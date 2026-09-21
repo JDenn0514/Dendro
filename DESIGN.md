@@ -1,6 +1,7 @@
 # Tree ID Learning Tool — Design Notes
 
-Status: pre-implementation. This document captures design thinking, not commitments.
+Status: pre-implementation. Sections 1 to 16 are the original design notes.
+Section 17 records the decisions made on 2026-09-21. Where the two disagree, section 17 wins.
 Nothing here is built yet.
 
 ---
@@ -318,45 +319,45 @@ Long-term target: US / North America.
 
 ### Content and taxonomy
 
-- [ ] **Naming convention.** Common names, scientific names, or both? Which is required
+- [x] **Naming convention.** Common names, scientific names, or both? Which is required
       for a correct answer? Common names vary regionally.
-- [ ] **Taxonomic authority.** iNat taxonomy, ITIS, POWO, or Audubon's groupings? These
+- [x] **Taxonomic authority.** iNat taxonomy, ITIS, POWO, or Audubon's groupings? These
       disagree, particularly on oaks and hawthorns. Pick one and stick to it.
-- [ ] **What counts as a tree?** Large shrubs, yuccas, palmettos, cacti? Audubon includes
+- [x] **What counts as a tree?** Large shrubs, yuccas, palmettos, cacti? Audubon includes
       some. Define the inclusion rule before building the species list.
-- [ ] **Non-native and planted species.** Many trees people actually encounter are
+- [x] **Non-native and planted species.** Many trees people actually encounter are
       ornamentals (ginkgo, Norway maple, callery pear, London plane). Include? Flag as
       a separate track?
-- [ ] **Subspecies and varieties.** Roll up to species, or quiz separately?
-- [ ] **Species list source.** Where does the initial list come from, and how is it
+- [x] **Subspecies and varieties.** Roll up to species, or quiz separately?
+- [x] **Species list source.** Where does the initial list come from, and how is it
       maintained?
 
 ### Mechanics
 
-- [ ] **SRS algorithm.** SM-2 (simple, well-understood) vs. FSRS (better, more complex).
-- [ ] **Grading strictness** for typed answers. Case, punctuation, hyphens, and
+- [x] **SRS algorithm.** SM-2 (simple, well-understood) vs. FSRS (better, more complex).
+- [x] **Grading strictness** for typed answers. Case, punctuation, hyphens, and
       whitespace should be ignored. Should "red oak" be accepted for "northern red oak"?
       Should near-misses get partial credit?
-- [ ] **Session length.** Fixed card count, fixed time, or until the due queue empties?
-- [ ] **Mastery definition** and how it's displayed.
-- [ ] Whether leaf arrangement is its own channel (see §4).
+- [x] **Session length.** Fixed card count, fixed time, or until the due queue empties?
+- [x] **Mastery definition** and how it's displayed.
+- [x] Whether leaf arrangement is its own channel (see §4).
 
 ### Technical
 
-- [ ] **Stack.** R/Shiny is the familiar option; a static JS app deploys free to GitHub
+- [x] **Stack.** R/Shiny is the familiar option; a static JS app deploys free to GitHub
       Pages and runs client-side with no server. Given this is a personal learning tool
       with no backend needs, static JS is probably the better fit despite the lower
       familiarity — but this is a real tradeoff worth weighing.
-- [ ] **Content storage.** JSON/YAML in-repo (diffable, reviewable, version-controlled)
+- [x] **Content storage.** JSON/YAML in-repo (diffable, reviewable, version-controlled)
       vs. SQLite. Leaning in-repo files for the species content; the confusion graph in
       particular benefits from being reviewable in a PR.
-- [ ] **Photo handling.** Cache/vendor images into the repo, or fetch from iNat at
+- [x] **Photo handling.** Cache/vendor images into the repo, or fetch from iNat at
       runtime? Vendoring gives offline capability and consistent performance; fetching
       keeps the repo small and photos fresh. Licensing obligations apply either way.
-- [ ] **Progress persistence.** localStorage (zero infrastructure, single device, data
+- [x] **Progress persistence.** localStorage (zero infrastructure, single device, data
       loss risk) vs. an exportable JSON file vs. a real backend. Single-user tool, so
       localStorage plus a manual export/import is probably sufficient.
-- [ ] **Deployment target.** GitHub Pages, or run locally only?
+- [x] **Deployment target.** GitHub Pages, or run locally only?
 - [ ] **Content authoring workflow.** How do new species get added? A script that takes
       a species name and pulls candidate photos for manual approval would make expansion
       tractable; without one, every addition is tedious manual work. Worth building
@@ -376,3 +377,121 @@ Existing iNaturalist-API-backed quiz tools, worth reviewing before building:
   philosophy to this design.
 
 None of them are tree-specific or channel-structured. That's the gap this fills.
+
+---
+
+## 17. Decisions log (2026-09-21)
+
+Decisions from the first brainstorming session. Each item resolves an open question above
+or adds a rule the notes did not cover. Section 15 checkboxes marked done point here.
+
+### Scope
+
+- **Three specs, not one.** (1) The learning app. (2) The content pipeline: photo fetch,
+  license filter, manual approval. (3) The content itself: species list, vocabularies,
+  confusion graph, miss explanations. The app spec comes first. The app consumes content
+  as data files.
+- **v0 modes.** Core quiz loop and a placement test ship in v0. Field sim mode (§10) and
+  range-prior questions (§11) wait for v1. Range, elevation, size, and habitat data are
+  authored in v0 and shown on every reveal and on the species card, but not quizzed.
+
+### Depth model: four levels
+
+The three-level model in §2 gains a fourth level.
+
+1. Type (level-1 category)
+2. Group (genus or family)
+3. Species
+4. **Subspecies or variety.** The expert level. Quizzed only within a species, with
+   sibling varieties as distractors. Example: Douglas-fir var. glauca vs. var. menziesii.
+   Photo supply at this level is thin, so a variety gets a card only when it has an
+   approved photo pool on at least one channel.
+
+The card model in §5 gains a `VarietyCard (channel, variety)`.
+
+### Taxonomy and species list
+
+- **Authority and list source: USDA PLANTS** (<https://plants.sc.egov.usda.gov/>). The
+  PLANTS symbol (for example QUGA) is the primary key for every species record. PLANTS
+  supplies distribution by state, native or introduced status, growth habit, and
+  subspecies and variety names.
+- **iNat taxon ID** is stored as a cross-reference for the photo pipeline. Where PLANTS
+  and iNat disagree on a split, PLANTS wins and the record notes the iNat name.
+- **Audubon name** is stored as a field so the book maps onto the app.
+- **What counts as a tree.** PLANTS growth habit is "tree" or "tree, shrub." Shrub-only
+  species are excluded. A manual include list exists for exceptions (yuccas, palmettos).
+  The include list is empty for v0.
+- **Non-native species** are included. Native status per state comes from PLANTS and is
+  shown on the species card. No separate track.
+
+### Naming and grading
+
+- **Both names accepted.** A typed answer is correct if it matches any listed common name
+  or the scientific name. Reveal and multiple-choice options show both names.
+- **Normalization:** lowercase, strip punctuation, collapse whitespace, hyphen equals
+  space.
+- **No partial credit.** Same genus, wrong species, is wrong.
+
+### Channels
+
+- **Leaf arrangement is part of the twig channel**, not its own channel. Arrangement is
+  also a tagged species attribute, so distractor building and miss explanations can use
+  it on any channel. The MADCap Horse mnemonic is the twig channel's first lesson.
+
+### Scheduling
+
+- **SM-2 now**, with a full review log (card, timestamp, grade, elapsed ms) so FSRS
+  parameters can be fitted later.
+- **Automatic grading.** Right maps to "good." Right with the guess flag maps to "hard."
+  Wrong maps to "again."
+- **Session:** fixed count, default 20, adjustable. Due cards first, ordered by overdue.
+  New cards fill the remainder up to a daily new-card cap (default 10, adjustable).
+  Multiple sessions per day allowed; after the cap, sessions are review-only.
+- **Format escalation** is tied to card interval: 4-option choice under 7 days,
+  8-option choice from 7 to 21 days, typed recall above 21 days. A lapse drops one
+  format tier. Inverted questions ("which photo is X?") replace a normal question about
+  one time in five on any tier.
+- **Unit** = one level-1 bucket taken through its depth levels. A channel's level-1
+  concept cards are that channel's first unit. Gating is soft: recommend the next unit,
+  allow skipping.
+- **Placement test:** a fixed 20-card session across all level-1 concepts. Each right
+  answer marks that concept card mastered at a 21-day interval.
+
+### Mastery and progress
+
+- **A card is mastered** when its interval exceeds 21 days and its last three reviews
+  have no lapse.
+- **Species mastery = weakest channel.**
+- **Progress screen:** a grid, species down the side, channels across. Each cell is
+  colored by card state: unseen, learning, review, mastered. Unit percentages sit above
+  the grid.
+
+### Photos
+
+- **Vendored into the repo**, resized to about 1200 px on the long side. Every image has a
+  record with source, author, license, and origin URL. Attribution is displayed in the
+  app and stored in the repo.
+- **Tiered sources, manual approval for all.** Curated core from university dendrology
+  sites, US government sources (USDA PLANTS images, Forest Service, NRCS), and Wikimedia
+  Commons. iNaturalist research-grade, CC-licensed photos are a fill source for rotation
+  only. Nothing enters the repo without human approval. "High quality" means a reputable
+  source and a photo that shows the diagnostic feature, not resolution alone.
+
+### Technical
+
+- **Stack:** static JavaScript, deployed to GitHub Pages. The repo is public.
+- **No framework for v0.** Plain HTML, CSS, and ES modules, no build step.
+- **Logic stays out of the DOM.** Scheduler, deck loader, session builder, grader, and
+  progress store are pure modules that take data in and return data out. Screens are a
+  thin layer over them. This is what makes a later move to Svelte or React a rewrite of
+  the screen layer only.
+- **Content storage:** JSON in the repo. The confusion graph is a reviewable file.
+- **Persistence:** localStorage for progress and the review log. Export and import to a
+  JSON file from the settings screen. Each answer writes immediately, so closing the tab
+  midway loses nothing.
+
+### Still open
+
+- Content authoring workflow (belongs in the pipeline spec).
+- The long-term species list needs a second filter beyond growth habit if the list ever
+  expands past what a field guide covers.
