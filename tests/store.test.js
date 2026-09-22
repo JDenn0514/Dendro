@@ -8,6 +8,16 @@ function row(card, at) {
   return { card, at, day: at.slice(0, 10), grade: 'good', format: 'mc4', options: 4, elapsed_ms: 1200, answer: 'x' };
 }
 
+function goodBlob() {
+  return JSON.stringify({
+    version: 1,
+    dendro_cards: { version: 1, cards: { 'species:ACPL:leaf': { interval: 2, tier: 'mc4', tier_passes: 1 } } },
+    dendro_log: { version: 1, rows: [] },
+    dendro_settings: defaultSettings(),
+    dendro_missing_edges: { version: 1, edges: [] }
+  });
+}
+
 test('a fresh store reports defaults and is available', () => {
   const store = createStore(memoryStorage());
   assert.equal(store.available, true);
@@ -122,6 +132,8 @@ test('a malformed import is rejected with a reason and changes nothing', () => {
 test('an import with a malformed section writes nothing', () => {
   const store = createStore(memoryStorage());
   store.writeCard('species:QUGA:leaf', { interval: 4, tier: 'mc4', tier_passes: 0 });
+  store.appendLog(row('species:QUGA:leaf', '2026-03-10T09:00:00Z'));
+  store.recordMissingEdge({ a: 'ACPL', b: 'QUGA', channel: 'leaf' });
   const good = {
     version: 1,
     dendro_cards: { version: 1, cards: {} },
@@ -148,6 +160,8 @@ test('an import with a malformed section writes nothing', () => {
 
   assert.equal(store.readCards()['species:QUGA:leaf'].interval, 4);
   assert.equal(store.readSettings().session_size, 20);
+  assert.equal(store.readLog().length, 1);
+  assert.deepEqual(store.readMissingEdges(), [{ a: 'ACPL', b: 'QUGA', channel: 'leaf', count: 1 }]);
 });
 
 test('an import migrates each section from its own version', () => {
@@ -245,6 +259,61 @@ test('a write that fails turns available off and leaves reads working', () => {
   assert.deepEqual(store.readLog(), []);
   assert.deepEqual(store.readCards(), {});
   assert.deepEqual(store.readSettings(), defaultSettings());
+});
+
+test('an import reports failure when storage refuses to write', () => {
+  const inner = memoryStorage();
+  let full = false;
+  const storage = {
+    getItem: (key) => inner.getItem(key),
+    setItem: (key, value) => {
+      if (full) throw new Error('QuotaExceededError');
+      inner.setItem(key, value);
+    },
+    removeItem: (key) => inner.removeItem(key)
+  };
+  const store = createStore(storage);
+  store.writeCard('species:QUGA:leaf', { interval: 4, tier: 'mc4', tier_passes: 0 });
+  const before = inner.getItem('dendro_cards');
+  full = true;
+  store.appendLog(row('species:QUGA:leaf', '2026-03-10T09:00:00Z'));
+  assert.equal(store.available, false);
+
+  const result = store.importBlob(goodBlob());
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join(' '), /not storing your progress/);
+  assert.equal(inner.getItem('dendro_cards'), before);
+});
+
+test('an import stops when the stored data comes from a newer build', () => {
+  const storage = memoryStorage();
+  const newer = JSON.stringify({ version: 2, cards: { 'species:QUGA:leaf': { interval: 30, tier: 'typed', tier_passes: 1 } } });
+  storage.setItem('dendro_cards', newer);
+  const store = createStore(storage);
+  store.readCards();
+  assert.equal(store.newer_version, true);
+
+  const result = store.importBlob(goodBlob());
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join(' '), /newer version/);
+  assert.equal(storage.getItem('dendro_cards'), newer);
+  assert.equal(storage.getItem('dendro_log'), null);
+});
+
+test('readSettings holds the floor on a stored value below 1', () => {
+  const storage = memoryStorage();
+  storage.setItem('dendro_settings', JSON.stringify({
+    version: 1, session_size: 0, new_per_day: -5, last_export: '2026-03-10'
+  }));
+  const store = createStore(storage);
+  const settings = store.readSettings();
+  assert.equal(settings.session_size, 20);
+  assert.equal(settings.new_per_day, 10);
+  assert.equal(settings.last_export, '2026-03-10');
+
+  storage.setItem('dendro_settings', JSON.stringify({ version: 1, session_size: 2.5, new_per_day: 'abc' }));
+  assert.equal(store.readSettings().session_size, 20);
+  assert.equal(store.readSettings().new_per_day, 10);
 });
 
 test('an unavailable storage leaves the store running and not available', () => {

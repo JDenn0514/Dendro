@@ -162,7 +162,15 @@ export function createStore(storage) {
       api.replaceLog(rows);
     },
 
-    readSettings() { return { ...defaultSettings(), ...read(KEYS.settings) }; },
+    readSettings() {
+      const defaults = defaultSettings();
+      const settings = { ...defaults, ...read(KEYS.settings) };
+      // Storage can hold a value from a hand edit or an older build. Hold the floor.
+      for (const field of ['session_size', 'new_per_day']) {
+        if (!isCount(settings[field])) settings[field] = defaults[field];
+      }
+      return settings;
+    },
 
     writeSettings(patch) {
       const current = api.readSettings();
@@ -198,6 +206,16 @@ export function createStore(storage) {
     },
 
     importBlob(text) {
+      // A blocked write must not report success. Import is how a user recovers.
+      if (!available) {
+        return { ok: false, errors: ['This browser is not storing your progress.'] };
+      }
+      if (newerVersion) {
+        return {
+          ok: false,
+          errors: ['Your stored data comes from a newer version of this app, so the import stops and leaves that data alone.']
+        };
+      }
       let payload;
       try {
         payload = JSON.parse(text);
