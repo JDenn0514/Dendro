@@ -90,7 +90,7 @@ test('the session never exceeds session_size', () => {
   assert.equal(result.card_ids.length, 1);
 });
 
-test('an empty queue with the cap reached returns no cards', () => {
+test('a zero allowance and no due card leave the deck empty', () => {
   const result = buildSession({
     content, states: {}, log: [], settings: { session_size: 20, new_per_day: 0 },
     today: TODAY, focus: 'bark', chosen_unit: null, rng: makeRng(34)
@@ -310,25 +310,32 @@ test('accumulateAnswer counts a right answer and leaves the input untouched', ()
 });
 
 test('accumulateAnswer counts a wrong answer and keeps its miss entry', () => {
-  const next = accumulateAnswer(emptyResults(),
+  const start = emptyResults();
+  const next = accumulateAnswer(start,
     answered({ correct: false, after: AT_LEVEL_1, miss: A_MISS }));
   assert.equal(next.right, 0);
   assert.equal(next.missed, 1);
   assert.deepEqual(next.misses, [A_MISS]);
+  // The new miss goes into a new list, not into the list handed in.
+  assert.deepEqual(start.misses, []);
 });
 
 test('a card that gains a level lands under promoted, by card id', () => {
-  const next = accumulateAnswer(emptyResults(),
+  const start = emptyResults();
+  const next = accumulateAnswer(start,
     answered({ before: AT_LEVEL_1, after: AT_LEVEL_2 }));
   assert.deepEqual(next.promoted, ['species:QUGA:leaf']);
   assert.deepEqual(next.demoted, []);
+  assert.deepEqual(start.promoted, []);
 });
 
 test('a card that loses a level lands under demoted', () => {
-  const next = accumulateAnswer(emptyResults(),
+  const start = emptyResults();
+  const next = accumulateAnswer(start,
     answered({ correct: false, before: AT_LEVEL_2, after: AT_LEVEL_1, miss: A_MISS }));
   assert.deepEqual(next.demoted, ['species:QUGA:leaf']);
   assert.deepEqual(next.promoted, []);
+  assert.deepEqual(start.demoted, []);
 });
 
 test('a first-ever answer is new, not promoted', () => {
