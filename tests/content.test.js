@@ -267,6 +267,63 @@ test('a species image with no concept on that channel fails validation', () => {
   assert.deepEqual(validateContent(retiredRow).errors, []);
 });
 
+test('a variety image with no parent concept on that channel fails validation', () => {
+  const twoVarieties = [
+    { key: 'QUGAG', name: 'var. gambelii', note: 'x' },
+    { key: 'QUGAB', name: 'var. bakeri', note: 'x' }
+  ];
+  const varietyRow = (hash, key, channel) => ({
+    hash, target: key, channel, source: 'x', author: 'x', license: 'public domain',
+    origin: 'x', tags: [], checked_by: 'x', checked_at: '2026-09-22', note: 'x'
+  });
+
+  const orphan = badContent();
+  orphan.species.QUGA.varieties = twoVarieties;
+  orphan.concepts.push({ key: 'furrowed', channel: 'bark', name: 'Furrowed', accept: ['furrowed'], description: 'x' });
+  orphan.manifest.push(varietyRow('4'.repeat(64), 'QUGAG', 'bark'));
+  orphan.manifest.push(varietyRow('5'.repeat(64), 'QUGAB', 'bark'));
+  const report = validateContent(orphan);
+  assert.match(messages(orphan), /QUGA has no bark concept/);
+  assert.ok(report.errors.every((e) => e.file === 'images/manifest.json'));
+
+  const onOwnChannel = badContent();
+  onOwnChannel.species.QUGA.varieties = twoVarieties;
+  onOwnChannel.manifest.push(varietyRow('4'.repeat(64), 'QUGAG', 'leaf'));
+  onOwnChannel.manifest.push(varietyRow('5'.repeat(64), 'QUGAB', 'leaf'));
+  assert.deepEqual(validateContent(onOwnChannel).errors, []);
+  const cards = deriveCards(onOwnChannel, deriveChannels(onOwnChannel.concepts));
+  assert.equal(cards['variety:QUGAG:leaf'].bucket, 'simple_lobed');
+
+  const retiredRow = badContent();
+  retiredRow.species.QUGA.varieties = twoVarieties;
+  retiredRow.concepts.push({ key: 'furrowed', channel: 'bark', name: 'Furrowed', accept: ['furrowed'], description: 'x' });
+  retiredRow.manifest.push({
+    ...varietyRow('4'.repeat(64), 'QUGAG', 'bark'),
+    retired: true, retired_reason: 'x', retired_at: '2026-09-22'
+  });
+  assert.deepEqual(validateContent(retiredRow).errors, []);
+});
+
+test('a card and the content object keep their field names', () => {
+  const { content } = loadContent(loadFixture());
+  assert.deepEqual(
+    Object.keys(content.cards['species:QUGA:leaf']).sort(),
+    ['bucket', 'channel', 'id', 'key', 'kind', 'photos']
+  );
+  assert.deepEqual(
+    Object.keys(content.cards['variety:QUGAG:leaf']).sort(),
+    ['bucket', 'channel', 'id', 'key', 'kind', 'photos']
+  );
+  assert.deepEqual(
+    Object.keys(content).sort(),
+    [
+      'cards', 'cards_by_channel', 'channels', 'concepts', 'concepts_by_channel',
+      'confusion', 'manifest', 'species', 'unit_cards', 'unit_members', 'units',
+      'warnings'
+    ]
+  );
+});
+
 test('a manifest row needs a 64 hex hash and carries no file path', () => {
   const shortHash = badContent();
   shortHash.manifest[0].hash = 'abc';

@@ -222,6 +222,18 @@ export function validateContent(raw) {
           `the ${where} row has channel ${image.channel} but its target names ${targetChannel}`);
       }
     }
+    // A variety card takes its bucket from the owning species, so the species
+    // needs a concept on the row's channel. Without it the card carries a null
+    // bucket. This is the species rule above, applied to a variety row.
+    if (varietyKeys.has(image.target) && !image.retired) {
+      const owner = Object.entries(raw.species).find(
+        ([, record]) => (record.varieties ?? []).some((v) => v.key === image.target)
+      );
+      if (owner && !owner[1].concepts?.[image.channel]) {
+        fail('images/manifest.json',
+          `the ${where} row is a ${image.channel} image but ${owner[0]} has no ${image.channel} concept`);
+      }
+    }
   }
 
   for (const edge of raw.confusion) {
