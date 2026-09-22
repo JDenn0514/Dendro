@@ -515,7 +515,8 @@ The card model in §5 gains a `VarietyCard (channel, variety)`.
 
 ### Still open
 
-- Content authoring workflow (belongs in the pipeline spec).
+- ~~Content authoring workflow~~ Resolved in
+  `docs/superpowers/specs/2026-09-22-content-pipeline-design.md`.
 - The long-term species list needs a second filter beyond growth habit if the list ever
   expands past what a field guide covers.
 
