@@ -107,9 +107,17 @@ card.
 
 ### Units
 
-A unit is one level-1 bucket taken through its depth levels. A channel's level-1 concept
-cards are that channel's first unit. Units are ordered in the content file. Gating is
-soft: the app recommends the next unit and allows skipping.
+A unit is a named set of cards at one level in one channel, 5 to 25 cards in size. A
+channel's level-1 concept cards are that channel's first unit. Below level 1, a unit
+narrows by bucket, region, and where a genus is large, by genus or section. Every unit
+below level 1 names a parent unit, and the app recommends a unit only when its parent is
+far enough along (section 6). Gating is soft: the user can start any unit from the home
+screen.
+
+Units are ordered wide first: every bucket to level 2 before any bucket goes to level 3.
+The order is a content decision in `units.json`, not code. The reason is the interleaving
+evidence for similar categories (Kornell and Bjork 2008; Carvalho and Goldstone 2014):
+mixing sibling species beats studying one group at a time.
 
 ---
 
@@ -206,6 +214,7 @@ wins.
     "inat_taxon_id": 47851,
     "inat_name": null,
     "genus": "Quercus",
+    "section": "Quercus",
     "family": "Fagaceae",
     "concepts": {
       "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn",
@@ -237,8 +246,12 @@ Rules:
 - `inat_name` is set only when iNat uses a different name; otherwise null.
 - `common[0]` is the display name. All entries are accepted as typed answers.
 - Inclusion rule for the species list: PLANTS growth habit is "tree" or "tree, shrub."
-  Shrub-only species are excluded. A manual include list exists for exceptions and is
-  empty in v0. Non-native species are included and flagged by `native_status`.
+  Shrub-only species are excluded. Hybrids, marked with a multiplication sign in the
+  PLANTS name, are excluded. A manual include list exists for exceptions and is empty in
+  v0. Non-native species are included and flagged by `native_status`.
+- `section` is optional. It names a recognized split inside a large genus, such as the
+  red oaks (`Lobatae`) and the white oaks (`Quercus`). Units can filter on it. It is
+  shown on the species screen when present.
 - Varieties roll up to the species for levels 1 to 3.
 
 ### concepts.json
@@ -273,17 +286,27 @@ answer is `a` and the user picked `b`; `b_not_a` is the reverse.
 
 ### units.json
 
-Ordered list. Each entry: `key`, `name`, `channel`, `level`, the level-1 `bucket` it
-covers, `states`, and the optional `include` and `exclude` arrays of species symbols.
+Ordered list, wide first. Each entry: `key`, `name`, `channel`, `level`, `parent`, the
+level-1 `bucket` it covers, `states`, and the optional `genera`, `section`, `include`,
+and `exclude` filters.
 
 ```json
 [
-  { "key": "leaf_types", "name": "Leaf types", "channel": "leaf", "level": 1 },
+  { "key": "leaf_types", "name": "Leaf types", "channel": "leaf", "level": 1,
+    "parent": null },
   { "key": "simple_lobed_genus", "name": "Simple lobed leaves", "channel": "leaf",
-    "level": 2, "bucket": "simple_lobed", "states": ["CO", "UT", "NM", "WY", "NE", "KS"] },
-  { "key": "simple_lobed_species", "name": "Simple lobed leaves", "channel": "leaf",
-    "level": 3, "bucket": "simple_lobed", "states": ["CO", "UT", "NM", "WY", "NE", "KS"],
-    "include": ["ACPL"], "exclude": [] }
+    "level": 2, "parent": "leaf_types", "bucket": "simple_lobed",
+    "states": ["CO", "UT", "NM", "WY", "NE", "KS"] },
+  { "key": "simple_lobed_maples_co", "name": "Maples", "channel": "leaf",
+    "level": 3, "parent": "simple_lobed_genus", "bucket": "simple_lobed",
+    "genera": ["Acer"], "states": ["CO", "UT", "NM", "WY", "NE", "KS"] },
+  { "key": "simple_lobed_oaks_co", "name": "Oaks", "channel": "leaf",
+    "level": 3, "parent": "simple_lobed_genus", "bucket": "simple_lobed",
+    "genera": ["Quercus"], "states": ["CO", "UT", "NM", "WY", "NE", "KS"] },
+  { "key": "simple_lobed_other_co", "name": "Sycamore, sweetgum, tulip tree",
+    "channel": "leaf", "level": 3, "parent": "simple_lobed_genus",
+    "bucket": "simple_lobed", "genera": ["Platanus", "Liquidambar", "Liriodendron"],
+    "states": ["CO", "UT", "NM", "WY", "NE", "KS"], "include": ["PLAC"], "exclude": [] }
 ]
 ```
 
@@ -291,10 +314,21 @@ Unit membership is computed, not listed:
 
 1. Take every species in the bucket whose `range.states` or `planted_states` overlaps the
    unit's `states`.
-2. Add every symbol in `include`.
-3. Remove every symbol in `exclude`.
+2. Keep only species whose `genus` is in `genera`, when `genera` is present.
+3. Keep only species whose `section` equals the unit's `section`, when present.
+4. Add every symbol in `include`.
+5. Remove every symbol in `exclude`.
 
-Level-1 units cover a whole channel and need no `states`.
+Level-1 units cover a whole channel, have `parent` null, and need no `states`. A level-2
+unit's parent is its channel's level-1 unit. A level-3 unit's parent is the level-2 unit
+for its bucket. A level-4 unit's parent is the level-3 unit that holds its species.
+
+The reason for `genera` and `section`: genus size varies wildly. PLANTS lists 1 tanoak,
+6 chestnuts, and about 90 oak species after hybrids are removed. One unit for all lobed
+leaves at level 3 would hold over 100 cards and never finish. Region is the first
+splitter, genus the second, section the third for oaks. Small genera are bundled into one
+unit through `genera`. Content validation warns when a unit has fewer than 5 or more than
+25 cards.
 
 ### images/manifest.json
 
@@ -422,8 +456,9 @@ logged on every answer.
 
 ### SM-2 rules
 
-- **New card**: first right answer sets interval 1; second sets interval 3. After that
-  the normal rules apply.
+- **New card**: first right answer sets interval 1; second sets interval 4. After that
+  the normal rules apply. With ease 2.5 the chain for a card always answered `good` is
+  1, 4, 10, 25 days, which is Anki's default.
 - **good**: interval = round(interval x ease). Ease unchanged.
 - **hard**: interval = round(interval x 1.2). Ease drops by 0.15.
 - **again**: interval = 1. Lapses + 1. Ease drops by 0.2.
@@ -445,13 +480,28 @@ review log, settings, today. Output: an ordered list of card IDs.
    is full or today's new-card count reaches `new_per_day`. Today's count is the number of
    log rows today whose card had no prior row. The target unit is the chosen unit if
    given, otherwise the recommended unit: the first unit in the focus, in `units.json`
-   order, that has level-0 cards. The session builder calls these cards "unseen"
-   internally.
+   order, that has level-0 cards and whose gate is open. The session builder calls these
+   cards "unseen" internally.
 4. Shuffle.
 
 Multiple sessions per day are allowed. After the daily cap, sessions contain due cards
 only. An empty result means nothing is due and the cap is reached; the home screen says
 so.
+
+### Unit gate
+
+A unit's gate is open when it has no parent, or when 80 percent or more of the parent
+unit's cards are at level 2 or higher. Level 2 means the card has promoted out of `mc4`,
+which takes two `good` answers and an interval of 7 or more: in practice, right about
+three times in a row.
+
+The gate affects the recommendation only. A user can start a closed unit from the home
+screen, and the home screen marks each unit open or closed. When every open unit in the
+focus has no level-0 cards left, the recommendation is empty and the home screen says
+which unit opens next and how far its parent is from the threshold.
+
+With the default cap of 10 new cards a day and mostly right answers, the leaf channel in
+v0 runs about: level 1 in week 1, level 2 from week 2, level 3 from week 3.
 
 ### Relearning
 
@@ -616,8 +666,9 @@ decided later; the content of each screen is fixed here.
 
 - **Home.** Channel buttons with due counts, "all channels" first. Only channels present
   in content appear. The recommended next unit with a Start button. The full unit list
-  with level-0 counts and a Start per unit (skipping ahead). A placement test link. On an
-  empty queue with the cap reached, a line saying so.
+  with level-0 counts, an open or closed mark from the unit gate, and a Start per unit
+  (skipping ahead, closed units included). A placement test link. On an empty queue with
+  the cap reached, a line saying so.
 - **Session.** Progress bar (card n of N). Prompt, format chip, photo, answer control,
   guess checkbox. Reveal replaces the answer control. Summary: right count, missed count,
   due tomorrow, the cards promoted in this session, the cards demoted in this session,
@@ -625,7 +676,8 @@ decided later; the content of each screen is fixed here.
 - **Progress.** Unit tiles with the unit number and the expert count, then the grid.
   Species names open the species screen.
 - **Species.** Both names, PLANTS symbol, native status. Facts: range, states, planted
-  states, elevation, height, habitat, Audubon name, level-1 categories, arrangement.
+  states, elevation, height, habitat, Audubon name, section when present, level-1
+  categories, arrangement.
   Photos by channel with attribution, and for each channel the level name and the next due
   date. Varieties list with notes and card status.
 - **Settings.** Session size, new cards per day, export, import, reset behind a confirm,
@@ -663,7 +715,10 @@ after the event that caused it: one answer, one write to cards and one append to
   common name; every species has at least one manifest image, unless a confusion edge
   names it; every manifest target exists; every `concepts` value exists in
   `concepts.json`; every confusion edge names two existing species and a valid channel;
-  every unit's `include` and `exclude` symbol exists.
+  every unit's `include` and `exclude` symbol exists; every unit's `parent` names an
+  existing unit one level up in the same channel, or is null at level 1; every `genera`
+  entry and `section` value matches at least one species. Validation warns, but does not
+  fail, when a unit has fewer than 5 or more than 25 cards.
 - **An image fails to load**: draw another from the pool. Pool exhausted: skip the card
   this session and log to the console.
 - **localStorage unavailable or full**: the app runs, shows a banner that progress is not
@@ -695,14 +750,16 @@ Every logic module has a test file under `tests/`, run with `node --test`, no
 dependencies. Tests load the `content_dev/` fixture. A validation test carries its own bad
 content inline.
 
-- **scheduler**: each grade path; new-card intervals 1 then 3; ease floor; lapse on a
+- **scheduler**: each grade path; new-card intervals 1 then 4; ease floor; lapse on a
   mature card; due-date arithmetic; `hard` from the guess box; `hard` from an elapsed time
   over the format threshold; the 60 s ceiling discards the time signal; a wrong answer is
   `again` at any time.
 - **session**: due-first ordering; fill from level-0 cards; daily cap counted from the
-  log; empty queue; chosen unit overrides recommended; an `again` card re-queues once and
-  its re-answer writes no log row and no state change; relearning is off in the placement
-  test.
+  log; empty queue; chosen unit overrides recommended; a chosen unit bypasses the gate;
+  the recommendation skips a unit whose parent is under 80 percent at level 2; a unit
+  with no parent is always open; the recommendation is empty when every open unit is
+  exhausted; an `again` card re-queues once and its re-answer writes no log row and no
+  state change; relearning is off in the placement test.
 - **ladder**: promotion needs 2 passes and the interval gate; `hard` is not a pass;
   demotion drops one tier and resets `tier_passes`, with no exception for level 4; the
   format always equals the tier; the `inv` tier is skipped below 4 photo
@@ -714,9 +771,11 @@ content inline.
   near miss rejected; a concept card accepts every entry in `accept`; a group card accepts
   the genus and the group common name.
 - **content**: the channel list derives from `concepts.json` and an empty channel renders
-  nowhere; unit membership is computed from `states`, `include`, and `exclude`; a species
-  with no manifest images fails validation unless an edge names it; each validation rule
-  fails on its own bad object; cards derive only where images exist.
+  nowhere; unit membership is computed from `states`, `genera`, `section`, `include`,
+  and `exclude`, in that order; a bad `parent` fails validation; a unit outside 5 to 25
+  cards warns and does not fail; a species with no manifest images fails validation
+  unless an edge names it; each validation rule fails on its own bad object; cards derive
+  only where images exist.
 - **progress**: card levels; species level is the lowest card level; the unit number and
   the expert count.
 - **store**: export and import round trip; version check; malformed file rejected;
@@ -756,6 +815,21 @@ Short form. The full log is `DESIGN.md` section 17.
   Logging it would tell the scheduler the card was answered twice.
 - **Units carry the region, the app does not**: a unit's `states` list with `include` and
   `exclude` covers the regional set without a setting the user has to understand.
+- **Units are 5 to 25 cards, split by region, then genus, then section**: PLANTS lists
+  about 90 oak species after hybrids are removed and 1 tanoak. A unit has to be
+  finishable, so large genera are split and small ones are bundled through `genera`.
+- **Wide first**: every bucket to level 2 before any bucket to level 3. Interleaving
+  similar categories beats blocking them (Kornell and Bjork 2008; Carvalho and Goldstone
+  2014). No study known to the authors favors deep first for this kind of learning.
+- **A unit gate on the parent, at 80 percent level 2**: without a gate, species questions
+  arrived on day 2, before the genera were reliable. The gate checks the parent unit, not
+  the previous unit in the list, so wide-first ordering does not stall one bucket behind
+  another. Level 2 is about three right answers in a row, which the user can count.
+- **Interval chain 1, 4, 10, 25**: Anki's default. With 1, 3, 8, 20 the 21-day gate for
+  `inv` fell on the fifth right answer at day 32; with 1, 4, 10, 25 it falls on the fourth
+  at day 15.
+- **Hybrids excluded**: a hybrid oak has no stable field marks to teach and doubles the
+  oak list in PLANTS.
 - **Planted species are full members**: the trees on a Denver street are the trees the
   user sees most, so `planted_states` puts them in the regional unit.
 - **Vendored photos, tiered sources, split trust**: a stable pool per card is what defeats

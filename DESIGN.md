@@ -498,6 +498,18 @@ The card model in §5 gains a `VarietyCard (channel, variety)`.
   JSON file from the settings screen. Each answer writes immediately, so closing the tab
   midway loses nothing.
 
+### Additions, 2026-09-22
+
+- **Units are 5 to 25 cards.** Below level 1 a unit narrows by region, then genus, then
+  section (red oaks vs. white oaks). Small genera are bundled. PLANTS lists about 90 oak
+  species after hybrids are removed, so one level-3 unit per bucket does not work.
+- **Wide first.** Every bucket to level 2 before any bucket to level 3. Interleaving
+  evidence: Kornell and Bjork 2008; Carvalho and Goldstone 2014.
+- **Unit gate on the parent.** A unit is recommended when 80% of its parent unit's cards
+  are at level 2 or higher, about three right answers in a row. Skipping stays allowed.
+- **Interval chain 1, 4, 10, 25** (Anki default), in place of 1, 3, 8, 20.
+- **Hybrids excluded** from the species list.
+
 ### Still open
 
 - Content authoring workflow (belongs in the pipeline spec).
