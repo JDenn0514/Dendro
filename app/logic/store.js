@@ -1,0 +1,250 @@
+// Owns the four localStorage keys. Pure apart from the injected storage object.
+
+export const STORE_VERSION = 1;
+export const LOG_CAP = 5000;
+export const EXPORT_PROMPT_DAYS = 30;
+
+export const KEYS = {
+  cards: 'dendro_cards',
+  log: 'dendro_log',
+  settings: 'dendro_settings',
+  missing_edges: 'dendro_missing_edges'
+};
+
+export function defaultSettings() {
+  return { version: STORE_VERSION, session_size: 20, new_per_day: 10, last_export: null };
+}
+
+function emptyPayload(key) {
+  if (key === KEYS.cards) return { version: STORE_VERSION, cards: {} };
+  if (key === KEYS.log) return { version: STORE_VERSION, rows: [] };
+  if (key === KEYS.settings) return defaultSettings();
+  return { version: STORE_VERSION, edges: [] };
+}
+
+export const MIGRATIONS = {
+  0: (key, payload) => {
+    if (key !== KEYS.cards) return { ...payload, version: 1 };
+    const cards = {};
+    for (const [id, state] of Object.entries(payload.cards ?? {})) {
+      cards[id] = { tier: 'mc4', tier_passes: 0, ...state };
+    }
+    return { version: 1, cards };
+  }
+};
+
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function isCount(value) {
+  return Number.isInteger(value) && value >= 1;
+}
+
+export function sectionError(key, section) {
+  if (!isPlainObject(section)) return `The ${key} section is not an object.`;
+  if ((section.version ?? 0) > STORE_VERSION) {
+    return `The ${key} section says version ${section.version}. This app reads version ${STORE_VERSION}.`;
+  }
+  if (key === KEYS.cards && !isPlainObject(section.cards)) {
+    return 'The dendro_cards section has no cards object.';
+  }
+  if (key === KEYS.log && !Array.isArray(section.rows)) {
+    return 'The dendro_log section has no rows array.';
+  }
+  if (key === KEYS.missing_edges && !Array.isArray(section.edges)) {
+    return 'The dendro_missing_edges section has no edges array.';
+  }
+  if (key === KEYS.settings && !(isCount(section.session_size) && isCount(section.new_per_day))) {
+    return 'The dendro_settings section needs session_size and new_per_day of 1 or more.';
+  }
+  return null;
+}
+
+export function migrateSection(key, section) {
+  let payload = section;
+  let version = payload.version ?? 0;
+  while (version < STORE_VERSION && MIGRATIONS[version]) {
+    payload = MIGRATIONS[version](key, payload);
+    version = payload.version;
+  }
+  return payload;
+}
+
+export function memoryStorage(initial = {}) {
+  const map = new Map(Object.entries(initial));
+  return {
+    getItem: (key) => (map.has(key) ? map.get(key) : null),
+    setItem: (key, value) => { map.set(key, value); },
+    removeItem: (key) => { map.delete(key); }
+  };
+}
+
+function daysBetween(fromDate, toDate) {
+  const parse = (d) => Date.UTC(...d.split('-').map((n, i) => (i === 1 ? Number(n) - 1 : Number(n))));
+  return Math.round((parse(toDate) - parse(fromDate)) / 86400000);
+}
+
+export function createStore(storage) {
+  let available = true;
+  let newerVersion = false;
+  try {
+    storage.setItem('dendro_probe', '1');
+    storage.removeItem('dendro_probe');
+  } catch {
+    available = false;
+  }
+
+  // Text that does not parse is copied aside once, so a user can send the file in.
+  function keepCorrupt(key, text) {
+    try {
+      if (storage.getItem(`${key}_corrupt`) === null) storage.setItem(`${key}_corrupt`, text);
+    } catch {
+      available = false;
+    }
+  }
+
+  function read(key) {
+    if (!available) return emptyPayload(key);
+    let text = null;
+    try {
+      text = storage.getItem(key);
+    } catch {
+      return emptyPayload(key);
+    }
+    if (!text) return emptyPayload(key);
+    let payload;
+    try {
+      payload = JSON.parse(text);
+    } catch {
+      keepCorrupt(key, text);
+      return emptyPayload(key);
+    }
+    if (!isPlainObject(payload)) return emptyPayload(key);
+    if ((payload.version ?? 0) > STORE_VERSION) {
+      newerVersion = true;
+      return payload;
+    }
+    const migrated = migrateSection(key, payload);
+    if (migrated !== payload) write(key, migrated);
+    return migrated;
+  }
+
+  function write(key, payload) {
+    if (!available || newerVersion) return;
+    try {
+      storage.setItem(key, JSON.stringify({ ...payload, version: STORE_VERSION }));
+    } catch {
+      available = false;
+    }
+  }
+
+  const api = {
+    get available() { return available; },
+
+    get newer_version() { return newerVersion; },
+
+    readCards() { return read(KEYS.cards).cards ?? {}; },
+
+    writeCard(cardId, state) {
+      const payload = read(KEYS.cards);
+      payload.cards = { ...(payload.cards ?? {}), [cardId]: state };
+      write(KEYS.cards, payload);
+    },
+
+    readLog() { return read(KEYS.log).rows ?? []; },
+
+    replaceLog(rows) { write(KEYS.log, { version: STORE_VERSION, rows: rows.slice(-LOG_CAP) }); },
+
+    appendLog(entry) {
+      const rows = api.readLog();
+      rows.push(entry);
+      api.replaceLog(rows);
+    },
+
+    readSettings() { return { ...defaultSettings(), ...read(KEYS.settings) }; },
+
+    writeSettings(patch) {
+      const current = api.readSettings();
+      const next = { ...current, ...patch };
+      for (const field of ['session_size', 'new_per_day']) {
+        if (!isCount(next[field])) next[field] = current[field];
+      }
+      write(KEYS.settings, next);
+      return next;
+    },
+
+    readMissingEdges() { return read(KEYS.missing_edges).edges ?? []; },
+
+    recordMissingEdge(edge) {
+      const [a, b] = [edge.a, edge.b].sort();
+      const edges = api.readMissingEdges();
+      const found = edges.find((e) => e.a === a && e.b === b && e.channel === edge.channel);
+      if (found) found.count += 1;
+      else edges.push({ a, b, channel: edge.channel, count: 1 });
+      write(KEYS.missing_edges, { version: STORE_VERSION, edges });
+    },
+
+    exportBlob(today) {
+      const payload = {
+        version: STORE_VERSION,
+        exported_at: today,
+        [KEYS.cards]: read(KEYS.cards),
+        [KEYS.log]: read(KEYS.log),
+        [KEYS.settings]: api.readSettings(),
+        [KEYS.missing_edges]: read(KEYS.missing_edges)
+      };
+      return { filename: `dendro-progress-${today}.json`, json: JSON.stringify(payload, null, 2) };
+    },
+
+    importBlob(text) {
+      let payload;
+      try {
+        payload = JSON.parse(text);
+      } catch {
+        return { ok: false, errors: ['The file is not valid JSON.'] };
+      }
+      const errors = [];
+      if (!isPlainObject(payload)) {
+        return { ok: false, errors: ['The file holds no export object.'] };
+      }
+      if (payload.version !== STORE_VERSION) {
+        errors.push(`The file says version ${payload.version}. This app reads version ${STORE_VERSION}.`);
+      }
+      const sections = {};
+      for (const key of Object.values(KEYS)) {
+        if (payload[key] === undefined) {
+          errors.push(`The file has no ${key} section.`);
+          continue;
+        }
+        const error = sectionError(key, payload[key]);
+        if (error) errors.push(error);
+        else sections[key] = migrateSection(key, payload[key]);
+      }
+      if (errors.length) return { ok: false, errors };
+      for (const key of Object.values(KEYS)) write(key, sections[key]);
+      return { ok: true, errors: [] };
+    },
+
+    reset() {
+      if (!available) return;
+      for (const key of Object.values(KEYS)) {
+        try {
+          storage.removeItem(key);
+        } catch {
+          available = false;
+        }
+      }
+    },
+
+    shouldPromptExport(today) {
+      const last = api.readSettings().last_export;
+      if (!last) return true;
+      return daysBetween(last, today) >= EXPORT_PROMPT_DAYS;
+    },
+
+    markExported(today) { api.writeSettings({ last_export: today }); }
+  };
+
+  return api;
+}
