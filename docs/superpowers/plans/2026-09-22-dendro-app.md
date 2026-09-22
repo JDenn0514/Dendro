@@ -4,19 +4,21 @@
 
 **Goal:** Build the Dendro learning app: a static site that quizzes North American tree identification with spaced repetition over species, genus, level-1 concept, and variety cards.
 
-**Architecture:** One HTML page. Pure logic modules under `app/logic/` take data in and return data out, and run in Node for tests. Screen modules under `app/screens/` render HTML, handle events, and compute nothing. Content is JSON plus vendored images under `content/`, with a committed fixture set under `content_dev/`.
+**Architecture:** One HTML page. Pure logic modules under `app/logic/` take data in and return data out, and run in Node for tests. Screen modules under `app/screens/` render HTML, handle events, and compute nothing. Content is JSON under `content/`, with a committed fixture set under `content_dev/`. The images live in object storage behind a CDN. Each manifest row carries the image `hash`, and the object key is `img/<hash>.jpg`.
 
-**Tech Stack:** Plain HTML, CSS, and ES modules. Node 20 or later for `node --test`. GitHub Actions for the check job and the Pages deploy. No libraries.
+**Tech Stack:** Plain HTML, CSS, and ES modules. Node 24 for `node --test`. GitHub Actions for the check job and the Pages deploy. No libraries in the app.
 
 ## Global Constraints
 
-- Static site. No build step, no runtime dependencies, no dev dependencies.
-- Node 20 or later. Tests run with the built-in runner: `node --test tests/`.
+- Static site. No build step and no runtime dependencies. The repo's `package.json` carries dev dependencies for the content pipeline only, and the app imports none of them.
+- Node 24 or later. Tests run with the built-in runner: `node --test "tests/**/*.test.js"`.
 - Logic modules never touch `document`, `window`, `localStorage`, or `fetch`. They take data in and return data out.
 - Screen modules compute nothing. Every number, list, and string they show comes from a logic module.
 - Every data name is snake_case: JSON fields, bucket keys, unit keys, localStorage keys, directory names. Card IDs keep the colon separator. JavaScript identifiers follow JavaScript convention (camelCase functions and variables).
 - The repo is public and GitHub Pages deploys the repo root.
 - `content/` is the live content set. `content_dev/` is the committed fixture. The URL switch `?content=dev` boots the app against the fixture. Tests always load the fixture.
+- No screen builds an image path. Every `<img>` takes its `src` from `imageUrl(photo, ctx.image_base)`. The base is `CDN_BASE` for `content/` and `content_dev/images/` for the fixture.
+- A retired species and a retired manifest row keep their IDs. The app skips both when it builds cards and pools, and keeps any stored card state for them.
 - The shared fixture is always valid. A validation test carries its own bad content object inline and never edits the fixture.
 - Commit messages end with the line: `Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>`
 
@@ -27,16 +29,17 @@
 - Run one test file with `node --test tests/<module>.test.js`. Run all tests with `npm test`.
 - Commit with two `-m` flags so the command stays short:
   `git commit -m "feat: subject line" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"`
-- The fixture images are 1x1 placeholder JPEGs written by `scripts/make_placeholder_jpegs.js` in Task 1. Do not hand-create binary files.
+- The fixture images are 1x1 placeholder JPEGs written by `scripts/make_placeholder_jpegs.js` in Task 1, under `content_dev/images/img/`. Do not hand-create binary files.
 
 ## File Structure
 
 | File | Responsibility |
 |---|---|
 | `index.html` | The one page. A banner slot and an `#app` slot. |
+| `package.json` | Scripts, `engines.node` `>=24`, and no dependencies. The pipeline plan adds its dev dependencies later. |
 | `app/main.js` | Fetches content, builds the store, routes on the hash. Holds no state. |
 | `app/style.css` | All styling. |
-| `app/logic/content.js` | Validates raw JSON, derives channels, cards, photo pools, and unit membership. |
+| `app/logic/content.js` | Validates raw JSON, derives channels, cards, photo pools, and unit membership. Holds `CDN_BASE` and `imageUrl`. Supplies the channel label, the concept lookup, and the variety card channels the screens show. |
 | `app/logic/scheduler.js` | Grade derivation, SM-2, and the tier ladder. |
 | `app/logic/grader.js` | Answer normalizer and the match rules per card kind. |
 | `app/logic/question.js` | Format, photo sampling, prompts, options, distractors, reveal. |
@@ -48,19 +51,21 @@
 | `app/screens/progress.js` | Unit tiles and the grid. |
 | `app/screens/species.js` | One species: facts, photos, levels, varieties. |
 | `app/screens/settings.js` | Settings, export, import, reset, missing diagnostics. |
-| `scripts/make_placeholder_jpegs.js` | Writes a 1x1 JPEG to every fixture manifest path. |
-| `scripts/validate_content.js` | CLI wrapper over `validateContent`, plus a file-exists check. |
+| `scripts/make_placeholder_jpegs.js` | Writes a 1x1 JPEG to `images/img/<hash>.jpg` for every live fixture manifest row. |
+| `scripts/validate_content.js` | CLI wrapper over `validateContent`, plus a file-exists check behind `--local-images <dir>`. |
 | `tests/helpers/fixture.js` | Reads `content_dev/` from disk for tests. |
 | `tests/helpers/rng.js` | A seeded pseudo-random generator for deterministic tests. |
 | `.github/workflows/check.yml` | Tests, content validation, then the Pages deploy. |
+
+`pipeline/` and `content_src/` belong to the content pipeline spec. This plan creates neither.
 
 ## Choices made where the spec is silent
 
 Each choice is the simplest option that satisfies the surrounding rules.
 
-1. **Group card existence.** A group card exists for every genus with at least one species image on that channel. Its bucket is the level-1 concept of its first member in symbol sort order, when members disagree.
-2. **Group common name.** `species.json` gains an optional `genus_common` field, for example `"oak"`. A group card accepts the genus plus every distinct `genus_common` among its members.
-3. **Leaf arrangement.** `species.json` gains an `arrangement` field, one of `opposite`, `alternate`, `whorled`. Section 2 tags it on every species and section 8 shows it.
+1. **Group card existence.** A group card exists for every genus with at least one species image on that channel. Its bucket is the level-1 concept of the first member in symbol sort order that has one on that channel, when members disagree. A member with an image and no concept on the channel is rejected by validation (choice 17).
+2. **Group common name.** `genus_common` is an optional authored field on a species record, for example `"oak"`. The pipeline never writes it. A group card accepts the genus name plus every distinct `genus_common` its live members carry. With none, the genus name alone.
+3. **Leaf arrangement.** `arrangement` is an optional authored field, one of `opposite`, `alternate`, `whorled`. The pipeline never writes it. The species screen shows the Arrangement row only when the field is there.
 4. **Concept and group photo pools** hold species images only, not variety images.
 5. **The unit gate lives in `progress.js`** and `session.js` imports it. One definition, no duplicate.
 6. **A parent unit with zero cards counts as open.** There is nothing to learn there.
@@ -72,7 +77,37 @@ Each choice is the simplest option that satisfies the surrounding rules.
 12. **`content/` ships with the 21 real level-1 concepts, three level-1 units, and no species.** Validation passes, the CI job is meaningful, and the content spec fills in the rest.
 13. **A variety card's typed answers** are the variety `name` and the variety `key`.
 14. **A wrong typed answer is resolved back to a key** with `resolveTyped`, so the reveal can still show the confusion sentence. Text that matches nothing gives `chosen_key: null`, and the reveal then shows the answer alone.
-15. **Variety options show every sibling** with no typed fallback below four. The sibling set is the whole answer space, so a short list is correct rather than degenerate.
+15. **Variety options show every sibling** with no typed fallback below four. The sibling set is the whole answer space, so a short list is correct rather than degenerate. The list is not cut to the format's option count.
+16. **A manifest row whose target is a concept key must carry the same channel as the target names.** Validation fails on `target: "bark/plated"` with `channel: "leaf"`. The spec's section 10 list does not name this rule.
+17. **A species with a manifest image on a channel must have a `concepts` entry for that channel.** Validation fails otherwise. Without it a group card can carry a null bucket.
+18. **`varietyCardChannels(content, symbol, varietyKey)` returns `[]`** when the named species does not own that variety.
+19. **A first review is never a lapse.** `scheduleCard(null, 'again', ...)` writes interval 1, tier `mc4`, `lapses` 0, and ease 2.5, because the card was never learned. Its next `good` still takes the learning step to interval 4.
+20. **The learning step belongs to a card that has never lapsed.** Interval 1 moves to 4 only on a `good` answer with `reps` 1 and `lapses` 0. A card that lapsed back to interval 1 follows the spec formula for its grade.
+21. **The group and variety fallback sentence** reads `The answer is <answer>. You picked <chosen>.`, the same two-sentence shape as the species branch.
+22. **`inv` availability is per card.** `invAvailable(content, card)` counts the `inv` options `buildQuestion` could build for that card. When a card at tier `inv` has fewer than four, `buildQuestion` asks an `mc8` question instead.
+23. **Every log row carries `day`,** the local calendar date from `todayString()`, next to the UTC `at`. The daily cap counts rows by `day`. `todayString(now)` lives in `session.js` so a test can pass a fixed date.
+24. **The log cap is 5,000 rows**, not the 20,000 the spec names. 5,000 rows is about a year of daily sessions and keeps the stored log well inside a 5 MB localStorage quota.
+25. **A stored payload from a newer build is never rewritten.** `read` returns it as it stands, the store sets `newer_version`, and every write after that does nothing.
+26. **Text that does not parse is kept.** The store copies the raw string to `${key}_corrupt` before it returns the empty payload, makes one copy only, and never replaces it.
+27. **`new_per_day` and `session_size` have a floor of 1.** `writeSettings`, the import check, and the settings fields all reject 0 and non-integers.
+28. **The review log stores the option key in `answer`,** for example `simple_lobed`, not the display name the spec's example row shows, because a key survives a change to the display text.
+29. **A card with no earlier state never appears under Promoted** on the session summary. The summary reports a level change, and a first answer is a new card.
+30. **The placement test can be retaken.** A retake sets a level only on cards that have no state, and the home screen says so under the link.
+31. **The session screen shows the storage banner after any failed write,** with the same words as the banner at boot. `main.js` passes the text in `ctx.storage_banner`.
+32. **The home screen lists only the units in the current focus,** although spec section 8 asks for the full unit list. A focus that hides the other channels' due counts hides their units too.
+33. **The CI job pins Node 24,** the version the content pipeline spec names. `node --test` also reads a glob pattern only from Node 21 and later.
+34. **An empty placement deck prints "No cards to place",** not the review line about the daily new-card cap.
+35. **`render(root, ctx)` may return a teardown function.** `main.js` calls it before rendering the next screen, so a late image event cannot paint an abandoned session over the live screen.
+36. **`answerEffects` in `session.js` owns the per-answer rules** (write once per card per session, no log row in placement, re-queue an `again` card once, no relearning in placement) so the spec's session tests can cover them in Node.
+37. **The retired seventh fixture species is LIST2**, Liquidambar styraciflua, with `planted_states: ["CO"]` and the `simple_lobed` leaf bucket. It lands in `simple_lobed_genus` membership and yields no card, so the fixture exercises "`unitMembers` may list a retired species, `unitCards` finds none".
+38. **A live species whose every image is retired still fails validation** unless a confusion edge names it. Only a record marked `retired: true` is exempt. A species retires when its last channel empties.
+39. **`photoPool` skips a retired species as well as a retired row,** so a group or concept pool never draws from a retired member.
+40. **A retired species donates nothing to a group card.** `acceptedAnswers` and `labelFor` skip a record with `retired: true`, so its `genus_common` never becomes an accepted answer or an option label.
+41. **The fixture manifest hashes are synthetic counters** (62 zeros and two hex digits), not the SHA-256 of the placeholder bytes, because one byte pattern serves every row. Tests read hashes out of the fixture pools, never out of a literal, so the values are free to change.
+42. **The placeholder script writes no file for a retired row,** and the fixture test asserts the retired hashes are absent from disk, the same as the pipeline deleting the object on a takedown.
+43. **`--local-images` takes the image directory,** not the content directory. The disk check names the object key `img/<hash>.jpg` in its message, because that key is what the CDN serves. A bad flag with no value prints the usage line and exits 1.
+44. **Each screen carries its own small `creditInto` helper** for the linked attribution, because the screen layer has no shared module and a logic module may not build DOM nodes.
+45. **The image-failure checklist reads the two QUGA leaf hashes out of the fixture manifest by hand,** because a hash is not guessable from the species and channel.
 
 ---
 
@@ -95,6 +130,8 @@ Each choice is the simplest option that satisfies the surrounding rules.
 
 - [ ] **Step 1: Create `package.json`**
 
+The file carries no dependencies. The content pipeline plan adds its dev dependencies later, and the app imports none of them.
+
 ```json
 {
   "name": "dendro",
@@ -103,13 +140,13 @@ Each choice is the simplest option that satisfies the surrounding rules.
   "type": "module",
   "description": "A desk-based learning tool for North American tree identification.",
   "scripts": {
-    "test": "node --test tests/",
-    "validate": "node scripts/validate_content.js content/",
-    "validate:dev": "node scripts/validate_content.js content_dev/",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "validate": "node scripts/validate_content.js content",
+    "validate:dev": "node scripts/validate_content.js content_dev --local-images content_dev/images",
     "images:dev": "node scripts/make_placeholder_jpegs.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   }
 }
 ```
@@ -120,6 +157,7 @@ Each choice is the simplest option that satisfies the surrounding rules.
 
 ```
 node_modules/
+pipeline/cache/
 .DS_Store
 Thumbs.db
 *.log
@@ -223,7 +261,7 @@ Expected: no output, and `content_dev/concepts.json` exists.
 
 - [ ] **Step 7: Create `content_dev/species.json`**
 
-Six species. QUVE carries no images and exists only because a confusion edge names it. ACPL has leaf and fruit cards but no bark card. PLOC's range misses every unit state, so only an `include` puts it in a unit.
+Seven species. QUVE carries no images and exists only because a confusion edge names it. ACPL has leaf and fruit cards but no bark card. PLOC's range misses every unit state, so only an `include` puts it in a unit. The two Acer records carry neither `genus_common` nor `arrangement`, so the fallbacks are exercised. LIST2 is retired: it keeps its record and its manifest row, and it makes no card.
 
 ```json
 {
@@ -297,10 +335,8 @@ Six species. QUVE carries no images and exists only because a confusion edge nam
     "inat_taxon_id": 54859,
     "inat_name": null,
     "genus": "Acer",
-    "genus_common": "maple",
     "section": null,
     "family": "Sapindaceae",
-    "arrangement": "opposite",
     "concepts": { "leaf": "simple_lobed", "fruit": "samara" },
     "range": { "text": "Europe, widely planted in North America", "states": [] },
     "planted_states": ["CO", "UT", "WY", "NE", "KS"],
@@ -317,10 +353,8 @@ Six species. QUVE carries no images and exists only because a confusion edge nam
     "inat_taxon_id": 48360,
     "inat_name": null,
     "genus": "Acer",
-    "genus_common": "maple",
     "section": null,
     "family": "Sapindaceae",
-    "arrangement": "opposite",
     "concepts": { "leaf": "simple_lobed", "fruit": "samara" },
     "range": { "text": "Eastern North America along rivers", "states": ["NE", "KS", "MO", "IA"] },
     "planted_states": ["CO", "WY"],
@@ -349,6 +383,29 @@ Six species. QUVE carries no images and exists only because a confusion edge nam
     "habitat": "Stream banks and bottomland forest",
     "native_status": "native",
     "varieties": []
+  },
+  "LIST2": {
+    "scientific": "Liquidambar styraciflua",
+    "common": ["Sweetgum", "American sweetgum"],
+    "audubon_name": "Sweetgum",
+    "inat_taxon_id": 48519,
+    "inat_name": null,
+    "genus": "Liquidambar",
+    "genus_common": "sweetgum",
+    "section": null,
+    "family": "Altingiaceae",
+    "arrangement": "alternate",
+    "concepts": { "leaf": "simple_lobed" },
+    "range": { "text": "Southeastern United States", "states": ["MO", "AR"] },
+    "planted_states": ["CO"],
+    "elevation_ft": [0, 3000],
+    "height_ft": [60, 80],
+    "habitat": "Bottomland forest and street plantings",
+    "native_status": "native",
+    "varieties": [],
+    "retired": true,
+    "retired_reason": "No approved photo survived the license check.",
+    "retired_at": "2026-09-22"
   }
 }
 ```
@@ -407,34 +464,38 @@ Six species. QUVE carries no images and exists only because a confusion edge nam
 
 - [ ] **Step 10: Create `content_dev/images/manifest.json`**
 
-Fifteen records. QUGA and QURU each carry two leaf images, so the no-repeat rule has something to work with. The last record is a concept override with the target `bark/plated`.
+Seventeen records. QUGA and QURU each carry two live leaf images, so the no-repeat rule has something to work with. Record 16 is a concept override with the target `bark/plated`. Two records are retired: a third QUGA leaf image, and the LIST2 image that went with the retired species.
+
+Each `hash` is 64 lowercase hex characters, the same shape the pipeline writes. The fixture hashes are synthetic counters, not the SHA-256 of the placeholder bytes, because the placeholder is one byte pattern for every row.
 
 ```json
 [
-  { "file": "images/QUGA/leaf/001.jpg", "target": "QUGA", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/QUGA/leaf/002.jpg", "target": "QUGA", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["autumn"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/QUGA/bark/001.jpg", "target": "QUGA", "channel": "bark", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["winter"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/QUGA/fruit/001.jpg", "target": "QUGA", "channel": "fruit", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["autumn"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/QUGAG/leaf/001.jpg", "target": "QUGAG", "channel": "leaf", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Quercus_gambelii", "tags": [], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/QUGAB/leaf/001.jpg", "target": "QUGAB", "channel": "leaf", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Quercus_gambelii", "tags": [], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/QURU/leaf/001.jpg", "target": "QURU", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QURU/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/QURU/leaf/002.jpg", "target": "QURU", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QURU/images", "tags": ["autumn"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/QURU/bark/001.jpg", "target": "QURU", "channel": "bark", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QURU/images", "tags": ["winter"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/ACPL/leaf/001.jpg", "target": "ACPL", "channel": "leaf", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Acer_platanoides", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/ACPL/fruit/001.jpg", "target": "ACPL", "channel": "fruit", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Acer_platanoides", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/ACSA2/leaf/001.jpg", "target": "ACSA2", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/ACSA2/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/PLOC/leaf/001.jpg", "target": "PLOC", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/PLOC/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/PLOC/bark/001.jpg", "target": "PLOC", "channel": "bark", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/PLOC/images", "tags": ["winter"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
-  { "file": "images/concepts/bark/plated/001.jpg", "target": "bark/plated", "channel": "bark", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Tree_bark", "tags": [], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder, textbook example of plated bark." }
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000001", "target": "QUGA", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000002", "target": "QUGA", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["autumn"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000003", "target": "QUGA", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder, retired by a takedown request.", "retired": true, "retired_reason": "Takedown request from the photographer.", "retired_at": "2026-09-22" },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000004", "target": "QUGA", "channel": "bark", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["winter"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000005", "target": "QUGA", "channel": "fruit", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QUGA/images", "tags": ["autumn"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000006", "target": "QUGAG", "channel": "leaf", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Quercus_gambelii", "tags": [], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000007", "target": "QUGAB", "channel": "leaf", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Quercus_gambelii", "tags": [], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000008", "target": "QURU", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QURU/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000009", "target": "QURU", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QURU/images", "tags": ["autumn"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "000000000000000000000000000000000000000000000000000000000000000a", "target": "QURU", "channel": "bark", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/QURU/images", "tags": ["winter"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "000000000000000000000000000000000000000000000000000000000000000b", "target": "ACPL", "channel": "leaf", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Acer_platanoides", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "000000000000000000000000000000000000000000000000000000000000000c", "target": "ACPL", "channel": "fruit", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Acer_platanoides", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "000000000000000000000000000000000000000000000000000000000000000d", "target": "ACSA2", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/ACSA2/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "000000000000000000000000000000000000000000000000000000000000000e", "target": "PLOC", "channel": "leaf", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/PLOC/images", "tags": ["summer"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "000000000000000000000000000000000000000000000000000000000000000f", "target": "PLOC", "channel": "bark", "source": "USDA PLANTS Database", "author": "USDA NRCS", "license": "public domain (US government work)", "origin": "https://plants.usda.gov/plant-profile/PLOC/images", "tags": ["winter"], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000010", "target": "bark/plated", "channel": "bark", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Tree_bark", "tags": [], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder, textbook example of plated bark." },
+  { "hash": "0000000000000000000000000000000000000000000000000000000000000011", "target": "LIST2", "channel": "leaf", "source": "Wikimedia Commons", "author": "Public domain contributor", "license": "public domain", "origin": "https://commons.wikimedia.org/wiki/Category:Liquidambar_styraciflua", "tags": [], "checked_by": "fixture", "checked_at": "2026-09-22", "note": "Fixture placeholder, retired with the species.", "retired": true, "retired_reason": "The species left the v0 pool.", "retired_at": "2026-09-22" }
 ]
 ```
 
 - [ ] **Step 11: Create `scripts/make_placeholder_jpegs.js`**
 
-The base64 string is a 1x1 grey baseline JPEG, 160 bytes, verified to decode.
+The base64 string is a 1x1 grey baseline JPEG, 160 bytes, verified to decode. The script writes one file per live manifest row, at the same object key the CDN serves: `images/img/<hash>.jpg`. It skips a retired row, because the pipeline deletes a retired object from the bucket.
 
 ```js
-// Writes a 1x1 placeholder JPEG to every path in a manifest.
+// Writes a 1x1 placeholder JPEG to images/img/<hash>.jpg for every live manifest row.
 // Usage: node scripts/make_placeholder_jpegs.js [content_dir]
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -451,7 +512,8 @@ const bytes = Buffer.from(MIN_JPEG_BASE64, 'base64');
 
 let written = 0;
 for (const record of manifest) {
-  const target = join(contentDir, record.file);
+  if (record.retired) continue;
+  const target = join(contentDir, 'images', 'img', `${record.hash}.jpg`);
   if (existsSync(target)) continue;
   mkdirSync(dirname(target), { recursive: true });
   writeFileSync(target, bytes);
@@ -463,7 +525,7 @@ console.log(`wrote ${written} placeholder images under ${contentDir}`);
 - [ ] **Step 12: Generate the fixture images**
 
 Run: `node scripts/make_placeholder_jpegs.js content_dev`
-Expected: `wrote 15 placeholder images under ...\content_dev`
+Expected: `wrote 15 placeholder images under ...\content_dev`, and the files land under `content_dev/images/img/`. The count is 15, not 17, because the script skips the two retired rows.
 
 - [ ] **Step 13: Create `tests/helpers/fixture.js` and `tests/helpers/rng.js`**
 
@@ -505,7 +567,9 @@ export function makeRng(seed) {
 }
 ```
 
-- [ ] **Step 14: Write the failing test**
+- [ ] **Step 14: Write `tests/fixture.test.js`**
+
+The two helpers already exist, so this test passes on its first run. It guards the fixture, not new code.
 
 `tests/fixture.test.js`:
 
@@ -517,19 +581,28 @@ import { join } from 'node:path';
 import { loadFixture, FIXTURE_DIR } from './helpers/fixture.js';
 import { makeRng } from './helpers/rng.js';
 
-test('the fixture parses and holds six species', () => {
+test('the fixture parses and holds seven species', () => {
   const raw = loadFixture();
-  assert.equal(Object.keys(raw.species).length, 6);
+  assert.equal(Object.keys(raw.species).length, 7);
   assert.equal(raw.concepts.length, 21);
   assert.equal(raw.confusion.length, 3);
   assert.equal(raw.units.length, 9);
-  assert.equal(raw.manifest.length, 15);
+  assert.equal(raw.manifest.length, 17);
+  assert.equal(raw.manifest.filter((m) => m.retired).length, 2);
+  assert.equal(raw.species.LIST2.retired, true);
 });
 
-test('every manifest image exists on disk', () => {
+test('every live manifest image exists on disk under images/img', () => {
   const raw = loadFixture();
   for (const record of raw.manifest) {
-    assert.ok(existsSync(join(FIXTURE_DIR, record.file)), `missing ${record.file}`);
+    assert.match(record.hash, /^[0-9a-f]{64}$/);
+    assert.equal(record.file, undefined);
+    const path = join(FIXTURE_DIR, 'images', 'img', `${record.hash}.jpg`);
+    if (record.retired) {
+      assert.ok(!existsSync(path), `retired ${record.hash} is still on disk`);
+    } else {
+      assert.ok(existsSync(path), `missing ${record.hash}`);
+    }
   }
 });
 
@@ -563,15 +636,23 @@ git add -A && git commit -m "feat: scaffold the repo and the content_dev fixture
 **Interfaces:**
 - Consumes: `loadFixture()` from `tests/helpers/fixture.js`.
 - Produces:
+  - `CDN_BASE` is the object storage base URL, ending in `/`. The pipeline's bucket setup supplies the real value.
+  - `imageUrl(photo, base)` returns `` `${base}img/${photo.hash}.jpg` ``. `base` always ends in `/`.
   - `deriveChannels(concepts)` returns `string[]` in first-seen order.
   - `cardId(kind, channel, key)` returns the card ID string.
-  - `photoPool(raw, kind, channel, key)` returns a manifest record array.
-  - `deriveCards(raw, channels)` returns `{ [card_id]: card }`.
+  - `photoPool(raw, kind, channel, key)` returns a manifest record array. It skips a retired row and a retired species.
+  - `deriveCards(raw, channels)` returns `{ [card_id]: card }`. It skips a retired species, so a retired species makes no species card, no variety card, and no group card of its own.
   - `unitMembers(raw, unit)` returns a symbol array.
   - `unitCards(unit, cards, raw)` returns a card ID array.
   - `validateContent(raw)` returns `{ errors, warnings }`, each entry `{ file, message }`.
   - `loadContent(raw)` returns `{ ok, content, errors, warnings }`.
-  - A `card` is `{ id, kind, channel, key, bucket, photos }`. `kind` is `concept`, `group`, `species`, or `variety`. `photos` is a manifest record array with one or more entries.
+  - `channelLabel(channel)` returns the channel key with underscores replaced by spaces.
+  - `conceptFor(content, channel, key)` returns the concept record, or `null`.
+  - `unitFor(content, unitKey)` returns the unit record with that key, or `null`.
+  - `varietyCardChannels(content, symbol, varietyKey)` returns the sorted channel list on which that variety has a card. It returns `[]` when the species does not own the variety.
+  - `LEVEL_KIND` maps a unit level 1 to 4 to a card kind.
+  - A `card` is `{ id, kind, channel, key, bucket, photos }`. `kind` is `concept`, `group`, `species`, or `variety`. `photos` is a manifest record array with one or more entries, and it never holds a retired row.
+  - A `photo` is a manifest row: `{ hash, target, channel, source, author, license, origin, tags, checked_by, checked_at, note }`. A retired row adds `retired`, `retired_reason`, and `retired_at`. `hash` names the image and `origin` is the page the attribution links to.
   - A `content` object is `{ species, concepts, confusion, units, manifest, channels, concepts_by_channel, cards, cards_by_channel, unit_members, unit_cards, warnings }`.
 
 **Card ID format.** Concept and group cards put the channel second. Species and variety cards put the channel last. Copy this exactly:
@@ -585,6 +666,8 @@ git add -A && git commit -m "feat: scaffold the repo and the content_dev fixture
 
 - [ ] **Step 1: Write the failing test for channels, cards, and pools**
 
+The import list names only what Step 3 adds. Later steps extend it.
+
 `tests/content.test.js`:
 
 ```js
@@ -592,8 +675,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { loadFixture } from './helpers/fixture.js';
 import {
-  deriveChannels, cardId, photoPool, deriveCards,
-  unitMembers, unitCards, validateContent, loadContent
+  CDN_BASE, imageUrl, deriveChannels, cardId, photoPool, deriveCards
 } from '../app/logic/content.js';
 
 test('the channel list derives from concepts.json', () => {
@@ -602,14 +684,11 @@ test('the channel list derives from concepts.json', () => {
   assert.ok(!deriveChannels(raw.concepts).includes('flower'));
 });
 
-test('an empty channel renders nowhere', () => {
-  const raw = loadFixture();
-  const result = loadContent(raw);
-  assert.equal(result.ok, true);
-  assert.ok(!result.content.channels.includes('twig_buds'));
-  for (const card of Object.values(result.content.cards)) {
-    assert.ok(result.content.channels.includes(card.channel));
-  }
+test('imageUrl builds the object URL from the base and the hash', () => {
+  const photo = { hash: 'a'.repeat(64) };
+  assert.ok(CDN_BASE.endsWith('/'));
+  assert.equal(imageUrl(photo, 'content_dev/images/'), `content_dev/images/img/${'a'.repeat(64)}.jpg`);
+  assert.equal(imageUrl(photo, CDN_BASE), `${CDN_BASE}img/${'a'.repeat(64)}.jpg`);
 });
 
 test('card IDs use the spec format', () => {
@@ -628,6 +707,23 @@ test('photo pools union the member species images', () => {
   assert.equal(photoPool(raw, 'variety', 'leaf', 'QUGAG').length, 1);
 });
 
+test('a concept pool skips an override row from another channel', () => {
+  const raw = loadFixture();
+  const override = raw.manifest.find((m) => m.target === 'bark/plated');
+  const stray = { ...override, hash: 'b'.repeat(64), channel: 'leaf' };
+  raw.manifest = [...raw.manifest, stray];
+  assert.equal(photoPool(raw, 'concept', 'bark', 'plated').length, 1);
+});
+
+test('a retired row and a retired species stay out of every pool', () => {
+  const raw = loadFixture();
+  assert.equal(raw.manifest.filter((m) => m.target === 'QUGA' && m.channel === 'leaf').length, 3);
+  assert.equal(photoPool(raw, 'species', 'leaf', 'QUGA').length, 2);
+  assert.equal(photoPool(raw, 'species', 'leaf', 'LIST2').length, 0);
+  assert.equal(photoPool(raw, 'group', 'leaf', 'Liquidambar').length, 0);
+  assert.equal(photoPool(raw, 'concept', 'leaf', 'simple_lobed').length, 7);
+});
+
 test('cards derive only where images exist', () => {
   const raw = loadFixture();
   const cards = deriveCards(raw, deriveChannels(raw.concepts));
@@ -639,20 +735,52 @@ test('cards derive only where images exist', () => {
   assert.ok(cards['variety:QUGAG:leaf']);
   assert.ok(cards['variety:QUGAB:leaf']);
 });
+
+test('a retired species makes no card', () => {
+  const raw = loadFixture();
+  const cards = deriveCards(raw, deriveChannels(raw.concepts));
+  assert.ok(!cards['species:LIST2:leaf']);
+  assert.ok(!cards['group:leaf:Liquidambar']);
+  for (const card of Object.values(cards)) {
+    for (const photo of card.photos) assert.ok(!photo.retired);
+  }
+});
+
+test('one variety with a photo makes no variety card', () => {
+  const raw = loadFixture();
+  raw.manifest = raw.manifest.filter((m) => m.target !== 'QUGAB');
+  const cards = deriveCards(raw, deriveChannels(raw.concepts));
+  assert.ok(!cards['variety:QUGAG:leaf']);
+  assert.ok(!cards['variety:QUGAB:leaf']);
+  assert.equal(Object.keys(cards).length, 23);
+});
+
+test('a group card takes the bucket of the first member that has one', () => {
+  const raw = loadFixture();
+  delete raw.species.ACPL.concepts.leaf;
+  const cards = deriveCards(raw, deriveChannels(raw.concepts));
+  assert.equal(cards['group:leaf:Acer'].bucket, 'simple_lobed');
+});
 ```
 
 - [ ] **Step 2: Run the test to verify it fails**
 
 Run: `node --test tests/content.test.js`
-Expected: FAIL with `Cannot find module ... app/logic/content.js`.
+Expected: FAIL with `Error [ERR_MODULE_NOT_FOUND]: Cannot find module ...\app\logic\content.js imported from ...\tests\content.test.js`. No test runs.
 
 - [ ] **Step 3: Write the channel, card, and pool half of `app/logic/content.js`**
 
 ```js
 // Loads, validates, and indexes content. Pure: no DOM, no fetch, no storage.
 
-const KIND_LEVEL = { concept: 1, group: 2, species: 3, variety: 4 };
 const LEVEL_KIND = { 1: 'concept', 2: 'group', 3: 'species', 4: 'variety' };
+
+// The content pipeline's bucket setup supplies the real host. See the pipeline spec, section 2.
+export const CDN_BASE = 'https://REPLACE-WITH-CDN-HOST/';
+
+export function imageUrl(photo, base) {
+  return `${base}img/${photo.hash}.jpg`;
+}
 
 export function deriveChannels(concepts) {
   const seen = [];
@@ -667,41 +795,48 @@ export function cardId(kind, channel, key) {
   return `${kind}:${key}:${channel}`;
 }
 
-function varietyOwner(raw, varietyKey) {
-  for (const [symbol, record] of Object.entries(raw.species)) {
-    for (const variety of record.varieties ?? []) {
-      if (variety.key === varietyKey) return symbol;
-    }
-  }
-  return null;
-}
-
 function speciesImages(raw, symbol, channel) {
-  return raw.manifest.filter((m) => m.target === symbol && m.channel === channel);
+  return raw.manifest.filter(
+    (m) => m.target === symbol && m.channel === channel && !m.retired
+  );
 }
 
 export function photoPool(raw, kind, channel, key) {
   if (kind === 'species' || kind === 'variety') {
+    const owner = raw.species[key];
+    if (owner?.retired) return [];
     return speciesImages(raw, key, channel);
   }
   const pool = [];
   for (const [symbol, record] of Object.entries(raw.species)) {
+    if (record.retired) continue;
     if (kind === 'group' && record.genus !== key) continue;
     if (kind === 'concept' && record.concepts?.[channel] !== key) continue;
     pool.push(...speciesImages(raw, symbol, channel));
   }
   if (kind === 'concept') {
-    pool.push(...raw.manifest.filter((m) => m.target === `${channel}/${key}`));
+    pool.push(...raw.manifest.filter(
+      (m) => m.target === `${channel}/${key}` && m.channel === channel && !m.retired
+    ));
   }
   return pool;
 }
 
+function liveSpecies(raw) {
+  return Object.entries(raw.species).filter(([, record]) => !record.retired);
+}
+
 function groupBucket(raw, genus, channel) {
-  const symbols = Object.keys(raw.species)
+  const symbols = liveSpecies(raw)
+    .map(([symbol]) => symbol)
     .filter((s) => raw.species[s].genus === genus)
     .filter((s) => speciesImages(raw, s, channel).length > 0)
     .sort();
-  return symbols.length ? (raw.species[symbols[0]].concepts?.[channel] ?? null) : null;
+  for (const symbol of symbols) {
+    const bucket = raw.species[symbol].concepts?.[channel];
+    if (bucket) return bucket;
+  }
+  return null;
 }
 
 export function deriveCards(raw, channels) {
@@ -717,9 +852,9 @@ export function deriveCards(raw, channels) {
     for (const concept of raw.concepts) {
       if (concept.channel === channel) add('concept', channel, concept.key, concept.key);
     }
-    const genera = [...new Set(Object.values(raw.species).map((s) => s.genus))].sort();
+    const genera = [...new Set(liveSpecies(raw).map(([, s]) => s.genus))].sort();
     for (const genus of genera) add('group', channel, genus, groupBucket(raw, genus, channel));
-    for (const [symbol, record] of Object.entries(raw.species)) {
+    for (const [symbol, record] of liveSpecies(raw)) {
       const bucket = record.concepts?.[channel] ?? null;
       if (bucket) add('species', channel, symbol, bucket);
       const withPhotos = (record.varieties ?? [])
@@ -736,11 +871,26 @@ export function deriveCards(raw, channels) {
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `node --test tests/content.test.js`
-Expected: FAIL on the two tests that call `loadContent`, `unitMembers`, `unitCards`, and `validateContent`. The channel, card ID, pool, and card-count tests pass.
+Expected: PASS, 10 tests.
 
 - [ ] **Step 5: Write the failing test for unit membership**
 
-Append to `tests/content.test.js`:
+First extend the import list in `tests/content.test.js` with the Edit tool. Replace:
+
+```js
+  CDN_BASE, imageUrl, deriveChannels, cardId, photoPool, deriveCards
+} from '../app/logic/content.js';
+```
+
+with:
+
+```js
+  CDN_BASE, imageUrl, deriveChannels, cardId, photoPool, deriveCards,
+  unitMembers, unitCards
+} from '../app/logic/content.js';
+```
+
+Then append to `tests/content.test.js`:
 
 ```js
 test('unit membership applies states, genera, section, include, exclude in order', () => {
@@ -750,7 +900,7 @@ test('unit membership applies states, genera, section, include, exclude in order
   assert.deepEqual(unitMembers(raw, unit('leaf_types')), []);
   assert.deepEqual(
     unitMembers(raw, unit('simple_lobed_genus')).sort(),
-    ['ACPL', 'ACSA2', 'PLOC', 'QUGA', 'QURU', 'QUVE']
+    ['ACPL', 'ACSA2', 'LIST2', 'PLOC', 'QUGA', 'QURU', 'QUVE']
   );
   assert.deepEqual(unitMembers(raw, unit('simple_lobed_white_oaks_co')), ['QUGA']);
   assert.deepEqual(unitMembers(raw, unit('simple_lobed_red_oaks_co')), ['QURU']);
@@ -760,27 +910,28 @@ test('unit membership applies states, genera, section, include, exclude in order
 
 test('unit cards follow the unit level', () => {
   const raw = loadFixture();
-  const { content } = loadContent(raw);
-  assert.deepEqual(content.unit_cards.leaf_types, ['concept:leaf:simple_lobed']);
+  const cards = deriveCards(raw, deriveChannels(raw.concepts));
+  const ids = (key) => unitCards(raw.units.find((u) => u.key === key), cards, raw).sort();
+
+  assert.deepEqual(ids('leaf_types'), ['concept:leaf:simple_lobed']);
   assert.deepEqual(
-    content.unit_cards.bark_types.sort(),
+    ids('bark_types'),
     ['concept:bark:furrowed', 'concept:bark:papery', 'concept:bark:plated']
   );
   assert.deepEqual(
-    content.unit_cards.simple_lobed_genus.sort(),
+    ids('simple_lobed_genus'),
     ['group:leaf:Acer', 'group:leaf:Platanus', 'group:leaf:Quercus']
   );
-  assert.deepEqual(content.unit_cards.simple_lobed_maples_co.sort(),
-    ['species:ACPL:leaf', 'species:ACSA2:leaf']);
-  assert.deepEqual(content.unit_cards.quga_varieties.sort(),
-    ['variety:QUGAB:leaf', 'variety:QUGAG:leaf']);
+  assert.ok(!ids('simple_lobed_genus').includes('group:leaf:Liquidambar'));
+  assert.deepEqual(ids('simple_lobed_maples_co'), ['species:ACPL:leaf', 'species:ACSA2:leaf']);
+  assert.deepEqual(ids('quga_varieties'), ['variety:QUGAB:leaf', 'variety:QUGAG:leaf']);
 });
 ```
 
 - [ ] **Step 6: Run the test to verify it fails**
 
 Run: `node --test tests/content.test.js`
-Expected: FAIL with `unitMembers is not a function`.
+Expected: FAIL with `SyntaxError: The requested module '../app/logic/content.js' does not provide an export named 'unitCards'`. Node names one of the two new imports, and the name it picks can differ. The module does not link, so no test runs.
 
 - [ ] **Step 7: Add unit membership to `app/logic/content.js`**
 
@@ -833,9 +984,31 @@ export function unitCards(unit, cards, raw) {
 }
 ```
 
-- [ ] **Step 8: Write the failing test for validation**
+- [ ] **Step 8: Run the test to verify it passes**
 
-Append to `tests/content.test.js`. Each bad object is inline, so the fixture stays valid.
+Run: `node --test tests/content.test.js`
+Expected: PASS, 12 tests.
+
+- [ ] **Step 9: Write the failing test for validation and the screen helpers**
+
+First extend the import list in `tests/content.test.js` with the Edit tool. Replace:
+
+```js
+  CDN_BASE, imageUrl, deriveChannels, cardId, photoPool, deriveCards,
+  unitMembers, unitCards
+} from '../app/logic/content.js';
+```
+
+with:
+
+```js
+  CDN_BASE, imageUrl, deriveChannels, cardId, photoPool, deriveCards,
+  unitMembers, unitCards, validateContent, loadContent,
+  channelLabel, conceptFor, unitFor, varietyCardChannels
+} from '../app/logic/content.js';
+```
+
+Then append to `tests/content.test.js`. Each bad object is inline, so the fixture stays valid.
 
 ```js
 function badContent(patch) {
@@ -853,7 +1026,7 @@ function badContent(patch) {
     concepts: [{ key: 'simple_lobed', channel: 'leaf', name: 'Lobed', accept: ['lobed'], description: 'x' }],
     confusion: [],
     units: [{ key: 'leaf_types', name: 'Leaf types', channel: 'leaf', level: 1, parent: null }],
-    manifest: [{ file: 'images/QUGA/leaf/001.jpg', target: 'QUGA', channel: 'leaf', source: 'x', author: 'x', license: 'public domain', origin: 'x', tags: [], checked_by: 'x', checked_at: '2026-09-22', note: 'x' }],
+    manifest: [{ hash: '1'.repeat(64), target: 'QUGA', channel: 'leaf', source: 'x', author: 'x', license: 'public domain', origin: 'x', tags: [], checked_by: 'x', checked_at: '2026-09-22', note: 'x' }],
     ...patch
   };
 }
@@ -861,6 +1034,17 @@ function badContent(patch) {
 function messages(raw) {
   return validateContent(raw).errors.map((e) => e.message).join(' | ');
 }
+
+test('an empty channel renders nowhere', () => {
+  const raw = loadFixture();
+  const result = loadContent(raw);
+  assert.equal(result.ok, true);
+  assert.ok(!result.content.channels.includes('twig_buds'));
+  for (const card of Object.values(result.content.cards)) {
+    assert.ok(result.content.channels.includes(card.channel));
+  }
+  assert.deepEqual(result.content.unit_cards.leaf_types, ['concept:leaf:simple_lobed']);
+});
 
 test('the fixture validates with no errors and size warnings only', () => {
   const report = validateContent(loadFixture());
@@ -926,6 +1110,78 @@ test('each validation rule fails on its own bad object', () => {
   assert.match(messages(badSection), /section/);
 });
 
+test('a concept override image on the wrong channel fails validation', () => {
+  const crossed = badContent();
+  crossed.manifest.push({
+    hash: '2'.repeat(64), target: 'leaf/simple_lobed',
+    channel: 'bark', source: 'x', author: 'x', license: 'public domain', origin: 'x',
+    tags: [], checked_by: 'x', checked_at: '2026-09-22', note: 'x'
+  });
+  assert.match(messages(crossed), /its target names leaf/);
+});
+
+test('a species image with no concept on that channel fails validation', () => {
+  const orphan = badContent();
+  orphan.concepts.push({ key: 'furrowed', channel: 'bark', name: 'Furrowed', accept: ['furrowed'], description: 'x' });
+  orphan.manifest.push({
+    hash: '3'.repeat(64), target: 'QUGA', channel: 'bark', source: 'x',
+    author: 'x', license: 'public domain', origin: 'x', tags: [], checked_by: 'x',
+    checked_at: '2026-09-22', note: 'x'
+  });
+  assert.match(messages(orphan), /bark image but no bark concept/);
+
+  const retiredRow = badContent();
+  retiredRow.concepts.push({ key: 'furrowed', channel: 'bark', name: 'Furrowed', accept: ['furrowed'], description: 'x' });
+  retiredRow.manifest.push({
+    hash: '3'.repeat(64), target: 'QUGA', channel: 'bark', source: 'x',
+    author: 'x', license: 'public domain', origin: 'x', tags: [], checked_by: 'x',
+    checked_at: '2026-09-22', note: 'x', retired: true,
+    retired_reason: 'x', retired_at: '2026-09-22'
+  });
+  assert.deepEqual(validateContent(retiredRow).errors, []);
+});
+
+test('a manifest row needs a 64 hex hash and carries no file path', () => {
+  const shortHash = badContent();
+  shortHash.manifest[0].hash = 'abc';
+  assert.match(messages(shortHash), /64 hex hash/);
+
+  const upperHash = badContent();
+  upperHash.manifest[0].hash = 'A'.repeat(64);
+  assert.match(messages(upperHash), /64 hex hash/);
+
+  const withFile = badContent();
+  withFile.manifest[0].file = 'images/QUGA/leaf/001.jpg';
+  assert.match(messages(withFile), /file field/);
+});
+
+test('two rows share a hash unless the target and the channel also match', () => {
+  const twoTargets = badContent();
+  twoTargets.manifest.push({ ...twoTargets.manifest[0], target: 'leaf/simple_lobed' });
+  assert.deepEqual(validateContent(twoTargets).errors, []);
+
+  const samePair = badContent();
+  samePair.manifest.push({ ...samePair.manifest[0] });
+  assert.match(messages(samePair), /duplicate row/);
+});
+
+test('a retired species needs no live image', () => {
+  const retired = badContent();
+  retired.species.QUGA.retired = true;
+  retired.species.QUGA.retired_reason = 'No approved photo survived the license check.';
+  retired.species.QUGA.retired_at = '2026-09-22';
+  retired.manifest[0].retired = true;
+  retired.manifest[0].retired_reason = 'The species left the v0 pool.';
+  retired.manifest[0].retired_at = '2026-09-22';
+  assert.deepEqual(validateContent(retired).errors, []);
+
+  const live = badContent();
+  live.manifest[0].retired = true;
+  live.manifest[0].retired_reason = 'x';
+  live.manifest[0].retired_at = '2026-09-22';
+  assert.match(messages(live), /no manifest image/);
+});
+
 test('a unit outside 5 to 25 cards warns and does not fail', () => {
   const report = validateContent(badContent());
   assert.deepEqual(report.errors, []);
@@ -940,14 +1196,37 @@ test('loadContent returns errors instead of content when validation fails', () =
   assert.equal(result.content, null);
   assert.equal(result.errors[0].file, 'species.json');
 });
+
+test('channelLabel spaces the channel key', () => {
+  assert.equal(channelLabel('leaf'), 'leaf');
+  assert.equal(channelLabel('twig_buds'), 'twig buds');
+});
+
+test('conceptFor finds the concept record or returns null', () => {
+  const { content } = loadContent(loadFixture());
+  assert.equal(conceptFor(content, 'bark', 'plated').name, 'Plated / blocky');
+  assert.equal(conceptFor(content, 'leaf', 'plated'), null);
+});
+
+test('unitFor finds the unit record or returns null', () => {
+  const { content } = loadContent(loadFixture());
+  assert.equal(unitFor(content, 'simple_lobed_maples_co').name, 'Maples');
+  assert.equal(unitFor(content, 'no_such_unit'), null);
+});
+
+test('varietyCardChannels lists the channels that hold a variety card', () => {
+  const { content } = loadContent(loadFixture());
+  assert.deepEqual(varietyCardChannels(content, 'QUGA', 'QUGAG'), ['leaf']);
+  assert.deepEqual(varietyCardChannels(content, 'QURU', 'QUGAG'), []);
+});
 ```
 
-- [ ] **Step 9: Run the test to verify it fails**
+- [ ] **Step 10: Run the test to verify it fails**
 
 Run: `node --test tests/content.test.js`
-Expected: FAIL with `validateContent is not a function`.
+Expected: FAIL with `SyntaxError: The requested module '../app/logic/content.js' does not provide an export named 'channelLabel'`. Node names one of the six new imports, and the name it picks can differ. The module does not link, so no test runs.
 
-- [ ] **Step 10: Add validation and `loadContent` to `app/logic/content.js`**
+- [ ] **Step 11: Add validation, `loadContent`, and the screen helpers to `app/logic/content.js`**
 
 ```js
 export function validateContent(raw) {
@@ -975,8 +1254,8 @@ export function validateContent(raw) {
     if (!record.common || record.common.length === 0) {
       fail('species.json', `${symbol} has no common name`);
     }
-    const hasImage = raw.manifest.some((m) => m.target === symbol);
-    if (!hasImage && !namedByEdge.has(symbol)) {
+    const hasImage = raw.manifest.some((m) => m.target === symbol && !m.retired);
+    if (!hasImage && !namedByEdge.has(symbol) && !record.retired) {
       fail('species.json', `${symbol} has no manifest image and no confusion edge`);
     }
     for (const [channel, bucket] of Object.entries(record.concepts ?? {})) {
@@ -984,13 +1263,41 @@ export function validateContent(raw) {
         fail('species.json', `${symbol} has an unknown concept ${channel}/${bucket}`);
       }
     }
+    for (const channel of channels) {
+      const onChannel = raw.manifest.some(
+        (m) => m.target === symbol && m.channel === channel && !m.retired
+      );
+      if (onChannel && !record.concepts?.[channel]) {
+        fail('species.json', `${symbol} has a ${channel} image but no ${channel} concept`);
+      }
+    }
   }
 
+  const seenRows = new Set();
   for (const image of raw.manifest) {
+    const where = `${image.target} ${image.channel}`;
+    if (typeof image.hash !== 'string' || !/^[0-9a-f]{64}$/.test(image.hash)) {
+      fail('images/manifest.json', `the ${where} row has no 64 hex hash`);
+    }
+    if (image.file !== undefined) {
+      fail('images/manifest.json', `the ${where} row carries a file field; a row names its image by hash`);
+    }
+    const pair = `${image.hash}|${image.target}|${image.channel}`;
+    if (seenRows.has(pair)) {
+      fail('images/manifest.json', `duplicate row for ${where} and hash ${image.hash}`);
+    }
+    seenRows.add(pair);
     const known = symbols.has(image.target)
       || varietyKeys.has(image.target)
       || conceptKeys.has(image.target);
     if (!known) fail('images/manifest.json', `unknown target ${image.target}`);
+    if (conceptKeys.has(image.target)) {
+      const targetChannel = image.target.split('/')[0];
+      if (image.channel !== targetChannel) {
+        fail('images/manifest.json',
+          `the ${where} row has channel ${image.channel} but its target names ${targetChannel}`);
+      }
+    }
   }
 
   for (const edge of raw.confusion) {
@@ -1083,22 +1390,43 @@ export function loadContent(raw) {
   return { ok: true, content, errors: [], warnings };
 }
 
-export { KIND_LEVEL, LEVEL_KIND };
+export function channelLabel(channel) {
+  return channel.replaceAll('_', ' ');
+}
+
+export function conceptFor(content, channel, key) {
+  return content.concepts.find((c) => c.channel === channel && c.key === key) ?? null;
+}
+
+export function unitFor(content, unitKey) {
+  return content.units.find((u) => u.key === unitKey) ?? null;
+}
+
+export function varietyCardChannels(content, symbol, varietyKey) {
+  const record = content.species[symbol];
+  const owned = (record?.varieties ?? []).some((v) => v.key === varietyKey);
+  if (!owned) return [];
+  return content.channels
+    .filter((channel) => content.cards[cardId('variety', channel, varietyKey)])
+    .sort();
+}
+
+export { LEVEL_KIND };
 ```
 
-- [ ] **Step 11: Run the test to verify it passes**
+- [ ] **Step 12: Run the test to verify it passes**
 
 Run: `node --test tests/content.test.js`
-Expected: PASS, 11 tests.
+Expected: PASS, 26 tests.
 
-- [ ] **Step 12: Validate the fixture and the live content set**
+- [ ] **Step 13: Validate the fixture and the live content set**
 
 Both directories must pass. `scripts/validate_content.js` arrives in Task 13, so use a one-line check now.
 
 Run: `node --input-type=module -e "import {loadFixture} from './tests/helpers/fixture.js'; import {validateContent} from './app/logic/content.js'; console.log(JSON.stringify(validateContent(loadFixture()).errors))"`
 Expected: `[]`
 
-- [ ] **Step 13: Commit**
+- [ ] **Step 14: Commit**
 
 ```bash
 git add -A && git commit -m "feat: add content loading, validation, and card derivation" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
@@ -1124,10 +1452,14 @@ git add -A && git commit -m "feat: add content loading, validation, and card der
   - `previousTier(tier, invAvailable)` returns the tier below, or `'mc4'` at `mc4`.
   - `addDays(dateString, days)` returns a `YYYY-MM-DD` string.
   - `isDue(state, today)` returns a boolean. A missing state is not due.
-  - `scheduleCard(state, grade, today, { inv_available })` returns a new state object. It never mutates the input.
+  - `scheduleCard(state, grade, today, { inv_available })` returns a new state object. It never mutates the input. A `state` of `null` means the card has no state yet.
   - A card state is `{ interval, ease, due, reps, lapses, recent, tier, tier_passes }`.
 
-**Learning steps.** The spec fixes the chain 1, 4, 10, 25. The rule that produces it: a right answer on a new card sets interval 1, a right answer at interval 1 sets interval 4, and every later right answer uses the normal multiplier. A `hard` answer at interval 1 also moves to 4, so the card cannot stall.
+**Learning steps.** The spec fixes the chain 1, 4, 10, 25. The rule that produces it: a right answer on a new card sets interval 1, and a `good` answer on a card that is still at interval 1, with `reps` 1 and no lapse, sets interval 4. Every other answer follows the spec formula for its grade: `again` gives 1, `hard` gives round(interval x 1.2), `good` gives round(interval x ease). A card that lapsed back to interval 1 does not repeat the learning step, so a `good` there gives round(1 x ease) and a `hard` there gives 1.
+
+**The first review.** `scheduleCard(null, grade, ...)` starts from `newCardState()`. A first answer of `again` is not a lapse, because the card was never learned: `lapses` stays 0 and the ease stays 2.5. The card gets interval 1, tier `mc4`, and `reps` 1, so its next `good` still takes the learning step to 4.
+
+**Promotion runs on `good` only.** A `hard` answer counts no pass and never promotes, whatever the new interval is.
 
 - [ ] **Step 1: Write the failing test for grade derivation**
 
@@ -1137,8 +1469,8 @@ git add -A && git commit -m "feat: add content loading, validation, and card der
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  deriveGrade, scheduleCard, newCardState, addDays, isDue,
-  nextTier, previousTier, FORMAT_THRESHOLDS_MS, TIME_CEILING_MS, PROMOTION_GATES
+  deriveGrade, newCardState, addDays, isDue,
+  FORMAT_THRESHOLDS_MS, TIME_CEILING_MS, PROMOTION_GATES
 } from '../app/logic/scheduler.js';
 
 test('a wrong answer is again at any time', () => {
@@ -1165,6 +1497,8 @@ test('above 60 seconds the time signal is discarded', () => {
   assert.equal(FORMAT_THRESHOLDS_MS.mc8, 15000);
 });
 ```
+
+The import list names only what Step 3 exports, so the file links. Step 7 extends it.
 
 - [ ] **Step 2: Run the test to verify it fails**
 
@@ -1241,13 +1575,14 @@ test('hard multiplies by 1.2 and drops ease by 0.15', () => {
   assert.equal(state.ease, 2.35);
 });
 
-test('again resets the interval to 1, adds a lapse, and drops ease by 0.2', () => {
+test('again resets the interval to 1, adds a lapse, drops ease, and demotes one tier', () => {
   const start = { ...newCardState(), interval: 25, reps: 5, lapses: 1, tier: 'inv', ease: 2.5 };
   const state = scheduleCard(start, 'again', '2026-01-01', OPTS);
   assert.equal(state.interval, 1);
   assert.equal(state.lapses, 2);
   assert.equal(state.ease, 2.3);
   assert.equal(state.due, '2026-01-02');
+  assert.equal(state.tier, 'mc8');
 });
 
 test('ease has a floor of 1.3', () => {
@@ -1273,12 +1608,39 @@ test('scheduleCard does not mutate its input', () => {
   scheduleCard(start, 'good', '2026-01-01', OPTS);
   assert.deepEqual(start, copy);
 });
+
+test('a card that lapsed does not repeat the learning step', () => {
+  const lapsed = { ...newCardState(), interval: 1, reps: 6, lapses: 1, tier: 'mc8', ease: 2.5 };
+  const state = scheduleCard(lapsed, 'good', '2026-01-01', OPTS);
+  assert.equal(state.interval, 3);
+  assert.equal(state.due, '2026-01-04');
+});
+
+test('hard at interval 1 follows the formula and does not jump to 4', () => {
+  const learning = { ...newCardState(), interval: 1, reps: 1, ease: 2.5 };
+  assert.equal(scheduleCard(learning, 'hard', '2026-01-01', OPTS).interval, 1);
+  const lapsed = { ...newCardState(), interval: 1, reps: 6, lapses: 1, ease: 2.3 };
+  assert.equal(scheduleCard(lapsed, 'hard', '2026-01-01', OPTS).interval, 1);
+});
+
+test('a first answer of again starts the card in learning and records no lapse', () => {
+  const state = scheduleCard(null, 'again', '2026-01-01', OPTS);
+  assert.equal(state.interval, 1);
+  assert.equal(state.lapses, 0);
+  assert.equal(state.ease, 2.5);
+  assert.equal(state.reps, 1);
+  assert.equal(state.tier, 'mc4');
+  assert.equal(state.tier_passes, 0);
+  assert.equal(scheduleCard(state, 'good', '2026-01-02', OPTS).interval, 4);
+});
 ```
+
+These tests call `scheduleCard`, which the import list does not name yet. Step 7 adds the function and the import together.
 
 - [ ] **Step 6: Run the test to verify it fails**
 
 Run: `node --test tests/scheduler.test.js`
-Expected: FAIL with `scheduleCard is not a function`.
+Expected: FAIL, 9 of 13 tests, each with `ReferenceError: scheduleCard is not defined`. The four grade tests still pass.
 
 - [ ] **Step 7: Add SM-2 and the ladder to `app/logic/scheduler.js`**
 
@@ -1296,26 +1658,34 @@ export function previousTier(tier, invAvailable) {
   return 'mc4';
 }
 
+// The learning step 1 to 4 belongs to a card that has never lapsed. Every other
+// card follows the spec formula for its grade.
 function nextInterval(state, grade) {
   if (grade === 'again') return 1;
   if (state.interval < 1) return 1;
-  if (state.interval === 1) return 4;
+  const learning = state.interval === 1 && state.reps === 1 && state.lapses === 0;
+  if (grade === 'good' && learning) return 4;
   if (grade === 'hard') return Math.round(state.interval * 1.2);
   return Math.round(state.interval * state.ease);
 }
 
-function nextEase(state, grade) {
-  const delta = grade === 'good' ? 0 : grade === 'hard' ? -0.15 : -0.2;
+function nextEase(state, grade, firstReview) {
+  if (grade === 'good') return state.ease;
+  if (grade === 'again' && firstReview) return state.ease;
+  const delta = grade === 'hard' ? -0.15 : -0.2;
   return Math.max(EASE_FLOOR, Math.round((state.ease + delta) * 100) / 100);
 }
 
 export function scheduleCard(state, grade, today, options = {}) {
   const invAvailable = options.inv_available !== false;
+  const firstReview = !state;
   const prior = state ? { ...state, recent: [...(state.recent ?? [])] } : newCardState();
 
   const interval = nextInterval(prior, grade);
-  const ease = nextEase(prior, grade);
+  const ease = nextEase(prior, grade, firstReview);
   const recent = [...prior.recent, grade].slice(-3);
+  // The first review of a card can not be a lapse: the card was never learned.
+  const lapsed = grade === 'again' && !firstReview;
 
   let tier = prior.tier;
   let passes = prior.tier_passes;
@@ -1323,8 +1693,8 @@ export function scheduleCard(state, grade, today, options = {}) {
   if (grade === 'again') {
     tier = previousTier(prior.tier, invAvailable);
     passes = 0;
-  } else {
-    if (grade === 'good') passes += 1;
+  } else if (grade === 'good') {
+    passes += 1;
     const upper = nextTier(tier, invAvailable);
     if (upper && passes >= 2 && interval >= PROMOTION_GATES[upper]) {
       tier = upper;
@@ -1337,7 +1707,7 @@ export function scheduleCard(state, grade, today, options = {}) {
     ease,
     due: addDays(today, interval),
     reps: prior.reps + 1,
-    lapses: prior.lapses + (grade === 'again' ? 1 : 0),
+    lapses: prior.lapses + (lapsed ? 1 : 0),
     recent,
     tier,
     tier_passes: passes
@@ -1345,10 +1715,20 @@ export function scheduleCard(state, grade, today, options = {}) {
 }
 ```
 
+Then extend the import list at the top of `tests/scheduler.test.js` with the three new names:
+
+```js
+import {
+  deriveGrade, newCardState, addDays, isDue,
+  FORMAT_THRESHOLDS_MS, TIME_CEILING_MS, PROMOTION_GATES,
+  scheduleCard, nextTier, previousTier
+} from '../app/logic/scheduler.js';
+```
+
 - [ ] **Step 8: Run the test to verify it passes**
 
 Run: `node --test tests/scheduler.test.js`
-Expected: PASS, 10 tests.
+Expected: PASS, 13 tests.
 
 - [ ] **Step 9: Write the failing test for the tier ladder**
 
@@ -1379,6 +1759,14 @@ test('a hard grade is not a pass', () => {
   state = scheduleCard(state, 'hard', '2026-01-01', OPTS);
   assert.equal(state.tier_passes, 1);
   assert.equal(state.tier, 'mc4');
+});
+
+test('a hard grade never promotes, even when it crosses the gate', () => {
+  const start = { ...newCardState(), interval: 10, reps: 3, tier: 'mc4', tier_passes: 2 };
+  const state = scheduleCard(start, 'hard', '2026-01-01', OPTS);
+  assert.equal(state.interval, 12);
+  assert.equal(state.tier, 'mc4');
+  assert.equal(state.tier_passes, 2);
 });
 
 test('demotion drops one tier and resets tier_passes, with no exception at level 4', () => {
@@ -1427,7 +1815,7 @@ test('addDays crosses a month and a year boundary', () => {
 - [ ] **Step 10: Run the test to verify it passes**
 
 Run: `node --test tests/scheduler.test.js`
-Expected: PASS, 18 tests. The ladder code is already in place from Step 7, so this cycle confirms it rather than driving new code. If any assertion fails, fix `scheduleCard` before moving on.
+Expected: PASS, 22 tests. The ladder code is already in place from Step 7, so this cycle confirms it rather than driving new code. If any assertion fails, fix `scheduleCard` before moving on.
 
 - [ ] **Step 11: Commit**
 
@@ -1450,7 +1838,7 @@ git add -A && git commit -m "feat: add the SM-2 scheduler and the tier ladder" -
   - `acceptedAnswers(card, content)` returns an array of normalized strings.
   - `gradeTyped(card, text, content)` returns a boolean.
   - `gradeChoice(answerKey, chosenKey)` returns a boolean.
-  - `resolveTyped(text, kind, channel, content)` returns the card key the text names, or null.
+  - `resolveTyped(text, kind, channel, content)` returns the key the text names, or null. It searches the cards on the channel first. For `kind` `concept` it then searches `content.concepts_by_channel[channel]`, so a real category with no card still resolves.
 
 **Accepted answers per kind:**
 
@@ -1458,8 +1846,10 @@ git add -A && git commit -m "feat: add the SM-2 scheduler and the tier ladder" -
 |---|---|
 | species | the scientific name, and every entry in `common` |
 | concept | every entry in the concept's `accept` array |
-| group | the genus, and every distinct `genus_common` among its members |
+| group | the genus, and every distinct `genus_common` among its live members |
 | variety | the variety `name` and the variety `key` |
+
+**`genus_common` is optional.** The content pipeline never writes it. A group card accepts the genus name plus every `genus_common` its live members carry. When no live member carries one, the group accepts the genus alone. A retired member donates nothing, because a retired species has no cards.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1483,6 +1873,13 @@ test('the normalizer lowercases, drops punctuation, and turns a hyphen into a sp
   assert.equal(normalize('Plated / blocky'), 'plated blocky');
   assert.equal(normalize(''), '');
   assert.equal(normalize(null), '');
+});
+
+test('the normalizer collapses a tab, a newline, and a non-breaking space', () => {
+  assert.equal(normalize('Gambel\toak'), 'gambel oak');
+  assert.equal(normalize('Gambel\noak'), 'gambel oak');
+  assert.equal(normalize('Gambel\u00a0oak'), 'gambel oak');
+  assert.equal(normalize('\u00a0 Quercus\tgambelii \n'), 'quercus gambelii');
 });
 
 test('a species card accepts the scientific name and every common name', () => {
@@ -1513,7 +1910,30 @@ test('a group card accepts the genus and the group common name', () => {
   assert.equal(gradeTyped(card, 'Quercus', content), true);
   assert.equal(gradeTyped(card, 'oak', content), true);
   assert.equal(gradeTyped(card, 'maple', content), false);
-  assert.deepEqual(acceptedAnswers(content.cards['group:leaf:Acer'], content).sort(), ['acer', 'maple']);
+});
+
+test('a group with no genus_common accepts the genus alone', () => {
+  // The Acer records in the fixture carry no genus_common, the oaks do.
+  assert.deepEqual(acceptedAnswers(content.cards['group:leaf:Acer'], content), ['acer']);
+  assert.equal(gradeTyped(content.cards['group:leaf:Acer'], 'Acer', content), true);
+  assert.equal(gradeTyped(content.cards['group:leaf:Acer'], 'maple', content), false);
+
+  const inMemory = {
+    species: {
+      PIPO: { genus: 'Pinus', common: ['Ponderosa pine'], scientific: 'Pinus ponderosa' },
+      PIED: { genus: 'Pinus', common: ['Pinyon pine'], scientific: 'Pinus edulis' },
+      PIRE: {
+        genus: 'Pinus', common: ['Red pine'], scientific: 'Pinus resinosa',
+        genus_common: 'pine', retired: true, retired_reason: 'no usable images',
+        retired_at: '2026-09-22'
+      }
+    },
+    concepts: [], concepts_by_channel: { leaf: [] }, cards: {}
+  };
+  const groupCard = { id: 'group:leaf:Pinus', kind: 'group', channel: 'leaf', key: 'Pinus' };
+  assert.deepEqual(acceptedAnswers(groupCard, inMemory), ['pinus']);
+  assert.equal(gradeTyped(groupCard, 'Pinus', inMemory), true);
+  assert.equal(gradeTyped(groupCard, 'pine', inMemory), false);
 });
 
 test('a variety card accepts the variety name and its key', () => {
@@ -1535,9 +1955,16 @@ test('a typed answer resolves back to the key it names', () => {
   assert.equal(resolveTyped('black oak', 'species', 'leaf', content), null);
   assert.equal(resolveTyped('', 'species', 'leaf', content), null);
 });
+
+test('a category with no card still resolves to its key', () => {
+  assert.equal(content.cards['concept:bark:smooth'], undefined);
+  assert.equal(resolveTyped('smooth bark', 'concept', 'bark', content), 'smooth');
+  assert.equal(resolveTyped('shaggy', 'concept', 'bark', content), 'shaggy');
+  assert.equal(resolveTyped('not a bark type', 'concept', 'bark', content), null);
+});
 ```
 
-`resolveTyped('black oak', ...)` returns null because QUVE has no leaf card.
+`resolveTyped('black oak', ...)` returns null because QUVE has no leaf card. A concept is different: the category exists whether or not a photo gives it a card, so the reveal can still name what the user typed.
 
 - [ ] **Step 2: Run the test to verify it fails**
 
@@ -1549,12 +1976,14 @@ Expected: FAIL with `Cannot find module ... app/logic/grader.js`.
 ```js
 // Answer normalization and the match rules per card kind.
 
+// The punctuation class keeps every whitespace character, so the collapse step
+// that follows can turn a tab, a newline, or a non-breaking space into one space.
 export function normalize(text) {
   if (typeof text !== 'string') return '';
   return text
     .toLowerCase()
     .replace(/[-‐-―]/gu, ' ')
-    .replace(/[^\p{L}\p{N} ]/gu, '')
+    .replace(/[^\p{L}\p{N}\s]/gu, '')
     .replace(/\s+/gu, ' ')
     .trim();
 }
@@ -1579,8 +2008,11 @@ export function acceptedAnswers(card, content) {
     );
     raw.push(...(concept?.accept ?? []));
   } else if (card.kind === 'group') {
+    // genus_common is optional and a retired member donates nothing, so a group
+    // with no live genus_common accepts the genus alone.
     raw.push(card.key);
     for (const record of Object.values(content.species)) {
+      if (record.retired) continue;
       if (record.genus === card.key && record.genus_common) raw.push(record.genus_common);
     }
   } else if (card.kind === 'variety') {
@@ -1606,6 +2038,12 @@ export function resolveTyped(text, kind, channel, content) {
     if (card.kind !== kind || card.channel !== channel) continue;
     if (acceptedAnswers(card, content).includes(target)) return card.key;
   }
+  // A real category with no card still names itself.
+  if (kind === 'concept') {
+    for (const concept of content.concepts_by_channel[channel] ?? []) {
+      if ((concept.accept ?? []).map(normalize).includes(target)) return concept.key;
+    }
+  }
   return null;
 }
 ```
@@ -1613,7 +2051,7 @@ export function resolveTyped(text, kind, channel, content) {
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `node --test tests/grader.test.js`
-Expected: PASS, 8 tests.
+Expected: PASS, 11 tests.
 
 - [ ] **Step 5: Commit**
 
@@ -1632,20 +2070,23 @@ git add -A && git commit -m "feat: add the answer normalizer and the grading rul
 **Interfaces:**
 - Consumes: `content` and `card` from `app/logic/content.js`; a card state from `app/logic/scheduler.js`.
 - Produces:
-  - `shuffle(items, rng)` returns a new shuffled array. `session.js` imports this.
-  - `invAvailable(content, channel)` returns true when the channel holds four or more species cards.
+  - `shuffle(items, rng)` returns a new shuffled array and never mutates the input. `session.js` imports this.
+  - `invAvailable(content, card)` returns true when four or more `inv` options exist for that card, the answer included. For a species card those are the species cards on the channel. For a concept card they are the concept cards on the channel. For a group card they are the group cards in the same bucket on the channel. For a variety card they are the variety cards of the same species on the channel.
   - `formatFor(state)` returns the card's tier, or `'mc4'` when there is no state.
-  - `optionCountFor(format)` returns 4 for `mc4`, and 8 for `mc8` and `inv`.
-  - `pickPhoto(card, excludedFiles, rng)` returns a manifest record, or `null` when the pool is exhausted.
+  - `optionCountFor(format)` returns 4 for `mc4`, 8 for `mc8` and `inv`, and 0 for `typed`.
+  - `pickPhoto(card, excludedHashes, rng)` returns a manifest record, or `null` when the pool is exhausted. It excludes a record whose `hash` is in the list.
   - `speciesCardSymbols(content, channel)` returns the symbols with a species card on the channel.
+  - `varietyOf(content, varietyKey)` returns `{ symbol, variety }`, or two nulls.
   - `speciesDistractors({ symbol, channel, count, content, rng })` returns a symbol array.
   - `labelFor(content, kind, channel, key)` returns `{ label, sublabel }`.
-  - `varietyOf(content, varietyKey)` returns `{ symbol, variety }`.
-  - `buildQuestion({ card, content, state, excluded_files, rng })` returns a question.
+  - `buildQuestion({ card, content, state, excluded_hashes, rng })` returns a question.
+  - `answerPhoto(question)` returns the photo the answer showed, or `null`. On an `inv` question that is the photo of the option whose `key` equals `answer_key`. On every other format it is `question.photo`. The session screen imports this and reads `photo.hash` to remember what it showed.
   - `buildReveal({ question, chosen_key, content })` returns a reveal. A `chosen_key` of null means the user typed something that names no card.
   - A question is `{ card_id, kind, channel, key, tier, format, prompt, photo, options, answer_key, option_count }`.
   - An option is `{ key, label, sublabel, photo }`. `photo` is null except on `inv`.
   - A reveal is `{ correct, card_id, channel, answer, chosen, diagnostic, missing_edge }`.
+
+**A photo is a manifest record.** It carries `hash`, the 64 hex character SHA-256 of the image bytes, plus `target`, `channel`, `source`, `author`, `license`, `origin`, `tags`, `checked_by`, `checked_at`, and `note`. There is no `file` field. `hash` is the image identity: `pickPhoto` excludes by it, `excluded_hashes` holds it, and the session screen keys its `lastHash` and `failedHashes` maps on it. A screen turns a photo into a URL with `imageUrl(photo, ctx.image_base)` from `content.js`. `origin` is the source page and the attribution line links it.
 
 **Prompts:**
 
@@ -1656,6 +2097,15 @@ git add -A && git commit -m "feat: add the answer normalizer and the grading rul
 | species | `Which species?` |
 | variety | `Which variety?` |
 | any kind at `inv` | `Which photo shows <label>?` |
+
+**Two fallbacks inside `buildQuestion`.** The tier field always holds the card's tier. The format can differ from it:
+
+- A card at tier `inv` with fewer than 4 `inv` options asks an `mc8` question instead.
+- A concept or group card with fewer than 4 name options asks a `typed` question instead.
+
+No option and no question ever carries `photo: null` on an `inv` question. When `excluded_hashes` covers the answer card's whole pool, `buildQuestion` calls `pickPhoto` again with an empty exclusion list.
+
+**Variety options.** Choice 15 holds: every sibling variety of the species shows, whether or not it has a card on the channel, and the list is not cut to the option count. The sibling set is the whole answer space. An `inv` variety question still shows only the siblings that have a photo.
 
 - [ ] **Step 1: Write the failing test for sampling, format, and distractors**
 
@@ -1668,8 +2118,8 @@ import { loadFixture } from './helpers/fixture.js';
 import { makeRng } from './helpers/rng.js';
 import { loadContent } from '../app/logic/content.js';
 import {
-  shuffle, invAvailable, formatFor, optionCountFor, pickPhoto,
-  speciesDistractors, labelFor, buildQuestion, buildReveal
+  shuffle, speciesCardSymbols, varietyOf, invAvailable, formatFor,
+  optionCountFor, pickPhoto, speciesDistractors
 } from '../app/logic/question.js';
 
 const { content } = loadContent(loadFixture());
@@ -1682,24 +2132,52 @@ test('the format always equals the tier', () => {
   assert.equal(optionCountFor('mc4'), 4);
   assert.equal(optionCountFor('mc8'), 8);
   assert.equal(optionCountFor('inv'), 8);
+  assert.equal(optionCountFor('typed'), 0);
 });
 
-test('inv availability follows the species card count on the channel', () => {
-  assert.equal(invAvailable(content, 'leaf'), true);
-  assert.equal(invAvailable(content, 'bark'), false);
-  assert.equal(invAvailable(content, 'fruit'), false);
+test('inv availability counts the options the card can build', () => {
+  assert.equal(invAvailable(content, content.cards['species:QUGA:leaf']), true);
+  assert.equal(invAvailable(content, content.cards['species:QUGA:bark']), false);
+  assert.equal(invAvailable(content, content.cards['species:QUGA:fruit']), false);
+  assert.equal(invAvailable(content, content.cards['concept:leaf:simple_lobed']), false);
+  assert.equal(invAvailable(content, content.cards['concept:bark:plated']), false);
+  assert.equal(invAvailable(content, content.cards['group:leaf:Quercus']), false);
+});
+
+test('shuffle returns a new array and leaves the input alone', () => {
+  const input = ['a', 'b', 'c', 'd', 'e'];
+  const copy = [...input];
+  const out = shuffle(input, makeRng(7));
+  assert.notEqual(out, input);
+  assert.deepEqual(input, copy);
+  assert.deepEqual(out.slice().sort(), copy.slice().sort());
+});
+
+test('speciesCardSymbols lists the species with a card on the channel', () => {
+  assert.deepEqual(speciesCardSymbols(content, 'leaf').sort(),
+    ['ACPL', 'ACSA2', 'PLOC', 'QUGA', 'QURU']);
+  assert.deepEqual(speciesCardSymbols(content, 'bark').sort(), ['PLOC', 'QUGA', 'QURU']);
+  assert.ok(!speciesCardSymbols(content, 'leaf').includes('QUVE'));
+});
+
+test('varietyOf finds the species that owns the variety', () => {
+  assert.equal(varietyOf(content, 'QUGAG').symbol, 'QUGA');
+  assert.equal(varietyOf(content, 'QUGAG').variety.name, 'var. gambelii');
+  assert.deepEqual(varietyOf(content, 'ZZZZZ'), { symbol: null, variety: null });
 });
 
 test('the same image is not shown twice in a row', () => {
   const card = content.cards['species:QUGA:leaf'];
   const first = pickPhoto(card, [], makeRng(1));
-  const second = pickPhoto(card, [first.file], makeRng(1));
-  assert.notEqual(second.file, first.file);
+  assert.match(first.hash, /^[0-9a-f]{64}$/);
+  const second = pickPhoto(card, [first.hash], makeRng(1));
+  assert.notEqual(second.hash, first.hash);
 });
 
 test('an exhausted pool returns null', () => {
   const card = content.cards['species:ACSA2:leaf'];
-  assert.equal(pickPhoto(card, ['images/ACSA2/leaf/001.jpg'], makeRng(1)), null);
+  const every = card.photos.map((p) => p.hash);
+  assert.equal(pickPhoto(card, every, makeRng(1)), null);
 });
 
 test('the distractor ladder walks the steps in order and never includes the answer', () => {
@@ -1720,7 +2198,9 @@ test('distractors are filtered to species with a card on this channel', () => {
 });
 ```
 
-Note on the first ladder assertion: QURU's leaf confusion neighbours are QUVE and QUGA. QUVE has no leaf card, so step 1 yields QUGA alone and QUGA must come first.
+Note on the first ladder assertion: QURU's leaf confusion neighbours are QUVE and QUGA. QUVE has no leaf card, so step 1 yields QUGA alone and QUGA must come first. The import list names only what Step 3 exports, so the file links. Steps 7 and 11 extend it.
+
+No test in this task writes a hash value. Each one reads the hashes it needs out of the card's own photo pool, so the fixture's synthetic hashes can change without touching a test.
 
 - [ ] **Step 2: Run the test to verify it fails**
 
@@ -1748,8 +2228,41 @@ export function speciesCardSymbols(content, channel) {
     .map((c) => c.key);
 }
 
-export function invAvailable(content, channel) {
-  return speciesCardSymbols(content, channel).length >= 4;
+export function varietyOf(content, varietyKey) {
+  for (const [symbol, record] of Object.entries(content.species)) {
+    for (const variety of record.varieties ?? []) {
+      if (variety.key === varietyKey) return { symbol, variety };
+    }
+  }
+  return { symbol: null, variety: null };
+}
+
+// The keys that can carry a photo option for this card, the answer included.
+function invOptionKeys(content, card) {
+  if (card.kind === 'concept') {
+    return Object.values(content.cards)
+      .filter((c) => c.kind === 'concept' && c.channel === card.channel)
+      .map((c) => c.key);
+  }
+  if (card.kind === 'group') {
+    return Object.values(content.cards)
+      .filter((c) => c.kind === 'group' && c.channel === card.channel)
+      .filter((c) => c.bucket === card.bucket)
+      .map((c) => c.key);
+  }
+  if (card.kind === 'variety') {
+    const { symbol } = varietyOf(content, card.key);
+    return (content.species[symbol]?.varieties ?? [])
+      .map((v) => v.key)
+      .filter((k) => content.cards[cardId('variety', card.channel, k)]);
+  }
+  return speciesCardSymbols(content, card.channel);
+}
+
+export function invAvailable(content, card) {
+  const keys = new Set(invOptionKeys(content, card));
+  keys.add(card.key);
+  return keys.size >= 4;
 }
 
 export function formatFor(state) {
@@ -1757,11 +2270,14 @@ export function formatFor(state) {
 }
 
 export function optionCountFor(format) {
+  if (format === 'typed') return 0;
   return format === 'mc4' ? 4 : 8;
 }
 
-export function pickPhoto(card, excludedFiles = [], rng = Math.random) {
-  const usable = card.photos.filter((p) => !excludedFiles.includes(p.file));
+// A photo's identity is its hash, so the same bytes under two manifest rows
+// count as one image here.
+export function pickPhoto(card, excludedHashes = [], rng = Math.random) {
+  const usable = card.photos.filter((p) => !excludedHashes.includes(p.hash));
   if (usable.length === 0) return null;
   return usable[Math.floor(rng() * usable.length)];
 }
@@ -1807,23 +2323,54 @@ export function speciesDistractors({ symbol, channel, count, content, rng = Math
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `node --test tests/question.test.js`
-Expected: PASS, 6 tests.
+Expected: PASS, 9 tests.
 
 - [ ] **Step 5: Write the failing test for question building**
 
 Append to `tests/question.test.js`:
 
 ```js
+// Three varieties, two cards. The fixture holds two of each, so this case needs
+// an object of its own.
+const varietyPhoto = (digit) => [{
+  hash: String(digit).repeat(64), target: 'x', channel: 'leaf',
+  author: 'x', source: 'x', license: 'x', origin: 'https://example.org/x'
+}];
+const varietyContent = {
+  species: {
+    QUGA: {
+      scientific: 'Quercus gambelii', common: ['Gambel oak'], genus: 'Quercus',
+      genus_common: 'oak', family: 'Fagaceae', concepts: { leaf: 'simple_lobed' },
+      varieties: [
+        { key: 'QUGAG', name: 'var. gambelii' },
+        { key: 'QUGAB', name: 'var. bakeri' },
+        { key: 'QUGAX', name: 'var. rara' }
+      ]
+    }
+  },
+  concepts: [], concepts_by_channel: { leaf: [] }, confusion: [],
+  cards: {
+    'variety:QUGAG:leaf': {
+      id: 'variety:QUGAG:leaf', kind: 'variety', channel: 'leaf', key: 'QUGAG',
+      bucket: 'simple_lobed', photos: varietyPhoto(1)
+    },
+    'variety:QUGAB:leaf': {
+      id: 'variety:QUGAB:leaf', kind: 'variety', channel: 'leaf', key: 'QUGAB',
+      bucket: 'simple_lobed', photos: varietyPhoto(2)
+    }
+  }
+};
+
 test('a species question at mc4 shows four options including the answer', () => {
   const card = content.cards['species:QUGA:leaf'];
-  const q = buildQuestion({ card, content, state: null, excluded_files: [], rng: makeRng(11) });
+  const q = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(11) });
   assert.equal(q.format, 'mc4');
   assert.equal(q.prompt, 'Which species?');
   assert.equal(q.options.length, 4);
   assert.equal(q.option_count, 4);
   assert.equal(q.answer_key, 'QUGA');
   assert.ok(q.options.some((o) => o.key === 'QUGA'));
-  assert.ok(q.photo.file.startsWith('images/QUGA/leaf/'));
+  assert.ok(card.photos.some((p) => p.hash === q.photo.hash));
   const answer = q.options.find((o) => o.key === 'QUGA');
   assert.equal(answer.label, 'Gambel oak');
   assert.equal(answer.sublabel, 'Quercus gambelii');
@@ -1832,7 +2379,7 @@ test('a species question at mc4 shows four options including the answer', () => 
 test('mc8 shows as many options as exist', () => {
   const card = content.cards['species:QUGA:bark'];
   const q = buildQuestion({
-    card, content, state: { tier: 'mc8' }, excluded_files: [], rng: makeRng(2)
+    card, content, state: { tier: 'mc8' }, excluded_hashes: [], rng: makeRng(2)
   });
   assert.equal(q.format, 'mc8');
   assert.equal(q.options.length, 3);
@@ -1842,7 +2389,7 @@ test('mc8 shows as many options as exist', () => {
 test('a bark concept card at mc8 shows one option per bark category', () => {
   const card = content.cards['concept:bark:plated'];
   const q = buildQuestion({
-    card, content, state: { tier: 'mc8' }, excluded_files: [], rng: makeRng(4)
+    card, content, state: { tier: 'mc8' }, excluded_hashes: [], rng: makeRng(4)
   });
   assert.equal(q.prompt, 'What bark type is this?');
   assert.equal(q.options.length, 6);
@@ -1852,7 +2399,7 @@ test('a bark concept card at mc8 shows one option per bark category', () => {
 test('a group card below four options falls back to typed without changing the tier', () => {
   const card = content.cards['group:bark:Quercus'];
   const q = buildQuestion({
-    card, content, state: { tier: 'mc8' }, excluded_files: [], rng: makeRng(6)
+    card, content, state: { tier: 'mc8' }, excluded_hashes: [], rng: makeRng(6)
   });
   assert.equal(q.tier, 'mc8');
   assert.equal(q.format, 'typed');
@@ -1863,6 +2410,9 @@ test('a group card below four options falls back to typed without changing the t
 test('a group option shows the genus common name over the genus', () => {
   assert.deepEqual(labelFor(content, 'group', 'leaf', 'Quercus'),
     { label: 'oak', sublabel: 'Quercus' });
+  // The Acer records carry no genus_common, so the genus stands in both rows.
+  assert.deepEqual(labelFor(content, 'group', 'leaf', 'Acer'),
+    { label: 'Acer', sublabel: 'Acer' });
   assert.deepEqual(labelFor(content, 'species', 'leaf', 'QURU'),
     { label: 'Northern red oak', sublabel: 'Quercus rubra' });
   assert.deepEqual(labelFor(content, 'concept', 'bark', 'plated'),
@@ -1874,7 +2424,7 @@ test('a group option shows the genus common name over the genus', () => {
 test('a leaf group card also falls back to typed, because its bucket holds three genera', () => {
   const card = content.cards['group:leaf:Quercus'];
   const q = buildQuestion({
-    card, content, state: { tier: 'mc4' }, excluded_files: [], rng: makeRng(8)
+    card, content, state: { tier: 'mc4' }, excluded_hashes: [], rng: makeRng(8)
   });
   assert.equal(q.prompt, 'Which genus?');
   assert.equal(q.format, 'typed');
@@ -1883,28 +2433,74 @@ test('a leaf group card also falls back to typed, because its bucket holds three
 
 test('a variety question offers the sibling varieties', () => {
   const card = content.cards['variety:QUGAG:leaf'];
-  const q = buildQuestion({ card, content, state: null, excluded_files: [], rng: makeRng(9) });
+  const q = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(9) });
   assert.equal(q.prompt, 'Which variety?');
   assert.deepEqual(q.options.map((o) => o.key).sort(), ['QUGAB', 'QUGAG']);
+});
+
+test('a variety question shows every sibling, card or no card', () => {
+  const card = varietyContent.cards['variety:QUGAG:leaf'];
+  const q = buildQuestion({
+    card, content: varietyContent, state: null, excluded_hashes: [], rng: makeRng(31)
+  });
+  assert.equal(q.format, 'mc4');
+  assert.deepEqual(q.options.map((o) => o.key).sort(), ['QUGAB', 'QUGAG', 'QUGAX']);
+  assert.equal(q.option_count, 3);
+  assert.equal(q.options.find((o) => o.key === 'QUGAX').label, 'var. rara');
 });
 
 test('an inv question names the answer and offers photos', () => {
   const card = content.cards['species:QUGA:leaf'];
   const q = buildQuestion({
-    card, content, state: { tier: 'inv' }, excluded_files: [], rng: makeRng(13)
+    card, content, state: { tier: 'inv' }, excluded_hashes: [], rng: makeRng(13)
   });
   assert.equal(q.format, 'inv');
   assert.equal(q.prompt, 'Which photo shows Gambel oak?');
   assert.equal(q.photo, null);
   assert.equal(q.options.length, 5);
-  for (const option of q.options) assert.ok(option.photo.file.endsWith('.jpg'));
+  for (const option of q.options) assert.match(option.photo.hash, /^[0-9a-f]{64}$/);
   assert.ok(q.options.some((o) => o.key === 'QUGA'));
+});
+
+test('a card at tier inv with too few photo options asks mc8 instead', () => {
+  const card = content.cards['concept:bark:plated'];
+  const q = buildQuestion({
+    card, content, state: { tier: 'inv' }, excluded_hashes: [], rng: makeRng(15)
+  });
+  assert.equal(q.tier, 'inv');
+  assert.equal(q.format, 'mc8');
+  assert.equal(q.options.length, 6);
+  assert.match(q.photo.hash, /^[0-9a-f]{64}$/);
+  for (const option of q.options) assert.equal(option.photo, null);
+});
+
+test('the inv answer keeps a photo when the exclusion list covers its pool', () => {
+  const card = content.cards['species:ACSA2:leaf'];
+  const every = card.photos.map((p) => p.hash);
+  const q = buildQuestion({
+    card, content, state: { tier: 'inv' }, excluded_hashes: every, rng: makeRng(17)
+  });
+  assert.equal(q.format, 'inv');
+  const answer = q.options.find((o) => o.key === 'ACSA2');
+  assert.ok(every.includes(answer.photo.hash));
+  for (const option of q.options) assert.ok(option.photo);
+});
+
+test('answerPhoto finds the photo the answer showed', () => {
+  const card = content.cards['species:QUGA:leaf'];
+  const inv = buildQuestion({
+    card, content, state: { tier: 'inv' }, excluded_hashes: [], rng: makeRng(19)
+  });
+  assert.equal(answerPhoto(inv), inv.options.find((o) => o.key === 'QUGA').photo);
+  const mc4 = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(19) });
+  assert.equal(answerPhoto(mc4), mc4.photo);
+  assert.equal(answerPhoto({ format: 'inv', answer_key: 'QUGA', options: [], photo: null }), null);
 });
 
 test('a typed question shows no options', () => {
   const card = content.cards['species:QUGA:leaf'];
   const q = buildQuestion({
-    card, content, state: { tier: 'typed' }, excluded_files: [], rng: makeRng(14)
+    card, content, state: { tier: 'typed' }, excluded_hashes: [], rng: makeRng(14)
   });
   assert.equal(q.format, 'typed');
   assert.deepEqual(q.options, []);
@@ -1912,12 +2508,12 @@ test('a typed question shows no options', () => {
 });
 ```
 
-The group test on the leaf channel expects `typed` because the fixture holds three genera with a leaf card and only two share the `simple_lobed` bucket with Quercus, which is under four options.
+The group test on the leaf channel expects `typed` because the fixture holds three genera with a leaf card and only two share the `simple_lobed` bucket with Quercus, which is under four options. The bark concept card at tier `inv` expects `mc8` with 6 options: the bark channel holds 3 concept cards, under the 4 an `inv` question needs, and the mc8 options come from all 6 bark categories.
 
 - [ ] **Step 6: Run the test to verify it fails**
 
 Run: `node --test tests/question.test.js`
-Expected: FAIL with `buildQuestion is not a function` and `labelFor is not a function`.
+Expected: FAIL, 13 of 22 tests. Twelve report `ReferenceError: buildQuestion is not defined` and the `labelFor` test reports `ReferenceError: labelFor is not defined`. Step 7 adds the functions and their imports.
 
 - [ ] **Step 7: Add question building to `app/logic/question.js`**
 
@@ -1930,15 +2526,6 @@ function conceptRecord(content, channel, key) {
   return content.concepts.find((c) => c.channel === channel && c.key === key) ?? null;
 }
 
-export function varietyOf(content, varietyKey) {
-  for (const [symbol, record] of Object.entries(content.species)) {
-    for (const variety of record.varieties ?? []) {
-      if (variety.key === varietyKey) return { symbol, variety };
-    }
-  }
-  return { symbol: null, variety: null };
-}
-
 export function labelFor(content, kind, channel, key) {
   if (kind === 'species') {
     const record = content.species[key];
@@ -1949,7 +2536,10 @@ export function labelFor(content, kind, channel, key) {
     return { label: concept?.name ?? key, sublabel: '' };
   }
   if (kind === 'group') {
-    const member = Object.values(content.species).find((s) => s.genus === key);
+    // genus_common is optional. With no live member that carries one, the genus
+    // fills both rows.
+    const member = Object.values(content.species)
+      .find((s) => s.genus === key && !s.retired && s.genus_common);
     return { label: member?.genus_common ?? key, sublabel: key };
   }
   const { symbol, variety } = varietyOf(content, key);
@@ -1971,37 +2561,40 @@ function siblingKeys(card, content, count, rng) {
     return shuffle(others, rng).slice(0, count);
   }
   if (card.kind === 'variety') {
+    // Choice 15: the sibling set is the whole answer space, so every sibling shows.
     const { symbol } = varietyOf(content, card.key);
     const others = (content.species[symbol]?.varieties ?? [])
       .map((v) => v.key)
-      .filter((k) => k !== card.key)
-      .filter((k) => content.cards[cardId('variety', card.channel, k)]);
-    return shuffle(others, rng).slice(0, count);
+      .filter((k) => k !== card.key);
+    return shuffle(others, rng);
   }
   return speciesDistractors({
     symbol: card.key, channel: card.channel, count, content, rng
   });
 }
 
-export function buildQuestion({ card, content, state, excluded_files = [], rng = Math.random }) {
+export function buildQuestion({ card, content, state, excluded_hashes = [], rng = Math.random }) {
   const tier = formatFor(state);
+  // An inv question needs four photo options. Below that the card asks mc8 instead.
+  const format = tier === 'inv' && !invAvailable(content, card) ? 'mc8' : tier;
   const base = {
     card_id: card.id, kind: card.kind, channel: card.channel, key: card.key,
     tier, answer_key: card.key
   };
 
-  if (tier === 'typed') {
+  if (format === 'typed') {
     return {
       ...base, format: 'typed', prompt: promptFor(card.kind, card.channel),
-      photo: pickPhoto(card, excluded_files, rng), options: [], option_count: 0
+      photo: pickPhoto(card, excluded_hashes, rng), options: [], option_count: 0
     };
   }
 
-  const wanted = optionCountFor(tier) - 1;
+  const wanted = optionCountFor(format) - 1;
   const distractorKeys = siblingKeys(card, content, wanted, rng);
 
-  if (tier === 'inv') {
-    const own = pickPhoto(card, excluded_files, rng);
+  if (format === 'inv') {
+    // The answer always shows a photo, even when the exclusion list covers its pool.
+    const own = pickPhoto(card, excluded_hashes, rng) ?? pickPhoto(card, [], rng);
     const options = [{ key: card.key, ...labelFor(content, card.kind, card.channel, card.key), photo: own }];
     for (const key of distractorKeys) {
       const other = content.cards[cardId(card.kind, card.channel, key)];
@@ -2020,7 +2613,7 @@ export function buildQuestion({ card, content, state, excluded_files = [], rng =
   if ((card.kind === 'concept' || card.kind === 'group') && keys.length < 4) {
     return {
       ...base, format: 'typed', prompt: promptFor(card.kind, card.channel),
-      photo: pickPhoto(card, excluded_files, rng), options: [], option_count: 0
+      photo: pickPhoto(card, excluded_hashes, rng), options: [], option_count: 0
     };
   }
   const options = shuffle(
@@ -2028,8 +2621,8 @@ export function buildQuestion({ card, content, state, excluded_files = [], rng =
     rng
   );
   return {
-    ...base, format: tier, prompt: promptFor(card.kind, card.channel),
-    photo: pickPhoto(card, excluded_files, rng), options, option_count: options.length
+    ...base, format, prompt: promptFor(card.kind, card.channel),
+    photo: pickPhoto(card, excluded_hashes, rng), options, option_count: options.length
   };
 }
 
@@ -2039,12 +2632,31 @@ function promptFor(kind, channel) {
   if (kind === 'species') return 'Which species?';
   return 'Which variety?';
 }
+
+// An inv question carries its photos on the options, every other format on the
+// question. The session screen and the reveal both need the answer's photo.
+export function answerPhoto(question) {
+  if (question.format === 'inv') {
+    return question.options.find((o) => o.key === question.answer_key)?.photo ?? null;
+  }
+  return question.photo ?? null;
+}
+```
+
+Then extend the import list at the top of `tests/question.test.js` with the three new names:
+
+```js
+import {
+  shuffle, speciesCardSymbols, varietyOf, invAvailable, formatFor,
+  optionCountFor, pickPhoto, speciesDistractors,
+  labelFor, buildQuestion, answerPhoto
+} from '../app/logic/question.js';
 ```
 
 - [ ] **Step 8: Run the test to verify it passes**
 
 Run: `node --test tests/question.test.js`
-Expected: PASS, 15 tests.
+Expected: PASS, 22 tests.
 
 - [ ] **Step 9: Write the failing test for the reveal**
 
@@ -2053,19 +2665,20 @@ Append to `tests/question.test.js`:
 ```js
 test('a wrong species answer shows the confusion sentence in the right direction', () => {
   const card = content.cards['species:QUGA:leaf'];
-  const q = buildQuestion({ card, content, state: null, excluded_files: [], rng: makeRng(21) });
+  const q = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(21) });
   const reveal = buildReveal({ question: q, chosen_key: 'QURU', content });
   assert.equal(reveal.correct, false);
   assert.equal(reveal.diagnostic.kind, 'edge');
   assert.equal(reveal.diagnostic.text, 'Gambel oak has rounded lobes with no bristle tips.');
   assert.equal(reveal.diagnostic.ref, 'USDA Silvics Manual, Quercus gambelii');
   assert.equal(reveal.missing_edge, null);
-  assert.ok(reveal.chosen.photo.file.startsWith('images/QURU/leaf/'));
+  const quruPool = content.cards['species:QURU:leaf'].photos.map((p) => p.hash);
+  assert.ok(quruPool.includes(reveal.chosen.photo.hash));
 });
 
 test('the reverse direction uses b_not_a', () => {
   const card = content.cards['species:QURU:leaf'];
-  const q = buildQuestion({ card, content, state: null, excluded_files: [], rng: makeRng(22) });
+  const q = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(22) });
   const reveal = buildReveal({ question: q, chosen_key: 'QUGA', content });
   assert.equal(reveal.diagnostic.text,
     'Northern red oak has pointed lobes that end in bristle tips.');
@@ -2073,7 +2686,7 @@ test('the reverse direction uses b_not_a', () => {
 
 test('a missing edge falls back to bucket and genus and records the pair', () => {
   const card = content.cards['species:QUGA:leaf'];
-  const q = buildQuestion({ card, content, state: null, excluded_files: [], rng: makeRng(23) });
+  const q = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(23) });
   const reveal = buildReveal({ question: q, chosen_key: 'ACPL', content });
   assert.equal(reveal.diagnostic.kind, 'fallback');
   assert.match(reveal.diagnostic.text, /Simple, lobed/);
@@ -2084,7 +2697,7 @@ test('a missing edge falls back to bucket and genus and records the pair', () =>
 
 test('a right answer carries the facts and the attribution and no diagnostic', () => {
   const card = content.cards['species:QUGA:leaf'];
-  const q = buildQuestion({ card, content, state: null, excluded_files: [], rng: makeRng(24) });
+  const q = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(24) });
   const reveal = buildReveal({ question: q, chosen_key: 'QUGA', content });
   assert.equal(reveal.correct, true);
   assert.equal(reveal.chosen, null);
@@ -2098,7 +2711,7 @@ test('a right answer carries the facts and the attribution and no diagnostic', (
 test('a concept miss uses the descriptions and records no missing edge', () => {
   const card = content.cards['concept:bark:plated'];
   const q = buildQuestion({
-    card, content, state: { tier: 'mc8' }, excluded_files: [], rng: makeRng(25)
+    card, content, state: { tier: 'mc8' }, excluded_hashes: [], rng: makeRng(25)
   });
   const reveal = buildReveal({ question: q, chosen_key: 'furrowed', content });
   assert.equal(reveal.diagnostic.kind, 'fallback');
@@ -2107,10 +2720,21 @@ test('a concept miss uses the descriptions and records no missing edge', () => {
   assert.equal(reveal.missing_edge, null);
 });
 
+test('a group miss names both genera in one sentence each', () => {
+  const card = content.cards['group:leaf:Quercus'];
+  const q = buildQuestion({
+    card, content, state: { tier: 'mc4' }, excluded_hashes: [], rng: makeRng(27)
+  });
+  const reveal = buildReveal({ question: q, chosen_key: 'Acer', content });
+  assert.equal(reveal.diagnostic.kind, 'fallback');
+  assert.equal(reveal.diagnostic.text, 'The answer is oak. You picked Acer.');
+  assert.equal(reveal.missing_edge, null);
+});
+
 test('a null chosen key shows the answer alone', () => {
   const card = content.cards['species:QUGA:leaf'];
   const q = buildQuestion({
-    card, content, state: { tier: 'typed' }, excluded_files: [], rng: makeRng(26)
+    card, content, state: { tier: 'typed' }, excluded_hashes: [], rng: makeRng(26)
   });
   const reveal = buildReveal({ question: q, chosen_key: null, content });
   assert.equal(reveal.correct, false);
@@ -2124,7 +2748,7 @@ test('a null chosen key shows the answer alone', () => {
 - [ ] **Step 10: Run the test to verify it fails**
 
 Run: `node --test tests/question.test.js`
-Expected: FAIL with `buildReveal is not a function`.
+Expected: FAIL, 7 of 29 tests, each with `ReferenceError: buildReveal is not defined`. Step 11 adds the function and its import.
 
 - [ ] **Step 11: Add the reveal to `app/logic/question.js`**
 
@@ -2174,12 +2798,13 @@ function fallbackText(content, kind, channel, answerKey, chosenKey) {
     };
     return `${describe(answerSymbol)} ${describe(chosenSymbol)}`;
   }
+  const sentence = (text) => (/[.!?]$/u.test(text) ? text : `${text}.`);
   const describeKey = (key) => {
     const { label } = labelFor(content, kind, channel, key);
     const concept = kind === 'concept' ? conceptRecord(content, channel, key) : null;
-    return concept ? `${label}: ${concept.description}` : label;
+    return sentence(concept ? `${label}: ${concept.description}` : label);
   };
-  return `${describeKey(answerKey)} You picked ${describeKey(chosenKey)}`;
+  return `The answer is ${describeKey(answerKey)} You picked ${describeKey(chosenKey)}`;
 }
 
 export function buildReveal({ question, chosen_key, content }) {
@@ -2187,14 +2812,11 @@ export function buildReveal({ question, chosen_key, content }) {
   const correct = chosen_key === answerKey;
 
   const answerCard = content.cards[cardId(kind, channel, answerKey)];
-  const answerPhoto = question.format === 'inv'
-    ? question.options.find((o) => o.key === answerKey)?.photo ?? null
-    : question.photo;
 
   const answer = {
     key: answerKey,
     ...labelFor(content, kind, channel, answerKey),
-    photo: answerPhoto ?? answerCard?.photos[0] ?? null,
+    photo: answerPhoto(question) ?? answerCard?.photos[0] ?? null,
     facts: factsFor(content, kind, channel, answerKey)
   };
 
@@ -2241,10 +2863,20 @@ export function buildReveal({ question, chosen_key, content }) {
 }
 ```
 
+Then extend the import list at the top of `tests/question.test.js` with the last name:
+
+```js
+import {
+  shuffle, speciesCardSymbols, varietyOf, invAvailable, formatFor,
+  optionCountFor, pickPhoto, speciesDistractors,
+  labelFor, buildQuestion, answerPhoto, buildReveal
+} from '../app/logic/question.js';
+```
+
 - [ ] **Step 12: Run the test to verify it passes**
 
 Run: `node --test tests/question.test.js`
-Expected: PASS, 21 tests.
+Expected: PASS, 29 tests.
 
 - [ ] **Step 13: Commit**
 
@@ -2266,9 +2898,10 @@ git add -A && git commit -m "feat: add question building, distractors, and the r
   - `LEVEL_NAMES` is `['novice', 'beginner', 'intermediate', 'advanced', 'expert']`.
   - `cardLevel(state)` returns 0 to 4.
   - `speciesLevel(symbol, content, states)` returns 0 to 4.
-  - `unitNumber(unitKey, content, states)` returns `{ percent, expert_count, card_count, label }`.
-  - `gateStatus(unitKey, content, states)` returns `{ open, parent_key, parent_card_count, at_level_2, fraction, needed_cards }`.
-  - `progressGrid(content, states)` returns `{ channels, units }` for the progress screen.
+  - `unseenCount(cardIds, states)` returns how many IDs have no state object.
+  - `unitNumber(unitKey, content, states)` returns `{ percent, expert_count, card_count, label }`. It throws on an unknown unit key.
+  - `gateStatus(unitKey, content, states)` returns `{ open, parent_key, parent_card_count, at_level_2, fraction, needed_cards }`. It throws on an unknown unit key.
+  - `progressGrid(content, states)` returns `{ channels, units }` for the progress screen. A species with no card on any channel gets no row.
   - `states` is a plain object mapping a card ID to a card state.
 
 **Level table.** 0 no state. 1 tier `mc4`. 2 tier `mc8`. 3 tier `inv`, or tier `typed` with `tier_passes` 0. 4 tier `typed` with `tier_passes` 1 or more.
@@ -2283,7 +2916,7 @@ import assert from 'node:assert/strict';
 import { loadFixture } from './helpers/fixture.js';
 import { loadContent } from '../app/logic/content.js';
 import {
-  LEVEL_NAMES, cardLevel, speciesLevel, unitNumber, gateStatus, progressGrid
+  LEVEL_NAMES, cardLevel, speciesLevel, unitNumber, gateStatus, progressGrid, unseenCount
 } from '../app/logic/progress.js';
 
 const { content } = loadContent(loadFixture());
@@ -2319,6 +2952,17 @@ test('the unit number is the mean level over four as a percent', () => {
   assert.equal(number.percent, 75);
   assert.equal(number.expert_count, 1);
   assert.equal(number.label, '75%, 1 of 2 expert');
+});
+
+test('an unknown unit key throws instead of returning a number', () => {
+  assert.throws(() => unitNumber('no_such_unit', content, {}), /unknown unit no_such_unit/);
+  assert.throws(() => gateStatus('no_such_unit', content, {}), /unknown unit no_such_unit/);
+});
+
+test('the unseen count is the number of ids with no state', () => {
+  const states = { 'species:QUGA:leaf': { tier: 'mc4', tier_passes: 0 } };
+  assert.equal(unseenCount(['species:QUGA:leaf', 'species:QURU:leaf'], states), 1);
+  assert.equal(unseenCount([], states), 0);
 });
 
 test('a unit with no parent is always open', () => {
@@ -2379,8 +3023,13 @@ test('the grid groups species rows by unit with one cell per channel', () => {
     { channel: 'bark', level: 0, has_card: false },
     { channel: 'fruit', level: 0, has_card: true }
   ]);
+  const genus = grid.units.find((u) => u.key === 'simple_lobed_genus');
+  assert.deepEqual(genus.rows.map((r) => r.symbol),
+    ['QUGA', 'QURU', 'ACPL', 'ACSA2', 'PLOC']);
 });
 ```
+
+QUVE is a member of `simple_lobed_genus` and has no card on any channel, so the grid gives it no row.
 
 - [ ] **Step 2: Run the test to verify it fails**
 
@@ -2416,8 +3065,18 @@ export function speciesLevel(symbol, content, states) {
   return Math.min(...ids.map((id) => cardLevel(states[id])));
 }
 
+export function unseenCount(cardIds, states) {
+  return cardIds.filter((id) => !states[id]).length;
+}
+
+function unitCardIds(unitKey, content) {
+  const ids = content.unit_cards[unitKey];
+  if (!ids) throw new Error(`unknown unit ${unitKey}`);
+  return ids;
+}
+
 export function unitNumber(unitKey, content, states) {
-  const ids = content.unit_cards[unitKey] ?? [];
+  const ids = unitCardIds(unitKey, content);
   const levels = ids.map((id) => cardLevel(states[id]));
   const expertCount = levels.filter((l) => l === 4).length;
   const mean = levels.length ? levels.reduce((a, b) => a + b, 0) / levels.length : 0;
@@ -2432,11 +3091,12 @@ export function unitNumber(unitKey, content, states) {
 
 export function gateStatus(unitKey, content, states) {
   const unit = content.units.find((u) => u.key === unitKey);
-  const parentKey = unit?.parent ?? null;
+  if (!unit) throw new Error(`unknown unit ${unitKey}`);
+  const parentKey = unit.parent ?? null;
   if (!parentKey) {
     return { open: true, parent_key: null, parent_card_count: 0, at_level_2: 0, fraction: 1, needed_cards: 0 };
   }
-  const parentIds = content.unit_cards[parentKey] ?? [];
+  const parentIds = unitCardIds(parentKey, content);
   if (parentIds.length === 0) {
     return { open: true, parent_key: parentKey, parent_card_count: 0, at_level_2: 0, fraction: 1, needed_cards: 0 };
   }
@@ -2455,7 +3115,8 @@ export function gateStatus(unitKey, content, states) {
 
 export function progressGrid(content, states) {
   const units = content.units.map((unit) => {
-    const members = content.unit_members[unit.key] ?? [];
+    const members = (content.unit_members[unit.key] ?? [])
+      .filter((symbol) => speciesCardIds(symbol, content).length > 0);
     const rows = members.map((symbol) => ({
       symbol,
       common: content.species[symbol].common[0],
@@ -2487,7 +3148,7 @@ export function progressGrid(content, states) {
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `node --test tests/progress.test.js`
-Expected: PASS, 8 tests.
+Expected: PASS, 10 tests.
 
 - [ ] **Step 5: Commit**
 
@@ -2504,16 +3165,23 @@ git add -A && git commit -m "feat: add card levels, unit numbers, and the unit g
 - Test: `tests/session.test.js`
 
 **Interfaces:**
-- Consumes: `isDue` and `addDays` from `app/logic/scheduler.js`; `shuffle` from `app/logic/question.js`; `gateStatus` from `app/logic/progress.js`; `content` from `app/logic/content.js`.
+- Consumes: `isDue`, `addDays`, and `scheduleCard` from `app/logic/scheduler.js`; `shuffle` from `app/logic/question.js`; `gateStatus` from `app/logic/progress.js`; `content` from `app/logic/content.js`.
 - Produces:
+  - `todayString(now = new Date())` returns the local calendar date as `YYYY-MM-DD`. `main.js` imports it from here.
   - `dueCardIds({ content, states, focus, today })` returns card IDs, most overdue first.
-  - `newCardCountToday(log, today)` returns an integer.
+  - `newCardCountToday(log, today)` returns an integer. It compares `row.day` to `today`, and falls back to `row.at.slice(0, 10)` for a row written before the `day` field existed.
+  - `unitsForFocus(content, focus)` returns the units in the focus, in content order.
+  - `dueTomorrowCount(states, today)` returns how many states are due the next day.
   - `recommendUnit({ content, states, focus })` returns `{ unit_key, next_closed }`.
-  - `buildSession({ content, states, log, settings, today, focus, chosen_unit, rng })` returns `{ card_ids, unit_key, due_card_ids, new_card_ids, capped }`.
+  - `buildSession({ content, states, log, settings, today, focus, chosen_unit, rng })` returns `{ card_ids, unit_key, due_card_ids, new_card_ids, capped }`. `capped` is true only when `card_ids` is empty and the daily cap is the reason.
+  - `sessionPosition(shown, total)` returns `{ position, total, percent }` for the progress bar. `position` is `shown` held inside 1 to `total`, and 0 when `total` is 0.
   - `requeueCard(cardIds, index, cardId)` returns a new array.
   - `buildPlacementDeck(content)` returns card IDs.
-  - `placementState(correct, today)` returns a card state or null.
+  - `placementState(correct, today, before)` returns a card state or null. It returns null when `before` holds any state.
+  - `answerEffects({ mode, repeat, correct, grade, before, today, inv_available, requeued })` returns `{ state, log, requeue }`. The session screen applies the result and keeps no scheduling logic of its own.
   - `focus` is `'all'` or a channel key. `settings` is `{ session_size, new_per_day }`.
+
+**The log row carries the day.** Every review-log row holds `day`, the local calendar date from `ctx.today`, beside `at`, the UTC timestamp. The daily cap reads `day`, so a session after 17:00 in a western time zone counts against the right day.
 
 - [ ] **Step 1: Write the failing test for due collection and the fill**
 
@@ -2525,9 +3193,11 @@ import assert from 'node:assert/strict';
 import { loadFixture } from './helpers/fixture.js';
 import { makeRng } from './helpers/rng.js';
 import { loadContent } from '../app/logic/content.js';
+import { scheduleCard } from '../app/logic/scheduler.js';
 import {
   dueCardIds, newCardCountToday, recommendUnit, buildSession,
-  requeueCard, buildPlacementDeck, placementState
+  requeueCard, buildPlacementDeck, placementState, answerEffects,
+  todayString, unitsForFocus, dueTomorrowCount, sessionPosition
 } from '../app/logic/session.js';
 
 const { content } = loadContent(loadFixture());
@@ -2536,6 +3206,12 @@ const TODAY = '2026-03-10';
 
 function reviewed(due) {
   return { interval: 5, ease: 2.5, due, reps: 2, lapses: 0, recent: ['good'], tier: 'mc4', tier_passes: 1 };
+}
+
+function logRow(card, at, day) {
+  return {
+    card, at, day, grade: 'good', format: 'mc4', options: 4, elapsed_ms: 1000, answer: 'x'
+  };
 }
 
 test('due cards come back most overdue first and only in the focus', () => {
@@ -2565,10 +3241,10 @@ test('the deck fills from level-0 cards in the target unit', () => {
 
 test('the daily cap is counted from the log and stops the fill', () => {
   const log = [
-    { card: 'species:QUGA:leaf', at: '2026-03-10T09:00:00Z', grade: 'good', format: 'mc4', options: 4, elapsed_ms: 1000, answer: 'x' },
-    { card: 'species:QURU:leaf', at: '2026-03-10T09:01:00Z', grade: 'good', format: 'mc4', options: 4, elapsed_ms: 1000, answer: 'x' },
-    { card: 'species:QURU:leaf', at: '2026-03-10T09:02:00Z', grade: 'good', format: 'mc4', options: 4, elapsed_ms: 1000, answer: 'x' },
-    { card: 'species:PLOC:leaf', at: '2026-03-09T09:00:00Z', grade: 'good', format: 'mc4', options: 4, elapsed_ms: 1000, answer: 'x' }
+    logRow('species:QUGA:leaf', '2026-03-10T09:00:00Z', '2026-03-10'),
+    logRow('species:QURU:leaf', '2026-03-10T09:01:00Z', '2026-03-10'),
+    logRow('species:QURU:leaf', '2026-03-10T09:02:00Z', '2026-03-10'),
+    logRow('species:PLOC:leaf', '2026-03-09T09:00:00Z', '2026-03-09')
   ];
   assert.equal(newCardCountToday(log, '2026-03-10'), 2);
   const result = buildSession({
@@ -2579,12 +3255,21 @@ test('the daily cap is counted from the log and stops the fill', () => {
   assert.equal(result.capped, true);
 });
 
+test('the day field decides the daily count, and at is the fallback', () => {
+  const late = [logRow('species:QUGA:leaf', '2026-03-11T02:00:00Z', '2026-03-10')];
+  assert.equal(newCardCountToday(late, '2026-03-10'), 1);
+  assert.equal(newCardCountToday(late, '2026-03-11'), 0);
+  const older = [{ card: 'species:QURU:leaf', at: '2026-03-10T09:00:00Z', grade: 'good' }];
+  assert.equal(newCardCountToday(older, '2026-03-10'), 1);
+});
+
 test('the session never exceeds session_size', () => {
   const result = buildSession({
     content, states: {}, log: [], settings: { session_size: 1, new_per_day: 10 },
     today: TODAY, focus: 'leaf', chosen_unit: 'simple_lobed_maples_co', rng: makeRng(33)
   });
   assert.equal(result.card_ids.length, 1);
+  assert.equal(result.capped, false);
 });
 
 test('an empty queue with the cap reached returns no cards', () => {
@@ -2594,6 +3279,27 @@ test('an empty queue with the cap reached returns no cards', () => {
   });
   assert.deepEqual(result.card_ids, []);
   assert.equal(result.capped, true);
+});
+
+test('a full session is not capped, and an exhausted unit is not capped', () => {
+  const states = { 'species:QUGA:leaf': reviewed('2026-03-01') };
+  const full = buildSession({
+    content, states, log: [], settings: { session_size: 1, new_per_day: 0 },
+    today: TODAY, focus: 'leaf', chosen_unit: 'simple_lobed_maples_co', rng: makeRng(35)
+  });
+  assert.deepEqual(full.card_ids, ['species:QUGA:leaf']);
+  assert.equal(full.capped, false);
+
+  const done = {
+    'species:ACPL:leaf': reviewed('2026-03-20'),
+    'species:ACSA2:leaf': reviewed('2026-03-20')
+  };
+  const empty = buildSession({
+    content, states: done, log: [], settings: SETTINGS, today: TODAY,
+    focus: 'leaf', chosen_unit: 'simple_lobed_maples_co', rng: makeRng(36)
+  });
+  assert.deepEqual(empty.card_ids, []);
+  assert.equal(empty.capped, false);
 });
 ```
 
@@ -2606,12 +3312,33 @@ Expected: FAIL with `Cannot find module ... app/logic/session.js`.
 
 ```js
 // Builds a session deck from due and level-0 cards. Pure.
-import { isDue, addDays } from './scheduler.js';
+import { isDue, addDays, scheduleCard } from './scheduler.js';
 import { shuffle } from './question.js';
 import { gateStatus } from './progress.js';
 
 function inFocus(card, focus) {
   return focus === 'all' || card.channel === focus;
+}
+
+// The local calendar date. Every date in the app is a local date, never a UTC one.
+export function todayString(now = new Date()) {
+  return now.toLocaleDateString('en-CA');
+}
+
+export function unitsForFocus(content, focus) {
+  return content.units.filter((unit) => focus === 'all' || unit.channel === focus);
+}
+
+export function dueTomorrowCount(states, today) {
+  const tomorrow = addDays(today, 1);
+  return Object.values(states).filter((state) => state && state.due === tomorrow).length;
+}
+
+// The progress bar: card n of N. An empty deck reads 0 of 0.
+export function sessionPosition(shown, total) {
+  if (total <= 0) return { position: 0, total, percent: 0 };
+  const position = Math.min(Math.max(shown, 1), total);
+  return { position, total, percent: Math.round((position / total) * 100) };
 }
 
 export function dueCardIds({ content, states, focus, today }) {
@@ -2628,7 +3355,7 @@ export function dueCardIds({ content, states, focus, today }) {
 export function newCardCountToday(log, today) {
   const firstSeen = new Map();
   for (const row of log) {
-    const day = row.at.slice(0, 10);
+    const day = row.day ?? row.at.slice(0, 10);
     if (!firstSeen.has(row.card)) firstSeen.set(row.card, day);
   }
   let count = 0;
@@ -2638,8 +3365,7 @@ export function newCardCountToday(log, today) {
 
 export function recommendUnit({ content, states, focus }) {
   let nextClosed = null;
-  for (const unit of content.units) {
-    if (focus !== 'all' && unit.channel !== focus) continue;
+  for (const unit of unitsForFocus(content, focus)) {
     const ids = content.unit_cards[unit.key] ?? [];
     const hasNew = ids.some((id) => !states[id]);
     if (!hasNew) continue;
@@ -2668,22 +3394,25 @@ export function buildSession({
   if (!unitKey) unitKey = recommendUnit({ content, states, focus }).unit_key;
 
   const allowance = Math.max(0, settings.new_per_day - newCardCountToday(log, today));
+  const unseen = (unitKey ? content.unit_cards[unitKey] ?? [] : [])
+    .filter((id) => !states[id])
+    .filter((id) => inFocus(content.cards[id], focus));
+
   const newIds = [];
-  if (unitKey) {
-    for (const id of content.unit_cards[unitKey] ?? []) {
-      if (picked.length + newIds.length >= settings.session_size) break;
-      if (newIds.length >= allowance) break;
-      if (states[id]) continue;
-      if (!inFocus(content.cards[id], focus)) continue;
-      newIds.push(id);
-    }
+  for (const id of unseen) {
+    if (picked.length + newIds.length >= settings.session_size) break;
+    if (newIds.length >= allowance) break;
+    newIds.push(id);
   }
 
-  const remainingRoom = settings.session_size - picked.length;
-  const capped = allowance === 0 || (newIds.length < remainingRoom && allowance <= newIds.length);
+  // The deck is capped only when it came back empty and the allowance is what emptied it.
+  const cardIds = shuffle([...picked, ...newIds], rng);
+  const capped = cardIds.length === 0
+    && unseen.length > newIds.length
+    && newIds.length >= allowance;
 
   return {
-    card_ids: shuffle([...picked, ...newIds], rng),
+    card_ids: cardIds,
     unit_key: unitKey,
     due_card_ids: picked,
     new_card_ids: newIds,
@@ -2706,7 +3435,8 @@ export function buildPlacementDeck(content) {
     .map((card) => card.id);
 }
 
-export function placementState(correct, today) {
+export function placementState(correct, today, before) {
+  if (before !== undefined && before !== null) return null;
   if (!correct) return null;
   return {
     interval: 21,
@@ -2719,14 +3449,30 @@ export function placementState(correct, today) {
     tier_passes: 0
   };
 }
+
+// One answer, one decision. The screen writes the state, appends the log row, and
+// re-queues the card exactly as this function says, and decides nothing else.
+export function answerEffects({
+  mode, repeat, correct, grade, before, today, inv_available, requeued
+}) {
+  if (repeat) return { state: null, log: false, requeue: false };
+  if (mode === 'placement') {
+    return { state: placementState(correct, today, before), log: false, requeue: false };
+  }
+  return {
+    state: scheduleCard(before, grade, today, { inv_available }),
+    log: true,
+    requeue: grade === 'again' && !requeued
+  };
+}
 ```
 
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `node --test tests/session.test.js`
-Expected: PASS, 5 tests.
+Expected: PASS, 7 tests.
 
-- [ ] **Step 5: Write the failing test for the gate, relearning, and placement**
+- [ ] **Step 5: Write the test for the gate, relearning, placement, and the answer effects**
 
 Append to `tests/session.test.js`:
 
@@ -2793,21 +3539,119 @@ test('a right placement answer writes the 21 day state and a wrong one writes no
   assert.equal(state.due, '2026-03-31');
   assert.equal(placementState(false, '2026-03-10'), null);
 });
+
+test('placement never overwrites a card that already has a state', () => {
+  const before = { interval: 4, ease: 2.5, due: '2026-03-14', reps: 2, lapses: 0, recent: [], tier: 'mc4', tier_passes: 1 };
+  assert.equal(placementState(true, '2026-03-10', before), null);
+  assert.equal(placementState(true, '2026-03-10', null).interval, 21);
+});
+
+test('todayString reads the local calendar date', () => {
+  assert.equal(todayString(new Date(2026, 2, 10, 2, 0, 0)), '2026-03-10');
+  assert.equal(todayString(new Date(2026, 11, 31, 23, 30, 0)), '2026-12-31');
+});
+
+test('unitsForFocus keeps content order and answers all', () => {
+  assert.deepEqual(unitsForFocus(content, 'bark').map((u) => u.key), ['bark_types']);
+  assert.equal(unitsForFocus(content, 'all').length, content.units.length);
+  assert.equal(unitsForFocus(content, 'leaf')[0].key, 'leaf_types');
+});
+
+test('dueTomorrowCount counts the states due the next day', () => {
+  const states = {
+    a: { due: '2026-03-11' },
+    b: { due: '2026-03-11' },
+    c: { due: '2026-03-12' },
+    d: { due: '2026-03-10' }
+  };
+  assert.equal(dueTomorrowCount(states, TODAY), 2);
+  assert.equal(dueTomorrowCount({}, TODAY), 0);
+});
+
+test('the session position stays inside the deck', () => {
+  assert.deepEqual(sessionPosition(0, 5), { position: 1, total: 5, percent: 20 });
+  assert.deepEqual(sessionPosition(3, 5), { position: 3, total: 5, percent: 60 });
+  assert.deepEqual(sessionPosition(9, 5), { position: 5, total: 5, percent: 100 });
+  assert.deepEqual(sessionPosition(1, 0), { position: 0, total: 0, percent: 0 });
+});
+
+test('a repeat answer writes nothing', () => {
+  const effects = answerEffects({
+    mode: 'review', repeat: true, correct: true, grade: 'good', before: undefined,
+    today: TODAY, inv_available: true, requeued: true
+  });
+  assert.deepEqual(effects, { state: null, log: false, requeue: false });
+});
+
+test('a placement answer writes state and no log row', () => {
+  const right = answerEffects({
+    mode: 'placement', repeat: false, correct: true, grade: 'good', before: undefined,
+    today: TODAY, inv_available: true, requeued: false
+  });
+  assert.equal(right.state.tier, 'mc8');
+  assert.equal(right.log, false);
+  assert.equal(right.requeue, false);
+
+  const wrong = answerEffects({
+    mode: 'placement', repeat: false, correct: false, grade: 'again', before: undefined,
+    today: TODAY, inv_available: true, requeued: false
+  });
+  assert.equal(wrong.state, null);
+  assert.equal(wrong.log, false);
+  assert.equal(wrong.requeue, false);
+});
+
+test('a review answer writes the scheduled state and a log row', () => {
+  const before = { interval: 25, ease: 2.5, due: TODAY, reps: 5, lapses: 0, recent: ['good'], tier: 'mc8', tier_passes: 1 };
+  const withInv = answerEffects({
+    mode: 'review', repeat: false, correct: true, grade: 'good', before,
+    today: TODAY, inv_available: true, requeued: false
+  });
+  assert.deepEqual(withInv.state, scheduleCard(before, 'good', TODAY, { inv_available: true }));
+  assert.equal(withInv.log, true);
+  assert.equal(withInv.requeue, false);
+
+  const noInv = answerEffects({
+    mode: 'review', repeat: false, correct: true, grade: 'good', before,
+    today: TODAY, inv_available: false, requeued: false
+  });
+  assert.deepEqual(noInv.state, scheduleCard(before, 'good', TODAY, { inv_available: false }));
+});
+
+test('an again answer re-queues once and not twice', () => {
+  const first = answerEffects({
+    mode: 'review', repeat: false, correct: false, grade: 'again', before: undefined,
+    today: TODAY, inv_available: true, requeued: false
+  });
+  assert.equal(first.requeue, true);
+  assert.equal(first.log, true);
+
+  const second = answerEffects({
+    mode: 'review', repeat: false, correct: false, grade: 'again', before: undefined,
+    today: TODAY, inv_available: true, requeued: true
+  });
+  assert.equal(second.requeue, false);
+  assert.equal(second.log, true);
+});
 ```
+
+The two `answerEffects` review tests compare against a live `scheduleCard` call, so they
+check the wiring and not the scheduler's numbers.
 
 - [ ] **Step 6: Run the test to verify it passes**
 
 Run: `node --test tests/session.test.js`
-Expected: PASS, 12 tests. If the recommendation tests fail, check that `recommendUnit` walks `content.units` in file order.
+Expected: PASS, 23 tests. If the recommendation tests fail, check that `recommendUnit` walks `content.units` in file order.
 
 - [ ] **Step 7: Note the relearning contract in the module**
 
-Relearning belongs to the session screen: the screen calls `requeueCard`, and on the repeat it writes no log row and calls no scheduler function. Add this comment above `requeueCard` in `app/logic/session.js`:
+`answerEffects` decides when to re-queue. The screen calls `requeueCard` only when `requeue` is true, and on the repeat `answerEffects` returns no state and no log row. Add this comment above `requeueCard` in `app/logic/session.js`:
 
 ```js
 // Re-queues a card graded again, once, at the back of the deck.
-// The caller must not log the repeat and must not re-run the scheduler on it.
-// The placement screen never calls this.
+// The caller runs this only when answerEffects returns requeue true.
+// On the repeat, answerEffects returns state null and log false.
+// Placement mode never re-queues.
 ```
 
 - [ ] **Step 8: Run the whole suite**
@@ -2834,13 +3678,17 @@ git add -A && git commit -m "feat: add the session builder, the unit gate, and t
 - Produces:
   - `STORE_VERSION` is `1`.
   - `KEYS` is `{ cards: 'dendro_cards', log: 'dendro_log', settings: 'dendro_settings', missing_edges: 'dendro_missing_edges' }`.
-  - `LOG_CAP` is `20000`.
+  - `LOG_CAP` is `5000`.
   - `defaultSettings()` returns `{ version: 1, session_size: 20, new_per_day: 10, last_export: null }`.
   - `memoryStorage()` returns an in-memory object with `getItem`, `setItem`, `removeItem`.
   - `createStore(storage)` returns a store object.
-  - Store methods: `available`, `readCards()`, `writeCard(cardId, state)`, `readLog()`, `replaceLog(rows)`, `appendLog(row)`, `readSettings()`, `writeSettings(patch)`, `readMissingEdges()`, `recordMissingEdge(edge)`, `exportBlob(today)`, `importBlob(text)`, `reset()`, `shouldPromptExport(today)`, `markExported(today)`.
+  - Store methods: `available`, `newer_version`, `readCards()`, `writeCard(cardId, state)`, `readLog()`, `replaceLog(rows)`, `appendLog(row)`, `readSettings()`, `writeSettings(patch)`, `readMissingEdges()`, `recordMissingEdge(edge)`, `exportBlob(today)`, `importBlob(text)`, `reset()`, `shouldPromptExport(today)`, `markExported(today)`.
+  - `available` is a getter. It turns false after any write throws, and every read then returns an empty payload.
+  - `newer_version` is a getter. It turns true when a stored payload carries a version above `STORE_VERSION`. The store then writes nothing, so a newer build's data survives.
+  - `writeSettings(patch)` ignores a `session_size` or a `new_per_day` that is not a whole number of 1 or more, and returns the settings object it stored.
+  - `recordMissingEdge(edge)` sorts `a` and `b` by string compare before it looks the pair up, so one pair is one row.
   - `exportBlob(today)` returns `{ filename, json }`.
-  - `importBlob(text)` returns `{ ok, errors }`.
+  - `importBlob(text)` returns `{ ok, errors }`. It checks every section's shape first, migrates each section from that section's own `version`, and writes nothing when any check fails.
 
 **Stored shapes.** Each key holds one object with a `version` field.
 
@@ -2852,6 +3700,10 @@ git add -A && git commit -m "feat: add the session builder, the unit gate, and t
 ```
 
 **Migration 0 to 1.** A version 0 card record has no `tier` and no `tier_passes`. The migration adds `tier: 'mc4'` and `tier_passes: 0`.
+
+**Text that does not parse.** On a parse failure the store copies the raw string to `${key}_corrupt` and returns the empty payload. It makes one copy and never replaces it, so the first bad text is the one a user can send in.
+
+**Import checks, per section.** `dendro_cards` needs a plain `cards` object. `dendro_log` needs a `rows` array. `dendro_missing_edges` needs an `edges` array. `dendro_settings` needs a whole-number `session_size` and `new_per_day` of 1 or more. A section from a newer version fails too. One failure stops the whole import.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -2865,17 +3717,19 @@ import {
 } from '../app/logic/store.js';
 
 function row(card, at) {
-  return { card, at, grade: 'good', format: 'mc4', options: 4, elapsed_ms: 1200, answer: 'x' };
+  return { card, at, day: at.slice(0, 10), grade: 'good', format: 'mc4', options: 4, elapsed_ms: 1200, answer: 'x' };
 }
 
 test('a fresh store reports defaults and is available', () => {
   const store = createStore(memoryStorage());
   assert.equal(store.available, true);
+  assert.equal(store.newer_version, false);
   assert.deepEqual(store.readCards(), {});
   assert.deepEqual(store.readLog(), []);
   assert.deepEqual(store.readSettings(), defaultSettings());
   assert.deepEqual(store.readMissingEdges(), []);
   assert.equal(STORE_VERSION, 1);
+  assert.equal(LOG_CAP, 5000);
   assert.equal(KEYS.cards, 'dendro_cards');
 });
 
@@ -2920,6 +3774,25 @@ test('a missing edge is recorded once and counted', () => {
   assert.equal(edges.find((e) => e.channel === 'leaf').count, 2);
 });
 
+test('a missing edge counts the same pair in either direction', () => {
+  const store = createStore(memoryStorage());
+  store.recordMissingEdge({ a: 'QUGA', b: 'ACPL', channel: 'leaf' });
+  store.recordMissingEdge({ a: 'ACPL', b: 'QUGA', channel: 'leaf' });
+  const edges = store.readMissingEdges();
+  assert.equal(edges.length, 1);
+  assert.deepEqual(edges[0], { a: 'ACPL', b: 'QUGA', channel: 'leaf', count: 2 });
+});
+
+test('writeSettings ignores a value that is not a whole number of 1 or more', () => {
+  const store = createStore(memoryStorage());
+  assert.equal(store.writeSettings({ session_size: 15 }).session_size, 15);
+  assert.equal(store.writeSettings({ session_size: 0 }).session_size, 15);
+  assert.equal(store.writeSettings({ session_size: 2.5 }).session_size, 15);
+  assert.equal(store.writeSettings({ new_per_day: 'abc' }).new_per_day, 10);
+  assert.equal(store.readSettings().session_size, 15);
+  assert.equal(store.writeSettings({ last_export: '2026-03-10' }).last_export, '2026-03-10');
+});
+
 test('export and import make a round trip', () => {
   const first = createStore(memoryStorage());
   first.writeCard('species:QUGA:leaf', { interval: 4, ease: 2.5, due: '2026-03-14', reps: 2, lapses: 0, recent: ['good'], tier: 'mc4', tier_passes: 2 });
@@ -2958,6 +3831,56 @@ test('a malformed import is rejected with a reason and changes nothing', () => {
   assert.equal(store.readCards()['species:QUGA:leaf'].interval, 4);
 });
 
+test('an import with a malformed section writes nothing', () => {
+  const store = createStore(memoryStorage());
+  store.writeCard('species:QUGA:leaf', { interval: 4, tier: 'mc4', tier_passes: 0 });
+  const good = {
+    version: 1,
+    dendro_cards: { version: 1, cards: {} },
+    dendro_log: { version: 1, rows: [] },
+    dendro_settings: defaultSettings(),
+    dendro_missing_edges: { version: 1, edges: [] }
+  };
+
+  const nullCards = store.importBlob(JSON.stringify({ ...good, dendro_cards: null }));
+  assert.equal(nullCards.ok, false);
+  assert.match(nullCards.errors.join(' '), /dendro_cards/);
+
+  const arrayCards = store.importBlob(JSON.stringify({ ...good, dendro_cards: [] }));
+  assert.equal(arrayCards.ok, false);
+
+  const arrayRows = store.importBlob(JSON.stringify({ ...good, dendro_log: { version: 1, rows: {} } }));
+  assert.equal(arrayRows.ok, false);
+
+  const badSize = store.importBlob(JSON.stringify({
+    ...good, dendro_settings: { ...defaultSettings(), session_size: 'abc' }
+  }));
+  assert.equal(badSize.ok, false);
+  assert.match(badSize.errors.join(' '), /session_size/);
+
+  assert.equal(store.readCards()['species:QUGA:leaf'].interval, 4);
+  assert.equal(store.readSettings().session_size, 20);
+});
+
+test('an import migrates each section from its own version', () => {
+  const store = createStore(memoryStorage());
+  const result = store.importBlob(JSON.stringify({
+    version: 1,
+    dendro_cards: {
+      version: 0,
+      cards: { 'species:QUGA:leaf': { interval: 10, ease: 2.5, due: '2026-03-20', reps: 3, lapses: 0, recent: [] } }
+    },
+    dendro_log: { version: 1, rows: [] },
+    dendro_settings: defaultSettings(),
+    dendro_missing_edges: { version: 1, edges: [] }
+  }));
+  assert.deepEqual(result, { ok: true, errors: [] });
+  const card = store.readCards()['species:QUGA:leaf'];
+  assert.equal(card.tier, 'mc4');
+  assert.equal(card.tier_passes, 0);
+  assert.equal(card.interval, 10);
+});
+
 test('reset clears every key', () => {
   const storage = memoryStorage();
   const store = createStore(storage);
@@ -2981,12 +3904,59 @@ test('a version 0 card payload migrates in place', () => {
   assert.equal(JSON.parse(storage.getItem('dendro_cards')).version, 1);
 });
 
+test('a payload from a newer build is left alone and blocks every write', () => {
+  const storage = memoryStorage();
+  const newer = JSON.stringify({ version: 2, cards: { 'species:QUGA:leaf': { interval: 30, tier: 'typed', tier_passes: 1 } } });
+  storage.setItem('dendro_cards', newer);
+  const store = createStore(storage);
+  assert.equal(store.readCards()['species:QUGA:leaf'].interval, 30);
+  assert.equal(store.newer_version, true);
+  store.writeCard('species:QURU:leaf', { interval: 1, tier: 'mc4', tier_passes: 0 });
+  assert.equal(storage.getItem('dendro_cards'), newer);
+  assert.equal(store.readCards()['species:QURU:leaf'], undefined);
+});
+
+test('corrupt stored JSON is copied aside once and not overwritten', () => {
+  const storage = memoryStorage();
+  storage.setItem('dendro_cards', '{oops');
+  const store = createStore(storage);
+  assert.deepEqual(store.readCards(), {});
+  assert.equal(storage.getItem('dendro_cards_corrupt'), '{oops');
+  store.writeCard('species:QUGA:leaf', { interval: 1, tier: 'mc4', tier_passes: 0 });
+  assert.equal(store.readCards()['species:QUGA:leaf'].interval, 1);
+  storage.setItem('dendro_cards', '{worse');
+  assert.deepEqual(store.readCards(), {});
+  assert.equal(storage.getItem('dendro_cards_corrupt'), '{oops');
+});
+
 test('the export prompt fires once a month', () => {
   const store = createStore(memoryStorage());
   assert.equal(store.shouldPromptExport('2026-03-10'), true);
   store.markExported('2026-03-10');
   assert.equal(store.shouldPromptExport('2026-03-20'), false);
   assert.equal(store.shouldPromptExport('2026-04-12'), true);
+});
+
+test('a write that fails turns available off and leaves reads working', () => {
+  const inner = memoryStorage();
+  let full = false;
+  const storage = {
+    getItem: (key) => inner.getItem(key),
+    setItem: (key, value) => {
+      if (full) throw new Error('QuotaExceededError');
+      inner.setItem(key, value);
+    },
+    removeItem: (key) => inner.removeItem(key)
+  };
+  const store = createStore(storage);
+  store.writeCard('species:QUGA:leaf', { interval: 4, tier: 'mc4', tier_passes: 0 });
+  assert.equal(store.available, true);
+  full = true;
+  store.appendLog(row('species:QUGA:leaf', '2026-03-10T09:00:00Z'));
+  assert.equal(store.available, false);
+  assert.deepEqual(store.readLog(), []);
+  assert.deepEqual(store.readCards(), {});
+  assert.deepEqual(store.readSettings(), defaultSettings());
 });
 
 test('an unavailable storage leaves the store running and not available', () => {
@@ -3014,7 +3984,7 @@ Expected: FAIL with `Cannot find module ... app/logic/store.js`.
 // Owns the four localStorage keys. Pure apart from the injected storage object.
 
 export const STORE_VERSION = 1;
-export const LOG_CAP = 20000;
+export const LOG_CAP = 5000;
 export const EXPORT_PROMPT_DAYS = 30;
 
 export const KEYS = {
@@ -3046,6 +4016,44 @@ export const MIGRATIONS = {
   }
 };
 
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
+}
+
+function isCount(value) {
+  return Number.isInteger(value) && value >= 1;
+}
+
+export function sectionError(key, section) {
+  if (!isPlainObject(section)) return `The ${key} section is not an object.`;
+  if ((section.version ?? 0) > STORE_VERSION) {
+    return `The ${key} section says version ${section.version}. This app reads version ${STORE_VERSION}.`;
+  }
+  if (key === KEYS.cards && !isPlainObject(section.cards)) {
+    return 'The dendro_cards section has no cards object.';
+  }
+  if (key === KEYS.log && !Array.isArray(section.rows)) {
+    return 'The dendro_log section has no rows array.';
+  }
+  if (key === KEYS.missing_edges && !Array.isArray(section.edges)) {
+    return 'The dendro_missing_edges section has no edges array.';
+  }
+  if (key === KEYS.settings && !(isCount(section.session_size) && isCount(section.new_per_day))) {
+    return 'The dendro_settings section needs session_size and new_per_day of 1 or more.';
+  }
+  return null;
+}
+
+export function migrateSection(key, section) {
+  let payload = section;
+  let version = payload.version ?? 0;
+  while (version < STORE_VERSION && MIGRATIONS[version]) {
+    payload = MIGRATIONS[version](key, payload);
+    version = payload.version;
+  }
+  return payload;
+}
+
 export function memoryStorage(initial = {}) {
   const map = new Map(Object.entries(initial));
   return {
@@ -3062,11 +4070,21 @@ function daysBetween(fromDate, toDate) {
 
 export function createStore(storage) {
   let available = true;
+  let newerVersion = false;
   try {
     storage.setItem('dendro_probe', '1');
     storage.removeItem('dendro_probe');
   } catch {
     available = false;
+  }
+
+  // Text that does not parse is copied aside once, so a user can send the file in.
+  function keepCorrupt(key, text) {
+    try {
+      if (storage.getItem(`${key}_corrupt`) === null) storage.setItem(`${key}_corrupt`, text);
+    } catch {
+      available = false;
+    }
   }
 
   function read(key) {
@@ -3082,19 +4100,21 @@ export function createStore(storage) {
     try {
       payload = JSON.parse(text);
     } catch {
+      keepCorrupt(key, text);
       return emptyPayload(key);
     }
-    let version = payload.version ?? 0;
-    while (version < STORE_VERSION && MIGRATIONS[version]) {
-      payload = MIGRATIONS[version](key, payload);
-      version = payload.version;
-      write(key, payload);
+    if (!isPlainObject(payload)) return emptyPayload(key);
+    if ((payload.version ?? 0) > STORE_VERSION) {
+      newerVersion = true;
+      return payload;
     }
-    return payload;
+    const migrated = migrateSection(key, payload);
+    if (migrated !== payload) write(key, migrated);
+    return migrated;
   }
 
   function write(key, payload) {
-    if (!available) return;
+    if (!available || newerVersion) return;
     try {
       storage.setItem(key, JSON.stringify({ ...payload, version: STORE_VERSION }));
     } catch {
@@ -3104,6 +4124,8 @@ export function createStore(storage) {
 
   const api = {
     get available() { return available; },
+
+    get newer_version() { return newerVersion; },
 
     readCards() { return read(KEYS.cards).cards ?? {}; },
 
@@ -3125,15 +4147,24 @@ export function createStore(storage) {
 
     readSettings() { return { ...defaultSettings(), ...read(KEYS.settings) }; },
 
-    writeSettings(patch) { write(KEYS.settings, { ...api.readSettings(), ...patch }); },
+    writeSettings(patch) {
+      const current = api.readSettings();
+      const next = { ...current, ...patch };
+      for (const field of ['session_size', 'new_per_day']) {
+        if (!isCount(next[field])) next[field] = current[field];
+      }
+      write(KEYS.settings, next);
+      return next;
+    },
 
     readMissingEdges() { return read(KEYS.missing_edges).edges ?? []; },
 
     recordMissingEdge(edge) {
+      const [a, b] = [edge.a, edge.b].sort();
       const edges = api.readMissingEdges();
-      const found = edges.find((e) => e.a === edge.a && e.b === edge.b && e.channel === edge.channel);
+      const found = edges.find((e) => e.a === a && e.b === b && e.channel === edge.channel);
       if (found) found.count += 1;
-      else edges.push({ a: edge.a, b: edge.b, channel: edge.channel, count: 1 });
+      else edges.push({ a, b, channel: edge.channel, count: 1 });
       write(KEYS.missing_edges, { version: STORE_VERSION, edges });
     },
 
@@ -3157,20 +4188,24 @@ export function createStore(storage) {
         return { ok: false, errors: ['The file is not valid JSON.'] };
       }
       const errors = [];
+      if (!isPlainObject(payload)) {
+        return { ok: false, errors: ['The file holds no export object.'] };
+      }
       if (payload.version !== STORE_VERSION) {
         errors.push(`The file says version ${payload.version}. This app reads version ${STORE_VERSION}.`);
       }
+      const sections = {};
       for (const key of Object.values(KEYS)) {
-        if (!payload[key] || typeof payload[key] !== 'object') errors.push(`The file has no ${key} section.`);
-      }
-      if (!errors.length && typeof payload[KEYS.cards].cards !== 'object') {
-        errors.push('The dendro_cards section has no cards object.');
-      }
-      if (!errors.length && !Array.isArray(payload[KEYS.log].rows)) {
-        errors.push('The dendro_log section has no rows array.');
+        if (payload[key] === undefined) {
+          errors.push(`The file has no ${key} section.`);
+          continue;
+        }
+        const error = sectionError(key, payload[key]);
+        if (error) errors.push(error);
+        else sections[key] = migrateSection(key, payload[key]);
       }
       if (errors.length) return { ok: false, errors };
-      for (const key of Object.values(KEYS)) write(key, payload[key]);
+      for (const key of Object.values(KEYS)) write(key, sections[key]);
       return { ok: true, errors: [] };
     },
 
@@ -3201,7 +4236,7 @@ export function createStore(storage) {
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `node --test tests/store.test.js`
-Expected: PASS, 11 tests.
+Expected: PASS, 18 tests.
 
 - [ ] **Step 5: Run the whole suite**
 
@@ -3223,12 +4258,14 @@ git add -A && git commit -m "feat: add the localStorage store with export, impor
 - Create: `app/screens/session.js`, `app/screens/progress.js`, `app/screens/species.js`, `app/screens/settings.js` as one-line stubs, so the imports in `main.js` resolve. Tasks 10 to 12 fill them in.
 
 **Interfaces:**
-- Consumes: `loadContent` from `content.js`; `createStore` from `store.js`; `dueCardIds`, `newCardCountToday`, `recommendUnit` from `session.js`; `gateStatus` from `progress.js`.
+- Consumes: `loadContent`, `CDN_BASE`, `channelLabel`, `unitFor` from `content.js`; `createStore` from `store.js`; `todayString`, `dueCardIds`, `newCardCountToday`, `recommendUnit`, `unitsForFocus` from `session.js`; `gateStatus`, `unseenCount` from `progress.js`.
 - Produces:
-  - Every screen module exports `render(root, ctx)`.
-  - `ctx` is `{ content, store, image_base, today, params, mode, symbol, navigate }`. `params` is a `URLSearchParams`. `navigate(hash)` sets `window.location.hash`.
+  - Every screen module exports `render(root, ctx)`. A screen may return a teardown function. `route()` calls the teardown the last screen returned, before it clears `#app`.
+  - `ctx` is `{ content, store, image_base, today, params, mode, symbol, navigate, banner, storage_banner }`. `params` is a `URLSearchParams`. `navigate(hash)` sets `window.location.hash`. `banner(text)` shows the top banner. `storage_banner` is the storage-unavailable text, so every screen shows the same words.
+  - `ctx.image_base` is `CDN_BASE` for `content/` and `'content_dev/images/'` for `?content=dev`. It always ends with `/`. A screen never builds a path: it calls `imageUrl(photo, ctx.image_base)`, which returns `<base>img/<hash>.jpg`.
   - Routes: `#/` home, `#/session?focus=&unit=` session, `#/placement` placement, `#/progress` progress, `#/species/<symbol>` species, `#/settings` settings.
-  - `todayString()` returns the local calendar date as `YYYY-MM-DD`.
+
+`todayString()` lives in `logic/session.js`. `main.js` imports it and defines no date code of its own.
 
 Screens are hand-tested. Each screen task ends with a manual checklist.
 
@@ -3246,8 +4283,9 @@ export function render(root) { root.textContent = 'Not built yet.'; }
 
 ```js
 // Boots the app, routes between screens, holds no state.
-import { loadContent } from './logic/content.js';
+import { loadContent, CDN_BASE } from './logic/content.js';
 import { createStore } from './logic/store.js';
+import { todayString } from './logic/session.js';
 import * as home from './screens/home.js';
 import * as session from './screens/session.js';
 import * as progress from './screens/progress.js';
@@ -3268,13 +4306,24 @@ const DEAD_STORAGE = {
   removeItem() { throw new Error('no storage'); }
 };
 
-export function todayString() {
-  return new Date().toLocaleDateString('en-CA');
+const STORAGE_BANNER =
+  'Progress is not saved. This browser blocks local storage. Export from Settings to keep a copy.';
+
+function showBanner(text) {
+  const node = document.getElementById('banner');
+  node.hidden = false;
+  node.textContent = text;
 }
 
 function contentDir() {
   const query = new URLSearchParams(window.location.search);
   return query.get('content') === 'dev' ? 'content_dev/' : 'content/';
+}
+
+// The live images sit in object storage behind the CDN. The fixture images sit
+// in the repo, so the app runs offline against the fixture.
+function imageBaseFor(dir) {
+  return dir === 'content_dev/' ? 'content_dev/images/' : CDN_BASE;
 }
 
 function parseRoute() {
@@ -3307,15 +4356,21 @@ function showError(title, lines) {
 async function fetchContent(dir) {
   const raw = {};
   for (const [field, file] of Object.entries(CONTENT_FILES)) {
-    const response = await fetch(`${dir}${file}`);
-    if (!response.ok) throw new Error(`${dir}${file} returned ${response.status}`);
-    raw[field] = await response.json();
+    const path = `${dir}${file}`;
+    const response = await fetch(path);
+    if (!response.ok) throw new Error(`${path} returned ${response.status}`);
+    try {
+      raw[field] = await response.json();
+    } catch (error) {
+      throw new Error(`${path} is not valid JSON: ${error.message}`);
+    }
   }
   return raw;
 }
 
 async function start() {
   const dir = contentDir();
+  const imageBase = imageBaseFor(dir);
   let raw;
   try {
     raw = await fetchContent(dir);
@@ -3339,32 +4394,36 @@ async function start() {
   }
   const store = createStore(storage);
 
-  const banner = document.getElementById('banner');
-  if (!store.available) {
-    banner.hidden = false;
-    banner.textContent =
-      'Progress is not saved. This browser blocks local storage. Export from Settings to keep a copy.';
-  }
+  if (!store.available) showBanner(STORAGE_BANNER);
   document.getElementById('nav').hidden = false;
 
+  // The screen that is leaving gets to stop its own pending work first.
+  let teardown = null;
+
   function route() {
+    if (teardown) teardown();
+    teardown = null;
     const { parts, params } = parseRoute();
     const root = document.getElementById('app');
     root.textContent = '';
     const ctx = {
       content: result.content,
       store,
-      image_base: dir,
+      image_base: imageBase,
       today: todayString(),
       params,
-      navigate: (hash) => { window.location.hash = hash; }
+      navigate: (hash) => { window.location.hash = hash; },
+      banner: showBanner,
+      storage_banner: STORAGE_BANNER
     };
-    if (parts[0] === 'session') session.render(root, { ...ctx, mode: 'review' });
-    else if (parts[0] === 'placement') session.render(root, { ...ctx, mode: 'placement' });
-    else if (parts[0] === 'progress') progress.render(root, ctx);
-    else if (parts[0] === 'species') species.render(root, { ...ctx, symbol: parts[1] });
-    else if (parts[0] === 'settings') settings.render(root, ctx);
-    else home.render(root, ctx);
+    let leave;
+    if (parts[0] === 'session') leave = session.render(root, { ...ctx, mode: 'review' });
+    else if (parts[0] === 'placement') leave = session.render(root, { ...ctx, mode: 'placement' });
+    else if (parts[0] === 'progress') leave = progress.render(root, ctx);
+    else if (parts[0] === 'species') leave = species.render(root, { ...ctx, symbol: parts[1] });
+    else if (parts[0] === 'settings') leave = settings.render(root, ctx);
+    else leave = home.render(root, ctx);
+    teardown = typeof leave === 'function' ? leave : null;
   }
 
   window.addEventListener('hashchange', route);
@@ -3378,8 +4437,11 @@ start();
 
 ```js
 // Home: channel buttons, the recommendation, the unit list, the placement link.
-import { dueCardIds, newCardCountToday, recommendUnit } from '../logic/session.js';
-import { gateStatus } from '../logic/progress.js';
+import { channelLabel, unitFor } from '../logic/content.js';
+import {
+  dueCardIds, newCardCountToday, recommendUnit, unitsForFocus
+} from '../logic/session.js';
+import { gateStatus, unseenCount } from '../logic/progress.js';
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -3400,7 +4462,7 @@ export function render(root, ctx) {
   const row = el('div', 'channel-row');
   const choices = [
     { key: 'all', name: 'All channels' },
-    ...content.channels.map((c) => ({ key: c, name: c.replace(/_/gu, ' ') }))
+    ...content.channels.map((c) => ({ key: c, name: channelLabel(c) }))
   ];
   for (const choice of choices) {
     const count = dueCardIds({ content, states, focus: choice.key, today }).length;
@@ -3414,7 +4476,7 @@ export function render(root, ctx) {
   const recommendation = recommendUnit({ content, states, focus });
   const box = el('section', 'card');
   if (recommendation.unit_key) {
-    const unit = content.units.find((u) => u.key === recommendation.unit_key);
+    const unit = unitFor(content, recommendation.unit_key);
     box.append(el('h2', null, `Next up: ${unit.name}`));
     const start = el('button', 'primary', 'Start');
     start.addEventListener('click',
@@ -3422,7 +4484,7 @@ export function render(root, ctx) {
     box.append(start);
   } else if (recommendation.next_closed) {
     const next = recommendation.next_closed;
-    const parent = content.units.find((u) => u.key === next.parent_key);
+    const parent = unitFor(content, next.parent_key);
     box.append(el('h2', null, 'No unit is open yet'));
     box.append(el('p', null,
       `${next.unit_name} opens when ${next.needed_cards} more card(s) in ${parent.name} reach level 2.`));
@@ -3439,10 +4501,9 @@ export function render(root, ctx) {
 
   const list = el('section', 'unit-list');
   list.append(el('h2', null, 'Units'));
-  for (const unit of content.units) {
-    if (focus !== 'all' && unit.channel !== focus) continue;
+  for (const unit of unitsForFocus(content, focus)) {
     const ids = content.unit_cards[unit.key] ?? [];
-    const unseen = ids.filter((id) => !states[id]).length;
+    const unseen = unseenCount(ids, states);
     const gate = gateStatus(unit.key, content, states);
     const line = el('div', 'unit-row');
     line.append(el('span', 'unit-name', unit.name));
@@ -3463,6 +4524,8 @@ export function render(root, ctx) {
   link.href = '#/placement';
   paragraph.append(link);
   root.append(paragraph);
+  root.append(el('p', 'attribution',
+    'The placement test sets a level on cards you have not studied yet. A retake leaves every card you have already studied as it is.'));
 }
 ```
 
@@ -3612,9 +4675,11 @@ Open `http://localhost:8000/?content=dev#/` and check each line:
 6. Every unit row shows "N of M not started" and a Start button.
 7. Click the "bark" channel button. The URL becomes `#/?focus=bark` and the unit list shows only "Bark types".
 8. Click "All channels" to go back.
-9. Click "Take the placement test". The URL becomes `#/placement` and the page reads "Not built yet."
-10. Open `http://localhost:8000/#/` with no query. The page loads, the channel buttons appear, and every unit shows "0 of 0 not started", because `content/` holds no images yet.
-11. Open the browser console. There are no errors.
+9. Under the placement link a grey line reads "The placement test sets a level on cards you have not studied yet. A retake leaves every card you have already studied as it is."
+10. Click "Take the placement test". The URL becomes `#/placement` and the page reads "Not built yet."
+11. Open `http://localhost:8000/#/` with no query. The page loads, the channel buttons appear, and every unit shows "0 of 0 not started", because `content/images/manifest.json` is still empty, so the live set derives no cards.
+12. Still with no query, run `document.querySelectorAll('img').length` in the console. It returns 0. The home screen shows no photo, so the placeholder CDN host in `CDN_BASE` is never fetched and the page boots clean.
+13. Open the browser console. There are no errors.
 
 - [ ] **Step 7: Check the content-error screen**
 
@@ -3639,6 +4704,23 @@ mv content_dev/species.good.json content_dev/species.json
 
 Reload and confirm the home screen returns.
 
+Now break the JSON syntax, so the parse path reports the file:
+
+```bash
+mv content_dev/units.json content_dev/units.good.json && printf '{' > content_dev/units.json
+```
+
+Reload `http://localhost:8000/?content=dev#/`.
+Expected: the page shows "Content failed to load" and one line that starts `content_dev/units.json is not valid JSON:`. The file path is in the line, so the reader knows which file to fix.
+
+Restore:
+
+```bash
+mv content_dev/units.good.json content_dev/units.json
+```
+
+Reload and confirm the home screen returns.
+
 - [ ] **Step 8: Commit**
 
 ```bash
@@ -3653,31 +4735,55 @@ git add -A && git commit -m "feat: add the app shell, the router, and the home s
 - Modify: `app/screens/session.js` (replace the stub)
 
 **Interfaces:**
-- Consumes: `buildSession`, `buildPlacementDeck`, `placementState`, `requeueCard` from `logic/session.js`; `buildQuestion`, `buildReveal`, `invAvailable` from `logic/question.js`; `gradeChoice`, `gradeTyped`, `resolveTyped` from `logic/grader.js`; `deriveGrade`, `scheduleCard`, `addDays` from `logic/scheduler.js`; `cardLevel` from `logic/progress.js`.
-- Produces: `render(root, ctx)`. `ctx.mode` is `'review'` or `'placement'`.
+- Consumes: `imageUrl` from `logic/content.js`; `buildSession`, `buildPlacementDeck`, `answerEffects`, `requeueCard`, `dueTomorrowCount`, `sessionPosition` from `logic/session.js`; `buildQuestion`, `buildReveal`, `invAvailable`, `answerPhoto` from `logic/question.js`; `gradeChoice`, `gradeTyped`, `resolveTyped` from `logic/grader.js`; `deriveGrade` from `logic/scheduler.js`; `cardLevel` from `logic/progress.js`.
+- Produces: `render(root, ctx)`, which returns a teardown function. `ctx.mode` is `'review'` or `'placement'`.
 
 **Rules this screen carries:**
+- Every `<img>` gets its `src` from `imageUrl(photo, ctx.image_base)`. The screen joins no path of its own.
+- An image is named by its `hash`, so `lastHash`, `failedHashes`, and `excluded_hashes` all carry hashes.
+- The attribution line names the author, the source, and the license. The author is a link to the photo's `origin`, in a new tab, with `rel="noopener"`. A photo with no `origin` shows the author as plain text.
 - The timer starts when the photo has loaded, not when the card is built.
 - An image that fails to load is replaced from the pool. An exhausted pool skips the card and logs to the console.
-- A card graded `again` in review mode re-queues once. The repeat writes no log row, no card state, and no second re-queue. The summary counts the card as missed.
-- Placement mode writes card state through `placementState` and writes no log row. It never re-queues.
+- One call to `answerEffects` decides what an answer does. The screen applies the result and holds no scheduling rule of its own. `answerEffects` owns the repeat rule, the placement rule, and the re-queue rule.
+- The screen writes card state and the log row through the store right after the answer, and shows the storage banner when a write fails.
+- The log row carries `interval_before` and `ease_before`, the card's interval and ease before the grade was applied. A card with no state logs 0 and 2.5 (spec section 4).
+- `render` returns a teardown. The teardown sets `cancelled`. Every image `load` handler and every image `error` handler returns early when `cancelled` is true, so a screen that has left the page touches nothing.
 
 - [ ] **Step 1: Replace `app/screens/session.js`**
 
 ```js
 // The quiz loop and the summary. Computes nothing: every value comes from a logic module.
+import { imageUrl } from '../logic/content.js';
 import {
-  buildSession, buildPlacementDeck, placementState, requeueCard
+  buildSession, buildPlacementDeck, answerEffects, requeueCard,
+  dueTomorrowCount, sessionPosition
 } from '../logic/session.js';
-import { buildQuestion, buildReveal, invAvailable } from '../logic/question.js';
+import {
+  buildQuestion, buildReveal, invAvailable, answerPhoto
+} from '../logic/question.js';
 import { gradeChoice, gradeTyped, resolveTyped } from '../logic/grader.js';
-import { deriveGrade, scheduleCard, addDays } from '../logic/scheduler.js';
+import { deriveGrade } from '../logic/scheduler.js';
 import { cardLevel } from '../logic/progress.js';
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
   if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+// The author links to the photo's origin page, so the credit reaches the source.
+function creditInto(node, photo) {
+  if (photo.origin) {
+    const link = el('a', null, photo.author);
+    link.href = photo.origin;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    node.append(link);
+  } else {
+    node.append(document.createTextNode(photo.author));
+  }
+  node.append(document.createTextNode(`, ${photo.source}, ${photo.license}.`));
   return node;
 }
 
@@ -3696,26 +4802,37 @@ export function render(root, ctx) {
     }).card_ids;
 
   const totalPlanned = deck.length;
-  const lastFile = {};
-  const failedFiles = {};
+  const lastHash = {};
+  const failedHashes = {};
   const requeuedOnce = new Set();
   const answered = new Set();
   const results = { right: 0, missed: 0, promoted: [], demoted: [], misses: [] };
   let index = 0;
   let shown = 0;
 
+  // The router calls this when the user leaves. A pending image must then do nothing.
+  let cancelled = false;
+  const teardown = () => { cancelled = true; };
+
+  function warnIfUnsaved() {
+    if (!store.available) ctx.banner(ctx.storage_banner);
+  }
+
   if (totalPlanned === 0) {
-    root.append(el('h1', null, 'Nothing to study'));
-    root.append(el('p', null,
-      'Nothing is due in this focus and the daily new-card cap is reached.'));
+    const placement = mode === 'placement';
+    root.append(el('h1', null, placement ? 'No cards to place' : 'Nothing to study'));
+    root.append(el('p', null, placement
+      ? 'The placement test needs level-1 concept cards, and this content set has none.'
+      : 'Nothing is due in this focus and the daily new-card cap is reached.'));
     const back = el('button', 'primary', 'Home');
     back.addEventListener('click', () => ctx.navigate('/'));
     root.append(back);
-    return;
+    return teardown;
   }
 
   function excludedFor(cardId) {
-    return [...(failedFiles[cardId] ?? []), lastFile[cardId]].filter(Boolean);
+    const failed = failedHashes[cardId] ?? [];
+    return lastHash[cardId] ? [...failed, lastHash[cardId]] : [...failed];
   }
 
   function answerCard(question, card, chosenKey, typedText, guess, elapsedMs) {
@@ -3727,29 +4844,42 @@ export function render(root, ctx) {
     });
     const repeat = answered.has(card.id);
     answered.add(card.id);
+    const before = store.readCards()[card.id];
 
+    const effects = answerEffects({
+      mode,
+      repeat,
+      correct,
+      grade,
+      before,
+      today,
+      inv_available: invAvailable(content, card),
+      requeued: requeuedOnce.has(card.id)
+    });
+
+    if (effects.state) {
+      store.writeCard(card.id, effects.state);
+      warnIfUnsaved();
+      // A card with no earlier state is new, not promoted, so the summary skips it.
+      if (before && cardLevel(effects.state) > cardLevel(before)) results.promoted.push(card.id);
+      if (before && cardLevel(effects.state) < cardLevel(before)) results.demoted.push(card.id);
+    }
+    if (effects.log) {
+      store.appendLog({
+        card: card.id,
+        at: new Date().toISOString(),
+        day: today,
+        grade,
+        format: question.format,
+        options: question.option_count,
+        elapsed_ms: elapsedMs,
+        answer: question.format === 'typed' ? typedText : chosenKey,
+        interval_before: before?.interval ?? 0,
+        ease_before: before?.ease ?? 2.5
+      });
+      warnIfUnsaved();
+    }
     if (!repeat) {
-      if (mode === 'placement') {
-        const state = placementState(correct, today);
-        if (state) store.writeCard(card.id, state);
-      } else {
-        const before = store.readCards()[card.id];
-        const after = scheduleCard(before, grade, today, {
-          inv_available: invAvailable(content, card.channel)
-        });
-        store.writeCard(card.id, after);
-        store.appendLog({
-          card: card.id,
-          at: new Date().toISOString(),
-          grade,
-          format: question.format,
-          options: question.option_count,
-          elapsed_ms: elapsedMs,
-          answer: question.format === 'typed' ? typedText : chosenKey
-        });
-        if (cardLevel(after) > cardLevel(before)) results.promoted.push(card.id);
-        if (cardLevel(after) < cardLevel(before)) results.demoted.push(card.id);
-      }
       if (correct) results.right += 1;
       else results.missed += 1;
     }
@@ -3760,7 +4890,10 @@ export function render(root, ctx) {
       revealKey = resolveTyped(typedText, card.kind, card.channel, content);
     }
     const reveal = buildReveal({ question, chosen_key: revealKey, content });
-    if (!repeat && reveal.missing_edge) store.recordMissingEdge(reveal.missing_edge);
+    if (!repeat && reveal.missing_edge) {
+      store.recordMissingEdge(reveal.missing_edge);
+      warnIfUnsaved();
+    }
     if (!repeat && !correct) {
       results.misses.push({
         card_id: card.id,
@@ -3770,7 +4903,7 @@ export function render(root, ctx) {
       });
     }
 
-    if (grade === 'again' && mode === 'review' && !requeuedOnce.has(card.id)) {
+    if (effects.requeue) {
       requeuedOnce.add(card.id);
       deck.splice(0, deck.length, ...requeueCard(deck, index, card.id));
       index -= 1;
@@ -3803,8 +4936,15 @@ export function render(root, ctx) {
     const facts = reveal.answer.facts;
     if (facts.range_text) {
       root.append(el('p', null, facts.range_text));
-      root.append(el('p', null,
-        `Elevation ${facts.elevation_ft[0]} to ${facts.elevation_ft[1]} ft. Height ${facts.height_ft[0]} to ${facts.height_ft[1]} ft.`));
+      // A species record may carry no elevation and no height, so guard each one.
+      const sizes = [];
+      if (facts.elevation_ft) {
+        sizes.push(`Elevation ${facts.elevation_ft[0]} to ${facts.elevation_ft[1]} ft.`);
+      }
+      if (facts.height_ft) {
+        sizes.push(`Height ${facts.height_ft[0]} to ${facts.height_ft[1]} ft.`);
+      }
+      if (sizes.length) root.append(el('p', null, sizes.join(' ')));
       root.append(el('p', null, facts.habitat));
     } else if (facts.description) {
       root.append(el('p', null, facts.description));
@@ -3820,25 +4960,24 @@ export function render(root, ctx) {
     if (photo) {
       const img = document.createElement('img');
       img.className = 'photo';
-      img.src = imageBase + photo.file;
+      img.src = imageUrl(photo, imageBase);
       img.alt = caption;
       box.append(img);
-      box.append(el('figcaption', 'attribution',
-        `${caption}. ${photo.author}, ${photo.source}, ${photo.license}.`));
+      box.append(creditInto(el('figcaption', 'attribution', `${caption}. `), photo));
     } else {
       box.append(el('p', 'attribution', `${caption}. No photo.`));
     }
     return box;
   }
 
-  // A re-queued card does not add to the total, so the counter is clamped.
+  // A re-queued card does not add to the total, so sessionPosition clamps the counter.
   function header(question) {
-    const position = Math.min(Math.max(shown, 1), deck.length);
+    const place = sessionPosition(shown, deck.length);
     const bar = el('div', 'progress-bar');
     const fill = el('div');
-    fill.style.width = `${Math.round((position / deck.length) * 100)}%`;
+    fill.style.width = `${place.percent}%`;
     bar.append(fill);
-    root.append(el('p', null, `Card ${position} of ${deck.length}`));
+    root.append(el('p', null, `Card ${place.position} of ${place.total}`));
     root.append(bar);
     const line = el('p', null, question.prompt);
     line.append(document.createTextNode(' '));
@@ -3853,7 +4992,7 @@ export function render(root, ctx) {
     const card = content.cards[cardId];
     const state = mode === 'placement' ? null : store.readCards()[cardId];
     const question = buildQuestion({
-      card, content, state, excluded_files: excludedFor(cardId)
+      card, content, state, excluded_hashes: excludedFor(cardId)
     });
 
     if (question.format !== 'inv' && !question.photo) {
@@ -3886,13 +5025,15 @@ export function render(root, ctx) {
       for (const option of question.options) {
         const button = el('button', null);
         const img = document.createElement('img');
-        img.src = imageBase + option.photo.file;
+        img.src = imageUrl(option.photo, imageBase);
         img.alt = 'Option photo';
         img.addEventListener('load', () => {
+          if (cancelled) return;
           pending -= 1;
           if (pending === 0 && !startedAt) startedAt = Date.now();
         });
         img.addEventListener('error', () => {
+          if (cancelled) return;
           pending -= 1;
           if (option.key === question.answer_key) {
             console.warn(`Answer photo failed for ${cardId}. Skipping the card this session.`);
@@ -3909,23 +5050,25 @@ export function render(root, ctx) {
       }
       root.append(list);
       root.append(guessLabel);
-      lastFile[cardId] = question.options
-        .find((o) => o.key === question.answer_key)?.photo.file ?? null;
+      lastHash[cardId] = answerPhoto(question)?.hash ?? null;
     } else {
       const img = document.createElement('img');
       img.className = 'photo';
-      img.src = imageBase + question.photo.file;
+      img.src = imageUrl(question.photo, imageBase);
       img.alt = question.prompt;
-      img.addEventListener('load', () => { startedAt = Date.now(); });
+      img.addEventListener('load', () => {
+        if (cancelled) return;
+        startedAt = Date.now();
+      });
       img.addEventListener('error', () => {
-        failedFiles[cardId] = [...(failedFiles[cardId] ?? []), question.photo.file];
-        console.warn(`Image failed: ${question.photo.file}`);
+        if (cancelled) return;
+        failedHashes[cardId] = [...(failedHashes[cardId] ?? []), question.photo.hash];
+        console.warn(`Image failed: img/${question.photo.hash}.jpg`);
         showCard();
       });
       root.append(img);
-      root.append(el('p', 'attribution',
-        `${question.photo.author}, ${question.photo.source}, ${question.photo.license}.`));
-      lastFile[cardId] = question.photo.file;
+      root.append(creditInto(el('p', 'attribution'), question.photo));
+      lastHash[cardId] = question.photo.hash;
 
       if (question.format === 'typed') {
         const field = document.createElement('input');
@@ -3958,10 +5101,8 @@ export function render(root, ctx) {
     root.append(el('h1', null, 'Session summary'));
     root.append(el('p', null, `Right: ${results.right}. Missed: ${results.missed}.`));
 
-    const tomorrow = addDays(today, 1);
-    const dueTomorrow = Object.values(store.readCards())
-      .filter((s) => s.due === tomorrow).length;
-    root.append(el('p', null, `Due tomorrow: ${dueTomorrow}.`));
+    root.append(el('p', null,
+      `Due tomorrow: ${dueTomorrowCount(store.readCards(), today)}.`));
 
     const name = (id) => content.cards[id] ? `${content.cards[id].kind} ${content.cards[id].key} (${content.cards[id].channel})` : id;
     root.append(el('p', null,
@@ -3997,6 +5138,7 @@ export function render(root, ctx) {
   }
 
   showCard();
+  return teardown;
 }
 ```
 
@@ -4012,33 +5154,44 @@ Clear storage first: open the console and run `localStorage.clear()`, then reloa
 
 1. Click Start on "Next up: Leaf types". The URL becomes `#/session?focus=all&unit=leaf_types`.
 2. The page shows "Card 1 of 1", a progress bar, the prompt "What leaf type is this?", a chip reading "mc4", a photo, and four option buttons.
-3. Each option button shows a bold category name. The correct option is "Simple, lobed".
-4. The guess checkbox reads "I guessed" and starts unchecked.
-5. Click a wrong option, for example "Needles". The page shows "Wrong", the answer photo, the fallback sentence naming both concepts, and a Next button.
-6. Click Next. The card re-queues at the back of the deck, so the same card appears again. The counter still reads "Card 1 of 1", because a re-queue adds no work to the total.
-7. Answer it right. The page shows "Right", the range line, and Next.
-8. Click Next. The summary shows "Right: 0. Missed: 1." The re-answer did not change the count.
-9. In the console run `JSON.parse(localStorage.dendro_log).rows.length`. It returns 1, not 2.
-10. In the console run `JSON.parse(localStorage.dendro_cards).cards`. The concept card shows `tier: "mc4"`, `interval: 1`, `lapses: 1`.
-11. Click Home. Click Start again and answer right three times across three sessions. After the third, the summary lists the card under Promoted.
-12. Go Home with focus "bark" and start "Bark types". With three bark concept cards the deck holds three. Answer each. The chip reads "mc4" for all three.
-13. Set a card to tier `inv` by hand in the console, then start a leaf session:
+3. In the console run `document.querySelector('img.photo').getAttribute('src')`. It reads `content_dev/images/img/<hash>.jpg`, with a 64-character hash. The screen builds no path of its own.
+4. The attribution line under the photo shows the author as a link. Hover it: the status bar shows the `origin` URL from the manifest row. Click it: the source page opens in a new tab.
+5. Each option button shows a bold category name. The correct option is "Simple, lobed".
+6. The guess checkbox reads "I guessed" and starts unchecked.
+7. Click a wrong option, for example "Needles". The page shows "Wrong", the answer photo, the fallback sentence naming both concepts, and a Next button.
+8. Click Next. The card re-queues at the back of the deck, so the same card appears again. The counter still reads "Card 1 of 1", because a re-queue adds no work to the total.
+9. Answer it right. The page shows "Right", the range line, and Next.
+10. Click Next. The summary shows "Right: 0. Missed: 1." The re-answer did not change the count.
+11. In the console run `JSON.parse(localStorage.dendro_log).rows`. There is one row, not two. The row holds `day` with today's local date, `at` with the UTC timestamp, and `answer` with the option key you clicked, for example `needles`. The log stores keys, not display names.
+12. In the console run `JSON.parse(localStorage.dendro_cards).cards`. The concept card shows `tier: "mc4"`, `interval: 1`, `lapses: 1`.
+13. Click Home, click Start, and answer the card right. The summary reads "Promoted: none.", because the card stays at level 1: the tier is still `mc4` and the interval is 4.
+14. Make the card due again. In the console run:
+    `const c=JSON.parse(localStorage.dendro_cards); c.cards['concept:leaf:simple_lobed'].due='2020-01-01'; localStorage.dendro_cards=JSON.stringify(c);`
+    Reload, start the leaf session, and answer the card right. The summary now lists the card under Promoted, because the card moves from `mc4` to `mc8`, that is level 1 to level 2.
+15. Run `localStorage.clear()`, reload, start a leaf session, and answer the card right at first sight. The summary reads "Promoted: none.", because a card with no earlier state is new, not promoted.
+16. Go Home with focus "bark" and start "Bark types". With three bark concept cards the deck holds three. Answer each. The chip reads "mc4" for all three.
+17. Set a card to tier `inv` by hand in the console, then start a leaf session:
     `const c=JSON.parse(localStorage.dendro_cards); c.cards['species:QUGA:leaf']={interval:25,ease:2.5,due:'2020-01-01',reps:5,lapses:0,recent:[],tier:'inv',tier_passes:0}; localStorage.dendro_cards=JSON.stringify(c);`
     Reload, open `#/session?focus=leaf`, and check that the prompt reads "Which photo shows Gambel oak?", the chip reads "inv", and five photo buttons appear with no prompt photo above them.
-14. Set the same card to tier `typed` the same way. The session shows a text field and an Answer button. Type "gambel oak" and press Enter. The reveal says "Right".
-15. Type "quercus rubra" on a later typed card. The reveal says "Wrong" and shows the line "You typed: quercus rubra".
-16. Open the console. There are no errors.
+18. On that `inv` card run `[...document.querySelectorAll('.options.inv img')].map((i) => i.getAttribute('src'))` in the console. Every value reads `content_dev/images/img/<hash>.jpg`, and the hashes differ.
+19. Set the same card to tier `typed` the same way. The session shows a text field and an Answer button. Type "gambel oak" and press Enter. The reveal says "Right".
+20. Type "quercus rubra" on a later typed card. The reveal says "Wrong" and shows the line "You typed: quercus rubra".
+21. Check the teardown. Start a session and click Home in the nav before you answer. The home screen renders. Open the session again: the counter reads "Card 1" again.
+22. Open the console. There are no errors.
 
 - [ ] **Step 4: Manual checklist, image failure**
 
-1. Rename one fixture image so it 404s:
-   `mv content_dev/images/QUGA/leaf/001.jpg content_dev/images/QUGA/leaf/001.hidden`
-2. Reload and start a leaf session that includes `species:QUGA:leaf`. The console logs `Image failed: images/QUGA/leaf/001.jpg` and the card shows the second QUGA leaf photo instead.
-3. Rename the second one too:
-   `mv content_dev/images/QUGA/leaf/002.jpg content_dev/images/QUGA/leaf/002.hidden`
-4. Reload and start the session again. The console logs the pool-exhausted warning and the deck moves past that card.
-5. Restore both:
-   `mv content_dev/images/QUGA/leaf/001.hidden content_dev/images/QUGA/leaf/001.jpg && mv content_dev/images/QUGA/leaf/002.hidden content_dev/images/QUGA/leaf/002.jpg`
+The fixture keys every image on its hash, so first read the two QUGA leaf hashes out of the manifest.
+
+1. Open `content_dev/images/manifest.json` and copy the `hash` of the two rows with `target: "QUGA"` and `channel: "leaf"`. Call them `<hash1>` and `<hash2>`.
+2. Hide the first one, so it 404s:
+   `mv content_dev/images/img/<hash1>.jpg content_dev/images/img/<hash1>.hidden`
+3. Reload and start a leaf session that includes `species:QUGA:leaf`. The console logs `Image failed: img/<hash1>.jpg` and the card shows the second QUGA leaf photo instead.
+4. Hide the second one too:
+   `mv content_dev/images/img/<hash2>.jpg content_dev/images/img/<hash2>.hidden`
+5. Reload and start the session again. The console logs the pool-exhausted warning and the deck moves past that card.
+6. Restore both:
+   `mv content_dev/images/img/<hash1>.hidden content_dev/images/img/<hash1>.jpg && mv content_dev/images/img/<hash2>.hidden content_dev/images/img/<hash2>.jpg`
 
 - [ ] **Step 5: Manual checklist, placement mode**
 
@@ -4050,8 +5203,20 @@ Clear storage first: open the console and run `localStorage.clear()`, then reloa
 6. In the console run `JSON.parse(localStorage.dendro_log).rows.length`. It returns 0.
 7. Run `JSON.parse(localStorage.dendro_cards).cards`. The five right cards show `tier: "mc8"`, `interval: 21`, `tier_passes: 0`. The wrong one is absent.
 8. Go Home. The leaf channel now shows 0 due, and "Simple lobed leaves" is marked open, because the one leaf concept card is at level 2.
+9. Take the placement test again and answer every card wrong. Run `JSON.parse(localStorage.dendro_cards).cards` once more. The five placed cards still show `tier: "mc8"`, `interval: 21`. A retake never overwrites a card that already has state.
+10. Point the app at a content set with no concept cards: open `http://localhost:8000/#/placement` with no query, so the app loads `content/`, which ships no images. The page reads "No cards to place" and offers a Home button.
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 6: Manual checklist, a full store**
+
+1. Run `localStorage.clear()`, reload, and start a leaf session.
+2. Fill the store from the console:
+   `const big='x'.repeat(1024*1024); try { for (let i=0;i<20;i+=1) localStorage.setItem('filler_'+i,big); } catch (e) { console.log('full'); }`
+3. Answer the card. The orange banner appears at the top and reads "Progress is not saved. This browser blocks local storage. Export from Settings to keep a copy."
+4. The reveal still renders and Next still works, so a failed write never stops the session.
+5. Clear the filler and reload:
+   `for (let i=0;i<20;i+=1) localStorage.removeItem('filler_'+i);`
+
+- [ ] **Step 7: Commit**
 
 ```bash
 git add -A && git commit -m "feat: add the session screen, the quiz loop, and the summary" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
@@ -4066,8 +5231,13 @@ git add -A && git commit -m "feat: add the session screen, the quiz loop, and th
 - Modify: `app/screens/species.js` (replace the stub)
 
 **Interfaces:**
-- Consumes: `progressGrid`, `unitNumber`, `cardLevel`, `speciesLevel`, `LEVEL_NAMES` from `logic/progress.js`; `cardId` from `logic/content.js`.
-- Produces: `render(root, ctx)` in each file. The species screen reads `ctx.symbol`.
+- Consumes: `progressGrid`, `cardLevel`, `speciesLevel`, `LEVEL_NAMES` from `logic/progress.js`; `cardId`, `conceptFor`, `varietyCardChannels`, `imageUrl` from `logic/content.js`.
+- Produces: `render(root, ctx)` in each file. The species screen reads `ctx.symbol`. Neither screen returns a teardown: both render once and start no image work of their own that outlives the screen.
+
+**Rules the species screen carries:**
+- A retired record shows one line `Retired: <retired_reason> (<retired_at>)` and no photos. `deriveCards` skips a retired species, so no channel heading renders for it.
+- `arrangement` and `genus_common` are optional authored fields. The Arrangement row is absent when the record carries no `arrangement`.
+- Every `<img>` gets its `src` from `imageUrl(photo, ctx.image_base)`, and the attribution links the author to the photo's `origin`, the same way the session screen does.
 
 - [ ] **Step 1: Replace `app/screens/progress.js`**
 
@@ -4128,7 +5298,9 @@ export function render(root, ctx) {
 
 ```js
 // One species: facts, photos by channel, levels, next due dates, varieties.
-import { cardId } from '../logic/content.js';
+import {
+  cardId, conceptFor, varietyCardChannels, imageUrl
+} from '../logic/content.js';
 import { cardLevel, speciesLevel, LEVEL_NAMES } from '../logic/progress.js';
 
 function el(tag, className, text) {
@@ -4138,6 +5310,22 @@ function el(tag, className, text) {
   return node;
 }
 
+// The author links to the photo's origin page, so the credit reaches the source.
+function creditInto(node, photo) {
+  if (photo.origin) {
+    const link = el('a', null, photo.author);
+    link.href = photo.origin;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    node.append(link);
+  } else {
+    node.append(document.createTextNode(photo.author));
+  }
+  node.append(document.createTextNode(`, ${photo.source}, ${photo.license}.`));
+  return node;
+}
+
+// An absent field drops its whole row, so an optional field needs no guard here.
 function fact(list, term, value) {
   if (value === undefined || value === null || value === '') return;
   list.append(el('dt', null, term));
@@ -4159,18 +5347,31 @@ export function render(root, ctx) {
   root.append(el('p', null,
     `${symbol}. ${record.native_status}. Overall level ${speciesLevel(symbol, content, states)}.`));
 
+  // A retired species keeps its record and its facts. It has no cards, so the
+  // channel loop below renders no heading and no photo for it.
+  if (record.retired) {
+    root.append(el('p', 'notice',
+      `Retired: ${record.retired_reason} (${record.retired_at})`));
+  }
+
   const list = el('dl');
   fact(list, 'Range', record.range?.text);
   fact(list, 'States', (record.range?.states ?? []).join(', '));
   fact(list, 'Planted states', (record.planted_states ?? []).join(', '));
-  fact(list, 'Elevation', `${record.elevation_ft[0]} to ${record.elevation_ft[1]} ft`);
-  fact(list, 'Height', `${record.height_ft[0]} to ${record.height_ft[1]} ft`);
+  // A species record may carry no elevation and no height, so guard each field first.
+  if (record.elevation_ft) {
+    fact(list, 'Elevation', `${record.elevation_ft[0]} to ${record.elevation_ft[1]} ft`);
+  }
+  if (record.height_ft) {
+    fact(list, 'Height', `${record.height_ft[0]} to ${record.height_ft[1]} ft`);
+  }
   fact(list, 'Habitat', record.habitat);
   fact(list, 'Audubon name', record.audubon_name);
   fact(list, 'Section', record.section);
+  // `arrangement` is optional. The pipeline never writes it, so many records lack it.
   fact(list, 'Arrangement', record.arrangement);
   for (const [channel, bucket] of Object.entries(record.concepts ?? {})) {
-    const concept = content.concepts.find((c) => c.channel === channel && c.key === bucket);
+    const concept = conceptFor(content, channel, bucket);
     fact(list, `${channel} type`, concept?.name ?? bucket);
   }
   root.append(list);
@@ -4187,11 +5388,10 @@ export function render(root, ctx) {
       const figure = el('figure');
       const img = document.createElement('img');
       img.className = 'photo';
-      img.src = imageBase + photo.file;
+      img.src = imageUrl(photo, imageBase);
       img.alt = `${record.common[0]} ${channel}`;
       figure.append(img);
-      figure.append(el('figcaption', 'attribution',
-        `${photo.author}, ${photo.source}, ${photo.license}.`));
+      figure.append(creditInto(el('figcaption', 'attribution'), photo));
       strip.append(figure);
     }
     root.append(strip);
@@ -4201,8 +5401,7 @@ export function render(root, ctx) {
     root.append(el('h2', null, 'Varieties'));
     const varieties = el('ul');
     for (const variety of record.varieties) {
-      const channels = content.channels
-        .filter((channel) => content.cards[cardId('variety', channel, variety.key)]);
+      const channels = varietyCardChannels(content, symbol, variety.key);
       const status = channels.length ? `card on ${channels.join(', ')}` : 'no card';
       varieties.append(el('li', null, `${variety.name}. ${variety.note} (${status})`));
     }
@@ -4243,14 +5442,18 @@ Species screen, at `#/species/ACPL`:
 
 8. The heading reads "Norway maple" with "Acer platanoides" under it.
 9. The line under that reads "ACPL. introduced. Overall level 0."
-10. The fact list shows Range, States (empty, so the row is absent), Planted states "CO, UT, WY, NE, KS", Elevation "4000 to 7000 ft", Height "40 to 60 ft", Habitat, Audubon name, Arrangement "opposite", "leaf type Simple, lobed", and "fruit type Samara". There is no Section row, because ACPL has none.
+10. The fact list shows Range, States (empty, so the row is absent), Planted states "CO, UT, WY, NE, KS", Elevation "4000 to 7000 ft", Height "40 to 60 ft", Habitat, Audubon name, "leaf type Simple, lobed", and "fruit type Samara". There is no Section row and no Arrangement row, because the fixture's maple records carry neither field.
 11. A "leaf" heading shows "Level 4, expert. Next due 2026-10-01." and one photo with the attribution line under it.
-12. A "fruit" heading shows "Level 0, novice. Next due not scheduled." and one photo.
-13. There is no "bark" heading, because ACPL has no bark card.
-14. Open `#/species/QUGA`. A Varieties section lists "var. gambelii" and "var. bakeri", each with its note and "(card on leaf)".
-15. Open `#/species/QUVE`. The facts render and no channel headings appear, because QUVE has no cards.
-16. Open `#/species/ZZZZ`. The page reads "Unknown species".
-17. The console shows no errors.
+12. In the console run `document.querySelector('img.photo').getAttribute('src')`. It reads `content_dev/images/img/<hash>.jpg`.
+13. In the attribution line the author is a link. Hover it: the status bar shows the `origin` URL from the manifest row.
+14. A "fruit" heading shows "Level 0, novice. Next due not scheduled." and one photo.
+15. There is no "bark" heading, because ACPL has no bark card.
+16. Open `#/species/QUGA`. The Arrangement row reads "alternate", because the oak records keep the field. A Varieties section lists "var. gambelii" and "var. bakeri", each with its note and "(card on leaf)".
+17. Open `#/species/QUVE`. The facts render and no channel headings appear, because QUVE has no cards.
+18. Open the species screen for the retired fixture species, the one record in `content_dev/species.json` with `retired: true`. Under the symbol line one notice reads `Retired: <its retired_reason> (<its retired_at>)`. No channel heading and no photo appear, because a retired species has no cards.
+19. Open `#/species/ZZZZ`. The page reads "Unknown species".
+20. Check the missing-field guard. Open `content_dev/species.json`, delete the `elevation_ft` line from ACPL, and reload `#/species/ACPL`. The Elevation row is absent, the Height row is still there, and the console stays clean. Put the line back.
+21. The console shows no errors.
 
 - [ ] **Step 5: Commit**
 
@@ -4266,8 +5469,12 @@ git add -A && git commit -m "feat: add the progress grid and the species screen"
 - Modify: `app/screens/settings.js` (replace the stub)
 
 **Interfaces:**
-- Consumes: the store from `logic/store.js`.
-- Produces: `render(root, ctx)`.
+- Consumes: the store from `logic/store.js`, and `ctx.banner` with `ctx.storage_banner` from `main.js`.
+- Produces: `render(root, ctx)`. The screen returns no teardown.
+
+**Rules this screen carries:**
+- `store.writeSettings` decides what a valid number is and returns the settings it stored. The screen parses the field, skips the write when the value is not an integer of 1 or more, and sets the field text from the returned settings. An empty field is not a write; the field snaps back to the stored value.
+- The export anchor goes into `document.body` before the click, comes out after it, and the object URL is revoked in a `setTimeout(..., 0)`, so the download has started before the URL goes away.
 
 - [ ] **Step 1: Replace `app/screens/settings.js`**
 
@@ -4291,33 +5498,35 @@ export function render(root, ctx) {
       'This browser blocks local storage. Changes here are not saved.'));
   }
 
-  const sizeLabel = el('label', null, 'Cards per session ');
-  const sizeField = document.createElement('input');
-  sizeField.type = 'number';
-  sizeField.id = 'session_size';
-  sizeField.min = '1';
-  sizeField.max = '100';
-  sizeField.value = String(current.session_size);
-  sizeField.addEventListener('change', () => {
-    store.writeSettings({ session_size: Number(sizeField.value) });
-  });
-  sizeLabel.append(sizeField);
-  root.append(sizeLabel);
+  // An empty field parses as 0, so the field is read back from the store after every change.
+  function numberField(labelText, field) {
+    const label = el('label', null, labelText);
+    const input = document.createElement('input');
+    input.type = 'number';
+    input.id = field;
+    input.min = '1';
+    input.max = '100';
+    input.value = String(current[field]);
+    input.addEventListener('change', () => {
+      const parsed = Number.parseInt(input.value, 10);
+      if (Number.isInteger(parsed) && parsed >= 1) {
+        const stored = store.writeSettings({ [field]: parsed });
+        input.value = String(stored[field]);
+        if (!store.available) ctx.banner(ctx.storage_banner);
+      } else {
+        input.value = String(store.readSettings()[field]);
+      }
+    });
+    label.append(input);
+    root.append(label);
+  }
 
-  const newLabel = el('label', null, 'New cards per day ');
-  const newField = document.createElement('input');
-  newField.type = 'number';
-  newField.id = 'new_per_day';
-  newField.min = '0';
-  newField.max = '100';
-  newField.value = String(current.new_per_day);
-  newField.addEventListener('change', () => {
-    store.writeSettings({ new_per_day: Number(newField.value) });
-  });
-  newLabel.append(newField);
-  root.append(newLabel);
+  numberField('Cards per session ', 'session_size');
+  numberField('New cards per day ', 'new_per_day');
 
   root.append(el('h2', null, 'Export'));
+  const exportLine = el('p', 'attribution',
+    `Last export: ${current.last_export ?? 'never'}.`);
   const exportButton = el('button', 'primary', 'Export progress');
   exportButton.addEventListener('click', () => {
     const blob = store.exportBlob(today);
@@ -4326,13 +5535,17 @@ export function render(root, ctx) {
     const anchor = document.createElement('a');
     anchor.href = url;
     anchor.download = blob.filename;
+    // Firefox needs the anchor in the document, and the URL must outlive the click.
+    document.body.append(anchor);
     anchor.click();
-    URL.revokeObjectURL(url);
+    anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 0);
     store.markExported(today);
+    if (!store.available) ctx.banner(ctx.storage_banner);
+    exportLine.textContent = `Last export: ${store.readSettings().last_export ?? 'never'}.`;
   });
   root.append(exportButton);
-  root.append(el('p', 'attribution',
-    `Last export: ${store.readSettings().last_export ?? 'never'}.`));
+  root.append(exportLine);
 
   root.append(el('h2', null, 'Import'));
   const importStatus = el('p', 'attribution', '');
@@ -4346,6 +5559,7 @@ export function render(root, ctx) {
     const result = store.importBlob(await chosen.text());
     if (result.ok) {
       importStatus.textContent = 'Import done. Reload the page to see the new progress.';
+      if (!store.available) ctx.banner(ctx.storage_banner);
     } else {
       importStatus.textContent = `Import rejected: ${result.errors.join(' ')}`;
     }
@@ -4395,18 +5609,20 @@ Serve with `python -m http.server 8000`. Open `http://localhost:8000/?content=de
 
 1. "Cards per session" shows 20 and "New cards per day" shows 10.
 2. Change "Cards per session" to 5 and click outside the field. In the console run `JSON.parse(localStorage.dendro_settings).session_size`. It returns 5.
-3. Go to `#/` and start a session. The deck holds at most 5 cards.
-4. Back on Settings, click "Export progress". The browser downloads `dendro-progress-YYYY-MM-DD.json` with today's date. Open it. It holds `version: 1` and the four sections `dendro_cards`, `dendro_log`, `dendro_settings`, `dendro_missing_edges`.
-5. The line under the button now reads "Last export: YYYY-MM-DD."
-6. Run `localStorage.clear()` in the console and reload `#/settings`. The fields show 20 and 10 again.
-7. Choose the exported file in the Import control. The status line reads "Import done. Reload the page to see the new progress."
-8. Reload. "Cards per session" shows 5 again.
-9. Save a broken file and import it: create `bad.json` holding `{"version": 99}` and choose it. The status line reads "Import rejected:" and names the version and the missing sections. The fields still show 5.
-10. Click "Reset all progress". A second button appears reading "Yes, delete everything" with a warning line. Click it. The line reads "Progress reset." Run `localStorage.dendro_cards` in the console. It returns null.
-11. Reload. The fields show 20 and 10.
-12. Miss a species pair with no confusion edge: start a leaf session, answer a Gambel oak card with Norway maple. Return to `#/settings`. The "Missing diagnostics" list holds one line reading "Norway maple against Gambel oak on leaf, missed 1 time(s)".
-13. Open a private window and block site data for localhost, then open the app. The orange banner appears at the top, Settings shows the "blocks local storage" notice, and the app still runs a session.
-14. The console shows no errors.
+3. Clear "Cards per session" so the field is empty, then click outside it. The field snaps back to 5. Run `JSON.parse(localStorage.dendro_settings).session_size` again. It still returns 5, so the empty field wrote nothing.
+4. Type `0` in "Cards per session" and click outside it. The field snaps back to 5 and the stored value stays 5. Do the same with `-3` and with `2.5`. The field snaps back every time.
+5. Go to `#/` and start a session. The deck holds at most 5 cards.
+6. Back on Settings, click "Export progress". The browser downloads `dendro-progress-YYYY-MM-DD.json` with today's date. Open it. It holds `version: 1` and the four sections `dendro_cards`, `dendro_log`, `dendro_settings`, `dendro_missing_edges`.
+7. The line under the button now reads "Last export: YYYY-MM-DD." The file opens from the Downloads list, so the object URL outlived the click.
+8. Run `localStorage.clear()` in the console and reload `#/settings`. The fields show 20 and 10 again.
+9. Choose the exported file in the Import control. The status line reads "Import done. Reload the page to see the new progress."
+10. Reload. "Cards per session" shows 5 again.
+11. Save a broken file and import it: create `bad.json` holding `{"version": 99}` and choose it. The status line reads "Import rejected:" and names the version and the missing sections. The fields still show 5.
+12. Click "Reset all progress". A second button appears reading "Yes, delete everything" with a warning line. Click it. The line reads "Progress reset." Run `localStorage.dendro_cards` in the console. It returns null.
+13. Reload. The fields show 20 and 10.
+14. Miss a species pair with no confusion edge: start a leaf session, answer a Gambel oak card with Norway maple. Return to `#/settings`. The "Missing diagnostics" list holds one line reading "Norway maple against Gambel oak on leaf, missed 1 time(s)".
+15. Open a private window and block site data for localhost, then open the app. The orange banner appears at the top, Settings shows the "blocks local storage" notice, and the app still runs a session.
+16. The console shows no errors.
 
 - [ ] **Step 4: Commit**
 
@@ -4425,7 +5641,12 @@ git add -A && git commit -m "feat: add the settings screen with export, import, 
 
 **Interfaces:**
 - Consumes: `validateContent` from `app/logic/content.js`.
-- Produces: a CLI that takes one directory argument, prints errors and warnings, and exits 1 when there is an error. The CI job runs `node --test tests/`, then the script against `content/` and `content_dev/`, and deploys Pages only when both pass.
+- Produces: a CLI that takes one directory argument and an optional `--local-images <dir>` flag, prints errors and warnings, and exits 1 when there is an error. Without the flag it checks the JSON only. With the flag it also requires `<dir>/img/<hash>.jpg` on disk for every manifest row that is not retired.
+- The CI job runs `node --test "tests/**/*.test.js"`, then `node scripts/validate_content.js content` and `node scripts/validate_content.js content_dev --local-images content_dev/images`, and deploys Pages only when all three pass. The `concurrency` group sits on the deploy job, so a check run never waits on a deploy.
+
+The live images sit in object storage, not in the repo, so the live set has nothing on disk to check. The fixture ships its images, so the fixture run passes the flag.
+
+The content pipeline plan adds one more CI step, the append-only check on species IDs. This task does not write it.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -4436,12 +5657,15 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 
-function run(dir) {
+function run(...args) {
   try {
-    const out = execFileSync(process.execPath, ['scripts/validate_content.js', dir],
+    const out = execFileSync(process.execPath, ['scripts/validate_content.js', ...args],
       { cwd: ROOT, encoding: 'utf8' });
     return { code: 0, out };
   } catch (error) {
@@ -4449,35 +5673,80 @@ function run(dir) {
   }
 }
 
+// A throwaway copy of the fixture, so one test may delete an image from it.
+function fixtureCopy(t) {
+  const dir = mkdtempSync(join(tmpdir(), 'dendro-content-'));
+  cpSync(join(ROOT, 'content_dev'), dir, { recursive: true });
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  return dir;
+}
+
+function manifestOf(dir) {
+  return JSON.parse(readFileSync(join(dir, 'images', 'manifest.json'), 'utf8'));
+}
+
 test('the script passes on the live content set', () => {
-  const result = run('content/');
+  const result = run('content');
   assert.equal(result.code, 0);
-  assert.match(result.out, /content\/ is valid/);
+  assert.match(result.out, /content is valid/);
 });
 
-test('the script passes on the fixture and prints the size warnings', () => {
-  const result = run('content_dev/');
+test('the script passes on the fixture with the local image check', () => {
+  const result = run('content_dev', '--local-images', 'content_dev/images');
   assert.equal(result.code, 0);
   assert.match(result.out, /warning/);
   assert.match(result.out, /outside the range 5 to 25/);
 });
 
 test('the script fails on a missing directory', () => {
-  const result = run('content_missing/');
+  const result = run('content_missing');
   assert.equal(result.code, 1);
   assert.match(result.out, /cannot read/);
+});
+
+// The live images sit in object storage, so without the flag the script must
+// never look on disk. This is the case CI runs against content/.
+test('without the flag a missing image is not an error', (t) => {
+  const dir = fixtureCopy(t);
+  const row = manifestOf(dir).find((r) => !r.retired);
+  rmSync(join(dir, 'images', 'img', `${row.hash}.jpg`));
+  const result = run(dir);
+  assert.equal(result.code, 0);
+});
+
+test('with the flag a missing image is an error', (t) => {
+  const dir = fixtureCopy(t);
+  const row = manifestOf(dir).find((r) => !r.retired);
+  rmSync(join(dir, 'images', 'img', `${row.hash}.jpg`));
+  const result = run(dir, '--local-images', join(dir, 'images'));
+  assert.equal(result.code, 1);
+  assert.match(result.out, /is not on disk/);
+  assert.ok(result.out.includes(row.hash));
+  assert.match(result.out, /1 error\(s\)/);
+});
+
+// A retired image is deleted from the bucket on purpose. Its row stays.
+test('the disk check skips a retired row', (t) => {
+  const dir = fixtureCopy(t);
+  const row = manifestOf(dir).find((r) => r.retired);
+  const path = join(dir, 'images', 'img', `${row.hash}.jpg`);
+  if (existsSync(path)) rmSync(path);
+  const result = run(dir, '--local-images', join(dir, 'images'));
+  assert.equal(result.code, 0);
 });
 ```
 
 - [ ] **Step 2: Run the test to verify it fails**
 
 Run: `node --test tests/validate_script.test.js`
-Expected: FAIL. The script does not exist, so every run exits non-zero with `Cannot find module`.
+Expected: FAIL, all 6 tests fail. The script does not exist, so every run exits 1 with `Cannot find module .../scripts/validate_content.js`.
 
 - [ ] **Step 3: Create `scripts/validate_content.js`**
 
 ```js
-// Validates a content directory. Usage: node scripts/validate_content.js content/
+// Validates a content directory. Usage:
+//   node scripts/validate_content.js content
+//   node scripts/validate_content.js content_dev --local-images content_dev/images
 import { readFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { validateContent } from '../app/logic/content.js';
@@ -4490,12 +5759,21 @@ const FILES = {
   manifest: 'images/manifest.json'
 };
 
-const arg = process.argv[2];
-if (!arg) {
-  console.error('usage: node scripts/validate_content.js <content_dir>');
+const USAGE = 'usage: node scripts/validate_content.js <content_dir> [--local-images <image_dir>]';
+
+const args = process.argv.slice(2);
+const arg = args[0];
+if (!arg || arg.startsWith('--')) {
+  console.error(USAGE);
+  process.exit(1);
+}
+const flagAt = args.indexOf('--local-images');
+if (flagAt !== -1 && !args[flagAt + 1]) {
+  console.error(USAGE);
   process.exit(1);
 }
 const dir = resolve(arg);
+const imageDir = flagAt === -1 ? null : resolve(args[flagAt + 1]);
 
 const raw = {};
 for (const [field, file] of Object.entries(FILES)) {
@@ -4510,11 +5788,17 @@ for (const [field, file] of Object.entries(FILES)) {
 
 const { errors, warnings } = validateContent(raw);
 
-const missingFiles = raw.manifest
-  .filter((record) => !existsSync(join(dir, record.file)))
-  .map((record) => record.file);
-for (const file of missingFiles) {
-  errors.push({ file: 'images/manifest.json', message: `the image ${file} is not on disk` });
+// The live images live in object storage, so the disk check runs only when the
+// caller names a local image directory. A retired image is gone on purpose.
+if (imageDir) {
+  for (const record of raw.manifest) {
+    if (record.retired) continue;
+    if (existsSync(join(imageDir, 'img', `${record.hash}.jpg`))) continue;
+    errors.push({
+      file: 'images/manifest.json',
+      message: `the image img/${record.hash}.jpg is not on disk`
+    });
+  }
 }
 
 for (const warning of warnings) console.log(`warning ${warning.file}: ${warning.message}`);
@@ -4530,7 +5814,7 @@ console.log(`${arg} is valid, with ${warnings.length} warning(s)`);
 - [ ] **Step 4: Run the test to verify it passes**
 
 Run: `node --test tests/validate_script.test.js`
-Expected: PASS, 3 tests.
+Expected: PASS, 6 tests.
 
 - [ ] **Step 5: Create `.github/workflows/check.yml`**
 
@@ -4545,10 +5829,6 @@ on:
 permissions:
   contents: read
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
   check:
     runs-on: ubuntu-latest
@@ -4556,18 +5836,24 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # The pipeline runs TypeScript through Node's type stripping, so the
+          # repo is on Node 24. `node --test` reads a glob pattern from Node 21.
+          node-version: '24'
       - name: Run the tests
-        run: node --test tests/
+        run: node --test "tests/**/*.test.js"
       - name: Validate the live content
-        run: node scripts/validate_content.js content/
+        run: node scripts/validate_content.js content
       - name: Validate the fixture content
-        run: node scripts/validate_content.js content_dev/
+        run: node scripts/validate_content.js content_dev --local-images content_dev/images
 
   deploy:
     needs: check
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    # Only one Pages deploy runs at a time. The check job is free to run in parallel.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     permissions:
       contents: read
       pages: write
@@ -4578,6 +5864,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      # The whole repo root goes up, so pipeline/runs/ and content_src/ are
+      # public. That is by design: the run records and the authored species
+      # files are meant to be readable. Keys and caches never enter the repo.
       - uses: actions/upload-pages-artifact@v3
         with:
           path: '.'
@@ -4585,13 +5874,22 @@ jobs:
         uses: actions/deploy-pages@v4
 ```
 
+The deploy uploads the repo root as it is. Every committed file is served, including `pipeline/runs/` and `content_src/`. `node_modules/` and `pipeline/cache/` are in `.gitignore`, so they are never committed and never served.
+
 - [ ] **Step 6: Run the whole suite and both validations**
 
 Run: `npm test`
 Expected: PASS, nine test files green.
 
-Run: `npm run validate && npm run validate:dev`
-Expected: `content/ is valid, with 3 warning(s)` then a list of fixture warnings and `content_dev/ is valid, with 9 warning(s)`.
+Run the same two commands CI runs.
+
+Run: `node scripts/validate_content.js content`
+Expected: three warning lines, one per unit. The first reads `warning units.json: leaf_types holds 0 cards, outside the range 5 to 25`. The last line reads `content is valid, with 3 warning(s)`. The live set ships no manifest rows yet, so it derives no cards.
+
+Run: `node scripts/validate_content.js content_dev --local-images content_dev/images`
+Expected: nine warning lines, one per fixture unit. The first reads `warning units.json: leaf_types holds 1 cards, outside the range 5 to 25`. The last line reads `content_dev is valid, with 9 warning(s)`.
+
+The `validate` and `validate:dev` scripts in `package.json` hold these same two commands, so `npm run validate && npm run validate:dev` prints the same output.
 
 - [ ] **Step 7: Commit**
 
@@ -4617,12 +5915,12 @@ This step is done by hand in the GitHub web interface, once.
 | 1 v0 scope | 1 (content sets), 9 to 12 (screens) |
 | 2 channels, levels, cards, photo pools, units | 2 |
 | 3 architecture, fixture, CI, repo layout | 1, 13 |
-| 4 data model, unit membership order | 1, 2 |
-| 5 scheduler, grade derivation | 3 |
-| 6 session builder, unit gate, relearning, distractor source, placement | 6, 7, 10 |
-| 7 tier ladder, inv, sampling, prompts, distractors, grading, reveal, progress | 3, 4, 5, 6 |
+| 4 data model, unit membership order | 1, 2, 8 (card state, log row, and settings shapes), 10 (the log row the screen writes) |
+| 5 scheduler, grade derivation | 3, 10 (the timer starts on photo load, and the screen logs `elapsed_ms`) |
+| 6 session builder, unit gate, relearning, distractor source, placement | 5 (species distractors), 6, 7, 10 |
+| 7 tier ladder, inv, sampling, prompts, distractors, grading, reveal, progress | 3, 4, 5, 6, 10 (reveal rendering), 11 (the progress screen) |
 | 8 screens | 9, 10, 11, 12 |
-| 9 persistence | 8, 12 |
+| 9 persistence | 8, 10 (a write after every answer, and the monthly export prompt on the summary), 12 |
 | 10 error handling | 2 (validation), 8 (storage), 9 (content error), 10 (image failure), 12 (import) |
 | 11 v0 content requirements | out of scope for the app; the content spec owns it |
 | 12 testing | every task's test file |

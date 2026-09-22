@@ -64,8 +64,9 @@ one is an ordinary channel with its own level-1 bucket list.
 - `twig_arrangement` buckets: opposite, alternate, whorled.
 - `twig_buds` buckets: scaled, naked, `clustered_terminal`.
 
-Leaf arrangement is also a tagged attribute on every species, so distractor building and
-miss explanations can use it on any channel.
+Leaf arrangement is also an optional tagged attribute on a species, so distractor
+building and miss explanations can use it on any channel where a species carries it. The
+content pipeline does not produce the field. An author adds it.
 
 The channel list derives from `concepts.json`. A channel with no concepts and no cards
 does not render anywhere: not on home, not on progress, not on the species screen, and
@@ -101,6 +102,9 @@ is a content change, not a code change.
   that channel. A manifest image with a concept target, such as `bark/plated`, is added
   to the same pool as an override for a textbook example.
 
+A retired manifest row is in no pool, and a retired species contributes nothing to a
+group pool or a concept pool.
+
 A variety card exists only when the species has two or more varieties with approved
 photos on that channel. Otherwise the variety is a note on the species screen and has no
 card.
@@ -123,9 +127,16 @@ mixing sibling species beats studying one group at a time.
 
 ## 3. Architecture
 
-Static site. One HTML page, ES modules, a `content/` folder of JSON and images. GitHub
-Pages serves the repo root. No build step, no server, no dependencies. The repo is
-public.
+Static site. One HTML page, ES modules, and a `content/` folder of JSON. The approved
+images are not in the repo. They live in object storage behind a CDN, which the content
+pipeline spec owns. `app/logic/content.js` holds the CDN base URL as a constant, and the
+app builds every image URL from that base and the manifest row's hash. A hash names one
+set of immutable bytes, so the CDN may serve a long `max-age`.
+
+No build step and no runtime dependencies. The repo's `package.json` carries dev
+dependencies for the content pipeline only, and the app imports none of them. There is
+no server. GitHub Pages serves the repo root, and the deploy uploads the whole root, so
+`pipeline/runs/` and `content_src/` are public by design. The repo is public.
 
 **Two layers with a hard line between them.** Logic modules know nothing about the
 browser. They import and export plain objects and run in Node for tests. Screen modules
@@ -139,10 +150,12 @@ covers data shapes only. JavaScript identifiers follow JavaScript convention.
 
 ### Fixture content
 
-`content_dev/` is a committed fixture content set: about six species and a few photos
-that are public domain or owned by the project. The app boots against it with a URL
-switch, for example `?content=dev`. The tests load the same fixture, so the fixture and
-the app stay in step.
+`content_dev/` is a committed fixture content set: about six live species, one retired
+species, and a few photos that are public domain or owned by the project. The app boots
+against it with a URL switch, for example `?content=dev`. The fixture images are in the
+repo under `content_dev/images/`, so the app sets its image base to that folder in place
+of the CDN base and the fixture works offline. The tests load the same fixture, so the
+fixture and the app stay in step.
 
 The shared fixture is always valid. A validation test carries its own small bad-content
 object inline and does not edit the fixture.
@@ -152,15 +165,19 @@ object inline and does not edit the fixture.
 One GitHub Actions job runs on every push to `main`:
 
 1. Run `node --test`.
-2. Run the content validation against `content/`.
+2. Run `node scripts/validate_content.js content`.
+3. Run `node scripts/validate_content.js content_dev --local-images content_dev/images`.
+4. Run the append-only check on the content IDs. The content pipeline plan adds this
+   step, and the pipeline spec, section 11, defines the check.
 
-Pages deploys only when both steps pass. This is not a build step. The site is still the
-repo root, served as it is.
+The job pins Node 24. Pages deploys only when every step passes. This is not a build
+step. The site is still the repo root, served as it is.
 
 ### Repo layout
 
 ```
 index.html                 one page, screens swap inside it
+package.json               dev dependencies for the content pipeline only
 app/
   main.js                  boots the app, routes between screens, holds no state
   logic/
@@ -184,10 +201,13 @@ content/
   confusion.json
   units.json               ordered list of units, each a channel, level, and bucket
   images/
-    SYMBOL/channel/NNN.jpg
-    concepts/channel/category/NNN.jpg
-    manifest.json
+    manifest.json          one row per approved image; the bytes are in object storage
 content_dev/               fixture content set, same shape as content/
+content_src/               authored species files, owned by the content pipeline spec
+pipeline/                  the content pipeline, owned by the content pipeline spec
+scripts/
+  validate_content.js      CLI over the app's validator, plus the --local-images check
+  make_placeholder_jpegs.js  writes the fixture's 1x1 placeholder images
 tests/
   module.test.js           one per logic module, run with node --test
 .github/
@@ -240,7 +260,15 @@ Rules:
 
 - `species.json` holds only species that have at least one card, or that a confusion edge
   or a variety needs. The file grows with the photo pool; it is not the whole flora.
-- A record with no manifest images fails validation, unless a confusion edge names it.
+- A record with no manifest images fails validation, unless a confusion edge names it,
+  or the record is retired.
+- A record may carry `retired: true`, a `retired_reason` string, and a `retired_at` date
+  in `YYYY-MM-DD` form. A retired record stays in `species.json`, because a card ID is a
+  foreign key in a user's stored review log. The app derives no card from a retired
+  species: no species card, and the species counts toward no group card and no variety
+  card. A unit may still list it, and the unit then finds no cards for it. The species
+  screen shows the reason and the date, and shows no photos. The pipeline spec, section
+  4, owns the rule.
 - `concepts` places the species in each channel's level-1 bucket. A missing channel means
   no card on that channel.
 - `planted_states` is an array of state codes, hand-authored for common urban species. It
@@ -251,10 +279,14 @@ Rules:
   Shrub-only species are excluded. Hybrids, marked with a multiplication sign in the
   PLANTS name, are excluded. A manual include list exists for exceptions and is empty in
   v0. Non-native species are included and flagged by `native_status`.
-- `genus_common` is the group's common name, such as `oak`. A group card accepts it as a
-  typed answer (section 7). Every species in a genus carries the same value.
-- `arrangement` is one of `opposite`, `alternate`, `whorled`. It is the tagged attribute
-  from section 2, shown on the species screen and usable in miss explanations.
+- `genus_common` is optional. It is the group's common name, such as `oak`. A group card
+  accepts the genus name and every `genus_common` value that its live members carry
+  (section 7). When no member carries one, the group card accepts the genus alone. The
+  content pipeline does not produce the field. An author adds it.
+- `arrangement` is optional and is one of `opposite`, `alternate`, `whorled`. It is the
+  tagged attribute from section 2, shown on the species screen when the record carries
+  it, and usable in miss explanations. The content pipeline does not produce the field.
+  An author adds it.
 - `section` is optional. It names a recognized split inside a large genus, such as the
   red oaks (`Lobatae`) and the white oaks (`Quercus`). Units can filter on it. It is
   shown on the species screen when present.
@@ -341,7 +373,8 @@ unit through `genera`. Content validation warns when a unit has fewer than 5 or 
 One record per image:
 
 ```json
-{ "file": "images/QUGA/bark/001.jpg", "target": "QUGA", "channel": "bark",
+{ "hash": "7b0c1e4d9a3f28561c8e7d40b2a95f31e6c0d8a47f2b13c95e08d6a4b7c2f105",
+  "target": "QUGA", "channel": "bark",
   "source": "USDA PLANTS Database", "author": "USDA NRCS",
   "license": "public domain (US government work)",
   "origin": "https://plants.usda.gov/plant-profile/QUGA/images",
@@ -352,8 +385,25 @@ One record per image:
 ```
 
 `target` is a species symbol, a variety key, or a concept key in the form `bark/plated`.
-Images are vendored into the repo, resized to about 1200 px on the long side. The app
-never hotlinks. Attribution is displayed wherever the image is shown.
+No v0 pipeline run targets a variety key, so a variety card appears only when a manual
+candidate names one.
+
+`hash` is the SHA-256 of the resized image bytes, 64 lowercase hex characters. It
+replaces the old `file` path. The bytes are not in the repo. Each image is copied to
+object storage as `img/<hash>.jpg`, and the app builds the URL from the CDN base
+constant of section 3 and the hash. The app never hotlinks the source. Every image is a
+JPEG, 1200 px on the long side, quality 82, with the EXIF data stripped. Two rows may
+carry the same hash, because duplicate bytes become one object. The unique key of a row
+is therefore `hash`, `target`, and `channel` together, not the hash alone.
+
+A row may carry `retired: true`, a `retired_reason` string, and a `retired_at` date. The
+pipeline spec, section 7, gives the takedown command that writes them and deletes the
+object. A retired row stays in the manifest and enters no photo pool. When retirement
+empties one channel, the species loses that card and keeps the others.
+
+Attribution is displayed wherever the image is shown. The line reads
+`<author>, <source>, <license>.` with the author linked to the origin URL. When `origin`
+is absent, the author is plain text.
 
 `license` must come from the source page and must permit redistribution: public domain, a
 US government work, or a CC license. Anything else is not used.
@@ -373,11 +423,14 @@ Eligible identity sources:
 
 - iNaturalist, research grade.
 - USDA PLANTS.
-- US Forest Service.
-- NRCS.
+- US Forest Service and NRCS, reached only through a manual candidate that the collector
+  agent found in a browser and read by hand. The pipeline spec, section 3, gives the
+  reason: the Forest Service site disallows crawlers and its photo credits are mixed,
+  and the NRCS photos are the USDA PLANTS images. Bugwood is not a source, because its
+  API returns no license.
 - Wikimedia Commons, with a species-level category.
 - University dendrology collections that name the species. These are used for identity
-  reference only when their license forbids vendoring.
+  reference only when their license forbids copying to storage.
 
 The agent escalates to the owner in three cases, and no others:
 
@@ -413,9 +466,11 @@ An array of rows:
 ```json
 { "card": "species:QUGA:bark", "at": "2026-09-21T14:03:11Z", "grade": "good",
   "format": "mc4", "options": 4, "elapsed_ms": 4200, "answer": "Gambel oak",
-  "interval_before": 12, "ease_before": 2.5 }
+  "interval_before": 12, "ease_before": 2.5, "day": "2026-09-21" }
 ```
 
+- `at` is the UTC timestamp. `day` is the local calendar date of the answer, and the
+  daily new-card cap counts rows by `day`.
 - `format` is one of `mc4`, `mc8`, `inv`, `typed`.
 - `options` is the integer count of options shown. A typed question logs 0.
 - `interval_before` and `ease_before` are the card's interval and ease as they stood
@@ -633,8 +688,9 @@ hyphen becomes space, collapse whitespace, trim. The normalized answer must matc
 
 - **Species card**: the scientific name or any entry in `common`.
 - **Concept card**: any entry in the concept's `accept` array.
-- **Group card**: the genus name or the group's common name, for example `Quercus` or
-  `oak`.
+- **Group card**: the genus name, or any `genus_common` value that a live member of the
+  group carries, for example `Quercus` or `oak`. When no member carries one, the genus
+  name is the only accepted answer.
 
 No partial credit. A wrong species in the same genus is wrong.
 
@@ -688,14 +744,17 @@ decided later; the content of each screen is fixed here.
   Species names open the species screen.
 - **Species.** Both names, PLANTS symbol, native status. Facts: range, states, planted
   states, elevation, height, habitat, Audubon name, section when present, level-1
-  categories, arrangement.
+  categories, and arrangement when the record carries it. The Arrangement row is omitted
+  when the field is absent.
   Photos by channel with attribution, and for each channel the level name and the next due
-  date. Varieties list with notes and card status.
+  date. Varieties list with notes and card status. When the record is retired, the screen
+  shows one line, `Retired: <retired_reason> (<retired_at>)`, and shows no photos.
 - **Settings.** Session size, new cards per day, export, import, reset behind a confirm,
   and the missing-diagnostics list.
 
 First visit: home screen, every card at level 0, placement test suggested. No login, no
-onboarding.
+onboarding. This describes v0. The content pipeline spec defers a sync server with
+sign-in to a later spec, and that spec decides how a login appears.
 
 ---
 
@@ -712,8 +771,9 @@ after the event that caused it: one answer, one write to cards and one append to
   rejected with the reason shown and existing data untouched.
 - **Reset**: clear all keys after a confirm step.
 - **Log cap**: 20,000 rows, oldest dropped first.
-- **Unknown card IDs** in stored state (species removed from content) are kept and
-  ignored. A content edit never destroys progress.
+- **Unknown card IDs** in stored state are kept and ignored. This covers a species
+  removed from the content and a species or an image marked retired. A content edit
+  never destroys progress.
 - **Migration**: when the stored version is older than the code's, `store.js` migrates
   in place before the app reads it.
 
@@ -724,12 +784,20 @@ after the event that caused it: one answer, one write to cards and one append to
 - **Content fails to load or validate**: home screen shows the error and the file.
   Nothing else renders. Validation: every species has a genus, a family, and at least one
   common name; every species has at least one manifest image, unless a confusion edge
-  names it; every manifest target exists; every `concepts` value exists in
-  `concepts.json`; every confusion edge names two existing species and a valid channel;
-  every unit's `include` and `exclude` symbol exists; every unit's `parent` names an
-  existing unit one level up in the same channel, or is null at level 1; every `genera`
-  entry and `section` value matches at least one species. Validation warns, but does not
-  fail, when a unit has fewer than 5 or more than 25 cards.
+  names it or the species is retired; every manifest row has a `hash` of 64 lowercase hex
+  characters and carries no `file` field; the three values `hash`, `target`, and
+  `channel` are unique as a set, because two rows may share a hash; every manifest target
+  exists; every `concepts` value exists in `concepts.json`; a retired species still has a
+  `concepts` value for every channel on which it has an image that is not retired; every
+  confusion edge names two existing species and a valid channel; every unit's `include`
+  and `exclude` symbol exists; every unit's `parent` names an existing unit one level up
+  in the same channel, or is null at level 1; every `genera` entry and `section` value
+  matches at least one species. Validation warns, but does not fail, when a unit has
+  fewer than 5 or more than 25 cards.
+- **Image files on disk**: the validation script checks them only when it runs with the
+  flag `--local-images <dir>`. It then requires `<dir>/img/<hash>.jpg` for every row that
+  is not retired. CI passes the flag for the fixture only, because the images of
+  `content/` are in object storage and not on disk.
 - **An image fails to load**: draw another from the pool. Pool exhausted: skip the card
   this session and log to the console.
 - **localStorage unavailable or full**: the app runs, shows a banner that progress is not
@@ -757,9 +825,11 @@ to it, wild and planted, each with photos on at least one channel.
 
 ## 12. Testing
 
-Every logic module has a test file under `tests/`, run with `node --test`, no
-dependencies. Tests load the `content_dev/` fixture. A validation test carries its own bad
-content inline.
+Every logic module has a test file under `tests/`, run with `node --test` and no test
+framework. The app tests import no dependency. Tests load the `content_dev/` fixture,
+whose manifest rows carry synthetic hashes and whose image files sit under
+`content_dev/images/img/<hash>.jpg`. A validation test carries its own bad content
+inline.
 
 - **scheduler**: each grade path; new-card intervals 1 then 4; ease floor; lapse on a
   mature card; due-date arithmetic; `hard` from the guess box; `hard` from an elapsed time
@@ -780,13 +850,16 @@ content inline.
   no-repeat image rule; `mc8` shows as many options as exist.
 - **grader**: normalization cases; common and scientific names accepted; hyphen as space;
   near miss rejected; a concept card accepts every entry in `accept`; a group card accepts
-  the genus and the group common name.
+  the genus and the group common name; a group whose members carry no `genus_common`
+  accepts the genus alone.
 - **content**: the channel list derives from `concepts.json` and an empty channel renders
   nowhere; unit membership is computed from `states`, `genera`, `section`, `include`,
   and `exclude`, in that order; a bad `parent` fails validation; a unit outside 5 to 25
   cards warns and does not fail; a species with no manifest images fails validation
-  unless an edge names it; each validation rule fails on its own bad object; cards derive
-  only where images exist.
+  unless an edge names it; a retired species derives no cards and is exempt from that
+  rule; a retired manifest row is not in its channel's photo pool; a manifest row whose
+  `hash` is not 64 lowercase hex characters fails validation; each validation rule fails
+  on its own bad object; cards derive only where images exist.
 - **progress**: card levels; species level is the lowest card level; the unit number and
   the expert count.
 - **store**: export and import round trip; version check; malformed file rejected;
@@ -843,11 +916,14 @@ Short form. The full log is `DESIGN.md` section 17.
   oak list in PLANTS.
 - **Planted species are full members**: the trees on a Denver street are the trees the
   user sees most, so `planted_states` puts them in the regional unit.
-- **Vendored photos, tiered sources, split trust**: a stable pool per card is what defeats
-  photo memorization. Trust is split by kind. Identity comes from the source page, never
-  from the agent's own recognition. Quality and license come from the agent check. Three
-  named cases escalate to the owner: a species mismatch, a license that is missing or not
-  redistributable, and a photo below the quality threshold.
+- **Photos copied to storage, tiered sources, split trust**: a stable pool per card is
+  what defeats photo memorization, so the app holds its own copy of every photo and
+  never hotlinks. The copies go to object storage behind a CDN, not into the repo; the
+  content pipeline spec, section 13, gives the reason. Trust is split by kind. Identity
+  comes from the source page, never from the agent's own recognition. Quality and license
+  come from the agent check. Three named cases escalate to the owner: a species mismatch,
+  a license that is missing or not redistributable, and a photo below the quality
+  threshold.
 - **Pith and leaf scars cut**: the photos do not exist in the libraries. A channel with no
   photo supply cannot hold a card.
 - **PLANTS as authority**: one stable key that also supplies range, native status, and

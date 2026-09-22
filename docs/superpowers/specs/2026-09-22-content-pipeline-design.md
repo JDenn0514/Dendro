@@ -478,8 +478,8 @@ For each approved verdict, `manifest.ts`:
 A rejected or escalated candidate is never uploaded to `img/` and never gets a manifest
 row.
 
-The app spec's `images/manifest.json` section still shows the vendored `file` path and
-says the images are in the repo. It needs the matching edit.
+The app spec's `images/manifest.json` section shows the same `hash` row and says the
+images are in object storage. The two specs agree on this shape.
 
 ### Retiring an image
 
