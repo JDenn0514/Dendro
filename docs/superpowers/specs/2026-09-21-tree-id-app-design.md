@@ -412,14 +412,19 @@ An array of rows:
 
 ```json
 { "card": "species:QUGA:bark", "at": "2026-09-21T14:03:11Z", "grade": "good",
-  "format": "mc4", "options": 4, "elapsed_ms": 4200, "answer": "Gambel oak" }
+  "format": "mc4", "options": 4, "elapsed_ms": 4200, "answer": "Gambel oak",
+  "interval_before": 12, "ease_before": 2.5 }
 ```
 
 - `format` is one of `mc4`, `mc8`, `inv`, `typed`.
 - `options` is the integer count of options shown. A typed question logs 0.
+- `interval_before` and `ease_before` are the card's interval and ease as they stood
+  before this grade was applied. A card with no state object logs 0 and 2.5.
 - The log is capped at 20,000 rows. When it is full, the oldest row is dropped.
 
-This log is the input a later FSRS fit needs.
+This log is the input a later FSRS fit needs. `interval_before` and `ease_before` are
+what make it answer the first analytics question: at each interval, how often was the
+recall right? Without them a row records the grade but not the prediction it tested.
 
 ### Settings (localStorage)
 
