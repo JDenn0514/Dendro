@@ -1,11 +1,12 @@
 # Dendro app design
 
-Date: 2026-09-21
-Status: approved design, not yet built
-Source: `DESIGN.md` sections 1 to 17, and the brainstorming session of 2026-09-21
+Date: 2026-09-21, revised 2026-09-22
+Status: approved design after review, not yet built
+Source: `DESIGN.md` sections 1 to 17, the brainstorming session of 2026-09-21, and the
+review session of 2026-09-22
 
 This spec covers the learning app only. The content pipeline (photo fetch, license
-filter, manual approval) and the content itself (species list, vocabularies, confusion
+filter, photo approval) and the content itself (species list, vocabularies, confusion
 graph) are separate specs. The app reads content as data files and never writes them.
 
 ---
@@ -29,14 +30,27 @@ In v0:
 - Progress grid, species screen, settings with export and import.
 - Range, elevation, height, and habitat shown on every reveal and on the species screen.
 
+v0 content, authored separately:
+
+- Level-1 concept cards for the leaf, bark, and fruit channels.
+- The `simple_lobed` leaf bucket taken to species for the Colorado region. The region is
+  Colorado and the states next to it.
+- Planted urban species in that region: Norway maple, red oak, silver maple, London
+  plane, pin oak. A planted species is a full member of the bucket.
+
+Next after v0, in this order: the flower channel, then `twig_arrangement`, then
+`twig_buds`.
+
+Cut from the model: twig pith and twig scars. The reason is photo supply. Pith needs a
+cut twig. Scars need a macro shot. Photo libraries and iNaturalist rarely hold either.
+
 Not in v0, reserved for later:
 
 - Field sim mode (progressive reveal, separately scored).
 - Range-prior questions ("which of these eight are plausible at 9,500 ft?").
 - Range as a distractor filter.
-
-v0 content, authored separately: all level-1 concept cards for all channels, and the
-"simple lobed" leaf bucket taken to species: maples, oaks, sycamore, sweetgum, tulip tree.
+- A region setting in the app. Each unit carries its own region instead.
+- A click-through breakdown on the unit progress number.
 
 ---
 
@@ -44,16 +58,25 @@ v0 content, authored separately: all level-1 concept cards for all channels, and
 
 ### Channels
 
-Leaf, bark, fruit, flower, twig. Leaf arrangement (opposite, alternate, whorled) is part
-of the twig channel and is also a tagged attribute on every species, so distractor
-building and miss explanations can use it on any channel.
+Six channels: `leaf`, `bark`, `fruit`, `flower`, `twig_arrangement`, `twig_buds`. Each
+one is an ordinary channel with its own level-1 bucket list.
+
+- `twig_arrangement` buckets: opposite, alternate, whorled.
+- `twig_buds` buckets: scaled, naked, `clustered_terminal`.
+
+Leaf arrangement is also a tagged attribute on every species, so distractor building and
+miss explanations can use it on any channel.
+
+The channel list derives from `concepts.json`. A channel with no concepts and no cards
+does not render anywhere: not on home, not on progress, not on the species screen, and
+not in the placement deck. v0 content therefore ships three channels.
 
 ### Depth levels
 
 1. **Type**: the level-1 category within a channel, such as "plated" bark.
 2. **Group**: genus or family within that category.
 3. **Species**.
-4. **Variety**: subspecies or variety within a species. The expert level.
+4. **Variety**: subspecies or variety within a species.
 
 ### Cards
 
@@ -66,8 +89,21 @@ The atomic unit is a card, not a species. Four card kinds:
 | SpeciesCard | channel, species | `species:QUGA:bark` |
 | VarietyCard | channel, variety | `variety:QUGAG:leaf` |
 
-Cards are derived from content at startup, never stored. A card exists only if its image
-pool has at least one entry. Adding a species is a content change, not a code change.
+Card IDs keep the colon separator. Cards are derived from content at startup, never
+stored. A card exists only when its image pool has at least one entry. Adding a species
+is a content change, not a code change.
+
+### Photo pools
+
+- A species card's pool is its manifest images on that channel.
+- A group card's pool is the union of the member species' images on that channel.
+- A concept card's pool is the union of the images of every species in that bucket on
+  that channel. A manifest image with a concept target, such as `bark/plated`, is added
+  to the same pool as an override for a textbook example.
+
+A variety card exists only when the species has two or more varieties with approved
+photos on that channel. Otherwise the variety is a note on the species screen and has no
+card.
 
 ### Units
 
@@ -89,6 +125,30 @@ render HTML and handle events. They call logic modules and compute nothing thems
 This rule is what makes a later move to Svelte or React a rewrite of the screen layer
 only.
 
+**Naming.** Every data name is snake_case: JSON fields, bucket keys, unit keys,
+localStorage keys, and directory names. Card IDs keep the colon separator. This spec
+covers data shapes only. JavaScript identifiers follow JavaScript convention.
+
+### Fixture content
+
+`content_dev/` is a committed fixture content set: about six species and a few photos
+that are public domain or owned by the project. The app boots against it with a URL
+switch, for example `?content=dev`. The tests load the same fixture, so the fixture and
+the app stay in step.
+
+The shared fixture is always valid. A validation test carries its own small bad-content
+object inline and does not edit the fixture.
+
+### Continuous check
+
+One GitHub Actions job runs on every push to `main`:
+
+1. Run `node --test`.
+2. Run the content validation against `content/`.
+
+Pages deploys only when both steps pass. This is not a build step. The site is still the
+repo root, served as it is.
+
 ### Repo layout
 
 ```
@@ -101,7 +161,7 @@ app/
     session.js             builds a session deck from due and new cards
     question.js            picks format, samples a photo, builds options and distractors
     grader.js              normalizes and checks a typed or chosen answer
-    progress.js            card states, mastery, unit percentages
+    progress.js            card states, levels, unit numbers
     store.js               localStorage read/write, export, import, reset, migration
   screens/
     home.js
@@ -119,8 +179,12 @@ content/
     SYMBOL/channel/NNN.jpg
     concepts/channel/category/NNN.jpg
     manifest.json
+content_dev/               fixture content set, same shape as content/
 tests/
   module.test.js           one per logic module, run with node --test
+.github/
+  workflows/
+    check.yml              node --test, then content validation, then Pages deploy
 ```
 
 ---
@@ -138,21 +202,22 @@ wins.
   "QUGA": {
     "scientific": "Quercus gambelii",
     "common": ["Gambel oak", "Rocky Mountain white oak"],
-    "audubonName": "Gambel Oak",
-    "inatTaxonId": 47851,
-    "inatName": null,
+    "audubon_name": "Gambel Oak",
+    "inat_taxon_id": 47851,
+    "inat_name": null,
     "genus": "Quercus",
     "family": "Fagaceae",
     "concepts": {
-      "leaf": "simple-lobed", "bark": "furrowed", "fruit": "acorn",
-      "flower": "catkin", "twig": "alternate"
+      "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn",
+      "flower": "catkin", "twig_arrangement": "alternate", "twig_buds": "clustered_terminal"
     },
     "range": { "text": "Colorado Plateau and southern Rockies",
                "states": ["CO", "UT", "NM", "AZ"] },
-    "elevationFt": [5000, 9000],
-    "heightFt": [15, 30],
+    "planted_states": [],
+    "elevation_ft": [5000, 9000],
+    "height_ft": [15, 30],
     "habitat": "Dry slopes and foothills with pinyon and juniper",
-    "nativeStatus": "native",
+    "native_status": "native",
     "varieties": [
       { "key": "QUGAG", "name": "var. gambelii", "note": "The widespread form." }
     ]
@@ -162,23 +227,34 @@ wins.
 
 Rules:
 
+- `species.json` holds only species that have at least one card, or that a confusion edge
+  or a variety needs. The file grows with the photo pool; it is not the whole flora.
+- A record with no manifest images fails validation, unless a confusion edge names it.
 - `concepts` places the species in each channel's level-1 bucket. A missing channel means
   no card on that channel.
-- `inatName` is set only when iNat uses a different name; otherwise null.
+- `planted_states` is an array of state codes, hand-authored for common urban species. It
+  records where people plant the species, not where it grows wild.
+- `inat_name` is set only when iNat uses a different name; otherwise null.
 - `common[0]` is the display name. All entries are accepted as typed answers.
 - Inclusion rule for the species list: PLANTS growth habit is "tree" or "tree, shrub."
   Shrub-only species are excluded. A manual include list exists for exceptions and is
-  empty in v0. Non-native species are included and flagged by `nativeStatus`.
-- Varieties roll up to the species for levels 1 to 3. A variety gets its own cards only
-  when the manifest has at least one approved image for it on some channel.
+  empty in v0. Non-native species are included and flagged by `native_status`.
+- Varieties roll up to the species for levels 1 to 3.
 
 ### concepts.json
 
 One record per channel and level-1 category: key, display name, one-paragraph
-description. Image pools come from the manifest.
+description, and `accept`. Image pools come from the manifest.
 
-Level-1 vocabularies are in `DESIGN.md` section 3, with leaf arrangement folded into the
-twig list.
+`accept` is an array of typed answers that grade as right. For plated bark:
+
+```json
+{ "key": "plated", "channel": "bark", "name": "Plated / blocky",
+  "accept": ["plated", "blocky", "plated blocky", "plate bark"],
+  "description": "..." }
+```
+
+Level-1 vocabularies are in `DESIGN.md` section 3.
 
 ### confusion.json
 
@@ -186,28 +262,39 @@ A list of edges:
 
 ```json
 { "a": "QURU", "b": "QUVE", "channel": "leaf",
-  "aNotB": "Northern red oak has shallower sinuses and shorter bristle tips than black oak.",
-  "bNotA": "Black oak has deeper sinuses, longer bristle tips, and larger hairy buds." }
+  "a_not_b": "Northern red oak has shallower sinuses and shorter bristle tips than black oak.",
+  "b_not_a": "Black oak has deeper sinuses, longer bristle tips, and larger hairy buds.",
+  "ref": "Virginia Tech Dendrology fact sheet, Quercus velutina" }
 ```
 
-Edges are per channel and undirected for distractor building. For the reveal, `aNotB`
-is shown when the correct answer is `a` and the user picked `b`; `bNotA` is the
-reverse. The seven seed pairs in `DESIGN.md` section 8 go here first.
+`ref` names the reference the two sentences came from. Edges are per channel and
+undirected for distractor building. For the reveal, `a_not_b` is shown when the correct
+answer is `a` and the user picked `b`; `b_not_a` is the reverse.
 
 ### units.json
 
-Ordered list. Each entry: key, display name, channel, level, and the level-1 bucket it
-covers. Level-1 units cover a whole channel. Example:
+Ordered list. Each entry: `key`, `name`, `channel`, `level`, the level-1 `bucket` it
+covers, `states`, and the optional `include` and `exclude` arrays of species symbols.
 
 ```json
 [
-  { "key": "leaf-types", "name": "Leaf types", "channel": "leaf", "level": 1 },
-  { "key": "simple-lobed-genus", "name": "Simple lobed leaves", "channel": "leaf",
-    "level": 2, "bucket": "simple-lobed" },
-  { "key": "simple-lobed-species", "name": "Simple lobed leaves", "channel": "leaf",
-    "level": 3, "bucket": "simple-lobed" }
+  { "key": "leaf_types", "name": "Leaf types", "channel": "leaf", "level": 1 },
+  { "key": "simple_lobed_genus", "name": "Simple lobed leaves", "channel": "leaf",
+    "level": 2, "bucket": "simple_lobed", "states": ["CO", "UT", "NM", "WY", "NE", "KS"] },
+  { "key": "simple_lobed_species", "name": "Simple lobed leaves", "channel": "leaf",
+    "level": 3, "bucket": "simple_lobed", "states": ["CO", "UT", "NM", "WY", "NE", "KS"],
+    "include": ["ACPL"], "exclude": [] }
 ]
 ```
+
+Unit membership is computed, not listed:
+
+1. Take every species in the bucket whose `range.states` or `planted_states` overlaps the
+   unit's `states`.
+2. Add every symbol in `include`.
+3. Remove every symbol in `exclude`.
+
+Level-1 units cover a whole channel and need no `states`.
 
 ### images/manifest.json
 
@@ -215,15 +302,53 @@ One record per image:
 
 ```json
 { "file": "images/QUGA/bark/001.jpg", "target": "QUGA", "channel": "bark",
-  "source": "Virginia Tech Dendrology", "author": "J. Doe",
-  "license": "CC BY-NC 4.0", "origin": "https://example.org/photo/123",
-  "tags": ["winter"] }
+  "source": "USDA PLANTS Database", "author": "USDA NRCS",
+  "license": "public domain (US government work)",
+  "origin": "https://plants.usda.gov/plant-profile/QUGA/images",
+  "tags": ["winter"],
+  "checked_by": "photo_check_agent",
+  "checked_at": "2026-09-22",
+  "note": "Bark fills the frame and is sharp. Source page names Quercus gambelii." }
 ```
 
-`target` is a species symbol, a variety key, or a concept key in the form
-`bark/plated`. Images are vendored into the repo, resized to about 1200 px on the long
-side. Every image was approved by hand before it entered the repo. Attribution is
-displayed wherever the image is shown.
+`target` is a species symbol, a variety key, or a concept key in the form `bark/plated`.
+Images are vendored into the repo, resized to about 1200 px on the long side. The app
+never hotlinks. Attribution is displayed wherever the image is shown.
+
+`license` must come from the source page and must permit redistribution: public domain, a
+US government work, or a CC license. Anything else is not used.
+
+### Photo approval
+
+An agent, not the owner, checks each candidate image on three points:
+
+- **Channel and quality.** The photo shows the channel. It is sharp. The subject fills the
+  frame. No hand and no ruler are in the shot.
+- **License.** The source page states a redistributable license, and the manifest row
+  matches it.
+- **Identity by source.** The source page names the same species as the manifest row.
+
+Identity is trusted from the source, never from the agent's own recognition of the plant.
+Eligible identity sources:
+
+- iNaturalist, research grade.
+- USDA PLANTS.
+- US Forest Service.
+- NRCS.
+- Wikimedia Commons, with a species-level category.
+- University dendrology collections that name the species. These are used for identity
+  reference only when their license forbids vendoring.
+
+The agent escalates to the owner in three cases, and no others:
+
+- The species on the source page and the species in the row differ.
+- The license is missing, ambiguous, or not redistributable.
+- Channel or quality falls below the fixed threshold.
+
+When more than a quarter of the images in a run escalate, the run stops. A stopped run is
+a signal that the source list or the threshold is wrong.
+
+`checked_by`, `checked_at`, and `note` record the agent run and its verdict.
 
 ### Card state (localStorage)
 
@@ -231,10 +356,15 @@ One object per card ID:
 
 ```json
 { "interval": 12, "ease": 2.5, "due": "2026-10-03", "reps": 9, "lapses": 1,
-  "recent": ["good", "good", "hard"] }
+  "recent": ["good", "good", "hard"], "tier": "mc8", "tier_passes": 1 }
 ```
 
-`recent` holds the last three grades. A card with no state object is unseen.
+- `tier` is one of `mc4`, `mc8`, `inv`, `typed`. It sets the question format and the
+  displayed level. See section 7.
+- `tier_passes` counts `good` grades earned at the current tier.
+- `recent` holds the last three grades. It is kept for logging and review only; no rule
+  reads it.
+- A card with no state object is at level 0.
 
 ### Review log (localStorage)
 
@@ -242,16 +372,19 @@ An array of rows:
 
 ```json
 { "card": "species:QUGA:bark", "at": "2026-09-21T14:03:11Z", "grade": "good",
-  "format": "mc4", "elapsedMs": 4200, "answer": "Gambel oak" }
+  "format": "mc4", "options": 4, "elapsed_ms": 4200, "answer": "Gambel oak" }
 ```
 
-`format` is one of `mc4`, `mc8`, `typed`, `inverted`. This log is the input a later
-FSRS fit needs.
+- `format` is one of `mc4`, `mc8`, `inv`, `typed`.
+- `options` is the integer count of options shown. A typed question logs 0.
+- The log is capped at 20,000 rows. When it is full, the oldest row is dropped.
+
+This log is the input a later FSRS fit needs.
 
 ### Settings (localStorage)
 
 ```json
-{ "sessionSize": 20, "newPerDay": 10 }
+{ "session_size": 20, "new_per_day": 10 }
 ```
 
 ---
@@ -260,15 +393,34 @@ FSRS fit needs.
 
 SM-2, on individual cards. One pure function: `(state, grade, today) -> newState`.
 
-Grades come from automatic grading plus a guess flag:
+### Grade derivation
+
+The answer produces a grade before the scheduler runs:
 
 | Outcome | Grade |
 |---|---|
-| Right | good |
-| Right, guess flag set | hard |
 | Wrong | again |
+| Right, and the guess box is checked | hard |
+| Right, and `elapsed_ms` exceeds the format threshold | hard |
+| Right, and neither applies | good |
 
-Rules:
+Format thresholds:
+
+| Format | Threshold |
+|---|---|
+| `mc4` | 8 s |
+| `mc8` | 15 s |
+| `inv` | 20 s |
+| `typed` | 20 s |
+
+Above 60 s the time signal is discarded. The app assumes an interruption, and only the
+guess box decides between `good` and `hard`. A wrong answer is `again` whatever the time
+was.
+
+The timer starts when the photo has loaded, not when the card is built. `elapsed_ms` is
+logged on every answer.
+
+### SM-2 rules
 
 - **New card**: first right answer sets interval 1; second sets interval 3. After that
   the normal rules apply.
@@ -278,7 +430,7 @@ Rules:
 - Ease starts at 2.5 and has a floor of 1.3.
 - `due` = today + interval, as a `YYYY-MM-DD` string. "Today" is the local calendar
   date. A card is due when `due` is today or earlier. Nothing runs during the day.
-- `reps` counts every review. `recent` is the last three grades.
+- `reps` counts every review.
 
 ---
 
@@ -288,51 +440,97 @@ Input: channel focus (one channel or all), optional chosen unit, card states, co
 review log, settings, today. Output: an ordered list of card IDs.
 
 1. Collect due cards in the focus. Sort most overdue first.
-2. Take up to `sessionSize`.
-3. If short, add unseen cards from the target unit, in content order, until the session
-   is full or today's new-card count reaches `newPerDay`. Today's count is the number of
+2. Take up to `session_size`.
+3. If short, add level-0 cards from the target unit, in content order, until the session
+   is full or today's new-card count reaches `new_per_day`. Today's count is the number of
    log rows today whose card had no prior row. The target unit is the chosen unit if
    given, otherwise the recommended unit: the first unit in the focus, in `units.json`
-   order, that has unseen cards.
+   order, that has level-0 cards. The session builder calls these cards "unseen"
+   internally.
 4. Shuffle.
 
 Multiple sessions per day are allowed. After the daily cap, sessions contain due cards
 only. An empty result means nothing is due and the cap is reached; the home screen says
 so.
 
+### Relearning
+
+A card graded `again` is re-queued once, at the back of the current session. The
+re-answer writes no log row and changes no card state. The summary counts the card as
+missed whatever the re-answer was. Relearning does not apply inside the placement test.
+
+### Distractor source
+
+Distractors come only from species that have a card on this channel. The rule holds for
+name options and for photo options, in every session and in the placement test.
+
 ### Placement test
 
-A fixed deck: one card per level-1 concept, all channels, about 30 cards. Format is
-always `mc4`. A right answer sets that card's state to interval 21, ease 2.5, reps 1,
-due today + 21. A wrong answer leaves the card unseen. Placement results write card
-state but not the review log, so they do not count against the daily cap.
+A fixed deck: one card per level-1 concept, in every channel present in content. In v0
+that is 21 cards: 8 leaf, 6 bark, 7 fruit. Format is always `mc4`.
+
+A right answer sets that card's state to tier `mc8`, `tier_passes` 0, interval 21, ease
+2.5, reps 1, due today + 21. A wrong answer leaves the card at level 0. Placement results
+write card state but not the review log, so they do not count against the daily cap.
 
 ---
 
-## 7. Questions, distractors, grading
+## 7. Questions, ladder, progress
 
-### Format tier
+### Tier and level are one thing
 
-Chosen per card at question time from the card's interval:
+A card's tier sets its question format and its displayed level. There is no separate
+mastery label.
 
-| Interval | Format |
-|---|---|
-| under 7 days | mc4 |
-| 7 to 20 days | mc8 |
-| 21 days or more | typed |
+| Level | Name | Card state |
+|---|---|---|
+| 0 | novice | no state object |
+| 1 | beginner | tier `mc4` |
+| 2 | intermediate | tier `mc8` |
+| 3 | advanced | tier `inv`, or tier `typed` with `tier_passes` 0 |
+| 4 | expert | tier `typed` with `tier_passes` 1 or more |
 
-A card whose last grade is `again` drops one tier until its next right answer. An
-unseen card is `mc4`.
+**The question format always equals the tier.** The interval gates promotion only; it
+never picks the format.
 
-**Inverted question**: one time in five, on `mc4` and `mc8` only, the prompt names the
-answer and the options are photos. One photo from the correct card's pool and the rest
-from distractor cards on the same channel. Logged as format `inverted`. If fewer than
-four distractors have photos on this channel, the question is not inverted.
+### Promotion
+
+A card promotes when both conditions hold:
+
+- `tier_passes` reaches 2.
+- The interval reaches the gate for the next tier: 7 for `mc8`, 21 for `inv`, 21 for
+  `typed`.
+
+Only a `good` grade counts as a pass. A `hard` grade does not. On promotion `tier_passes`
+resets to 0.
+
+Level 4 needs no promotion step: a card at tier `typed` reaches expert on its first `good`
+at that tier.
+
+### Demotion
+
+A grade of `again` resets `tier_passes` to 0 and drops the card one tier: `typed` to
+`inv`, `inv` to `mc8`, `mc8` to `mc4`. A card at `mc4` stays at `mc4`. There is no
+exception for level 4: an expert card that lapses goes to tier `inv` and level 3, and it
+must earn `typed` again to return to expert.
+
+### The inverted tier
+
+`inv` is a tier, not a random flavor of another question. It is never chosen at random.
+
+An `inv` question names the answer and shows photos as options: one photo from the correct
+card's pool, the rest from distractor species that have photos on this channel. The
+distractor ladder below runs in full. The option count is the number of usable photos
+available, up to 8.
+
+When fewer than 4 photo options are available on a channel, the `inv` tier is skipped on
+that channel. Promotion from `mc8` then goes straight to `typed`, and still needs the 2
+`mc8` passes and the interval gate. Demotion from `typed` then goes to `mc8`.
 
 ### Photo sampling
 
-One image at random from the card's pool. The same image is not shown twice in a row
-for that card. The last image shown per card is held in memory for the session only.
+One image at random from the card's pool. The same image is not shown twice in a row for
+that card. The last image shown per card is held in memory for the session only.
 
 ### Prompts and options
 
@@ -345,6 +543,11 @@ for that card. The last image shown per card is held in memory for the session o
 
 Each option shows the common name with the scientific name under it.
 
+At tier `mc8`, a channel with fewer than 8 species with cards shows as many options as
+exist. For concept and group cards, below 4 options the question falls back to `typed`
+for that answer only; the tier does not change. A bark concept card at tier `mc8`
+therefore shows 6 options, one per bark category.
+
 ### Distractor ladder for species cards
 
 Fill the requested option count by walking down, shuffling within each step:
@@ -356,22 +559,25 @@ Fill the requested option count by walking down, shuffling within each step:
 5. Same level-1 bucket on this channel.
 6. Any other species in the content set.
 
-A distractor for a normal question is a name only and needs no photo. The count drops
-from 8 to 4 only when the whole content set has fewer than 8 other species.
-
-Concept and group cards draw distractors from their own row in the table above. They
-show as many options as exist, up to the tier count. Below 4 options they fall back to
-typed. A bark concept card on the `mc8` tier therefore shows 6 options, one per bark
-category.
+Every step is filtered to species that have a card on this channel. A distractor for a
+name question needs a card but no extra photo. The count drops from 8 to 4 only when the
+whole content set has fewer than 8 other species with a card on the channel.
 
 ### Grading
 
-Multiple choice: exact match on the option chosen. Typed: normalize both sides, then the
-answer must equal the scientific name or any entry in `common`. Normalization:
-lowercase, remove punctuation, hyphen becomes space, collapse whitespace, trim. No
-partial credit. A wrong species in the same genus is wrong.
+Multiple choice: exact match on the option chosen.
 
-The guess flag is a checkbox beside the answer control, off by default, reset per card.
+Typed answers use one normalizer for every card kind: lowercase, remove punctuation,
+hyphen becomes space, collapse whitespace, trim. The normalized answer must match:
+
+- **Species card**: the scientific name or any entry in `common`.
+- **Concept card**: any entry in the concept's `accept` array.
+- **Group card**: the genus name or the group's common name, for example `Quercus` or
+  `oak`.
+
+No partial credit. A wrong species in the same genus is wrong.
+
+The guess box is a checkbox beside the answer control, off by default, reset per card.
 
 ### Reveal
 
@@ -382,67 +588,67 @@ After every answer:
 - **Wrong**: the photo shown, beside a photo of the species picked, same channel. Below
   them the diagnostic sentence from the confusion graph for this pair and channel, in
   the direction that matches the miss. If no edge exists, show both species' level-1
-  category and genus instead, and append the pair, channel, and count to a
-  `dendro.missingEdges` list in localStorage. Then the same names, range line,
+  category and genus instead, and append the pair, channel, and count to the
+  `dendro_missing_edges` list in localStorage. Then the same names, range line,
   attribution, and Next.
 
-For an inverted question, a wrong answer shows the photo picked and the correct photo
-side by side with the same diagnostic logic.
+For an `inv` question, a wrong answer shows the photo picked and the correct photo side
+by side, with the same diagnostic logic.
+
+### Progress
+
+- **Card level**: from the table above.
+- **Species level**: the lowest level among its cards.
+- **Unit number**: the mean level over the unit's cards, divided by 4, shown as a percent.
+  The count of expert cards is shown beside it, for example "62%, 3 of 21 expert".
+
+The progress screen shows unit numbers above a grid: species rows grouped by unit,
+channel columns. Each cell shows the digit 0 to 4 over a five-step color, so it reads
+without color.
 
 ---
 
-## 8. Progress and mastery
-
-- **Card state label**: unseen (no state), learning (interval under 7), review (7 to 20,
-  or 21 or more with an `again` in `recent`), mastered (interval 21 or more and no
-  `again` in `recent`).
-- **Species mastery** = the weakest channel among its cards.
-- **Unit percentage** = mastered cards / total cards in the unit.
-
-The progress screen shows unit percentages above a grid: species rows grouped by unit,
-channel columns, each cell colored by state and carrying a letter code (U, L, R, M) so
-it reads without color.
-
----
-
-## 9. Screens
+## 8. Screens
 
 One page. `main.js` swaps screens and holds no state. The approved wireframe is at
 <https://claude.ai/artifact/EnEkF8bnSzL3BCcqrREeKE>. Visual style and mobile layout are
 decided later; the content of each screen is fixed here.
 
-- **Home.** Channel buttons with due counts, "all channels" first. The recommended next
-  unit with a Start button. The full unit list with unseen counts and a Start per unit
-  (skipping ahead). A placement test link. On an empty queue with the cap reached, a
-  line saying so.
+- **Home.** Channel buttons with due counts, "all channels" first. Only channels present
+  in content appear. The recommended next unit with a Start button. The full unit list
+  with level-0 counts and a Start per unit (skipping ahead). A placement test link. On an
+  empty queue with the cap reached, a line saying so.
 - **Session.** Progress bar (card n of N). Prompt, format chip, photo, answer control,
-  guess checkbox. Reveal replaces the answer control. Summary: right count, missed
-  count, due tomorrow, the missed cards with their confusion pair, Another session and
-  Home buttons.
-- **Progress.** Unit tiles, legend, the grid. Species names open the species screen.
-- **Species.** Both names, PLANTS symbol, native status. Facts: range, states,
-  elevation, height, habitat, Audubon name, level-1 categories, arrangement. Photos by
-  channel with attribution and that channel's card state and next due. Varieties list
-  with notes and card status.
+  guess checkbox. Reveal replaces the answer control. Summary: right count, missed count,
+  due tomorrow, the cards promoted in this session, the cards demoted in this session,
+  the missed cards with their confusion pair, Another session and Home buttons.
+- **Progress.** Unit tiles with the unit number and the expert count, then the grid.
+  Species names open the species screen.
+- **Species.** Both names, PLANTS symbol, native status. Facts: range, states, planted
+  states, elevation, height, habitat, Audubon name, level-1 categories, arrangement.
+  Photos by channel with attribution, and for each channel the level name and the next due
+  date. Varieties list with notes and card status.
 - **Settings.** Session size, new cards per day, export, import, reset behind a confirm,
   and the missing-diagnostics list.
 
-First visit: home screen, everything unseen, placement test suggested. No login, no
+First visit: home screen, every card at level 0, placement test suggested. No login, no
 onboarding.
 
 ---
 
-## 10. Persistence
+## 9. Persistence
 
-`store.js` owns four localStorage keys: `dendro.cards`, `dendro.log`,
-`dendro.settings`, `dendro.missingEdges`. Each value carries a `version` field. Every
-write happens right after the event that caused it: one answer, one write to cards and
-one append to the log.
+`store.js` owns four localStorage keys: `dendro_cards`, `dendro_log`, `dendro_settings`,
+`dendro_missing_edges`. Each value carries a `version` field. Every write happens right
+after the event that caused it: one answer, one write to cards and one append to the log.
 
-- **Export**: all keys to one JSON file named `dendro-progress-YYYY-MM-DD.json`.
+- **Export**: all keys to one JSON file named `dendro-progress-YYYY-MM-DD.json`. The file
+  holds the full history, including the whole review log.
+- **Export prompt**: once a month, the session summary screen suggests an export.
 - **Import**: validate version and shape, then replace all keys. A malformed file is
   rejected with the reason shown and existing data untouched.
 - **Reset**: clear all keys after a confirm step.
+- **Log cap**: 20,000 rows, oldest dropped first.
 - **Unknown card IDs** in stored state (species removed from content) are kept and
   ignored. A content edit never destroys progress.
 - **Migration**: when the stored version is older than the code's, `store.js` migrates
@@ -450,39 +656,71 @@ one append to the log.
 
 ---
 
-## 11. Error handling
+## 10. Error handling
 
 - **Content fails to load or validate**: home screen shows the error and the file.
   Nothing else renders. Validation: every species has a genus, a family, and at least one
-  common name; every manifest target exists; every `concepts` value exists in
-  `concepts.json`; every confusion edge names two existing species and a valid channel.
+  common name; every species has at least one manifest image, unless a confusion edge
+  names it; every manifest target exists; every `concepts` value exists in
+  `concepts.json`; every confusion edge names two existing species and a valid channel;
+  every unit's `include` and `exclude` symbol exists.
 - **An image fails to load**: draw another from the pool. Pool exhausted: skip the card
   this session and log to the console.
 - **localStorage unavailable or full**: the app runs, shows a banner that progress is not
   saved, and offers export on the summary screen.
-- **Malformed import**: see section 10.
+- **Malformed import**: see section 9.
+
+---
+
+## 11. Content requirements for v0
+
+These three items are shipping requirements. v0 does not ship without them.
+
+**Confusion edges.** 15 to 25 edges for the `simple_lobed` bucket. An agent drafts each
+edge from a named dendrology reference: Sibley, a Virginia Tech fact sheet, or the USDA
+silvics manual. The reference goes in the edge's `ref` field. The owner reads every edge
+before it merges.
+
+**Level-1 concept photos.** 3 to 5 photos for each of the 21 leaf, bark, and fruit
+categories, about 70 photos in total. Each one passes the photo approval in section 4.
+
+**The regional species set.** The `simple_lobed` species for Colorado and the states next
+to it, wild and planted, each with photos on at least one channel.
 
 ---
 
 ## 12. Testing
 
 Every logic module has a test file under `tests/`, run with `node --test`, no
-dependencies. Tests use a small fixture content set of about six species.
+dependencies. Tests load the `content_dev/` fixture. A validation test carries its own bad
+content inline.
 
 - **scheduler**: each grade path; new-card intervals 1 then 3; ease floor; lapse on a
-  mature card; due-date arithmetic.
-- **session**: due-first ordering; fill from new cards; daily cap counted from the log;
-  empty queue; chosen unit overrides recommended.
-- **question**: format tier by interval; tier drop after `again`; distractor ladder
-  produces the requested count, never includes the answer, and walks down the steps in
-  order; no-repeat image rule; inverted question skipped when photos are short.
-- **grader**: normalization cases; common and scientific names accepted; hyphen as
-  space; near miss rejected.
-- **progress**: state labels; weakest-channel species mastery; unit percentages.
+  mature card; due-date arithmetic; `hard` from the guess box; `hard` from an elapsed time
+  over the format threshold; the 60 s ceiling discards the time signal; a wrong answer is
+  `again` at any time.
+- **session**: due-first ordering; fill from level-0 cards; daily cap counted from the
+  log; empty queue; chosen unit overrides recommended; an `again` card re-queues once and
+  its re-answer writes no log row and no state change; relearning is off in the placement
+  test.
+- **ladder**: promotion needs 2 passes and the interval gate; `hard` is not a pass;
+  demotion drops one tier and resets `tier_passes`, with no exception for level 4; the
+  format always equals the tier; the `inv` tier is skipped below 4 photo
+  options and promotion then goes `mc8` to `typed`.
+- **question**: distractor ladder produces the requested count, never includes the answer,
+  walks the steps in order, and is filtered to species with a card on this channel;
+  no-repeat image rule; `mc8` shows as many options as exist.
+- **grader**: normalization cases; common and scientific names accepted; hyphen as space;
+  near miss rejected; a concept card accepts every entry in `accept`; a group card accepts
+  the genus and the group common name.
+- **content**: the channel list derives from `concepts.json` and an empty channel renders
+  nowhere; unit membership is computed from `states`, `include`, and `exclude`; a species
+  with no manifest images fails validation unless an edge names it; each validation rule
+  fails on its own bad object; cards derive only where images exist.
+- **progress**: card levels; species level is the lowest card level; the unit number and
+  the expert count.
 - **store**: export and import round trip; version check; malformed file rejected;
-  unknown card IDs preserved; migration path.
-- **content**: each validation rule fails on a bad fixture; cards derive only where
-  images exist.
+  unknown card IDs preserved; migration path; the log cap drops the oldest row.
 
 Screens are checked by hand in the browser, and later on a phone.
 
@@ -495,14 +733,45 @@ Short form. The full log is `DESIGN.md` section 17.
 - **Static JS, no framework**: no backend needs, free hosting, and a build step is a
   failure surface the owner cannot yet debug. The logic/screen split keeps the upgrade
   path open.
+- **A CI job, not a build step**: the job runs the tests and the content validation before
+  Pages deploys. The site is still the repo root.
+- **A committed fixture content set in `content_dev/`**: the app and the tests boot
+  against the same known content, so a test failure and a browser bug look the same.
+- **snake_case for every data name**: one rule for JSON, keys, and localStorage removes
+  the daily question of which style a field uses.
 - **SM-2 now, log everything**: enough for a few hundred cards; the log is what FSRS
-  needs later.
+  needs later. The log is capped at 20,000 rows so localStorage cannot fill.
 - **Fixed session size**: a session must be a known amount of work, or it does not get
   started.
-- **Vendored photos, tiered sources, manual approval**: a stable pool per card is what
-  defeats photo memorization, and trust comes from the approval step, not the source.
+- **Tier and level are one thing**: the format the user sees is the level they are on.
+  Two parallel ladders, one for format and one for mastery, told the user two different
+  stories about the same card.
+- **Promotion needs 2 passes and an interval gate**: passes prove recall at the format,
+  and the interval proves the recall lasted. Either one alone promotes too early.
+- **Inverted is a tier, not a one-in-five surprise**: naming a photo and picking a photo
+  are different skills, so picking the photo earns its own step on the ladder.
+- **Time counts toward `hard`**: a slow right answer is a weak answer. Above 60 s the app
+  assumes the user left the desk and ignores the clock.
+- **Relearning re-queues once and records nothing**: the repeat is practice, not evidence.
+  Logging it would tell the scheduler the card was answered twice.
+- **Units carry the region, the app does not**: a unit's `states` list with `include` and
+  `exclude` covers the regional set without a setting the user has to understand.
+- **Planted species are full members**: the trees on a Denver street are the trees the
+  user sees most, so `planted_states` puts them in the regional unit.
+- **Vendored photos, tiered sources, split trust**: a stable pool per card is what defeats
+  photo memorization. Trust is split by kind. Identity comes from the source page, never
+  from the agent's own recognition. Quality and license come from the agent check. Three
+  named cases escalate to the owner: a species mismatch, a license that is missing or not
+  redistributable, and a photo below the quality threshold.
+- **Pith and leaf scars cut**: the photos do not exist in the libraries. A channel with no
+  photo supply cannot hold a card.
 - **PLANTS as authority**: one stable key that also supplies range, native status, and
   growth habit.
+- **`species.json` grows with the photo pool**: a record with no images and no edge is a
+  species the app cannot quiz, so validation rejects it.
 - **Show context, do not quiz it, in v0**: range and size attach to the visual over
   repetitions with no quiz machinery.
-- **Varieties as level 4**: the expert level, gated on photo supply.
+- **Varieties as level 4**: the expert depth, gated on photo supply. A variety card needs
+  two or more varieties with photos, or the comparison has nothing to compare.
+- **Confusion edges are a shipping requirement**: the diagnostic sentence on a miss is the
+  teaching moment. Without the edges the app only says "wrong".

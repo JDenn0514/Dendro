@@ -101,11 +101,12 @@ downstream of it.
 - Inconspicuous / greenish
 - Strobilus / cone-bearing
 
-**Twig / bud**
-- Bud arrangement: opposite / alternate / whorled
-- Bud type: scaled / naked / clustered-terminal
-- Leaf scar shape and bundle-scar count
-- Pith: solid / chambered / hollow
+**Twig** — two channels, not one
+
+- `twig_arrangement`: opposite / alternate / whorled
+- `twig_buds`: scaled / naked / clustered_terminal
+
+The pith and leaf-scar channels were cut on 2026-09-22 for lack of photo supply.
 
 Note: the **entire top tier is small and continent-wide** — roughly 30 concept cards
 covering all of North America. Cheap to build, useful on its own.
@@ -286,6 +287,10 @@ This is where the project lives or dies.
   still. Expect to hand-curate these.
 - iNat photo licenses vary per photo. Only CC-licensed images may be used, licenses must
   be filtered at query time, and **photographer attribution must be displayed**.
+- **Trust is split by kind.** An agent checks quality and license on every candidate
+  photo. Species identity comes from the source page, never from the agent's own
+  recognition. Three cases go to the owner: a species mismatch, a license that is missing
+  or not redistributable, and a photo below the quality threshold.
 - iNat phenology annotations (flowering, fruiting, budding) help filter but are
   inconsistently applied.
 - Respect API rate limits; cache aggressively.
@@ -471,11 +476,14 @@ The card model in §5 gains a `VarietyCard (channel, variety)`.
 - **Vendored into the repo**, resized to about 1200 px on the long side. Every image has a
   record with source, author, license, and origin URL. Attribution is displayed in the
   app and stored in the repo.
-- **Tiered sources, manual approval for all.** Curated core from university dendrology
+- **Tiered sources, split trust.** Curated core from university dendrology
   sites, US government sources (USDA PLANTS images, Forest Service, NRCS), and Wikimedia
   Commons. iNaturalist research-grade, CC-licensed photos are a fill source for rotation
-  only. Nothing enters the repo without human approval. "High quality" means a reputable
-  source and a photo that shows the diagnostic feature, not resolution alone.
+  only. An agent checks channel, quality, and license on every candidate, and takes the
+  species identity from the source page rather than from its own recognition. The owner
+  sees only the escalations: a species mismatch, a doubtful license, or a photo below the
+  quality threshold. "High quality" means a reputable source and a photo that shows the
+  diagnostic feature, not resolution alone.
 
 ### Technical
 
@@ -495,3 +503,76 @@ The card model in §5 gains a `VarietyCard (channel, variety)`.
 - Content authoring workflow (belongs in the pipeline spec).
 - The long-term species list needs a second filter beyond growth habit if the list ever
   expands past what a field guide covers.
+
+---
+
+### Review of 2026-09-22
+
+Decisions from the review of the app spec. Each line changes a rule above or in
+`docs/superpowers/specs/2026-09-21-tree-id-app-design.md`.
+
+- **v0 ships three channels.** Level-1 concept cards for leaf, bark, and fruit, plus the
+  `simple_lobed` leaf bucket taken to species for Colorado and the states next to it.
+- **Planted urban species are full members** of a regional unit: Norway maple, red oak,
+  silver maple, London plane, pin oak.
+- **Next after v0:** the flower channel, then `twig_arrangement`, then `twig_buds`.
+- **Pith and leaf scars are cut** from the model for lack of photo supply.
+- **The twig channel splits in two**, `twig_arrangement` and `twig_buds`, each an ordinary
+  channel with its own level-1 buckets.
+- **The channel list derives from `concepts.json`.** A channel with no concepts and no
+  cards renders nowhere.
+- **No region setting in the app.** Each unit carries a `states` list, with `include` and
+  `exclude` for exceptions, and membership is computed.
+- **No click-through breakdown** on the unit progress number.
+- **Photo pools are unions.** A group card pools its member species; a concept card pools
+  its whole bucket, plus any manifest image aimed at the concept.
+- **A variety gets a card only when the species has two or more varieties** with approved
+  photos on that channel. Otherwise it is a note on the species screen.
+- **snake_case for every data name:** JSON fields, bucket keys, unit keys, and
+  localStorage keys. Card IDs keep the colon separator.
+- **A committed fixture content set in `content_dev/`.** The app boots against it with
+  `?content=dev`, and the tests use the same fixture.
+- **One GitHub Actions job on push to `main`:** `node --test`, then content validation.
+  Pages deploys only when it passes. This is not a build step.
+- **`species.json` grows with the photo pool.** A record with no manifest images fails
+  validation unless a confusion edge names it.
+- **`planted_states` is a new species field.** A unit matches either `range.states` or
+  `planted_states`.
+- **Concept records gain `accept`,** the list of typed answers that grade as right.
+- **Confusion edges gain `ref`,** the named reference the two sentences came from.
+- **Licenses must permit redistribution:** public domain, a US government work, or a CC
+  license. No hotlinking. Manifest rows gain `checked_by`, `checked_at`, and `note`.
+- **Photo approval is split by trust.** The agent checks channel, quality, and license.
+  Identity comes from the source page. Three cases escalate to the owner, and a run stops
+  when more than a quarter of it escalates.
+- **Tier and level are one thing.** Levels 0 to 4 are novice, beginner (`mc4`),
+  intermediate (`mc8`), advanced (`inv`), and expert (a pass at `typed`).
+- **The question format always equals the tier.** The old interval-to-format table is
+  gone.
+- **Promotion needs 2 `good` grades at the tier plus an interval gate:** 7 for `mc8`, 21
+  for `inv` and `typed`. A `hard` grade is not a pass.
+- **Demotion drops one tier** and resets `tier_passes`, with no exception for level 4. An
+  expert card that lapses goes to tier `inv`, level 3.
+- **Inverted is a tier, not a one-in-five question.** Below 4 photo options it is skipped,
+  and `mc8` promotes straight to `typed`.
+- **A slow right answer grades `hard`:** over 8 s at `mc4`, 15 s at `mc8`, 20 s at `inv`
+  and `typed`. Over 60 s the clock is ignored and only the guess box counts.
+- **Relearning:** an `again` card is re-queued once at the back of the session. The
+  re-answer writes no log row and no state change. It does not apply in the placement
+  test.
+- **A placement pass sets tier `mc8`,** interval 21, ease 2.5, reps 1, due today + 21. The
+  deck is one card per level-1 concept in every channel present, 21 cards in v0.
+- **Distractors come only from species with a card on this channel**, for names and for
+  photos.
+- **Typed grading covers concept and group cards:** the `accept` list for a concept, the
+  genus or the group common name for a group. One normalizer for all.
+- **Progress:** a species sits at the lowest level among its cards. A unit number is the
+  mean level over 4, as a percent, with the expert count beside it. Grid cells show the
+  digit 0 to 4. The unseen, learning, review, and mastered labels are gone.
+- **The review log is capped at 20,000 rows,** oldest dropped first, and each row records
+  the option count. Format `inverted` becomes `inv`.
+- **The summary screen suggests an export once a month.** The export holds the full
+  history.
+- **The v0 confusion edges are a shipping requirement:** 15 to 25 edges for the
+  `simple_lobed` bucket, drafted by agents from named references, read by the owner
+  before merge.
