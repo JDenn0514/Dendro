@@ -148,6 +148,14 @@ export function labelFor(content, kind, channel, key) {
   return { label: variety?.name ?? key, sublabel: symbol ? content.species[symbol].scientific : '' };
 }
 
+// The question the answer card shows. A question with no image cannot be
+// answered, so when the exclusion list covers the whole pool the card samples
+// again with nothing excluded. Every format goes through here, so no path can
+// forget the retry.
+function answerPhotoFor(card, excludedHashes, rng) {
+  return pickPhoto(card, excludedHashes, rng) ?? pickPhoto(card, [], rng);
+}
+
 function siblingKeys(card, content, count, rng) {
   if (card.kind === 'concept') {
     const others = content.concepts_by_channel[card.channel]
@@ -187,7 +195,7 @@ export function buildQuestion({ card, content, state, excluded_hashes = [], rng 
   if (format === 'typed') {
     return {
       ...base, format: 'typed', prompt: promptFor(card.kind, card.channel),
-      photo: pickPhoto(card, excluded_hashes, rng), options: [], option_count: 0
+      photo: answerPhotoFor(card, excluded_hashes, rng), options: [], option_count: 0
     };
   }
 
@@ -195,8 +203,7 @@ export function buildQuestion({ card, content, state, excluded_hashes = [], rng 
   const distractorKeys = siblingKeys(card, content, wanted, rng);
 
   if (format === 'inv') {
-    // The answer always shows a photo, even when the exclusion list covers its pool.
-    const own = pickPhoto(card, excluded_hashes, rng) ?? pickPhoto(card, [], rng);
+    const own = answerPhotoFor(card, excluded_hashes, rng);
     const options = [{ key: card.key, ...labelFor(content, card.kind, card.channel, card.key), photo: own }];
     for (const key of distractorKeys) {
       const other = content.cards[cardId(card.kind, card.channel, key)];
@@ -215,7 +222,7 @@ export function buildQuestion({ card, content, state, excluded_hashes = [], rng 
   if ((card.kind === 'concept' || card.kind === 'group') && keys.length < NAME_OPTION_MINIMUM) {
     return {
       ...base, format: 'typed', prompt: promptFor(card.kind, card.channel),
-      photo: pickPhoto(card, excluded_hashes, rng), options: [], option_count: 0
+      photo: answerPhotoFor(card, excluded_hashes, rng), options: [], option_count: 0
     };
   }
   const options = shuffle(
@@ -224,7 +231,7 @@ export function buildQuestion({ card, content, state, excluded_hashes = [], rng 
   );
   return {
     ...base, format, prompt: promptFor(card.kind, card.channel),
-    photo: pickPhoto(card, excluded_hashes, rng), options, option_count: options.length
+    photo: answerPhotoFor(card, excluded_hashes, rng), options, option_count: options.length
   };
 }
 

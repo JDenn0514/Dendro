@@ -251,6 +251,39 @@ test('answerPhoto finds the photo the answer showed', () => {
   assert.equal(answerPhoto({ format: 'inv', answer_key: 'QUGA', options: [], photo: null }), null);
 });
 
+// Every format needs an image to identify. 18 of the fixture's 25 cards hold a
+// single photo, so a session that excludes the last shown hash exhausts the
+// pool on the common path, not a rare one.
+test('an mc4 question keeps a photo when the exclusion list covers its pool', () => {
+  const card = content.cards['species:ACSA2:leaf'];
+  const every = card.photos.map((p) => p.hash);
+  const q = buildQuestion({
+    card, content, state: null, excluded_hashes: every, rng: makeRng(41)
+  });
+  assert.equal(q.format, 'mc4');
+  assert.ok(every.includes(q.photo.hash));
+});
+
+test('a typed question keeps a photo when the exclusion list covers its pool', () => {
+  const card = content.cards['species:ACSA2:leaf'];
+  const every = card.photos.map((p) => p.hash);
+  const q = buildQuestion({
+    card, content, state: { tier: 'typed' }, excluded_hashes: every, rng: makeRng(42)
+  });
+  assert.equal(q.format, 'typed');
+  assert.ok(every.includes(q.photo.hash));
+});
+
+test('a card that falls back to typed keeps a photo when the exclusion list covers its pool', () => {
+  const card = content.cards['group:bark:Quercus'];
+  const every = card.photos.map((p) => p.hash);
+  const q = buildQuestion({
+    card, content, state: { tier: 'mc8' }, excluded_hashes: every, rng: makeRng(43)
+  });
+  assert.equal(q.format, 'typed');
+  assert.ok(every.includes(q.photo.hash));
+});
+
 test('a typed question shows no options', () => {
   const card = content.cards['species:QUGA:leaf'];
   const q = buildQuestion({
