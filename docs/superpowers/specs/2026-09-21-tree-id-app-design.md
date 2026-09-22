@@ -214,8 +214,10 @@ wins.
     "inat_taxon_id": 47851,
     "inat_name": null,
     "genus": "Quercus",
+    "genus_common": "oak",
     "section": "Quercus",
     "family": "Fagaceae",
+    "arrangement": "alternate",
     "concepts": {
       "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn",
       "flower": "catkin", "twig_arrangement": "alternate", "twig_buds": "clustered_terminal"
@@ -249,6 +251,10 @@ Rules:
   Shrub-only species are excluded. Hybrids, marked with a multiplication sign in the
   PLANTS name, are excluded. A manual include list exists for exceptions and is empty in
   v0. Non-native species are included and flagged by `native_status`.
+- `genus_common` is the group's common name, such as `oak`. A group card accepts it as a
+  typed answer (section 7). Every species in a genus carries the same value.
+- `arrangement` is one of `opposite`, `alternate`, `whorled`. It is the tagged attribute
+  from section 2, shown on the species screen and usable in miss explanations.
 - `section` is optional. It names a recognized split inside a large genus, such as the
   red oaks (`Lobatae`) and the white oaks (`Quercus`). Units can filter on it. It is
   shown on the species screen when present.

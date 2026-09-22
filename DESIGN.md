@@ -509,6 +509,9 @@ The card model in §5 gains a `VarietyCard (channel, variety)`.
   are at level 2 or higher, about three right answers in a row. Skipping stays allowed.
 - **Interval chain 1, 4, 10, 25** (Anki default), in place of 1, 3, 8, 20.
 - **Hybrids excluded** from the species list.
+- **Superseded above:** the format escalation by interval and the one-in-five inverted
+  question in the Scheduling section. The app spec (section 7) replaces both with a tier
+  ladder where the question format is the level and inverted is its own tier.
 
 ### Still open
 
