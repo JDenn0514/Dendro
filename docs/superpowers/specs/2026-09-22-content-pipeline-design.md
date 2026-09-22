@@ -1,14 +1,22 @@
 # Dendro content pipeline design
 
 Date: 2026-09-22
-Status: approved design, not yet built
+Status: approved design, not yet built. The decision to publish reopened three parts:
+where the approved images live, whether a content ID can be removed, and how a photo
+comes down. Those three are revised here. The rest stands.
 Source: `DESIGN.md` section 17, `docs/superpowers/specs/2026-09-21-tree-id-app-design.md`
-(the app spec), the brainstorming session of 2026-09-22, and live checks of the data
-sources on 2026-09-22.
+(the app spec), the brainstorming session of 2026-09-22, the publishing session of
+2026-09-22, and live checks of the data sources on 2026-09-22.
 
 This spec covers the content pipeline. The pipeline builds the files under `content/`
 that the app spec section 4 defines. The app reads those files and never writes them.
 The content itself (the species set, the vocabularies, the edges) is a third spec.
+
+Dendro is published for public use. The app stays local-first and static. People sign in
+only to sync their progress across devices, through OAuth, with no password. A small
+server the owner runs holds an append-only copy of the review log and answers analytics
+queries. That server is its own spec. This spec names it only where it constrains the
+content, in sections 4 and 11.
 
 ---
 
@@ -20,16 +28,22 @@ The pipeline produces:
 - `content/concepts.json`
 - `content/confusion.json`
 - `content/units.json`
-- `content/images/manifest.json` and the image files under `content/images/`
+- `content/images/manifest.json`
 
-The pipeline never runs in the app and never runs in CI. CI runs only the content
-validator on what the pipeline committed.
+The approved image files are not in the repo. The pipeline uploads them to object storage
+behind a CDN, and the manifest rows point at them. Section 7 gives the object keys and
+section 13 the reason.
+
+The pipeline never runs in the app, never runs in CI, and never runs on the server. It is
+a local job the owner starts. CI runs only the content validator on what the pipeline
+committed.
 
 ### Three kinds of worker
 
 - **Scripts** do the mechanical steps: fetch from PLANTS, iNaturalist, and Wikimedia
-  Commons within their rate limits, download and resize images, merge records, write
-  manifest rows, compute unit sizes, render the report, and open the pull request.
+  Commons within their rate limits, download and resize images, upload the approved ones,
+  merge records, write manifest rows, compute unit sizes, render the report, and open the
+  pull request.
 - **Agents** do the judgment steps: approve photos, draft the authored species fields,
   draft confusion edges, and hunt by hand for photos the APIs do not hold. Each agent's
   instructions are a skill file in the repo, so a run next year uses today's rules.
@@ -47,9 +61,9 @@ These come from the app spec and `DESIGN.md` and are not re-opened here:
 
 - USDA PLANTS is the taxonomic authority. The PLANTS symbol is the primary key. Growth
   habit must be "tree" or "tree, shrub". Hybrids are excluded.
-- Photos are vendored and resized to about 1200 px on the long side. Every image has a
-  source, an author, a license, and an origin URL. The license must permit
-  redistribution.
+- Photos are copied to storage the owner controls, never hotlinked, and resized to about
+  1200 px on the long side. Every image has a source, an author, a license, and an origin
+  URL. The license must permit redistribution. Section 7 says where the copy goes.
 - Photo approval rules, the three escalation cases, and the quarter-escalation stop rule
   are in the app spec, section 4, under "Photo approval". Identity is trusted from the
   source page, never from image recognition.
@@ -67,8 +81,9 @@ no compile step. Syntax stays to the erasable subset: no enums, no parameter pro
 no namespaces. Tests run with `node --test`.
 
 One `package.json` at the repo root, with dev dependencies only: `sharp` for image
-resizing and `@types/node`. The app keeps zero runtime dependencies. `node_modules` is
-ignored by git, so GitHub Pages does not serve it.
+resizing, an S3-compatible client for the uploads, and `@types/node`. The app keeps zero
+runtime dependencies. `node_modules` is ignored by git, so GitHub Pages does not serve
+it.
 
 ```
 package.json
@@ -81,9 +96,10 @@ pipeline/
     inat.ts               taxon lookup, observation photos
     commons.ts            category listing and image info
     images.ts             download, strip EXIF, resize, hash
+    storage.ts            object storage: upload by hash, head, delete
     species.ts            fetched layer, merge with authored layer
     candidates.ts         candidate rows, queue, dedupe, license allowlist
-    manifest.ts           approved verdicts to manifest rows and files
+    manifest.ts           approved verdicts to uploads and manifest rows
     report.ts
     run.ts                branch, commit, push, draft PR through gh
   data/
@@ -109,6 +125,20 @@ content_src/
 The boundary between the pipeline and the app is the `content/` folder and the validator
 module. The pipeline imports the validator from `app/logic/`. Nothing in `app/` imports
 from `pipeline/`.
+
+### Object storage
+
+The approved images live in one bucket behind a CDN. The provider is not chosen yet. It
+must offer an S3-compatible API and must charge nothing for egress. Cloudflare R2 and
+Backblaze B2 both meet that. The bucket has two prefixes:
+
+- `img/` holds the approved images. These objects are public and permanent.
+- `review/` holds escalated candidates for the length of one review. A lifecycle rule
+  deletes an object 30 days after it is written.
+
+The access key and the bucket name come from the environment and are never committed.
+The app holds the CDN base URL as a constant in `app/logic/` and builds each image URL
+from that base and the manifest row's hash.
 
 ---
 
@@ -233,6 +263,28 @@ least one approved image, or a confusion edge names it. The rest appear in the r
 "not authored" or "authored, no photos". This matches the app spec rule that a record
 with no images fails validation unless an edge names it.
 
+A species that has entered `species.json` once never leaves it again, whatever its photo
+count later becomes. The next subsection sets that rule.
+
+### IDs are append-only
+
+A card ID such as `species:QUGA:bark` is a foreign key in other people's data. It sits in
+a stranger's review log, on their device and on the sync server, for months. An ID that
+disappears from the content orphans that history. So:
+
+- Card IDs, concept keys, bucket keys, and unit keys are append-only. None is renamed.
+  None is removed.
+- A species that leaves the pool keeps its record in `species.json` and gains
+  `retired: true`, a `retired_reason`, and a `retired_at` date.
+- An image that leaves the pool keeps its manifest row and gains the same three fields.
+  Section 7 gives the command.
+- A retired record is exempt from the rule that every record needs an image.
+- The app skips a retired species when it builds a session, and skips a retired image
+  when it draws from a channel pool. The ID still resolves, so an old review row still
+  names something.
+
+Section 11 gives the check that enforces this.
+
 ---
 
 ## 5. Authored content
@@ -292,8 +344,8 @@ One constant in `candidates.ts`, used by every source:
 - CC BY-SA, any version
 
 NC and ND variants are excluded in v0. The owner can widen the list later if a channel
-stays thin. An image whose license text does not match the list is not downloaded to
-`content/`.
+stays thin. An image whose license text does not match the list is never uploaded and
+never gets a manifest row.
 
 ---
 
@@ -415,13 +467,37 @@ For each approved verdict, `manifest.ts`:
 2. Strips all EXIF data. This removes GPS coordinates and camera data.
 3. Resizes to 1200 px on the long side, JPEG quality 82. An original smaller than 1200 px
    is kept at its size.
-4. Writes `content/images/<TARGET>/<channel>/NNN.jpg` with the next free number. A
-   concept target writes under `content/images/concepts/<channel>/<category>/NNN.jpg`.
-5. Appends a manifest row in the app spec's shape. `source` is the source name, `author`
-   the row's author, `license` the row's license text, `origin` the origin URL, `tags`
-   the verdict's tags, `checked_by`, `checked_at`, and `note` from the verdict.
+4. Takes the sha256 of the resized bytes and uploads the file to object storage as
+   `img/<sha256>.jpg`. The hash is the whole key, for a species target and a concept
+   target alike. A `HEAD` that finds the key skips the upload.
+5. Appends a manifest row. The row carries `hash` in place of the old `file` path and
+   keeps `target` and `channel` as before. `source` is the source name, `author` the
+   row's author, `license` the row's license text, `origin` the origin URL, `tags` the
+   verdict's tags, and `checked_by`, `checked_at`, and `note` come from the verdict.
 
-A rejected or escalated candidate is never written under `content/`.
+A rejected or escalated candidate is never uploaded to `img/` and never gets a manifest
+row.
+
+The app spec's `images/manifest.json` section still shows the vendored `file` path and
+says the images are in the repo. It needs the matching edit.
+
+### Retiring an image
+
+A public site with several hundred third-party photos will get an email that asks for one
+photo to come down. `cli images retire <hash> --reason "<text>"`:
+
+1. Deletes `img/<hash>.jpg` from the bucket.
+2. Sets `retired: true`, `retired_reason`, and `retired_at` on the manifest row. The row
+   stays. The hash stays.
+3. Runs the validator and commits.
+
+This is the retire mechanism of section 4, applied to one image. The app then draws from
+the rest of that channel's pool. When the retirement empties one channel, the species
+loses that card and keeps the others. When it empties every channel, the species retires
+under section 4.
+
+Two manifest rows can share a hash, because duplicate bytes collapse into one object. The
+command retires both rows. A takedown removes the photo everywhere it was used.
 
 ---
 
@@ -441,9 +517,9 @@ command.
    The list is then filtered to the bucket.
 4. `cli photos fetch <name>` fills `candidates.jsonl` and the cache.
 5. The `photo-check` skill writes `verdicts.jsonl`. The stop rule applies.
-6. `cli build <name>` merges species records, writes approved images and manifest rows,
-   runs the validator, computes unit sizes, and writes the gap list per species and
-   channel into the report data.
+6. `cli build <name>` merges species records, uploads approved images, writes manifest
+   rows, runs the validator, computes unit sizes, and writes the gap list per species
+   and channel into the report data.
 7. The collector reads the gap list and hunts by hand for the thin channels, appends
    manual candidates, and steps 5 and 6 run again.
 8. The `edges-draft` skill writes edges for the run's units.
@@ -482,9 +558,10 @@ request body.
   by count, lowest first.
 - **Units.** Each unit the run touches, its computed card count, and a flag when the
   count is outside 5 to 25.
-- **Escalations.** One row each: the image inline through its raw URL on the branch, the
-  source link, the case, and the agent's note. The section is empty once decisions are
-  applied.
+- **Escalations.** One row each: the image inline, the source link, the case, and the
+  agent's note. The branch holds no image bytes, so `cli report` uploads each escalated
+  candidate to the `review/` prefix and links that copy. The lifecycle rule deletes the
+  copy 30 days later. The section is empty once decisions are applied.
 - **Run counts.** Candidates per source, verdicts by kind, fetch failures, and whether
   the stop rule fired.
 
@@ -498,7 +575,9 @@ Every network call goes through `http.ts`.
   second, Commons 2 per second with at most 3 in flight. Image downloads share the
   host's bucket.
 - **User-Agent.** One string on every request: `dendro-pipeline/<version> (<contact
-  URL>)`. Without it Commons drops to 10 requests per minute.
+  URL>)`. Without it Commons drops to 10 requests per minute. Wikimedia's policy expects
+  that address to reach a person who can answer. A real address must be set before the
+  first public run. A placeholder will not do.
 - **429.** Sleep for `Retry-After`, or 30 seconds when the header is absent, then retry.
 - **5xx and network errors.** Retry three times with doubling waits (2, 4, 8 seconds).
   Then record the failure on the candidate or species row and continue. The report lists
@@ -512,9 +591,11 @@ Every network call goes through `http.ts`.
   committed. `plants_ids.json` grows as species are fetched and is committed with each
   run.
 
-The raw cache is not committed, for four reasons: GitHub Pages would serve it, it holds
-photos the license check rejected, raw iNat responses carry observer names and
-coordinates, and git history would grow on every run.
+The raw cache is not committed, for four reasons: GitHub Pages serves whatever is in the
+repo, the cache holds photos the license check rejected, raw iNat responses carry
+observer names and coordinates, and git history would grow on every run. The approved
+images now leave the repo as well (section 7), and that weakens none of the four. The
+cache belongs in neither the repo nor the bucket.
 
 ---
 
@@ -523,14 +604,24 @@ coordinates, and git history would grow on every run.
 ### Validation
 
 `cli build` imports the app's validator module and runs it on `content/` before it
-commits. A build that fails validation writes nothing to `content/` and prints the
-failures. CI runs the same validator on the branch, so a pull request cannot merge with
-invalid content.
+commits. A build that fails validation writes nothing to `content/`, uploads nothing, and
+prints the failures. CI runs the same validator on the branch, so a pull request cannot
+merge with invalid content.
+
+### The append-only check
+
+One more check runs beside the validator, in `cli build` and in CI. It reads the last
+published content with `git show main:content/species.json` and the same for the other
+three files. It collects every ID: species symbols, variety keys, concept keys, bucket
+keys, unit keys, and manifest hashes. Every one of them must still be present in the new
+content. A missing ID fails the build. A record marked `retired: true` counts as present.
+The check is skipped on the first run, when `main` holds no content yet.
 
 ### Tests
 
 Under `pipeline/tests/`, run with `node --test`, no network. Fixtures are recorded
-responses under `pipeline/tests/fixtures/`.
+responses under `pipeline/tests/fixtures/`. A fake storage client stands in for the
+bucket.
 
 - `http`: the limiter spaces requests with a fake clock; 429 honors `Retry-After`; the
   cache hits, misses, and expires by host lifetime; `--refresh` bypasses the cache.
@@ -544,8 +635,15 @@ responses under `pipeline/tests/fixtures/`.
   fails; a species with no image and no edge is left out of `species.json`.
 - `candidates`: duplicate origin URLs and duplicate file hashes are dropped; the
   per-species cap holds; the per-channel stop at 8 approved holds.
-- `manifest`: the next free number; the row shape matches the app spec; a rejected
-  candidate writes no file; EXIF is stripped; the long side is 1200 px.
+- `manifest`: the object key is the sha256 of the resized bytes; a second run over the
+  same verdicts uploads nothing and adds no row; two candidates with the same bytes give
+  one object and two rows; the row shape matches the app spec; a rejected candidate
+  uploads nothing; EXIF is stripped; the long side is 1200 px.
+- `ids`: the append-only check fails when a symbol in the last published `species.json`
+  is gone; it passes when that symbol is there with `retired: true`; it passes when
+  `main` holds no content.
+- `retire`: `cli images retire` deletes the object, keeps the manifest row, and writes
+  the reason and the date; two rows that share a hash both retire.
 - `verdicts`: the stop rule fires above a quarter at 20 or more judged, and not below;
   an owner decision becomes a verdict row with `checked_by: owner`.
 - `report`: rendered from a fixture run and compared to a stored file.
@@ -600,8 +698,32 @@ to 25.
 - **Branch and draft pull request.** One review surface for edges, authored records, and
   escalations, with a diff view. CI validates before anything reaches `main`, and `main`
   deploys.
-- **A `pipeline/` folder in this repo.** The validator is shared, the pull request is
-  in-repo, and the report can link to images on the branch.
+- **A `pipeline/` folder in this repo.** The validator is shared and the pull request is
+  in-repo. The report no longer links to images on the branch; it links to the review
+  prefix in the bucket, as section 9 says.
+- **Approved images in object storage, not in git.** v0 is about 610 approved images: 70
+  concept images, plus roughly 30 species across 3 channels at up to 6 images each. At
+  1200 px and quality 82 each runs about 250 KB, so about 150 MB. Git keeps every version
+  of every binary forever, so one re-encode doubles that. Delivery is the harder limit. A
+  20-card session with four options per question loads about 80 images, near 20 MB.
+  GitHub Pages allows about 100 GB a month, which is 4,000 to 5,000 sessions. That
+  ceiling is too low for a public site. A CDN with no egress charge lifts it and keeps
+  the repo small enough to clone.
+- **Objects keyed by the sha256 of the resized bytes.** The old `NNN.jpg` numbering had
+  to read the folder to find the next free number, so an upload that died halfway left a
+  manifest row pointing at nothing. A hash key is idempotent: the retry writes the same
+  key, and duplicate bytes collapse into one object on their own. `target` and `channel`
+  stay on the manifest row, where a query reads them. The key carries no meaning.
+- **IDs are append-only.** Once progress syncs, a card ID is a foreign key in other
+  people's data, held for months on their devices and on the server. Dropping a species
+  when its last photo goes would orphan real review history, with no error anywhere, and
+  would skew every analytics query that reads it. `retired: true` costs one field and
+  keeps the history readable.
+- **A takedown command.** Several hundred third-party photos will produce an email that
+  asks for one to come down, and the answer has to be same-day. `cli images retire` makes
+  that one command against the bucket rather than a rebuild and a deploy. It keeps the
+  manifest row, so the audit trail still shows what was published, by whom, under what
+  license, and when it came down.
 - **Raw cache ignored, run records committed.** The records are the audit trail and a
   few KB per species. The raw cache would be served by Pages, would redistribute
   rejected photos, and would hold observer data.
