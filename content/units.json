@@ -1,0 +1,5 @@
+[
+  { "key": "leaf_types", "name": "Leaf types", "channel": "leaf", "level": 1, "parent": null },
+  { "key": "bark_types", "name": "Bark types", "channel": "bark", "level": 1, "parent": null },
+  { "key": "fruit_types", "name": "Fruit types", "channel": "fruit", "level": 1, "parent": null }
+]

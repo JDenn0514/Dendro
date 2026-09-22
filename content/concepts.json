@@ -1,0 +1,23 @@
+[
+  { "key": "needles", "channel": "leaf", "name": "Needles", "accept": ["needles", "needle", "needle like", "conifer needles"], "description": "Narrow stiff leaves, in bundles, single along the twig, or in clusters." },
+  { "key": "scale_like", "channel": "leaf", "name": "Scale-like", "accept": ["scale", "scales", "scale like", "scaly"], "description": "Tiny overlapping scales pressed flat against the twig." },
+  { "key": "simple_entire", "channel": "leaf", "name": "Simple, untoothed", "accept": ["entire", "simple entire", "simple untoothed", "untoothed", "smooth margin"], "description": "One blade per stalk with a smooth unbroken edge." },
+  { "key": "simple_toothed", "channel": "leaf", "name": "Simple, toothed", "accept": ["toothed", "simple toothed", "serrated", "serrate"], "description": "One blade per stalk with teeth along the edge." },
+  { "key": "simple_lobed", "channel": "leaf", "name": "Simple, lobed", "accept": ["lobed", "simple lobed", "lobes"], "description": "One blade per stalk cut into lobes by sinuses." },
+  { "key": "pinnately_compound", "channel": "leaf", "name": "Pinnately compound", "accept": ["pinnately compound", "pinnate", "compound pinnate"], "description": "Leaflets in two rows along a central stalk." },
+  { "key": "palmately_compound", "channel": "leaf", "name": "Palmately compound", "accept": ["palmately compound", "palmate", "compound palmate"], "description": "Leaflets spread from one point like fingers." },
+  { "key": "fan_strap", "channel": "leaf", "name": "Fan / strap", "accept": ["fan", "strap", "fan strap", "palm"], "description": "Long strap blades or fan blades, as on palms and yuccas." },
+  { "key": "smooth", "channel": "bark", "name": "Smooth", "accept": ["smooth", "smooth bark"], "description": "An unbroken surface with no ridges or plates." },
+  { "key": "furrowed", "channel": "bark", "name": "Furrowed / ridged", "accept": ["furrowed", "ridged", "furrowed ridged", "ridges"], "description": "Long ridges separated by deep vertical grooves." },
+  { "key": "plated", "channel": "bark", "name": "Plated / blocky", "accept": ["plated", "blocky", "plated blocky", "plate bark"], "description": "The surface breaks into square or rectangular plates." },
+  { "key": "shaggy", "channel": "bark", "name": "Shaggy / strip-peeling", "accept": ["shaggy", "strip peeling", "peeling strips", "shaggy strip peeling"], "description": "Long strips lift away at one or both ends." },
+  { "key": "papery", "channel": "bark", "name": "Papery / exfoliating", "accept": ["papery", "exfoliating", "papery exfoliating", "flaking"], "description": "Thin sheets or flakes peel off and show a paler layer." },
+  { "key": "warty", "channel": "bark", "name": "Warty / lenticelled", "accept": ["warty", "lenticelled", "warty lenticelled", "lenticels"], "description": "Raised corky bumps or horizontal lenticel lines." },
+  { "key": "samara", "channel": "fruit", "name": "Samara", "accept": ["samara", "samaras", "winged seed", "key"], "description": "A dry seed with a papery wing." },
+  { "key": "acorn", "channel": "fruit", "name": "Acorn", "accept": ["acorn", "acorns"], "description": "A single nut seated in a scaly cup." },
+  { "key": "nut", "channel": "fruit", "name": "Nut / husk", "accept": ["nut", "husk", "nut husk"], "description": "A hard nut inside a thick husk that splits." },
+  { "key": "pod", "channel": "fruit", "name": "Pod / legume", "accept": ["pod", "legume", "pod legume", "bean pod"], "description": "A flat or round pod holding a row of seeds." },
+  { "key": "berry", "channel": "fruit", "name": "Berry / drupe", "accept": ["berry", "drupe", "berry drupe"], "description": "A fleshy fruit around one stone or several seeds." },
+  { "key": "capsule", "channel": "fruit", "name": "Capsule", "accept": ["capsule", "capsules"], "description": "A dry case that splits open along seams." },
+  { "key": "cone", "channel": "fruit", "name": "Cone", "accept": ["cone", "cones", "woody cone", "fleshy cone"], "description": "Overlapping scales on an axis, woody or fleshy." }
+]

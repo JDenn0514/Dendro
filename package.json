@@ -1,0 +1,16 @@
+{
+  "name": "dendro",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A desk-based learning tool for North American tree identification.",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.js\"",
+    "validate": "node scripts/validate_content.js content",
+    "validate:dev": "node scripts/validate_content.js content_dev --local-images content_dev/images",
+    "images:dev": "node scripts/make_placeholder_jpegs.js"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

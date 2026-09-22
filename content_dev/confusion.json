@@ -1,0 +1,14 @@
+[
+  { "a": "QURU", "b": "QUVE", "channel": "leaf",
+    "a_not_b": "Northern red oak has shallower sinuses and shorter bristle tips than black oak.",
+    "b_not_a": "Black oak has deeper sinuses, longer bristle tips, and larger hairy buds.",
+    "ref": "Virginia Tech Dendrology fact sheet, Quercus velutina" },
+  { "a": "QUGA", "b": "QURU", "channel": "leaf",
+    "a_not_b": "Gambel oak has rounded lobes with no bristle tips.",
+    "b_not_a": "Northern red oak has pointed lobes that end in bristle tips.",
+    "ref": "USDA Silvics Manual, Quercus gambelii" },
+  { "a": "ACPL", "b": "ACSA2", "channel": "leaf",
+    "a_not_b": "Norway maple has five broad lobes and milky sap in the leaf stalk.",
+    "b_not_a": "Silver maple has deep narrow sinuses and a silver-white leaf underside.",
+    "ref": "Virginia Tech Dendrology fact sheet, Acer saccharinum" }
+]
