@@ -57,6 +57,12 @@ const OPTIONAL_AUTHORED: string[] = [
 
 const ALLOWED_AUTHORED: string[] = [...REQUIRED_AUTHORED, ...OPTIONAL_AUTHORED].sort();
 
+/** The optional fields the merge spreads into a list. A string spreads into its letters. */
+const ARRAY_AUTHORED: string[] = ['common_extra', 'planted_states'];
+
+/** The optional fields the merge copies to the record as they are. */
+const STRING_AUTHORED: string[] = ['audubon_name', 'genus_common', 'arrangement'];
+
 /** The app prints this when PLANTS gave no native status. */
 const NATIVE_STATUS_UNKNOWN = 'unknown';
 
@@ -152,6 +158,30 @@ export function validateAuthored(
   if (ref !== undefined) {
     if (!Array.isArray(ref) || ref.length === 0 || !ref.every(nonEmptyString)) {
       errors.push(`${symbol}: ref must be a non-empty array of non-empty strings`);
+    }
+  }
+
+  // An optional field of the wrong type reaches a public page. A string common_extra
+  // spreads into one common name per letter.
+  for (const field of ARRAY_AUTHORED) {
+    const value = authored[field];
+    if (value === undefined) continue;
+    if (!Array.isArray(value) || !value.every(nonEmptyString)) {
+      errors.push(`${symbol}: ${field} must be an array of non-empty strings`);
+    }
+  }
+
+  for (const field of STRING_AUTHORED) {
+    const value = authored[field];
+    if (value !== undefined && !nonEmptyString(value)) {
+      errors.push(`${symbol}: ${field} must be a non-empty string`);
+    }
+  }
+
+  const notes = authored.variety_notes;
+  if (notes !== undefined) {
+    if (!isPlainObject(notes) || !Object.values(notes).every(nonEmptyString)) {
+      errors.push(`${symbol}: variety_notes must be an object of non-empty strings`);
     }
   }
 

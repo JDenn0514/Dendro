@@ -214,6 +214,25 @@ test('each malformed field fails', () => {
   }
 });
 
+test('an optional field of the wrong type fails with one error naming the field', () => {
+  const cases: [Record<string, unknown>, string][] = [
+    [{ common_extra: 'Rocky Mountain oak' }, 'common_extra'],
+    [{ planted_states: 'CO' }, 'planted_states'],
+    [{ common_extra: ['Rocky Mountain oak', ' '] }, 'common_extra'],
+    [{ audubon_name: 12 }, 'audubon_name'],
+    [{ genus_common: '' }, 'genus_common'],
+    [{ arrangement: ['alternate'] }, 'arrangement'],
+    [{ variety_notes: 'The widespread form.' }, 'variety_notes'],
+  ];
+  for (const [over, field] of cases) {
+    const bad = { ...authored(), ...over };
+    const errors = validateAuthored(bad, 'QUGA', KEYS);
+    assert.equal(errors.length, 1, `${field}: ${errors.join(' | ')}`);
+    assert.ok(errors[0].includes(field), errors[0]);
+    assert.match(errors[0], /QUGA/);
+  }
+});
+
 test('an unknown top-level field fails and the message lists it', () => {
   const bad = { ...authored(), habitats: 'Dry slopes' };
   const errors = validateAuthored(bad, 'QUGA', KEYS);
