@@ -12,8 +12,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           # The pipeline runs TypeScript through Node's type stripping, so the
           # repo is on Node 24. `node --test` reads a glob pattern from Node 21.
@@ -41,13 +41,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v5
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
       # The whole repo root goes up, so pipeline/runs/ and content_src/ are
       # public. That is by design: the run records and the authored species
       # files are meant to be readable. Keys and caches never enter the repo.
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: '.'
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
