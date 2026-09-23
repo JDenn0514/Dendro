@@ -666,6 +666,85 @@ test('a species whose every manifest row is retired gains retired true', async (
   assert.equal(buildOf(root).species[0].status, 'no_photos');
 });
 
+test('a rebuild keeps the reason and the date the owner retired a species with', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root);
+  fakeGitShow(exec, 'main', {
+    species: {
+      QUGA: record({
+        retired: true,
+        retired_reason: 'misidentified',
+        retired_at: '2026-09-01',
+      }),
+    },
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  const species = speciesOf(root);
+  assert.equal(species.QUGA.retired, true);
+  assert.equal(species.QUGA.retired_reason, 'misidentified');
+  assert.equal(species.QUGA.retired_at, '2026-09-01');
+  // The run rebuilt the record. Only the three retirement fields come from the past.
+  assert.equal(species.QUGA.inat_taxon_id, INAT_TAXON_ID);
+});
+
+test('a retired species with no manifest row stays retired after a rebuild', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    verdicts: [verdict(MYSTERY.id, 'escalate', { case: 'quality', note: 'Blurred.' })],
+  });
+  fakeGitShow(exec, 'main', {
+    species: {
+      QUGA: record({
+        retired: true,
+        retired_reason: 'misidentified',
+        retired_at: '2026-09-01',
+      }),
+    },
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.equal(manifestOf(root).length, 0);
+  const species = speciesOf(root);
+  assert.equal(species.QUGA.retired, true);
+  assert.equal(species.QUGA.retired_reason, 'misidentified');
+  assert.equal(species.QUGA.retired_at, '2026-09-01');
+});
+
+test('a new approved photo does not un-retire a species the owner retired', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  const retiredRow = row({
+    hash: HASH_B,
+    target: 'QUGA',
+    channel: 'leaf',
+    retired: true,
+    retired_reason: 'takedown request',
+    retired_at: '2026-09-01',
+  });
+  seed(root, { manifest: [retiredRow] });
+  fakeGitShow(exec, 'main', {
+    species: {
+      QUGA: record({
+        retired: true,
+        retired_reason: 'misidentified',
+        retired_at: '2026-09-01',
+      }),
+    },
+    manifest: [retiredRow],
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  // The run approved two photos, so the species has live rows again.
+  assert.equal(manifestOf(root).filter((one) => one.retired !== true).length, 2);
+  const species = speciesOf(root);
+  assert.equal(species.QUGA.retired, true);
+  assert.equal(species.QUGA.retired_reason, 'misidentified');
+  assert.equal(species.QUGA.retired_at, '2026-09-01');
+});
+
 test('an authored file with a missing required field stops the build', async (t) => {
   const { root, deps, storage, err } = setup(t);
   const broken: Record<string, unknown> = { ...AUTHORED };

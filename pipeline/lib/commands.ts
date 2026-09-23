@@ -1048,6 +1048,7 @@ async function buildContent(
 
   const previous = readPublished(gitShowOf(deps, base));
   carryPublished(species, previous);
+  carryRetired(species, previous);
   markRetiredSpecies(species, manifest, at);
 
   const raw = rawOf(deps.root, species, manifest);
@@ -1107,8 +1108,29 @@ function carryPublished(
 }
 
 /**
+ * Plan decision 23: a species retires on purpose. `mergeSpecies` builds a fresh record with
+ * no retirement, so a rebuild of a retired species copies the three fields from the published
+ * record. The owner's reason and date stay the ones the owner wrote.
+ */
+function carryRetired(
+  species: Record<string, SpeciesRecord>,
+  previous: ContentSet | null,
+): void {
+  if (previous === null) return;
+  for (const [symbol, record] of Object.entries(species)) {
+    const published = previous.species[symbol];
+    if (published === undefined || published.retired !== true) continue;
+    const next: SpeciesRecord = { ...record, retired: true };
+    if (published.retired_reason !== undefined) next.retired_reason = published.retired_reason;
+    if (published.retired_at !== undefined) next.retired_at = published.retired_at;
+    species[symbol] = next;
+  }
+}
+
+/**
  * The second of the two retire paths: a species whose every manifest row is retired.
- * `cli species retire` is the first. Nothing else writes these three fields.
+ * `cli species retire` is the first. This path only adds a retirement to a record that
+ * carries none. It never replaces a reason or a date, and it never removes a retirement.
  */
 function markRetiredSpecies(
   species: Record<string, SpeciesRecord>,
@@ -1116,7 +1138,7 @@ function markRetiredSpecies(
   at: string,
 ): void {
   for (const [symbol, record] of Object.entries(species)) {
-    if (record.retired === true) continue;
+    if (isRetired(record)) continue;
     const rows = manifest.filter((one) => one.target === symbol);
     if (rows.length === 0) continue;
     if (rows.some((one) => one.retired !== true)) continue;
@@ -1127,6 +1149,15 @@ function markRetiredSpecies(
       retired_at: at,
     };
   }
+}
+
+/** A record any retire path already wrote. One of the three fields is enough. */
+function isRetired(record: SpeciesRecord): boolean {
+  return (
+    record.retired === true
+    || record.retired_reason !== undefined
+    || record.retired_at !== undefined
+  );
 }
 
 function statusOf(
