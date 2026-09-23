@@ -1,0 +1,32 @@
+{
+  "total_results": 1,
+  "page": 1,
+  "per_page": 50,
+  "results": [
+    {
+      "id": 121101,
+      "quality_grade": "research",
+      "taxon": { "id": 47851, "name": "Quercus gambelii", "rank": "species" },
+      "photos": [
+        {
+          "id": 999101,
+          "license_code": null,
+          "attribution": "(c) Tam Nguyen, all rights reserved",
+          "url": "https://static.inaturalist.org/photos/999101/square.jpg"
+        },
+        {
+          "id": 999102,
+          "license_code": "cc-by-nc",
+          "attribution": "(c) Ravi Patel, some rights reserved (CC BY-NC)",
+          "url": "https://static.inaturalist.org/photos/999102/square.jpg"
+        },
+        {
+          "id": 999103,
+          "license_code": "cc-by",
+          "attribution": "(c) Dana Cole, some rights reserved (CC BY)",
+          "url": "https://static.inaturalist.org/photos/999103/square.jpg"
+        }
+      ]
+    }
+  ]
+}

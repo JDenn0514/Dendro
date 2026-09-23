@@ -1,0 +1,52 @@
+{
+  "total_results": 3,
+  "page": 1,
+  "per_page": 50,
+  "results": [
+    {
+      "id": 121001,
+      "quality_grade": "research",
+      "taxon": { "id": 47851, "name": "Quercus gambelii", "rank": "species" },
+      "photos": [
+        {
+          "id": 999001,
+          "license_code": "cc-by",
+          "attribution": "(c) Lyrae, some rights reserved (CC BY)",
+          "url": "https://static.inaturalist.org/photos/999001/square.jpg"
+        },
+        {
+          "id": 999002,
+          "license_code": "cc-by",
+          "attribution": "(c) Lyrae, some rights reserved (CC BY)",
+          "url": "https://static.inaturalist.org/photos/999002/square.jpg"
+        }
+      ]
+    },
+    {
+      "id": 121002,
+      "quality_grade": "research",
+      "taxon": { "id": 47851, "name": "Quercus gambelii", "rank": "species" },
+      "photos": [
+        {
+          "id": 999003,
+          "license_code": "cc-by-sa",
+          "attribution": "(c) Pat Ruiz, some rights reserved (CC BY-SA)",
+          "url": "https://static.inaturalist.org/photos/999003/square.jpg"
+        }
+      ]
+    },
+    {
+      "id": 121003,
+      "quality_grade": "research",
+      "taxon": { "id": 1155222, "name": "Quercus gambelii var. gambelii", "rank": "variety" },
+      "photos": [
+        {
+          "id": 999004,
+          "license_code": "cc0",
+          "attribution": "Marta Olsen, no rights reserved (CC0)",
+          "url": "https://static.inaturalist.org/photos/999004/square.jpeg"
+        }
+      ]
+    }
+  ]
+}
