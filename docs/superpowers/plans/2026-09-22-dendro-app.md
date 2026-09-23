@@ -5156,40 +5156,45 @@ Clear storage first: open the console and run `localStorage.clear()`, then reloa
 2. The page shows "Card 1 of 1", a progress bar, the prompt "What leaf type is this?", a chip reading "mc4", a photo, and four option buttons.
 3. In the console run `document.querySelector('img.photo').getAttribute('src')`. It reads `content_dev/images/img/<hash>.jpg`, with a 64-character hash. The screen builds no path of its own.
 4. The attribution line under the photo shows the author as a link. Hover it: the status bar shows the `origin` URL from the manifest row. Click it: the source page opens in a new tab.
-5. Each option button shows a bold category name. The correct option is "Simple, lobed".
+5. Each option button shows a category name. The correct option is "Simple, lobed".
 6. The guess checkbox reads "I guessed" and starts unchecked.
 7. Click a wrong option, for example "Needles". The page shows "Wrong", the answer photo, the fallback sentence naming both concepts, and a Next button.
 8. Click Next. The card re-queues at the back of the deck, so the same card appears again. The counter still reads "Card 1 of 1", because a re-queue adds no work to the total.
-9. Answer it right. The page shows "Right", the range line, and Next.
+9. Answer it right. The page shows "Right", the concept description, and Next. A concept card carries no range line; the species card in step 20 shows one.
 10. Click Next. The summary shows "Right: 0. Missed: 1." The re-answer did not change the count.
 11. In the console run `JSON.parse(localStorage.dendro_log).rows`. There is one row, not two. The row holds `day` with today's local date, `at` with the UTC timestamp, and `answer` with the option key you clicked, for example `needles`. The log stores keys, not display names.
-12. In the console run `JSON.parse(localStorage.dendro_cards).cards`. The concept card shows `tier: "mc4"`, `interval: 1`, `lapses: 1`.
-13. Click Home, click Start, and answer the card right. The summary reads "Promoted: none.", because the card stays at level 1: the tier is still `mc4` and the interval is 4.
-14. Make the card due again. In the console run:
+12. In the console run `JSON.parse(localStorage.dendro_cards).cards`. The concept card shows `tier: "mc4"`, `interval: 1`, `lapses: 0`. A first review is never a lapse, so `scheduleCard` counts none.
+13. Click Home. The recommendation reads "Next up: Bark types". The leaf concept card now has state and is due tomorrow, so `recommendUnit` moves to the next unit that holds a card you have not started.
+14. Make the leaf card due. In the console run:
     `const c=JSON.parse(localStorage.dendro_cards); c.cards['concept:leaf:simple_lobed'].due='2020-01-01'; localStorage.dendro_cards=JSON.stringify(c);`
-    Reload, start the leaf session, and answer the card right. The summary now lists the card under Promoted, because the card moves from `mc4` to `mc8`, that is level 1 to level 2.
-15. Run `localStorage.clear()`, reload, start a leaf session, and answer the card right at first sight. The summary reads "Promoted: none.", because a card with no earlier state is new, not promoted.
-16. Go Home with focus "bark" and start "Bark types". With three bark concept cards the deck holds three. Answer each. The chip reads "mc4" for all three.
-17. Set a card to tier `inv` by hand in the console, then start a leaf session:
+    Reload, open `#/session?focus=leaf&unit=leaf_types`, and answer the card right. The summary reads "Promoted: none.", because the card stays at level 1: the tier is still `mc4` and the interval is 4.
+15. Make the card due again with the same console line, reload, and answer it right again. Answer within eight seconds of the photo appearing, or the grade is `hard` and the card does not move. The summary now lists the card under Promoted, because the card moves from `mc4` to `mc8`, that is level 1 to level 2.
+16. Run `localStorage.clear()`, reload, start a leaf session, and answer the card right at first sight. The summary reads "Promoted: none.", because a card with no earlier state is new, not promoted.
+17. Go Home with focus "bark" and start "Bark types". With three bark concept cards the deck holds three. Answer each. The chip reads "mc4" for all three.
+18. Set a card to tier `inv` by hand in the console, then start a leaf session:
     `const c=JSON.parse(localStorage.dendro_cards); c.cards['species:QUGA:leaf']={interval:25,ease:2.5,due:'2020-01-01',reps:5,lapses:0,recent:[],tier:'inv',tier_passes:0}; localStorage.dendro_cards=JSON.stringify(c);`
     Reload, open `#/session?focus=leaf`, and check that the prompt reads "Which photo shows Gambel oak?", the chip reads "inv", and five photo buttons appear with no prompt photo above them.
-18. On that `inv` card run `[...document.querySelectorAll('.options.inv img')].map((i) => i.getAttribute('src'))` in the console. Every value reads `content_dev/images/img/<hash>.jpg`, and the hashes differ.
-19. Set the same card to tier `typed` the same way. The session shows a text field and an Answer button. Type "gambel oak" and press Enter. The reveal says "Right".
-20. Type "quercus rubra" on a later typed card. The reveal says "Wrong" and shows the line "You typed: quercus rubra".
-21. Check the teardown. Start a session and click Home in the nav before you answer. The home screen renders. Open the session again: the counter reads "Card 1" again.
-22. Open the console. There are no errors.
+19. On that `inv` card run `[...document.querySelectorAll('.options.inv img')].map((i) => i.getAttribute('src'))` in the console. Every value reads `content_dev/images/img/<hash>.jpg`, and the hashes differ.
+20. Set the same card to tier `typed` the same way. The session shows a text field and an Answer button. Type "gambel oak" and press Enter. The reveal says "Right", and shows the range line, the size line, and the habitat line.
+21. Type "quercus rubra" on a later typed card. The reveal says "Wrong" and shows the line "You typed: quercus rubra".
+22. Check the teardown. Start a session and click Home in the nav before you answer. The home screen renders. Open the session again: the counter reads "Card 1" again.
+23. Open the console. There are no errors.
 
 - [ ] **Step 4: Manual checklist, image failure**
 
+Nothing may change `content_dev/`, so copy `index.html`, `app/`, and `content_dev/`
+to a scratch folder, serve that folder, and hide the images there. Every path
+below is a path inside the copy.
+
 The fixture keys every image on its hash, so first read the two QUGA leaf hashes out of the manifest.
 
-1. Open `content_dev/images/manifest.json` and copy the `hash` of the two rows with `target: "QUGA"` and `channel: "leaf"`. Call them `<hash1>` and `<hash2>`.
+1. Open `content_dev/images/manifest.json` and copy the `hash` of the two live rows with `target: "QUGA"` and `channel: "leaf"`. The third such row is retired and holds no card photo. Call them `<hash1>` and `<hash2>`.
 2. Hide the first one, so it 404s:
    `mv content_dev/images/img/<hash1>.jpg content_dev/images/img/<hash1>.hidden`
 3. Reload and start a leaf session that includes `species:QUGA:leaf`. The console logs `Image failed: img/<hash1>.jpg` and the card shows the second QUGA leaf photo instead.
 4. Hide the second one too:
    `mv content_dev/images/img/<hash2>.jpg content_dev/images/img/<hash2>.hidden`
-5. Reload and start the session again. The console logs the pool-exhausted warning and the deck moves past that card.
+5. Reload and start the session again. The console logs `Image failed:` once for each of the two photos, then `Photo pool exhausted for species:QUGA:leaf. Skipping the card this session.`, and the deck moves past that card. The card asks for exactly two images, one per photo in its pool.
 6. Restore both:
    `mv content_dev/images/img/<hash1>.hidden content_dev/images/img/<hash1>.jpg && mv content_dev/images/img/<hash2>.hidden content_dev/images/img/<hash2>.jpg`
 
@@ -5198,23 +5203,30 @@ The fixture keys every image on its hash, so first read the two QUGA leaf hashes
 1. Run `localStorage.clear()` in the console and reload.
 2. Click "Take the placement test". The URL becomes `#/placement`.
 3. The deck holds 6 cards, one per level-1 concept with photos. Every chip reads "mc4".
-4. Answer the first one wrong. The reveal appears and Next moves on. The card does not re-queue, so the count still reads "Card 2 of 6".
-5. Answer the rest right and reach the summary.
-6. In the console run `JSON.parse(localStorage.dendro_log).rows.length`. It returns 0.
-7. Run `JSON.parse(localStorage.dendro_cards).cards`. The five right cards show `tier: "mc8"`, `interval: 21`, `tier_passes: 0`. The wrong one is absent.
+4. Answer the first card right, then answer the second card, a bark concept, wrong. The reveal appears and Next moves on. The card does not re-queue, so the count reads "Card 3 of 6". Miss a bark card rather than the first card: a wrong placement answer writes no state, and step 8 needs the one leaf concept card at level 2.
+5. Answer the rest right and reach the summary. It reads "Right: 5. Missed: 1." and "Promoted: none.", because a card the placement test writes for the first time is new, not promoted.
+6. In the console run `JSON.parse(localStorage.dendro_log).rows.length`. It returns 0. Placement writes no log key at all.
+7. Run `JSON.parse(localStorage.dendro_cards).cards`. The five right cards show `tier: "mc8"`, `interval: 21`, `tier_passes: 0`. The missed bark card is absent.
 8. Go Home. The leaf channel now shows 0 due, and "Simple lobed leaves" is marked open, because the one leaf concept card is at level 2.
 9. Take the placement test again and answer every card wrong. Run `JSON.parse(localStorage.dendro_cards).cards` once more. The five placed cards still show `tier: "mc8"`, `interval: 21`. A retake never overwrites a card that already has state.
 10. Point the app at a content set with no concept cards: open `http://localhost:8000/#/placement` with no query, so the app loads `content/`, which ships no images. The page reads "No cards to place" and offers a Home button.
 
 - [ ] **Step 6: Manual checklist, a full store**
 
-1. Run `localStorage.clear()`, reload, and start a leaf session.
-2. Fill the store from the console:
-   `const big='x'.repeat(1024*1024); try { for (let i=0;i<20;i+=1) localStorage.setItem('filler_'+i,big); } catch (e) { console.log('full'); }`
-3. Answer the card. The orange banner appears at the top and reads "Progress is not saved. This browser blocks local storage. Export from Settings to keep a copy."
-4. The reveal still renders and Next still works, so a failed write never stops the session.
+1. Run `localStorage.clear()`, reload, and start a leaf session. Leave the card on screen.
+2. Fill the store from the console. Each browser holds a different amount, so fill
+   until the write throws rather than counting blocks. Paste the helper first:
+   `const fill=(size,prefix)=>{const block='q'.repeat(size);let n=0;try{for(let i=0;i<9000;i+=1){localStorage.setItem(prefix+i,block);n+=1;}}catch(e){return n;}return n;};`
+   Then fill in three passes, coarse to fine, and free one small block at the end:
+   `fill(1024*1024,'big_'); fill(1024,'mid_'); const last=fill(32,'small_'); localStorage.removeItem('small_'+(last-1));`
+   The three passes leave under 100 bytes free. That is room for the store's own
+   probe write, which is a few bytes, and not for a card write and a log row.
+   Without the third pass about a megabyte stays free, every write still lands,
+   and the step proves nothing.
+3. Answer the card. The orange banner appears at the top and reads "Progress is not saved. This browser blocks local storage. Export from Settings to keep a copy." Run `localStorage.dendro_log` to confirm the key is absent, so the write really did fail.
+4. The reveal still renders and Next still works, so a failed write never stops the session. The summary carries "This browser blocks local storage, so nothing was saved. Open Settings and export before you close the tab."
 5. Clear the filler and reload:
-   `for (let i=0;i<20;i+=1) localStorage.removeItem('filler_'+i);`
+   `for (const key of Object.keys(localStorage)) if (/^(big_|mid_|small_)/.test(key)) localStorage.removeItem(key);`
 
 - [ ] **Step 7: Commit**
 

@@ -69,6 +69,11 @@ function showError(title, lines) {
   root.append(box);
 }
 
+// A thrown value is not always an Error, so read the message only when it has one.
+function errorText(error) {
+  return error && error.message ? error.message : String(error);
+}
+
 async function fetchContent(dir) {
   const raw = {};
   for (const [field, file] of Object.entries(CONTENT_FILES)) {
@@ -138,13 +143,20 @@ async function start() {
       banner: showBanner,
       storage_banner: STORAGE_BANNER
     };
+    // The root is already clear, so a screen that throws would leave a blank
+    // page. The error panel goes there instead.
     let leave;
-    if (parts[0] === 'session') leave = session.render(root, { ...ctx, mode: 'review' });
-    else if (parts[0] === 'placement') leave = session.render(root, { ...ctx, mode: 'placement' });
-    else if (parts[0] === 'progress') leave = progress.render(root, ctx);
-    else if (parts[0] === 'species') leave = species.render(root, { ...ctx, symbol: parts[1] });
-    else if (parts[0] === 'settings') leave = settings.render(root, ctx);
-    else leave = home.render(root, ctx);
+    try {
+      if (parts[0] === 'session') leave = session.render(root, { ...ctx, mode: 'review' });
+      else if (parts[0] === 'placement') leave = session.render(root, { ...ctx, mode: 'placement' });
+      else if (parts[0] === 'progress') leave = progress.render(root, ctx);
+      else if (parts[0] === 'species') leave = species.render(root, { ...ctx, symbol: parts[1] });
+      else if (parts[0] === 'settings') leave = settings.render(root, ctx);
+      else leave = home.render(root, ctx);
+    } catch (error) {
+      showError('The screen failed to open', [errorText(error)]);
+      return;
+    }
     teardown = typeof leave === 'function' ? leave : null;
   }
 
@@ -153,4 +165,4 @@ async function start() {
 }
 
 // A throw inside a screen would otherwise leave the placeholder text on screen.
-start().catch((error) => showError('The app failed to start', [error.message]));
+start().catch((error) => showError('The app failed to start', [errorText(error)]));

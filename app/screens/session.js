@@ -53,11 +53,19 @@ export function render(root, ctx) {
   const answered = new Set();
   let results = emptyResults();
   let index = 0;
+  // The counter names the card on screen. It is fixed when the card renders, so
+  // the reveal keeps the number the question had, and a second render of the
+  // same card, after a photo fails, keeps it too.
+  let answerCount = 0;
   let shown = 0;
 
-  // The router calls this when the user leaves. A pending image must then do nothing.
+  // Every render takes the next number. An image handler belongs to the render
+  // that made it, so it does nothing once a later render has replaced that one,
+  // and nothing once the router has called the teardown.
+  let renderId = 0;
   let cancelled = false;
   const teardown = () => { cancelled = true; };
+  const stale = (generation) => cancelled || generation !== renderId;
 
   function warnIfUnsaved() {
     if (!store.available) ctx.banner(ctx.storage_banner);
@@ -89,6 +97,7 @@ export function render(root, ctx) {
     });
     const repeat = answered.has(card.id);
     answered.add(card.id);
+    answerCount += 1;
     const before = store.readCards()[card.id];
 
     const effects = answerEffects({
@@ -156,6 +165,7 @@ export function render(root, ctx) {
   }
 
   function showReveal(question, reveal, typedText, correct) {
+    renderId += 1;
     root.textContent = '';
     header(question);
     root.append(el('h2', null, correct ? 'Right' : 'Wrong'));
@@ -239,11 +249,11 @@ export function render(root, ctx) {
     });
 
     // buildQuestion samples again with nothing excluded when the exclusion list
-    // covers the whole pool. A photo that already failed therefore means the
-    // pool is out, and the card waits for another session.
+    // covers the whole pool, so it can hand back a photo that already failed.
+    // The card waits for another session once every photo in its pool has failed.
     const failed = failedHashes[cardId] ?? [];
     const exhausted = question.format !== 'inv'
-      && (!question.photo || failed.includes(question.photo.hash));
+      && (!question.photo || card.photos.every((photo) => failed.includes(photo.hash)));
     if (exhausted) {
       console.warn(`Photo pool exhausted for ${cardId}. Skipping the card this session.`);
       index += 1;
@@ -251,8 +261,8 @@ export function render(root, ctx) {
       return;
     }
 
-    // The counter names the card on screen, so a skipped card never counts.
-    shown += 1;
+    const generation = (renderId += 1);
+    shown = answerCount + 1;
     root.textContent = '';
     header(question);
 
@@ -279,16 +289,15 @@ export function render(root, ctx) {
         img.src = imageUrl(option.photo, imageBase);
         img.alt = 'Option photo';
         img.addEventListener('load', () => {
-          if (cancelled) return;
+          if (stale(generation)) return;
           pending -= 1;
           if (pending === 0 && !startedAt) startedAt = Date.now();
         });
         img.addEventListener('error', () => {
-          if (cancelled) return;
+          if (stale(generation)) return;
           pending -= 1;
           if (option.key === question.answer_key) {
             console.warn(`Answer photo failed for ${cardId}. Skipping the card this session.`);
-            shown -= 1;
             index += 1;
             showCard();
             return;
@@ -309,15 +318,13 @@ export function render(root, ctx) {
       img.src = imageUrl(question.photo, imageBase);
       img.alt = question.prompt;
       img.addEventListener('load', () => {
-        if (cancelled) return;
+        if (stale(generation)) return;
         startedAt = Date.now();
       });
       img.addEventListener('error', () => {
-        if (cancelled) return;
+        if (stale(generation)) return;
         failedHashes[cardId] = [...(failedHashes[cardId] ?? []), question.photo.hash];
         console.warn(`Image failed: img/${question.photo.hash}.jpg`);
-        // The same card comes back with another photo, so it counts once.
-        shown -= 1;
         showCard();
       });
       root.append(img);
@@ -351,6 +358,7 @@ export function render(root, ctx) {
   }
 
   function showSummary() {
+    renderId += 1;
     root.textContent = '';
     root.append(el('h1', null, 'Session summary'));
     root.append(el('p', null, `Right: ${results.right}. Missed: ${results.missed}.`));
