@@ -939,6 +939,19 @@ test('photos add appends one manual row and names a missing flag', async (t) => 
   assert.equal(candidatesOf(root).length, 1);
 });
 
+test('photos add stores an absolute --local path root-relative with forward slashes', async (t) => {
+  const { root, deps } = setup(t);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+  const absolute = path.join(root, 'pipeline', 'cache', 'manual', 'quga_bark.jpg');
+
+  const args = [...manualAdd('https://example.org/a.jpg'), '--local', absolute];
+  assert.equal(await runCommand(args, deps), 0);
+
+  const rows = candidatesOf(root);
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].local, 'pipeline/cache/manual/quga_bark.jpg');
+});
+
 test('photos add downloads the file when --local is absent', async (t) => {
   const fileUrl = 'https://www.fs.usda.gov/images/quga_bark.jpg';
   const { root, deps, out } = setup(t, new Map([[fileUrl, { bytes: jpeg(7) }]]));

@@ -393,7 +393,12 @@ async function photosAdd(rest: string[], deps: CliDeps): Promise<number> {
     license_url: flags['license-url'] ?? null,
     source_species: flags['source-species'] ?? null,
     channel_hint: flags['channel-hint'] ?? null,
-    local: flags.local ?? null,
+    // Every fetched row carries a root-relative POSIX path. A hand-typed Windows path or
+    // an absolute one is stored the same way, so `path.join(root, …)` finds it later.
+    local:
+      flags.local === undefined
+        ? null
+        : relative(deps.root, path.resolve(deps.root, flags.local)),
     fetched_at: isoNow(deps),
   });
   if (flags.local === undefined) {
