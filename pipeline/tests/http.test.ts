@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import {
   BACKOFF_BASE_MS,
   CACHE_DAYS,
@@ -282,6 +282,24 @@ test('the cache expires after the group lifetime', async (t) => {
   assert.equal(fake.calls.length, 2);
   assert.equal(res.fromCache, false);
   assert.equal(res.body, 'new');
+});
+
+test('a corrupt cache file is treated as a miss and gets rewritten', async (t) => {
+  const clock = makeClock();
+  const fake = makeFetch(clock, [{ body: 'fresh body' }]);
+  const dir = tmpCacheDir(t);
+  const file = cachePath(dir, INAT, '.json');
+  // A process killed mid-write can leave a truncated file behind.
+  mkdirSync(dirname(file), { recursive: true });
+  writeFileSync(file, '{"url": "https://api.inaturalist.org/v1/taxa?q=Que');
+  const http = createHttp({
+    cacheDir: dir, fetchImpl: fake.impl, now: clock.now, sleep: clock.sleep,
+  });
+  const res = await http.getText(INAT);
+  assert.equal(fake.calls.length, 1);
+  assert.equal(res.fromCache, false);
+  assert.equal(res.body, 'fresh body');
+  assert.doesNotThrow(() => JSON.parse(readFileSync(file, 'utf8')));
 });
 
 test('refresh bypasses a warm cache and rewrites it', async (t) => {

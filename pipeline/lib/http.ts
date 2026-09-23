@@ -105,6 +105,38 @@ function lifetimeMs(group: string): number {
   return (CACHE_DAYS[group] ?? DEFAULT_CACHE_DAYS) * DAY_MS;
 }
 
+interface CachedRow {
+  url: string;
+  fetched_at: string;
+  status: number;
+  body?: string;
+}
+
+/**
+ * `writeFileSync` is not atomic: a process killed mid-write leaves a truncated file.
+ * A parse failure, or a row missing a field a caller needs, is a cache miss, not a
+ * crash. Both `getText` and `getBytes` read a cached row through this one gate.
+ */
+function readCachedRow(file: string): CachedRow | null {
+  let raw: string;
+  try {
+    raw = readFileSync(file, 'utf8');
+  } catch {
+    return null;
+  }
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return null;
+  }
+  if (typeof parsed !== 'object' || parsed === null) return null;
+  const row = parsed as Record<string, unknown>;
+  if (typeof row.fetched_at !== 'string' || typeof row.status !== 'number') return null;
+  if (row.body !== undefined && typeof row.body !== 'string') return null;
+  return row as unknown as CachedRow;
+}
+
 interface HostGate {
   nextAt: number;
   inFlight: number;
@@ -239,9 +271,12 @@ export function createHttp(options: HttpOptions): Http {
   }
 
   async function text(url: string, init: RequestInit, file: string): Promise<TextResult> {
-    if (!refresh && existsSync(file)) {
-      const row = JSON.parse(readFileSync(file, 'utf8'));
-      if (now() - Date.parse(row.fetched_at) < lifetimeMs(groupOf(hostOf(url)))) {
+    if (!refresh) {
+      const row = readCachedRow(file);
+      if (
+        row !== null && typeof row.body === 'string'
+        && now() - Date.parse(row.fetched_at) < lifetimeMs(groupOf(hostOf(url)))
+      ) {
         return { ok: true, status: row.status, body: row.body, fromCache: true, error: null };
       }
     }
@@ -274,10 +309,12 @@ export function createHttp(options: HttpOptions): Http {
       const head = cachePath(cacheDir, url, '.bin.json');
       const bin = cachePath(cacheDir, url, '.bin');
       // No lifetime check. Image bytes never change, so a cached file never expires.
-      if (!refresh && existsSync(head) && existsSync(bin)) {
-        const row = JSON.parse(readFileSync(head, 'utf8'));
-        const cached = new Uint8Array(readFileSync(bin));
-        return { ok: true, status: row.status, bytes: cached, fromCache: true, error: null };
+      if (!refresh && existsSync(bin)) {
+        const row = readCachedRow(head);
+        if (row !== null) {
+          const cached = new Uint8Array(readFileSync(bin));
+          return { ok: true, status: row.status, bytes: cached, fromCache: true, error: null };
+        }
       }
       const sent = await send(url, { method: 'GET', headers: headers({}) });
       if (sent.res === null) {
