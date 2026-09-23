@@ -201,10 +201,15 @@ export function createHttp(options: HttpOptions): Http {
     if (next !== undefined) next();
   }
 
-  function retryAfterMs(res: Response): number {
+  /**
+   * The wait the server asked for. A header that is absent, not a number, or negative
+   * leaves the caller's own wait in place.
+   */
+  function retryAfterOr(res: Response, fallback: number): number {
     const header = res.headers.get('retry-after');
     const seconds = header === null ? NaN : Number(header);
-    return Number.isFinite(seconds) ? seconds * MS_PER_SECOND : NO_RETRY_AFTER_MS;
+    if (!Number.isFinite(seconds) || seconds < 0) return fallback;
+    return Math.max(0, seconds * MS_PER_SECOND);
   }
 
   function backoffMs(attempt: number): number {
@@ -238,17 +243,19 @@ export function createHttp(options: HttpOptions): Http {
       return {
         sent: { res: null, status, error: 'http 429' },
         retryable: true,
-        waitMs: retryAfterMs(res),
+        waitMs: retryAfterOr(res, NO_RETRY_AFTER_MS),
       };
     }
     // Every other 4xx is final. A 404 records one failure and stops here.
     if (status < 500) {
       return { sent: { res: null, status, error: `http ${status}` }, retryable: false, waitMs: 0 };
     }
+    // A 5xx carries Retry-After too, and the server knows its own outage better than the
+    // doubling backoff does.
     return {
       sent: { res: null, status, error: `http ${status}` },
       retryable: true,
-      waitMs: backoffMs(attempt),
+      waitMs: retryAfterOr(res, backoffMs(attempt)),
     };
   }
 

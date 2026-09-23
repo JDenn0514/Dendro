@@ -239,6 +239,23 @@ test('a 500 retries with doubling waits, then records one failure', async (t) =>
   assert.equal(http.failures[0].status, 500);
 });
 
+test('a 503 with Retry-After sleeps that many seconds and retries', async (t) => {
+  const clock = makeClock();
+  const fake = makeFetch(clock, [
+    { status: 503, headers: { 'Retry-After': '2' } },
+    { status: 200, body: 'second try' },
+  ]);
+  const http = createHttp({
+    cacheDir: tmpCacheDir(t), fetchImpl: fake.impl, now: clock.now, sleep: clock.sleep,
+  });
+  const res = await http.getText(INAT);
+  assert.deepEqual(clock.sleeps, [2 * MS_PER_SECOND]);
+  assert.equal(fake.calls.length, 2);
+  assert.equal(res.ok, true);
+  assert.equal(res.body, 'second try');
+  assert.deepEqual(http.failures, []);
+});
+
 test('a 404 records one failure and does not retry', async (t) => {
   const clock = makeClock();
   const fake = makeFetch(clock, [{ status: 404 }]);
