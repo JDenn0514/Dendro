@@ -49,5 +49,9 @@ jobs:
       - uses: actions/upload-pages-artifact@v5
         with:
           path: '.'
+          # .nojekyll is a hidden file. From v5 the upload drops hidden files
+          # unless this is set, and without .nojekyll Pages runs the site
+          # through Jekyll.
+          include-hidden-files: true
       - id: deployment
         uses: actions/deploy-pages@v5
