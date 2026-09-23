@@ -5205,7 +5205,7 @@ The fixture keys every image on its hash, so first read the two QUGA leaf hashes
 3. The deck holds 6 cards, one per level-1 concept with photos. Every chip reads "mc4".
 4. Answer the first card right, then answer the second card, a bark concept, wrong. The reveal appears and Next moves on. The card does not re-queue, so the count reads "Card 3 of 6". Miss a bark card rather than the first card: a wrong placement answer writes no state, and step 8 needs the one leaf concept card at level 2.
 5. Answer the rest right and reach the summary. It reads "Right: 5. Missed: 1." and "Promoted: none.", because a card the placement test writes for the first time is new, not promoted.
-6. In the console run `JSON.parse(localStorage.dendro_log).rows.length`. It returns 0. Placement writes no log key at all.
+6. In the console run `localStorage.dendro_log`. It returns `undefined`. Placement writes no log key at all.
 7. Run `JSON.parse(localStorage.dendro_cards).cards`. The five right cards show `tier: "mc8"`, `interval: 21`, `tier_passes: 0`. The missed bark card is absent.
 8. Go Home. The leaf channel now shows 0 due, and "Simple lobed leaves" is marked open, because the one leaf concept card is at level 2.
 9. Take the placement test again and answer every card wrong. Run `JSON.parse(localStorage.dendro_cards).cards` once more. The five placed cards still show `tier: "mc8"`, `interval: 21`. A retake never overwrites a card that already has state.
