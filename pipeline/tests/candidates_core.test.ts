@@ -260,3 +260,27 @@ test('makeCandidate keeps every field the caller passed', () => {
   assert.equal(candidate.fetched_at, '2026-09-22T15:04:00Z');
   assert.equal(candidate.fetch_error, 'timeout');
 });
+
+test('makeCandidate copies tags_hint, so two rows from one pass never share one array', () => {
+  const passTags = ['flowering'];
+  const first = makeCandidate({
+    target: 'QUGA',
+    source_key: 'inat',
+    origin: 'https://www.inaturalist.org/observations/1#photo=1',
+    file_url: 'https://static.inaturalist.org/photos/1/original.jpg',
+    tags_hint: passTags,
+  });
+  const second = makeCandidate({
+    target: 'QUGA',
+    source_key: 'inat',
+    origin: 'https://www.inaturalist.org/observations/2#photo=2',
+    file_url: 'https://static.inaturalist.org/photos/2/original.jpg',
+    tags_hint: passTags,
+  });
+
+  first.tags_hint.push('extra');
+
+  assert.deepEqual(first.tags_hint, ['flowering', 'extra']);
+  assert.deepEqual(second.tags_hint, ['flowering']);
+  assert.deepEqual(passTags, ['flowering']);
+});

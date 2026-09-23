@@ -44,7 +44,7 @@ function tempDir(): string {
 
 const NOW = '2026-09-22T15:04:00Z';
 const TAXON_ID = 47851;
-// One name for the flowering value, read from the committed data file.
+// One name for the flowering value, read from the frozen fixture.
 const FLOWERING_VALUE_ID = loadInatTerms(termsPath).flowering_value_id;
 // A value no pass hard-codes, so a test can prove where the argument lands.
 const PROBE_VALUE_ID = 99;

@@ -139,7 +139,9 @@ export function makeCandidate(
     license_url: fields.license_url ?? null,
     source_species: fields.source_species ?? null,
     channel_hint: fields.channel_hint ?? null,
-    tags_hint: fields.tags_hint ?? [],
+    // A copy, not the caller's array, so two rows built from one pass's tags_hint never
+    // share one array: a later push onto one row could not change another row or the pass.
+    tags_hint: fields.tags_hint === undefined ? [] : [...fields.tags_hint],
     // photos fetch sets this from the identity check. Task 9 holds the comparison.
     identity_match: fields.identity_match ?? null,
     local: fields.local ?? null,
