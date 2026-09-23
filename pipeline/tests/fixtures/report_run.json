@@ -1,0 +1,77 @@
+{
+  "run": "v0-oaks",
+  "channels": ["leaf", "bark", "fruit"],
+  "species": [
+    {
+      "symbol": "QUAL",
+      "status": "included",
+      "reason": null,
+      "counts": { "leaf": 9, "bark": 6, "fruit": 3 }
+    },
+    {
+      "symbol": "QUMA2",
+      "status": "no_photos",
+      "reason": null,
+      "counts": {}
+    },
+    {
+      "symbol": "QURU",
+      "status": "included",
+      "reason": null,
+      "counts": { "leaf": 5, "bark": 2 }
+    },
+    {
+      "symbol": "QUST",
+      "status": "dropped",
+      "reason": "shrub habit only",
+      "counts": {}
+    },
+    {
+      "symbol": "QUVE",
+      "status": "not_authored",
+      "reason": null,
+      "counts": { "leaf": 4, "bark": 1 }
+    }
+  ],
+  "gaps": [
+    { "symbol": "QUMA2", "channel": "bark", "count": 0 },
+    { "symbol": "QUMA2", "channel": "fruit", "count": 0 },
+    { "symbol": "QUMA2", "channel": "leaf", "count": 0 },
+    { "symbol": "QURU", "channel": "fruit", "count": 0 },
+    { "symbol": "QURU", "channel": "bark", "count": 2 },
+    { "symbol": "QUAL", "channel": "fruit", "count": 3 }
+  ],
+  "units": [
+    { "key": "bark_types", "cards": 12, "warning": null },
+    {
+      "key": "leaf_types",
+      "cards": 27,
+      "warning": "leaf_types holds 27 cards, outside the range 5 to 25"
+    },
+    { "key": "simple_lobed_white_oaks_co", "cards": 5, "warning": null }
+  ],
+  "escalations": [
+    {
+      "candidate_id": "a1b2c3d4e5f60718293a4b5c6d7e8f9012345678",
+      "image_url": "https://images.dendro.test/review/a1b2c3d4e5f60718293a4b5c6d7e8f9012345678.jpg",
+      "origin": "https://www.inaturalist.org/observations/123456",
+      "case": "mismatch",
+      "note": "Leaf reads Quercus rubra | not Quercus alba.",
+      "target": "QUAL"
+    },
+    {
+      "candidate_id": "90abcdef1234567890abcdef1234567890abcdef",
+      "image_url": "https://images.dendro.test/review/90abcdef1234567890abcdef1234567890abcdef.jpg",
+      "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_bark.jpg",
+      "case": "license",
+      "note": "The file page names CC BY-NC.",
+      "target": "QUVE"
+    }
+  ],
+  "counts": {
+    "candidates_by_source": { "commons": 41, "inat": 63, "manual": 5, "plants": 24 },
+    "verdicts_by_kind": { "approve": 58, "escalate": 2, "reject": 61 },
+    "fetch_failures": 3,
+    "stop_rule_fired": false
+  }
+}
