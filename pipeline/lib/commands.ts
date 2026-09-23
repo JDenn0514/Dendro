@@ -47,6 +47,7 @@ import { appendJsonl, readJsonl } from './jsonl.ts';
 import { publishApproved, retireRows, type ManifestRow } from './manifest.ts';
 import {
   CHECKLIST_URL,
+  DISTRIBUTION_URL,
   acceptedSymbols,
   fetchDistribution,
   fetchImages,
@@ -1021,10 +1022,20 @@ async function buildContent(
       );
     }
     const taxon = await inatTaxonOf(deps, profile.scientific, symbol, now);
+    const subordinate = await fetchSubordinateTaxa(deps.http, profile.plants_id, now);
+    // fetchDistribution answers a failed fetch with an empty list, and validateFetched does
+    // not read the states. Without this check a PLANTS outage republishes the species with
+    // an empty range.states, which is worse than a stopped build.
+    const failuresBefore = deps.http.failures.length;
+    const states = await fetchDistribution(deps.http, profile.plants_id, now);
+    if (deps.http.failures.slice(failuresBefore).some((one) => one.url === DISTRIBUTION_URL)) {
+      console.error(`${symbol}: distribution fetch failed, build stopped`);
+      return null;
+    }
     const fetched = buildFetched({
       profile,
-      subordinate: await fetchSubordinateTaxa(deps.http, profile.plants_id, now),
-      states: await fetchDistribution(deps.http, profile.plants_id, now),
+      subordinate,
+      states,
       section: sections === null ? null : sectionFor(sections, profile.scientific),
       inat: taxon,
     });

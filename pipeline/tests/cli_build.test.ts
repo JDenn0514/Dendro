@@ -793,6 +793,20 @@ test('a species whose profile fetch fails stops the build', async (t) => {
   assert.equal(exists(root, 'content/species.json'), false);
 });
 
+test('a failed distribution fetch stops the build before it writes or uploads', async (t) => {
+  const routes = defaultRoutes();
+  routes.set(`${DISTRIBUTION_URL} {"MasterId":${QUGA_ID}}`, { status: 500 });
+  const { root, deps, storage, err } = setup(t, routes);
+  seed(root);
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.ok(err.includes('QUGA: distribution fetch failed, build stopped'));
+  assert.deepEqual(storage.puts, []);
+  assert.equal(exists(root, 'content/species.json'), false);
+  assert.equal(exists(root, 'content/images/manifest.json'), false);
+});
+
 test('a missing content/units.json is an error that names the file', async (t) => {
   const { root, deps, err } = setup(t);
   seed(root);
