@@ -441,15 +441,15 @@ test('an unknown command fails', async (t) => {
   assert.ok(err.join('\n').includes('usage:'));
 });
 
-test('a Task 14 command says it is not implemented yet', async (t) => {
+test('a Task 14 command reaches its own handler', async (t) => {
   const { deps, err } = setup(t);
   assert.equal(await runCommand(['build', 'demo'], deps), 1);
   assert.equal(await runCommand(['run', 'pr', 'demo'], deps), 1);
   assert.equal(await runCommand(['species', 'retire', 'QUGA'], deps), 1);
   assert.deepEqual(err, [
-    'not implemented yet: build',
-    'not implemented yet: run pr',
-    'not implemented yet: species retire',
+    'run demo does not exist. Run "cli run init demo" first.',
+    'run demo has no report.md; run report first',
+    'species retire needs --reason "<text>"',
   ]);
 });
 

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
+import { loadContent } from '../../app/logic/content.js';
 import {
   collect,
   licenseAllowed,
@@ -9,9 +10,17 @@ import {
   type Candidate,
 } from './candidates.ts';
 import { categoryUrl, commonsCandidates, parseCategoryListing } from './commons.ts';
-import { SECTION_PAGES, buildSectionTable, nextPageUrl } from './fna.ts';
+import { SECTION_PAGES, buildSectionTable, loadSectionTable, nextPageUrl, sectionFor } from './fna.ts';
 import type { Http, TextResult } from './http.ts';
-import { sha256Hex, type Resize } from './images.ts';
+import { appendOnlyErrors, readPublished, type ContentSet } from './ids.ts';
+import {
+  JPEG_QUALITY,
+  MAX_SIDE,
+  objectKey,
+  reviewKey,
+  sha256Hex,
+  type Resize,
+} from './images.ts';
 import {
   FRUITING_VALUE_ID,
   PER_PAGE,
@@ -25,6 +34,7 @@ import {
   phenologyProbeUrl,
   taxaUrl,
   type InatPass,
+  type InatTaxon,
 } from './inat.ts';
 import {
   asArray,
@@ -34,18 +44,27 @@ import {
   parseJson as parseJsonBody,
 } from './json_fields.ts';
 import { appendJsonl, readJsonl } from './jsonl.ts';
-import type { ManifestRow } from './manifest.ts';
+import { publishApproved, retireRows, type ManifestRow } from './manifest.ts';
 import {
   CHECKLIST_URL,
   acceptedSymbols,
   fetchDistribution,
   fetchImages,
   fetchProfile,
+  fetchSubordinateTaxa,
   parseChecklist,
   plantsCandidates,
   synonymNames,
   type PlantsProfile,
 } from './plants.ts';
+import {
+  buildGaps,
+  renderReport,
+  type ReportData,
+  type ReportEscalationRow,
+  type ReportSpeciesRow,
+  type ReportUnitRow,
+} from './report.ts';
 import {
   csvList,
   errorMessage,
@@ -53,6 +72,7 @@ import {
   gitCheckoutExisting,
   gitCommitAll,
   newScope,
+  openPullRequest,
   parseFlags,
   readConceptKeys,
   readJsonFile,
@@ -62,13 +82,24 @@ import {
   type Exec,
   type RunScope,
 } from './run.ts';
-import { enumerateRun } from './species.ts';
-import type { Storage } from './storage.ts';
+import {
+  buildFetched,
+  enumerateRun,
+  mergeSpecies,
+  readAuthored,
+  validateAuthored,
+  validateFetched,
+  type SpeciesRecord,
+} from './species.ts';
+import { deferredStorage, type Storage } from './storage.ts';
 import {
   VERDICT_KINDS,
   countByTargetChannel,
+  decisionsToVerdicts,
   identityMatches,
+  stopRule,
   validateVerdicts,
+  type Decision,
   type EscalationCase,
   type Verdict,
   type VerdictKind,
@@ -495,14 +526,7 @@ async function dataInatTerms(_rest: string[], deps: CliDeps): Promise<number> {
   return 0;
 }
 
-function notYet(name: string): Handler {
-  return async () => {
-    console.error(`not implemented yet: ${name}`);
-    return 1;
-  };
-}
-
-// Every command of the surface is named here. Task 14 replaces the last seven.
+// Every command of the surface is named here.
 const COMMANDS: Record<string, Handler> = {
   'run init': runInit,
   'species list': speciesList,
@@ -511,13 +535,13 @@ const COMMANDS: Record<string, Handler> = {
   'photos verdict': photosVerdict,
   'data sections': dataSections,
   'data inat-terms': dataInatTerms,
-  build: notYet('build'),
-  report: notYet('report'),
-  'run pr': notYet('run pr'),
-  'run finish': notYet('run finish'),
-  'images retire': notYet('images retire'),
-  'species retire': notYet('species retire'),
-  'ids check': notYet('ids check'),
+  build,
+  report,
+  'run pr': runPr,
+  'run finish': runFinish,
+  'images retire': imagesRetire,
+  'species retire': speciesRetire,
+  'ids check': idsCheck,
 };
 
 interface FetchContext {
@@ -772,4 +796,651 @@ function positional(rest: string[], usage: string): string {
 
 function isoNow(deps: CliDeps): string {
   return deps.now().toISOString().replace(/\.\d+Z$/, 'Z');
+}
+
+const MANIFEST_NAME = path.join('images', 'manifest.json');
+const DEFAULT_BASE = 'main';
+const IMAGES_RETIRED = 'every approved image was retired';
+const MISSING_FILE = 'the local file is missing';
+const NO_INAT_TAXON = 'no iNat taxon';
+
+type BuildReport = Omit<ReportData, 'escalations'>;
+
+/** What `loadContent` hands back. The app module carries no types of its own. */
+interface LoadedContent {
+  unit_cards: Record<string, string[]>;
+}
+
+interface LoadResult {
+  ok: boolean;
+  content: LoadedContent | null;
+  errors: ValidationMessage[];
+}
+
+interface SpeciesStatus {
+  status: string;
+  reason: string | null;
+}
+
+const CONCEPT_STATUS: SpeciesStatus = { status: 'included', reason: null };
+
+async function build(rest: string[], deps: CliDeps): Promise<number> {
+  const name = positional(rest, 'build <name> [--base <ref>]');
+  const data = await buildContent(name, deps, baseRef(parseFlags(rest.slice(1))));
+  if (data === null) return 1;
+  gitCommitAll(deps.exec, `content: build ${name}`);
+  return 0;
+}
+
+async function report(rest: string[], deps: CliDeps): Promise<number> {
+  const name = positional(rest, 'report <name>');
+  if (!(await writeReport(name, deps))) return 1;
+  gitCommitAll(deps.exec, `content(${name}): report`);
+  return 0;
+}
+
+async function runPr(rest: string[], deps: CliDeps): Promise<number> {
+  const name = positional(rest, 'run pr <name>');
+  const body = path.join(runDir(deps.root, name), 'report.md');
+  if (!fs.existsSync(body)) {
+    console.error(`run ${name} has no report.md; run report first`);
+    return 1;
+  }
+  gitCommitAll(deps.exec, `content(${name}): pull request`);
+  if (!pushBranch(deps, name)) return 1;
+  openPullRequest(deps.exec, name, body);
+  console.log(`draft pull request opened for content/${name}`);
+  return 0;
+}
+
+async function runFinish(rest: string[], deps: CliDeps): Promise<number> {
+  const name = positional(rest, 'run finish <name>');
+  const dir = runDir(deps.root, name);
+  const file = path.join(dir, 'decisions.json');
+  if (!fs.existsSync(file)) {
+    // The owner had nothing to decide. That is a finished run, not a failure.
+    console.log('no decisions to apply');
+    return 0;
+  }
+
+  const scope = readRun(deps.root, name);
+  const decisions = readJsonOr<Record<string, Decision>>(file, {});
+  const owner = decisionsToVerdicts(decisions, isoNow(deps).slice(0, 10));
+  const verdictsPath = path.join(dir, 'verdicts.jsonl');
+  const verdicts = readJsonl<Verdict>(verdictsPath);
+  const candidates = readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'));
+
+  // verdicts.jsonl is append-only, so a bad decision is rejected before it is written.
+  const errors = validateVerdicts([...verdicts, ...owner], candidates, scope.channels);
+  if (errors.length > 0) {
+    for (const message of errors) console.error(message);
+    return 1;
+  }
+
+  appendJsonl(verdictsPath, owner);
+  console.log(`${owner.length} decision${owner.length === 1 ? '' : 's'} applied`);
+
+  const data = await buildContent(name, deps, DEFAULT_BASE);
+  if (data === null) return 1;
+  gitCommitAll(deps.exec, `content: build ${name}`);
+  if (!(await writeReport(name, deps))) return 1;
+  gitCommitAll(deps.exec, `content(${name}): report`);
+  return pushBranch(deps, name) ? 0 : 1;
+}
+
+async function imagesRetire(rest: string[], deps: CliDeps): Promise<number> {
+  const hash = positional(rest, 'images retire <hash> --reason "<text>"');
+  const flags = parseFlags(rest.slice(1));
+  const reason = flagValue(flags, 'reason');
+  if (reason === null) {
+    console.error('images retire needs --reason "<text>"');
+    return 1;
+  }
+
+  const at = isoNow(deps).slice(0, 10);
+  const before = readManifest(deps.root);
+  const result = retireRows(before, hash, reason, at);
+  if (result.retired === 0) {
+    console.error(`no manifest row carries hash ${hash}`);
+    return 1;
+  }
+
+  const species = readSpecies(deps.root);
+  markRetiredSpecies(species, result.rows, at);
+  if (!(await commitRetire(deps, species, before, result.rows, `retire image ${hash}`))) {
+    return 1;
+  }
+  const rows = `${result.retired} manifest row${result.retired === 1 ? '' : 's'}`;
+  console.log(`${rows} retired for ${hash}`);
+  return 0;
+}
+
+async function speciesRetire(rest: string[], deps: CliDeps): Promise<number> {
+  const symbol = positional(rest, 'species retire <SYMBOL> --reason "<text>"');
+  const flags = parseFlags(rest.slice(1));
+  const reason = flagValue(flags, 'reason');
+  if (reason === null) {
+    console.error('species retire needs --reason "<text>"');
+    return 1;
+  }
+
+  const species = readSpecies(deps.root);
+  const current = species[symbol];
+  if (current === undefined) {
+    console.error(`species.json has no record ${symbol}`);
+    return 1;
+  }
+
+  const at = isoNow(deps).slice(0, 10);
+  const before = readManifest(deps.root);
+  // The rows go too. A rebuild then sees every row retired and keeps the species retired.
+  const rows = retireOwnRows(before, ownTargets(symbol, current), reason, at);
+  species[symbol] = { ...current, retired: true, retired_reason: reason, retired_at: at };
+  if (!(await commitRetire(deps, species, before, rows, `retire species ${symbol}`))) {
+    return 1;
+  }
+  const count = rows.filter((one) => one.retired === true).length;
+  console.log(`${symbol} retired, ${count} manifest row${count === 1 ? '' : 's'} retired`);
+  return 0;
+}
+
+async function idsCheck(rest: string[], deps: CliDeps): Promise<number> {
+  const raw = rawOf(deps.root, readSpecies(deps.root), readManifest(deps.root));
+  const base = baseRef(parseFlags(rest));
+  const errors = appendOnlyErrors(readPublished(gitShowOf(deps, base)), contentSetOf(raw));
+  for (const message of errors) console.error(message);
+  if (errors.length > 0) return 1;
+  console.log('content ids are append-only');
+  return 0;
+}
+
+/**
+ * Builds the whole content set in memory, checks it, and only then uploads and writes.
+ * Spec section 11: a build that fails writes nothing to content/ and uploads nothing.
+ * Returns null when it printed a failure.
+ */
+async function buildContent(
+  name: string,
+  deps: CliDeps,
+  base: string,
+): Promise<BuildReport | null> {
+  const scope = readRun(deps.root, name);
+  const dir = runDir(deps.root, name);
+  const candidates = readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'));
+  const verdicts = readJsonl<Verdict>(path.join(dir, 'verdicts.jsonl'));
+  const now = isoNow(deps);
+  const at = now.slice(0, 10);
+
+  const verdictErrors = validateVerdicts(verdicts, candidates, scope.channels);
+  if (verdictErrors.length > 0) {
+    for (const message of verdictErrors) console.error(message);
+    return null;
+  }
+
+  const deferred = deferredStorage(deps.storage);
+  const published = await publishApproved({
+    deps: {
+      storage: deferred,
+      resize: deps.resize,
+      readLocal: (file) => fs.readFileSync(path.join(deps.root, file)),
+    },
+    candidates,
+    verdicts,
+    rows: readManifest(deps.root),
+  });
+  const manifest = published.rows;
+
+  const concepts = readContentList<RawContent['concepts'][number]>(deps.root, 'concepts.json');
+  const conceptKeys = new Set(concepts.map((one) => `${one.channel}/${one.key}`));
+  const authoredDir = path.join(deps.root, 'content_src', 'species');
+  const species: Record<string, SpeciesRecord> = {};
+  const statuses: Record<string, SpeciesStatus> = {};
+  const authoredErrors: string[] = [];
+  let sections: Record<string, string> | null = null;
+
+  for (const symbol of scope.species) {
+    const authored = readAuthored(authoredDir, symbol);
+    if (authored === null) {
+      statuses[symbol] = { status: 'not_authored', reason: null };
+      continue;
+    }
+    authoredErrors.push(...validateAuthored(authored, symbol, conceptKeys));
+
+    // species list fetched this profile already, so the disk cache answers it. The build
+    // needs the whole record, which pipeline/data/plants_ids.json does not carry.
+    const profile = await fetchProfile(deps.http, symbol, now);
+    if (profile === null) {
+      console.error(`${symbol}: ${NO_PROFILE}. The build stopped.`);
+      return null;
+    }
+    if (profile.genus === 'Quercus' && sections === null) {
+      sections = loadSectionTable(
+        path.join(deps.root, 'pipeline', 'data', 'quercus_sections.json'),
+      );
+    }
+    const taxon = await inatTaxonOf(deps, profile.scientific, symbol, now);
+    const fetched = buildFetched({
+      profile,
+      subordinate: await fetchSubordinateTaxa(deps.http, profile.plants_id, now),
+      states: await fetchDistribution(deps.http, profile.plants_id, now),
+      section: sections === null ? null : sectionFor(sections, profile.scientific),
+      inat: taxon,
+    });
+
+    const fetchedErrors = validateFetched(fetched, symbol);
+    const live = manifest.filter(
+      (one) => one.target === symbol && one.retired !== true,
+    ).length;
+    statuses[symbol] = statusOf(fetchedErrors, live, taxon === null);
+    if (fetchedErrors.length > 0) {
+      console.log(`${symbol}: dropped, ${statuses[symbol].reason ?? ''}`);
+      continue;
+    }
+    // A species with no photo is still written. The app validator owns the rule that a
+    // live species needs a live image or a confusion edge.
+    species[symbol] = mergeSpecies(fetched, authored);
+  }
+
+  if (authoredErrors.length > 0) {
+    for (const message of authoredErrors) console.error(message);
+    return null;
+  }
+
+  const previous = readPublished(gitShowOf(deps, base));
+  carryPublished(species, previous);
+  markRetiredSpecies(species, manifest, at);
+
+  const raw = rawOf(deps.root, species, manifest);
+  const result = validated(deps, raw);
+  if (result === null) return null;
+
+  const loaded = loadContent(raw) as LoadResult;
+  if (loaded.content === null) {
+    // deps.validate passed and the app loader did not. The two disagree, so stop.
+    for (const one of loaded.errors) console.error(`error ${one.file}: ${one.message}`);
+    return null;
+  }
+
+  const idErrors = appendOnlyErrors(previous, contentSetOf(raw));
+  if (idErrors.length > 0) {
+    for (const message of idErrors) console.error(message);
+    return null;
+  }
+
+  await deferred.flush();
+  writeJson(contentFile(deps.root, 'species.json'), raw.species);
+  writeJson(contentFile(deps.root, MANIFEST_NAME), raw.manifest);
+
+  const data = reportData({
+    name,
+    scope,
+    statuses,
+    candidates,
+    verdicts,
+    raw,
+    loaded: loaded.content,
+    warnings: result.warnings,
+  });
+  writeJson(path.join(dir, 'build.json'), data);
+  // A cap that photos fetch recorded reaches the reader again here.
+  for (const message of scope.capped) console.log(`capped: ${message}`);
+  printFailures(deps);
+  console.log(
+    `content built: ${Object.keys(raw.species).length} species, ${raw.manifest.length} manifest rows, ${published.uploaded.length} images uploaded`,
+  );
+  return data;
+}
+
+/**
+ * Spec section 4: a species never leaves species.json. Every published record this run
+ * does not rebuild is copied as it was published. It was valid then, so it is valid now.
+ */
+function carryPublished(
+  species: Record<string, SpeciesRecord>,
+  previous: ContentSet | null,
+): void {
+  if (previous === null) return;
+  for (const [symbol, record] of Object.entries(previous.species)) {
+    if (species[symbol] !== undefined) continue;
+    species[symbol] = record;
+  }
+}
+
+/**
+ * The second of the two retire paths: a species whose every manifest row is retired.
+ * `cli species retire` is the first. Nothing else writes these three fields.
+ */
+function markRetiredSpecies(
+  species: Record<string, SpeciesRecord>,
+  manifest: ManifestRow[],
+  at: string,
+): void {
+  for (const [symbol, record] of Object.entries(species)) {
+    if (record.retired === true) continue;
+    const rows = manifest.filter((one) => one.target === symbol);
+    if (rows.length === 0) continue;
+    if (rows.some((one) => one.retired !== true)) continue;
+    species[symbol] = {
+      ...record,
+      retired: true,
+      retired_reason: IMAGES_RETIRED,
+      retired_at: at,
+    };
+  }
+}
+
+function statusOf(
+  fetchedErrors: string[],
+  liveImages: number,
+  taxonMissing: boolean,
+): SpeciesStatus {
+  if (fetchedErrors.length > 0) {
+    return { status: 'dropped', reason: fetchedErrors.join('; ') };
+  }
+  return {
+    status: liveImages === 0 ? 'no_photos' : 'included',
+    reason: taxonMissing ? NO_INAT_TAXON : null,
+  };
+}
+
+function reportData(input: {
+  name: string;
+  scope: RunScope;
+  statuses: Record<string, SpeciesStatus>;
+  candidates: Candidate[];
+  verdicts: Verdict[];
+  raw: RawContent;
+  loaded: LoadedContent;
+  warnings: ValidationMessage[];
+}): BuildReport {
+  const { name, scope, statuses, candidates, verdicts, raw, loaded, warnings } = input;
+  const counts = countByTargetChannel(verdicts, candidates);
+  const rows: ReportSpeciesRow[] = [];
+  // A concept run's targets are its qualified concept keys and it fills no status.
+  const targets = scope.concepts.length > 0 ? scope.concepts : scope.species;
+  for (const target of targets) {
+    const status = statuses[target] ?? CONCEPT_STATUS;
+    rows.push({
+      symbol: target,
+      status: status.status,
+      reason: status.reason,
+      counts: counts[target] ?? {},
+    });
+  }
+  for (const dropped of scope.dropped) {
+    rows.push({ symbol: dropped.symbol, status: 'dropped', reason: dropped.reason, counts: {} });
+  }
+
+  const kinds: Record<string, number> = {};
+  for (const one of lastVerdicts(verdicts)) kinds[one.verdict] = (kinds[one.verdict] ?? 0) + 1;
+  const sources: Record<string, number> = {};
+  for (const one of candidates) sources[one.source_key] = (sources[one.source_key] ?? 0) + 1;
+
+  return {
+    run: name,
+    channels: scope.channels,
+    species: rows,
+    gaps: buildGaps(rows, scope.channels),
+    units: unitRows(raw.units, loaded, warnings),
+    counts: {
+      candidates_by_source: sortKeys(sources),
+      verdicts_by_kind: sortKeys(kinds),
+      // The fetch step owns this count. A rebuild reports it and never changes it.
+      fetch_failures: scope.fetch_failures,
+      stop_rule_fired: stopRule(verdicts).fired,
+    },
+  };
+}
+
+/** Every unit gets a row. The count is the app's own, and so is the warning text. */
+function unitRows(
+  units: Record<string, unknown>[],
+  loaded: LoadedContent,
+  warnings: ValidationMessage[],
+): ReportUnitRow[] {
+  return units.map((unit) => {
+    const key = String(unit.key);
+    const warning = warnings.find(
+      (one) => one.file === 'units.json' && one.message.startsWith(`${key} `),
+    );
+    return {
+      key,
+      cards: loaded.unit_cards[key].length,
+      warning: warning === undefined ? null : warning.message,
+    };
+  });
+}
+
+async function writeReport(name: string, deps: CliDeps): Promise<boolean> {
+  const dir = runDir(deps.root, name);
+  readRun(deps.root, name);
+  const data = readJsonOr<BuildReport | null>(path.join(dir, 'build.json'), null);
+  if (data === null) {
+    console.error(`run ${name} has no build.json; run build first`);
+    return false;
+  }
+
+  const candidates = readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'));
+  const verdicts = readJsonl<Verdict>(path.join(dir, 'verdicts.jsonl'));
+  const byId = new Map(candidates.map((one) => [one.id, one]));
+
+  const escalations: ReportEscalationRow[] = [];
+  for (const one of lastVerdicts(verdicts)) {
+    if (one.verdict !== 'escalate') continue;
+    const candidate = byId.get(one.candidate_id);
+    if (candidate === undefined) {
+      console.error(`verdicts.jsonl names candidate ${one.candidate_id}, which run ${name} does not hold`);
+      return false;
+    }
+
+    // The branch holds no image bytes, so the report links a copy under review/.
+    const bytes = localBytes(deps.root, candidate);
+    let url = '';
+    let note = one.note;
+    if (bytes === null) {
+      note = note === '' ? MISSING_FILE : `${note} (${MISSING_FILE})`;
+    } else {
+      const key = reviewKey(candidate.id);
+      await deps.storage.put(key, await deps.resize(bytes, MAX_SIDE, JPEG_QUALITY), 'image/jpeg');
+      url = `${deps.cdnBase}${key}`;
+    }
+    escalations.push({
+      candidate_id: candidate.id,
+      image_url: url,
+      origin: candidate.origin,
+      case: one.case ?? '',
+      note,
+      target: candidate.target,
+    });
+  }
+
+  const file = path.join(dir, 'report.md');
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(file, renderReport({ ...data, escalations }), 'utf8');
+  console.log(`${escalations.length} escalations in ${relative(deps.root, file)}`);
+  return true;
+}
+
+/**
+ * Both retire commands end the same way: validate, check the ids, remove the objects no
+ * live row carries any more, write the two files, commit.
+ */
+async function commitRetire(
+  deps: CliDeps,
+  species: Record<string, SpeciesRecord>,
+  before: ManifestRow[],
+  after: ManifestRow[],
+  subject: string,
+): Promise<boolean> {
+  const raw = rawOf(deps.root, species, after);
+  if (validated(deps, raw) === null) return false;
+  // A retire runs on a checkout that has main, so it needs no --base.
+  const previous = readPublished(gitShowOf(deps, DEFAULT_BASE));
+  const idErrors = appendOnlyErrors(previous, contentSetOf(raw));
+  if (idErrors.length > 0) {
+    for (const message of idErrors) console.error(message);
+    return false;
+  }
+  for (const key of deadObjectKeys(before, after)) await deps.storage.remove(key);
+  writeJson(contentFile(deps.root, 'species.json'), raw.species);
+  writeJson(contentFile(deps.root, MANIFEST_NAME), raw.manifest);
+  gitCommitAll(deps.exec, `content: ${subject}`);
+  return true;
+}
+
+/** The species symbol and every variety key it owns. A row targets one of them. */
+function ownTargets(symbol: string, record: SpeciesRecord): Set<string> {
+  const targets = new Set([symbol]);
+  const varieties = Array.isArray(record.varieties) ? record.varieties : [];
+  for (const variety of varieties) {
+    const key = (variety as Record<string, unknown>).key;
+    if (typeof key === 'string') targets.add(key);
+  }
+  return targets;
+}
+
+function retireOwnRows(
+  rows: ManifestRow[],
+  targets: Set<string>,
+  reason: string,
+  at: string,
+): ManifestRow[] {
+  return rows.map((one) => {
+    if (one.retired === true || !targets.has(one.target)) return one;
+    return { ...one, retired: true, retired_reason: reason, retired_at: at };
+  });
+}
+
+/** An object key no live row carries any more. The same bytes under two targets stay. */
+function deadObjectKeys(before: ManifestRow[], after: ManifestRow[]): string[] {
+  const live = new Set(after.filter((one) => one.retired !== true).map((one) => one.hash));
+  const keys: string[] = [];
+  for (const one of before) {
+    if (one.retired === true || live.has(one.hash)) continue;
+    const key = objectKey(one.hash);
+    if (!keys.includes(key)) keys.push(key);
+  }
+  return keys;
+}
+
+/** A miss is a line on the screen and a reason in the report, never a silent null. */
+async function inatTaxonOf(
+  deps: CliDeps,
+  scientific: string,
+  symbol: string,
+  now: string,
+): Promise<InatTaxon | null> {
+  const url = taxaUrl(scientific);
+  const result = await deps.http.getText(url);
+  if (!result.ok) {
+    console.error(`${symbol}: ${NO_INAT_TAXON}`);
+    return null;
+  }
+  // parseJson pushes a `body is not JSON` failure row and returns null.
+  const json = parseJson(deps.http, url, result, now);
+  const taxon = json === null ? null : parseTaxon(json);
+  if (taxon === null) console.error(`${symbol}: ${NO_INAT_TAXON}`);
+  return taxon;
+}
+
+function localBytes(root: string, candidate: Candidate): Uint8Array | null {
+  if (candidate.local === null) return null;
+  const file = path.join(root, candidate.local);
+  if (!fs.existsSync(file)) return null;
+  return fs.readFileSync(file);
+}
+
+/** Prints every message. Returns the result, or null when the set holds an error. */
+function validated(deps: CliDeps, raw: RawContent): ValidationResult | null {
+  const result = deps.validate(raw);
+  for (const one of result.warnings) console.log(`warning ${one.file}: ${one.message}`);
+  for (const one of result.errors) console.error(`error ${one.file}: ${one.message}`);
+  return result.errors.length === 0 ? result : null;
+}
+
+function pushBranch(deps: CliDeps, name: string): boolean {
+  const result = deps.exec('git', ['push', '-u', 'origin', `content/${name}`]);
+  if (result.code === 0) return true;
+  console.error(`git push failed with code ${result.code}: ${result.out}`);
+  return false;
+}
+
+function gitShowOf(deps: CliDeps, base: string): (file: string) => string | null {
+  return (file) => {
+    const result = deps.exec('git', ['show', `${base}:${file}`]);
+    return result.code === 0 ? result.out : null;
+  };
+}
+
+/**
+ * The ref that holds the published content. GitHub Actions checks out a pull request
+ * without a local main, so the CI step of Task 18 passes --base origin/main.
+ */
+function baseRef(flags: Record<string, string>): string {
+  const value = flags.base;
+  return value === undefined || value === 'true' ? DEFAULT_BASE : value;
+}
+
+/** A flag with a real value. `parseFlags` gives a bare flag the value `true`. */
+function flagValue(flags: Record<string, string>, key: string): string | null {
+  const value = flags[key];
+  return value === undefined || value === 'true' ? null : value;
+}
+
+function rawOf(
+  root: string,
+  species: Record<string, SpeciesRecord>,
+  manifest: ManifestRow[],
+): RawContent {
+  return {
+    species: sortKeys(species),
+    concepts: readContentList<RawContent['concepts'][number]>(root, 'concepts.json'),
+    units: readContentList<Record<string, unknown>>(root, 'units.json'),
+    confusion: readJsonOr<RawContent['confusion']>(contentFile(root, 'confusion.json'), []),
+    manifest,
+  };
+}
+
+/**
+ * The five ids of section 4 come from four of the five files. confusion.json carries no
+ * id of its own: an edge names two species, and both ids live in species.json.
+ */
+function contentSetOf(raw: RawContent): ContentSet {
+  return {
+    species: raw.species,
+    concepts: raw.concepts,
+    units: raw.units.map((unit) => ({ key: String(unit.key) })),
+    manifest: raw.manifest,
+  };
+}
+
+/** The last row for a candidate id wins, so an owner decision beats an agent verdict. */
+function lastVerdicts(verdicts: Verdict[]): Verdict[] {
+  const last = new Map<string, Verdict>();
+  for (const one of verdicts) last.set(one.candidate_id, one);
+  return [...last.values()];
+}
+
+function contentFile(root: string, name: string): string {
+  return path.join(root, 'content', name);
+}
+
+function readSpecies(root: string): Record<string, SpeciesRecord> {
+  return readJsonOr<Record<string, SpeciesRecord>>(contentFile(root, 'species.json'), {});
+}
+
+function readManifest(root: string): ManifestRow[] {
+  return readJsonOr<ManifestRow[]>(contentFile(root, MANIFEST_NAME), []);
+}
+
+/** An authored input the build cannot invent. Its absence is an error, not an empty list. */
+function readContentList<T>(root: string, name: string): T[] {
+  const file = contentFile(root, name);
+  if (!fs.existsSync(file)) throw new Error(`${relative(root, file)} is missing`);
+  return readJsonFile(file) as T[];
+}
+
+function readJsonOr<T>(file: string, fallback: T): T {
+  if (!fs.existsSync(file)) return fallback;
+  return readJsonFile(file) as T;
 }
