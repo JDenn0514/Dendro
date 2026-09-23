@@ -169,3 +169,111 @@ function hasPhrase(words: string[], phrase: string[]): boolean {
   }
   return false;
 }
+
+/** At most 60 candidates per target per run, across every source. */
+export const MAX_PER_SPECIES = 60;
+
+/** 8 approved images stop collection for one channel of one target. */
+export const CHANNEL_TARGET = 8;
+
+/**
+ * Rows that share an id become one row. The three iNaturalist passes return the same
+ * photo more than once, and each pass carries its own hints.
+ */
+export function mergeFound(found: Candidate[]): Candidate[] {
+  const byId = new Map<string, Candidate>();
+  for (const candidate of found) {
+    const first = byId.get(candidate.id);
+    if (first === undefined) {
+      byId.set(candidate.id, { ...candidate, tags_hint: [...candidate.tags_hint] });
+      continue;
+    }
+    for (const tag of candidate.tags_hint) {
+      if (!first.tags_hint.includes(tag)) first.tags_hint.push(tag);
+    }
+    if (first.channel_hint === null) first.channel_hint = candidate.channel_hint;
+  }
+  return [...byId.values()];
+}
+
+/** How many more rows the target may take before it reaches MAX_PER_SPECIES. */
+export function underCap(existing: Candidate[], target: string): number {
+  const count = existing.filter((candidate) => candidate.target === target).length;
+  return Math.max(0, MAX_PER_SPECIES - count);
+}
+
+/** True once the channel holds CHANNEL_TARGET approved images for one target. */
+export function channelFull(
+  approvedByChannel: Record<string, number>,
+  channel: string,
+): boolean {
+  return (approvedByChannel[channel] ?? 0) >= CHANNEL_TARGET;
+}
+
+/** Walks `found` in order and splits it into the rows the run keeps and the rows it drops. */
+export function collect(input: {
+  existing: Candidate[];
+  found: Candidate[];
+  target: string;
+  approvedByChannel: Record<string, number>;
+}): { added: Candidate[]; skipped: { id: string; reason: string }[] } {
+  const seen = newSeen(input.existing);
+  const added: Candidate[] = [];
+  const skipped: { id: string; reason: string }[] = [];
+  let room = underCap(input.existing, input.target);
+
+  for (const candidate of input.found) {
+    if (isDuplicate(seen, candidate)) {
+      skipped.push({ id: candidate.id, reason: 'duplicate' });
+      continue;
+    }
+    // A null hint never stops a row, because the agent assigns the channel later.
+    if (candidate.channel_hint !== null && channelFull(input.approvedByChannel, candidate.channel_hint)) {
+      skipped.push({ id: candidate.id, reason: 'channel_full' });
+      continue;
+    }
+    if (room <= 0) {
+      skipped.push({ id: candidate.id, reason: 'cap' });
+      continue;
+    }
+    addSeen(seen, candidate);
+    added.push(candidate);
+    room -= 1;
+  }
+
+  return { added, skipped };
+}
+
+/**
+ * Every set is keyed by target, because one photo may serve two targets. The id already
+ * hashes the target with the origin; the origin set repeats that check for a row whose id
+ * arrived from a file rather than from makeCandidate.
+ */
+interface Seen {
+  ids: Set<string>;
+  origins: Set<string>;
+  hashes: Set<string>;
+}
+
+function newSeen(existing: Candidate[]): Seen {
+  const seen: Seen = { ids: new Set(), origins: new Set(), hashes: new Set() };
+  for (const candidate of existing) addSeen(seen, candidate);
+  return seen;
+}
+
+function addSeen(seen: Seen, candidate: Candidate): void {
+  seen.ids.add(candidate.id);
+  seen.origins.add(`${candidate.target}|${candidate.origin}`);
+  if (typeof candidate.file_hash === 'string') {
+    seen.hashes.add(`${candidate.target}|${candidate.file_hash}`);
+  }
+}
+
+function isDuplicate(seen: Seen, candidate: Candidate): boolean {
+  if (seen.ids.has(candidate.id)) return true;
+  if (seen.origins.has(`${candidate.target}|${candidate.origin}`)) return true;
+  return (
+    typeof candidate.file_hash === 'string'
+    && seen.hashes.has(`${candidate.target}|${candidate.file_hash}`)
+  );
+}
