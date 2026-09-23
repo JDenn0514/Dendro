@@ -1,4 +1,5 @@
 // Session size, new cards per day, export, import, reset, and the missing diagnostics.
+import { isCount } from '../logic/store.js';
 
 // The store enforces only the floor (1) on session_size and new_per_day. This
 // is a UI hint on the number input's spinner, not an enforced ceiling: nothing
@@ -35,7 +36,7 @@ export function render(root, ctx) {
     input.value = String(current[field]);
     input.addEventListener('change', () => {
       const parsed = Number(input.value);
-      if (Number.isInteger(parsed) && parsed >= 1) {
+      if (isCount(parsed)) {
         const stored = store.writeSettings({ [field]: parsed });
         input.value = String(stored[field]);
         if (!store.available) ctx.banner(ctx.storage_banner);
@@ -115,8 +116,9 @@ export function render(root, ctx) {
   } else {
     const list = el('ul');
     for (const edge of edges) {
-      const a = content.species[edge.a]?.common[0] ?? edge.a;
-      const b = content.species[edge.b]?.common[0] ?? edge.b;
+      // Settings opens when the content failed to load, so fall back to the symbol.
+      const a = content?.species[edge.a]?.common[0] ?? edge.a;
+      const b = content?.species[edge.b]?.common[0] ?? edge.b;
       list.append(el('li', null, `${a} against ${b} on ${edge.channel}, missed ${edge.count} time(s)`));
     }
     root.append(list);

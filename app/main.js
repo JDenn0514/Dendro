@@ -25,6 +25,9 @@ const DEAD_STORAGE = {
 const STORAGE_BANNER =
   'Progress is not saved. This browser blocks local storage. Export from Settings to keep a copy.';
 
+const NEWER_VERSION_BANNER =
+  'Progress is not saved. The stored progress comes from a newer version of this app, and this older version leaves it alone. Open the newer version, or reset from Settings to study in this one.';
+
 function showBanner(text) {
   const node = document.getElementById('banner');
   node.hidden = false;
@@ -92,20 +95,11 @@ async function fetchContent(dir) {
 async function start() {
   const dir = contentDir();
   const imageBase = imageBaseFor(dir);
-  let raw;
-  try {
-    raw = await fetchContent(dir);
-  } catch (error) {
-    showError('Content failed to load', [error.message]);
-    return;
-  }
 
-  const result = loadContent(raw);
-  if (!result.ok) {
-    showError('Content failed to validate',
-      result.errors.map((e) => `${e.file}: ${e.message}`));
-    return;
-  }
+  // The nav goes up before the content fetch. Content that fails to load must
+  // not lock the user out of Settings, where the export button rescues the
+  // progress that is already stored.
+  document.getElementById('nav').hidden = false;
 
   let storage = DEAD_STORAGE;
   try {
@@ -116,7 +110,29 @@ async function start() {
   const store = createStore(storage);
 
   if (!store.available) showBanner(STORAGE_BANNER);
-  document.getElementById('nav').hidden = false;
+  else if (store.newer_version) showBanner(NEWER_VERSION_BANNER);
+
+  // A content failure is kept rather than thrown away. Settings still opens;
+  // every other route shows the failure again instead of a blank page.
+  let content = null;
+  let contentFailure = null;
+  let raw = null;
+  try {
+    raw = await fetchContent(dir);
+  } catch (error) {
+    contentFailure = { title: 'Content failed to load', lines: [errorText(error)] };
+  }
+  if (raw) {
+    const result = loadContent(raw);
+    if (result.ok) {
+      content = result.content;
+    } else {
+      contentFailure = {
+        title: 'Content failed to validate',
+        lines: result.errors.map((e) => `${e.file}: ${errorText(e)}`)
+      };
+    }
+  }
 
   // The screen that is leaving gets to stop its own pending work first.
   let teardown = null;
@@ -133,15 +149,21 @@ async function start() {
     const { parts, params } = parseRoute();
     const root = document.getElementById('app');
     root.textContent = '';
+    // Settings is the one screen that runs without content.
+    if (contentFailure && parts[0] !== 'settings') {
+      showError(contentFailure.title, contentFailure.lines);
+      return;
+    }
     const ctx = {
-      content: result.content,
+      content,
       store,
       image_base: imageBase,
       today: todayString(),
       params,
       navigate: (hash) => { window.location.hash = hash; },
       banner: showBanner,
-      storage_banner: STORAGE_BANNER
+      storage_banner: STORAGE_BANNER,
+      newer_version_banner: NEWER_VERSION_BANNER
     };
     // The root is already clear, so a screen that throws would leave a blank
     // page. The error panel goes there instead.
@@ -154,6 +176,7 @@ async function start() {
       else if (parts[0] === 'settings') leave = settings.render(root, ctx);
       else leave = home.render(root, ctx);
     } catch (error) {
+      console.error('The screen failed to open.', error);
       showError('The screen failed to open', [errorText(error)]);
       return;
     }
