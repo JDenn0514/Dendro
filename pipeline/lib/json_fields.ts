@@ -21,3 +21,15 @@ export function asNumber(value: unknown): number | null {
 export function asArray(value: unknown): unknown[] | null {
   return Array.isArray(value) ? value : null;
 }
+
+/**
+ * Parses a body. `ok` is false when the body is not JSON, so the caller can
+ * record the failure. Nothing here returns a fabricated value.
+ */
+export function parseJson(body: string): { ok: boolean; value: unknown } {
+  try {
+    return { ok: true, value: JSON.parse(body) };
+  } catch {
+    return { ok: false, value: null };
+  }
+}

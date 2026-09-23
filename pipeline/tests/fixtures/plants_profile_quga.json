@@ -1,0 +1,18 @@
+{
+  "Id": 25297,
+  "Symbol": "QUGA",
+  "ScientificName": "<i>Quercus</i> <i>gambelii</i> Nutt.",
+  "CommonName": "Gambel oak",
+  "Rank": "Species",
+  "GrowthHabits": ["Tree", "Shrub"],
+  "NativeStatuses": [
+    { "Region": "L48", "NativeStatus": "N" },
+    { "Region": "CAN", "NativeStatus": "I" }
+  ],
+  "AncestorRanks": [
+    { "Rank": "Kingdom", "ScientificName": "Plantae" },
+    { "Rank": "Order", "ScientificName": "Fagales" },
+    { "Rank": "Family", "ScientificName": "Fagaceae" },
+    { "Rank": "Genus", "ScientificName": "<i>Quercus</i>" }
+  ]
+}

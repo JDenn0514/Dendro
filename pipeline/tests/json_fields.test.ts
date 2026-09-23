@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { asRecord, asString, asNumber, asArray } from '../lib/json_fields.ts';
+import { asRecord, asString, asNumber, asArray, parseJson } from '../lib/json_fields.ts';
 
 test('asRecord admits a plain object and rejects an array, null, and a scalar', () => {
   assert.deepEqual(asRecord({ a: 1 }), { a: 1 });
@@ -34,4 +34,9 @@ test('asArray admits an array and rejects an object and a string', () => {
   assert.equal(asArray({ length: 2 }), null);
   assert.equal(asArray('ab'), null);
   assert.equal(asArray(null), null);
+});
+
+test('parseJson admits valid JSON and rejects a truncated body', () => {
+  assert.deepEqual(parseJson('{"a":1}'), { ok: true, value: { a: 1 } });
+  assert.deepEqual(parseJson('{"a":'), { ok: false, value: null });
 });

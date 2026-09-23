@@ -1,0 +1,49 @@
+{
+  "PlantImages": [
+    {
+      "Id": 501,
+      "ThumbnailPath": "/ImageLibrary/thumbnail/quga_001_thp.jpg",
+      "SmallImagePath": "/ImageLibrary/small/quga_001_svp.jpg",
+      "MediumImagePath": "/ImageLibrary/medium/quga_001_mvp.jpg",
+      "OriginalImagePath": "/ImageLibrary/original/quga_001_lvp.jpg",
+      "Copyright": false,
+      "CommonName": "R. Nichols"
+    },
+    {
+      "Id": 502,
+      "ThumbnailPath": "/ImageLibrary/thumbnail/quga_002_thp.jpg",
+      "SmallImagePath": "/ImageLibrary/small/quga_002_svp.jpg",
+      "MediumImagePath": "/ImageLibrary/medium/quga_002_mvp.jpg",
+      "OriginalImagePath": "/ImageLibrary/original/quga_002_bkp.jpg",
+      "Copyright": false,
+      "CommonName": "T. Alvarez"
+    },
+    {
+      "Id": 503,
+      "ThumbnailPath": "/ImageLibrary/thumbnail/quga_003_thp.jpg",
+      "SmallImagePath": "/ImageLibrary/small/quga_003_svp.jpg",
+      "MediumImagePath": "/ImageLibrary/medium/quga_003_mvp.jpg",
+      "OriginalImagePath": "/ImageLibrary/original/quga_003_hbp.jpg",
+      "Copyright": false,
+      "CommonName": "J. Park"
+    },
+    {
+      "Id": 504,
+      "ThumbnailPath": "/ImageLibrary/thumbnail/quga_004_thp.jpg",
+      "SmallImagePath": "/ImageLibrary/small/quga_004_svp.jpg",
+      "MediumImagePath": "/ImageLibrary/medium/quga_004_mvp.jpg",
+      "OriginalImagePath": "/ImageLibrary/original/quga_004_frp.jpg",
+      "Copyright": true,
+      "CommonName": "M. Osei"
+    },
+    {
+      "Id": 505,
+      "ThumbnailPath": "/ImageLibrary/thumbnail/quga_005_thp.jpg",
+      "SmallImagePath": "/ImageLibrary/small/quga_005_svp.jpg",
+      "MediumImagePath": "/ImageLibrary/medium/quga_005_mvp.jpg",
+      "OriginalImagePath": "/ImageLibrary/original/quga_005_lvd.jpg",
+      "Copyright": false,
+      "CommonName": ""
+    }
+  ]
+}
