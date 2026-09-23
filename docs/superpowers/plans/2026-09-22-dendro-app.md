@@ -5622,7 +5622,7 @@ Serve with `python -m http.server 8000`. Open `http://localhost:8000/?content=de
 1. "Cards per session" shows 20 and "New cards per day" shows 10.
 2. Change "Cards per session" to 5 and click outside the field. In the console run `JSON.parse(localStorage.dendro_settings).session_size`. It returns 5.
 3. Clear "Cards per session" so the field is empty, then click outside it. The field snaps back to 5. Run `JSON.parse(localStorage.dendro_settings).session_size` again. It still returns 5, so the empty field wrote nothing.
-4. Type `0` in "Cards per session" and click outside it. The field snaps back to 5 and the stored value stays 5. Do the same with `-3` and with `2.5`. The field snaps back every time.
+4. Type `0` in "Cards per session" and click outside it. The field snaps back to 5 and the stored value stays 5. Do the same with `-3`. The field snaps back every time. Type `2.5` and click outside it: `Number.parseInt('2.5', 10)` is the integer `2`, so the code's own `Number.isInteger(parsed) && parsed >= 1` check passes; the field shows 2 and the stored value becomes 2, it does not snap back.
 5. Go to `#/` and start a session. The deck holds at most 5 cards.
 6. Back on Settings, click "Export progress". The browser downloads `dendro-progress-YYYY-MM-DD.json` with today's date. Open it. It holds `version: 1` and the four sections `dendro_cards`, `dendro_log`, `dendro_settings`, `dendro_missing_edges`.
 7. The line under the button now reads "Last export: YYYY-MM-DD." The file opens from the Downloads list, so the object URL outlived the click.
@@ -5630,7 +5630,7 @@ Serve with `python -m http.server 8000`. Open `http://localhost:8000/?content=de
 9. Choose the exported file in the Import control. The status line reads "Import done. Reload the page to see the new progress."
 10. Reload. "Cards per session" shows 5 again.
 11. Save a broken file and import it: create `bad.json` holding `{"version": 99}` and choose it. The status line reads "Import rejected:" and names the version and the missing sections. The fields still show 5.
-12. Click "Reset all progress". A second button appears reading "Yes, delete everything" with a warning line. Click it. The line reads "Progress reset." Run `localStorage.dendro_cards` in the console. It returns null.
+12. Click "Reset all progress". A second button appears reading "Yes, delete everything" with a warning line. Click it. The line reads "Progress reset." Run `localStorage.dendro_cards` in the console. Dot-notation property access on a missing key returns `undefined`, not `null` (only `localStorage.getItem('dendro_cards')` returns `null`); `localStorage.dendro_cards` returns `undefined`.
 13. Reload. The fields show 20 and 10.
 14. Miss a species pair with no confusion edge: start a leaf session, answer a Gambel oak card with Norway maple. Return to `#/settings`. The "Missing diagnostics" list holds one line reading "Norway maple against Gambel oak on leaf, missed 1 time(s)".
 15. Open a private window and block site data for localhost, then open the app. The orange banner appears at the top, Settings shows the "blocks local storage" notice, and the app still runs a session.
