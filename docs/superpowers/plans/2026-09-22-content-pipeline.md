@@ -173,7 +173,7 @@ caches every good response.
 
 The clock, the sleep, and the fetch arrive as options. `fetchImpl` is required: there is
 no fallback to the global `fetch`, so a test can never reach the network by accident. The
-`main` guard in `pipeline/cli.ts` (Task 13) passes the global `fetch`.
+`main` guard in `pipeline/cli.ts` (Task 16) passes the global `fetch`.
 
 The module writes the cache to disk. That is not a hidden global: the caller passes the
 directory as `cacheDir`, so a test points it at a temporary directory.
@@ -5294,7 +5294,7 @@ Task 3's `parseSubordinateTaxa` returns the variety `name` as the short label,
 `enumerateRun` imports the three rules it used to repeat. `acceptedSymbols` drops the
 synonym rows and the rows outside the named genera, and returns the symbols unique and
 sorted. `isTree` reads `growth_habits`. `isHybrid` reads the scientific name. A symbol with
-no profile leaves `enumerateRun` in `dropped` with the reason `no profile`. Task 12's
+no profile leaves `enumerateRun` in `dropped` with the reason `no profile`. Task 13's
 `cli species list` prints one line, `<symbol>: no profile`, for each of those rows, and the
 report lists them.
 
@@ -11294,7 +11294,7 @@ git add pipeline/lib/run.ts pipeline/lib/commands.ts pipeline/tests/run.test.ts 
 ### Task 14: The build, the report, and the pull request
 
 **Files:**
-- Modify: `pipeline/lib/commands.ts` (two edits, then one append)
+- Modify: `pipeline/lib/commands.ts` (the dispatch-table edits, the import changes, then one append)
 - Modify: `pipeline/lib/storage.ts` (one append)
 - Modify: `pipeline/tests/cli_fetch.test.ts` (one edit, step 7)
 - Test: `pipeline/tests/cli_build.test.ts`
@@ -13636,7 +13636,7 @@ the last commit. Do not run `git commit` yourself.
 
 | Path | Written by |
 |---|---|
-| `pipeline/runs/<name>/run.json` | `run init`, then `species list` |
+| `pipeline/runs/<name>/run.json` | `run init`, then `species list` and `photos fetch` |
 | `pipeline/runs/<name>/candidates.jsonl` | `photos fetch`, `photos add` |
 | `pipeline/runs/<name>/verdicts.jsonl` | `photos verdict`, `run finish` |
 | `pipeline/runs/<name>/build.json` | `build` |
@@ -14896,7 +14896,7 @@ person who can answer, and that a placeholder will not do. Without a compliant U
 Commons drops from 200 requests per minute to 10.
 
 Run: `node -e "import('./pipeline/lib/http.ts').then(m => console.log(m.USER_AGENT))"`
-Expected: `dendro-pipeline/0.1.0 (https://github.com/jdenn0514/dendro)`
+Expected: `dendro-pipeline/0.1.0 (https://github.com/JDenn0514/Dendro)`
 
 Open that URL in a browser. Confirm all three:
 
@@ -15139,7 +15139,7 @@ is safe: the approval agent assigns the channel anyway. A code mapped to the wro
 not safe, because the hint biases the agent.
 
 ```bash
-curl -s -H "User-Agent: dendro-pipeline/0.1.0 (https://github.com/jdenn0514/dendro)" "https://plantsservices.sc.egov.usda.gov/api/PlantImages?plantId=$(node -e "console.log(JSON.parse(require('fs').readFileSync('pipeline/data/plants_ids.json','utf8'))['QUGA'].id)")"
+curl -s -H "User-Agent: dendro-pipeline/0.1.0 (https://github.com/JDenn0514/Dendro)" "https://plantsservices.sc.egov.usda.gov/api/PlantImages?plantId=$(node -e "console.log(JSON.parse(require('fs').readFileSync('pipeline/data/plants_ids.json','utf8'))['QUGA'].id)")"
 ```
 
 Read the file paths in the response. For each distinct part code:
@@ -15184,17 +15184,19 @@ parser and the live shape disagree. Read that source's cached response before St
 
 Every fixture under `pipeline/tests/fixtures/` was written by hand from the field shapes the
 spec documents. The cache now holds real responses for the same calls: Steps 6 and 7 filled
-the FNA and iNaturalist term responses, Step 9 the checklist and the profiles, and Step 12
-the Commons listings, the iNaturalist observations, and the subordinate taxa.
+the FNA and iNaturalist term responses, Step 9 the checklist and the profiles, Step 12 the
+Commons listings and the iNaturalist observations, and Step 14 the subordinate taxa.
 
 For each fixture, find its cached response, copy the body, and trim it to the rows the test
 reads:
 
-- `plants_profile_quga.json`, `plants_profile_purple_sage.json`, `plants_profile_quun.json`
+- `plants_profile_quga.json`, `plants_profile_purple_sage.json` (stays hand-built; no step
+  fetches a purple sage profile), `plants_profile_quun.json`
 - `plants_subordinate_quga.json`, `plants_distribution_quga.csv`, `plants_images_quga.json`
 - `plantlst_sample.txt`
 - `fna_lobatae.html`, `fna_quercus.html`, `fna_protobalanus.html`
-- `inat_taxa_quga.json`, `inat_taxa_empty.json`, `inat_observations_quga.json`
+- `inat_taxa_quga.json`, `inat_taxa_empty.json` (stays hand-built; no step fetches an empty
+  result), `inat_observations_quga.json`
 - `commons_category_quga.json`, `commons_category_quga_page2.json`
 
 Run: `node --test "pipeline/tests/**/*.test.ts"` after each fixture.
