@@ -195,7 +195,7 @@ function floweringPass(): InatPass {
  *  images than that: one is copyright and one names no photographer. */
 function plantsRowsOf(target: string): Candidate[] {
   const images = parseImages(JSON.parse(fixture('plants_images_quga.json')));
-  return plantsCandidates(images, target, SCIENTIFIC, NOW);
+  return plantsCandidates(images, target, 'QUGA', SCIENTIFIC, NOW);
 }
 
 /** The rows the two recorded Commons pages give. Page 1 holds a file with no artist and a
@@ -878,18 +878,7 @@ test('photos fetch keeps one photo under two concept targets', async (t) => {
     perTarget * 2,
     'the target is part of the id, so the second target is no duplicate',
   );
-  // One origin per photo, except the PLANTS rows: PLANTS has no page per image, so
-  // `plantsCandidates` builds the origin from the profile url and the target. The
-  // expectation runs that same function, so no count is written here by hand.
-  assert.deepEqual(
-    new Set(rows.map((row) => row.origin)),
-    new Set(
-      [...expectedRows('leaf/simple_lobed'), ...expectedRows('bark/plated')].map(
-        (row) => row.origin,
-      ),
-    ),
-    'the Commons and iNat origins are shared, and the PLANTS origin carries its target',
-  );
+  assert.equal(new Set(rows.map((row) => row.origin)).size, perTarget, 'one origin per photo');
 });
 
 test('photos fetch reports an exemplar with no profile', async (t) => {

@@ -262,7 +262,7 @@ test('partCodeOf reads the code from a path and gives null when there is none', 
 test('plantsCandidates drops the copyright row and fills the PLANTS fields', () => {
   const images = parseImages(fixtureJson('plants_images_quga.json'));
   assert.equal(images.length, 5);
-  const rows = plantsCandidates(images, 'QUGA', QUGA_SCIENTIFIC, FETCHED_AT);
+  const rows = plantsCandidates(images, 'QUGA', 'QUGA', QUGA_SCIENTIFIC, FETCHED_AT);
   assert.equal(rows.length, 3);
   const firstPath = '/ImageLibrary/original/quga_001_lvp.jpg';
   const firstOrigin = `${QUGA_PROFILE}#image=${encodeURIComponent(firstPath)}`;
@@ -306,6 +306,20 @@ test('plantsCandidates drops the copyright row and fills the PLANTS fields', () 
   );
   assert.equal(new Set(rows.map((row) => row.origin)).size, rows.length);
   assert.equal(new Set(rows.map((row) => row.id)).size, rows.length);
+
+  // D21: a concept run targets `<channel>/<key>`, and the origin still names the
+  // species' own profile page, because that page carries the attribution.
+  const concept = plantsCandidates(images, 'leaf/lobed', 'QUGA', QUGA_SCIENTIFIC, FETCHED_AT);
+  assert.equal(concept.length, rows.length);
+  for (const row of concept) {
+    assert.equal(row.target, 'leaf/lobed');
+    assert.ok(row.origin.startsWith(`${QUGA_PROFILE}#image=`));
+  }
+  assert.deepEqual(
+    concept.map((row) => row.origin),
+    rows.map((row) => row.origin),
+    'one photo keeps one origin under every target',
+  );
 });
 
 test('plantsCandidates drops an image that names no photographer', () => {
@@ -314,7 +328,7 @@ test('plantsCandidates drops an image that names no photographer', () => {
   assert.equal(anonymous.length, 1);
   assert.equal(anonymous[0].path, '/ImageLibrary/original/quga_005_lvd.jpg');
   assert.equal(anonymous[0].copyright, false);
-  const rows = plantsCandidates(images, 'QUGA', QUGA_SCIENTIFIC, FETCHED_AT);
+  const rows = plantsCandidates(images, 'QUGA', 'QUGA', QUGA_SCIENTIFIC, FETCHED_AT);
   assert.equal(rows.length, 3);
   assert.equal(
     rows.some((row) => row.file_url.includes('quga_005')),

@@ -292,6 +292,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
         deps,
         scope,
         target: target.key,
+        symbol,
         scientific: plant.scientific,
         plantsId: plant.id,
         now,
@@ -524,6 +525,9 @@ interface FetchContext {
   scope: RunScope;
   /** The run's target. The candidate id carries it, so a source builds with it. */
   target: string;
+  /** The PLANTS symbol of the species these images come from. D21: the PLANTS
+   *  origin names that species' profile page, which a concept target cannot. */
+  symbol: string;
   scientific: string;
   plantsId: number;
   now: string;
@@ -567,7 +571,13 @@ async function plantOf(
 
 async function plantsRows(context: FetchContext): Promise<Candidate[]> {
   const images = await fetchImages(context.deps.http, context.plantsId, context.now);
-  return plantsCandidates(images, context.target, context.scientific, context.now);
+  return plantsCandidates(
+    images,
+    context.target,
+    context.symbol,
+    context.scientific,
+    context.now,
+  );
 }
 
 async function commonsRows(context: FetchContext): Promise<Candidate[]> {

@@ -216,14 +216,21 @@ export function parseImages(json: unknown): PlantsImage[] {
  * One candidate per usable image. An image is usable when it is not copyright
  * and it names a photographer. The app prints the photographer as the credit,
  * so an image with no name cannot ship and the row never enters the queue.
+ *
+ * `target` is the run's target and `symbol` is the PLANTS symbol of the species
+ * the images come from. The two differ on a concept run, whose target is
+ * `<channel>/<key>`. D21: the origin is the species' own profile page, so it
+ * comes from the symbol. A target in that url would name a page that does not
+ * exist, and would give one photo two origins under two concept targets.
  */
 export function plantsCandidates(
   images: PlantsImage[],
   target: string,
+  symbol: string,
   scientific: string,
   now: string,
 ): Candidate[] {
-  const profile = `${PLANTS_PROFILE}${target}`;
+  const profile = `${PLANTS_PROFILE}${symbol}`;
   return images
     .filter((image) => !image.copyright)
     .filter((image) => image.photographer.trim() !== '')
