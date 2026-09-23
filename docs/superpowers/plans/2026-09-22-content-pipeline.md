@@ -35,7 +35,7 @@ These are the steps only a person can do. Line them up before the first task, in
 | 2 | npm registry access | Task 16 Step 2, `npm install` |
 | 3 | `gh` authenticated with push rights to `JDenn0514/Dendro`; GitHub Actions enabled | Task 18, the pull request that merges `pipeline` into `main` |
 | 4 | A contact URL that reaches a person, as Wikimedia's policy expects. `CONTACT_URL` is `https://github.com/JDenn0514/Dendro`; the repository page must show how to reach the owner | Task 19 Step 1 |
-| 5 | Cloudflare: the R2 bucket `dendro-images` and the `expire-review` lifecycle rule that deletes the `review/` prefix after 30 days (both exist today), a custom domain `img.<domain>` bound to the bucket, and an API token scoped to the bucket with object read and write | Task 19 Step 2 |
+| 5 | Cloudflare: the R2 bucket `dendro-images` and the `expire-review` lifecycle rule that deletes the `review/` prefix after 30 days (both exist today), a custom domain `img.learndendro.com` bound to the bucket, and an API token scoped to the bucket with object read and write | Task 19 Step 2 |
 | 6 | A `.env` file at the repo root with the five `DENDRO_S3_*` values (endpoint, region, bucket, access key id, secret access key) | Task 19 Step 3 |
 | 7 | The owner's judgment: `concept_exemplars` in a concept run's `run.json`, `decisions.json` after each review, the `ref` and habitat fields of authored species files, and each merge | Task 19 Steps 8 to 15 |
 | 8 | GitHub Pages configured for the repository | Task 19's site check |
@@ -122,7 +122,7 @@ Each choice is the simplest option that satisfies the surrounding rules.
 24. **`cli build`, `cli ids check`, `cli images retire`, and `cli species retire` take `--base <ref>`, defaulting to `main`.** GitHub Actions checks out a pull request with no local `main`, so the CI step of Task 18 passes `origin/main`.
 25. **`CliDeps` carries `cdn_base`,** and `pipeline/cli.ts` sets it from the app's `CDN_BASE`, so the two never drift. The report links an escalated image through it.
 26. **A concept run's exemplar species live in `run.json` under `concept_exemplars`.** `cli run init --concepts` writes an empty object and the owner fills it before `photos fetch`, because the exemplars are a content judgment, not something a script can derive.
-27. **The CDN host is not chosen yet.** It must be a domain the owner holds, added as a zone in the same Cloudflare account as the bucket: R2 binds a custom domain only to a zone in that account. An earlier draft named `img.dendro.app`, but `dendro.app` is registered to someone else. Until the choice is made, this plan writes the host as `img.<domain>`. `CDN_BASE` holds the bucket's r2.dev development URL today. Task 19 Step 2 registers the domain and records the host, Step 5 writes it into `CDN_BASE`, and the app test then holds it there.
+27. **The CDN host is `img.learndendro.com`.** The owner bought `learndendro.com` through Cloudflare Registrar on 2026-09-23, so it is a zone in the same Cloudflare account as the bucket, which is what R2 requires: it binds a custom domain only to a zone in that account. An earlier draft named `img.dendro.app`, but `dendro.app` is registered to someone else. `CDN_BASE` holds the bucket's r2.dev development URL today. Task 19 Step 2 binds the host to the bucket, Step 5 writes it into `CDN_BASE`, and the app test then holds it there.
 28. **A manifest row's `source` is a display name**: `USDA PLANTS Database`, `iNaturalist`, `Wikimedia Commons`. The app prints it verbatim in the photo credit. The candidate row carries `source_key` (`plants`, `inat`, `commons`, `manual`) for the cache directory and the report counts.
 29. **A concept target is `<channel>/<key>`,** the form the app validator requires. A concept run names its concepts qualified, and its channels are the distinct prefixes; it takes no `--channels` flag.
 30. **The channel cap is per target and channel.** `countByTargetChannel` joins verdicts to candidates, so eight approved bark photos of one species never stop bark collection for the next.
@@ -14670,7 +14670,7 @@ git add package.json package-lock.json pipeline/cli.ts pipeline/lib/sharp_resize
 ### Task 17: Folded into Task 19
 
 `CDN_BASE` in `app/logic/content.js` holds the r2.dev development URL of the
-`dendro-images` bucket, which serves images today. Switching it to `https://img.<domain>/`
+`dendro-images` bucket, which serves images today. Switching it to `https://img.learndendro.com/`
 is only correct after the custom domain is bound, so that edit moved into Task 19, Step 5,
 next to the step that binds the domain. The task numbering stays 1 to 19.
 
@@ -14923,14 +14923,11 @@ click them and must not be given the token.
    is written. It exists today, named `expire-review`. Confirm that `img/` carries no
    rule other than Cloudflare's own `Default Multipart Abort Rule`, which aborts a
    half-finished upload after 7 days. Objects under `img/` are permanent.
-3. Choose the domain and register it. It must be a zone in this same Cloudflare account,
-   because R2 binds a custom domain only to a zone in the account that owns the bucket. A
-   domain bought at Cloudflare Registrar is a zone already. A domain bought elsewhere
-   needs its nameservers pointed at Cloudflare, because the CNAME-only setup that keeps
-   DNS elsewhere is a Business plan feature. Record the host in decision 27, then replace
-   every `img.<domain>` in this plan with it. There are 12, in the prerequisites table,
-   decision 27, the Task 17 stub, and Steps 2, 4, 5, 8, 16, and 17 of this task.
-4. Under the bucket's Settings, connect the custom domain `img.<domain>`. Cloudflare
+3. Confirm the zone `learndendro.com` is active in this same Cloudflare account. The owner
+   bought it through Cloudflare Registrar on 2026-09-23, so it is a zone already. R2 binds
+   a custom domain only to a zone in the account that owns the bucket. Decision 27 records
+   the host.
+4. Under the bucket's Settings, connect the custom domain `img.learndendro.com`. Cloudflare
    rate-limits the r2.dev host and does not cache it, so the public app needs the custom
    domain. Step 5 writes it into `CDN_BASE`.
 5. Create an API token scoped to this one bucket, with object read and write. Copy the id
@@ -14976,7 +14973,7 @@ Then the custom domain, over the `img/` prefix the app reads:
 node -e "process.loadEnvFile(); import('./pipeline/lib/s3_storage.ts').then(async m => { const s = m.s3Storage(m.s3ConfigFromEnv(process.env)); await s.put('img/_probe.jpg', new Uint8Array([1,2,3]), 'image/jpeg'); })"
 ```
 
-Run: `curl -sI https://img.<domain>/img/_probe.jpg | head -1`
+Run: `curl -sI https://img.learndendro.com/img/_probe.jpg | head -1`
 Expected: `HTTP/2 200`. A 403 means the custom domain is not bound. A 404 means the key or
 the bucket is wrong. The key is new, so no cache can answer for it and the 200 is the
 binding itself.
@@ -15005,7 +15002,7 @@ Replace them with:
 // The custom domain bound to the dendro-images bucket. The r2.dev host it replaces is
 // rate-limited and uncached, so it was for development only.
 // See the pipeline spec, section 2.
-export const CDN_BASE = 'https://img.<domain>/';
+export const CDN_BASE = 'https://img.learndendro.com/';
 ```
 
 The trailing slash is part of the value. `imageUrl(photo, CDN_BASE)` returns
@@ -15038,7 +15035,7 @@ accepted it.
 
 ```bash
 git checkout -b live-prep
-git add app/logic/content.js tests/content.test.js && git commit -m "feat: serve images from the img.<domain> custom domain" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
+git add app/logic/content.js tests/content.test.js && git commit -m "feat: serve images from the img.learndendro.com custom domain" -m "Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 ```
 
 - [ ] **Step 6: Build the oak section table**
@@ -15089,7 +15086,7 @@ tables must be on `main` before the first run starts.
 
 ```bash
 git push -u origin live-prep
-gh pr create --base main --head live-prep --title "Serve images from img.<domain> and build the live data tables" --body "The custom domain is bound and answers. The oak section table and the inat flowering value come from the live sources."
+gh pr create --base main --head live-prep --title "Serve images from img.learndendro.com and build the live data tables" --body "The custom domain is bound and answers. The oak section table and the inat flowering value come from the live sources."
 ```
 
 Run: `gh pr checks --watch`
@@ -15102,7 +15099,7 @@ git checkout main && git pull
 ```
 
 Run: `node -e "import('./app/logic/content.js').then(m => console.log(m.CDN_BASE))"`
-Expected: `https://img.<domain>/`, on `main`.
+Expected: `https://img.learndendro.com/`, on `main`.
 
 - [ ] **Step 9: Init `simple_lobed_co` and list its species**
 
@@ -15258,7 +15255,7 @@ the `photo-check` skill, `build`, the gap hunt, `report`, `run pr`, the owner's 
 
 After both runs merge, open the deployed site and check three things:
 
-1. A species card shows a photo, and its URL is `https://img.<domain>/img/<hash>.jpg`.
+1. A species card shows a photo, and its URL is `https://img.learndendro.com/img/<hash>.jpg`.
 2. The browser network tab shows no request to `plants.usda.gov`, `inaturalist.org`, or
    `commons.wikimedia.org`. Every image comes from the CDN, as spec section 1 requires.
 3. The credit under each photo prints the author, the source, and the license, and links to
@@ -15288,7 +15285,7 @@ node -e "process.loadEnvFile(); import('./pipeline/lib/s3_storage.ts').then(asyn
 
 Expected: `head false`. This is the check that settles it: it asks the bucket itself.
 
-Run: `curl -sI https://img.<domain>/img/<hash>.jpg | head -1`
+Run: `curl -sI https://img.learndendro.com/img/<hash>.jpg | head -1`
 Expected: `HTTP/2 404`, or `HTTP/2 200` while Cloudflare still serves a cached copy. The
 cached copy is informational only. When an answer has to be immediate, purge that URL in the
 Cloudflare dashboard, then run the `curl` again.
