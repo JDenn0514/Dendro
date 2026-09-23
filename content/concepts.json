@@ -1,4 +1,5 @@
 [
+  { "key": "needles", "channel": "leaf", "name": "Needles", "accept": ["needles", "needle", "needle like", "conifer needles"], "description": "Narrow stiff leaves, in bundles, single along the twig, or in clusters." },
   { "key": "scale_like", "channel": "leaf", "name": "Scale-like", "accept": ["scale", "scales", "scale like", "scaly"], "description": "Tiny overlapping scales pressed flat against the twig." },
   { "key": "simple_entire", "channel": "leaf", "name": "Simple, untoothed", "accept": ["entire", "simple entire", "simple untoothed", "untoothed", "smooth margin"], "description": "One blade per stalk with a smooth unbroken edge." },
   { "key": "simple_toothed", "channel": "leaf", "name": "Simple, toothed", "accept": ["toothed", "simple toothed", "serrated", "serrate"], "description": "One blade per stalk with teeth along the edge." },
