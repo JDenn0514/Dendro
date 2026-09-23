@@ -109,7 +109,7 @@ test('an empty category gives no files, no token, and no error', () => {
   assert.deepEqual(empty, { files: [], next: null, error: null });
 });
 
-test('stripHtml decodes, strips the tags, then decodes once more', () => {
+test('stripHtml strips the tags, then decodes the entities once', () => {
   assert.equal(stripHtml('<a href="x">Jane Doe</a>'), 'Jane Doe');
   assert.equal(stripHtml('Leaves &amp; twigs'), 'Leaves & twigs');
   assert.equal(stripHtml('a &quot;quoted&quot; word'), 'a "quoted" word');
@@ -117,12 +117,27 @@ test('stripHtml decodes, strips the tags, then decodes once more', () => {
   assert.equal(stripHtml('one&nbsp;two'), 'one two');
   assert.equal(stripHtml('  spaced\n\n out  '), 'spaced out');
 
-  // An encoded tag decodes before the strip, so no live markup reaches the output.
-  assert.equal(stripHtml('&lt;script&gt;alert(1)&lt;/script&gt;'), 'alert(1)');
-  assert.equal(stripHtml('&lt;i&gt;'), '');
+  // Tags are removed from the raw HTML before any decoding, so an entity-encoded tag
+  // becomes literal text and never markup.
+  assert.equal(
+    stripHtml('&lt;script&gt;alert(1)&lt;/script&gt;'),
+    '<script>alert(1)</script>',
+  );
+  assert.equal(stripHtml('&lt;i&gt;'), '<i>');
 
-  // A tag encoded twice is text the page shows, so it survives as text.
-  assert.equal(stripHtml('&amp;lt;i&amp;gt;'), '<i>');
+  // A tag encoded twice is the text a browser would show for it, decoded once.
+  assert.equal(stripHtml('&amp;lt;i&amp;gt;'), '&lt;i&gt;');
+});
+
+test('stripHtml strips tags before decoding, so an encoded angle bracket cannot eat text', () => {
+  assert.equal(stripHtml('5 &lt; 7 &amp;&amp; 8 &gt; 2'), '5 < 7 && 8 > 2');
+});
+
+test('stripHtml decodes numeric character references, decimal and hex', () => {
+  assert.equal(stripHtml('Jane&#160;Doe'), 'Jane Doe');
+  assert.equal(stripHtml('A&#8211;B'), 'A–B');
+  assert.equal(stripHtml('<span>&#160;</span>'), '');
+  assert.equal(stripHtml('&#x41;&#X42;'), 'AB');
 });
 
 test('commonsCandidates drops the NC file and the non-JPEG file', () => {

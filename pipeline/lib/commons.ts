@@ -45,32 +45,42 @@ export function categoryUrl(category: string, continueToken: string | null): str
   return `${COMMONS_API}?${parts.join('&')}`;
 }
 
-// `&amp;` comes last in one pass, so `&amp;lt;` decodes to `&lt;` and not to `<`.
-const ENTITIES: [string, string][] = [
-  ['&lt;', '<'],
-  ['&gt;', '>'],
-  ['&quot;', '"'],
-  ['&#39;', "'"],
-  ['&nbsp;', ' '],
-  ['&amp;', '&'],
-];
+// A single global-regex pass never rescans a replacement, so `&amp;lt;` matches `&amp;`
+// and the literal `lt;` as two separate matches and decodes to the text `&lt;`, not `<`.
+const NAMED_ENTITIES: Record<string, string> = {
+  lt: '<',
+  gt: '>',
+  quot: '"',
+  '#39': "'",
+  nbsp: ' ',
+  amp: '&',
+};
+
+const ENTITY_PATTERN = /&(lt|gt|quot|#39|nbsp|amp);|&#(\d+);|&#[xX]([0-9a-fA-F]+);/g;
 
 function decodeEntities(text: string): string {
-  let out = text;
-  for (const [entity, char] of ENTITIES) {
-    out = out.split(entity).join(char);
-  }
-  return out;
+  return text.replace(ENTITY_PATTERN, (match, named, dec, hex) => {
+    if (named !== undefined) return NAMED_ENTITIES[named];
+    const codePoint = dec !== undefined ? parseInt(dec, 10) : parseInt(hex, 16);
+    try {
+      return String.fromCodePoint(codePoint);
+    } catch {
+      // An out-of-range or invalid code point is left as it was.
+      return match;
+    }
+  });
 }
 
 /**
- * `Artist` and `ImageDescription` come back as HTML. Decode first, then strip the tags,
- * so an encoded tag cannot pass the strip and land in the output as live markup. Decode
- * once more, so a twice-encoded entity reads as the text the Commons page shows.
+ * `Artist` and `ImageDescription` come back as HTML. Strip the tags from the raw HTML
+ * first, then decode entities exactly once, so an entity-encoded tag becomes literal
+ * text and never markup. `&nbsp;` and `&#160;` both decode to U+00A0, which the final
+ * collapse treats as whitespace like any other, so a span holding only a non-breaking
+ * space strips to an empty string.
  */
 export function stripHtml(html: string): string {
-  const stripped = decodeEntities(html).replace(/<[^>]*>/g, ' ');
-  return decodeEntities(stripped).replace(/\s+/g, ' ').trim();
+  const withoutTags = html.replace(/<[^>]*>/g, ' ');
+  return decodeEntities(withoutTags).replace(/\s+/g, ' ').trim();
 }
 
 export function parseCategoryListing(json: unknown): {
