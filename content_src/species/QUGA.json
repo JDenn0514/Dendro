@@ -1,0 +1,20 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "common_extra": ["Rocky Mountain white oak"],
+  "audubon_name": "Gambel Oak",
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Colorado Plateau and southern Rockies" },
+  "planted_states": [],
+  "elevation_ft": [5000, 9000],
+  "height_ft": [15, 30],
+  "habitat": "Dry slopes and foothills with pinyon and juniper",
+  "variety_notes": {
+    "QUGAG": "The widespread form.",
+    "QUGAB": "Narrower lobes, southwestern."
+  },
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus gambelii",
+    "FNA vol. 3, Quercus gambelii"
+  ]
+}

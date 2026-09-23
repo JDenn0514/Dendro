@@ -1,0 +1,15 @@
+{
+  "Id": 30247,
+  "Symbol": "SADO4",
+  "ScientificName": "<i>Salvia</i> <i>dorrii</i> (Kellogg) Abrams",
+  "CommonName": "purple sage",
+  "Rank": "Species",
+  "GrowthHabits": ["Shrub", "Subshrub"],
+  "NativeStatuses": [{ "Region": "L48", "NativeStatus": "N" }],
+  "AncestorRanks": [
+    { "Rank": "Kingdom", "ScientificName": "Plantae" },
+    { "Rank": "Order", "ScientificName": "Lamiales" },
+    { "Rank": "Family", "ScientificName": "Lamiaceae" },
+    { "Rank": "Genus", "ScientificName": "<i>Salvia</i>" }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "TotalResults": 3,
+  "PlantResults": [
+    {
+      "Id": 25298,
+      "Symbol": "QUGAG",
+      "ScientificName": "<i>Quercus</i> <i>gambelii</i> Nutt. var. <i>gambelii</i>"
+    },
+    {
+      "Id": 25299,
+      "Symbol": "QUGAB",
+      "ScientificName": "<i>Quercus</i> <i>gambelii</i> Nutt. var. <i>bakeri</i> (Kellogg) Cory"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "invalidcategory",
+    "info": "The category name you entered is not valid.",
+    "*": "See https://commons.wikimedia.org/w/api.php for API usage."
+  },
+  "servedby": "mw-api-ext.codfw.main-6f7b8"
+}

@@ -1,0 +1,13 @@
+{
+  "Id": 25298,
+  "Symbol": "QUUN",
+  "ScientificName": "<i>Quercus</i> <i>×undulata</i> Torr.",
+  "CommonName": "wavyleaf oak",
+  "Rank": "Species",
+  "GrowthHabits": ["Tree", "Shrub"],
+  "NativeStatuses": [{ "Region": "L48", "NativeStatus": "N" }],
+  "AncestorRanks": [
+    { "Rank": "Family", "ScientificName": "Fagaceae" },
+    { "Rank": "Genus", "ScientificName": "<i>Quercus</i>" }
+  ]
+}

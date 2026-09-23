@@ -1,0 +1,6 @@
+"Symbol","Synonym Symbol","Scientific Name with Author","Common Name","Family"
+"QUGA","","Quercus gambelii Nutt.","Gambel oak","Fagaceae"
+"QUUT","QUGA","Quercus utahensis (A. DC.) Rydb.","Gambel oak","Fagaceae"
+"ACPL","","Acer platanoides L.","Norway maple","Sapindaceae"
+"QUUN","","Quercus ×undulata Torr.","wavyleaf oak","Fagaceae"
+"PIPO","","Pinus ponderosa Douglas ex C. Lawson","ponderosa pine","Pinaceae"
