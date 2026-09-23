@@ -945,8 +945,9 @@ async function speciesRetire(rest: string[], deps: CliDeps): Promise<number> {
 }
 
 async function idsCheck(rest: string[], deps: CliDeps): Promise<number> {
-  const raw = rawOf(deps.root, readSpecies(deps.root), readManifest(deps.root));
   const base = baseRef(parseFlags(rest));
+  if (!baseResolved(deps, base)) return 1;
+  const raw = rawOf(deps.root, readSpecies(deps.root), readManifest(deps.root));
   const errors = appendOnlyErrors(readPublished(gitShowOf(deps, base)), contentSetOf(raw));
   for (const message of errors) console.error(message);
   if (errors.length > 0) return 1;
@@ -964,6 +965,7 @@ async function buildContent(
   deps: CliDeps,
   base: string,
 ): Promise<BuildReport | null> {
+  if (!baseResolved(deps, base)) return null;
   const scope = readRun(deps.root, name);
   const dir = runDir(deps.root, name);
   const candidates = readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'));
@@ -1303,6 +1305,8 @@ async function commitRetire(
   after: ManifestRow[],
   subject: string,
 ): Promise<boolean> {
+  // A retire runs on a checkout that has main. A checkout without it writes nothing.
+  if (!baseResolved(deps, DEFAULT_BASE)) return false;
   const raw = rawOf(deps.root, species, after);
   if (validated(deps, raw) === null) return false;
   // A retire runs on a checkout that has main, so it needs no --base.
@@ -1393,6 +1397,19 @@ function pushBranch(deps: CliDeps, name: string): boolean {
   const result = deps.exec('git', ['push', '-u', 'origin', `content/${name}`]);
   if (result.code === 0) return true;
   console.error(`git push failed with code ${result.code}: ${result.out}`);
+  return false;
+}
+
+/**
+ * `readPublished` reads four absent files as a first run, and `git show` answers every path
+ * of a ref it cannot resolve with an error. A failed fetch or a renamed branch would then
+ * pass the append-only check on no content at all. Every command that reads a base resolves
+ * it here first. Prints the line and returns false when the ref is not a commit.
+ */
+function baseResolved(deps: CliDeps, base: string): boolean {
+  const result = deps.exec('git', ['rev-parse', '--verify', '--quiet', `${base}^{commit}`]);
+  if (result.code === 0) return true;
+  console.error(`base ${base} does not resolve to a commit`);
   return false;
 }
 

@@ -1220,6 +1220,33 @@ test('ids check reads main by default and the --base ref when it is given', asyn
   assert.ok(shown(exec).includes('origin/main:content/species.json'));
 });
 
+test('ids check on a base that does not resolve exits 1 and says so', async (t) => {
+  const { root, deps, exec, out, err } = setup(t);
+  seed(root);
+  exec.codes.set('rev-parse', { code: 128, out: '' });
+
+  assert.equal(await runCommand(['ids', 'check', '--base', 'no-such-ref'], deps), 1);
+
+  assert.deepEqual(err, ['base no-such-ref does not resolve to a commit']);
+  assert.deepEqual(out, []);
+  // The check stops before the read, so nothing asked that ref for a file.
+  assert.deepEqual(shown(exec), []);
+});
+
+test('build on a base that does not resolve writes nothing and uploads nothing', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root);
+  exec.codes.set('rev-parse', { code: 128, out: '' });
+
+  assert.equal(await runCommand(['build', 'demo', '--base', 'no-such-ref'], deps), 1);
+
+  assert.deepEqual(err, ['base no-such-ref does not resolve to a commit']);
+  assert.deepEqual(storage.puts, []);
+  assert.equal(exists(root, 'content/species.json'), false);
+  assert.equal(exists(root, 'content/images/manifest.json'), false);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
 test('build --base reads the published content from that ref', async (t) => {
   const { root, deps, exec, err } = setup(t);
   seed(root);
