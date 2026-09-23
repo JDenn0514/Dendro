@@ -402,3 +402,38 @@ test('varietyCardChannels lists the channels that hold a variety card', () => {
   assert.deepEqual(varietyCardChannels(content, 'QUGA', 'QUGAG'), ['leaf']);
   assert.deepEqual(varietyCardChannels(content, 'QURU', 'QUGAG'), []);
 });
+
+test('a manifest row with no author, source, or license fails validation', () => {
+  // The screens print all three as the photo credit, so a missing one renders
+  // the word undefined on a public page.
+  const noAuthor = badContent();
+  delete noAuthor.manifest[0].author;
+  assert.match(messages(noAuthor), /the QUGA leaf row has no author/);
+
+  const noSource = badContent();
+  delete noSource.manifest[0].source;
+  assert.match(messages(noSource), /the QUGA leaf row has no source/);
+
+  const noLicense = badContent();
+  delete noLicense.manifest[0].license;
+  assert.match(messages(noLicense), /the QUGA leaf row has no license/);
+
+  const empty = badContent();
+  empty.manifest[0].author = '';
+  empty.manifest[0].source = '   ';
+  empty.manifest[0].license = null;
+  const report = validateContent(empty);
+  assert.equal(report.errors.length, 3);
+  assert.ok(report.errors.every((e) => e.file === 'images/manifest.json'));
+
+  // A retired row never reaches a screen, so it carries no credit to render.
+  const retired = badContent();
+  retired.manifest.push({
+    hash: '2'.repeat(64), target: 'QUGA', channel: 'leaf', origin: 'x', tags: [],
+    checked_by: 'x', checked_at: '2026-09-22', note: 'x', retired: true,
+    retired_reason: 'x', retired_at: '2026-09-22'
+  });
+  assert.deepEqual(validateContent(retired).errors, []);
+
+  assert.deepEqual(validateContent(badContent()).errors, []);
+});

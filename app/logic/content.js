@@ -206,6 +206,17 @@ export function validateContent(raw) {
     if (image.file !== undefined) {
       fail('images/manifest.json', `the ${where} row carries a file field; a row names its image by hash`);
     }
+    // Both screens print author, source, and license as the photo credit. A
+    // row without them renders the word undefined on a public page. A retired
+    // row never reaches a screen, so it is exempt, as it is on the rule below.
+    if (!image.retired) {
+      for (const field of ['author', 'source', 'license']) {
+        const value = image[field];
+        if (typeof value !== 'string' || value.trim() === '') {
+          fail('images/manifest.json', `the ${where} row has no ${field}`);
+        }
+      }
+    }
     const pair = `${image.hash}|${image.target}|${image.channel}`;
     if (seenRows.has(pair)) {
       fail('images/manifest.json', `duplicate row for ${where} and hash ${image.hash}`);
