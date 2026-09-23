@@ -175,6 +175,23 @@ test('a line break in a note becomes one space and the row stays on one line', (
   assert.ok(rows[0].includes('Quercus rubra. The cup is wrong too.'));
 });
 
+test('a link destination with a space and a parenthesis stays angle-bracketed and the row keeps its cells', () => {
+  const origin = 'https://commons.wikimedia.org/wiki/File:Quercus (velutina) bark.jpg';
+  const imageUrl = 'https://images.dendro.test/review/a b.jpg';
+  const text = renderReport(
+    makeData({
+      escalations: [escalation({ origin, image_url: imageUrl })],
+    }),
+  );
+
+  const rows = bodyRows(text, 'Escalations');
+  assert.equal(rows.length, 1);
+  assert.ok(rows[0].includes(`[QUAL](<${origin}>)`));
+  assert.ok(rows[0].includes(`![](<${imageUrl}>)`));
+  // Four cells give five unescaped pipes, so the split yields six pieces.
+  assert.equal(rows[0].split(/(?<!\\)\|/).length, 6);
+});
+
 test('a unit warning fills the Warning cell and a null warning leaves it empty', () => {
   const text = renderReport(
     makeData({

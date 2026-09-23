@@ -33,8 +33,8 @@
 
 | Image | Source | Case | Note |
 | --- | --- | --- | --- |
-| ![](https://images.dendro.test/review/a1b2c3d4e5f60718293a4b5c6d7e8f9012345678.jpg) | [QUAL](https://www.inaturalist.org/observations/123456) | mismatch | Leaf reads Quercus rubra \| not Quercus alba. |
-| ![](https://images.dendro.test/review/90abcdef1234567890abcdef1234567890abcdef.jpg) | [QUVE](https://commons.wikimedia.org/wiki/File:Quercus_velutina_bark.jpg) | license | The file page names CC BY-NC. |
+| ![](<https://images.dendro.test/review/a1b2c3d4e5f60718293a4b5c6d7e8f9012345678.jpg>) | [QUAL](<https://www.inaturalist.org/observations/123456>) | mismatch | Leaf reads Quercus rubra \| not Quercus alba. |
+| ![](<https://images.dendro.test/review/90abcdef1234567890abcdef1234567890abcdef.jpg>) | [QUVE](<https://commons.wikimedia.org/wiki/File:Quercus_velutina_bark.jpg>) | license | The file page names CC BY-NC. |
 
 ## Run counts
 

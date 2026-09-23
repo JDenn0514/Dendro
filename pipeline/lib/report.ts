@@ -144,8 +144,8 @@ export function renderReport(data: ReportData): string {
       ...table(
         ['Image', 'Source', 'Case', 'Note'],
         data.escalations.map((row) => [
-          `![](${row.image_url})`,
-          `[${row.target}](${row.origin})`,
+          `![](<${row.image_url}>)`,
+          `[${row.target}](<${row.origin}>)`,
           row.case,
           row.note,
         ]),
