@@ -1,0 +1,53 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # The pipeline runs TypeScript through Node's type stripping, so the
+          # repo is on Node 24. `node --test` reads a glob pattern from Node 21.
+          node-version: '24'
+      - name: Run the tests
+        run: node --test "tests/**/*.test.js"
+      - name: Validate the live content
+        run: node scripts/validate_content.js content
+      - name: Validate the fixture content
+        run: node scripts/validate_content.js content_dev --local-images content_dev/images
+
+  deploy:
+    needs: check
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # Only one Pages deploy runs at a time. The check job is free to run in parallel.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      # The whole repo root goes up, so pipeline/runs/ and content_src/ are
+      # public. That is by design: the run records and the authored species
+      # files are meant to be readable. Keys and caches never enter the repo.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - id: deployment
+        uses: actions/deploy-pages@v4
