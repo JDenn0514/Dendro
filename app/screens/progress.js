@@ -27,10 +27,21 @@ export function render(root, ctx) {
     if (unit.rows.length === 0) continue;
     root.append(el('h2', null, `${unit.name} (${unit.number.label})`));
     const table = el('table', 'grid');
+    // A screen reader needs the column header tied to each cell. The grid is
+    // read one column at a time, so scope="col" carries the whole meaning.
+    const thead = el('thead');
     const head = el('tr');
-    head.append(el('th', null, 'Species'));
-    for (const channel of grid.channels) head.append(el('th', null, channel));
-    table.append(head);
+    const corner = el('th', null, 'Species');
+    corner.scope = 'col';
+    head.append(corner);
+    for (const channel of grid.channels) {
+      const cell = el('th', null, channel);
+      cell.scope = 'col';
+      head.append(cell);
+    }
+    thead.append(head);
+    table.append(thead);
+    const body = el('tbody');
     for (const row of unit.rows) {
       const line = el('tr');
       const nameCell = el('td');
@@ -43,8 +54,9 @@ export function render(root, ctx) {
           cell.has_card ? String(cell.level) : '');
         line.append(box);
       }
-      table.append(line);
+      body.append(line);
     }
+    table.append(body);
     root.append(table);
   }
 }

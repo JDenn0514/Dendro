@@ -76,7 +76,7 @@ export function render(root, ctx) {
     root.append(el('h1', null, placement ? 'No cards to place' : 'Nothing to study'));
     root.append(el('p', null, placement
       ? 'The placement test needs level-1 concept cards, and this content set has none.'
-      : 'Nothing is due in this focus and the daily new-card cap is reached.'));
+      : 'Nothing is due in this focus, and no new card is ready for it today.'));
     const back = el('button', 'primary', 'Home');
     back.addEventListener('click', () => ctx.navigate('/'));
     root.append(back);
