@@ -117,7 +117,13 @@ async function start() {
   let teardown = null;
 
   function route() {
-    if (teardown) teardown();
+    // A screen that throws on its way out must not hold the router. The next
+    // screen still renders, and the console keeps the error.
+    try {
+      if (teardown) teardown();
+    } catch (error) {
+      console.error('The screen failed to tear down.', error);
+    }
     teardown = null;
     const { parts, params } = parseRoute();
     const root = document.getElementById('app');
@@ -146,4 +152,5 @@ async function start() {
   route();
 }
 
-start();
+// A throw inside a screen would otherwise leave the placeholder text on screen.
+start().catch((error) => showError('The app failed to start', [error.message]));
