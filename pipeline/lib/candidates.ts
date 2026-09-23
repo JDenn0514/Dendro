@@ -153,6 +153,7 @@ export function makeCandidate(
 function licenseWords(text: string): string[] {
   return text
     .toLowerCase()
+    .replace(/\bu\.?\s*s\.?/g, 'us')
     .replace(/united states/g, 'us')
     .replace(/[^a-z0-9]+/g, ' ')
     .trim()

@@ -71,6 +71,13 @@ test('the cc by phrase already covers CC BY-SA, so the allowlist needs no sa phr
   assert.equal(licenseAllowed('CC BY-SA 4.0'), true);
 });
 
+test('licenseAllowed admits the U.S. spelling of the government work license', () => {
+  assert.equal(licenseAllowed('U.S. Government Work'), true);
+  assert.equal(licenseAllowed('U. S. Government Work'), true);
+  // The NC token still rejects the text, whichever spelling of U.S. it carries.
+  assert.equal(licenseAllowed('U.S. Government Work, CC BY-NC'), false);
+});
+
 test('licenseAllowed rejects a license whose words carry an NC or ND token', () => {
   const rejected = [
     'CC BY-NC 4.0',
