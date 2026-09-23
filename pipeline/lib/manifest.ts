@@ -73,6 +73,21 @@ export async function publishApproved(input: {
     const hash = sha256Hex(resized);
     const key = objectKey(hash);
 
+    // `images retire` removed this object, and the approved verdict is still in the run.
+    // Without this the next build puts the same bytes back at the same public url, which
+    // is the one thing a takedown must not do. The row stays as it is.
+    const retired = rows.some(
+      (row) =>
+        row.hash === hash
+        && row.target === candidate.target
+        && row.channel === channel
+        && row.retired === true,
+    );
+    if (retired) {
+      skipped.push(key);
+      continue;
+    }
+
     if (await deps.storage.head(key)) {
       skipped.push(key);
     } else {

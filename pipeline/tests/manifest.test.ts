@@ -287,6 +287,33 @@ test('an approved verdict with a null channel throws and uploads nothing', async
   assert.deepEqual(h.storage.puts, []);
 });
 
+test('a retired row for the hash blocks the upload and adds no row', async () => {
+  const h = harness({ [CACHE_1]: 'alpha' });
+  const first = await publishApproved({
+    deps: h.deps,
+    candidates: [cand({})],
+    verdicts: [verd({})],
+    rows: [],
+  });
+  const hash = first.rows[0].hash;
+  const retired = retireRows(first.rows, hash, 'takedown request', '2026-09-23').rows;
+  // images retire removed the object. The approved verdict is still in the run.
+  await h.storage.remove(objectKey(hash));
+
+  const second = await publishApproved({
+    deps: h.deps,
+    candidates: [cand({})],
+    verdicts: [verd({})],
+    rows: retired,
+  });
+
+  assert.equal(h.storage.objects.has(objectKey(hash)), false);
+  assert.equal(h.storage.puts.length, 1);
+  assert.deepEqual(second.uploaded, []);
+  assert.deepEqual(second.skipped, [objectKey(hash)]);
+  assert.deepEqual(second.rows, retired);
+});
+
 test('retireRows marks the row, keeps the object, and leaves the input alone', async () => {
   const h = harness({ [CACHE_1]: 'alpha' });
   const published = await publishApproved({
