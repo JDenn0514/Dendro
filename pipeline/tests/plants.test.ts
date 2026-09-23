@@ -160,6 +160,21 @@ test('splitScientific takes the author out of the middle of an infraspecific nam
   });
 });
 
+test('splitScientific keeps filius out of the species name but still reads a true forma', () => {
+  assert.deepEqual(splitScientific('Magnolia campbellii Hook. f. & Thomson'), {
+    scientific: 'Magnolia campbellii',
+    author: 'Hook. f. & Thomson',
+  });
+  assert.deepEqual(splitScientific('Pinus jeffreyi Balf. f.'), {
+    scientific: 'Pinus jeffreyi',
+    author: 'Balf. f.',
+  });
+  assert.deepEqual(splitScientific('Quercus alba f. latiloba Sarg.'), {
+    scientific: 'Quercus alba f. latiloba',
+    author: 'Sarg.',
+  });
+});
+
 test('a multiplication sign or a lone x marks a hybrid', () => {
   assert.equal(isHybrid('Quercus ×undulata'), true);
   assert.equal(isHybrid('Quercus x undulata'), true);
@@ -337,9 +352,9 @@ test('the fetch helpers read the fake HTTP client and parse the body', async () 
 
   const profile = await fetchProfile(http, 'QUGA', FETCHED_AT);
   assert.equal(profile?.plants_id, QUGA_ID);
-  assert.deepEqual(await fetchDistribution(http, QUGA_ID), ['AZ', 'CO', 'NM', 'UT']);
+  assert.deepEqual(await fetchDistribution(http, QUGA_ID, FETCHED_AT), ['AZ', 'CO', 'NM', 'UT']);
   assert.equal((await fetchImages(http, QUGA_ID, FETCHED_AT)).length, 5);
-  assert.equal((await fetchChecklist(http)).length, 5);
+  assert.equal((await fetchChecklist(http, FETCHED_AT)).length, 5);
   assert.equal(await fetchProfile(http, 'NOPE', FETCHED_AT), null);
   assert.deepEqual(asked, [
     profileUrl('QUGA'),
@@ -388,11 +403,37 @@ test('a body that is not JSON gives null and records a failure', async () => {
   ]);
 });
 
+test('a non-CSV distribution body gives an empty result and records a failure', async () => {
+  const { http } = makeHttp({ [DISTRIBUTION_URL]: '<html>maintenance</html>' });
+  assert.deepEqual(await fetchDistribution(http, QUGA_ID, FETCHED_AT), []);
+  assert.deepEqual(http.failures, [
+    {
+      url: DISTRIBUTION_URL,
+      status: OK,
+      message: 'body is not the expected CSV',
+      at: FETCHED_AT,
+    },
+  ]);
+});
+
+test('a non-CSV checklist body gives an empty result and records a failure', async () => {
+  const { http } = makeHttp({ [CHECKLIST_URL]: '<html>maintenance</html>' });
+  assert.deepEqual(await fetchChecklist(http, FETCHED_AT), []);
+  assert.deepEqual(http.failures, [
+    {
+      url: CHECKLIST_URL,
+      status: OK,
+      message: 'body is not the expected CSV',
+      at: FETCHED_AT,
+    },
+  ]);
+});
+
 test('a 500 gives an empty result and leaves the failure row in place', async () => {
   const { http } = makeHttp({}, SERVER_ERROR);
   assert.deepEqual(await fetchImages(http, QUGA_ID, FETCHED_AT), []);
   assert.deepEqual(await fetchSubordinateTaxa(http, QUGA_ID, FETCHED_AT), []);
-  assert.deepEqual(await fetchDistribution(http, QUGA_ID), []);
+  assert.deepEqual(await fetchDistribution(http, QUGA_ID, FETCHED_AT), []);
   assert.equal(await fetchProfile(http, 'QUGA', FETCHED_AT), null);
   assert.deepEqual(
     http.failures.map((row) => row.url),

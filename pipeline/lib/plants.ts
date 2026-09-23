@@ -40,6 +40,7 @@ const BINOMIAL_WORDS = 2;
 const MARKER_WORDS = 2;
 
 const NOT_JSON = 'body is not JSON';
+const NOT_CSV = 'body is not the expected CSV';
 
 export interface PlantsProfile {
   symbol: string;
@@ -305,10 +306,18 @@ export async function fetchSubordinateTaxa(
   }
 }
 
-export async function fetchDistribution(http: Http, plantsId: number): Promise<string[]> {
+export async function fetchDistribution(
+  http: Http,
+  plantsId: number,
+  now: string,
+): Promise<string[]> {
   const result = await http.postJson(DISTRIBUTION_URL, { MasterId: plantsId });
   // A result that is not ok is already a row in http.failures.
   if (!result.ok) return [];
+  if (!looksLikeDistributionCsv(result.body)) {
+    http.failures.push({ url: DISTRIBUTION_URL, status: result.status, message: NOT_CSV, at: now });
+    return [];
+  }
   return parseDistribution(result.body);
 }
 
@@ -329,10 +338,14 @@ export async function fetchImages(
   return parseImages(parsed.value);
 }
 
-export async function fetchChecklist(http: Http): Promise<ChecklistRow[]> {
+export async function fetchChecklist(http: Http, now: string): Promise<ChecklistRow[]> {
   const result = await http.getText(CHECKLIST_URL);
   // A result that is not ok is already a row in http.failures.
   if (!result.ok) return [];
+  if (!looksLikeChecklistCsv(result.body)) {
+    http.failures.push({ url: CHECKLIST_URL, status: result.status, message: NOT_CSV, at: now });
+    return [];
+  }
   return parseChecklist(result.body);
 }
 
@@ -346,12 +359,26 @@ function wordsOf(text: string): string[] {
 /**
  * The index of the first rank marker after the epithet, or -1. A marker with no
  * word after it does not count, because there is no infraspecific epithet to take.
+ *
+ * `f.` is ambiguous: it is both the forma rank marker and, in an author string, the
+ * abbreviation for filius (`Hook. f.`, `Balf. f.`). It counts as a rank marker only
+ * when the word right before it is a lowercase epithet, never a capitalized author
+ * abbreviation. The other markers carry no such author string, so they keep the
+ * plain rule.
  */
 function rankMarkerAt(words: string[]): number {
   for (let i = BINOMIAL_WORDS; i + 1 < words.length; i += 1) {
-    if (RANK_MARKERS.includes(words[i].toLowerCase())) return i;
+    const marker = words[i].toLowerCase();
+    if (!RANK_MARKERS.includes(marker)) continue;
+    if (marker === 'f.' && !isLowercaseEpithet(words[i - 1])) continue;
+    return i;
   }
   return -1;
+}
+
+/** All lowercase letters, optionally with one hyphen, as a botanical epithet is written. */
+function isLowercaseEpithet(word: string): boolean {
+  return /^[a-z]+(-[a-z]+)?$/.test(word);
 }
 
 /**
@@ -389,6 +416,22 @@ function familyOf(value: unknown): string | null {
     return orNull(stripItalics(str(row.ScientificName)));
   }
   return null;
+}
+
+/** True when the first line reads like the distribution CSV header, not a maintenance page. */
+function looksLikeDistributionCsv(body: string): boolean {
+  const header = headerLine(body);
+  return header.includes('country') && header.includes('state');
+}
+
+/** True when the first line reads like the plantlst.txt header, not a maintenance page. */
+function looksLikeChecklistCsv(body: string): boolean {
+  const header = headerLine(body);
+  return header.includes('symbol') && header.includes('scientific name');
+}
+
+function headerLine(body: string): string {
+  return (body.split(/\r?\n/)[0] ?? '').toLowerCase();
 }
 
 /** The data lines of a comma separated file, with the header line dropped. */
