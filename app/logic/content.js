@@ -6,8 +6,10 @@ const LEVEL_KIND = { 1: 'concept', 2: 'group', 3: 'species', 4: 'variety' };
 const UNIT_CARDS_MIN = 5;
 const UNIT_CARDS_MAX = 25;
 
-// The content pipeline's bucket setup supplies the real host. See the pipeline spec, section 2.
-export const CDN_BASE = 'https://REPLACE-WITH-CDN-HOST/';
+// The r2.dev development URL of the dendro-images bucket. Cloudflare rate-limits this
+// host and does not cache it, so a custom domain replaces it before the app is public.
+// See the pipeline spec, section 2.
+export const CDN_BASE = 'https://pub-54f0f3ab05464e9db548cc8568c073bb.r2.dev/';
 
 export function imageUrl(photo, base) {
   return `${base}img/${photo.hash}.jpg`;
