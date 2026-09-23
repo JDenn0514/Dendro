@@ -60,11 +60,20 @@ export function appendOnlyErrors(previous: ContentSet | null, next: ContentSet):
 
 export function readPublished(gitShow: (path: string) => string | null): ContentSet | null {
   const speciesText = gitShow(SPECIES_PATH);
-  if (speciesText === null) return null;
-
   const conceptsText = gitShow(CONCEPTS_PATH);
   const unitsText = gitShow(UNITS_PATH);
   const manifestText = gitShow(MANIFEST_PATH);
+
+  // The first-run signal is that all four files are absent. Any other mix of
+  // absent and present is a broken publish, not a first run.
+  if (
+    speciesText === null &&
+    conceptsText === null &&
+    unitsText === null &&
+    manifestText === null
+  ) {
+    return null;
+  }
 
   return {
     species: readRecordMap(SPECIES_PATH, speciesText),

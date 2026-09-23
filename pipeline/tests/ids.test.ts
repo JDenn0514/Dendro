@@ -143,6 +143,23 @@ test('readPublished returns null when gitShow returns null for content/species.j
   assert.equal(readPublished(gitShow), null);
 });
 
+test('readPublished returns null when all four published files are absent', () => {
+  const { gitShow } = gitShowFrom({});
+  assert.equal(readPublished(gitShow), null);
+});
+
+test('readPublished throws when species.json is absent but the other three files are present', () => {
+  const { gitShow } = gitShowFrom({
+    'content/concepts.json': JSON.stringify([{ key: 'plated', channel: 'bark' }]),
+    'content/units.json': JSON.stringify([{ key: 'bark_types' }]),
+    'content/images/manifest.json': JSON.stringify([]),
+  });
+  assert.throws(
+    () => readPublished(gitShow),
+    { message: 'content/species.json is missing from the published content' },
+  );
+});
+
 test('readPublished parses four files and calls gitShow with those four paths in order', () => {
   const { gitShow, calls } = gitShowFrom({
     'content/species.json': JSON.stringify({
