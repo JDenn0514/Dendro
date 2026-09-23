@@ -34,7 +34,7 @@ export function render(root, ctx) {
     input.max = String(NUMBER_FIELD_UNENFORCED_MAX_HINT);
     input.value = String(current[field]);
     input.addEventListener('change', () => {
-      const parsed = Number.parseInt(input.value, 10);
+      const parsed = Number(input.value);
       if (Number.isInteger(parsed) && parsed >= 1) {
         const stored = store.writeSettings({ [field]: parsed });
         input.value = String(stored[field]);

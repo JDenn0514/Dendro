@@ -5622,7 +5622,7 @@ Serve with `python -m http.server 8000`. Open `http://localhost:8000/?content=de
 1. "Cards per session" shows 20 and "New cards per day" shows 10.
 2. Change "Cards per session" to 5 and click outside the field. In the console run `JSON.parse(localStorage.dendro_settings).session_size`. It returns 5.
 3. Clear "Cards per session" so the field is empty, then click outside it. The field snaps back to 5. Run `JSON.parse(localStorage.dendro_settings).session_size` again. It still returns 5, so the empty field wrote nothing.
-4. Type `0` in "Cards per session" and click outside it. The field snaps back to 5 and the stored value stays 5. Do the same with `-3`. The field snaps back every time. Type `2.5` and click outside it: `Number.parseInt('2.5', 10)` is the integer `2`, so the code's own `Number.isInteger(parsed) && parsed >= 1` check passes; the field shows 2 and the stored value becomes 2, it does not snap back.
+4. Type `0` in "Cards per session" and click outside it. The field snaps back to 5 and the stored value stays 5. Do the same with `-3` and with `2.5`. The field snaps back every time.
 5. Go to `#/` and start a session. The deck holds at most 5 cards.
 6. Back on Settings, click "Export progress". The browser downloads `dendro-progress-YYYY-MM-DD.json` with today's date. Open it. It holds `version: 1` and the four sections `dendro_cards`, `dendro_log`, `dendro_settings`, `dendro_missing_edges`.
 7. The line under the button now reads "Last export: YYYY-MM-DD." The file opens from the Downloads list, so the object URL outlived the click.
