@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          # The append-only check reads the published content from main. A default
+          # checkout fetches one commit and no main ref, so the check would have
+          # nothing to compare against.
+          fetch-depth: 0
       - uses: actions/setup-node@v7
         with:
           # The pipeline runs TypeScript through Node's type stripping, so the
@@ -24,6 +29,12 @@ jobs:
         run: node scripts/validate_content.js content
       - name: Validate the fixture content
         run: node scripts/validate_content.js content_dev --local-images content_dev/images
+      - name: Fetch the published content
+        run: git fetch --no-tags origin +refs/heads/main:refs/remotes/origin/main
+      - name: Check the content ids are append-only
+        # A card ID is a foreign key in other people's review logs. Once an ID has
+        # shipped it never leaves the content, retired or not.
+        run: node pipeline/cli.ts ids check --base origin/main
 
   deploy:
     needs: check
