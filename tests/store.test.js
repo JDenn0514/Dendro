@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  STORE_VERSION, KEYS, LOG_CAP, defaultSettings, memoryStorage, createStore
+  STORE_VERSION, KEYS, LOG_CAP, defaultSettings, memoryStorage, createStore, isCount
 } from '../app/logic/store.js';
 
 function row(card, at) {
@@ -314,6 +314,72 @@ test('readSettings holds the floor on a stored value below 1', () => {
   storage.setItem('dendro_settings', JSON.stringify({ version: 1, session_size: 2.5, new_per_day: 'abc' }));
   assert.equal(store.readSettings().session_size, 20);
   assert.equal(store.readSettings().new_per_day, 10);
+});
+
+test('the store spots a newer-version payload at boot, before any read', () => {
+  const storage = memoryStorage();
+  storage.setItem('dendro_settings', JSON.stringify({ version: 9, session_size: 5, new_per_day: 5 }));
+  const store = createStore(storage);
+  assert.equal(store.newer_version, true);
+  assert.equal(store.available, true);
+
+  // The boot scan reads only. It writes nothing, migrates nothing, and copies
+  // no corrupt text aside.
+  const zero = memoryStorage();
+  zero.setItem('dendro_cards', JSON.stringify({ version: 0, cards: {} }));
+  zero.setItem('dendro_log', '{oops');
+  const quiet = createStore(zero);
+  assert.equal(quiet.newer_version, false);
+  assert.equal(JSON.parse(zero.getItem('dendro_cards')).version, 0);
+  assert.equal(zero.getItem('dendro_log_corrupt'), null);
+});
+
+test('a reset after a newer-version read lets the store write again', () => {
+  const storage = memoryStorage();
+  const newer = JSON.stringify({ version: 9, cards: { 'species:QUGA:leaf': { interval: 30, tier: 'typed', tier_passes: 1 } } });
+  storage.setItem('dendro_cards', newer);
+  const store = createStore(storage);
+  assert.equal(store.readCards()['species:QUGA:leaf'].interval, 30);
+  assert.equal(store.newer_version, true);
+
+  store.reset();
+  assert.equal(store.newer_version, false);
+  store.writeCard('species:QURU:leaf', { interval: 1, tier: 'mc4', tier_passes: 0 });
+  assert.equal(store.readCards()['species:QURU:leaf'].interval, 1);
+  assert.equal(JSON.parse(storage.getItem('dendro_cards')).cards['species:QURU:leaf'].interval, 1);
+
+  store.writeSettings({ session_size: 7 });
+  assert.equal(store.readSettings().session_size, 7);
+});
+
+test('a reset removes the corrupt copy of every key', () => {
+  const storage = memoryStorage();
+  storage.setItem('dendro_cards', '{oops');
+  storage.setItem('dendro_log', '{bad');
+  const store = createStore(storage);
+  assert.deepEqual(store.readCards(), {});
+  assert.deepEqual(store.readLog(), []);
+  assert.equal(storage.getItem('dendro_cards_corrupt'), '{oops');
+  assert.equal(storage.getItem('dendro_log_corrupt'), '{bad');
+
+  store.reset();
+  for (const key of Object.values(KEYS)) {
+    assert.equal(storage.getItem(`${key}_corrupt`), null);
+  }
+  store.writeCard('species:QUGA:leaf', { interval: 1, tier: 'mc4', tier_passes: 0 });
+  assert.equal(store.readCards()['species:QUGA:leaf'].interval, 1);
+});
+
+test('isCount is the one count rule the app shares', () => {
+  assert.equal(isCount(1), true);
+  assert.equal(isCount(20), true);
+  assert.equal(isCount(2.5), false);
+  assert.equal(isCount(0), false);
+  assert.equal(isCount(-3), false);
+  assert.equal(isCount('4'), false);
+  assert.equal(isCount(NaN), false);
+  assert.equal(isCount(null), false);
+  assert.equal(isCount(undefined), false);
 });
 
 test('an unavailable storage leaves the store running and not available', () => {

@@ -37,7 +37,10 @@ function isPlainObject(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
 
-function isCount(value) {
+// The one count rule for session_size and new_per_day. The settings screen
+// imports it, so the screen and the store cannot drift apart: an earlier copy
+// in the screen used parseInt and turned 2.5 into a valid 2.
+export function isCount(value) {
   return Number.isInteger(value) && value >= 1;
 }
 
@@ -94,6 +97,31 @@ export function createStore(storage) {
   } catch {
     available = false;
   }
+
+  // The newer-version state is a fact about the stored data, not about what the
+  // app has read so far. Boot checks the four keys once, so the banner appears
+  // before the first screen renders. This scan reads only: it writes nothing,
+  // migrates nothing, and copies no corrupt text aside.
+  function scanVersions() {
+    if (!available) return;
+    for (const key of Object.values(KEYS)) {
+      let text = null;
+      try {
+        text = storage.getItem(key);
+      } catch {
+        return;
+      }
+      if (!text) continue;
+      let payload;
+      try {
+        payload = JSON.parse(text);
+      } catch {
+        continue;
+      }
+      if (isPlainObject(payload) && (payload.version ?? 0) > STORE_VERSION) newerVersion = true;
+    }
+  }
+  scanVersions();
 
   // Text that does not parse is copied aside once, so a user can send the file in.
   function keepCorrupt(key, text) {
@@ -244,15 +272,20 @@ export function createStore(storage) {
       return { ok: true, errors: [] };
     },
 
+    // Reset is the only recovery path a user has. It clears the corrupt copies
+    // and the newer-version flag as well, so writing works again afterwards.
+    // Without that, every later write is silently dropped.
     reset() {
       if (!available) return;
       for (const key of Object.values(KEYS)) {
         try {
           storage.removeItem(key);
+          storage.removeItem(`${key}_corrupt`);
         } catch {
           available = false;
         }
       }
+      newerVersion = false;
     },
 
     shouldPromptExport(today) {
