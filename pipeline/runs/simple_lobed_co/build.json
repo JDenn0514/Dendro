@@ -47,7 +47,7 @@
       "counts": {
         "fruit": 5,
         "leaf": 16,
-        "bark": 1
+        "bark": 2
       }
     },
     {
@@ -199,7 +199,7 @@
       "counts": {
         "bark": 4,
         "leaf": 9,
-        "fruit": 3
+        "fruit": 4
       }
     },
     {
@@ -255,7 +255,7 @@
       "counts": {
         "leaf": 18,
         "bark": 1,
-        "fruit": 2
+        "fruit": 3
       }
     },
     {
@@ -1909,11 +1909,6 @@
   ],
   "gaps": [
     {
-      "symbol": "ACGR3",
-      "channel": "bark",
-      "count": 1
-    },
-    {
       "symbol": "QUHA3",
       "channel": "bark",
       "count": 1
@@ -1924,23 +1919,23 @@
       "count": 2
     },
     {
+      "symbol": "ACGR3",
+      "channel": "bark",
+      "count": 2
+    },
+    {
       "symbol": "PLWR2",
       "channel": "fruit",
       "count": 2
     },
     {
-      "symbol": "QUHA3",
-      "channel": "fruit",
-      "count": 2
-    },
-    {
-      "symbol": "QUBU2",
-      "channel": "fruit",
+      "symbol": "QUGA",
+      "channel": "bark",
       "count": 3
     },
     {
-      "symbol": "QUGA",
-      "channel": "bark",
+      "symbol": "QUHA3",
+      "channel": "fruit",
       "count": 3
     }
   ],
@@ -1965,13 +1960,12 @@
     "candidates_by_source": {
       "commons": 1009,
       "inat": 1012,
-      "manual": 73,
+      "manual": 74,
       "plants": 205
     },
     "verdicts_by_kind": {
-      "approve": 387,
-      "escalate": 120,
-      "reject": 706
+      "approve": 390,
+      "reject": 824
     },
     "fetch_failures": 0,
     "stop_rule_fired": false

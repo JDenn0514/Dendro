@@ -6008,5 +6008,50 @@
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T14:23:32Z",
     "note": "One green sycamore ball hanging on its stalk at the centre of the frame. Sharp, with the foliage behind thrown out of focus."
+  },
+  {
+    "hash": "a17e9921725d715ee9296c5baa6c183b5d71a3d443c4e612f8cc7aa68eaac61b",
+    "target": "QUBU2",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Sam Kieschnick, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/176132040#photo=306175293",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-24",
+    "note": "Owner decision 2026-09-24: approved. Sharp Texas red oak acorns and leaf; a hand holds the shoot."
+  },
+  {
+    "hash": "9d57cb09e4a1d02d339fc982070352368262cb1eb2989642bd18850393ea7071",
+    "target": "ACGR3",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Rachel Stringham, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/243728605#photo=434647585",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-24",
+    "note": "Owner decision 2026-09-24: approved. Mature gray furrowed bigtooth maple trunk; a pine trunk stands beside it."
+  },
+  {
+    "hash": "86d1613e1d9effb72189dbdebbe8c4e0fa67c7005bffc4f8bbbecec6fea15972",
+    "target": "QUHA3",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Bob Nieman, some rights reserved (CC BY), cropped",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/39093193#photo=62028073-cropped",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-24",
+    "note": "Owner decision 2026-09-24: approved as a crop of candidate 890c3fc1 (iNaturalist observation 39093193, photo 62028073). One Havard oak acorn in its cup on red sand; the credit says cropped."
   }
 ]
