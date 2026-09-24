@@ -52,7 +52,7 @@ committed.
 
 ### Files that are authored, not generated
 
-`concepts.json` (21 records in v0, stable) and `units.json` (a content decision) are
+`concepts.json` (22 records in v0, stable) and `units.json` (a content decision) are
 written by hand. The pipeline validates both and reports unit sizes.
 
 ### Decisions this spec inherits
@@ -662,8 +662,8 @@ Everything else is recorded on the row it belongs to and listed in the report.
 
 Two runs meet the app spec's section 11.
 
-**`concepts_v0`.** A concept run for the 21 level-1 categories of the leaf, bark, and
-fruit channels. Target: 3 to 5 approved images per category, about 70 in total. Its
+**`concepts_v0`.** A concept run for the 22 level-1 categories of the leaf, bark, and
+fruit channels. Target: 3 to 5 approved images per category, about 75 in total. Its
 `run.json` lists two or three exemplar species per category.
 
 **`simple_lobed_co`.** Bucket `simple_lobed`. States CO, UT, NM, WY, NE, KS. Genera

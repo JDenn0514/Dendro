@@ -5240,7 +5240,7 @@ git add pipeline/lib/commons.ts pipeline/tests/commons.test.ts pipeline/tests/fi
 - Create: `content_src/species/QUGA.json`
 - Create: `pipeline/lib/species.ts`
 - Test: `pipeline/tests/species.test.ts`
-- Read only: `content/concepts.json`. It holds 21 rows on `main`. The test reads it and
+- Read only: `content/concepts.json`. It holds 22 rows on `main`. The test reads it and
   builds the concept key set from it.
 
 **Interfaces:**
@@ -14791,7 +14791,7 @@ the branch is not `main`.
 - [ ] **Step 8: Prove the gate fails on a dropped ID**
 
 `content/species.json` is `{}` on `main`, so no species record exists to delete.
-`content/concepts.json` holds 21 rows, and each one is a published ID. Delete one, watch the
+`content/concepts.json` holds 22 rows, and each one is a published ID. Delete one, watch the
 gate fail, then revert.
 
 Edit `content/concepts.json` and delete the whole `needles` row, the first element of the
@@ -15227,22 +15227,22 @@ species, and `content/images/manifest.json` holding one row per approved image.
 
 - [ ] **Step 15: Run `concepts_v0`**
 
-Spec section 12's first run: the 21 level-1 categories of the leaf, bark, and fruit channels.
-Target 3 to 5 approved images per category, about 70 in total. Each value is the qualified
+Spec section 12's first run: the 22 level-1 categories of the leaf, bark, and fruit channels.
+Target 3 to 5 approved images per category, about 75 in total. Each value is the qualified
 key `<channel>/<key>` from `content/concepts.json`. The command takes no `--channels`: it
 derives the run's channels from the key prefixes, which here are `leaf`, `bark`, and
 `fruit`, and it throws when `--channels` is passed as well.
 
 ```bash
 git checkout main && git pull
-node pipeline/cli.ts run init concepts_v0 --concepts leaf/needles,leaf/scale_like,leaf/simple_entire,leaf/simple_toothed,leaf/simple_lobed,leaf/pinnately_compound,leaf/palmately_compound,leaf/fan_strap,bark/smooth,bark/furrowed,bark/plated,bark/shaggy,bark/papery,bark/warty,fruit/samara,fruit/acorn,fruit/nut,fruit/pod,fruit/berry,fruit/capsule,fruit/cone
+node pipeline/cli.ts run init concepts_v0 --concepts leaf/needles,leaf/scale_like,leaf/simple_entire,leaf/simple_toothed,leaf/simple_lobed,leaf/pinnately_compound,leaf/palmately_compound,leaf/fan_strap,bark/smooth,bark/furrowed,bark/plated,bark/shaggy,bark/papery,bark/warty,fruit/samara,fruit/acorn,fruit/nut,fruit/pod,fruit/berry,fruit/capsule,fruit/cone,fruit/ball
 ```
 
 Expected: `run concepts_v0 created on branch content/concepts_v0`. An unknown key exits 1 and
 the message names it.
 
 Run: `node -e "const r=JSON.parse(require('fs').readFileSync('pipeline/runs/concepts_v0/run.json','utf8'));console.log(r.concepts.length, [...r.channels].sort().join(','))"`
-Expected: `21 bark,fruit,leaf` — the 21 keys, and the three channels the command derived
+Expected: `22 bark,fruit,leaf` — the 22 keys, and the three channels the command derived
 from their prefixes.
 
 Then edit `pipeline/runs/concepts_v0/run.json` and fill `concept_exemplars` with two or three

@@ -19,5 +19,6 @@
   { "key": "pod", "channel": "fruit", "name": "Pod / legume", "accept": ["pod", "legume", "pod legume", "bean pod"], "description": "A flat or round pod holding a row of seeds." },
   { "key": "berry", "channel": "fruit", "name": "Berry / drupe", "accept": ["berry", "drupe", "berry drupe"], "description": "A fleshy fruit around one stone or several seeds." },
   { "key": "capsule", "channel": "fruit", "name": "Capsule", "accept": ["capsule", "capsules"], "description": "A dry case that splits open along seams." },
-  { "key": "cone", "channel": "fruit", "name": "Cone", "accept": ["cone", "cones", "woody cone", "fleshy cone"], "description": "Overlapping scales on an axis, woody or fleshy." }
+  { "key": "cone", "channel": "fruit", "name": "Cone", "accept": ["cone", "cones", "woody cone", "fleshy cone"], "description": "Overlapping scales on an axis, woody or fleshy." },
+  { "key": "ball", "channel": "fruit", "name": "Ball / aggregate head", "accept": ["ball", "balls", "fruit ball", "aggregate head", "aggregate", "multiple", "buttonball"], "description": "A round head of many small dry fruits packed around a core, hanging on a stalk." }
 ]
