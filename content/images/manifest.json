@@ -5724,5 +5724,289 @@
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T06:36:48Z",
     "note": "Sharp frame of a mature trunk filling most of the picture. The blocky plates and shallow furrows read across the trunk."
+  },
+  {
+    "hash": "4072fbc55c5b91e2e1d941daba447f7a21feb1005e36d0511122999434a4c042",
+    "target": "ACGR3",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-grandidentatum/",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:21:21Z",
+    "note": "Mature trunk with scaly furrowed bark filling the frame. Sharp, no hand or scale object."
+  },
+  {
+    "hash": "ee39c203bf3191c9ab2f6647f051e572e74a0079027674dee3c76477ada78123",
+    "target": "ACGL",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/42549.htm",
+    "tags": [
+      "variety",
+      "young",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:21:22Z",
+    "note": "Smooth grey stem of a small tree, which matches the smooth bark concept. Source page names Acer glabrum var. douglasii."
+  },
+  {
+    "hash": "3ab35b50748e35e54324db895e4f77091e31d7b4d5e20407aa3fbae2c49df10b",
+    "target": "PLOC",
+    "channel": "fruit",
+    "source": "Trees and Shrubs Online",
+    "author": "John Anderson",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-occidentalis/",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:21:22Z",
+    "note": "Five sycamore balls hanging from a bare branch against a clear sky. Sharp and well exposed."
+  },
+  {
+    "hash": "ee27ae9a0410868eee5c74aca4438c4ca671ce68a4caff660addd56f2acc3811",
+    "target": "QUBU2",
+    "channel": "fruit",
+    "source": "Trees and Shrubs Online",
+    "author": "Beatrice Chasse",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-buckleyi/",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:21:23Z",
+    "note": "Cluster of green acorns with scaly cups on the twig. Sharp and large in the frame."
+  },
+  {
+    "hash": "6c46b6b4950bc666683610831d938ebecd6840b32e3d5502eda3005db21f6d6b",
+    "target": "QUGA",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Charles Snyers",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gambelii/",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:21:23Z",
+    "note": "Grey plated bark of a mature trunk filling the frame. Matches the plated concept."
+  },
+  {
+    "hash": "7c0c3573ef4e03da82ecb7b92a4bb3c0e127c734fd2755387543b93c8c57475a",
+    "target": "QUST",
+    "channel": "fruit",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2257.htm",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:08Z",
+    "note": "One green acorn seated in a scaly cup on the twig, with leaves behind. Sharp and large in the frame."
+  },
+  {
+    "hash": "b4572206b1d70313c15889aaf74419a855d59db70d5ae2cecec5c7233abf4d85",
+    "target": "QUST",
+    "channel": "fruit",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2298.htm",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:09Z",
+    "note": "Three green acorns in scaly cups along a twig. Sharp, subject fills the middle of the frame."
+  },
+  {
+    "hash": "9f629cc814c1650385d131c813e33f52000e8d34d9dde9b2bcfa80e8bc775564",
+    "target": "ACPL",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Tom Christian",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-platanoides/",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:10Z",
+    "note": "Mature trunk with fine furrowed bark down the centre of the frame. Texture reads clearly, and no hand, scale object, or text is in the shot."
+  },
+  {
+    "hash": "a872fcf053a90f5fae54bff891f58024d6c737476b62f2ad0c5d7635471f2bbc",
+    "target": "ACSA3",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Robin Young",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/youngr/20190918_155922.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:10Z",
+    "note": "Large trunk with furrowed plated bark filling most of the frame. Sharp, with only a blurred building behind."
+  },
+  {
+    "hash": "05a785050c82d1d013397d5223ab31eed6bcb49ea1521d589c1bc9c6c436b6ea",
+    "target": "ACSA3",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Alice Siqi Chen",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/chena/24.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:54Z",
+    "note": "Large trunk with deep furrowed bark filling most of the frame. Sharp, with a blurred building behind."
+  },
+  {
+    "hash": "b757c27a70a6117f9673c9c4dec2feb0700a9b7bc900d763e032fcba32be583a",
+    "target": "QUMA2",
+    "channel": "fruit",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/15615.htm",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:55Z",
+    "note": "Two acorns in deep cups with the fringed rim of bur oak, large and sharp in the frame."
+  },
+  {
+    "hash": "70c3bd3350fe1721f10deb4e5a73d87189c6cd0a5945c1af2c5176e7b787c402",
+    "target": "QUMA2",
+    "channel": "fruit",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-macrocarpa/",
+    "tags": [
+      "summer",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:55Z",
+    "note": "Immature acorns in fringed cups at the centre of the frame, among the leaves. Sharp and clear."
+  },
+  {
+    "hash": "52fc5aa97f0d74205658f706b932ebe0b9231a966835b4fa521e276e7e098cae",
+    "target": "QUMA3",
+    "channel": "fruit",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2528.htm",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:56Z",
+    "note": "One acorn in a scaly cup on a twig against a plain dark background. Sharp, and the cup and nut read clearly."
+  },
+  {
+    "hash": "06aff72d46462353fba4ff5dc32d811fd69a0095fbafda263eec45dca8a24b29",
+    "target": "QUPA2",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2200.htm",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:22:56Z",
+    "note": "Mature trunk with ridged furrowed bark filling the whole frame. Sharp, with nothing else in the shot."
+  },
+  {
+    "hash": "8b571dd0ef1c7b5cd0539c7aa7a0ffdd443e9fad35e2817192d90d466d016efd",
+    "target": "QUPA2",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2339.htm",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:23:31Z",
+    "note": "Mature trunk with close ridged furrowed bark filling the frame. Sharp, with only a thin strip of background at the edges."
+  },
+  {
+    "hash": "006d2ae0110e8ff84fdcc1aefa5cd4992a774b728bc2e8d4d8d27702b97b609d",
+    "target": "QUPA2",
+    "channel": "fruit",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/bkk2904.htm",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:23:31Z",
+    "note": "One ripe acorn in a shallow scaly cup on a twig against a plain pale background. Sharp and large in the frame."
+  },
+  {
+    "hash": "2cd763c2b713e3b36c859cc089199a9d46d3d49f16e45033ea0e7d57d023e818",
+    "target": "QUPA2",
+    "channel": "fruit",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2324.htm",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:23:32Z",
+    "note": "Acorn in a shallow cup on the twig, with blurred lobed leaves behind. Sharp and well filled."
+  },
+  {
+    "hash": "6bc4b5975c09d057afec76c0f80ef1608dcd3748f34dbacdd3913b6c27810dbe",
+    "target": "PLOC",
+    "channel": "fruit",
+    "source": "Trees and Shrubs Online",
+    "author": "Tom Christian",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-occidentalis/#image=platanus-occidentalis-15.jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T14:23:32Z",
+    "note": "One green sycamore ball hanging on its stalk at the centre of the frame. Sharp, with the foliage behind thrown out of focus."
   }
 ]
