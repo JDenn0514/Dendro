@@ -246,8 +246,8 @@ const EMPTY_SECTION_PAGE = [
 /** The first page of each section, and the page its next anchor points at. */
 const SECTION_WALK: { first: string; second: string | null }[] = [
   { first: 'fna_lobatae.html', second: 'fna_lobatae_page2.html' },
-  { first: 'fna_quercus.html', second: null },
   { first: 'fna_protobalanus.html', second: null },
+  { first: 'fna_quercus.html', second: null },
 ];
 
 /** The routes and the urls `data sections` reads, in order, following every next anchor. */

@@ -27,9 +27,11 @@ const lobataePage2 = fixture('fna_lobatae_page2.html');
 const quercus = fixture('fna_quercus.html');
 const protobalanus = fixture('fna_protobalanus.html');
 
+// The order follows SECTION_PAGES, which follows the live taxon ids:
+// 302020 is Lobatae, 302027 is Protobalanus, and 302029 is Quercus.
 const LOBATAE = SECTION_PAGES[0];
-const QUERCUS = SECTION_PAGES[1];
-const PROTOBALANUS = SECTION_PAGES[2];
+const PROTOBALANUS = SECTION_PAGES[1];
+const QUERCUS = SECTION_PAGES[2];
 const LOBATAE_PAGE_2 = `${LOBATAE.url}&page=2`;
 
 test('the Lobatae first page parses to its four species, in page order', () => {
@@ -205,7 +207,7 @@ test('SECTION_PAGES holds three http urls, each with its taxon id', () => {
   }
   assert.deepEqual(
     SECTION_PAGES.map((page) => page.section),
-    ['Lobatae', 'Quercus', 'Protobalanus'],
+    ['Lobatae', 'Protobalanus', 'Quercus'],
   );
   assert.deepEqual(
     SECTION_PAGES.map((page) => page.taxonId),
