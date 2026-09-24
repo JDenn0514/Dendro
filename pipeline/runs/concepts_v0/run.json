@@ -1,0 +1,196 @@
+{
+  "name": "concepts_v0",
+  "bucket": null,
+  "concepts": [
+    "leaf/needles",
+    "leaf/scale_like",
+    "leaf/simple_entire",
+    "leaf/simple_toothed",
+    "leaf/simple_lobed",
+    "leaf/pinnately_compound",
+    "leaf/palmately_compound",
+    "leaf/fan_strap",
+    "bark/smooth",
+    "bark/furrowed",
+    "bark/plated",
+    "bark/shaggy",
+    "bark/papery",
+    "bark/warty",
+    "fruit/samara",
+    "fruit/acorn",
+    "fruit/nut",
+    "fruit/pod",
+    "fruit/berry",
+    "fruit/capsule",
+    "fruit/cone",
+    "fruit/ball"
+  ],
+  "concept_exemplars": {
+    "leaf/needles": [
+      "PIPO",
+      "PIPU",
+      "PIED"
+    ],
+    "leaf/scale_like": [
+      "JUSC2",
+      "JUOS",
+      "JUVI"
+    ],
+    "leaf/simple_entire": [
+      "CECA4",
+      "CASP8",
+      "ELAN"
+    ],
+    "leaf/simple_toothed": [
+      "ULAM",
+      "PRVI",
+      "ULPU"
+    ],
+    "leaf/simple_lobed": [
+      "QUMA2",
+      "QUGA",
+      "PLOC"
+    ],
+    "leaf/pinnately_compound": [
+      "FRPE",
+      "JUNI",
+      "RHGL"
+    ],
+    "leaf/palmately_compound": [
+      "AEGL",
+      "AEHI"
+    ],
+    "leaf/fan_strap": [
+      "YUGL",
+      "YUBA",
+      "WAFI"
+    ],
+    "bark/smooth": [
+      "POTR5",
+      "ABCO",
+      "FAGR"
+    ],
+    "bark/furrowed": [
+      "PODE3",
+      "FRPE",
+      "QUMA2"
+    ],
+    "bark/plated": [
+      "JUDE2",
+      "DIVI5",
+      "PIPO"
+    ],
+    "bark/shaggy": [
+      "CAOV2",
+      "JUVI",
+      "JUSC2"
+    ],
+    "bark/papery": [
+      "BEPA",
+      "PLOC",
+      "BEOC2"
+    ],
+    "bark/warty": [
+      "CEOC",
+      "PRSE2",
+      "PRVI"
+    ],
+    "fruit/samara": [
+      "ACNE2",
+      "ACSA2",
+      "FRPE"
+    ],
+    "fruit/acorn": [
+      "QUMA2",
+      "QUGA",
+      "QURU"
+    ],
+    "fruit/nut": [
+      "JUNI",
+      "CAOV2",
+      "COAM3"
+    ],
+    "fruit/pod": [
+      "GLTR",
+      "ROPS",
+      "GYDI"
+    ],
+    "fruit/berry": [
+      "PRAM",
+      "COSE16",
+      "AMAL2"
+    ],
+    "fruit/capsule": [
+      "YUGL",
+      "AEGL"
+    ],
+    "fruit/cone": [
+      "PSME",
+      "PIPU",
+      "PIPO"
+    ],
+    "fruit/ball": [
+      "PLOC",
+      "PLHI",
+      "MAPO"
+    ]
+  },
+  "states": [],
+  "genera": [],
+  "include": [],
+  "channels": [
+    "leaf",
+    "bark",
+    "fruit"
+  ],
+  "created_at": "2026-09-24T17:20:45Z",
+  "species": [],
+  "dropped": [],
+  "fetch_failures": 0,
+  "capped": [
+    "leaf/needles: inat any listing capped at 4 pages",
+    "leaf/scale_like: inat any listing capped at 4 pages",
+    "leaf/scale_like: commons listing capped at 4 pages",
+    "leaf/simple_entire: inat any listing capped at 4 pages",
+    "leaf/simple_entire: inat flowering listing capped at 4 pages",
+    "leaf/simple_entire: inat fruiting listing capped at 4 pages",
+    "leaf/simple_toothed: inat any listing capped at 4 pages",
+    "leaf/simple_toothed: inat flowering listing capped at 4 pages",
+    "leaf/simple_toothed: inat fruiting listing capped at 4 pages",
+    "leaf/simple_lobed: inat any listing capped at 4 pages",
+    "leaf/simple_lobed: inat fruiting listing capped at 4 pages",
+    "leaf/pinnately_compound: inat any listing capped at 4 pages",
+    "leaf/pinnately_compound: inat fruiting listing capped at 4 pages",
+    "leaf/pinnately_compound: inat flowering listing capped at 4 pages",
+    "leaf/palmately_compound: inat any listing capped at 4 pages",
+    "leaf/fan_strap: inat any listing capped at 4 pages",
+    "bark/smooth: commons listing capped at 4 pages",
+    "bark/smooth: inat any listing capped at 4 pages",
+    "bark/furrowed: inat any listing capped at 4 pages",
+    "bark/plated: inat any listing capped at 4 pages",
+    "bark/plated: inat fruiting listing capped at 4 pages",
+    "bark/shaggy: inat any listing capped at 4 pages",
+    "bark/papery: inat any listing capped at 4 pages",
+    "bark/papery: inat fruiting listing capped at 4 pages",
+    "bark/warty: inat any listing capped at 4 pages",
+    "bark/warty: commons listing capped at 4 pages",
+    "bark/warty: inat flowering listing capped at 4 pages",
+    "bark/warty: inat fruiting listing capped at 4 pages",
+    "fruit/samara: inat any listing capped at 4 pages",
+    "fruit/samara: inat flowering listing capped at 4 pages",
+    "fruit/samara: inat fruiting listing capped at 4 pages",
+    "fruit/acorn: inat any listing capped at 4 pages",
+    "fruit/nut: inat any listing capped at 4 pages",
+    "fruit/nut: inat fruiting listing capped at 4 pages",
+    "fruit/pod: inat any listing capped at 4 pages",
+    "fruit/pod: inat flowering listing capped at 4 pages",
+    "fruit/pod: inat fruiting listing capped at 4 pages",
+    "fruit/berry: inat any listing capped at 4 pages",
+    "fruit/berry: inat flowering listing capped at 4 pages",
+    "fruit/berry: inat fruiting listing capped at 4 pages",
+    "fruit/capsule: inat any listing capped at 4 pages",
+    "fruit/cone: inat any listing capped at 4 pages",
+    "fruit/ball: inat any listing capped at 4 pages",
+    "fruit/ball: inat fruiting listing capped at 4 pages"
+  ]
+}
