@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "common_extra": ["Buckley oak", "Spanish oak"],
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Central Texas and southern Oklahoma limestone hills" },
+  "elevation_ft": [490, 1640],
+  "height_ft": [35, 70],
+  "habitat": "Dry limestone ridges and slopes, and creek bottoms",
+  "ref": [
+    "FNA vol. 3, Quercus buckleyi",
+    "Texas A&M Forest Service Texas Tree ID fact sheet, Quercus buckleyi (height)"
+  ]
+}

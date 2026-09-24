@@ -1,1 +1,1248 @@
-{}
+{
+  "ACGL": {
+    "scientific": "Acer glabrum",
+    "common": [
+      "Rocky Mountain maple"
+    ],
+    "inat_taxon_id": 63078,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "smooth",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Western mountains from Alaska south to New Mexico",
+      "states": [
+        "AK",
+        "AZ",
+        "CA",
+        "CO",
+        "ID",
+        "MT",
+        "NE",
+        "NM",
+        "NV",
+        "OR",
+        "SD",
+        "UT",
+        "WA",
+        "WY"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      1500,
+      12700
+    ],
+    "height_ft": [
+      20,
+      40
+    ],
+    "habitat": "Mountain streamsides, canyons, talus slopes and moist upland slopes",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "ACGLD3",
+        "name": "var. diffusum"
+      },
+      {
+        "key": "ACGLD4",
+        "name": "var. douglasii"
+      },
+      {
+        "key": "ACGLG2",
+        "name": "var. glabrum"
+      },
+      {
+        "key": "ACGLG",
+        "name": "var. greenei"
+      },
+      {
+        "key": "ACGLN2",
+        "name": "var. neomexicanum"
+      },
+      {
+        "key": "ACGLT2",
+        "name": "var. torreyi"
+      }
+    ]
+  },
+  "ACGR3": {
+    "scientific": "Acer grandidentatum",
+    "common": [
+      "bigtooth maple"
+    ],
+    "inat_taxon_id": 52546,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Interior mountains from Idaho and Wyoming south to Texas",
+      "states": [
+        "AZ",
+        "CO",
+        "ID",
+        "MT",
+        "NM",
+        "NV",
+        "TX",
+        "UT",
+        "WA",
+        "WY"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      4200,
+      9400
+    ],
+    "height_ft": [
+      26,
+      50
+    ],
+    "habitat": "Canyon bottoms, ravines and mountain streamsides, also drier canyon slopes",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "ACGRG",
+        "name": "var. grandidentatum"
+      },
+      {
+        "key": "ACGRS",
+        "name": "var. sinuosum"
+      }
+    ]
+  },
+  "ACNI5": {
+    "scientific": "Acer nigrum",
+    "common": [
+      "black maple"
+    ],
+    "inat_taxon_id": 48078,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Northeastern and midwestern United States, west to eastern Kansas",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "MA",
+        "MD",
+        "MI",
+        "MN",
+        "MO",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "PA",
+        "SD",
+        "TN",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      5250
+    ],
+    "height_ft": [
+      70,
+      110
+    ],
+    "habitat": "Moist soils of river bottoms in mixed hardwood forests",
+    "native_status": "native",
+    "varieties": []
+  },
+  "ACPL": {
+    "scientific": "Acer platanoides",
+    "common": [
+      "Norway maple"
+    ],
+    "inat_taxon_id": 54763,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Europe and western Asia, widely planted in North American cities",
+      "states": [
+        "CT",
+        "DC",
+        "DE",
+        "ID",
+        "IL",
+        "IN",
+        "KY",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MT",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "OR",
+        "PA",
+        "RI",
+        "TN",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [
+      "CO",
+      "WY",
+      "NE",
+      "KS"
+    ],
+    "elevation_ft": [
+      0,
+      4600
+    ],
+    "height_ft": [
+      40,
+      98
+    ],
+    "habitat": "Street plantings, parks and yards, and mixed forest in its European range",
+    "native_status": "introduced",
+    "varieties": []
+  },
+  "ACSA2": {
+    "scientific": "Acer saccharinum",
+    "common": [
+      "silver maple"
+    ],
+    "inat_taxon_id": 54762,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "shaggy",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Eastern North America along rivers and bottomlands",
+      "states": [
+        "AL",
+        "AR",
+        "CA",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "NC",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SC",
+        "SD",
+        "TN",
+        "TX",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      100,
+      1980
+    ],
+    "height_ft": [
+      90,
+      120
+    ],
+    "habitat": "Wet bottomlands, riverbanks and lake edges",
+    "native_status": "native",
+    "varieties": []
+  },
+  "ACSA3": {
+    "scientific": "Acer saccharum",
+    "common": [
+      "sugar maple"
+    ],
+    "inat_taxon_id": 52543,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Eastern North America from Nova Scotia to eastern Kansas and Georgia",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DE",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "NC",
+        "ND",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SD",
+        "TN",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      5500
+    ],
+    "height_ft": [
+      90,
+      120
+    ],
+    "habitat": "Rich mesic woods, coves, stream terraces and sheltered lower slopes",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "ACSAS",
+        "name": "var. saccharum"
+      },
+      {
+        "key": "ACSAS2",
+        "name": "var. schneckii"
+      }
+    ]
+  },
+  "PLOC": {
+    "scientific": "Platanus occidentalis",
+    "common": [
+      "American sycamore"
+    ],
+    "inat_taxon_id": 49662,
+    "inat_name": null,
+    "genus": "Platanus",
+    "genus_common": "sycamore",
+    "section": null,
+    "family": "Platanaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "papery",
+      "fruit": "ball"
+    },
+    "range": {
+      "text": "Eastern United States bottomlands, Maine to Texas",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MO",
+        "MS",
+        "NC",
+        "NE",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "VT",
+        "WA",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [
+      "CO"
+    ],
+    "elevation_ft": [
+      0,
+      2500
+    ],
+    "height_ft": [
+      60,
+      120
+    ],
+    "habitat": "Alluvial soils along streams and lakes, and in moist bottomlands",
+    "native_status": "native",
+    "varieties": []
+  },
+  "PLWR2": {
+    "scientific": "Platanus wrightii",
+    "common": [
+      "Arizona sycamore",
+      "Arizona planetree",
+      "Wright's sycamore"
+    ],
+    "inat_taxon_id": 167031,
+    "inat_name": null,
+    "genus": "Platanus",
+    "genus_common": "sycamore",
+    "section": null,
+    "family": "Platanaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "papery",
+      "fruit": "ball"
+    },
+    "range": {
+      "text": "Mountain canyons of Arizona and New Mexico",
+      "states": [
+        "AZ",
+        "NM"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      1970,
+      6560
+    ],
+    "height_ft": [
+      60,
+      80
+    ],
+    "habitat": "Riparian forests in montane canyons and along desert streams",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUAL": {
+    "scientific": "Quercus alba",
+    "common": [
+      "white oak"
+    ],
+    "inat_taxon_id": 54779,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Eastern North America from Maine to Texas",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "NC",
+        "NE",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      5250
+    ],
+    "height_ft": [
+      80,
+      100
+    ],
+    "habitat": "Moist to fairly dry deciduous forests on well-drained loams and dry upland slopes",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUBU2": {
+    "scientific": "Quercus buckleyi",
+    "common": [
+      "Texas red oak",
+      "Buckley oak",
+      "Spanish oak"
+    ],
+    "inat_taxon_id": 167640,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Central Texas and southern Oklahoma limestone hills",
+      "states": [
+        "KS",
+        "OK",
+        "TX"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      490,
+      1640
+    ],
+    "height_ft": [
+      35,
+      70
+    ],
+    "habitat": "Dry limestone ridges and slopes, and creek bottoms",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUGA": {
+    "scientific": "Quercus gambelii",
+    "common": [
+      "Gambel oak",
+      "Rocky Mountain white oak"
+    ],
+    "audubon_name": "Gambel Oak",
+    "inat_taxon_id": 116377,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Colorado Plateau and southern Rockies",
+      "states": [
+        "AZ",
+        "CO",
+        "NM",
+        "NV",
+        "OK",
+        "SD",
+        "TX",
+        "UT",
+        "WY"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      5000,
+      9000
+    ],
+    "height_ft": [
+      15,
+      30
+    ],
+    "habitat": "Dry slopes and foothills with pinyon and juniper",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QUGAB2",
+        "name": "var. bonina"
+      },
+      {
+        "key": "QUGAG",
+        "name": "var. gambelii",
+        "note": "The widespread form."
+      }
+    ]
+  },
+  "QUHA3": {
+    "scientific": "Quercus havardii",
+    "common": [
+      "Havard oak",
+      "sand shinnery oak"
+    ],
+    "inat_taxon_id": 122533,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Sand dunes of the southern Great Plains and the Colorado Plateau",
+      "states": [
+        "AZ",
+        "CO",
+        "KS",
+        "NM",
+        "OK",
+        "TX",
+        "UT"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      2300,
+      7000
+    ],
+    "height_ft": [
+      3,
+      7
+    ],
+    "habitat": "Deep shifting or stabilized sand dunes, where it forms low clonal thickets",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QUHAH",
+        "name": "var. havardii"
+      },
+      {
+        "key": "QUHAT",
+        "name": "var. tuckeri"
+      }
+    ]
+  },
+  "QUMA2": {
+    "scientific": "Quercus macrocarpa",
+    "common": [
+      "bur oak"
+    ],
+    "inat_taxon_id": 54781,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Great Plains and eastern North America",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "MT",
+        "ND",
+        "NE",
+        "NH",
+        "NJ",
+        "NM",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SD",
+        "TN",
+        "TX",
+        "VA",
+        "VT",
+        "WI",
+        "WV",
+        "WY"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      3280
+    ],
+    "height_ft": [
+      80,
+      100
+    ],
+    "habitat": "Bottomlands, riparian slopes and prairies, often on limestone or calcareous clays",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QUMAD",
+        "name": "var. depressa"
+      },
+      {
+        "key": "QUMAM",
+        "name": "var. macrocarpa"
+      }
+    ]
+  },
+  "QUMA3": {
+    "scientific": "Quercus marilandica",
+    "common": [
+      "blackjack oak"
+    ],
+    "inat_taxon_id": 82329,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Central and eastern United States, west to Texas and Kansas",
+      "states": [
+        "AL",
+        "AR",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MD",
+        "MO",
+        "MS",
+        "NC",
+        "NE",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2950
+    ],
+    "height_ft": [
+      30,
+      50
+    ],
+    "habitat": "Poor shallow soils of glades, barrens, rocky outcrops and dry ridges",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QUMAA2",
+        "name": "var. ashei"
+      },
+      {
+        "key": "QUMAM2",
+        "name": "var. marilandica"
+      }
+    ]
+  },
+  "QUPA2": {
+    "scientific": "Quercus palustris",
+    "common": [
+      "pin oak"
+    ],
+    "inat_taxon_id": 54785,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Midwestern and eastern United States bottomlands",
+      "states": [
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MO",
+        "MS",
+        "NC",
+        "NE",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "TN",
+        "VA",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [
+      "CO"
+    ],
+    "elevation_ft": [
+      0,
+      1150
+    ],
+    "height_ft": [
+      80,
+      120
+    ],
+    "habitat": "Bottoms and poorly drained upland clay soils",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QURU": {
+    "scientific": "Quercus rubra",
+    "common": [
+      "northern red oak"
+    ],
+    "inat_taxon_id": 49005,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Eastern North America from Nova Scotia to Oklahoma",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "NC",
+        "NE",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [
+      "CO",
+      "WY"
+    ],
+    "elevation_ft": [
+      0,
+      5900
+    ],
+    "height_ft": [
+      65,
+      98
+    ],
+    "habitat": "Mesic slopes and well-drained uplands, occasionally dry slopes",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QURUA",
+        "name": "var. ambigua"
+      },
+      {
+        "key": "QURUR",
+        "name": "var. rubra"
+      }
+    ]
+  },
+  "QUSH": {
+    "scientific": "Quercus shumardii",
+    "common": [
+      "Shumard's oak"
+    ],
+    "inat_taxon_id": 54786,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "South-central and southeastern United States",
+      "states": [
+        "AL",
+        "AR",
+        "FL",
+        "GA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MD",
+        "MI",
+        "MO",
+        "MS",
+        "NC",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      1640
+    ],
+    "height_ft": [
+      100,
+      120
+    ],
+    "habitat": "Mesic slopes and bottoms, stream banks and poorly drained uplands",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QUSHS",
+        "name": "var. schneckii"
+      },
+      {
+        "key": "QUSHS2",
+        "name": "var. shumardii"
+      },
+      {
+        "key": "QUSHS3",
+        "name": "var. stenocarpa"
+      }
+    ]
+  },
+  "QUST": {
+    "scientific": "Quercus stellata",
+    "common": [
+      "post oak"
+    ],
+    "inat_taxon_id": 119269,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Southeastern and south-central United States",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "MO",
+        "MS",
+        "NC",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2460
+    ],
+    "height_ft": [
+      30,
+      65
+    ],
+    "habitat": "Dry gravelly and sandy ridges, uplands, prairies and limestone hills",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUVE": {
+    "scientific": "Quercus velutina",
+    "common": [
+      "black oak"
+    ],
+    "inat_taxon_id": 49006,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Eastern United States from Maine to Texas",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "NC",
+        "NE",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      4900
+    ],
+    "height_ft": [
+      60,
+      80
+    ],
+    "habitat": "Dry slopes and uplands, sometimes sandy lowlands",
+    "native_status": "native",
+    "varieties": []
+  }
+}

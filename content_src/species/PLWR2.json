@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "papery", "fruit": "ball" },
+  "common_extra": ["Arizona planetree", "Wright's sycamore"],
+  "genus_common": "sycamore",
+  "arrangement": "alternate",
+  "range": { "text": "Mountain canyons of Arizona and New Mexico" },
+  "elevation_ft": [1970, 6560],
+  "height_ft": [60, 80],
+  "habitat": "Riparian forests in montane canyons and along desert streams",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Platanus wrightii (height)",
+    "FNA vol. 3, Platanus wrightii (elevation)",
+    "Fire Effects Information System, Platanus wrightii"
+  ]
+}

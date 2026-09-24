@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Southeastern and south-central United States" },
+  "elevation_ft": [0, 2460],
+  "height_ft": [30, 65],
+  "habitat": "Dry gravelly and sandy ridges, uplands, prairies and limestone hills",
+  "ref": [
+    "Silvics of North America, Quercus stellata (height low)",
+    "Virginia Tech Dendrology fact sheet, Quercus stellata (height high)",
+    "FNA vol. 3, Quercus stellata"
+  ]
+}

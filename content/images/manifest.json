@@ -1,1 +1,4946 @@
-[]
+[
+  {
+    "hash": "4bcdaabfd4f1d2348a5e3812d0fe0a15726d91ffe5217e1da6c26d1ee38c7d55",
+    "target": "ACGL",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2013-08-15_09_46_22_Acer_glabrum_var._diffusum_on_the_western_slopes_of_the_Jarbidge_Mountains.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:40:40Z",
+    "note": "Sharp branch shot with many paired samaras in good light, lobed leaves behind them."
+  },
+  {
+    "hash": "3be28f62c00cf484cab2e653cf443c06429eb3ff2678baa08ec69baca21d33a4",
+    "target": "ACGL",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Walter Siegmund (talk)",
+    "license": "CC BY 2.5",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_15926.JPG",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:40:40Z",
+    "note": "Close sharp view of red paired samaras hanging from a twig, centred in the frame."
+  },
+  {
+    "hash": "190265413432ab3c7bcac249598d13831db784dabc6d528c84174025f84079e2",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Alex Abair",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_18699963.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:40:41Z",
+    "note": "Sharp spring foliage with the three lobed simple leaf outline clear against the ground."
+  },
+  {
+    "hash": "717728f61643f8454f91d8d9fd3aa62bcd3a9e862f60bffb4b08d136d76b5c81",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Walter Siegmund (talk)",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_4985.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:41:14Z",
+    "note": "Backlit young foliage, sharp, with the lobed simple leaf outline clear against a dark background."
+  },
+  {
+    "hash": "45a78603236fe3e0f512ac58d6567f808f01bdf51f6b9d63db5195adaf2dfc89",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Walter Siegmund (talk)",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_5197.JPG",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:41:15Z",
+    "note": "Sharp spray of lobed leaves filling the frame, a few green samaras among them."
+  },
+  {
+    "hash": "3669a3a3949c93c731609b28ea899e938117ebad379578ffe1ab1d200bf4fff0",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Krzysztof Ziarnek, Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_kz01.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:42:13Z",
+    "note": "A sharp close view of two lobed simple leaves filling the frame, veins and margin teeth clear."
+  },
+  {
+    "hash": "abd36e442d19b740f60e024aeb7c42a925cde8ddebecfaacccb65d5d464d2895",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Krzysztof Ziarnek, Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_kz02.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:42:13Z",
+    "note": "A sharp spray of lobed simple leaves on a red petiole, filling most of the frame."
+  },
+  {
+    "hash": "970ffa8dc5d5939610f4651714a8b75872314b1d9daf92cad5582df92eeb7f12",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Robert Flogaus-Faust",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_ssp_douglasii_RF.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:42:14Z",
+    "note": "Large sharp lobed leaves fill the frame, one green samara hangs at the centre."
+  },
+  {
+    "hash": "0c10aa086df61b2a703a643a52c657a15372c4f66be872d5b181cb943cb0ea6e",
+    "target": "ACGL",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_var_diffusum_3.jpg",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:43:07Z",
+    "note": "A pale grey smooth trunk close enough that the bark surface reads, which matches the smooth concept."
+  },
+  {
+    "hash": "0431acc2b76871683a753b2cb8a3791c89eb5abcee33fb3a0f54d1e2df597332",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_var_diffusum_4.jpg",
+    "tags": [
+      "spring",
+      "young",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:43:08Z",
+    "note": "A sharp close view of young lobed simple leaves on a red twig, with yellow flowers between them."
+  },
+  {
+    "hash": "906e3124579bd880696f13707576a4e377b0bc39425c3875e3a2aa8dc4d038f4",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_var_diffusum_5.jpg",
+    "tags": [
+      "spring",
+      "young",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:43:08Z",
+    "note": "A sharp close view of young lobed simple leaves opening beside a yellow flower cluster."
+  },
+  {
+    "hash": "349f949f2963ec0c1a380ad0031ca7b6848a508f33023d00c83347734ffb8fdb",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_var_diffusum_7.jpg",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:43:50Z",
+    "note": "A sharp shoot of young lobed simple leaves with yellow flower clusters, filling the frame."
+  },
+  {
+    "hash": "9fde80cdcf3eca12772b059addfb3e535f7c342709f4dd9558c9325253c773cf",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_var_diffusum_8.jpg",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:43:50Z",
+    "note": "Sharp young lobed leaves on a red twig, with small red samaras forming at the right."
+  },
+  {
+    "hash": "ced17ed697ae93f539f9a0b1b442719a9dcfaec98c5fbbd729ae19e99078f295",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Thayne Tuason",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_var._douglasii_1.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:43:51Z",
+    "note": "One large backlit lobed simple leaf fills the upper frame and is sharp throughout."
+  },
+  {
+    "hash": "a4b247661ff400a7a13c7250987a5beadc87fbd10761f8b956a2bf2244563d8e",
+    "target": "ACGL",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Thayne Tuason",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_glabrum_var._douglasii_3.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:43:52Z",
+    "note": "Sharp clusters of green and red paired samaras hanging among lobed leaves, filling the frame."
+  },
+  {
+    "hash": "8c51b9f5fd12b0b587a100e0ec52a04684d674cb03abbb64f112ff4e3ae56462",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bureau of Land Management Oregon and Washington",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Douglas_maple_acer_glabrum_(17844449643).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:44:27Z",
+    "note": "Sharp rain wet lobed simple leaves filling the frame against a dark background."
+  },
+  {
+    "hash": "a023216f60386853c24e78f4f9958fa5f7b913b73bb2b9af36887696355dd05f",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Anders Hastings, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/173351655#photo=301035309",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:00:10Z",
+    "note": "A sharp close view of one lobed simple leaf filling the frame. Supersedes the earlier row for this id, which carried a wrong variety tag; the source names Acer glabrum."
+  },
+  {
+    "hash": "bcaa836fc297e8c962291c326532cafc4b6170defec13680e751412f20ee13f5",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Anders Hastings, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/173351655#photo=301035315",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:45:15Z",
+    "note": "A sharp close view of one three lobed simple leaf filling the frame against a soft background."
+  },
+  {
+    "hash": "6565b11d39a84d86498e58c388f095cf1b98a3a542ff27b215a2a5cde3e52acd",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Anders Hastings, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/173351655#photo=301035345",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:46:07Z",
+    "note": "Sharp small three lobed leaves on red petioles fill the frame, the lobed outline reads well."
+  },
+  {
+    "hash": "ad23faedbed938473f97fe13c36927b8fd411e23e75aa8341663d9a28e1047a9",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/136732262#photo=233402131",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:46:08Z",
+    "note": "A sharp spray of lobed simple leaves filling most of the frame against a dark background."
+  },
+  {
+    "hash": "847bfb638dc186bb3f95b3ee994ff10ee3e5b5a7e74b407d11fe7176d3bdd7f4",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/136732262#photo=233402162",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:46:09Z",
+    "note": "A sharp close view of lobed simple leaves and their petioles against a dark background."
+  },
+  {
+    "hash": "da14919bdd2bfe619292941a946d7598ac29923eb003715e03cf8f303e1f7604",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/136732262#photo=233402305",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:47:02Z",
+    "note": "Sharp lobed simple leaves on long petioles fill the frame against a dark background."
+  },
+  {
+    "hash": "a46ed09438b374c2f1837c9551e635f269846839d5c7a44886bb0f4dbeb4372d",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) fern Wildtruth, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/322913999#photo=584241350",
+    "tags": [
+      "autumn",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:47:03Z",
+    "note": "A sharp autumn shoot with yellow lobed simple leaves, centred against a soft background."
+  },
+  {
+    "hash": "4debdcd963a63917b3a85cac0b0d73912894ae6130785e6dc774b3fc763c83f7",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) John A Haskins, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/84139079#photo=138257565",
+    "tags": [
+      "summer",
+      "variety"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:47:53Z",
+    "note": "Sharp lobed simple leaves fill the frame over ferns. The source names the variety douglasii."
+  },
+  {
+    "hash": "79602b50e1bf8f100970488c502a09b1f6740d9de6ebd83041c4d162554a2313",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/119496960#photo=202003409",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:47:54Z",
+    "note": "A sharp rain wet lobed simple leaf at the centre of the frame against a soft green background."
+  },
+  {
+    "hash": "f7904dc0a814f5a70ff43221b7674d6e27679a3a8cfd5038697885c2f044f1b0",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/119496960#photo=202003461",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:48:38Z",
+    "note": "A sharp branch of young lobed simple leaves across the frame against a soft background."
+  },
+  {
+    "hash": "6cc7c9fff64f95f49be615482f85fdacc03d99cdb92906cbf23b978d3a3c6d39",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Anders Hastings, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/217209325#photo=384180405",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:48:39Z",
+    "note": "Sharp young lobed simple leaves open at the centre of the frame, with a small flower cluster at the left."
+  },
+  {
+    "hash": "363774173f6e8147fcfa490c3bb085cca7d3a6c80bfc3f08406cc8d563f624c4",
+    "target": "ACGL",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Matt Berger, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/59845739#photo=95654481",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:49:20Z",
+    "note": "A sharp cluster of brown paired samaras under fresh snow, filling the centre of the frame."
+  },
+  {
+    "hash": "76188b527be1de700d10183c636a67acb6fc35079aa709fde758ac30250b6b6e",
+    "target": "ACGL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Andrew Conboy, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/181856487#photo=316957843",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:49:20Z",
+    "note": "Sharp lobed simple leaves on red petioles fill the frame, with an old brown samara cluster among them."
+  },
+  {
+    "hash": "46d52a9f8263847a164737dd66d818d6cd1cd98f9c482f6a6008ce541e884121",
+    "target": "ACGR3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.06.01_18.53.30_DSC04634_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:50:57Z",
+    "note": "A sharp close view of green paired samaras with red edges, hanging among lobed leaves."
+  },
+  {
+    "hash": "6b8c0acdf60a7b6c4e29cf443b71ffc0d863d1247f0d28cce464c62f17c693ab",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.06.01_18.53.36_DSC04635_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:50:58Z",
+    "note": "Sharp lobed simple leaves seen from above fill the whole frame, with one small samara cluster."
+  },
+  {
+    "hash": "ec6966e5696a3a87c91d1df7a261c788a9f9e498f2f2b6a76542ad5549bff321",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.09.28_16.36.46_DSC06577_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:50:58Z",
+    "note": "A sharp shoot of red autumn lobed leaves at the centre of the frame over leaf litter."
+  },
+  {
+    "hash": "c0797dda7525e3cbf40b7265b7bd3e1ae671e2ba9ddaaa857140236438ac020b",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Mason Brock ( Masebrock )",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_grandidentatum.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:51:55Z",
+    "note": "Sharp lobed simple leaves fill the frame, with a hanging flower cluster between them."
+  },
+  {
+    "hash": "f0bfb6493b86f06daf092dce02d0e859f44770a18edeb705398df60565377202",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Zion National Park",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Autumn_in_Zion_(8119749546).jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:51:56Z",
+    "note": "Sharp red autumn lobed leaves fill the whole frame and the lobed outline reads clearly."
+  },
+  {
+    "hash": "f7bde2e071080fe5927bfb4e0b26166d9573cfe2b23da3a639e480683def347e",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "CarlsbadCavernsNPS",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bigtooth_Maple_(51202533861).jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:52:34Z",
+    "note": "Sharp green lobed simple leaves fill the frame, with a few red samaras among them."
+  },
+  {
+    "hash": "b47bbbb7d4ba4c905aa2411ee34e440a2a7c02f86a8bf5993568a14a1c71e9e1",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "smallcurio from Austin, TX",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bigtooth_maple_(38560674045).jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:52:35Z",
+    "note": "Sharp wet autumn leaves fill the frame and the lobed simple outline reads on several of them."
+  },
+  {
+    "hash": "5677878659e36432f722d283b71583a758682369a5483073cbd48fd9c6c56a48",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Don McCulley",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bigtooth-maple-acer-grandidentatum-IMG_5952.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:52:35Z",
+    "note": "A sharp wet branch of lobed simple leaves with brown samaras, filling the left of the frame."
+  },
+  {
+    "hash": "d4f2f3cea974d71cad722d96fd3ea363ab1ac6b97d1ff0e3a35ef4e13235f4c7",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Don McCulley",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bigtooth-maple-acer-grandidentatum-IMG_5953.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:53:17Z",
+    "note": "Sharp wet lobed simple leaves fill the frame with brown samaras hanging among them."
+  },
+  {
+    "hash": "6348e23d944c2a77d6e72a09f6804ade11ad028bb30f32f74ecc6cfbf1155455",
+    "target": "ACGR3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Don McCulley",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bigtooth-maple-acer-grandidentatum-IMG_5955.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:53:18Z",
+    "note": "A sharp close view of brown paired samaras hanging from a wet twig, filling the centre."
+  },
+  {
+    "hash": "641c09c5d56c2505715ca8c5879c0e09b2e809bce8f335346db8488a55d7f767",
+    "target": "ACGR3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Don McCulley",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bigtooth-maple-acer-grandidentatum-IMG_5956.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:53:19Z",
+    "note": "Two sharp pairs of brown samaras hang at the centre of the frame against soft green leaves."
+  },
+  {
+    "hash": "c664031ea7f58ae393c48e3c2bbdd180a748595744d3bba4f5278fcd0db34dc3",
+    "target": "ACGR3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Don McCulley",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bigtooth-maple-acer-grandidentatum-IMG_5957.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:53:19Z",
+    "note": "Sharp brown paired samaras hang from a wet branch and fill the middle of the frame."
+  },
+  {
+    "hash": "64b222a9da4457bfdf2f30c99ea297501ee159fa08a4b04eee188ed07d15885d",
+    "target": "ACGR3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Don McCulley",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bigtooth-maple-acer-grandidentatum-IMG_5958.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:53:51Z",
+    "note": "Sharp brown paired samaras hang from a wet branch at the centre of the frame, with lobed leaves behind."
+  },
+  {
+    "hash": "3f0c9d43238826652b0edd3265e8dc1e2b93ac7b15184b7f80c57ef46209821c",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "John Rusk from Berkeley, CA, United States of America",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:H20140814-3385%E2%80%94Acer_grandidentatum%E2%80%94RPBG_(15014437055).jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:56:53Z",
+    "note": "One large sharp lobed simple leaf fills the left of the frame, with brown samaras beside it."
+  },
+  {
+    "hash": "dea9c5184f9d1f3659fc3b5a7fc10e40549cbe7fbfcd029d35c9c7894d4266b9",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Jon Sullivan",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Red_leaves_in_zion_national_park.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:56:55Z",
+    "note": "Sharp dark red autumn leaves on thin branches, the lobed outline reads against a soft cliff background."
+  },
+  {
+    "hash": "c0b6540af0814932d0b3be91cbcd63070e8fb0791a6a939c4835cd2c5a05b0fb",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/134059199#photo=228447184",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:57:51Z",
+    "note": "A sharp branch of green lobed simple leaves fills the right of the frame against a soft background."
+  },
+  {
+    "hash": "7f878becd1c112693bec1086dc1342602499c526c1739a6a6de2ccdd2ac34df3",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/134059199#photo=228447227",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:57:51Z",
+    "note": "Sharp backlit lobed simple leaves fill the frame and the lobes and sinuses read clearly."
+  },
+  {
+    "hash": "653042e2caa74d469db4dd81f5f475c6838cb8035a55d326f199f9b6c0cbebc8",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Logan, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/101441368#photo=169416971",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:57:52Z",
+    "note": "One sharp pink autumn leaf hangs at the centre of the frame with the lobed outline clear."
+  },
+  {
+    "hash": "5bf98787d3a5acfe9902b718898e47c461addb7800735bafb39c5865ec76876e",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Ryan Goodman, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/299986284#photo=540479015",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:58:25Z",
+    "note": "A sharp cluster of green lobed simple leaves at the centre of the frame, with one green samara at the right."
+  },
+  {
+    "hash": "6b19a831761dec7b454f4565218b99188fa93b1dd5a97857081578faba76d5e5",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Siddarth Machado, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/124026728#photo=210176460",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:58:25Z",
+    "note": "A dense sharp spray of green lobed simple leaves fills the whole frame."
+  },
+  {
+    "hash": "76cb1d11b7e12e5475f974dd375c4aacbc0b0fcb9f1db718f15f4b28968db408",
+    "target": "ACGR3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Siddarth Machado, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/124026728#photo=210176596",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T02:59:01Z",
+    "note": "A sharp branch of green lobed simple leaves fills the centre of the frame over rock."
+  },
+  {
+    "hash": "55cf17f388e69baba747d8431cab928ccd9c2ac0b9f47472ed58260ed3867077",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ACNI5#image=%2FImageLibrary%2Flarge%2Facni5_003_lhp.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:02:08Z",
+    "note": "Black and white studio photo of a spray of lobed simple leaves, sharp and filling the frame."
+  },
+  {
+    "hash": "2b51525440868b4c37f4ec9b055e83de80c6cc155a17cd749732ef035089a3c8",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Elvert Barnes",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:110.DullesCorner.HerndonVA.28October2012_(8141422558).jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:02:09Z",
+    "note": "Sharp close photo of lobed simple leaves in autumn color on the tree."
+  },
+  {
+    "hash": "1c896a166ea8c2ba9e9b7548e862f6ee0e9d303e763f4c6182fd0f5434280563",
+    "target": "ACNI5",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Maxime Laterreur",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_nigrum_Tronc.jpg",
+    "tags": [
+      "mature",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:02:26Z",
+    "note": "Mature trunk with furrowed bark, sharp and filling the center of the frame."
+  },
+  {
+    "hash": "f962ff247f206c9c9b6b557e05fd4f7a635443bde0c671e50aefccdf7f284667",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AcerNigrum1.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:02:27Z",
+    "note": "Sharp photo of foliage with lobed simple leaves that read clearly."
+  },
+  {
+    "hash": "fb7a5f13575eb28f9d4b9451fa67b9fcd1dd70c2d4a8c303734ac5e69044bbdc",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AcerNigrum10.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:03:11Z",
+    "note": "Sharp close photo of a whole lobed simple leaf on the twig against a dark background."
+  },
+  {
+    "hash": "653f87d27b6e81f4e5258099bbefbebb5d64a2e062a10a36fe1e140ee50ed6bb",
+    "target": "ACNI5",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AcerNigrum13.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:03:13Z",
+    "note": "Sharp close photo of furrowed mature trunk bark that fills the frame."
+  },
+  {
+    "hash": "d61a05f40d2410b1cab0df24f57419dd16b2351512a2b53a24e84bf8b8120564",
+    "target": "ACNI5",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AcerNigrum14.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:03:13Z",
+    "note": "Sharp close photo of a hanging cluster of samaras on the twig."
+  },
+  {
+    "hash": "22db9ee8c71623930b177235aca2d6b328ca3fb5399dacdef15239998ba46220",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AcerNigrum3.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:03:58Z",
+    "note": "Foliage spray at close range, the lobed simple leaves read clearly and the photo is sharp."
+  },
+  {
+    "hash": "306ee8a164e2c47c76fecff74a33abb99b43b083fc618f9d7995e0bc76852f04",
+    "target": "ACNI5",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AcerNigrum4.jpg",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:03:58Z",
+    "note": "Lower trunk of a mature tree, the furrowed bark texture reads and fills much of the frame."
+  },
+  {
+    "hash": "3601333681fc0c04be3bd3b34cc233bef6eb29792477734f58274945cd30b9aa",
+    "target": "ACNI5",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AcerNigrum5.jpg",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:03:59Z",
+    "note": "Two large furrowed trunks fill the frame and the bark texture reads."
+  },
+  {
+    "hash": "11db0acbd65b19df45fa94b8b911adf28a1c341817316b89416b2a21ae15a91c",
+    "target": "ACNI5",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AcerNigrum6.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:03:59Z",
+    "note": "Sharp close photo of one samara pair hanging from the twig."
+  },
+  {
+    "hash": "7f65c55dff8a4009ff524f4314070d21964dea6d653e4babe99764f1b8ebbbd4",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Leaf_19-10-04_179.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:04:39Z",
+    "note": "Sharp photo of foliage at close range, the lobed simple leaves read clearly."
+  },
+  {
+    "hash": "12cee4a05bc99b7685d3041c8db16f2d6896514d4ee38ee81872bd5196085213",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Maple_20-08-21_054.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:04:39Z",
+    "note": "Sharp photo of a leafy branch, the lobed simple leaves fill the frame."
+  },
+  {
+    "hash": "4c9645bb4a7164e5dce724806439991682812c968f1ab0f77dcded87db45e198",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/50338597#photo=79929060",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:05:16Z",
+    "note": "Foliage in forest shade, the lobed simple leaves in the lower half read clearly."
+  },
+  {
+    "hash": "471f1f253929d172d317566376f6d8220fa74fb5a07e6b42052bea3b30938da1",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/50338597#photo=79929403",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:05:17Z",
+    "note": "Close photo of lobed simple leaves in sunlight, the outlines read clearly."
+  },
+  {
+    "hash": "2e4e8c00d2e51ef7a47d48e318bebbc9d7a8276c54f3c283e078fd37f10e5c76",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/50338597#photo=79929330",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:06:01Z",
+    "note": "Sharp photo of a leafy branch at close range, the lobed simple leaves read clearly."
+  },
+  {
+    "hash": "ba7b3b609e6453282247361b75d86ecaa1b6d9b6aee2760fd2288f4570408f07",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/50338597#photo=79929868",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:06:37Z",
+    "note": "Close photo of lobed simple leaves in forest light, the outlines read clearly."
+  },
+  {
+    "hash": "54c1892812a896056363e0b2ce1acfa7192560888414d4766493caeb8799258a",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/50338597#photo=79929808",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:06:37Z",
+    "note": "Sharp close photo of one large lobed simple leaf that fills the frame."
+  },
+  {
+    "hash": "dcf6f35afef7e050a1486c183a2466ca2928f44cb7dd91747d15d53549b9319f",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/50338597#photo=79930046",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:07:17Z",
+    "note": "Close photo of a leafy branch, the lobed simple leaves read clearly."
+  },
+  {
+    "hash": "048d8c0fc6f70852204b7eae9e381a707553403eb0d39a6e22a235bfbba1f603",
+    "target": "ACNI5",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/123959468#photo=210057117",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:07:18Z",
+    "note": "Sharp close photo of one samara pair against a dark background."
+  },
+  {
+    "hash": "203ba47ff400c97abd5e41a0c957214f321800e2362eb664ef227df33099d3ca",
+    "target": "ACNI5",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/123959468#photo=210057636",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:07:18Z",
+    "note": "Sharp close photo of a hanging cluster of samaras on the twig."
+  },
+  {
+    "hash": "2ebebb1f9500b64a870bfb2e481df3e663c43e41174b146b026678b494a3d719",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/123959468#photo=210057672",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:07:52Z",
+    "note": "Sharp close photo of a whole lobed simple leaf against a dark background."
+  },
+  {
+    "hash": "61ffe00160e9166a1f1fd44a6a37c10aa6b10dfc2920c2cdae6f28d71a9a3bc7",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/123959468#photo=210057841",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:08:47Z",
+    "note": "Sharp photo of a leafy branch, the lobed simple leaves read clearly across the frame."
+  },
+  {
+    "hash": "a59cf6242cfc04f1e814265a9c55ad2c4be3842b6b82c8a3d7ffe82408e5e8ba",
+    "target": "ACNI5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/123959468#photo=210057855",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:08:47Z",
+    "note": "Sharp photo of a large leafy branch, the lobed simple leaf outlines still read."
+  },
+  {
+    "hash": "65e1f424c3a5a0ff5580658399762098fde8557a2dc5b4ec8b522eec94ea5079",
+    "target": "ACNI5",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/123959468#photo=210057897",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:08:48Z",
+    "note": "Sharp photo of a mature trunk, the furrowed bark texture reads and fills the center of the frame."
+  },
+  {
+    "hash": "9b377a42acd18fcc799dceda1313364b50ae721a40f935997be4dfd5fc1c72bb",
+    "target": "ACNI5",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/123959468#photo=210057909",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:09:32Z",
+    "note": "Two large trunks of a mature tree, the furrowed bark texture reads and fills the frame."
+  },
+  {
+    "hash": "e6467810678045be72306c506fcb4efc2354c8b6135c5b4dfe170e4158f38de7",
+    "target": "ACNI5",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/123959468#photo=210057920",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:09:32Z",
+    "note": "Sharp close photo of furrowed mature trunk bark that fills the whole frame."
+  },
+  {
+    "hash": "da48d96ffbf60cd270f1400df908631eea46198e5485ce2cc033ca59fa4e2d64",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ACSA2#image=%2FImageLibrary%2Flarge%2Facsa2_002_lhp.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:10:14Z",
+    "note": "Photo of a leafy spray, the deeply lobed simple leaves read clearly against a dark background."
+  },
+  {
+    "hash": "0fbf7a7daf1a778e927d76b28ae1d08453c1a1b0dabbca63018d4e8fdcac1325",
+    "target": "ACSA2",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ACSA2#image=%2FImageLibrary%2Flarge%2Facsa2_005_lvp.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:10:15Z",
+    "note": "Fork of a mature trunk with shaggy peeling bark, the texture reads and fills the right of the frame."
+  },
+  {
+    "hash": "8a2fe5e996b8152f53b02b642664195d68a33a4ec31e3a1ce8ba5620300f61dd",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ACSA2#image=%2FImageLibrary%2Flarge%2Facsa2_007_lvp.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:10:46Z",
+    "note": "Black and white studio photo of a spray of deeply lobed simple leaves, sharp and filling the frame."
+  },
+  {
+    "hash": "72cabea3744f588be656ef6350f75586a0daa8b797e30f858c56971aeb9df80b",
+    "target": "ACSA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-012.jpg",
+    "tags": [
+      "mature",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:13:30Z",
+    "note": "Large limbs with shaggy flaking bark, the texture reads and fills the frame."
+  },
+  {
+    "hash": "812f8f424254d5657198cbefa1ac4e030c1f2724648e50207a416aa9d4b9b378",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-016.jpg",
+    "tags": [
+      "underside",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:13:32Z",
+    "note": "Studio photo of a leafy shoot on black, the deeply lobed leaves show the upper and the lower surface."
+  },
+  {
+    "hash": "f00eed39d461dbfb80e171ab7713e39513e8fee6c656cfeeb813a998168ab9c6",
+    "target": "ACSA2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-017.jpg",
+    "tags": [
+      "close_up",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:14Z",
+    "note": "Studio photo of a samara cluster on black, the paired winged fruits fill most of the frame."
+  },
+  {
+    "hash": "078358741d495c873458375398a9994810d239cb2423bce33b7be590a1112ac6",
+    "target": "ACSA2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-018.jpg",
+    "tags": [
+      "close_up",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:15Z",
+    "note": "Studio photo of a samara cluster on black beside one leaf, the winged fruits dominate the frame."
+  },
+  {
+    "hash": "37236851b0186103e9c2228e484bda702ed966cf754570cb95bd946d3610e54e",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-019.jpg",
+    "tags": [
+      "young",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:15Z",
+    "note": "Studio photo of a young unfolding leaf on black, the lobed simple outline reads clearly."
+  },
+  {
+    "hash": "bc0405b0309c12364265def96639755b1ff031c98d67a7a0bab6d7baba8cb97b",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-021.jpg",
+    "tags": [
+      "young",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:16Z",
+    "note": "Studio photo of a shoot on black, the young lobed simple leaf on the right reads clearly."
+  },
+  {
+    "hash": "9ad846c1502b81da4a483289d4827f39bf2fe11d3779b682d39c7a4f22c3ab36",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-022.jpg",
+    "tags": [
+      "young",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:50Z",
+    "note": "Studio photo of a spring shoot on black, the young lobed simple leaves fill the right of the frame."
+  },
+  {
+    "hash": "7b5d32fd670f95e0d8777e93c4199f2b82c8d5696b65be8371038336e15e385f",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-023.jpg",
+    "tags": [
+      "young",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:51Z",
+    "note": "Studio photo of young lobed simple leaves on black, the outlines read clearly."
+  },
+  {
+    "hash": "60d27513dd9d7a589154d519b4b9388de76e235f7ea070979cf0889f024ea700",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-024.jpg",
+    "tags": [
+      "young",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:51Z",
+    "note": "Studio photo of a spring shoot on black, the young lobed simple leaves dominate the frame."
+  },
+  {
+    "hash": "faac95596f7061db1e434ba2415a862de8757905db478dadc26d9442d27b2338",
+    "target": "ACSA2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-025.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:52Z",
+    "note": "Studio photo on black, three young samaras hang in the left half and read sharply."
+  },
+  {
+    "hash": "7ad4820ccd8d4fd252b2a45794e17fadcf15a5b64950eb06ee859007f3a258e0",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-026.jpg",
+    "tags": [
+      "young",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:14:52Z",
+    "note": "Studio photo of a shoot on black, the young lobed simple leaf on the right reads clearly."
+  },
+  {
+    "hash": "d6777142b853d5a0f036936ef6d3d9545d351f3514cd1039801d7c09d7a458ba",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-027.jpg",
+    "tags": [
+      "underside",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:15:32Z",
+    "note": "Studio photo of a leafy shoot on black, the lobed simple leaves show the silvery lower surface."
+  },
+  {
+    "hash": "b8ee7f218a5315bef96cb97d663a59226d85eb7fd5e8cb209a1cd44b553fd4a7",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-028.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:15:33Z",
+    "note": "Studio photo of a leafy shoot on black, the deeply lobed simple leaves fill the right of the frame."
+  },
+  {
+    "hash": "19b114efabdb4897d33fecba58795b5157280538007b06a836f70fcc80776c30",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-029.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:15:33Z",
+    "note": "Studio photo of a leafy shoot on black, the deeply lobed simple leaves read clearly."
+  },
+  {
+    "hash": "e60e5bc54f187267db9dd08e7e29cf9992b537599e069a124c3e84361fc6915e",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-030.jpg",
+    "tags": [
+      "underside",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:15:34Z",
+    "note": "Studio photo of one leaf on black, the lower surface and the deep lobes fill the frame."
+  },
+  {
+    "hash": "934c803a968346d8d8a5fd3319175cb690590f708f2c7cfc040f58c9f2c1b70b",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-031.jpg",
+    "tags": [
+      "underside",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:15:34Z",
+    "note": "Studio photo of one leaf on black, the silvery lower surface and the deep lobes fill the frame."
+  },
+  {
+    "hash": "6cd5568a6f1c11a259269e49ec87c87adb6616afffd94ca42851691de8033da4",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-032.jpg",
+    "tags": [
+      "close_up",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:16:04Z",
+    "note": "Studio photo of one leaf on black, the deeply lobed simple outline fills the frame."
+  },
+  {
+    "hash": "52208460d58ba87f14230350d36dd2ee96b435c77479c5b5947ac22f0abee014",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-033.jpg",
+    "tags": [
+      "underside",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:16:04Z",
+    "note": "Studio photo of one leaf on black, the silvery lower surface and the deep lobes fill the frame."
+  },
+  {
+    "hash": "861be55e39acd33a535a43471a6ae411bc8d2ff02bd5912ad4321c61b79cd1d7",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-035.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:16:05Z",
+    "note": "Studio photo of one leaf on black, the deeply lobed simple outline fills the frame."
+  },
+  {
+    "hash": "5e9a822ab143ed6f3e8ccd5b3f24caa65bc60cb5c5d25e512755e5ed9b710a34",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-037.jpg",
+    "tags": [
+      "underside",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:16:52Z",
+    "note": "Studio photo of two leaves on black, one shows the upper surface and one the silvery lower surface."
+  },
+  {
+    "hash": "20775591b44f089b65c3e4fb98a0ed60f63e0498485af155ad242034e25a9cf5",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-038.jpg",
+    "tags": [
+      "underside",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:16:53Z",
+    "note": "Studio photo of two leaves on black, one shows the upper surface and one the silvery lower surface."
+  },
+  {
+    "hash": "8aa0074b1e864d1609a47fcc238787443f2ea38ca6b26a571f7f6248b08c0af9",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-039.jpg",
+    "tags": [
+      "underside",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:16:53Z",
+    "note": "Studio photo of one leaf on black, the pale lower surface and the deep lobes fill the frame."
+  },
+  {
+    "hash": "5f4890bdf7a0f89a2661eef01d04770886b1badf1346d3baf32e950b57d9fd1b",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-040.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:16:54Z",
+    "note": "Studio photo of one leaf on black, the deeply lobed simple outline fills the frame."
+  },
+  {
+    "hash": "ffbc51b658edee48ade6f60276d78a2ad2e057b8e0e8ae4449fe31509eed648d",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-041.jpg",
+    "tags": [
+      "underside"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:16:54Z",
+    "note": "Studio photo of four leaves on a shoot on black, the deeply lobed outlines read clearly."
+  },
+  {
+    "hash": "3fa4f4a6657194f2f78f2e1ab6b85266559d97d5b0e1ffacbc4cdff5d4a8b5cf",
+    "target": "ACSA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_15-p.bot-a.saccharinum-042.jpg",
+    "tags": [
+      "underside",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:17:23Z",
+    "note": "Studio photo of two leaves on black, one shows the upper surface and one the pale lower surface."
+  },
+  {
+    "hash": "af54c31600abe3b0d6b4b22c15e4bad52870140e0cdd841bd7813eae4d5fc71c",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ACSA3#image=%2FImageLibrary%2Flarge%2Facsa3_007_lvp.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:18:17Z",
+    "note": "Black and white studio photo of a spray of lobed simple leaves, sharp and filling the frame."
+  },
+  {
+    "hash": "ba28610a14ea302d9bcf10ff67711c5d315d94c37c096474818a83f0b8e4f76b",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ACSA3#image=%2FImageLibrary%2Flarge%2Facsa3_009_lvp.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:18:18Z",
+    "note": "Black and white studio photo of one lobed simple leaf with a samara cluster, the leaf outline reads clearly."
+  },
+  {
+    "hash": "89672c11b8cf52e6984ca4b3c6a879cf2f2f0b23015378de5d02f59d6e00b82d",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Plant Image Library from Boston, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharum_(Sugar_Maple)_(32812316210).jpg",
+    "tags": [
+      "winter",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:24:00Z",
+    "note": "Close photo of dead leaves held on the twig in winter, the lobed simple outline reads on several of them."
+  },
+  {
+    "hash": "1d1a1c19efa7e1f54cd6cd28faa889f7337f0bb428d721b13d54477eb7fcbb26",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "James St. John",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharum_(sugar_maple_tree_in_fall_colors)_(Newark,_Ohio,_USA)_(25_October_2024)_3.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:24:41Z",
+    "note": "Sharp photo of foliage in autumn color that fills the frame, the lobed simple leaves read clearly."
+  },
+  {
+    "hash": "d2a46631b78330b4e687daf63f07081648df6ad305e3af0c021138169b691a7a",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "James St. John",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharum_(sugar_maple_tree_in_fall_colors)_(Newark,_Ohio,_USA)_(25_October_2024)_4.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:24:41Z",
+    "note": "Sharp photo of foliage in autumn color that fills the frame, the lobed simple leaves read clearly."
+  },
+  {
+    "hash": "03175fab33c398a081881ac4fbb5f043dbfce230a285076e677f92e8b344fc86",
+    "target": "ACSA3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharum_15-p.bot-a.saccharum-006.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:26:01Z",
+    "note": "Studio photo on black of a branch with a large cluster of paired samaras that fills the lower frame."
+  },
+  {
+    "hash": "a9e93fb697870531a65dcfa428d14a203734491e47ff42a012e129eb529911ea",
+    "target": "ACSA3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharum_15-p.bot-a.saccharum-007.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:26:02Z",
+    "note": "Studio photo on black of a dense cluster of paired samaras that fills most of the frame."
+  },
+  {
+    "hash": "21386c8a836fcf07db470cf88e212361e3c08b06356d887a275fa87a0d4f59b5",
+    "target": "ACPL",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Josepgesti",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_platanoides_Sant_Juli%C3%A0_de_Vilatorta_3.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:31:04Z",
+    "note": "Sharp close view of a paired samara cluster on a branch, with lobed leaves behind. The samaras fill the center of the frame."
+  },
+  {
+    "hash": "64c0471747f57fe0ef67bd9b3b8c41fda484b07be6f0bd91b249377e2e2c74ec",
+    "target": "ACPL",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "T. Kebert",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_platanoides_TK_2023-05-03_7.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:31:05Z",
+    "note": "Sharp close view of young green samaras on a branch. The paired wings fill the center of the frame."
+  },
+  {
+    "hash": "156e2c77635bce957cdc64b9bf52177bd82fec00dc923c82f82a46b0c06a0a08",
+    "target": "ACPL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Josepgesti",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_platanoides,_Sant_Juli%C3%A0_de_Vilatorta_2.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:32:20Z",
+    "note": "One large lobed simple leaf fills the center of the frame and is sharp. The lobe outline and the teeth read clearly."
+  },
+  {
+    "hash": "fb33cc1198f34ab2b5e948ee4ce1abfac9a907951907a01fdf195ef4985fced9",
+    "target": "ACPL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Josep Gesti",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_platanoides,_Sant_Juli%C3%A0_de_Vilatorta.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:32:21Z",
+    "note": "Several sharp lobed simple leaves fill the frame on a branch. The lobe outline reads clearly."
+  },
+  {
+    "hash": "b79e9136f9a872ec9d3bfe8260d5cf28efaefe83e317bbdb672cb362fd2fcc08",
+    "target": "ACPL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ryan Hodnett",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Norway_Maple_(Acer_platanoides)_-_B%C3%A6rum,_Norway_2021-09-25.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:34:59Z",
+    "note": "Sharp yellow lobed simple leaves on a young stem fill the center of the frame. The lobe outline reads clearly."
+  },
+  {
+    "hash": "9cd2a9e117d4b09644a85be3218a340d89e50a985f9925dfbeda1d3ca1f0e23c",
+    "target": "QURU",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QURU#image=%2FImageLibrary%2Flarge%2Fquru_008_lvp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:36:33Z",
+    "note": "Sharp archival black and white plate of two acorns on a twig. The cap scales and the nut fill the frame, and only a small archival number sits in the corner."
+  },
+  {
+    "hash": "13eacaa84bda0c103bacfebf1ca30faa23a6da7b0f2dc40f87a09f811b76b92c",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QURU#image=%2FImageLibrary%2Flarge%2Fquru_006_lvp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:36:34Z",
+    "note": "Sharp black and white plate of a shoot with several lobed simple leaves. The bristle tipped lobes fill the frame."
+  },
+  {
+    "hash": "66ccb385b85a24322da7be0c1771bee45fbad7488de6ce7d9cd817203a784e0e",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QURU#image=%2FImageLibrary%2Flarge%2Fquru_007_lvp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:36:34Z",
+    "note": "Sharp archival black and white plate of one lobed simple leaf on a dark ground. The lobe outline reads clearly."
+  },
+  {
+    "hash": "1a0bae522c6028bdd369abc72369ad6a29ad06f26b0dac110a38583e272c4cc5",
+    "target": "QURU",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "W.R. Mattoon",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QURU#image=%2FImageLibrary%2Flarge%2Fquru_012_lvp.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:37:09Z",
+    "note": "Sharp archival black and white photo of a mature furrowed trunk that fills the frame. Only a small archival number sits in the corner."
+  },
+  {
+    "hash": "8ce5eb703ad5aca6d3a44d66ffe18b182e20acdf8a1d1923e5bb8d5545dbe53f",
+    "target": "QURU",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Molgreen",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:20250726_xl_07455-Roteiche,_Quercus_rubra.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:38:50Z",
+    "note": "Sharp mossy furrowed trunk bark fills the frame. A small leafy sprout sits in front of the lower middle of the trunk."
+  },
+  {
+    "hash": "37066e9c95420c49540c2c1cd450bd582a9d38592c6d4aab2a1f6754fac15ecf",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Evelyn Simak",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:A_Red_oak_(Quercus_rubra)_-_young_leaves_-_geograph.org.uk_-_5762146.jpg",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:38:51Z",
+    "note": "Sharp young lobed simple leaves on a branch fill the frame. The deep bristle tipped lobes read clearly."
+  },
+  {
+    "hash": "09092a8f8a504b7fba10f68269ac6a6ec99a8feae52f4f7e81141e3e09f557cc",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Evelyn Simak",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:A_Red_oak_(Quercus_rubra)_-_young_leaves_-_geograph.org.uk_-_5762150.jpg",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:38:51Z",
+    "note": "Sharp young lobed simple leaves with hanging catkins on a branch. The lobe outline reads clearly and the leaves fill the frame."
+  },
+  {
+    "hash": "b20f66476ab8f1211570eba8ed36263a51661b1ccb8f37714559b7ebe39d94d4",
+    "target": "QURU",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Brian Stansberry",
+    "license": "CC BY 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:House-mountain-red-oak-tn1.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:39:37Z",
+    "note": "View up a mature trunk with the ridged bark sharp and filling the center of the frame."
+  },
+  {
+    "hash": "239b658b8f51d3853d7e5e539a34dd573fc2d5678782ef70648a61c539dc4979",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Annabell Hormann / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2011-05-20_Quercus_rubra.jpg",
+    "tags": [
+      "summer",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T03:40:11Z",
+    "note": "Sharp lobed simple leaves on a young sapling fill the center of the frame. The deep bristle tipped lobes read clearly."
+  },
+  {
+    "hash": "a5163cd83017428c0ca8427daf6cc4b724f5d4bfae158ec763eaf853191bba62",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2015-10-10_Quercus_rubra_1.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:02:01Z",
+    "note": "Sunlit oak sapling foliage in autumn colour. The lobed simple leaf outline reads clearly across the branch."
+  },
+  {
+    "hash": "d385fcf54253dbd57e59133831bac8019ef41cd15d4156d0792d159189db2f0c",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2015-10-10_Quercus_rubra_3.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:02:01Z",
+    "note": "Dense oak foliage fills the frame. The lobed simple leaves are sharp and the outline reads."
+  },
+  {
+    "hash": "1660dded832f4c6012f0d04f2b50048d744346b44b6337e8d8d259c3715b6c2d",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2015-10-10_Quercus_rubra_4.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:02:02Z",
+    "note": "Red autumn oak foliage spread across the frame over a boulder. The lobed leaf outline reads."
+  },
+  {
+    "hash": "0f9549297c15a6b637e790fb38fb8d72a88db2a2c74cefa36e1c86a242ecc17f",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2015-10-10_Quercus_rubra_5.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:02:02Z",
+    "note": "Red autumn oak foliage fills most of the frame and the lobed simple leaf shape is sharp."
+  },
+  {
+    "hash": "26d78de0d694f9fa01cfc9f56d9e6e7db981e8b28aa6987ddf682a1864472ccf",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2015-10-10_Quercus_rubra_7.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:02:55Z",
+    "note": "Red autumn oak foliage fills the whole frame and is sharp. The lobed simple leaf outline reads well."
+  },
+  {
+    "hash": "dbd5580e2a848afd411bcbaae1d1c8863ecdacccea1070457ace254469e6e68e",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2015-10-10_Quercus_rubra_8.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:02:55Z",
+    "note": "Red oak foliage over about half the frame with a forest behind. The lobed leaf outline still reads."
+  },
+  {
+    "hash": "30232b230d2682a6e5c69111fbbeaf0afbb3858c41382e872f1e4cbc7b6e3bc7",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2015-10-10_Quercus_rubra_9.jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:02:56Z",
+    "note": "One sharp branch of red autumn leaves across the frame against a soft background. The lobes read clearly."
+  },
+  {
+    "hash": "fd3443956985ab89968d8b3afe5b9a1e57aaf99c8490748c21e72a52fffa27a9",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2018-09-01_Quercus_rubra_2.jpg",
+    "tags": [
+      "summer",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:02:57Z",
+    "note": "Green leaves of a young oak sapling, sharp and large in the frame. The lobed simple leaf shape reads well."
+  },
+  {
+    "hash": "30e1701d5932001dc60d6072d6e533cb1c43be92feec5b6541dcd05429cf2876",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2018-09-01_Quercus_rubra_3.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:03:39Z",
+    "note": "Green oak leaves seen from above, sharp and large in the frame. The lobed simple leaf outline reads well."
+  },
+  {
+    "hash": "5889940ee5626cb2a8f3b2108e04abbc93bab1da5dfa210b5f9c2d074467a706",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2018-09-01_Quercus_rubra_4.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:03:39Z",
+    "note": "A sharp spray of green oak leaves fills the frame. The lobed simple leaf shape reads clearly."
+  },
+  {
+    "hash": "a143b956945566ad4a77dfa7953e480e90e8632daaec6d7f6f9c24d2b056345e",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2018-09-01_Quercus_rubra_5.jpg",
+    "tags": [
+      "summer",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:03:39Z",
+    "note": "Green leaves of oak seedlings on the forest floor cover most of the frame. The lobed outline reads."
+  },
+  {
+    "hash": "28dff80d85bdd47954fde6808abf3ea28f03678e145882dbbbd5d645c0ec870f",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2018-09-01_Quercus_rubra.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:03:40Z",
+    "note": "Sharp green oak leaves fill the right and centre of the frame. The lobed simple leaf shape reads well."
+  },
+  {
+    "hash": "d11e10d8b98542dda45229187b83e30e79921757d718cbe8a84eaa6c21e99323",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:N_Red_Oak_(Quercus_rubra)_9374.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:04:16Z",
+    "note": "Fallen brown oak leaves fill the frame and are sharp. The lobed simple leaf outline reads clearly."
+  },
+  {
+    "hash": "5b1d53b0079d6f5a1be18a0e6bf2a0655c012f360eac237e48b3a187bfbf5dd0",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:N_Red_Oak_9386.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:04:16Z",
+    "note": "Dry fallen oak leaves fill the frame and are sharp. The lobed simple leaf outline reads."
+  },
+  {
+    "hash": "a2efe229d0bfbf234726748b1f36722c01a04b63bfa40803966d0e817a732c54",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bjankuloski06",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Northern_red_oak_leaves,_Brookfield_Stream_Reserve.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:05:03Z",
+    "note": "A sharp close view of green oak leaves that fill the frame. The lobed simple leaf outline reads very well."
+  },
+  {
+    "hash": "7169e4b5901c8e001524bca5520910e9aa872cf455ab827c13522b77b54bbb5d",
+    "target": "QUVE",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUVE#image=%2FImageLibrary%2Flarge%2Fquve_003_lvp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:06:31Z",
+    "note": "Archival black and white plate of a leafy twig with acorns. The lobed simple leaves are sharp and fill the frame."
+  },
+  {
+    "hash": "09d73373abcf151d0db5164a62b94b3e59d9403ed69955f4a19a53ccb7b97314",
+    "target": "QUVE",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUVE#image=%2FImageLibrary%2Flarge%2Fquve_005_lvp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:06:31Z",
+    "note": "Archival black and white plate of two acorns on a twig. The acorns are sharp and fill a good part of the frame."
+  },
+  {
+    "hash": "619905cf25c67e1ff03cf74b237eb6d50618c48ca6159ca8a6da80b1938a0be3",
+    "target": "QUVE",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUVE#image=%2FImageLibrary%2Flarge%2Fquve_007_lvp.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:07:08Z",
+    "note": "Archival black and white plate of a mature trunk. The deep furrowed bark is sharp and fills the frame."
+  },
+  {
+    "hash": "97af73d6ead6399df1aa5745dbc579471ed5687d57b648610ef3928a72d893bb",
+    "target": "QUVE",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_(23515212763).jpg",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:09:27Z",
+    "note": "A mature trunk seen from below. The dark furrowed bark is sharp and runs the height of the frame."
+  },
+  {
+    "hash": "642aea45b87b0416edf897d155a4be278893e2868f74150d97a4f25eeefb2f99",
+    "target": "QUVE",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_(23523218683).jpg",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:10:00Z",
+    "note": "A mature trunk seen from below with foliage around it. The furrowed bark runs the height of the frame and reads well."
+  },
+  {
+    "hash": "8b001fe276e7afe564f278bf27c5437627da8cd0c9647a2e4527ef22e050e3f9",
+    "target": "QUVE",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_(24060859292).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:11:22Z",
+    "note": "Two acorn cups on a black ground. The near cup is sharp and the scaly cup surface reads clearly."
+  },
+  {
+    "hash": "ae37574417843780dd8e747c1c2a970f1c3c6a225d6fc634c1564d2229c5740f",
+    "target": "QUVE",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_(24101451461).jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:11:24Z",
+    "note": "A hanging spray of large green oak leaves in the centre of the frame. The lobed simple leaf outline reads well."
+  },
+  {
+    "hash": "024f335e22d1b5715c5f684f0dd1fb427f2c406b12956a98a878685ce8356c13",
+    "target": "QUVE",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_(24163860326).jpg",
+    "tags": [
+      "summer",
+      "underside"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:12:17Z",
+    "note": "Large oak leaves seen from below fill the frame and are sharp. The lobed simple leaf outline reads clearly."
+  },
+  {
+    "hash": "8858e02638e6f7f73b6e2478bce65d072133b8c16ec197dd2c24c5665b57d433",
+    "target": "QUVE",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_(24164441935).jpg",
+    "tags": [
+      "mature",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:12:18Z",
+    "note": "A mature trunk in winter. The furrowed grey bark is sharp and runs the height of the frame."
+  },
+  {
+    "hash": "0389f18c15d7be630855b38a6ef6f1c461d9d5de8032583f7017671d77bec2bd",
+    "target": "QUVE",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Jean-Pol GRANDMONT",
+    "license": "CC BY 2.5",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_JPG1f.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:13:45Z",
+    "note": "Sunlit oak foliage fills the whole frame and is sharp. The lobed simple leaf outline reads well."
+  },
+  {
+    "hash": "1eb870d292ce7cc38ed968dd0f47fcbaa8e9beccb737affd1236e57d1ac42b2a",
+    "target": "QUVE",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Trevor Edmonson, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/9635836#photo=13157454",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:14:26Z",
+    "note": "One dried brown oak leaf on a plain sheet. It is sharp, fills the frame, and the lobed simple outline reads well."
+  },
+  {
+    "hash": "5d0201481b322888a494f68b9275fcc30d34ed354b00a3c8b11a483281ae5415",
+    "target": "QUVE",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/179460419#photo=312439392",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:14:27Z",
+    "note": "A large mature trunk in a park. The furrowed bark is sharp and fills a wide band up the frame."
+  },
+  {
+    "hash": "7a0e581d92a02e0192ec477159cf6e02a60d13ded1e3fe82c94a26c16e655d2e",
+    "target": "QUPA2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA SCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUPA2#image=%2FImageLibrary%2Flarge%2Fqupa2_002_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:15:18Z",
+    "note": "Two green pin oak leaves laid against a trunk. They are sharp and the deep lobed simple outline reads well."
+  },
+  {
+    "hash": "d26cccc97df5ffeb6b8fd67c1347dcc90a79d40eef8809d9843b363b92b04863",
+    "target": "QUPA2",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUPA2#image=%2FImageLibrary%2Flarge%2Fqupa2_009_lhp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:15:54Z",
+    "note": "One acorn in its scaly cup on a twig, sharp and large in the frame. No scale bar or hand is in the shot."
+  },
+  {
+    "hash": "49ac8ca062f0102a047ed7e7285b31f79c21eeeaebaffc3891562d456f26dd5d",
+    "target": "QUPA2",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUPA2#image=%2FImageLibrary%2Flarge%2Fqupa2_010_lhp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:15:55Z",
+    "note": "One broad acorn in a shallow cup on a twig. It is sharp and fills much of the frame."
+  },
+  {
+    "hash": "2fcc3cc21dad242757aa01eb681e81f666d25f9dc464540b2cf825d8b51e4bf2",
+    "target": "QUPA2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUPA2#image=%2FImageLibrary%2Flarge%2Fqupa2_011_lhp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:15:55Z",
+    "note": "Two pin oak leaves laid on a dark cloth. Both are sharp and the deep lobed simple outline reads very well."
+  },
+  {
+    "hash": "e73ef6834ae553d639c97ebe4447d660fb03f2664d239e957931f6df1febc0c7",
+    "target": "QUPA2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUPA2#image=%2FImageLibrary%2Flarge%2Fqupa2_012_lhp.jpg",
+    "tags": [
+      "close_up",
+      "underside"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:16:39Z",
+    "note": "A close view of two leaves, one upper face and one pale underside. The bristle tipped lobed margin is sharp and reads."
+  },
+  {
+    "hash": "07d4e805d4aa0ad46033c634aa77bdf1a703cfc7236277c8bf24523f9e927d3e",
+    "target": "QUPA2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUPA2#image=%2FImageLibrary%2Flarge%2Fqupa2_013_lhp.jpg",
+    "tags": [
+      "summer",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:16:40Z",
+    "note": "A young pin oak shoot with pale green leaves over darker ground cover. The lobed simple outline reads clearly."
+  },
+  {
+    "hash": "4dab72a00a88d217a6bd5c1d98600dd3bf126cd5c0879bf70f3b1430e1854d29",
+    "target": "QUPA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2018-05-11_19_04_18_Pin_Oak_foliage_in_mid-late_spring_along_Ladybank_Lane_in_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:18:37Z",
+    "note": "Sunlit foliage fills the frame and the deep narrow lobes of each simple leaf read clearly."
+  },
+  {
+    "hash": "6e25c5f94d40cfa3a8585f4a9628d061bd31221617d8c4f265feefb336b391ee",
+    "target": "QUPA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2020-05-10_18_39_10_View_up_into_the_canopy_of_a_Pin_Oak_leafing_out_in_spring_along_Glen_Taylor_Lane_in_the_Chantilly_Highlands_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:22:02Z",
+    "note": "Sunlit young foliage fills the frame against the sky. The deep narrow lobes of each simple leaf read clearly."
+  },
+  {
+    "hash": "a1546e636e0ec85547dd7b111393369494fb7b0336dce090de05363a36689da4",
+    "target": "QUPA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2020-05-10_19_03_34_View_up_into_the_canopy_of_a_Pin_Oak_leafing_out_in_spring_along_Ladybank_Lane_in_the_Chantilly_Highlands_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:22:37Z",
+    "note": "Young sunlit leaves fill the frame and are sharp. The deep narrow lobes of each simple leaf read clearly."
+  },
+  {
+    "hash": "484356a393d130ecb0ad05c10f5e5c5b5d74124fa84f9e5dccc75171b820ecf9",
+    "target": "QUSH",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA SCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUSH#image=%2FImageLibrary%2Flarge%2Fqush_001_lhp.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:24:46Z",
+    "note": "Sharp close up of a lobed simple oak leaf spray against a trunk, the lobe outline reads clearly."
+  },
+  {
+    "hash": "277617e0d3eeeb2842cb9fe061532e9c078bdab6f9e8dab9d60c158c4cbdeae0",
+    "target": "QUSH",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii1.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:27:07Z",
+    "note": "Sharp close up of a mature trunk with vertical furrowed ridges filling the whole frame."
+  },
+  {
+    "hash": "9ba80394106632886dbe46dbf3dfcdd9f5e112df30827ae138ab59c68c5f2bd0",
+    "target": "QUSH",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii10.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:27:08Z",
+    "note": "Two picked lobed simple leaves on a plain dark cloth, sharp and filling the frame."
+  },
+  {
+    "hash": "5938f444818519af5e12b733abf906819a1a724293de6a7627dc65d094eb3343",
+    "target": "QUSH",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii12.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:27:44Z",
+    "note": "Sunlit branch of lobed simple leaves that fills most of the frame and reads sharply."
+  },
+  {
+    "hash": "41476448127a59db5fa007740d9bd7b58846d173f4a907f6425373b5f8467266",
+    "target": "QUSH",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii13.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:27:45Z",
+    "note": "Three acorns in their cups on a twig, sharp and clear against dried foliage."
+  },
+  {
+    "hash": "391efb717b40febe398a5f2b5ad6805d22a14eec0abe4127ddb691ad9401bc1e",
+    "target": "QUSH",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii14.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:27:45Z",
+    "note": "Dense spray of lobed simple leaves filling the frame, sharp and well lit."
+  },
+  {
+    "hash": "5fab1784ee1f8a5777bfc5b3cdfb02d0886b297eba76c6d2a9229026c5b857b6",
+    "target": "QUSH",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii16.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:28:05Z",
+    "note": "Two acorns in scaly cups on a twig against a black background, sharp and filling the frame."
+  },
+  {
+    "hash": "0f317ac2a52808265068914dca7a8baa68ddce1d7ffa82d1bea2a0d85bc7a732",
+    "target": "QUSH",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii17.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:28:05Z",
+    "note": "Single acorn in its cup on a twig against a black background, sharp and filling the frame."
+  },
+  {
+    "hash": "5296f70a827f145b443e27ad6f17ed1a5e386dd5864b50d736ab87c12f16a39d",
+    "target": "QUSH",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii18.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:28:06Z",
+    "note": "End on macro of an acorn in its cup against a black background, sharp and filling the frame."
+  },
+  {
+    "hash": "8e49278609acc84cbb5c97e50f624953139e012ce3d747e60547584e53791846",
+    "target": "QUSH",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "DouglasGoldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii19.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:28:06Z",
+    "note": "Tight macro of one acorn and its scaly cup, sharp and filling the frame."
+  },
+  {
+    "hash": "94124084aa4aa8081805c6b7e3bb2c91e3e2ae07f6090b3e1af677dacdcddf69",
+    "target": "QUBU2",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUBU2#image=%2FImageLibrary%2Flarge%2Fqubu2_005_lhp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:31:30Z",
+    "note": "Sharp close up of furrowed trunk bark filling the whole frame."
+  },
+  {
+    "hash": "614bbdb8ae5d62db466bc10a3b6c55d8418d74a142422f16368e6841b8925810",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUBU2#image=%2FImageLibrary%2Flarge%2Fqubu2_006_lvp.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:31:30Z",
+    "note": "Spray of deeply lobed simple leaves against a black background, sharp and filling the frame."
+  },
+  {
+    "hash": "adf454b4cca52666fbd75406adaeb19e811a5a113b68b8fecbc23781dcaeff23",
+    "target": "QUBU2",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUBU2#image=%2FImageLibrary%2Flarge%2Fqubu2_007_lhp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:31:31Z",
+    "note": "Three acorns laid on a dark cloth, sharp and filling the frame with no ruler or hand."
+  },
+  {
+    "hash": "f9ee45af55abc04239c324bdd6b284df6cd3916b82084918b26e47ae624c4e71",
+    "target": "QUBU2",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUBU2#image=%2FImageLibrary%2Flarge%2Fqubu2_008_lhp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:31:31Z",
+    "note": "Macro of one striped acorn in its cup against a black background, sharp and filling the frame."
+  },
+  {
+    "hash": "257da19bd98b907b0ecc73bb291e775a9daeef7d8a010d37b603bdd1eec983b5",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUBU2#image=%2FImageLibrary%2Flarge%2Fqubu2_011_lvp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:31:54Z",
+    "note": "One deeply lobed simple leaf centred and sharp, filling most of the frame."
+  },
+  {
+    "hash": "bf572955723386b3e02fffa54401bb57e18bc0037073726fff2da63043d662b9",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUBU2#image=%2FImageLibrary%2Flarge%2Fqubu2_012_lhp.jpg",
+    "tags": [
+      "close_up",
+      "underside"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:31:54Z",
+    "note": "Two picked lobed leaves on a dark cloth showing the upper face and the underside, sharp and filling the frame."
+  },
+  {
+    "hash": "b5d716bdef2d240aadbc20f3f7d5b93335f6630d584fbfcb3ea8d65bfb5d319a",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "georgiakharper",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_buckleyi_leaf.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:32:15Z",
+    "note": "Two lobed simple leaves cut out on a white background, sharp and filling the frame."
+  },
+  {
+    "hash": "b70353fb60c469e7eff6185b05e2beee4f8870ee5c2b5a69976c43912444f58f",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "georgiakharper",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_buckleyi_leaves.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:32:15Z",
+    "note": "Leafy shoot on the tree with the lobed outline clear across the frame, sharp."
+  },
+  {
+    "hash": "5efa0e96ba85b73c9b9defee4bc00b8db33126a7a2e66ea96d15f97c70273051",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) psweet, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/125924917#photo=213604326",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:33:35Z",
+    "note": "Close view of a lobed simple leaf that fills the frame and reads sharply against a soft background."
+  },
+  {
+    "hash": "1718d5127bcd34fcdfd2ae458f37c57f0f53baf11f01c08262acaf13a4b6d189",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) mattmsa, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/191033793#photo=335026319",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:34:05Z",
+    "note": "Lobed simple leaves in red autumn colour fill the frame and read sharply."
+  },
+  {
+    "hash": "8eb5a6e62c00965ed08094026b7164a0d6f57169e0d5064ec16fad95052b34ac",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jo Roberts, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/98317964#photo=163662369",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:34:55Z",
+    "note": "Close view of lobed simple leaves, the central leaf is sharp and fills much of the frame."
+  },
+  {
+    "hash": "249021cccf46ff47a3c5e3ea3d551386668e5374df15d63dfd7324ec953294b4",
+    "target": "QUBU2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jo Roberts, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/98317964#photo=163662400",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:34:56Z",
+    "note": "Leafy branch fills the frame and the lobed outlines read clearly."
+  },
+  {
+    "hash": "d8e79b897258dcca475decf32387c18649e98b4a953fb29755955f666012bcea",
+    "target": "QUBU2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/42419899#photo=67352188",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:35:20Z",
+    "note": "Mature trunk base with furrowed ridged bark, sharp and filling the centre of the frame."
+  },
+  {
+    "hash": "399e0b4e89993591545fa3448a634d9cc3f3015b19fa7a6bc77c39ea5cee2a66",
+    "target": "QUBU2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/113567210#photo=191850935",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:36:46Z",
+    "note": "Mature trunk base with ridged furrowed bark filling the centre of the frame, sharp and evenly lit."
+  },
+  {
+    "hash": "ca2045df2260cf4731c2299cdfabc8fb71755cc54233f1a29f5eff75fba16720",
+    "target": "QUBU2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/23456417#photo=36323599",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:37:11Z",
+    "note": "Close view of a mature trunk with vertical furrowed ridges filling the frame, sharp."
+  },
+  {
+    "hash": "d24280880930eb3f10d5bb57943d2c69863c1e967056f3696864401184edc472",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA3#image=%2FImageLibrary%2Flarge%2Fquma3_003_lvp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:38:19Z",
+    "note": "Archival black and white plate of a shoot with lobed simple leaves that fill the frame, sharp, with only a small archival number in the corner."
+  },
+  {
+    "hash": "4745482d90f84a90c96172d3325ff44260bbe017f10c2c692b3bc78469d85a1b",
+    "target": "QUMA3",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA3#image=%2FImageLibrary%2Flarge%2Fquma3_005_lvp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:38:20Z",
+    "note": "Archival plate of two acorns in scaly cups, sharp and centred, with only a small archival number in the corner."
+  },
+  {
+    "hash": "7f715b4a7cae5c13bb58afefdef336bfe1eb714a72265e39d806ad317576f5dc",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Jay Sturner from USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Garden_of_the_Gods_-_Blackjack_Oak_(Quercus_marilandica)_-_Flickr_-_Jay_Sturner.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:38:51Z",
+    "note": "Low branch of broad lobed simple leaves fills most of the frame and reads sharply."
+  },
+  {
+    "hash": "bffb17be9c895069a3f502424ecd391b206fdfc71293e30f9276a37668d389ee",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Qmarilandica1.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:39:14Z",
+    "note": "Mass of broad lobed simple leaves in orange autumn colour fills the frame and reads sharply."
+  },
+  {
+    "hash": "7f28b4fd961068ca7dbb408f7f31fbabd18f91cb2c933e1193a38450677d112d",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Qmarilandica2.jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:39:14Z",
+    "note": "Shoot of broad lobed leaves in autumn colour, sharp and filling the frame against a dark trunk."
+  },
+  {
+    "hash": "d6b2ed623f59bb658b55895e5cff0a6591c63ac47365e0a343aec3ae7b66064c",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Qmarilandica3.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:39:34Z",
+    "note": "Broad lobed simple leaves in orange autumn colour fill the frame and read sharply."
+  },
+  {
+    "hash": "85b523e0a92154fcf97f5a41df2fb33905a9802a4fc130c5f16d9b4f37eee114",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) er-birds, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/102640867#photo=171623098",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:40:01Z",
+    "note": "Dried leaves held on the shoot in winter, broad lobed outlines fill the frame and read sharply."
+  },
+  {
+    "hash": "5f3616320e562e6eecd5f81b85a7b43db6c08cff931164b73414e8fefc083ada",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) er-birds, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/102640867#photo=171623121",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:40:01Z",
+    "note": "Dried winter leaves on a shoot, the broad lobed outline reads clearly and the leaves fill the frame."
+  },
+  {
+    "hash": "8da217206e8a6b0a88dc454039edc527994f6d2f61aba287a55c1d105cfbfea5",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/142069731#photo=243511614",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:40:22Z",
+    "note": "Shoot of broad lobed leaves in autumn colour, sharp and filling the frame."
+  },
+  {
+    "hash": "78d71be9fc0e3188bc7ca13fe8004d55addf34d3431ffadffd0f0f1bed80af77",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/142069731#photo=243511800",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:40:23Z",
+    "note": "Mass of broad lobed leaves in orange autumn colour fills the frame and reads sharply."
+  },
+  {
+    "hash": "ccea4aaea758225c259d9c66d56a0f5466f7dcc98f7f6e4b5c0ccd5feb3f5110",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/142069731#photo=243511808",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:40:23Z",
+    "note": "Close view of broad lobed leaves in autumn colour, sharp and filling the frame."
+  },
+  {
+    "hash": "a55230554ac828ceec988e5f6f4b66692ed1c78447213164a352a69a25e58d59",
+    "target": "QUMA3",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/193535555#photo=339986230",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:40:58Z",
+    "note": "Mature trunk with blocky plated bark filling the centre of the frame, sharp and even."
+  },
+  {
+    "hash": "3c73321448d06e2f5c9d392f4bc5d5f6bda606c5426d2ded7ddf6477c0922413",
+    "target": "QUMA3",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/193535555#photo=339986255",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:40:58Z",
+    "note": "Closer view of the same blocky plated trunk bark, sharp and filling the frame."
+  },
+  {
+    "hash": "7d200b197bc3c459c966fccdb0f5c56ac27e6cf11a452e64d4c99f6c44f89839",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/118111186#photo=199518094",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:41:43Z",
+    "note": "Shoot of broad lobed simple leaves against a dark background, sharp and filling the frame."
+  },
+  {
+    "hash": "622c1177148d4c75857ae36933bc13fdcfcdfbe4dbcb9bf5d1b342d9740c1529",
+    "target": "QUMA3",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/118111186#photo=199518115",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:41:44Z",
+    "note": "Trunk with rough blocky lichen patched bark filling the centre of the frame, sharp."
+  },
+  {
+    "hash": "2ef84511b5c566da251b661b76978d0a990a97d2f42880bae39901d63bff3235",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Annika Lindqvist, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/204297934#photo=361086738",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:42:07Z",
+    "note": "New red spring leaves on a shoot, sharp and filling the centre of the frame with the lobed outline clear."
+  },
+  {
+    "hash": "9b29e3ec3110c826ed4fc1bf3d92f57ea434f540f2566633df50e24a07a0367b",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/85677945#photo=141007476",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:42:09Z",
+    "note": "Rosette of broad lobed simple leaves at a shoot tip, sharp and filling the frame."
+  },
+  {
+    "hash": "542485d06de45a1e7fe5d04d7f558bb87b1bee2b78041a46d382ecd6ed187bb1",
+    "target": "QUMA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Alex Zorach, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/131575792#photo=223933656",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:43:08Z",
+    "note": "Leafy shoot seen from above, the broad lobed leaves are sharp and fill most of the frame."
+  },
+  {
+    "hash": "2c175c54a720326cac993804041aac262c0d8f7d0b3c8d00918b0338a2e2e67a",
+    "target": "QUMA3",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Joshua, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/343669687#photo=626076678",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:44:00Z",
+    "note": "Three trunks with blocky plated bark fill the frame, sharp and clear."
+  },
+  {
+    "hash": "c107b484636c06aad3641ec27d31d67f8ea987eb8ef3e830431e7810eb5c45d2",
+    "target": "QUMA3",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Joshua, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/343669687#photo=626076675",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:44:00Z",
+    "note": "Close view of rough blocky bark with lichen filling the whole frame, sharp."
+  },
+  {
+    "hash": "f0659b48582657afabc41deb8535f6076d197a0a39b7bd70c5c70a61aa3a4859",
+    "target": "QUMA3",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Joshua, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/343669687#photo=626076676",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:44:01Z",
+    "note": "Close view of a trunk and branch junction with blocky plated bark, sharp and filling the frame."
+  },
+  {
+    "hash": "6b5c93fe9af004289a8c3c1fc8378bc2b107993d3f9aa7766977b9c9b364c5af",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "cogdogblog",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016-366-177_Among_The_Destruction,_Opportunity_(27833558681).jpg",
+    "tags": [
+      "young",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:46:45Z",
+    "note": "Sharp close view of a young resprout with clearly lobed simple leaves on burned ground."
+  },
+  {
+    "hash": "cdeecb0a12dc17b0d40363b210b99634dff324c2989e7b25f1390b24e65e269a",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.05.28_10.00.55_DSC04436_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:47:21Z",
+    "note": "Sharp close view of a shoot with several lobed simple leaves that fill most of the frame."
+  },
+  {
+    "hash": "90678b60a94dc094669b55cdf1b0fdce11670ec5eb2402da3a0a917104840d65",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ninjatacoshell",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Autumn_Gambel_Oak_Leaf.jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:47:23Z",
+    "note": "A single dry brown leaf on a plain white ground. The deep rounded lobes read clearly."
+  },
+  {
+    "hash": "678934aaf368c16875db14af529ae02d7845d899b6f9ec378fcd29edc23b719f",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "LBM1948",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Estados_Unidos,_%C3%A1rboles_1997_07.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:48:10Z",
+    "note": "Sharp foliage mass filling the frame. The deep lobed outline of many leaves reads well."
+  },
+  {
+    "hash": "c0128703570a4dafe3ce7867ed55997ca6544ce29343a9dfb4b8b80281f00830",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Alice Wondrak-Biel",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gambel_oak_(47938760-7dab-434e-8541-37637f95d631).jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:48:12Z",
+    "note": "Backlit autumn foliage against a rock wall. Several lobed leaves read clearly in the middle of the frame."
+  },
+  {
+    "hash": "a93a7147cca00a1f70be324344388a3450f79bf67d76f267ed0b8cece0305031",
+    "target": "QUGA",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Photo by Cory Maylett",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gambel_oak_leaves.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:48:12Z",
+    "note": "Sharp close view of five green acorns in scaly cups on the twig, with leaves behind them."
+  },
+  {
+    "hash": "960f365b14ab85646fb661f53a66ba8c971671de06087856037e4d5ee1704dfb",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "SonoranDesertNPS from Tucson, Arizona",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:GambelOak_(6541147917).jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:48:44Z",
+    "note": "Backlit autumn foliage on a branch against a rock wall. Several lobed leaves read clearly."
+  },
+  {
+    "hash": "05f2c26bf3e49be98dff679204c631eb6a16c4b1de7dc60a857d2ab000e3739e",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "James St. John",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_(Gambel_oak)_(Warner_Point_Trail,_Black_Canyon_of_the_Gunnison_National_Park,_Colorado,_USA)_2_(19877840961).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:49:27Z",
+    "note": "Sharp close view of one lobed leaf filling the frame, with a blurred background."
+  },
+  {
+    "hash": "7956c4c6233ed7f5c6b4d48cef6c955dac0fc71871676e1e1e988121ecee32a2",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "James St. John",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_(Gambel_oak)_(Warner_Point_Trail,_Black_Canyon_of_the_Gunnison_National_Park,_Colorado,_USA)_3_(19686233959).jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:49:28Z",
+    "note": "Sharp foliage spray filling the frame. The deep rounded lobes read on many leaves."
+  },
+  {
+    "hash": "af0a8c037bf88efdf4be6a145e2cc265e24b979bef4de9442fec33c59d11dc59",
+    "target": "QUGA",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Patrick Alexander from Las Cruces, NM",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_-_Flickr_-_aspidoscelis.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:49:28Z",
+    "note": "Sharp trunk close up. The rough grey bark broken into short plates fills the frame."
+  },
+  {
+    "hash": "1fbb9e4212ce36ce95128321aa4dcce6e5a772a5c55c57548b4841e84fd40438",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_2.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:50:05Z",
+    "note": "Sharp spring shoot with fully expanded lobed leaves across the frame. Catkins hang below them."
+  },
+  {
+    "hash": "198586858597e7a47182328a3288b39d6c0de38f327c438e08492dc543dd64ad",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Stan Shebs",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_3.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:50:06Z",
+    "note": "Shoot tip against blue sky. The lobed outline of the expanded leaves reads clearly and sharply."
+  },
+  {
+    "hash": "afaf6169750d36de560c61846e89574e8af0602e7e9f90456ebdb9aa7352c56b",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz02.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:50:55Z",
+    "note": "Sharp leafy spray filling the frame with deeply lobed leaves. One green acorn sits in the centre."
+  },
+  {
+    "hash": "2dfae4b20983a4985e303b85f055420c80d1ea182e54cb18317d97dea1f8561f",
+    "target": "QUGA",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz04.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:50:56Z",
+    "note": "Two green acorns in shallow cups on the central shoot, sharp and clear, with lobed leaves around them."
+  },
+  {
+    "hash": "a6c6bd6a9437578d63cad759b03e27a7c86b17c2a8855d963595ee63d2e87449",
+    "target": "QUGA",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz05.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:51:28Z",
+    "note": "Two green acorns, one in a scaly cup, sharp on a leafy branch."
+  },
+  {
+    "hash": "6dc5836772a32dea0c953098d164592d5b013c8097554cc8c91a491c490ffa6c",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz06.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:51:28Z",
+    "note": "Sharp close view of a shoot tip. Several deeply lobed leaves fill the frame."
+  },
+  {
+    "hash": "6ccacf2b814ec7cc04e54f9c691241130b474ebf976f3ae3c68ea62892a09af4",
+    "target": "QUGA",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz07.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:51:29Z",
+    "note": "One large green acorn in a scaly cup, sharp and well lit, on a leafy twig."
+  },
+  {
+    "hash": "5d9349085b553c8520e6ff88aa9d09939b7de40ff3ad3fa24306992a5350a0e1",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz09.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:51:30Z",
+    "note": "Sharp leafy branch in the front of the frame. The lobed outline reads on many leaves."
+  },
+  {
+    "hash": "1bc03989937724a625dcd6c343ac58d039342dab3681a95020d0f43f8e3cf5bb",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz10.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:52:08Z",
+    "note": "A leafy branch in the front of the frame, sharp enough that the lobed outline reads on many leaves."
+  },
+  {
+    "hash": "b418498f5c1e40f87597ff00fc343bcc6993589290f6ce4a70439dba607772b1",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz14.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:52:10Z",
+    "note": "Dense sharp foliage filling the frame. The deep lobes read on many leaves and small acorns sit among them."
+  },
+  {
+    "hash": "6424992e2779bdb947472d279588bb59c2a33ec26a6670bda3512070bc628e24",
+    "target": "QUGA",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz15.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:52:49Z",
+    "note": "A sharp cluster of green acorns in scaly cups in the centre of the frame, with lobed leaves around them."
+  },
+  {
+    "hash": "301aeca60e9ed6c83caf110f1a2603e99fe5a7cb6e29e1f1b20240f239e9e430",
+    "target": "QUGA",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz16.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:52:50Z",
+    "note": "Several green acorns in scaly cups on a leafy branch, sharp and clear."
+  },
+  {
+    "hash": "fd86aa5d0795efa53fde21d8ba2cee87e7a6b967d141cbef8ad3e6e1011a1b3d",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz19.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:52:51Z",
+    "note": "Leafy shoots fill the front of the frame and the lobed outline reads well. A canyon lies behind them."
+  },
+  {
+    "hash": "9977ada8432e52a5aafb5f9f6672eb7946aad07a0287c3fdd76038e1d331ffe8",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz20.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:53:34Z",
+    "note": "Leafy shoots fill the front of the frame and the lobed outline reads. A canyon lies behind them."
+  },
+  {
+    "hash": "17b6d76cc7df6ecf0ad4de3c3bd9146033e844ebd18e8fb2d8f2e902123e68b5",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz21.jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:53:35Z",
+    "note": "Sharp close view of autumn leaves turning red. The rounded lobes read on many of them."
+  },
+  {
+    "hash": "d64397b2e35ad80db9ef313c9d9309c4a13756456151068fd71ec9df01de7207",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz23.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:54:03Z",
+    "note": "A foliage mass seen from above, sharp, with the lobed outline clear on many leaves."
+  },
+  {
+    "hash": "a5d296a0e569c688ec45a857436ea66c7d63a74b2730ec6bfa8d3b990cd5ee79",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz25.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:54:41Z",
+    "note": "Sharp leafy shoot in the front of the frame. The deep lobes read on many leaves."
+  },
+  {
+    "hash": "e4c0d4cdebb0f92060ea9ea899389340abc16167d5c4c3b0bba705fe1a0e5499",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz27.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:54:42Z",
+    "note": "Sharp close view of a leafy twig. The lobed outline reads clearly on the front leaves."
+  },
+  {
+    "hash": "aa79411d1c1a051c66e1a837aeed7d48eb66ac85a7dca2808c62b0369998bf76",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz28.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:54:43Z",
+    "note": "Sharp leafy branch filling most of the frame. The lobes read well on the front leaves."
+  },
+  {
+    "hash": "dc6a20875930efd4573b30fd8f0d190c892a9ebd978e6af8f9ac0adee28c9589",
+    "target": "QUGA",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz29.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:54:43Z",
+    "note": "Sharp leafy shoot with deeply lobed leaves across the front of the frame."
+  },
+  {
+    "hash": "13e6f018759b3de2306f7e79fdcdea478f2335ced4a55298e1c84aaaf1c30831",
+    "target": "QUMA2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA SCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA2#image=%2FImageLibrary%2Flarge%2Fquma2_002_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:55:28Z",
+    "note": "One green leaf laid on a trunk, sharp and filling the frame. The deep lobes and wide top read clearly."
+  },
+  {
+    "hash": "7df85d5caef33c978fb11bba54e0092fa30dadc13bbd8603a5bb78c431ff1a67",
+    "target": "QUMA2",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA2#image=%2FImageLibrary%2Flarge%2Fquma2_010_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:55:29Z",
+    "note": "One acorn in a deep fringed cup at the centre of the frame, sharp, among leaves."
+  },
+  {
+    "hash": "96db33bd5cf4b9d9f3de08dce17b3164ea9e41bc2afd288cc99309d8d31280ff",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA2#image=%2FImageLibrary%2Flarge%2Fquma2_012_lvp.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:55:30Z",
+    "note": "Sharp trunk close up. The dark ridged and furrowed bark fills the frame."
+  },
+  {
+    "hash": "f9c3af57551118e941721bca9fdff09601f348012c1cf23a45406a3ddfc07026",
+    "target": "QUMA2",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA2#image=%2FImageLibrary%2Flarge%2Fquma2_017_lvp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:56:15Z",
+    "note": "An archival black and white studio shot of one acorn in a deep fringed cup on a short twig. The cup fringe reads clearly."
+  },
+  {
+    "hash": "9917db0a8e74599ef94bc8ecc9956dfc0793406da05c4f46879b050c5f24feec",
+    "target": "QUMA2",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA2#image=%2FImageLibrary%2Flarge%2Fquma2_021_lvp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:56:58Z",
+    "note": "An archival black and white plate of two leaves on a twig against a plain ground. The lobes and wide leaf top read clearly."
+  },
+  {
+    "hash": "870bf70bec051e93724f9e9651b3e76359f79d606112d88959cf37842b8632cf",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Katja Schulz from Washington, D. C., USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bur_Oak_-_Flickr_-_treegrow.jpg",
+    "tags": [
+      "mature",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:58:29Z",
+    "note": "A view up the trunk and main limbs in warm light. The ridged bark texture reads sharply across the frame."
+  },
+  {
+    "hash": "ea1a43ca050ed51c524cc6aa251720b39a547ab617faafed115cef088527634f",
+    "target": "QUMA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Murray Foubister",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bur_Oak_in_Spruce_Woods_Provincial_Park,_Carberry,_Manitoba_(28814703785).jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:59:10Z",
+    "note": "Sharp dense foliage filling the frame. The deep lobes and wide leaf top read on many leaves."
+  },
+  {
+    "hash": "2a9bacc9f747cb6a53c7a5b4aa41be1b3024ab5061d25a61f9956e164842ae50",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Chiselwit",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bur_oak.JPG",
+    "tags": [
+      "mature",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T04:59:49Z",
+    "note": "A close view up the trunk crotch and main limbs. The ridged bark texture reads sharply across the frame."
+  },
+  {
+    "hash": "53bb2a9c1da59aac6ebdf5ed3354b5efd5a4da8f5da65c4fdee6c3f0d7ed6634",
+    "target": "QUMA2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Burr_Oak_20-05-31_026.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:00:29Z",
+    "note": "Foliage seen from below against a bright sky. The lobed outline and wide leaf top read clearly."
+  },
+  {
+    "hash": "e32a801f1b61af4bb019c6d3d5ded032791f58824f0804d77d43e81e7c9c15a4",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Burr_Oak_20-05-31_027.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:00:29Z",
+    "note": "A sharp trunk frame in woodland. The grey ridged and furrowed bark fills most of the frame."
+  },
+  {
+    "hash": "c60b3e6797431b983d0f1b158ed9b256ad7c0c73f2b4e6983baccf4a9457fcc2",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Burr_Oak_20-05-31_028.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:00:30Z",
+    "note": "A sharp trunk frame in woodland. The grey ridged bark fills the middle of the frame."
+  },
+  {
+    "hash": "f7d1507271f9f39816419b0b25decd3e47809637030fb4750c23c85217371073",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "MBisanz talk",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:MLK_tree_by_Matthew_Bisanz.JPG",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:01:46Z",
+    "note": "A view up the trunk into the crown. The ridged bark on the trunk and main limbs reads sharply."
+  },
+  {
+    "hash": "d8f3437dbab4b78c817f3152f8b58663eda6779600de29cbded94cf955b694b5",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Chiselwit",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:North_American_white_oak,_bur_oak.JPG",
+    "tags": [
+      "mature",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:01:47Z",
+    "note": "A close view of the trunk crotch and heavy limbs in winter. The ridged bark texture reads across the frame."
+  },
+  {
+    "hash": "51f96b91a4df150da0b66616fd5042c24ce44b95d5728bcfc78cfa09f5903eec",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Homoarborea",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_macrocarpa_(1)_Meise_Nat._Plantentuin.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:02:35Z",
+    "note": "A sharp close view of heavy limbs with deeply corky ridged bark that fills the frame."
+  },
+  {
+    "hash": "17fdcd74361ace62f30751242bfb7b0a5cc89b778660260625ea78b26594794f",
+    "target": "QUMA2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_macrocarpa_(23515308443).jpg",
+    "tags": [
+      "close_up",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:02:36Z",
+    "note": "A sharp close view of one acorn in a deep fringed cup. The cup fringe and the nut read clearly."
+  },
+  {
+    "hash": "0e261bb313980f5fe6b3e27bdc3e0b0cf0e017203b4e7ce1ee018896e6d99200",
+    "target": "QUMA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_macrocarpa_(23518502753).jpg",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:02:36Z",
+    "note": "A view up a large trunk into the crown. The ridged and furrowed bark reads sharply and fills much of the frame."
+  },
+  {
+    "hash": "f697f0aabc2d6b1c5d4a6c3302efdf599b35fe359f4d6ef08b02ccd0f54e6dc0",
+    "target": "QUAL",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUAL#image=%2FImageLibrary%2Flarge%2Fqual_007_lvp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:04:13Z",
+    "note": "An archival black and white plate of two leaves on a twig against a plain ground. The rounded lobes read clearly."
+  },
+  {
+    "hash": "2140bb14576a42afe277556a1e4655dbca771057630fffd853f1243524cad951",
+    "target": "QUAL",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUAL#image=%2FImageLibrary%2Flarge%2Fqual_009_lvp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:04:14Z",
+    "note": "An archival black and white plate of one acorn in a warty cup on a twig. The nut and cup read clearly."
+  },
+  {
+    "hash": "3a44bdc6bb22282cb85cebc9ade3c1703cbbf1ea53e7dd697837eff8117f8ca6",
+    "target": "QUAL",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Daniel O. Todd",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUAL#image=%2FImageLibrary%2Flarge%2Fqual_024_lvp.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:06:14Z",
+    "note": "A sharp archival bark frame. The narrow vertical plates and ridges fill the whole frame."
+  },
+  {
+    "hash": "8fbc23e45adeb324f26461a15ede0609b5313a28e5e52f77de39f4a028935dea",
+    "target": "QUAL",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Daniel O. Todd",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUAL#image=%2FImageLibrary%2Flarge%2Fqual_025_lvp.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:06:57Z",
+    "note": "A sharp archival bark frame. The narrow plates and shallow furrows fill the frame."
+  },
+  {
+    "hash": "62f9ab433968b6a639fc95b2068628739a6d808e412ecb50ba032717137044da",
+    "target": "QUAL",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Daniel O. Todd",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUAL#image=%2FImageLibrary%2Flarge%2Fqual_026_lvp.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:06:57Z",
+    "note": "A sharp archival bark frame of a straight trunk. The flaky plated surface fills the frame."
+  },
+  {
+    "hash": "c9c5c458eee63aa8c5118157ca42a1cd03a6850f085674ca8826f727785c9223",
+    "target": "QUAL",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Daniel O. Todd",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUAL#image=%2FImageLibrary%2Flarge%2Fqual_027_lvp.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:06:58Z",
+    "note": "A sharp archival bark frame. The pale flaky plates read clearly across the trunk."
+  },
+  {
+    "hash": "82eff691fd2f976103627a5330b34e24aec966b872d8a60d7431940ff5b389b6",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA NRCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUST#image=%2FImageLibrary%2Flarge%2Fqust_002_lvp.jpg",
+    "tags": [
+      "summer",
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:14:21Z",
+    "note": "Single lobed post oak leaf laid on bark, sharp and filling the frame, cross-shaped lobes read clearly."
+  },
+  {
+    "hash": "475a533ed717b38a30bed81313b18e70247493207fbe1ad9937b8bacac783c72",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "psweet",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_stellata_153360876.jpg",
+    "tags": [
+      "summer",
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:15:45Z",
+    "note": "Sharp spray of lobed post oak leaves filling the frame, the cross shaped lobes read well."
+  },
+  {
+    "hash": "9f67257b5a0542a35141feecc3a4fd6c55c9d30c8283fbfed37cd930b10837aa",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/27887274#photo=43434339",
+    "tags": [
+      "summer",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:16:21Z",
+    "note": "Leafy branch fills the frame and the lobed outlines read clearly against the sky."
+  },
+  {
+    "hash": "ae1677bfc31352bc6fbc0671a54ef5a7489edfe9cee66d7ce8f4c428a42f4bd6",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Andrew Conboy, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/251948665#photo=450914395",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:16:22Z",
+    "note": "Fallen lobed oak leaves on grass, sharp and filling the frame, the lobed outline reads."
+  },
+  {
+    "hash": "7b382e7f654e288f67bf269a410c60c7cda1e054f7bb28c201aa4e2b152be43e",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/353528119#photo=645034043",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:16:23Z",
+    "note": "Sharp close up of green lobed leaves that fill the frame."
+  },
+  {
+    "hash": "8b29e69cc396e9c3350632924b920a6697aea82b35351154757728e568f5f182",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Andrew Conboy, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/193387237#photo=339716752",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:17:10Z",
+    "note": "Two fallen lobed leaves on the forest floor, sharp and large in the frame."
+  },
+  {
+    "hash": "fca137a0808ce339448c3501bddbf3a860821571a04f24108d47bb454a51be2b",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) CK2AZ, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/108075162#photo=181891378",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:17:12Z",
+    "note": "Dry tan lobed leaves held on the branches, sharp and filling the frame, the lobed outline reads."
+  },
+  {
+    "hash": "b43803720cb0b44f3e915246869954845015408fdeed1aab555a43a32de71eb1",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/12812033#photo=18580157",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:19:14Z",
+    "note": "Sharp cluster of green lobed leaves filling the frame against a dark background."
+  },
+  {
+    "hash": "a4ed9c8f471d2aa38c7a80550ae75659c24768c6b8a70e914d358e16fab89a93",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/92831305#photo=153760644",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:19:15Z",
+    "note": "Backlit lobed leaf, sharp and filling the frame, the lobes and sinuses read."
+  },
+  {
+    "hash": "197417cbfcf754d63ed276168da87d2bc8bd9585ef7c340ff48f535151dc2312",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/92831305#photo=153760540",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:19:16Z",
+    "note": "Leafy branch in sunlight, sharp and filling the frame, the lobed outline reads."
+  },
+  {
+    "hash": "b6bf094b2fb39b519fd2c40a1d072ab7fdad4c3c375b1086ea3b842a0526c274",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/92831305#photo=153760746",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:20:12Z",
+    "note": "Foliage close up from below, the central lobed leaves are sharp and read clearly."
+  },
+  {
+    "hash": "361a166040d16ead6bb6fd1f634e51b6998ac8fb434f159a6ff2bd01d7cf6d52",
+    "target": "QUST",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Linda Jo Conn, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/260564877#photo=467957493",
+    "tags": [
+      "winter",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:20:13Z",
+    "note": "Mature trunk fills the frame and the blocky plated bark reads clearly, with a burl on one side."
+  },
+  {
+    "hash": "b5347c561c0234e0760bf5058158c6d8b39fb88a9025d42e188a883365f3d115",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Linda Jo Conn, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/260564877#photo=467957971",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:20:13Z",
+    "note": "Dry tan lobed leaves on a twig, sharp and filling the frame, the lobed outline reads."
+  },
+  {
+    "hash": "406a74ade1dd3a4fe06948c37850103fba7f8a2042e04103a555938d96a58c20",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Andrew Conboy, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/332503560#photo=603444188",
+    "tags": [
+      "winter",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:20:47Z",
+    "note": "Two fallen lobed leaves on snow, sharp and filling the frame."
+  },
+  {
+    "hash": "7fe817a286af678351bc2dc06df07bbbbf742abc489a870cba3f7a73dce6f9d3",
+    "target": "QUST",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Andrew Conboy, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/332503560#photo=603444156",
+    "tags": [
+      "winter",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:20:48Z",
+    "note": "Mature trunk fills the frame and the blocky plated bark reads clearly."
+  },
+  {
+    "hash": "9843cffe66b6158e597f1c1f92beb0a05144b0ab33a87a3495820b38df21266d",
+    "target": "QUST",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) CK2AZ, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/102643732#photo=171628620",
+    "tags": [
+      "autumn",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:22:30Z",
+    "note": "Mature trunk in the middle of the frame, sharp, and the blocky plated bark reads clearly."
+  },
+  {
+    "hash": "39d5e10b358d7a813f5dac72eebfdd1b0215d98130c8a0a261e31b3001a4d1ab",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "bobnieman",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_Havardii.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:23:18Z",
+    "note": "Leafy shrub branches fill the frame, sharp, and the lobed leaf outline reads well, with catkins present."
+  },
+  {
+    "hash": "2de1196b37123414922ff7606d6d2264d6262b20879dee95992e9b233f94181a",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Arches National Park",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Shinnery_Oak_(6887363749).jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:23:20Z",
+    "note": "Sharp macro of red autumn leaves that fill the frame, the lobed outline reads clearly."
+  },
+  {
+    "hash": "d86a72f07a2e15cd6c11715ea0de25cea55cbebe4d646e7198135dab4d9a365f",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) nmoorhatch, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/122415691#photo=207260657",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:24:09Z",
+    "note": "Low shoot on open sand, sharp, and the lobed leaf outline reads clearly against a plain background."
+  },
+  {
+    "hash": "0c4867f3a8700d93481ece9a52e66773cb582c0c2b68886925a1b6ed4d55aea7",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) nmoorhatch, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/122415691#photo=207260703",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:24:09Z",
+    "note": "Close up of lobed leaves over sand, sharp and filling the frame."
+  },
+  {
+    "hash": "7711327d94b41988f0e466a7b1d59fbf7c4bb855aa919b1d3384dfea1797969d",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) CK2AZ, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/26308196#photo=40842063",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:24:10Z",
+    "note": "Dense foliage of the shrub fills the frame and the lobed leaf outline reads."
+  },
+  {
+    "hash": "3198e744bf9d7763bbfd5bbd3d9ab744ef5798366f9c3f94ab538b41001a79a3",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jared Shorma, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/98449402#photo=163907177",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:25:01Z",
+    "note": "Sharp macro of lobed leaves that fill the frame, with pink galls and one small moth on a leaf."
+  },
+  {
+    "hash": "d9637c36dc82fb78f0a3bf09d2ab4f68541d6e78bd426f5c53c3228f1ff696e1",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jared Shorma, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/98449402#photo=163907222",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:25:02Z",
+    "note": "Sharp macro of lobed leaves filling the frame, with pink galls and a small moth present."
+  },
+  {
+    "hash": "6267c3a01f18afc59b763730a6510930050ee36fbc31772f2f968cb5dd622bc4",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jared Shorma, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/98449402#photo=163907212",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:25:02Z",
+    "note": "Sharp close up of lobed leaves across the frame, with pink galls and a small moth present."
+  },
+  {
+    "hash": "ed2d889de0596926a1f93db2135b43a72b9f17f5da13446b2f100d68b007983c",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jared Shorma, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/98449402#photo=163907195",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:25:03Z",
+    "note": "Sharp close up of lobed leaves filling the frame, with pink galls and a small moth present."
+  },
+  {
+    "hash": "bc8ce73c18e530809735fb933b64600355e6e6257d6d5b3931d1872f538bc1ab",
+    "target": "QUHA3",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) CK2AZ, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/65015960#photo=104610946",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:25:51Z",
+    "note": "Main stem of the shrub stands in the middle of the frame and its rough trunk bark is sharp and reads."
+  },
+  {
+    "hash": "7fbbd094506513bd7d8fe533cb5dd6dc8bb225c6c67edbf71b916a2e563d525b",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) psweet, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/121031166#photo=204766047",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:26:33Z",
+    "note": "Sharp macro of two leaves on a twig against a dark background, the wavy lobed margin reads."
+  },
+  {
+    "hash": "3a48c83cccfafa30fdd0a505ea94c46ba36b46f0fd160c43acdb4afaf6adb653",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) psweet, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/121031166#photo=204766067",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:26:34Z",
+    "note": "Sharp close up of leaves on a twig that fill the frame, the lobed margin reads."
+  },
+  {
+    "hash": "2f10c66bce1a8a29eddc61f34666b1a13ffd7cd5a3a3640d7e945af469bc584c",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Annika Lindqvist, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/50358417#photo=79964317",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:26:34Z",
+    "note": "Leafy shoots fill the frame, sharp, and the broad lobed leaf outline reads."
+  },
+  {
+    "hash": "963e2b31be128ed6a03ce3ac60a72b86c94f6f9253384e302d84d9f78b9df132",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Annika Lindqvist, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/50358417#photo=79965575",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:27:22Z",
+    "note": "Sharp foliage that fills the frame, the broad lobed leaf outline reads well."
+  },
+  {
+    "hash": "c7a13d34b2f2e0d1a3de028a971578e43e404e4630667d564502dda42d1e8ab4",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) CK2AZ, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/57737165#photo=92123898",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:27:24Z",
+    "note": "Low shoot with lobed leaves fills the frame and is sharp, the lobed outline reads."
+  },
+  {
+    "hash": "07bfe31d3e32a19a2a084bfa06ccdf468b2a63eaad35e1b28781184c103bbbce",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jared Shorma, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/98452154#photo=163914178",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:28:07Z",
+    "note": "Leafy shoots fill the frame and the lobed leaf outline reads on the sharp leaves."
+  },
+  {
+    "hash": "eaf5f2de3bcc17adc1a7fbf022f49ec487fd798fdb22ddfbbd2a159a9e0be162",
+    "target": "QUHA3",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) CK2AZ, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/66126431#photo=106533450",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:28:08Z",
+    "note": "Two acorns with scaly cups sit on winter twigs, sharp and clear against a plain background."
+  },
+  {
+    "hash": "717ba232674a144dc28f88ab6ebb7fbd1d2a2baa1ee01e2d57045a8073661a67",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jared Shorma, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/99309535#photo=165523741",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:28:54Z",
+    "note": "Flash lit close up of foliage, sharp and filling the frame, the lobed leaf outline reads clearly."
+  },
+  {
+    "hash": "7ef2252ac199cd611c02a198b4e087be935cbebd87105396c94f24ebc28b3dad",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/101734406#photo=169930427",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:29:37Z",
+    "note": "Leafy shoots fill the frame, sharp, and the lobed leaf outline reads on the yellow and green leaves."
+  },
+  {
+    "hash": "e2b1465a480d3e320609faa1812db713136ab7b3b59680002933ba84b44da5ed",
+    "target": "QUHA3",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Lyrae, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/256259290#photo=459334529",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:30:21Z",
+    "note": "One pale acorn on a leafy shoot, sharp and central in the frame with no hand present."
+  },
+  {
+    "hash": "3a0957c0c025fa38926a055893ecac54e535439bf00dffb10204927aa7c6f484",
+    "target": "QUHA3",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Billi Krochuk, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/25332434#photo=39222111",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:30:22Z",
+    "note": "Lobed leaves over sand fill the frame and are sharp, the lobed outline reads."
+  },
+  {
+    "hash": "585ffc7aa4c9f8c38bc2dbe5c616fac2a5d2df41ca0d749b7a2e578a2e5bf42e",
+    "target": "PLOC",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "W.D. Brush",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PLOC#image=%2FImageLibrary%2Flarge%2Fploc_006_lvp.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:34:31Z",
+    "note": "Archival black-and-white plate of a twig with three lobed simple leaves and one fruiting ball. Sharp and fills the frame, with only a small archival negative number in the corner."
+  },
+  {
+    "hash": "592ce6b852d29506a10cebd6aa4ecb1d700331e770fb2e211d17f5ae01157c02",
+    "target": "PLOC",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Ryan Hodnett",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:American_Sycamore_(Platanus_occidentalis)_-_London,_Ontario.jpg",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:42:01Z",
+    "note": "Bare branches with many round fruiting heads on their stalks against a clear sky. Sharp, and the balls read clearly across the frame."
+  },
+  {
+    "hash": "a192821a4dc237aef872abec36c22cdfc7e9aa5521980114623ee7a9c177a1de",
+    "target": "PLOC",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Ryan Hodnett",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:American_Sycamore_(Platanus_occidentalis)_-_Mahwah,_New_Jersey_2023-01-18.jpg",
+    "tags": [
+      "winter",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:42:50Z",
+    "note": "Upper trunk and large limbs in the frame, with the mottled papery flaking clearly visible. Sharp and filling a good part of the frame."
+  },
+  {
+    "hash": "46c6f815b5bda19ae9c005d727b7109e8fb3d00c095d9c512882d7adc9707a1d",
+    "target": "PLOC",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Jim Thomas",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:American_sycamore_bark.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:42:51Z",
+    "note": "Close frame of the upper trunk and limbs, with the white and gray mottled papery flaking filling most of the picture."
+  },
+  {
+    "hash": "0add6cb82a8cb9dcbf9a6e18c6c5d936c3a22405607967a843486a42fb330a71",
+    "target": "PLOC",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "ScottyBoy900Q at English Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Americansycamore.jpg",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:42:51Z",
+    "note": "Upper trunk and limbs against the sky, with the pale mottled papery flaking clear on the central trunk. Sharp and close enough for the texture to read."
+  },
+  {
+    "hash": "d758b3507b9d28cec5d8894f251f0e40e9683c8c8375f4f7abc18f0c685fe9a0",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "SonoranDesertNPS from Tucson, Arizona",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AZSycamore1_(6541125821).jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:43:55Z",
+    "note": "Upper trunk shot from below, white with pale flaking patches, sharp and running across the frame. This is the upper trunk frame, not the dark base."
+  },
+  {
+    "hash": "b003c659aeb083f38f977bb00dfda9f32bf7f5c61a9bae9d3f1e5299c17ea985",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "SonoranDesertNPS from Tucson, Arizona",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AZSycamore2_(6541128705).jpg",
+    "tags": [
+      "autumn",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:44:43Z",
+    "note": "Three upper trunks in the frame with the pale green and cream mottled papery flaking clear on each. Sharp, and the trunks fill much of the picture."
+  },
+  {
+    "hash": "5858da72ae4d92ea5164c5df4f0fb3221ddf9f73993264fa93c03c8de53b47d9",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "SonoranDesertNPS from Tucson, Arizona",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AZSycamoreBark_(6541131103).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:44:43Z",
+    "note": "Close frame of the mottled papery flaking on an upper trunk, filling the whole picture. Sharp, with no hand or scale object."
+  },
+  {
+    "hash": "5a33cb5924b3a548d5cb177ca2627c08122f441bddd057a2c9d497bf15584a13",
+    "target": "PLWR2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "SonoranDesertNPS from Tucson, Arizona",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AZSycamoreLeaf_(6541122241).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:44:44Z",
+    "note": "Close frame of one lobed simple leaf on its twig, sharp and filling the center of the picture."
+  },
+  {
+    "hash": "8548573312f743dc9d9ab6e6c16e13f2c2976fea2b836b6c9c11bb959479821b",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Alice Wondrak-Biel",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Arizona_sycamore,_Montezuma_Castle_National_Monument._(2ef21804-0d1a-41e7-b061-f0a31d57811b).jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:45:30Z",
+    "note": "Upper trunk shot from below, white with pale flaking patches and sharp across the frame. This is the upper trunk frame, not the dark base."
+  },
+  {
+    "hash": "935a169d88cc61ff670b05aee1d759adf98ec75344fb05a3d3d9def6275563a1",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Alice Wondrak-Biel",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Arizona_sycamore,_Montezuma_Castle_National_Monument._(db098677-84c1-493c-9c7e-931ff15d91f5).jpg",
+    "tags": [
+      "autumn",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:45:31Z",
+    "note": "Three upper trunks with clear cream and gray mottled papery flaking. Sharp, and the trunks fill much of the frame."
+  },
+  {
+    "hash": "58d87b4bbc27e9a96dfe7c7e65922987874ec8e40da2b35245f747b392e9e187",
+    "target": "PLWR2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "ALAN SCHMIERER",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:PATAGONIA_LAKE_STATE_PARK,_east_end_(11-18-10)_-04_arizona_sycamore_(5187961159).jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:46:05Z",
+    "note": "Spray of yellow and orange lobed simple leaves against a clear sky. Sharp, and the leaves fill most of the frame."
+  },
+  {
+    "hash": "c8eb78f584b44dff92686290f15f0b30175f87eb52212cb2037d41b90674c594",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Kretyen at Flickr",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_wrightii_bark.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:46:06Z",
+    "note": "Close frame of an upper trunk with green, gray, and cream mottled papery flaking. Sharp and filling most of the picture."
+  },
+  {
+    "hash": "926758552f1c68118cf74d404e5dc925f24cf65fccf239ca9075762b3616de03",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Kretyen at Flickr",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_wrightii.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:46:52Z",
+    "note": "Upper trunk and limbs in the frame, white with pale flaking patches and sharp. This is the upper trunk frame, not the dark base."
+  },
+  {
+    "hash": "87759aed30c4581539ce8475df806f291c9ba82da703a7c8cdb9b4fe2e6adea9",
+    "target": "PLWR2",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Zihao Wang, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/145473434#photo=249881651",
+    "tags": [
+      "winter",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:47:44Z",
+    "note": "Close frame of several round fruiting heads on their stalks against the sky. Sharp, and the balls fill a good part of the picture."
+  },
+  {
+    "hash": "9ddaf4cf0e71a619946645186bd09880b8b630f16185f8bf7a157487946536b2",
+    "target": "PLWR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Zihao Wang, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/145473434#photo=249881624",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:47:45Z",
+    "note": "Two yellow lobed simple leaves on a short twig, sharp and clear against a pale limb behind them."
+  },
+  {
+    "hash": "dbdd17493c1e7cd4a4c13d554352e4fef69bad873ebb03184835625cfb57e30f",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Zihao Wang, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/145473434#photo=249881605",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:47:46Z",
+    "note": "Close frame of an upper trunk with gray, cream, and tan mottled papery flaking filling the whole picture."
+  },
+  {
+    "hash": "00ce285b146b412a03daba1949cbbbcf2989bbc566bb45b499c916d46cbde78a",
+    "target": "PLWR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Zihao Wang, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/145473434#photo=249881587",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:47:46Z",
+    "note": "One yellow lobed simple leaf fills the left half of the frame, sharp, with the lobes and veins clear."
+  },
+  {
+    "hash": "b155e44ddcc3dc717f8cef5969029bfd2463f990c7da142381c40e0901d6a09b",
+    "target": "PLWR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Zihao Wang, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/145473434#photo=249881664",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:47:46Z",
+    "note": "One orange lobed simple leaf against the sky, sharp and filling most of the frame."
+  },
+  {
+    "hash": "59c8e97d079fb9345cedb9c2039c388202fa0b463694e10d5cc07fee337452bb",
+    "target": "PLWR2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) CK2AZ, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/218565656#photo=386775531",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:48:36Z",
+    "note": "Upper trunk curving across the frame against the sky, with clear cream and gray mottled papery flaking. Sharp and close enough for the texture to read."
+  },
+  {
+    "hash": "519d655d3805987a30a474db092154c5c1209df20bbe9dc1468f665eebae8260",
+    "target": "PLWR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Cole Wolf, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/170142783#photo=295058199",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:50:21Z",
+    "note": "Low shoot over a creek bed with many lobed simple leaves, sharp and filling most of the frame."
+  },
+  {
+    "hash": "fa389bc02567a3bdd128a57d16c0ba3b3d51e8c94b11ae41e5443a10633f9a7a",
+    "target": "PLWR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Rachel Stringham, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/243914874#photo=435007796",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T05:50:21Z",
+    "note": "Foliage seen from below, with large lobed simple leaves sharp and clear across most of the frame."
+  }
+]

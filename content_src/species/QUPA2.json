@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Midwestern and eastern United States bottomlands" },
+  "planted_states": ["CO"],
+  "elevation_ft": [0, 1150],
+  "height_ft": [80, 120],
+  "habitat": "Bottoms and poorly drained upland clay soils",
+  "ref": [
+    "Silvics of North America, Quercus palustris",
+    "Virginia Tech Dendrology fact sheet, Quercus palustris",
+    "FNA vol. 3, Quercus palustris"
+  ]
+}

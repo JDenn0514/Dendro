@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "South-central and southeastern United States" },
+  "elevation_ft": [0, 1640],
+  "height_ft": [100, 120],
+  "habitat": "Mesic slopes and bottoms, stream banks and poorly drained uplands",
+  "ref": [
+    "Silvics of North America, Quercus shumardii (height low)",
+    "Fire Effects Information System, Quercus shumardii (height high)",
+    "Virginia Tech Dendrology fact sheet, Quercus shumardii",
+    "FNA vol. 3, Quercus shumardii"
+  ]
+}

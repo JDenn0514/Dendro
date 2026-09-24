@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "shaggy", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Eastern North America along rivers and bottomlands" },
+  "planted_states": [],
+  "elevation_ft": [100, 1980],
+  "height_ft": [90, 120],
+  "habitat": "Wet bottomlands, riverbanks and lake edges",
+  "ref": [
+    "Silvics of North America, Acer saccharinum",
+    "Virginia Tech Dendrology fact sheet, Acer saccharinum",
+    "Fire Effects Information System, Acer saccharinum"
+  ]
+}

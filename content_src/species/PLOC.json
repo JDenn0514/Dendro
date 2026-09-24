@@ -1,0 +1,16 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "papery", "fruit": "ball" },
+  "genus_common": "sycamore",
+  "arrangement": "alternate",
+  "range": { "text": "Eastern United States bottomlands, Maine to Texas" },
+  "planted_states": ["CO"],
+  "elevation_ft": [0, 2500],
+  "height_ft": [60, 120],
+  "habitat": "Alluvial soils along streams and lakes, and in moist bottomlands",
+  "ref": [
+    "Silvics of North America, Platanus occidentalis",
+    "Virginia Tech Dendrology fact sheet, Platanus occidentalis",
+    "FNA vol. 3, Platanus occidentalis",
+    "Fire Effects Information System, Platanus occidentalis"
+  ]
+}

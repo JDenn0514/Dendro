@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Europe and western Asia, widely planted in North American cities" },
+  "planted_states": ["CO", "WY", "NE", "KS"],
+  "elevation_ft": [0, 4600],
+  "height_ft": [40, 98],
+  "habitat": "Street plantings, parks and yards, and mixed forest in its European range",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer platanoides",
+    "Fire Effects Information System, Acer platanoides",
+    "European Atlas of Forest Tree Species, Acer platanoides (elevation)"
+  ]
+}

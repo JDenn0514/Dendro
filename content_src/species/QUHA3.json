@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "common_extra": ["sand shinnery oak"],
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Sand dunes of the southern Great Plains and the Colorado Plateau" },
+  "elevation_ft": [2300, 7000],
+  "height_ft": [3, 7],
+  "habitat": "Deep shifting or stabilized sand dunes, where it forms low clonal thickets",
+  "ref": [
+    "FNA vol. 3, Quercus havardii",
+    "Fire Effects Information System, Quercus havardii"
+  ]
+}

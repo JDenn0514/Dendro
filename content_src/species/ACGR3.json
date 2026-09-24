@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Interior mountains from Idaho and Wyoming south to Texas" },
+  "elevation_ft": [4200, 9400],
+  "height_ft": [26, 50],
+  "habitat": "Canyon bottoms, ravines and mountain streamsides, also drier canyon slopes",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer grandidentatum",
+    "Fire Effects Information System, Acer grandidentatum"
+  ]
+}
