@@ -15108,7 +15108,7 @@ Spec section 12's second run comes first here, because only a bucket run runs
 the PLANTS checklist. Steps 10 and 11 read both.
 
 ```bash
-node pipeline/cli.ts run init simple_lobed_co --bucket simple_lobed --states CO,UT,NM,WY,NE,KS --genera Acer,Quercus,Platanus,Liquidambar,Liriodendron --include ACPL,QURU,ACSA2,PLAC,QUPA2 --channels leaf,bark,fruit
+node pipeline/cli.ts run init simple_lobed_co --bucket simple_lobed --states CO,UT,NM,WY,NE,KS --genera Acer,Quercus,Platanus --include ACPL,QURU,ACSA2,PLHI,QUPA2 --channels leaf,bark,fruit
 ```
 
 Expected: `run simple_lobed_co created on branch content/simple_lobed_co`.
