@@ -6053,5 +6053,2138 @@
     "checked_by": "owner",
     "checked_at": "2026-09-24",
     "note": "Owner decision 2026-09-24: approved as a crop of candidate 890c3fc1 (iNaturalist observation 39093193, photo 62028073). One Havard oak acorn in its cup on red sand; the credit says cropped."
+  },
+  {
+    "hash": "a6a316e0ca3fa2e45df7c459d88fc5b50aa4acc71dbfb949e0c766db2fd6d34d",
+    "target": "leaf/needles",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PIPO#image=%2FImageLibrary%2Flarge%2Fpipo_024_lhp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T16:17:15Z",
+    "note": "Close view of a branch tip. The long needles in bundles fill most of the frame."
+  },
+  {
+    "hash": "32934e2e300813c093d4311d3b9c87fe79273dfc2fc697fa8658cceba913274d",
+    "target": "leaf/needles",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PIPO#image=%2FImageLibrary%2Flarge%2Fpipo_026_lhp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T16:17:16Z",
+    "note": "Branch tip with cones. The long needles in bundles are sharp and fill the frame."
+  },
+  {
+    "hash": "95d77bb98ad6e701a60d5063f764a563d14298236cf3facad092a7adeea87b0e",
+    "target": "leaf/needles",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jim Morefield, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/28988090#photo=45216919",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T16:19:16Z",
+    "note": "Close view of a shoot against the sky. The long needles in bundles fill most of the frame and are sharp."
+  },
+  {
+    "hash": "5968b7e373c22f2ea093378af5a3e8dfee03e1fdfba7b3b730b8bad7d76e42b8",
+    "target": "leaf/needles",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jim Morefield, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/28988090#photo=45216918",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T16:19:16Z",
+    "note": "Branch held against the sky. The tufts of long needles at the shoot tips read clearly."
+  },
+  {
+    "hash": "c3d76e164ac5bf92adb12b8712265230f144e86da53f311083d9efdca03f44f9",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2013-06-28_12_56_43_Rocky_Mountain_Juniper_foliage_along_Elko_County_Route_748_(Charleston-Jarbidge_Road)_and_the_Jarbidge_River_north_of_Jarbidge,_Nevada.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T16:27:19Z",
+    "note": "A spray held near the camera. The tiny overlapping scales along the shoots read across the frame."
+  },
+  {
+    "hash": "77e5b3a993cb5ac0d34447bdedf056d79fdf8d6613ca507577e583de5c6df6e7",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2013-06-28_14_31_52_Closeup_of_Rocky_Mountain_Juniper_foliage_along_the_Jarbidge_River_in_far_southern_Owyhee_County,_Idaho.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T16:27:20Z",
+    "note": "Close view of a branch of sprays. The overlapping scales pressed to the shoots are plain and sharp."
+  },
+  {
+    "hash": "2b6b1f62341cbbe0ba139f4cf0f4e27aae73c46622e7a403b05120bd0c2d2256",
+    "target": "leaf/needles",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PIPU#image=%2FImageLibrary%2Flarge%2Fpipu_014_lhp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:39:10Z",
+    "note": "Sharp close view of a blue spruce shoot. The stiff single needles set all round the twig read plainly."
+  },
+  {
+    "hash": "c0293b644ea99b0eef873c7d665881b32a21775307443c41c8e528730899c1ef",
+    "target": "leaf/needles",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Hermann Luyken",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2012.09.14.092908_Poecile_gambeli_Mather_Point_Grand_Canyon_Arizona.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:39:30Z",
+    "note": "Sharp pinon branch tip against a canyon backdrop. The short paired needles crowded along the twigs read well. A small bird sits on one branch."
+  },
+  {
+    "hash": "74d712ff07382983356455b11555c4d7dae6ed1076dca52077daa69d7b923509",
+    "target": "leaf/needles",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Rennett Stowe from USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Lupin_flowers_and_Picea_pungens_branches_(4841784088).jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:42:02Z",
+    "note": "Blue spruce branches fill the upper half of the frame in sharp focus. The stiff single needles set all round the shoot read plainly. Lupine flowers grow below."
+  },
+  {
+    "hash": "e08833e9fef3276f2c16a108049cc49679bc73b3de84699478c327ea7a306741",
+    "target": "leaf/needles",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Jeffrey J. Witcosky, USDA Forest Service",
+    "license": "CC BY 3.0 us",
+    "origin": "https://commons.wikimedia.org/wiki/File:Picea_pungens_USDA4.jpg",
+    "tags": [
+      "close_up",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:43:36Z",
+    "note": "A sharp close view of a blue spruce shoot. The stiff blue needles set all round the twig fill the frame. Small brown pollen cones sit among them."
+  },
+  {
+    "hash": "da9dfb5115c4f4448204c15572881940adf594cb5f8cee09a84d8eadde4ff902",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2013-06-27_08_53_56_Closeup_of_Utah_Juniper_foliage_on_the_slopes_of_Spruce_Mountain,_Nevada.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:46:11Z",
+    "note": "A sharp close view of Utah juniper foliage filling the frame. The tiny overlapping scales pressed flat along the twigs read plainly."
+  },
+  {
+    "hash": "c3bc8cc4e16bc8dfae66c6338cc2828dcc05ab3329b54cf1080a64924ede64e6",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2013-09-23_14_43_17_Closeup_of_Juniperus_osteosperma_along_Capitol_Reef_Scenic_Drive_5.1_miles_from_Utah_State_Route_24.JPG",
+    "tags": [
+      "close_up",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:48:00Z",
+    "note": "A sharp close view of Utah juniper foliage filling the frame. The tiny overlapping scales along each twig read plainly. Pale berry like cones are scattered through the spray."
+  },
+  {
+    "hash": "2a842f253c3773e35f7b4ba8ee1a212d17faa876255ab8aee67a26adfd35ed3b",
+    "target": "leaf/simple_entire",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA NRCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/CASP8#image=%2FImageLibrary%2Flarge%2Fcasp8_003_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:50:18Z",
+    "note": "One catalpa leaf laid flat on bark and filling the frame. The single blade and its smooth unbroken edge read plainly."
+  },
+  {
+    "hash": "0232e9ce7a456477fa03d814af6b172c4f02adc70930a8bc6ea13c307f9a1047",
+    "target": "leaf/simple_entire",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ELAN#image=%2FImageLibrary%2Flarge%2Felan_007_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:50:19Z",
+    "note": "A Russian olive shoot fills the frame. The narrow silver blades each sit on one short stalk and the smooth unbroken edges read. Small green fruits sit along the twig."
+  },
+  {
+    "hash": "c06760e469b193be9c64e35ba21cb163f104fc4cb5b5c0b9349e88ece034b761",
+    "target": "leaf/simple_entire",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ELAN#image=%2FImageLibrary%2Flarge%2Felan_009_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:50:36Z",
+    "note": "A Russian olive branch fills the frame. Each narrow silver blade sits alone on its stalk and the smooth unbroken edge reads. Green fruits hang among the leaves."
+  },
+  {
+    "hash": "b46f93a16444c64997e79cead9223967198f3df163ab8b2c380c45dfacf025d7",
+    "target": "leaf/simple_entire",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2015.09.05_11.29.02_DSC00268_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "summer",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:53:33Z",
+    "note": "A young catalpa shoot in the centre of the frame carries large green blades. Each blade sits alone on its stalk and the smooth unbroken edge reads. The background is a reed bank and a trunk."
+  },
+  {
+    "hash": "53bb80639d4d7768584ede8d07cb3ac10e7870b4220f0858501293a974c90f79",
+    "target": "leaf/simple_entire",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Michał J",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Atlas_roslin_pl_Oliwnik_w%C4%85skolistny_7689_8414.jpg",
+    "tags": [
+      "close_up",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:54:22Z",
+    "note": "Russian olive foliage fills the whole frame. Each narrow blade sits alone on its stalk and the smooth unbroken edge reads. One dark fruit hangs near the centre."
+  },
+  {
+    "hash": "fc987b1c23aae0c53405bc9f9197a0e799647e8172ba4829622a9f0687cd0255",
+    "target": "leaf/simple_entire",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Joanna Boisse",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Atlas_roslin_pl_Oliwnik_w%C4%85skolistny_7805_8414.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:54:23Z",
+    "note": "A sharp close view of a Russian olive shoot against blue sky. The narrow silver blades and their smooth unbroken edges fill the frame. A few pale fruits sit below."
+  },
+  {
+    "hash": "c9e2ee5a7541d61d138c66f6fe6c9810f20d4d140f3387e9390f997025dc200f",
+    "target": "leaf/simple_entire",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Joanna Boisse",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Atlas_roslin_pl_Oliwnik_w%C4%85skolistny_7816_8414.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:55:13Z",
+    "note": "A sharp close view of Russian olive foliage. Two long blades cross the centre and their smooth unbroken edges read plainly. Pale fruits hang behind them."
+  },
+  {
+    "hash": "7b0603b9af40678d7665900ab9931cb219b72309aae0689504c5637ff3a8fdc5",
+    "target": "leaf/simple_entire",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Douglas Goldman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:E_angust1.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:56:00Z",
+    "note": "A sharp studio view of a Russian olive shoot on a black background. Each narrow silver blade sits alone on its stalk and the smooth unbroken edge reads plainly. Two pale fruits sit on the twig."
+  },
+  {
+    "hash": "d19072b5d2b1c19a01e7ce09ce6a4843936930a3e010cb7776c9c16034db9fa9",
+    "target": "leaf/simple_toothed",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA SCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ULAM#image=%2FImageLibrary%2Flarge%2Fulam_002_lvp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:59:26Z",
+    "note": "One elm leaf laid on bark. The doubly toothed edge is sharp and fills much of the frame."
+  },
+  {
+    "hash": "7cda96f39f6f3cb89e98b08fe6c26919a57244c15a6db966a65e15a986f9836d",
+    "target": "leaf/simple_toothed",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Sheri Hagwood",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PRVI#image=%2FImageLibrary%2Flarge%2Fprvi_010_lhp.jpg",
+    "tags": [
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:59:27Z",
+    "note": "Chokecherry foliage with flower clusters. Several simple leaves show their fine toothed edge clearly."
+  },
+  {
+    "hash": "77dcd18ebdd170b65fbc31199ac7b5412c734231c7431403441078158cff0846",
+    "target": "leaf/simple_toothed",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ULPU#image=%2FImageLibrary%2Flarge%2Fulpu_002_lhp.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:59:42Z",
+    "note": "Close view of three Siberian elm leaves on a twig. The toothed edge reads plainly."
+  },
+  {
+    "hash": "3c35ad65a5e22931206ec01643218d6c1b94fedc332ba241c4f89fd30cef47ae",
+    "target": "leaf/simple_toothed",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ULAM#image=%2FImageLibrary%2Flarge%2Fulam_009_lhp.jpg",
+    "tags": [
+      "close_up",
+      "underside"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T17:59:44Z",
+    "note": "Close view of one elm leaf underside. The doubly toothed edge is sharp."
+  },
+  {
+    "hash": "de008a2c5684e40722679d496a3f112ca402a27071727aad9747081fbec18b3b",
+    "target": "leaf/simple_toothed",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Dan Keck from Ohio",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Chokecherry_(27472759547).jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:06:15Z",
+    "note": "Close view of a leafy shoot. The central simple leaf shows a fine toothed edge across its whole margin."
+  },
+  {
+    "hash": "13e6f018759b3de2306f7e79fdcdea478f2335ced4a55298e1c84aaaf1c30831",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA SCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA2#image=%2FImageLibrary%2Flarge%2Fquma2_002_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:07:33Z",
+    "note": "One bur oak leaf laid on bark. The deep sinuses and rounded lobes read plainly."
+  },
+  {
+    "hash": "7df85d5caef33c978fb11bba54e0092fa30dadc13bbd8603a5bb78c431ff1a67",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA2#image=%2FImageLibrary%2Flarge%2Fquma2_010_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:07:52Z",
+    "note": "Close view of bur oak foliage around one acorn. Several leaves show the deep sinuses and rounded lobes."
+  },
+  {
+    "hash": "0b4687155cb9b8b151bd85629b959a03f14db0f1a025954035bb1b2911409f92",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.04.18_12.12.09_DSC03438_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "close_up",
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:08:55Z",
+    "note": "Sharp close view of a Gambel oak shoot. The new leaves show deep sinuses and clear lobes."
+  },
+  {
+    "hash": "cdeecb0a12dc17b0d40363b210b99634dff324c2989e7b25f1390b24e65e269a",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.05.28_10.00.55_DSC04436_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:09:14Z",
+    "note": "Sharp close view of a Gambel oak branch. Several leaves show the lobes and sinuses across the whole blade."
+  },
+  {
+    "hash": "90678b60a94dc094669b55cdf1b0fdce11670ec5eb2402da3a0a917104840d65",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ninjatacoshell",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Autumn_Gambel_Oak_Leaf.jpg",
+    "tags": [
+      "close_up",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:10:40Z",
+    "note": "One dried brown Gambel oak leaf on a plain white ground. The rounded lobes and deep sinuses read plainly."
+  },
+  {
+    "hash": "678934aaf368c16875db14af529ae02d7845d899b6f9ec378fcd29edc23b719f",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "LBM1948",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Estados_Unidos,_%C3%A1rboles_1997_07.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:11:35Z",
+    "note": "Sharp close view of dense Gambel oak foliage. Many leaves show the lobes and deep sinuses."
+  },
+  {
+    "hash": "c0128703570a4dafe3ce7867ed55997ca6544ce29343a9dfb4b8b80281f00830",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Alice Wondrak-Biel",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gambel_oak_(47938760-7dab-434e-8541-37637f95d631).jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:12:53Z",
+    "note": "Autumn Gambel oak foliage in sunlight. Several orange leaves show the rounded lobes and deep sinuses."
+  },
+  {
+    "hash": "a93a7147cca00a1f70be324344388a3450f79bf67d76f267ed0b8cece0305031",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Photo by Cory Maylett",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gambel_oak_leaves.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:12:55Z",
+    "note": "Sharp close view of Gambel oak leaves with green acorns. The lobes and sinuses read across the whole blade."
+  },
+  {
+    "hash": "960f365b14ab85646fb661f53a66ba8c971671de06087856037e4d5ee1704dfb",
+    "target": "leaf/simple_lobed",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "SonoranDesertNPS from Tucson, Arizona",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:GambelOak_(6541147917).jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:13:11Z",
+    "note": "Autumn Gambel oak foliage in sunlight. Several leaves show the rounded lobes and deep sinuses."
+  },
+  {
+    "hash": "3358ec3b0696c6b7e96031a11525db6f12a92f82336ade99fa1852c19a536895",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA SCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/FRPE#image=%2FImageLibrary%2Flarge%2Ffrpe_002_lvp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:15:32Z",
+    "note": "One whole ash leaf laid on bark. The two rows of leaflets along the central stalk read plainly."
+  },
+  {
+    "hash": "493b4236f81b67b8d982108131c50df055d1087883f6b7448f07694043febbc4",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA NRCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/JUNI#image=%2FImageLibrary%2Flarge%2Fjuni_003_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:15:34Z",
+    "note": "Close view of a walnut leaf. The two rows of leaflets along one central stalk read plainly."
+  },
+  {
+    "hash": "64d3ee6f7b5a57fba9a8fb9bd9f2d74776c23fb774a1489226c74d5f2b4eeeea",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/RHGL#image=%2FImageLibrary%2Flarge%2Frhgl_004_lvp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:15:51Z",
+    "note": "Close view of sumac foliage. Several leaves show the two rows of leaflets along a red central stalk."
+  },
+  {
+    "hash": "405b2066f85c0546040a67d7cc99a8d4ff0ab1ed93c8b4410b77ec28013b28fc",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/FRPE#image=%2FImageLibrary%2Flarge%2Ffrpe_004_lhp.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:15:51Z",
+    "note": "Ash leaf held against the sky. The two rows of leaflets on one stalk read plainly."
+  },
+  {
+    "hash": "7272146d5565f311275fdf91c4dd4ccaee67b225dc97fc99fc335bfa6d030292",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/JUNI#image=%2FImageLibrary%2Flarge%2Fjuni_007_lhp.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:17:22Z",
+    "note": "Walnut foliage filling the frame around two green fruit. Several leaves show the two rows of leaflets on one stalk."
+  },
+  {
+    "hash": "3802f4d8a761df813f821730e068369f15a69ff338f80b2b838882a1a787715f",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Velocicaptor at Wikipedia",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:NIEdot297115.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:20:59Z",
+    "note": "Sumac foliage filling the frame around a flower cluster. Several leaves show the two rows of leaflets on one stalk."
+  },
+  {
+    "hash": "a23a58eb0547222e83f90375627f866648a922a4d93879f439fa9ccf0ba5c8df",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ryan Hodnett",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Black_Walnut_(Juglans_nigra)_-_Guelph,_Ontario_2020-07-29.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:21:32Z",
+    "note": "Sharp view of walnut foliage with two green fruit. The two rows of leaflets along one stalk read plainly."
+  },
+  {
+    "hash": "b59e43712a25231093491c33362107167b660cf9a05dc074c0d25443c2ff1c2d",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Photo by David J. Stang",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Rhus_glabra_11zz.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:22:18Z",
+    "note": "Sumac foliage filling the frame. Several whole leaves show the two rows of leaflets along one stalk."
+  },
+  {
+    "hash": "7381fd146117d31f7b0cfbe91e5fe8e3f3101bee2db922b1bb9537d941c6172a",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Black_Walnut_078.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:22:19Z",
+    "note": "Walnut foliage filling the frame. The two rows of leaflets along each stalk read plainly."
+  },
+  {
+    "hash": "fd30d445a43069d5b1bed1fd48d530232bd11e975e7e1aa721b206023c16c2aa",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Superior National Forest",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Rhus_glabra_2_(5097502673).jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:22:19Z",
+    "note": "Sumac shoot with a flower cluster at the left and a whole leaf across the right. The two rows of leaflets on the red stalk read plainly."
+  },
+  {
+    "hash": "66af2d3356ec99695232d98ac5066ac01af5225343f87006c8d58283c7114b4f",
+    "target": "leaf/pinnately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Eric Hunt",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Rhus_glabra_AR.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:22:59Z",
+    "note": "Sumac shoot with a flower cluster in the centre and whole leaves at each side. The two rows of leaflets on the pink stalk read plainly."
+  },
+  {
+    "hash": "28910eafa3c083b1457b162d72c5b499cdc3e881cb6eb183947042704d757f08",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/AEGL#image=%2FImageLibrary%2Flarge%2Faegl_002_lhp.jpg",
+    "tags": [
+      "summer",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:25:28Z",
+    "note": "Buckeye foliage from below; several leaves show leaflets spreading from one point."
+  },
+  {
+    "hash": "24532352aba741da357cf9a42b741e80b6cb130b7fe75659ed7bed9c62c229be",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/AEGL#image=%2FImageLibrary%2Flarge%2Faegl_005_lhp.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:26:04Z",
+    "note": "Sharp close view of whole leaves; the leaflets spread from one point."
+  },
+  {
+    "hash": "14fd0d3eee011cce4e52c2554aef87cb8f7e13170861a62e26940bc5433ca98e",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "kmortimerjones",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_hippocastanum_654307707.jpg",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:26:57Z",
+    "note": "Sharp foliage fills the frame and one leaf shows its leaflets spreading from a single point."
+  },
+  {
+    "hash": "e0cfc2120fc580cf03a1a66bfcf2b55c2bc4a869f3406376d5d894014e526c7d",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Brian White, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/46298422#photo=73427333",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:27:38Z",
+    "note": "Foliage at close range; many leaves show leaflets spreading from one point."
+  },
+  {
+    "hash": "ea4551ca70a6c535069d2a7f91c13ab0d1bcfd8640630a8cd65986ba4e87bfda",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "James St. John",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_(Ohio_buckeye)_(Roaring_Run,_Warren_County,_Ohio,_USA)_1_(41559929720).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:28:23Z",
+    "note": "Several whole leaves seen from above; the leaflets spread from one point."
+  },
+  {
+    "hash": "8a079c43112529ed89647e17d357983c0830e1bb8a99aaa05c0e82d7de68bf24",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "James St. John",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_(Ohio_buckeye)_(Roaring_Run,_Warren_County,_Ohio,_USA)_2_(42464759085).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:28:24Z",
+    "note": "Whole leaves from above; the point where the leaflets join is plain."
+  },
+  {
+    "hash": "76b61b37c77b709c8bf4740d0e38e1f80eefbee76d2512f779838b5ae7da47b9",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "James St. John",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_(Ohio_buckeye)_(Roaring_Run,_Warren_County,_Ohio,_USA)_3_(42652175044).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:28:25Z",
+    "note": "Whole leaves from above; leaflets spread from one point on a long stalk."
+  },
+  {
+    "hash": "77077ad160dfd10bac0375a430d8d739314b867c7770b5d2977570b6ed9507c8",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Brian White, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/46298422#photo=73427444",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:28:36Z",
+    "note": "Large leaves fill the frame and the leaflets spread from one point."
+  },
+  {
+    "hash": "f3d8d7d866ccf97712c29b83de11e6b2afed8326c2b0ceb49b1ff0b7dc29addf",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/24901752#photo=38519668",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:29:12Z",
+    "note": "Branch with large leaves whose leaflets spread from one point."
+  },
+  {
+    "hash": "8a6bab2d0fa54879b69fcb94c6fb9c83ff678acf5f3301adb09f671b7774876c",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/24901752#photo=38519664",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:29:13Z",
+    "note": "Flower spike framed by large leaves whose leaflets spread from one point."
+  },
+  {
+    "hash": "c6d57606799227c9723d8e50ff2a323a271ddfa25940a46811031ca766222307",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/24901752#photo=38519690",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:29:55Z",
+    "note": "Flower spike with large leaves below it whose leaflets spread from one point."
+  },
+  {
+    "hash": "9b7b63169304be6565d6dc4e6586c3c845cc5ee7e5b2d9b002f233181b156453",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/161605943#photo=279347951",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:30:34Z",
+    "note": "Branch in flower with many large leaves whose leaflets spread from one point."
+  },
+  {
+    "hash": "606b031abdf4279074b41f35b3454cb4163c73b2b00e20fe5e91f632992cfb72",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Dandarmkd",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_-_%D0%91%D0%BE%D1%82%D0%B0%D0%BD%D0%B8%D1%87%D0%BA%D0%B0_%D0%B3%D1%80%D0%B0%D0%B4%D0%B8%D0%BD%D0%B0_%D0%A1%D0%BA%D0%BE%D0%BF%D1%98%D0%B5_03.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:30:35Z",
+    "note": "Branch tip with whole leaves; the leaflets spread from one point."
+  },
+  {
+    "hash": "4dfe9bbc304f5d9565f395e058048f88c31b881acc8582a1f27cb411e0e2fd6f",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) zebedeugalinha, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/335851189#photo=610206918",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:30:35Z",
+    "note": "Young shoot with whole leaves; the leaflets spread from one point."
+  },
+  {
+    "hash": "fce6013fb8487c82c6361395bde6f711076a6e42aedb57aac8fb71d1f02fb961",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) zebedeugalinha, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/335851189#photo=610207731",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:30:57Z",
+    "note": "Young shoot; one leaf shows its leaflets spreading from a single point."
+  },
+  {
+    "hash": "33488ded23a5b20d25925fcfcf7ec47102b722b5276ef3afc65b8b510595d10f",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) zebedeugalinha, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/335851189#photo=610207735",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:31:43Z",
+    "note": "Young shoot; one whole leaf shows its leaflets spreading from a single point."
+  },
+  {
+    "hash": "bd0de0dd140e3c852d1c1c3e6f4a96fdc58a510b7bfcf600817b027bd679cc8d",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) zebedeugalinha, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/335851189#photo=610207866",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:31:44Z",
+    "note": "Opening shoot; the upper leaf shows its leaflets spreading from one point."
+  },
+  {
+    "hash": "7f5bed96eebaa823842d87780e6277affb559c2e545038303278ec2586558709",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) zebedeugalinha, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/335851189#photo=610207872",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:32:17Z",
+    "note": "Young shoot; the upper leaf shows its leaflets spreading from one point."
+  },
+  {
+    "hash": "cbc482b32b967996b357c12ab9f61489e1759c56fa351e9b35af50db90797103",
+    "target": "leaf/palmately_compound",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Alexis Vink",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_sapling.jpg",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:33:47Z",
+    "note": "Sapling from above; several leaves show their leaflets spreading from one point."
+  },
+  {
+    "hash": "101f7d584cbc2eb08881bdd32e10d1ee2ce94b3dc4fd693c3f6ed18ee5fa0b35",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "NPS Photo",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:File-Yucca_glauca_-_native;-Alternate_names-_Yucca,_beargrass,_Spanish_bayonet,_small_soapweed;-Blooms_June_-_July;-This_plant_is_(98f8d235-155d-4519-3e3b-6c58ae1195c5).jpg",
+    "tags": [
+      "summer",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:36:37Z",
+    "note": "Yucca in flower with a clear rosette of long narrow strap blades at the base."
+  },
+  {
+    "hash": "01a3197663dd9977907217dfd7a74b4c332507d98b9fd5307ac7d1c53f6ba630",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.04.24_08.41.23_DSC03721_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:36:39Z",
+    "note": "One yucca fills the middle of the frame and its long stiff strap blades read clearly."
+  },
+  {
+    "hash": "5d90301fe7e2751e1cf9310de7ba356eaf7929fe10da1a0df8aecf39bea7cff3",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Raffi Kojian",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gardenology.org-IMG_2356_hunt0903.jpg",
+    "tags": [
+      "summer",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:37:24Z",
+    "note": "A yucca fills the frame; the long narrow strap blades spread from the centre."
+  },
+  {
+    "hash": "a4266d0dc6333c83ebb23c9a0f8250246be92069b69891a8f3387e3cfba371ac",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.04.24_08.41.38_DSC03722_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:37:25Z",
+    "note": "Stiff blue green strap blades fill the frame around the flower cluster."
+  },
+  {
+    "hash": "7f93ae113e4419036fdf1101599461db1f5698bbc69632444125c634faeb8076",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.04.24_08.42.11_DSC03724_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:37:26Z",
+    "note": "Long stiff strap blades fill the frame around the flower cluster."
+  },
+  {
+    "hash": "343d362abdb2a1ac2ba8bc00559cc730f205384217cbf798b12c078e62bee4dd",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.04.24_08.42.20_DSC03725_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:38:09Z",
+    "note": "Long stiff strap blades fill the frame and their form reads clearly."
+  },
+  {
+    "hash": "297524f84566d032aec32600632094b627344e2db3b1bd620eb59815604c87cb",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Jim Morefield from Nevada, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:California_fan_palm,_Washingtonia_filifera_(15881831320).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:38:09Z",
+    "note": "Close view of pleated fan blades against the sky. The plant is a palm and is out of region (California)."
+  },
+  {
+    "hash": "ea9a308d29f482414c45b48a5880dcd85dcbc7a535978447ea5d6b05645bc38c",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "JeffersonClark",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:YG013.jpg",
+    "tags": [
+      "summer",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:38:10Z",
+    "note": "Garden yucca in flower; the long narrow strap blades fill a good part of the frame."
+  },
+  {
+    "hash": "a72dc4a584f1a3e859c4519256aa030a31b48a17d3a1bf502292e829a18242eb",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.05.29_07.02.19_DSC04601_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:38:57Z",
+    "note": "One yucca in flower from above; the long stiff strap blades fill the middle of the frame."
+  },
+  {
+    "hash": "3e8f9e020f07c7b4e5c32e190f622d5a0f068645292b602208ac025f21fe6ac9",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Yucca_(Yucca_angustigolia)_2016-07-12_446.jpg",
+    "tags": [
+      "summer",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:41:08Z",
+    "note": "One yucca fills the lower frame; the long narrow strap blades are sharp and clear."
+  },
+  {
+    "hash": "025938cdbe6cb713eebde1a1238cc670fadabe19c6406cf73a3e3776bfdd5882",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2017.05.04_17.24.11_IMG_8908_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:41:09Z",
+    "note": "Yucca in flower on a sand slope; the broad strap blades fill the middle of the frame."
+  },
+  {
+    "hash": "f53add3936ffc8d4afb5f957616f4ebaa823cde66b8db6ecc27ce56888d84658",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2017.05.05_12.24.51_IMG_0555_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:41:51Z",
+    "note": "One yucca in bud on a rock ledge; the stiff strap blades are sharp and clear."
+  },
+  {
+    "hash": "ba23f4f16b92ac5d925e57bfccd8c7a45cdf146dbd2ecf93063e48de20d52fd8",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Matt Lavin",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Yucca_Glauca.jpg",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:41:52Z",
+    "note": "Flower spike with long narrow strap blades sharp across the lower frame."
+  },
+  {
+    "hash": "214909efc99119984a1f6088d6953b69bc520f82c91ffb8a54d406fcf908edbd",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Dietmar Rabich",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Grand_Canyon_(Arizona,_USA),_South_Rim_nahe_Tusayan_--_2012_--_5857.jpg",
+    "tags": [
+      "summer",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:41:53Z",
+    "note": "One yucca on a canyon rim; the stiff strap blades fill the middle of the frame."
+  },
+  {
+    "hash": "1c82cbf272b6b1922241f57c8cb5fc1cfdaddb9fb0de29014aa44bccf1415e31",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "brewbooks from near Seattle, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Narrow_leaf_banana_yucca_(Yucca_baccata)_-_Flickr_-_brewbooks_(1).jpg",
+    "tags": [
+      "winter",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:42:24Z",
+    "note": "One yucca fills the frame; the long stiff strap blades are sharp and clear."
+  },
+  {
+    "hash": "491992e41197e9ad845acfdbe43f9f4abbcdfe82e7f879b319623ec63e67658b",
+    "target": "leaf/fan_strap",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Matt Lavin from Bozeman, Montana, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Yucca_glauca_(5241688445).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:42:25Z",
+    "note": "Rosette seen from above; the long narrow strap blades spread from one centre."
+  },
+  {
+    "hash": "f0a0ddeb929e2478de32877fa9f0325ce608f58c8581fc47bffe457866e0a62f",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/POTR5#image=%2FImageLibrary%2Flarge%2Fpotr5_008_lhp.jpg",
+    "tags": [
+      "winter",
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:45:10Z",
+    "note": "Pale aspen trunk fills the frame; the surface is unbroken with dark scars and no ridges."
+  },
+  {
+    "hash": "ba8b99c436715676e715084da15129b747d25f20ecba1c507def26d2a64faeaf",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Tim Ross",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:07-03AmericanBeechFL.jpg",
+    "tags": [
+      "summer",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:46:34Z",
+    "note": "View up a beech trunk; the grey surface is unbroken with no ridges. Beech is out of region."
+  },
+  {
+    "hash": "cf406bcc6d48396c5b085cd8093236cd3a81f71a4345b4cd29f3bd2b0a11c497",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2014-05-12_08_56_48_Large_American_Beech_adjacent_to_the_Blue_Trail_within_Drexel_Woods_in_Lawrence_Township,_New_Jersey.JPG",
+    "tags": [
+      "spring",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:48:40Z",
+    "note": "Large beech trunk fills the middle of the frame; the grey surface is unbroken. Beech is out of region."
+  },
+  {
+    "hash": "96db33bd5cf4b9d9f3de08dce17b3164ea9e41bc2afd288cc99309d8d31280ff",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/QUMA2#image=%2FImageLibrary%2Flarge%2Fquma2_012_lvp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:53:40Z",
+    "note": "Mature bur oak trunk fills the frame. Vertical ridges and deep grooves read clearly."
+  },
+  {
+    "hash": "085144c30fb1ee386bdf3e63739ac22ba7487f04696411385586815a2c7bbde7",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PODE3#image=%2FImageLibrary%2Flarge%2Fpode3_013_lvp.jpg",
+    "tags": [
+      "mature",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:54:13Z",
+    "note": "Mature cottonwood trunk seen from the base upward. Deep vertical furrows and thick ridges fill the frame."
+  },
+  {
+    "hash": "eac625db916dc610c88b612ca15aca35f2a48884a17ae4940d065d9d8e1a096e",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "cogdogblog",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2009-365-88_Growing_Old_in_that_Red_Dirt_(3396480723).jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T18:59:57Z",
+    "note": "Close-up of an alligator juniper trunk base. The square blocky plates read clearly on the left trunk."
+  },
+  {
+    "hash": "06ac26ddde3e4e58cca1bfd0a71eb49fbd965fcf5fc61ba21e936e6fc49595c9",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "cogdogblog",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2013-365-179_Armored_Skin_(9164687004).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:01:12Z",
+    "note": "Close-up of an alligator juniper limb. The bark breaks into square plates that fill the frame."
+  },
+  {
+    "hash": "a1682624f04b1f5923229639091210f77dbb3eff76e455c077c3be3089ef06b7",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Benjamin Cody",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Alligator_Juniper_Trunks.JPG",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:03:10Z",
+    "note": "Alligator juniper trunks fill the frame. The square checkered plates read clearly."
+  },
+  {
+    "hash": "7ead2bc5af2f62c96bb8f72e5edab8db35c19a0dc6c6bba1496faada7b7abf40",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/BEPA#image=%2FImageLibrary%2Flarge%2Fbepa_005_lhp.jpg",
+    "tags": [
+      "winter",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:16:54Z",
+    "note": "Close view of a paper birch trunk. White sheets peel away and show a paler tan layer beneath."
+  },
+  {
+    "hash": "9551249e49989ca5fdb13e164464ef3255e05e51dd7fd36392100e5cd7125306",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Robert H. Mohlenbrock. USDA SCS",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/CEOC#image=%2FImageLibrary%2Flarge%2Fceoc_003_lvp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:24:04Z",
+    "note": "Close view of a hackberry trunk. Raised corky warts and ridges stand out over the grey green surface."
+  },
+  {
+    "hash": "10aae145fc2ce3c7317f9548b6751e2386399a4ec799311a5e473eb8b667c29f",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/CEOC#image=%2FImageLibrary%2Flarge%2Fceoc_009_lhp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:25:51Z",
+    "note": "Close view of a hackberry trunk that fills the frame. Corky warts and short ridges stand out clearly."
+  },
+  {
+    "hash": "36aaccb3352e571680ad23e46351da11776ae335eba674cff170fc3fa1d23b51",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Dan Keck from Ohio",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Chokecherry_(40535182780).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:31:03Z",
+    "note": "Close view of a chokecherry stem that fills the frame. Pale raised lenticels dot the smooth grey green surface."
+  },
+  {
+    "hash": "8b081c511e811773f2c9d0a167766d8fe36cd8936b3e30921b934d2ccf0e2bac",
+    "target": "fruit/samara",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/ACNE2#image=%2FImageLibrary%2Flarge%2Facne2_008_lvp.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:32:21Z",
+    "note": "Hanging clusters of paired boxelder samaras against blue sky. The papery wing on each seed reads clearly."
+  },
+  {
+    "hash": "aded5c9714056484f3aa4648d112f9259e2141c732bf7d42b99cfc83a91d5660",
+    "target": "fruit/samara",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/FRPE#image=%2FImageLibrary%2Flarge%2Ffrpe_006_lhp.jpg",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:33:03Z",
+    "note": "Clusters of dry green ash samaras hanging on bare twigs against blue sky. The narrow papery wing reads clearly."
+  },
+  {
+    "hash": "2b0c4b2e9c942dd937ad685bcea44a815506d7c1c722c2a1cbbf80f75b6feb74",
+    "target": "fruit/samara",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Thayne Tuason",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_1.jpg",
+    "tags": [
+      "spring",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:36:22Z",
+    "note": "Silver maple stems carrying large red paired samaras in sunlight. Each papery wing reads clearly."
+  },
+  {
+    "hash": "a93a7147cca00a1f70be324344388a3450f79bf67d76f267ed0b8cece0305031",
+    "target": "fruit/acorn",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Photo by Cory Maylett",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gambel_oak_leaves.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:45:49Z",
+    "note": "Several green acorns seated in scaly cups on the twig, sharp and well lit."
+  },
+  {
+    "hash": "006c71478ba5b8071960c87cdf62f8e595252962cae02451a3284c749500b413",
+    "target": "fruit/nut",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Judy Gallagher",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:American_Hazelnut_-_Corylus_americana,_Watkins_Regional_Park,_Upper_Marlboro,_Maryland_(38562356145).jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:49:29Z",
+    "note": "One ripe hazelnut sitting in its opened husk on wood, sharp and filling the frame."
+  },
+  {
+    "hash": "c9803195c1674a871d712d73ce3c7feaf851df6059dd87e343ee155b98412555",
+    "target": "fruit/nut",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Superior National Forest",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Corylus_americana_1-eheep_(5098096972).jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:49:31Z",
+    "note": "A cluster of hazelnuts in their green ragged husks on the shrub, sharp and close."
+  },
+  {
+    "hash": "7272146d5565f311275fdf91c4dd4ccaee67b225dc97fc99fc335bfa6d030292",
+    "target": "fruit/nut",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/JUNI#image=%2FImageLibrary%2Flarge%2Fjuni_007_lhp.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:50:04Z",
+    "note": "Two green walnut husks hanging on the tree among the leaves, plainly the fruit."
+  },
+  {
+    "hash": "b6e742791423727de6d12d2932206862559d2e869064bdab2493c9ad8b63ea65",
+    "target": "fruit/nut",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Superior National Forest",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Corylus_americana_2-eheep_(5098096734).jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:50:45Z",
+    "note": "A cluster of hazelnuts wrapped in their ragged green husks on the shrub, sharp and close."
+  },
+  {
+    "hash": "870e82c3ca31173608a93a3fb652e357b5b421839ecf1c293fe930f308ec0c46",
+    "target": "fruit/nut",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Superior National Forest",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Corylus_americana_3-eheep_(5097498779).jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:53:18Z",
+    "note": "A cluster of hazelnuts in their green husks on the shrub, sharp and well lit."
+  },
+  {
+    "hash": "57bc789e309490ea254b6a2ba7c0783b92065c4efad9008d2a8389b7eae0639a",
+    "target": "fruit/nut",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Rob Routledge, Sault College, Bugwood.org",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Corylus_americana_5474404.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:54:39Z",
+    "note": "One hazelnut wrapped in its ragged green husk on the twig, sharp and close."
+  },
+  {
+    "hash": "443481ac9a9a8970ac361d2f66df37edb2d0e0b00341e97fc15cfafe64c03797",
+    "target": "fruit/nut",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Steven Katovich, USDA Forest Service, Bugwood.org",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Corylus_americana_5497076.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:54:40Z",
+    "note": "A cluster of green hazelnuts in their husks on the twig, sharp and close."
+  },
+  {
+    "hash": "45d17115da8bdc3fc19b90e06a4e985c804d3e239393629630ef57301f4ef9a7",
+    "target": "fruit/pod",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/GLTR#image=%2FImageLibrary%2Flarge%2Fgltr_006_lhp.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:57:14Z",
+    "note": "Many long twisted pods hanging on the tree, each one plainly a flat pod."
+  },
+  {
+    "hash": "73ffce80c367c10472e74736fda0b9aa7f94a7de7c36c9fcd365e4f9dd07759c",
+    "target": "fruit/pod",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Homoarborea",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gymnocladus_dioica_vruchten.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:58:37Z",
+    "note": "Two broad flat pods hanging on the tree, sharp and filling much of the frame."
+  },
+  {
+    "hash": "6b2bb797dc6334dbabc268143f8fe57597837884b313a03e102a382936a60f04",
+    "target": "fruit/pod",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Leonora (Ellie) Enking from East Preston, United Kingdom",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gymnocladus_dioicus_(Kentucky_Coffee_Tree)_(28773254876).jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T19:58:39Z",
+    "note": "Two green flat pods hanging on a leafy branch, sharp and clear against the foliage."
+  },
+  {
+    "hash": "fe72a281b729f0f3454760a94c0dc2c714e6d038f9ded7e2024e8b7e99d07285",
+    "target": "fruit/pod",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "MONGO",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gymnocladus_dioicus_seed_pods_and_leaves2.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:00:27Z",
+    "note": "Three broad flat green pods hanging on the tree, sharp and filling much of the frame."
+  },
+  {
+    "hash": "93e3a98efe794446ef409b17d8722d84cb6578dbc5c8b2c43f660658ea536f49",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Ryan Hodnett",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:American_Plum_(Prunus_americana)_-_Guelph,_Ontario_2017-06-21_(02).jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:06:30Z",
+    "note": "A sharp close view of many green round plums on a branch. The fleshy fruit fills a good part of the frame."
+  },
+  {
+    "hash": "5dcda11f13edaa4a6ddcbf125e7052c6f36014b1c37124c3597174b24f2f67e9",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Wildfeuer",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2008-08-22Cornus_sericea114.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:06:30Z",
+    "note": "A sharp close view of a cluster of green round dogwood fruits among leaves. The fleshy fruit reads well."
+  },
+  {
+    "hash": "37dc72804a37e12e34553b9d2364e645903f97c52b541995ff31d1399ae5afdb",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Andrey Zharkikh from Salt Lake City, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2016.06.30_14.33.26_DSC05082_-_Flickr_-_andrey_zharkikh.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:08:38Z",
+    "note": "A sharp cluster of pale blue round dogwood fruits on red stalks among leaves. The fleshy fruit reads well."
+  },
+  {
+    "hash": "d9eb97b4378ad5fe23e0a5e17946af390aebf31cf1d13a11b61b1a259b9f2c0e",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Matt Lavin from Bozeman, Montana, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Prunus_americana_-_American_(wild)_plum_-_Flickr_-_Matt_Lavin_(2).jpg",
+    "tags": [
+      "young",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:08:39Z",
+    "note": "A sharp branch with many small green round plums. The fleshy fruit is young but plain."
+  },
+  {
+    "hash": "7b4abb60f8c6b06b1e6d8e4eab845247a6c0cd7bd5d17571bc7bf35872bd859c",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Matt Lavin from Bozeman, Montana, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Prunus_americana_-_American_(wild)_plum_-_Flickr_-_Matt_Lavin.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:10:40Z",
+    "note": "One ripe red plum hangs from a twig and fills the middle of a sharp frame. The fleshy fruit reads plainly."
+  },
+  {
+    "hash": "2bb4d05de3155739988ad848c2b8ad95d6e238b7d13217c549dd6108414e21bb",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Matt Lavin from Bozeman, Montana, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Prunus_americana_-_American_plum_-_Flickr_-_Matt_Lavin_(1).jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:10:41Z",
+    "note": "A sunlit branch with several green plums that are sharp and easy to see among the leaves."
+  },
+  {
+    "hash": "9543f6517b92ebd10772d0a7dc6693434d11445acde83dc363c686f6d71259f6",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Matt Lavin from Bozeman, Montana, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Prunus_americana_-_American_plum_-_Flickr_-_Matt_Lavin_(2).jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:11:21Z",
+    "note": "Two green plums hang from a twig and fill the middle of a sharp frame. The fleshy fruit reads plainly."
+  },
+  {
+    "hash": "26528ef7e1d83c08433692c225e09a0a73ffe53d55c47f3807878cc61179ba7e",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "AnRo0002",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:20190803Cornus_sericea1.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:11:22Z",
+    "note": "A sharp cluster of green round dogwood fruits at the tip of a shoot. The fleshy fruit reads well."
+  },
+  {
+    "hash": "598910efc1e6cfe139cbc2e4406d7c25f0c52bccfbdd739f2ace9557697b7036",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Matt Lavin from Bozeman, Montana, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Prunus_americana_-_American_plum_-_Flickr_-_Matt_Lavin_(3).jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:11:23Z",
+    "note": "Two green plums on a twig fill the middle of a sharp frame. The fleshy fruit reads plainly."
+  },
+  {
+    "hash": "d7bc1393e4933a6a850c8259e9c993ee53c53c5608130c8021e38a7376622186",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "AnRo0002",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:20190803Cornus_sericea2.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:11:56Z",
+    "note": "A sharp cluster of green round dogwood fruits at the tip of a leafy shoot. The fleshy fruit reads well."
+  },
+  {
+    "hash": "3e96d650fc36446962f8a4f5be0f3347fcb1e0104e00a0d740a9dc1087e45268",
+    "target": "fruit/berry",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "AnRo0002",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:20190803Cornus_sericea3.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:11:58Z",
+    "note": "A sharp cluster of young green dogwood fruits in the middle of the frame. The fleshy fruit reads."
+  },
+  {
+    "hash": "28910eafa3c083b1457b162d72c5b499cdc3e881cb6eb183947042704d757f08",
+    "target": "fruit/capsule",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/AEGL#image=%2FImageLibrary%2Flarge%2Faegl_002_lhp.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:12:43Z",
+    "note": "One round tan buckeye fruit hangs among the leaves and is easy to see. The dry case reads as the fruit."
+  },
+  {
+    "hash": "9d7e76ef65402927129e2c9ded9ebb4046abca82ede67ec4194512f0f3520bf4",
+    "target": "fruit/capsule",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Daderot",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_-_Stanley_M._Rowe_Arboretum_-_DSC03419.JPG",
+    "tags": [
+      "close_up",
+      "young",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:15:53Z",
+    "note": "A sharp close view of young green spiny buckeye fruits on a stalk. The fruit fills a good part of the frame."
+  },
+  {
+    "hash": "3e8f9e020f07c7b4e5c32e190f622d5a0f068645292b602208ac025f21fe6ac9",
+    "target": "fruit/capsule",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Yucca_(Yucca_angustigolia)_2016-07-12_446.jpg",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:16:46Z",
+    "note": "Three green oval yucca fruits sit on a stalk above the leaves and are sharp and easy to see. The unopened case reads as the fruit."
+  },
+  {
+    "hash": "a12f43865f91f9c1fd16c74064a3238f4b07cc4a5a119282effc0d4dbf95bede",
+    "target": "fruit/capsule",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_007.JPG",
+    "tags": [
+      "close_up",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:18:09Z",
+    "note": "A sharp close view of many young green buckeye fruits on a branch. The fruit fills a good part of the frame."
+  },
+  {
+    "hash": "7a0f6e954c7ba3b80653ccd5019c08703c4377b6dd9e9bca16ccb4f3e07c3579",
+    "target": "fruit/capsule",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_008.JPG",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:18:49Z",
+    "note": "One tan buckeye fruit at the tip of a twig, sharp and large in the frame. The dry case reads plainly."
+  },
+  {
+    "hash": "2a8a4fce75512dd634c12c40e7e37d84963de365887c797e169853bd3832bf1c",
+    "target": "fruit/capsule",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_009.JPG",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:18:50Z",
+    "note": "One large buckeye fruit hangs from a twig and fills the middle of a sharp frame. The dry case reads plainly."
+  },
+  {
+    "hash": "d6dbbcd9cb23d2eb96db0b80618bee55f5c45a5b7ab6b9761dbcd7e2b424fa65",
+    "target": "fruit/capsule",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "H. Zell",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_010.JPG",
+    "tags": [
+      "close_up",
+      "mature",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:18:51Z",
+    "note": "A split buckeye case on the grass with the seeds inside. The case that opens along a seam reads plainly."
+  },
+  {
+    "hash": "712d80f4c2b6eaec85003744752b3c01b824651e3f6aec8646b70666c2c417d6",
+    "target": "fruit/capsule",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Krzysztof Ziarnek, Kenraiz",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Aesculus_glabra_kz02.jpg",
+    "tags": [
+      "close_up",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:19:42Z",
+    "note": "A sharp close view of several young green buckeye fruits on a stalk. The fruit fills a good part of the frame."
+  },
+  {
+    "hash": "a6a316e0ca3fa2e45df7c459d88fc5b50aa4acc71dbfb949e0c766db2fd6d34d",
+    "target": "fruit/cone",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PIPO#image=%2FImageLibrary%2Flarge%2Fpipo_024_lhp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:22:50Z",
+    "note": "Mature ponderosa pine cone on the twig, close and sharp, the cone scales read plainly."
+  },
+  {
+    "hash": "2ed0913d96d3f0ec1b7858412bc53bb0900e5aecbbf64007f8ca72a8fc7d23d9",
+    "target": "fruit/cone",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PIPU#image=%2FImageLibrary%2Flarge%2Fpipu_016_lhp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:23:34Z",
+    "note": "One blue spruce cone hangs among the needles, close and sharp, and the overlapping scales read plainly."
+  },
+  {
+    "hash": "32934e2e300813c093d4311d3b9c87fe79273dfc2fc697fa8658cceba913274d",
+    "target": "fruit/cone",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Herman, D.E., et al",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/PIPO#image=%2FImageLibrary%2Flarge%2Fpipo_026_lhp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:23:34Z",
+    "note": "A cluster of ponderosa pine cones on the twig, close and sharp, with the scales clear."
+  },
+  {
+    "hash": "363ce5a4f57fd9cb6ffd8ac01478c78785ae7ee25c9ee325798719b63d193493",
+    "target": "fruit/cone",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Zachary Dankowicz, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/253698787#photo=454308243",
+    "tags": [
+      "close_up",
+      "young",
+      "variety"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:27:26Z",
+    "note": "Young green Douglas-fir cones hang on the branch, close and sharp, with the three pointed bracts clear. Source names the variety Pseudotsuga menziesii var. menziesii."
+  },
+  {
+    "hash": "8e781e84a3257935ba6920c9a8a89d5a67df3d7eb914573e7c1776ed6421893b",
+    "target": "fruit/cone",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Jim Morefield, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/28988090#photo=45216932",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:27:27Z",
+    "note": "One open ponderosa pine cone on the twig fills the frame, sharp, with the scale tips clear."
+  },
+  {
+    "hash": "9f0d6ab74ecdbf301ac94706e8923ed519fcf00e883b6c4a82abf465d678d0cb",
+    "target": "fruit/cone",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Zachary Dankowicz, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/253698787#photo=454308244",
+    "tags": [
+      "close_up",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:28:00Z",
+    "note": "Two young green Douglas-fir cones hang close in the frame, sharp, with the three pointed bracts clear. Source names the variety Pseudotsuga menziesii var. menziesii."
+  },
+  {
+    "hash": "95d77bb98ad6e701a60d5063f764a563d14298236cf3facad092a7adeea87b0e",
+    "target": "fruit/cone",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Jim Morefield, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/28988090#photo=45216919",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:28:01Z",
+    "note": "One brown ponderosa pine cone sits among the needles, close and sharp, with the scales clear."
+  },
+  {
+    "hash": "612598722bae55834f83abb698686b863ff6fea79bd6a9fd530a1e8511ac6d67",
+    "target": "fruit/cone",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Miguel Vieira, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/16370494#photo=24613446",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:28:51Z",
+    "note": "One mature Douglas-fir cone lies on the leaf litter, close and sharp, with the three pointed bracts clear. Source names the variety Pseudotsuga menziesii var. menziesii."
+  },
+  {
+    "hash": "ec2804a8980eaf2649eed8006697f5d9f27d98f93d3fe1b5b0b58e4847f42eb1",
+    "target": "fruit/ball",
+    "channel": "fruit",
+    "source": "USDA PLANTS Database",
+    "author": "Doug Goldman",
+    "license": "public domain (US government work)",
+    "origin": "https://plants.usda.gov/plant-profile/MAPO#image=%2FImageLibrary%2Flarge%2Fmapo_027_lhp.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:34:30Z",
+    "note": "One whole green Osage orange ball lies on the grass, close and sharp, and fills most of the frame."
   }
 ]

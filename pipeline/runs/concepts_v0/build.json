@@ -1,0 +1,482 @@
+{
+  "run": "concepts_v0",
+  "channels": [
+    "leaf",
+    "bark",
+    "fruit"
+  ],
+  "species": [
+    {
+      "symbol": "leaf/needles",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 8
+      }
+    },
+    {
+      "symbol": "leaf/scale_like",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 4
+      }
+    },
+    {
+      "symbol": "leaf/simple_entire",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 8
+      }
+    },
+    {
+      "symbol": "leaf/simple_toothed",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 5
+      }
+    },
+    {
+      "symbol": "leaf/simple_lobed",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 9
+      }
+    },
+    {
+      "symbol": "leaf/pinnately_compound",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 11
+      }
+    },
+    {
+      "symbol": "leaf/palmately_compound",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 19
+      }
+    },
+    {
+      "symbol": "leaf/fan_strap",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 16
+      }
+    },
+    {
+      "symbol": "bark/smooth",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "bark": 3
+      }
+    },
+    {
+      "symbol": "bark/furrowed",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "bark": 2
+      }
+    },
+    {
+      "symbol": "bark/plated",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "bark": 3
+      }
+    },
+    {
+      "symbol": "bark/shaggy",
+      "status": "included",
+      "reason": null,
+      "counts": {}
+    },
+    {
+      "symbol": "bark/papery",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "bark": 1
+      }
+    },
+    {
+      "symbol": "bark/warty",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "bark": 3
+      }
+    },
+    {
+      "symbol": "fruit/samara",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 3
+      }
+    },
+    {
+      "symbol": "fruit/acorn",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 1
+      }
+    },
+    {
+      "symbol": "fruit/nut",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 7
+      }
+    },
+    {
+      "symbol": "fruit/pod",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 4
+      }
+    },
+    {
+      "symbol": "fruit/berry",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 11
+      }
+    },
+    {
+      "symbol": "fruit/capsule",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 8
+      }
+    },
+    {
+      "symbol": "fruit/cone",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 8
+      }
+    },
+    {
+      "symbol": "fruit/ball",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 1
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "symbol": "bark/furrowed",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "bark/furrowed",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "bark/papery",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "bark/papery",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "bark/plated",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "bark/plated",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "bark/shaggy",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "bark/shaggy",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "bark/shaggy",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "bark/smooth",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "bark/smooth",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "bark/warty",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "bark/warty",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/acorn",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/acorn",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/ball",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/ball",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/berry",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/berry",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/capsule",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/capsule",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/cone",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/cone",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/nut",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/nut",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/pod",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/pod",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/samara",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "fruit/samara",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/fan_strap",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/fan_strap",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/needles",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/needles",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/palmately_compound",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/palmately_compound",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/pinnately_compound",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/pinnately_compound",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/scale_like",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/scale_like",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/simple_entire",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/simple_entire",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/simple_lobed",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/simple_lobed",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/simple_toothed",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "leaf/simple_toothed",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "bark/papery",
+      "channel": "bark",
+      "count": 1
+    },
+    {
+      "symbol": "fruit/acorn",
+      "channel": "fruit",
+      "count": 1
+    },
+    {
+      "symbol": "fruit/ball",
+      "channel": "fruit",
+      "count": 1
+    },
+    {
+      "symbol": "bark/furrowed",
+      "channel": "bark",
+      "count": 2
+    },
+    {
+      "symbol": "bark/plated",
+      "channel": "bark",
+      "count": 3
+    },
+    {
+      "symbol": "bark/smooth",
+      "channel": "bark",
+      "count": 3
+    },
+    {
+      "symbol": "bark/warty",
+      "channel": "bark",
+      "count": 3
+    },
+    {
+      "symbol": "fruit/samara",
+      "channel": "fruit",
+      "count": 3
+    }
+  ],
+  "units": [
+    {
+      "key": "leaf_types",
+      "cards": 8,
+      "warning": null
+    },
+    {
+      "key": "bark_types",
+      "cards": 6,
+      "warning": null
+    },
+    {
+      "key": "fruit_types",
+      "cards": 8,
+      "warning": null
+    }
+  ],
+  "counts": {
+    "candidates_by_source": {
+      "commons": 672,
+      "inat": 66,
+      "plants": 582
+    },
+    "verdicts_by_kind": {
+      "approve": 135,
+      "escalate": 25,
+      "reject": 1160
+    },
+    "fetch_failures": 0,
+    "stop_rule_fired": false
+  }
+}
