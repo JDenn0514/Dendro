@@ -1232,7 +1232,7 @@ function reportData(input: {
     run: name,
     channels: scope.channels,
     species: rows,
-    gaps: buildGaps(rows, scope.channels),
+    gaps: buildGaps(rows, scope.channels, scope.concepts),
     units: unitRows(raw.units, loaded, warnings),
     counts: {
       candidates_by_source: sortKeys(sources),
