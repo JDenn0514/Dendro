@@ -1,195 +1,210 @@
 {
+  "batchcomplete": "",
   "continue": {
-    "gcmcontinue": "file|515545524355532047414d42454c49492e6a7067|60113541",
+    "gcmcontinue": "file|515545524355532047414d42454c4949204b5a31392e4a5047|75963421",
     "continue": "gcmcontinue||"
   },
   "query": {
     "pages": {
-      "555": {
-        "pageid": 555,
+      "7382006": {
+        "pageid": 7382006,
         "ns": 6,
-        "title": "File:Quercus gambelii range map.svg",
+        "title": "File:Autumn Gambel Oak Leaf.jpg",
         "imageinfo": [
           {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Quercus_gambelii_range_map.svg",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_range_map.svg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Quercus_gambelii_range_map.svg/1280px-Quercus_gambelii_range_map.svg.png",
+            "size": 512490,
+            "width": 904,
+            "height": 1480,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/5/51/Autumn_Gambel_Oak_Leaf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
             "thumbwidth": 1280,
-            "thumbheight": 1024,
-            "width": 1000,
-            "height": 800,
-            "mime": "image/svg+xml",
+            "thumbheight": 2096,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Autumn_Gambel_Oak_Leaf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Autumn_Gambel_Oak_Leaf.jpg",
             "extmetadata": {
-              "LicenseShortName": { "value": "CC0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/publicdomain/zero/1.0" },
-              "Artist": { "value": "<a href=\"https://commons.wikimedia.org/wiki/User:Map_Maker\">Map Maker</a>" },
-              "ImageDescription": { "value": "Range map of the species" }
-            }
+              "ImageDescription": {
+                "value": "Scan of a leaf of a Gambel Oak (<i><a href=\"https://en.wikipedia.org/wiki/Quercus_gambelii\" class=\"extiw\" title=\"wikipedia:Quercus gambelii\">Quercus gambelii</a></i> Nutt.) changing colors during autumn.",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ninjatacoshell\" title=\"User:Ninjatacoshell\">Ninjatacoshell</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/3.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
           }
         ]
       },
-      "222": {
-        "pageid": 222,
+      "295813": {
+        "pageid": 295813,
         "ns": 6,
-        "title": "File:Quercus gambelii in autumn.jpg",
+        "title": "File:Gambel oak bark.jpg",
         "imageinfo": [
           {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/2/22/Quercus_gambelii_in_autumn.jpg",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_in_autumn.jpg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Quercus_gambelii_in_autumn.jpg/1280px-Quercus_gambelii_in_autumn.jpg",
+            "size": 1046765,
+            "width": 997,
+            "height": 1500,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Gambel_oak_bark.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
             "thumbwidth": 1280,
-            "thumbheight": 960,
-            "width": 3264,
-            "height": 2448,
-            "mime": "image/jpeg",
+            "thumbheight": 1926,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Gambel_oak_bark.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Gambel_oak_bark.jpg",
             "extmetadata": {
-              "LicenseShortName": { "value": "CC BY 2.0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by/2.0" },
-              "Artist": { "value": "<a href=\"https://www.flickr.com/people/jsmith\">John Smith</a>" },
-              "ImageDescription": { "value": "Green <b>leaves</b> &amp; a branch in summer" }
-            }
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://creativecommons.org/licenses/by-sa/3.0/",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
           }
         ]
       },
-      "666": {
-        "pageid": 666,
+      "24885182": {
+        "pageid": 24885182,
         "ns": 6,
-        "title": "File:Quercus gambelii sapling.jpg",
+        "title": "File:Quercus gambelii Grand Canyon 1.jpg",
         "imageinfo": [
           {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/6/66/Quercus_gambelii_sapling.jpg",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_sapling.jpg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Quercus_gambelii_sapling.jpg/1280px-Quercus_gambelii_sapling.jpg",
+            "size": 7835099,
+            "width": 4928,
+            "height": 3264,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Quercus_gambelii_Grand_Canyon_1.jpg/1280px-Quercus_gambelii_Grand_Canyon_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
             "thumbwidth": 1280,
-            "thumbheight": 853,
-            "width": 3000,
-            "height": 2000,
-            "mime": "image/jpeg",
+            "thumbheight": 848,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Quercus_gambelii_Grand_Canyon_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_Grand_Canyon_1.jpg",
             "extmetadata": {
-              "LicenseShortName": { "value": "CC BY-NC 4.0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by-nc/4.0" },
-              "Artist": { "value": "<a href=\"https://commons.wikimedia.org/wiki/User:Nadia_Ruiz\">Nadia Ruiz</a>" },
-              "ImageDescription": { "value": "A young plant in a meadow" }
-            }
+              "ImageDescription": {
+                "value": "Gambel Oak <i><a href=\"//commons.wikimedia.org/wiki/Quercus_gambelii\" title=\"Quercus gambelii\">Quercus gambelii</a></i> along Desert View Drive on the South Rim of Grand Canyon National park. NPS photo by Michael Quinn.",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/50693818@N08\">Public Domain</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "image/jpeg"
           }
         ]
       },
-      "111": {
-        "pageid": 111,
+      "75963399": {
+        "pageid": 75963399,
         "ns": 6,
-        "title": "File:Quercus gambelii bark.jpg",
+        "title": "File:Quercus gambelii kz02.jpg",
         "imageinfo": [
           {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Quercus_gambelii_bark.jpg",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_bark.jpg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Quercus_gambelii_bark.jpg/1280px-Quercus_gambelii_bark.jpg",
+            "size": 1861270,
+            "width": 2878,
+            "height": 3837,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Quercus_gambelii_kz02.jpg/1280px-Quercus_gambelii_kz02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
             "thumbwidth": 1280,
-            "thumbheight": 853,
-            "width": 4000,
-            "height": 2667,
-            "mime": "image/jpeg",
+            "thumbheight": 1707,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Quercus_gambelii_kz02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz02.jpg",
             "extmetadata": {
-              "LicenseShortName": { "value": "CC BY-SA 4.0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by-sa/4.0" },
-              "Artist": { "value": "<a href=\"https://commons.wikimedia.org/wiki/User:Jane_Doe\">Jane Doe</a>" },
-              "ImageDescription": { "value": "Bark of <i>Quercus gambelii</i> in autumn" }
-            }
+              "ImageDescription": {
+                "value": "Quercus gambelii at Cape Royal in Grand Canyon NP, Arizona USA",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Kenraiz\" title=\"User:Kenraiz\">Kenraiz</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
           }
         ]
       },
-      "777": {
-        "pageid": 777,
+      "94223721": {
+        "pageid": 94223721,
         "ns": 6,
-        "title": "File:Quercus gambelii wind.ogg"
-      },
-      "333": {
-        "pageid": 333,
-        "ns": 6,
-        "title": "File:Quercus gambelii acorn.jpg",
+        "title": "File:Quercus gambelii - Flickr - aspidoscelis.jpg",
         "imageinfo": [
           {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Quercus_gambelii_acorn.jpg",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_acorn.jpg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Quercus_gambelii_acorn.jpg/1280px-Quercus_gambelii_acorn.jpg",
-            "thumbwidth": 1280,
-            "thumbheight": 960,
-            "width": 2048,
-            "height": 1536,
-            "mime": "image/jpeg",
-            "extmetadata": {
-              "LicenseShortName": { "value": "CC0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/publicdomain/zero/1.0" },
-              "Artist": { "value": "Ada Lovelace" },
-              "ImageDescription": { "value": "A ripe nut on a branch" }
-            }
-          }
-        ]
-      },
-      "444": {
-        "pageid": 444,
-        "ns": 6,
-        "title": "File:Quercus gambelii habit.jpg",
-        "imageinfo": [
-          {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/4/44/Quercus_gambelii_habit.jpg",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_habit.jpg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Quercus_gambelii_habit.jpg/900px-Quercus_gambelii_habit.jpg",
-            "thumbwidth": 900,
-            "thumbheight": 600,
-            "width": 900,
-            "height": 600,
-            "mime": "image/jpeg",
-            "extmetadata": {
-              "LicenseShortName": { "value": "CC BY-SA 4.0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by-sa/4.0" },
-              "Artist": { "value": "<a href=\"https://commons.wikimedia.org/wiki/User:Rosa_Vega\">Rosa Vega</a>" },
-              "ImageDescription": { "value": "A whole tree on a hillside" }
-            }
-          }
-        ]
-      },
-      "999": {
-        "pageid": 999,
-        "ns": 6,
-        "title": "File:Quercus gambelii twig.jpg",
-        "imageinfo": [
-          {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/9/99/Quercus_gambelii_twig.jpg",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_twig.jpg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Quercus_gambelii_twig.jpg/1280px-Quercus_gambelii_twig.jpg",
+            "size": 906767,
+            "width": 1800,
+            "height": 1200,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Quercus_gambelii_-_Flickr_-_aspidoscelis.jpg/1280px-Quercus_gambelii_-_Flickr_-_aspidoscelis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
             "thumbwidth": 1280,
             "thumbheight": 853,
-            "width": 2400,
-            "height": 1600,
-            "mime": "image/jpeg",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/1/13/Quercus_gambelii_-_Flickr_-_aspidoscelis.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_-_Flickr_-_aspidoscelis.jpg",
             "extmetadata": {
-              "LicenseShortName": { "value": "CC0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/publicdomain/zero/1.0" },
-              "Artist": { "value": "" },
-              "ImageDescription": { "value": "A young shoot in spring" }
-            }
+              "ImageDescription": {
+                "value": "<i>Quercus gambelii</i> at the high point above Corral Canyon, Sacramento Mountains, Otero County, New Mexico, 20 May 2012.",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/26246711@N00\">Patrick Alexander</a> from Las Cruces, NM",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
           }
         ]
       },
-      "1001": {
-        "pageid": 1001,
+      "91683451": {
+        "pageid": 91683451,
         "ns": 6,
-        "title": "File:Quercus gambelii winter.jpg",
+        "title": "File:Economic considerations in use and management of Gambel oak for fuelwood (IA CAT31118970).pdf",
         "imageinfo": [
           {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Quercus_gambelii_winter.jpg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Quercus_gambelii_winter.jpg/1280px-Quercus_gambelii_winter.jpg",
+            "size": 827689,
+            "width": 1360,
+            "height": 1825,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Economic_considerations_in_use_and_management_of_Gambel_oak_for_fuelwood_%28IA_CAT31118970%29.pdf/page1-1280px-Economic_considerations_in_use_and_management_of_Gambel_oak_for_fuelwood_%28IA_CAT31118970%29.pdf.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
             "thumbwidth": 1280,
-            "thumbheight": 853,
-            "width": 3000,
-            "height": 2000,
-            "mime": "image/jpeg",
+            "thumbheight": 1718,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Economic_considerations_in_use_and_management_of_Gambel_oak_for_fuelwood_%28IA_CAT31118970%29.pdf?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Economic_considerations_in_use_and_management_of_Gambel_oak_for_fuelwood_(IA_CAT31118970).pdf",
             "extmetadata": {
-              "LicenseShortName": { "value": "CC0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/publicdomain/zero/1.0" },
-              "Artist": { "value": "Ada Lovelace" },
-              "ImageDescription": { "value": "Bare branches under snow" }
-            }
+              "Artist": {
+                "value": "Anonymous",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            },
+            "mime": "application/pdf"
           }
         ]
       }

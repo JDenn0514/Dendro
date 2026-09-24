@@ -28,6 +28,11 @@ const NEXT_TEXT = 'next page';
 /** A genus and an epithet. A one-word name is the genus alone, not a species. */
 const BINOMIAL_WORDS = 2;
 
+/** All lowercase letters, optionally with one hyphen, as a botanical epithet is written. */
+function isEpithet(word: string): boolean {
+  return /^[a-z]+(-[a-z]+)?$/.test(word);
+}
+
 function decodeEntities(text: string): string {
   return text
     .replace(/&#x([0-9a-f]+);/gi, (_m, hex: string) => String.fromCodePoint(parseInt(hex, 16)))
@@ -75,7 +80,13 @@ export function parseSectionPage(html: string): string[] {
     const name = textOf(italic === null ? inner : italic[1]);
     if (name === '') continue;
     if (isHybrid(name)) continue;
-    if (name.split(' ').length < BINOMIAL_WORDS) continue;
+    const words = name.split(' ');
+    if (words.length < BINOMIAL_WORDS) continue;
+    // The live page links its own heading, `Quercus Sect. Lobatae`, in the same
+    // way it links a species. A species carries a lowercase epithet as its
+    // second word, and a rank heading carries `Sect.`, so the epithet tells them
+    // apart. Task 19 found three such headings in the 93 row table.
+    if (!isEpithet(words[1])) continue;
     names.push(name);
   }
   return names;

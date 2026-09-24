@@ -1,15 +1,19 @@
 {
-  "TotalResults": 3,
-  "PlantResults": [
+  "SubordinateTaxa": [
     {
-      "Id": 25298,
-      "Symbol": "QUGAG",
-      "ScientificName": "<i>Quercus</i> <i>gambelii</i> Nutt. var. <i>gambelii</i>"
+      "Id": 70266,
+      "Symbol": "QUGAB2",
+      "ScientificName": "<i>Quercus gambelii</i> Nutt. var. <i>bonina</i> S.L. Welsh",
+      "CommonName": "Gambel oak",
+      "Rank": null
     },
     {
-      "Id": 25299,
-      "Symbol": "QUGAB",
-      "ScientificName": "<i>Quercus</i> <i>gambelii</i> Nutt. var. <i>bakeri</i> (Kellogg) Cory"
+      "Id": 70267,
+      "Symbol": "QUGAG",
+      "ScientificName": "<i>Quercus gambelii</i> Nutt. var. <i>gambelii </i>",
+      "CommonName": "Gambel oak",
+      "Rank": null
     }
-  ]
+  ],
+  "NumTotalResults": null
 }

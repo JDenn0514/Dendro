@@ -1,18 +1,24 @@
 {
-  "Id": 25297,
+  "Id": 70265,
   "Symbol": "QUGA",
-  "ScientificName": "<i>Quercus</i> <i>gambelii</i> Nutt.",
+  "ScientificName": "<i>Quercus gambelii</i> Nutt.",
   "CommonName": "Gambel oak",
+  "Group": "Dicot",
+  "RankId": 180,
   "Rank": "Species",
-  "GrowthHabits": ["Tree", "Shrub"],
-  "NativeStatuses": [
-    { "Region": "L48", "NativeStatus": "N" },
-    { "Region": "CAN", "NativeStatus": "I" }
+  "Durations": ["Perennial"],
+  "GrowthHabits": ["Shrub", "Tree"],
+  "NativeStatuses": [{ "Region": "L48", "Status": "N", "Type": "Native" }],
+  "AcceptedId": 70265,
+  "HasSynonyms": false,
+  "Ancestors": [
+    { "Rank": "Kingdom", "ScientificName": "<i>Plantae</i>", "Symbol": "Plantae" },
+    { "Rank": "Order", "ScientificName": "<i>Fagales</i>", "Symbol": "Fagales" },
+    { "Rank": "Family", "ScientificName": "<i>Fagaceae</i> Dumort.", "Symbol": "FAGACE" },
+    { "Rank": "Genus", "ScientificName": "<i>Quercus</i> L.", "Symbol": "QUERC" },
+    { "Rank": "Species", "ScientificName": "<i>Quercus gambelii</i> Nutt.", "Symbol": "QUGA" }
   ],
-  "AncestorRanks": [
-    { "Rank": "Kingdom", "ScientificName": "Plantae" },
-    { "Rank": "Order", "ScientificName": "Fagales" },
-    { "Rank": "Family", "ScientificName": "Fagaceae" },
-    { "Rank": "Genus", "ScientificName": "<i>Quercus</i>" }
-  ]
+  "HasImages": true,
+  "HasDistributionData": true,
+  "ProfileImageFilename": "quga_001_svp.jpg"
 }

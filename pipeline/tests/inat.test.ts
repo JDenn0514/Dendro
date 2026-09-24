@@ -43,7 +43,7 @@ function tempDir(): string {
 }
 
 const NOW = '2026-09-22T15:04:00Z';
-const TAXON_ID = 47851;
+const TAXON_ID = 116377;
 // One name for the flowering value, read from the frozen fixture.
 const FLOWERING_VALUE_ID = loadInatTerms(termsPath).flowering_value_id;
 // A value no pass hard-codes, so a test can prove where the argument lands.
@@ -83,14 +83,14 @@ test('observationsUrl carries every parameter and the fruiting pass adds the phe
   assert.equal(
     observationsUrl(TAXON_ID, 1, fruiting),
     'https://api.inaturalist.org/v1/observations' +
-      '?taxon_id=47851&quality_grade=research&photo_license=cc0,cc-by,cc-by-sa' +
+      '?taxon_id=116377&quality_grade=research&photo_license=cc0,cc-by,cc-by-sa' +
       `&photos=true&order_by=votes&per_page=${PER_PAGE}&page=1` +
       `&term_id=${PHENOLOGY_TERM_ID}&term_value_id=${FRUITING_VALUE_ID}`,
   );
 
   const url = observationsUrl(TAXON_ID, 3, fruiting);
   for (const part of [
-    'taxon_id=47851',
+    'taxon_id=116377',
     'quality_grade=research',
     'photo_license=cc0,cc-by,cc-by-sa',
     'photos=true',
@@ -112,7 +112,7 @@ test('the any pass adds no term_id', () => {
   assert.equal(
     url,
     'https://api.inaturalist.org/v1/observations' +
-      '?taxon_id=47851&quality_grade=research&photo_license=cc0,cc-by,cc-by-sa' +
+      '?taxon_id=116377&quality_grade=research&photo_license=cc0,cc-by,cc-by-sa' +
       `&photos=true&order_by=votes&per_page=${PER_PAGE}&page=1`,
   );
 });
@@ -158,17 +158,23 @@ test('parseObservations flattens every photo of every observation', () => {
   assert.equal(photos.length, 4);
   assert.deepEqual(
     photos.map((photo) => photo.photo_id),
-    [999001, 999002, 999003, 999004],
+    [238192398, 238192471, 663607957, 227089986],
   );
   assert.deepEqual(
     photos.map((photo) => photo.observation_id),
-    [121001, 121001, 121002, 121003],
+    [139281806, 139281806, 363535924, 133330397],
   );
   assert.equal(photos[0].license_code, 'cc-by');
   assert.equal(photos[0].attribution, '(c) Lyrae, some rights reserved (CC BY)');
   assert.equal(photos[0].taxon_name, 'Quercus gambelii');
-  assert.equal(photos[3].taxon_name, 'Quercus gambelii var. gambelii');
-  assert.equal(photos[3].url, 'https://static.inaturalist.org/photos/999004/square.jpeg');
+  // Every recorded observation names the species, never a variety: the live
+  // listing for this taxon holds no finer name.
+  assert.equal(photos[3].taxon_name, 'Quercus gambelii');
+  // The live photo host is the open data bucket, and a file can end in .jpeg.
+  assert.equal(
+    photos[3].url,
+    'https://inaturalist-open-data.s3.amazonaws.com/photos/227089986/square.jpeg',
+  );
 });
 
 test('parseObservations reports an API error instead of an empty listing', () => {
@@ -215,8 +221,14 @@ test('inatCandidates gives each photo of an observation its own id', () => {
   );
 
   // The origin carries the photo id, so two photos of one observation are two rows.
-  assert.equal(rows[0].origin, 'https://www.inaturalist.org/observations/121001#photo=999001');
-  assert.equal(rows[1].origin, 'https://www.inaturalist.org/observations/121001#photo=999002');
+  assert.equal(
+    rows[0].origin,
+    'https://www.inaturalist.org/observations/139281806#photo=238192398',
+  );
+  assert.equal(
+    rows[1].origin,
+    'https://www.inaturalist.org/observations/139281806#photo=238192471',
+  );
   assert.notEqual(rows[0].id, rows[1].id);
   assert.notEqual(rows[0].file_url, rows[1].file_url);
 });
@@ -230,12 +242,18 @@ test('a candidate points at the observation photo and the original photo size', 
   assert.equal(row.source, SOURCE_NAMES.inat);
   assert.equal(row.source, 'iNaturalist');
   assert.equal(row.target, 'QUGA');
-  assert.equal(row.origin, 'https://www.inaturalist.org/observations/121003#photo=999004');
-  assert.equal(row.file_url, 'https://static.inaturalist.org/photos/999004/original.jpeg');
-  assert.equal(row.author, 'Marta Olsen, no rights reserved (CC0)');
+  assert.equal(
+    row.origin,
+    'https://www.inaturalist.org/observations/133330397#photo=227089986',
+  );
+  assert.equal(
+    row.file_url,
+    'https://inaturalist-open-data.s3.amazonaws.com/photos/227089986/original.jpeg',
+  );
+  assert.equal(row.author, 'no rights reserved');
   assert.equal(row.license, 'CC0 1.0');
   assert.equal(row.license_url, 'https://creativecommons.org/publicdomain/zero/1.0/');
-  assert.equal(row.source_species, 'Quercus gambelii var. gambelii');
+  assert.equal(row.source_species, 'Quercus gambelii');
   assert.equal(row.channel_hint, 'fruit');
   assert.deepEqual(row.tags_hint, ['fruiting']);
   assert.equal(row.fetched_at, NOW);

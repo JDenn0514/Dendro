@@ -66,6 +66,14 @@ const STRING_AUTHORED: string[] = ['audubon_name', 'genus_common', 'arrangement'
 /** The app prints this when PLANTS gave no native status. */
 const NATIVE_STATUS_UNKNOWN = 'unknown';
 
+/** A genus and an epithet. A name of one word is a genus row, not a species. */
+const BINOMIAL_WORDS = 2;
+
+function wordCount(name: string): number {
+  const trimmed = name.trim();
+  return trimmed === '' ? 0 : trimmed.split(/\s+/).length;
+}
+
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -296,8 +304,20 @@ export function enumerateRun(input: {
   const kept: string[] = [];
   const dropped: { symbol: string; reason: string }[] = [];
 
+  const included = new Set(include);
+  const nameOf = new Map(
+    rows.filter((row) => row.synonym_symbol === '').map((row) => [row.symbol, row.scientific]),
+  );
+
   // acceptedSymbols drops the synonym rows and the other genera, and sorts.
   for (const symbol of acceptedSymbols(rows, genera)) {
+    // A name of one word is a genus row, not a species. The live checklist
+    // carries `Acer`, `Quercus`, and `Platanus` as accepted rows of their own,
+    // and each one matches its genus.
+    if (wordCount(nameOf.get(symbol) ?? '') < BINOMIAL_WORDS) {
+      dropped.push({ symbol, reason: 'not a species' });
+      continue;
+    }
     const profile = profiles[symbol];
     if (profile === undefined) {
       dropped.push({ symbol, reason: 'no profile' });
@@ -307,13 +327,14 @@ export function enumerateRun(input: {
       dropped.push({ symbol, reason: 'not a tree' });
       continue;
     }
-    if (isHybrid(profile.scientific)) {
+    // An include symbol is the owner's own choice, so it bypasses the hybrid
+    // gate and the range gate. The tree gate still applies to it.
+    if (isHybrid(profile.scientific) && !included.has(symbol)) {
       dropped.push({ symbol, reason: 'hybrid' });
       continue;
     }
-    // include bypasses the range gate only. The tree and hybrid gates still apply.
     const inRange = (distribution[symbol] ?? []).some((state) => states.includes(state));
-    if (!inRange && !include.includes(symbol)) {
+    if (!inRange && !included.has(symbol)) {
       dropped.push({ symbol, reason: 'out of range' });
       continue;
     }

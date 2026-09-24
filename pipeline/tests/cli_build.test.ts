@@ -28,8 +28,8 @@ import { captureConsole } from './helpers.ts';
 const NOW = '2026-09-22T15:04:00Z';
 const TODAY = '2026-09-22';
 const SCIENTIFIC = 'Quercus gambelii';
-const QUGA_ID = 25297;
-const INAT_TAXON_ID = 47851;
+const QUGA_ID = 70265;
+const INAT_TAXON_ID = 116377;
 const CDN = 'https://images.dendro.test/';
 /** git exits 128 when a ref or a path is not there. The first run reads that as "no past". */
 const GIT_BAD_REVISION = 128;

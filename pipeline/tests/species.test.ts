@@ -361,6 +361,38 @@ test('enumerateRun drops an include symbol that is a shrub', () => {
   assert.equal(reasonFor(out.dropped, 'QUGAM'), 'not a tree');
 });
 
+// The owner names an include symbol on purpose, so the hybrid gate gives way to
+// it. London plane, the planted species of the first run, is a hybrid.
+test('enumerateRun keeps an include symbol that is a hybrid, and still drops an included shrub', () => {
+  const out = enumerateRun({
+    rows: RUN_ROWS,
+    genera: ['Quercus'],
+    states: ['CO'],
+    include: ['QUXBE', 'QUGAM'],
+    profiles: RUN_PROFILES,
+    distribution: RUN_DISTRIBUTION,
+  });
+  assert.equal(out.kept.includes('QUXBE'), true);
+  assert.equal(reasonFor(out.dropped, 'QUXBE'), null);
+  assert.equal(out.kept.includes('QUGAM'), false);
+  assert.equal(reasonFor(out.dropped, 'QUGAM'), 'not a tree');
+});
+
+// The live checklist holds `Acer`, `Quercus`, and `Platanus` as accepted rows,
+// and each one matches its own genus.
+test('enumerateRun drops a genus row, whose name is one word', () => {
+  const out = enumerateRun({
+    rows: [...RUN_ROWS, row('QUERC', 'Quercus')],
+    genera: ['Quercus'],
+    states: ['CO'],
+    include: [],
+    profiles: RUN_PROFILES,
+    distribution: RUN_DISTRIBUTION,
+  });
+  assert.equal(out.kept.includes('QUERC'), false);
+  assert.equal(reasonFor(out.dropped, 'QUERC'), 'not a species');
+});
+
 test('mergeSpecies emits the fields in the app fixture order', () => {
   const fetched = buildFetched({
     profile: profile(),

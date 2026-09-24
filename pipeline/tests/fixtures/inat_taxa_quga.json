@@ -4,9 +4,17 @@
   "per_page": 1,
   "results": [
     {
-      "id": 47851,
+      "id": 116377,
+      "rank": "species",
+      "rank_level": 10,
+      "iconic_taxon_id": 47126,
       "name": "Quercus gambelii",
-      "rank": "species"
+      "parent_id": 47851,
+      "ancestry": "48460/47126/211194/47125/47853/47851",
+      "is_active": true,
+      "observations_count": 18732,
+      "matched_term": "Quercus gambelii",
+      "preferred_common_name": "Gambel Oak"
     }
   ]
 }
