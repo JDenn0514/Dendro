@@ -44,7 +44,7 @@ function fixtureJson(name: string): unknown {
 }
 
 const QUGA_PROFILE = 'https://plants.usda.gov/plant-profile/QUGA';
-const QUGA_ID = 25297;
+const QUGA_ID = 70265;
 const QUGA_SCIENTIFIC = 'Quercus gambelii';
 const FETCHED_AT = '2026-09-22T15:04:00Z';
 const OK = 200;
@@ -110,7 +110,7 @@ test('the profile parser strips the tags and splits the author off', () => {
     family: 'Fagaceae',
     genus: 'Quercus',
     rank: 'Species',
-    growth_habits: ['Tree', 'Shrub'],
+    growth_habits: ['Shrub', 'Tree'],
     native_status: 'native',
   });
 });
@@ -175,6 +175,54 @@ test('splitScientific keeps filius out of the species name but still reads a tru
   });
 });
 
+// Task 19 read these rows out of the live plantlst.txt. Each one is a shape the
+// file writes, with the author in the middle of the name.
+test('splitScientific reads the rank of a real checklist row', () => {
+  assert.deepEqual(splitScientific('Acer glabrum Torr. var. douglasii (Hook.) Dippel'), {
+    scientific: 'Acer glabrum var. douglasii',
+    author: 'Torr. (Hook.) Dippel',
+  });
+  assert.deepEqual(splitScientific('Acer tataricum L. ssp. ginnala (Maxim.) Wesmael'), {
+    scientific: 'Acer tataricum ssp. ginnala',
+    author: 'L. (Maxim.) Wesmael',
+  });
+  assert.deepEqual(
+    splitScientific('Acer saccharum Marshall subsp. floridanum (Chapm.) Desmarais'),
+    {
+      scientific: 'Acer saccharum subsp. floridanum',
+      author: 'Marshall (Chapm.) Desmarais',
+    },
+  );
+  // `Michx. f.` is filius, and the `var.` after it carries the rank.
+  assert.deepEqual(splitScientific('Acer nigrum Michx. f. var. floridanum (Chapm.) Fosberg'), {
+    scientific: 'Acer nigrum var. floridanum',
+    author: 'Michx. f. (Chapm.) Fosberg',
+  });
+  // A forma epithet follows an author here, so the word before the `f.` cannot
+  // tell filius from forma, but the lowercase epithet after it can.
+  assert.deepEqual(
+    splitScientific('Abies grandis (Douglas ex D. Don) Lindl. f. johnsonii O.V. Matthews'),
+    {
+      scientific: 'Abies grandis f. johnsonii',
+      author: '(Douglas ex D. Don) Lindl. O.V. Matthews',
+    },
+  );
+  // `Hook. f. ex Hemsl.` is filius, although `ex` is a lowercase word.
+  assert.deepEqual(splitScientific('Acleisanthes wrightii (A. Gray) Benth. & Hook. f. ex Hemsl.'), {
+    scientific: 'Acleisanthes wrightii',
+    author: '(A. Gray) Benth. & Hook. f. ex Hemsl.',
+  });
+  // The `f.` inside `(Wendl. f.)` is part of a word that ends in a bracket, so
+  // it is never a marker.
+  assert.deepEqual(
+    splitScientific('Acacia decurrens (Wendl. f.) Willd. var. dealbata (Link) F. Muell.'),
+    {
+      scientific: 'Acacia decurrens var. dealbata',
+      author: '(Wendl. f.) Willd. (Link) F. Muell.',
+    },
+  );
+});
+
 test('a multiplication sign or a lone x marks a hybrid', () => {
   assert.equal(isHybrid('Quercus ×undulata'), true);
   assert.equal(isHybrid('Quercus x undulata'), true);
@@ -184,12 +232,16 @@ test('a multiplication sign or a lone x marks a hybrid', () => {
 });
 
 test('the distribution CSV yields unique, sorted US states and drops the other country', () => {
+  // The live file writes a title line above the header, the country as
+  // `United States`, and the state as its full name.
   assert.deepEqual(parseDistribution(fixture('plants_distribution_quga.csv')), [
     'AZ',
     'CO',
     'NM',
     'UT',
   ]);
+  // The genus record carries Canadian provinces, which are not US states.
+  assert.deepEqual(parseDistribution(fixture('plants_distribution_querc.csv')), ['CO']);
 });
 
 test('region L48 maps N to native and I to introduced, and no L48 row gives null', () => {
@@ -214,8 +266,8 @@ test('region L48 maps N to native and I to introduced, and no L48 row gives null
 
 test('parseSubordinateTaxa gives the key and the short rank label', () => {
   assert.deepEqual(parseSubordinateTaxa(fixtureJson('plants_subordinate_quga.json')), [
+    { key: 'QUGAB2', name: 'var. bonina' },
     { key: 'QUGAG', name: 'var. gambelii' },
-    { key: 'QUGAB', name: 'var. bakeri' },
   ]);
   assert.deepEqual(
     parseSubordinateTaxa({
@@ -237,17 +289,23 @@ test('parseSubordinateTaxa gives the key and the short rank label', () => {
 
 test('the checklist parses, accepted symbols filter by genus, and synonyms resolve', () => {
   const rows = parseChecklist(fixture('plantlst_sample.txt'));
-  assert.equal(rows.length, 5);
+  assert.equal(rows.length, 8);
   assert.deepEqual(rows[0], {
-    symbol: 'QUGA',
+    symbol: 'ACPL',
     synonym_symbol: '',
-    scientific: QUGA_SCIENTIFIC,
-    common: 'Gambel oak',
-    family: 'Fagaceae',
+    scientific: 'Acer platanoides',
+    common: 'Norway maple',
+    family: 'Aceraceae',
   });
-  assert.deepEqual(acceptedSymbols(rows, ['Quercus', 'Acer']), ['ACPL', 'QUGA', 'QUUN']);
-  assert.deepEqual(synonymNames(rows, 'QUGA'), ['Quercus utahensis']);
-  assert.deepEqual(synonymNames(rows, 'ACPL'), []);
+  assert.deepEqual(acceptedSymbols(rows, ['Quercus', 'Acer']), ['ACPL', 'QUGA', 'QUPA4']);
+  // The live file writes the accepted symbol first and the synonym's own symbol
+  // second, so a synonym row belongs to the symbol in its first column.
+  assert.deepEqual(synonymNames(rows, 'QUGAG'), [
+    'Quercus utahensis',
+    'Quercus novomexicana',
+  ]);
+  assert.deepEqual(synonymNames(rows, 'QUGA'), []);
+  assert.deepEqual(synonymNames(rows, 'ACPL'), ['Acer platanoides var. schwedleri']);
 });
 
 test('partCodeOf reads the code from a path and gives null when there is none', () => {
@@ -263,8 +321,8 @@ test('plantsCandidates drops the copyright row and fills the PLANTS fields', () 
   const images = parseImages(fixtureJson('plants_images_quga.json'));
   assert.equal(images.length, 5);
   const rows = plantsCandidates(images, 'QUGA', 'QUGA', QUGA_SCIENTIFIC, FETCHED_AT);
-  assert.equal(rows.length, 3);
-  const firstPath = '/ImageLibrary/original/quga_001_lvp.jpg';
+  assert.equal(rows.length, 2);
+  const firstPath = '/ImageLibrary/large/quga_005_lvp.jpg';
   const firstOrigin = `${QUGA_PROFILE}#image=${encodeURIComponent(firstPath)}`;
   assert.deepEqual(rows[0], {
     id: candidateId(firstOrigin, 'QUGA'),
@@ -273,11 +331,13 @@ test('plantsCandidates drops the copyright row and fills the PLANTS fields', () 
     source: SOURCE_NAMES.plants,
     origin: firstOrigin,
     file_url: `${PLANTS_FILES}${firstPath}`,
-    author: 'R. Nichols',
+    author: 'F. Lee Kirby',
     license: PLANTS_LICENSE,
     license_url: null,
     source_species: QUGA_SCIENTIFIC,
-    channel_hint: 'leaf',
+    // The file name carries the size and the orientation, not the part, so
+    // every PLANTS row leaves the channel to the approval agent.
+    channel_hint: null,
     tags_hint: [],
     local: null,
     file_hash: null,
@@ -287,10 +347,10 @@ test('plantsCandidates drops the copyright row and fills the PLANTS fields', () 
   });
   assert.deepEqual(
     rows.map((row) => row.channel_hint),
-    ['leaf', 'bark', null],
+    [null, null],
   );
   assert.equal(
-    rows.some((row) => row.file_url.includes('quga_004_frp')),
+    rows.some((row) => row.file_url.includes('quga_001')),
     false,
   );
   for (const row of rows) {
@@ -298,11 +358,7 @@ test('plantsCandidates drops the copyright row and fills the PLANTS fields', () 
   }
   assert.deepEqual(
     rows.map((row) => row.origin.split('#image=')[1]),
-    [
-      encodeURIComponent(firstPath),
-      encodeURIComponent('/ImageLibrary/original/quga_002_bkp.jpg'),
-      encodeURIComponent('/ImageLibrary/original/quga_003_hbp.jpg'),
-    ],
+    [encodeURIComponent(firstPath), encodeURIComponent('/ImageLibrary/large/quga_006_lhp.jpg')],
   );
   assert.equal(new Set(rows.map((row) => row.origin)).size, rows.length);
   assert.equal(new Set(rows.map((row) => row.id)).size, rows.length);
@@ -326,12 +382,12 @@ test('plantsCandidates drops an image that names no photographer', () => {
   const images = parseImages(fixtureJson('plants_images_quga.json'));
   const anonymous = images.filter((image) => image.photographer === '');
   assert.equal(anonymous.length, 1);
-  assert.equal(anonymous[0].path, '/ImageLibrary/original/quga_005_lvd.jpg');
+  assert.equal(anonymous[0].path, '/ImageLibrary/large/quga_007_lvp.jpg');
   assert.equal(anonymous[0].copyright, false);
   const rows = plantsCandidates(images, 'QUGA', 'QUGA', QUGA_SCIENTIFIC, FETCHED_AT);
-  assert.equal(rows.length, 3);
+  assert.equal(rows.length, 2);
   assert.equal(
-    rows.some((row) => row.file_url.includes('quga_005')),
+    rows.some((row) => row.file_url.includes('quga_007')),
     false,
   );
   for (const row of rows) {
@@ -348,11 +404,11 @@ test('the constants hold the PLANTS hosts, the license text, and the part code t
     'https://plants.sc.egov.usda.gov/DocumentLibrary/Txt/plantlst.txt',
   );
   assert.equal(PLANTS_LICENSE, 'public domain (US government work)');
-  assert.equal(PART_CODE_CHANNELS.lvp, 'leaf');
-  assert.equal(PART_CODE_CHANNELS.bkp, 'bark');
-  assert.equal(PART_CODE_CHANNELS.frp, 'fruit');
-  assert.equal(PART_CODE_CHANNELS.flp, 'flower');
-  assert.equal(PART_CODE_CHANNELS.twp, 'twig');
+  // Task 19 read the live file names: the three letters give the size, the
+  // orientation, and photo or drawing. `quga_001_lvp` is bark and
+  // `quga_004_lhp` is a leaf, so no code names a channel and the table is empty.
+  assert.deepEqual(PART_CODE_CHANNELS, {});
+  assert.equal(PART_CODE_CHANNELS.lvp, undefined);
   assert.equal(PART_CODE_CHANNELS.hbp, undefined);
 });
 
@@ -368,7 +424,7 @@ test('the fetch helpers read the fake HTTP client and parse the body', async () 
   assert.equal(profile?.plants_id, QUGA_ID);
   assert.deepEqual(await fetchDistribution(http, QUGA_ID, FETCHED_AT), ['AZ', 'CO', 'NM', 'UT']);
   assert.equal((await fetchImages(http, QUGA_ID, FETCHED_AT)).length, 5);
-  assert.equal((await fetchChecklist(http, FETCHED_AT)).length, 5);
+  assert.equal((await fetchChecklist(http, FETCHED_AT)).length, 8);
   assert.equal(await fetchProfile(http, 'NOPE', FETCHED_AT), null);
   assert.deepEqual(asked, [
     profileUrl('QUGA'),
@@ -383,19 +439,20 @@ test('the fetch helpers read the fake HTTP client and parse the body', async () 
   );
   assert.equal(
     subordinateTaxaUrl(QUGA_ID, FIRST_OFFSET),
-    'https://plantsservices.sc.egov.usda.gov/api/PlantSubordinateTaxa/25297?offset=0',
+    'https://plantsservices.sc.egov.usda.gov/api/PlantSubordinateTaxa/70265?offset=0',
   );
 });
 
-test('fetchSubordinateTaxa follows the offset until it has read TotalResults rows', async () => {
+// The live response names the list `SubordinateTaxa` and writes `NumTotalResults`
+// as null, so the empty page at the next offset is what ends the walk.
+test('fetchSubordinateTaxa follows the offset until a page comes back empty', async () => {
   const { http, asked } = makeHttp({
     [subordinateTaxaUrl(QUGA_ID, FIRST_OFFSET)]: fixture('plants_subordinate_quga.json'),
     [subordinateTaxaUrl(QUGA_ID, PAGE_ONE_ROWS)]: fixture('plants_subordinate_quga_page2.json'),
   });
   assert.deepEqual(await fetchSubordinateTaxa(http, QUGA_ID, FETCHED_AT), [
+    { key: 'QUGAB2', name: 'var. bonina' },
     { key: 'QUGAG', name: 'var. gambelii' },
-    { key: 'QUGAB', name: 'var. bakeri' },
-    { key: 'QUGAT', name: 'var. triloba' },
   ]);
   assert.deepEqual(asked, [
     subordinateTaxaUrl(QUGA_ID, FIRST_OFFSET),

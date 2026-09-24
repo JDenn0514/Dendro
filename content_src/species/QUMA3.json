@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Central and eastern United States, west to Texas and Kansas" },
+  "elevation_ft": [0, 2950],
+  "height_ft": [30, 50],
+  "habitat": "Poor shallow soils of glades, barrens, rocky outcrops and dry ridges",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus marilandica",
+    "FNA vol. 3, Quercus marilandica",
+    "Fire Effects Information System, Quercus marilandica"
+  ]
+}

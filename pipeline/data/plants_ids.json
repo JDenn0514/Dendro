@@ -1,0 +1,1218 @@
+{
+  "ACBU4": {
+    "id": 92754,
+    "scientific": "Acer buergerianum"
+  },
+  "ACCA5": {
+    "id": 92755,
+    "scientific": "Acer campestre"
+  },
+  "ACCI": {
+    "id": 92756,
+    "scientific": "Acer circinatum"
+  },
+  "ACCI5": {
+    "id": 92757,
+    "scientific": "Acer cissifolium"
+  },
+  "ACDI12": {
+    "id": 92758,
+    "scientific": "Acer diabolicum"
+  },
+  "ACER": {
+    "id": 92753,
+    "scientific": "Acer L."
+  },
+  "ACFL": {
+    "id": 92759,
+    "scientific": "Acer floridanum"
+  },
+  "ACFR": {
+    "id": 92771,
+    "scientific": "Acer ×freemanii"
+  },
+  "ACGI": {
+    "id": 92772,
+    "scientific": "Acer ginnala"
+  },
+  "ACGL": {
+    "id": 92774,
+    "scientific": "Acer glabrum"
+  },
+  "ACGLD3": {
+    "id": 92775,
+    "scientific": "Acer glabrum var. diffusum"
+  },
+  "ACGLD4": {
+    "id": 92778,
+    "scientific": "Acer glabrum var. douglasii"
+  },
+  "ACGLG": {
+    "id": 92781,
+    "scientific": "Acer glabrum var. greenei"
+  },
+  "ACGLG2": {
+    "id": 92782,
+    "scientific": "Acer glabrum var. glabrum"
+  },
+  "ACGLN2": {
+    "id": 92786,
+    "scientific": "Acer glabrum var. neomexicanum"
+  },
+  "ACGLT2": {
+    "id": 92790,
+    "scientific": "Acer glabrum var. torreyi"
+  },
+  "ACGR14": {
+    "id": 92793,
+    "scientific": "Acer griseum"
+  },
+  "ACGR3": {
+    "id": 92794,
+    "scientific": "Acer grandidentatum"
+  },
+  "ACGRG": {
+    "id": 92795,
+    "scientific": "Acer grandidentatum var. grandidentatum"
+  },
+  "ACGRS": {
+    "id": 92799,
+    "scientific": "Acer grandidentatum var. sinuosum"
+  },
+  "ACJA2": {
+    "id": 92805,
+    "scientific": "Acer japonicum"
+  },
+  "ACLE": {
+    "id": 92806,
+    "scientific": "Acer leucoderme"
+  },
+  "ACLE2": {
+    "id": 92811,
+    "scientific": "Acer leucoderme"
+  },
+  "ACMA3": {
+    "id": 92813,
+    "scientific": "Acer macrophyllum"
+  },
+  "ACNE2": {
+    "id": 92814,
+    "scientific": "Acer negundo"
+  },
+  "ACNEA": {
+    "id": 92815,
+    "scientific": "Acer negundo var. arizonicum"
+  },
+  "ACNEC2": {
+    "id": 92816,
+    "scientific": "Acer negundo var. californicum"
+  },
+  "ACNEI2": {
+    "id": 92819,
+    "scientific": "Acer negundo var. interius"
+  },
+  "ACNEN": {
+    "id": 92824,
+    "scientific": "Acer negundo var. negundo"
+  },
+  "ACNET": {
+    "id": 92828,
+    "scientific": "Acer negundo var. texanum"
+  },
+  "ACNEV": {
+    "id": 92830,
+    "scientific": "Acer negundo var. violaceum"
+  },
+  "ACNI5": {
+    "id": 92832,
+    "scientific": "Acer nigrum"
+  },
+  "ACOP3": {
+    "id": 92838,
+    "scientific": "Acer opalus"
+  },
+  "ACOPO": {
+    "id": 92839,
+    "scientific": "Acer opalus ssp. obtusatum"
+  },
+  "ACPA2": {
+    "id": 92841,
+    "scientific": "Acer palmatum"
+  },
+  "ACPE": {
+    "id": 92842,
+    "scientific": "Acer pensylvanicum"
+  },
+  "ACPL": {
+    "id": 92843,
+    "scientific": "Acer platanoides"
+  },
+  "ACPS": {
+    "id": 92845,
+    "scientific": "Acer pseudoplatanus"
+  },
+  "ACRU": {
+    "id": 92846,
+    "scientific": "Acer rubrum"
+  },
+  "ACRUD": {
+    "id": 92847,
+    "scientific": "Acer rubrum var. drummondii"
+  },
+  "ACRUR": {
+    "id": 92851,
+    "scientific": "Acer rubrum var. rubrum"
+  },
+  "ACRUT": {
+    "id": 92855,
+    "scientific": "Acer rubrum var. trilobum"
+  },
+  "ACSA2": {
+    "id": 92860,
+    "scientific": "Acer saccharinum"
+  },
+  "ACSA3": {
+    "id": 92865,
+    "scientific": "Acer saccharum"
+  },
+  "ACSAS": {
+    "id": 92866,
+    "scientific": "Acer saccharum var. saccharum"
+  },
+  "ACSAS2": {
+    "id": 92872,
+    "scientific": "Acer saccharum var. schneckii"
+  },
+  "ACSP2": {
+    "id": 92875,
+    "scientific": "Acer spicatum"
+  },
+  "ACTA80": {
+    "id": 92876,
+    "scientific": "Acer tataricum"
+  },
+  "ACTAT2": {
+    "id": 92877,
+    "scientific": "Acer tataricum var. torminaloides"
+  },
+  "LICH6": {
+    "id": 71550,
+    "scientific": "Liriodendron chinense"
+  },
+  "LIOR2": {
+    "id": 70556,
+    "scientific": "Liquidambar orientalis"
+  },
+  "LIQUI": {
+    "id": 70555,
+    "scientific": "Liquidambar L."
+  },
+  "LIRIO": {
+    "id": 71549,
+    "scientific": "Liriodendron L."
+  },
+  "LIST2": {
+    "id": 70557,
+    "scientific": "Liquidambar styraciflua"
+  },
+  "LITU": {
+    "id": 71551,
+    "scientific": "Liriodendron tulipifera"
+  },
+  "PLATA": {
+    "id": 70561,
+    "scientific": "Platanus L."
+  },
+  "PLHI": {
+    "id": 70562,
+    "scientific": "Platanus ×hispanica"
+  },
+  "PLOC": {
+    "id": 70568,
+    "scientific": "Platanus occidentalis"
+  },
+  "PLOR6": {
+    "id": 70570,
+    "scientific": "Platanus orientalis"
+  },
+  "PLRA": {
+    "id": 70571,
+    "scientific": "Platanus racemosa"
+  },
+  "PLWR2": {
+    "id": 70572,
+    "scientific": "Platanus wrightii"
+  },
+  "QUAC2": {
+    "id": 70161,
+    "scientific": "Quercus acerifolia"
+  },
+  "QUAC3": {
+    "id": 70163,
+    "scientific": "Quercus ×acutidens"
+  },
+  "QUAC80": {
+    "id": 70164,
+    "scientific": "Quercus acutissima"
+  },
+  "QUAG": {
+    "id": 70165,
+    "scientific": "Quercus agrifolia"
+  },
+  "QUAGA": {
+    "id": 70166,
+    "scientific": "Quercus agrifolia var. agrifolia"
+  },
+  "QUAGO": {
+    "id": 70168,
+    "scientific": "Quercus agrifolia var. oxyadenia"
+  },
+  "QUAJ": {
+    "id": 70169,
+    "scientific": "Quercus ajoensis"
+  },
+  "QUAL": {
+    "id": 70172,
+    "scientific": "Quercus alba"
+  },
+  "QUAL2": {
+    "id": 70175,
+    "scientific": "Quercus ×alvordiana"
+  },
+  "QUAL3": {
+    "id": 70177,
+    "scientific": "Quercus alba"
+  },
+  "QUAR": {
+    "id": 70178,
+    "scientific": "Quercus arizonica"
+  },
+  "QUAR2": {
+    "id": 70179,
+    "scientific": "Quercus arkansana"
+  },
+  "QUAS3": {
+    "id": 70181,
+    "scientific": "Quercus ×ashei"
+  },
+  "QUAT": {
+    "id": 70183,
+    "scientific": "Quercus ×atlantica"
+  },
+  "QUAU": {
+    "id": 70185,
+    "scientific": "Quercus austrina"
+  },
+  "QUBE": {
+    "id": 70186,
+    "scientific": "Quercus ×beadlei"
+  },
+  "QUBE2": {
+    "id": 70187,
+    "scientific": "Quercus ×beaumontiana"
+  },
+  "QUBE3": {
+    "id": 70188,
+    "scientific": "Quercus ×bebbiana"
+  },
+  "QUBE4": {
+    "id": 70189,
+    "scientific": "Quercus ×bernardiensis"
+  },
+  "QUBE5": {
+    "id": 70190,
+    "scientific": "Quercus berberidifolia"
+  },
+  "QUBE8": {
+    "id": 70191,
+    "scientific": "Quercus ×beckyae"
+  },
+  "QUBE9": {
+    "id": 70192,
+    "scientific": "Quercus ×benderi"
+  },
+  "QUBI": {
+    "id": 70193,
+    "scientific": "Quercus bicolor"
+  },
+  "QUBI2": {
+    "id": 70194,
+    "scientific": "Quercus ×bimundorum"
+  },
+  "QUBL": {
+    "id": 70195,
+    "scientific": "Quercus ×blufftonensis"
+  },
+  "QUBO2": {
+    "id": 70196,
+    "scientific": "Quercus boyntonii"
+  },
+  "QUBR": {
+    "id": 70198,
+    "scientific": "Quercus ×brittonii"
+  },
+  "QUBR2": {
+    "id": 70199,
+    "scientific": "Quercus brantii"
+  },
+  "QUBU": {
+    "id": 70201,
+    "scientific": "Quercus ×bushii"
+  },
+  "QUBU2": {
+    "id": 70202,
+    "scientific": "Quercus buckleyi"
+  },
+  "QUBU3": {
+    "id": 70204,
+    "scientific": "Quercus ×burnetensis"
+  },
+  "QUBY": {
+    "id": 70205,
+    "scientific": "Quercus ×byarsii"
+  },
+  "QUCA": {
+    "id": 70206,
+    "scientific": "Quercus ×caduca"
+  },
+  "QUCA2": {
+    "id": 70207,
+    "scientific": "Quercus ×capesii"
+  },
+  "QUCA3": {
+    "id": 70208,
+    "scientific": "Quercus ×caesariensis"
+  },
+  "QUCA7": {
+    "id": 70209,
+    "scientific": "Quercus carmenensis"
+  },
+  "QUCE": {
+    "id": 70210,
+    "scientific": "Quercus cerris"
+  },
+  "QUCE2": {
+    "id": 70211,
+    "scientific": "Quercus cedrosensis"
+  },
+  "QUCH": {
+    "id": 70212,
+    "scientific": "Quercus chapmanii"
+  },
+  "QUCH2": {
+    "id": 70213,
+    "scientific": "Quercus chrysolepis"
+  },
+  "QUCH4": {
+    "id": 70217,
+    "scientific": "Quercus chihuahuensis"
+  },
+  "QUCH5": {
+    "id": 70218,
+    "scientific": "Quercus chenii"
+  },
+  "QUCHC": {
+    "id": 70214,
+    "scientific": "Quercus chrysolepis var. chrysolepis"
+  },
+  "QUCHN": {
+    "id": 70216,
+    "scientific": "Quercus chrysolepis var. nana"
+  },
+  "QUCO2": {
+    "id": 70219,
+    "scientific": "Quercus coccinea"
+  },
+  "QUCO3": {
+    "id": 70223,
+    "scientific": "Quercus ×comptoniae"
+  },
+  "QUCO4": {
+    "id": 70224,
+    "scientific": "Quercus ×columnaris"
+  },
+  "QUCO5": {
+    "id": 70225,
+    "scientific": "Quercus ×cocksii"
+  },
+  "QUCO7": {
+    "id": 70226,
+    "scientific": "Quercus cornelius-mulleri"
+  },
+  "QUCOC": {
+    "id": 70220,
+    "scientific": "Quercus coccinea var. coccinea"
+  },
+  "QUCOT": {
+    "id": 70222,
+    "scientific": "Quercus coccinea var. tuberculata"
+  },
+  "QUCR": {
+    "id": 70227,
+    "scientific": "Quercus ×cravenensis"
+  },
+  "QUDE": {
+    "id": 70229,
+    "scientific": "Quercus ×deamii"
+  },
+  "QUDE2": {
+    "id": 70231,
+    "scientific": "Quercus ×demareei"
+  },
+  "QUDE3": {
+    "id": 70232,
+    "scientific": "Quercus depressipes"
+  },
+  "QUDE4": {
+    "id": 70233,
+    "scientific": "Quercus dentata"
+  },
+  "QUDI": {
+    "id": 70234,
+    "scientific": "Quercus ×discreta"
+  },
+  "QUDI2": {
+    "id": 70235,
+    "scientific": "Quercus ×diversiloba"
+  },
+  "QUDO": {
+    "id": 70236,
+    "scientific": "Quercus douglasii"
+  },
+  "QUDU": {
+    "id": 70237,
+    "scientific": "Quercus dumosa"
+  },
+  "QUDU4": {
+    "id": 70240,
+    "scientific": "Quercus durata"
+  },
+  "QUDUD": {
+    "id": 70238,
+    "scientific": "Quercus dumosa var. dumosa"
+  },
+  "QUDUD2": {
+    "id": 70241,
+    "scientific": "Quercus durata var. durata"
+  },
+  "QUDUE": {
+    "id": 70239,
+    "scientific": "Quercus dumosa var. elegantula"
+  },
+  "QUDUG": {
+    "id": 70242,
+    "scientific": "Quercus durata var. gabrielensis"
+  },
+  "QUEG": {
+    "id": 70243,
+    "scientific": "Quercus ×egglestonii"
+  },
+  "QUEL": {
+    "id": 70245,
+    "scientific": "Quercus ellipsoidalis"
+  },
+  "QUEM": {
+    "id": 70246,
+    "scientific": "Quercus emoryi"
+  },
+  "QUEN": {
+    "id": 70247,
+    "scientific": "Quercus engelmannii"
+  },
+  "QUEP": {
+    "id": 70248,
+    "scientific": "Quercus ×eplingii"
+  },
+  "QUERC": {
+    "id": 70160,
+    "scientific": "Quercus L."
+  },
+  "QUEX": {
+    "id": 70249,
+    "scientific": "Quercus ×exacta"
+  },
+  "QUFA": {
+    "id": 70250,
+    "scientific": "Quercus falcata"
+  },
+  "QUFA2": {
+    "id": 70253,
+    "scientific": "Quercus ×faxonii"
+  },
+  "QUFE": {
+    "id": 70254,
+    "scientific": "Quercus ×fernaldii"
+  },
+  "QUFE2": {
+    "id": 70256,
+    "scientific": "Quercus ×fernowii"
+  },
+  "QUFI": {
+    "id": 70257,
+    "scientific": "Quercus ×filialis"
+  },
+  "QUFO": {
+    "id": 70260,
+    "scientific": "Quercus ×fontana"
+  },
+  "QUFR": {
+    "id": 70261,
+    "scientific": "Quercus frainetto"
+  },
+  "QUFU": {
+    "id": 70263,
+    "scientific": "Quercus fusiformis"
+  },
+  "QUGA": {
+    "id": 70265,
+    "scientific": "Quercus gambelii"
+  },
+  "QUGA2": {
+    "id": 70276,
+    "scientific": "Quercus ×ganderi"
+  },
+  "QUGA3": {
+    "id": 70278,
+    "scientific": "Quercus ×garlandensis"
+  },
+  "QUGA4": {
+    "id": 70279,
+    "scientific": "Quercus garryana"
+  },
+  "QUGAB2": {
+    "id": 70266,
+    "scientific": "Quercus gambelii var. bonina"
+  },
+  "QUGAF": {
+    "id": 70280,
+    "scientific": "Quercus garryana var. fruticosa"
+  },
+  "QUGAG": {
+    "id": 70267,
+    "scientific": "Quercus gambelii var. gambelii"
+  },
+  "QUGAG2": {
+    "id": 70283,
+    "scientific": "Quercus garryana var. garryana"
+  },
+  "QUGAS": {
+    "id": 70284,
+    "scientific": "Quercus garryana var. semota"
+  },
+  "QUGE": {
+    "id": 70286,
+    "scientific": "Quercus georgiana"
+  },
+  "QUGE2": {
+    "id": 70287,
+    "scientific": "Quercus geminata"
+  },
+  "QUGI": {
+    "id": 70290,
+    "scientific": "Quercus ×giffordii"
+  },
+  "QUGL2": {
+    "id": 70291,
+    "scientific": "Quercus glauca"
+  },
+  "QUGR": {
+    "id": 70293,
+    "scientific": "Quercus graciliformis"
+  },
+  "QUGR2": {
+    "id": 70294,
+    "scientific": "Quercus gravesii"
+  },
+  "QUGR3": {
+    "id": 70295,
+    "scientific": "Quercus grisea"
+  },
+  "QUGR4": {
+    "id": 70296,
+    "scientific": "Quercus ×grandidentata"
+  },
+  "QUGU": {
+    "id": 70297,
+    "scientific": "Quercus ×guadalupensis"
+  },
+  "QUHA": {
+    "id": 70298,
+    "scientific": "Quercus ×harbisonii"
+  },
+  "QUHA2": {
+    "id": 70299,
+    "scientific": "Quercus ×hastingsii"
+  },
+  "QUHA3": {
+    "id": 70300,
+    "scientific": "Quercus havardii"
+  },
+  "QUHA4": {
+    "id": 70303,
+    "scientific": "Quercus ×hawkinsiae"
+  },
+  "QUHAH": {
+    "id": 70301,
+    "scientific": "Quercus havardii var. havardii"
+  },
+  "QUHAT": {
+    "id": 70302,
+    "scientific": "Quercus havardii var. tuckeri"
+  },
+  "QUHE": {
+    "id": 70305,
+    "scientific": "Quercus ×heterophylla"
+  },
+  "QUHE2": {
+    "id": 70306,
+    "scientific": "Quercus hemisphaerica"
+  },
+  "QUHEH": {
+    "id": 70307,
+    "scientific": "Quercus hemisphaerica var. hemisphaerica"
+  },
+  "QUHEM": {
+    "id": 70308,
+    "scientific": "Quercus hemisphaerica var. maritima"
+  },
+  "QUHI": {
+    "id": 70310,
+    "scientific": "Quercus hinckleyi"
+  },
+  "QUHO": {
+    "id": 70311,
+    "scientific": "Quercus ×howellii"
+  },
+  "QUHU": {
+    "id": 70312,
+    "scientific": "Quercus ×humidicola"
+  },
+  "QUHY": {
+    "id": 70313,
+    "scientific": "Quercus hypoleucoides"
+  },
+  "QUIL": {
+    "id": 70314,
+    "scientific": "Quercus ilicifolia"
+  },
+  "QUIL2": {
+    "id": 70315,
+    "scientific": "Quercus ilex"
+  },
+  "QUIM": {
+    "id": 70316,
+    "scientific": "Quercus imbricaria"
+  },
+  "QUIN": {
+    "id": 70317,
+    "scientific": "Quercus incana"
+  },
+  "QUIN2": {
+    "id": 70319,
+    "scientific": "Quercus ×inconstans"
+  },
+  "QUIN3": {
+    "id": 70321,
+    "scientific": "Quercus intricata"
+  },
+  "QUIN4": {
+    "id": 70322,
+    "scientific": "Quercus ×introgressa"
+  },
+  "QUIN5": {
+    "id": 70323,
+    "scientific": "Quercus ×incomita"
+  },
+  "QUIN6": {
+    "id": 70324,
+    "scientific": "Quercus infectoria"
+  },
+  "QUIN7": {
+    "id": 70325,
+    "scientific": "Quercus inopina"
+  },
+  "QUJA": {
+    "id": 70326,
+    "scientific": "Quercus ×jackiana"
+  },
+  "QUJO": {
+    "id": 70327,
+    "scientific": "Quercus ×jolonensis"
+  },
+  "QUJO3": {
+    "id": 70328,
+    "scientific": "Quercus john-tuckeri"
+  },
+  "QUJO4": {
+    "id": 70331,
+    "scientific": "Quercus ×joorii"
+  },
+  "QUKE": {
+    "id": 70332,
+    "scientific": "Quercus kelloggii"
+  },
+  "QULA": {
+    "id": 70334,
+    "scientific": "Quercus laceyi"
+  },
+  "QULA2": {
+    "id": 70336,
+    "scientific": "Quercus laevis"
+  },
+  "QULA3": {
+    "id": 70338,
+    "scientific": "Quercus laurifolia"
+  },
+  "QULE": {
+    "id": 70343,
+    "scientific": "Quercus ×leana"
+  },
+  "QULO": {
+    "id": 70344,
+    "scientific": "Quercus lobata"
+  },
+  "QULU": {
+    "id": 70350,
+    "scientific": "Quercus ×ludoviciana"
+  },
+  "QULY": {
+    "id": 70351,
+    "scientific": "Quercus lyrata"
+  },
+  "QUMA": {
+    "id": 70352,
+    "scientific": "Quercus ×macnabiana"
+  },
+  "QUMA13": {
+    "id": 70354,
+    "scientific": "Quercus margaretta"
+  },
+  "QUMA2": {
+    "id": 70362,
+    "scientific": "Quercus macrocarpa"
+  },
+  "QUMA3": {
+    "id": 70367,
+    "scientific": "Quercus marilandica"
+  },
+  "QUMA4": {
+    "id": 70373,
+    "scientific": "Quercus ×macdonaldii"
+  },
+  "QUMA5": {
+    "id": 70375,
+    "scientific": "Quercus macrolepis"
+  },
+  "QUMAA2": {
+    "id": 70368,
+    "scientific": "Quercus marilandica var. ashei"
+  },
+  "QUMAD": {
+    "id": 70363,
+    "scientific": "Quercus macrocarpa var. depressa"
+  },
+  "QUMAM": {
+    "id": 70365,
+    "scientific": "Quercus macrocarpa var. macrocarpa"
+  },
+  "QUMAM2": {
+    "id": 70371,
+    "scientific": "Quercus marilandica var. marilandica"
+  },
+  "QUME": {
+    "id": 70377,
+    "scientific": "Quercus ×mellichampii"
+  },
+  "QUME2": {
+    "id": 70378,
+    "scientific": "Quercus ×megaleia"
+  },
+  "QUMI": {
+    "id": 70379,
+    "scientific": "Quercus michauxii"
+  },
+  "QUMI2": {
+    "id": 70382,
+    "scientific": "Quercus minima"
+  },
+  "QUMO": {
+    "id": 70384,
+    "scientific": "Quercus mohriana"
+  },
+  "QUMO2": {
+    "id": 70385,
+    "scientific": "Quercus ×moreha"
+  },
+  "QUMO3": {
+    "id": 70386,
+    "scientific": "Quercus ×moultonensis"
+  },
+  "QUMO4": {
+    "id": 70387,
+    "scientific": "Quercus montana"
+  },
+  "QUMO5": {
+    "id": 70389,
+    "scientific": "Quercus mongolica"
+  },
+  "QUMU": {
+    "id": 70390,
+    "scientific": "Quercus muehlenbergii"
+  },
+  "QUMU2": {
+    "id": 70395,
+    "scientific": "Quercus ×mutabilis"
+  },
+  "QUMU3": {
+    "id": 70396,
+    "scientific": "Quercus ×munzii"
+  },
+  "QUMY": {
+    "id": 70397,
+    "scientific": "Quercus myrtifolia"
+  },
+  "QUNE": {
+    "id": 70398,
+    "scientific": "Quercus ×neopalmeri"
+  },
+  "QUNE2": {
+    "id": 70399,
+    "scientific": "Quercus ×neotharpii"
+  },
+  "QUNE3": {
+    "id": 70400,
+    "scientific": "Quercus ×nessiana"
+  },
+  "QUNI": {
+    "id": 70401,
+    "scientific": "Quercus nigra"
+  },
+  "QUOB": {
+    "id": 70404,
+    "scientific": "Quercus oblongifolia"
+  },
+  "QUOG": {
+    "id": 70405,
+    "scientific": "Quercus oglethorpensis"
+  },
+  "QUOR": {
+    "id": 70406,
+    "scientific": "Quercus ×organensis"
+  },
+  "QUOV": {
+    "id": 70407,
+    "scientific": "Quercus ×oviedoensis"
+  },
+  "QUPA": {
+    "id": 70408,
+    "scientific": "Quercus ×palaeolithicola"
+  },
+  "QUPA10": {
+    "id": 70409,
+    "scientific": "Quercus palmeri"
+  },
+  "QUPA2": {
+    "id": 70412,
+    "scientific": "Quercus palustris"
+  },
+  "QUPA3": {
+    "id": 70413,
+    "scientific": "Quercus ×palmeriana"
+  },
+  "QUPA4": {
+    "id": 70415,
+    "scientific": "Quercus ×pauciloba"
+  },
+  "QUPA5": {
+    "id": 70420,
+    "scientific": "Quercus pagoda"
+  },
+  "QUPA6": {
+    "id": 70424,
+    "scientific": "Quercus pacifica"
+  },
+  "QUPA8": {
+    "id": 70425,
+    "scientific": "Quercus parvula"
+  },
+  "QUPAP2": {
+    "id": 70426,
+    "scientific": "Quercus parvula var. parvula"
+  },
+  "QUPAS2": {
+    "id": 70427,
+    "scientific": "Quercus parvula var. shrevei"
+  },
+  "QUPAT": {
+    "id": 70429,
+    "scientific": "Quercus parvula var. tamalpaisensis"
+  },
+  "QUPE2": {
+    "id": 70430,
+    "scientific": "Quercus petraea"
+  },
+  "QUPH": {
+    "id": 70432,
+    "scientific": "Quercus phellos"
+  },
+  "QUPO": {
+    "id": 70433,
+    "scientific": "Quercus ×podophylla"
+  },
+  "QUPO2": {
+    "id": 70434,
+    "scientific": "Quercus polymorpha"
+  },
+  "QUPR": {
+    "id": 70435,
+    "scientific": "Quercus prinoides"
+  },
+  "QUPS": {
+    "id": 70437,
+    "scientific": "Quercus ×pseudomargaretta"
+  },
+  "QUPU": {
+    "id": 70438,
+    "scientific": "Quercus pungens"
+  },
+  "QUPU80": {
+    "id": 70439,
+    "scientific": "Quercus pumila"
+  },
+  "QURE": {
+    "id": 70441,
+    "scientific": "Quercus ×rehderi"
+  },
+  "QURI": {
+    "id": 70442,
+    "scientific": "Quercus ×riparia"
+  },
+  "QURO": {
+    "id": 70443,
+    "scientific": "Quercus ×robbinsii"
+  },
+  "QURO2": {
+    "id": 70444,
+    "scientific": "Quercus robur"
+  },
+  "QURO3": {
+    "id": 70446,
+    "scientific": "Quercus robusta"
+  },
+  "QURO4": {
+    "id": 70447,
+    "scientific": "Quercus ×rolfsii"
+  },
+  "QURU": {
+    "id": 70448,
+    "scientific": "Quercus rubra"
+  },
+  "QURU2": {
+    "id": 70455,
+    "scientific": "Quercus ×rudkinii"
+  },
+  "QURU3": {
+    "id": 70457,
+    "scientific": "Quercus ×runcinata"
+  },
+  "QURU4": {
+    "id": 70458,
+    "scientific": "Quercus rugosa"
+  },
+  "QURUA": {
+    "id": 70449,
+    "scientific": "Quercus rubra var. ambigua"
+  },
+  "QURUR": {
+    "id": 70452,
+    "scientific": "Quercus rubra var. rubra"
+  },
+  "QUSA": {
+    "id": 70461,
+    "scientific": "Quercus ×saulii"
+  },
+  "QUSA2": {
+    "id": 70462,
+    "scientific": "Quercus sadleriana"
+  },
+  "QUSA3": {
+    "id": 70463,
+    "scientific": "Quercus ×sargentii"
+  },
+  "QUSC": {
+    "id": 70464,
+    "scientific": "Quercus ×schochiana"
+  },
+  "QUSC2": {
+    "id": 70465,
+    "scientific": "Quercus ×schuettei"
+  },
+  "QUSE2": {
+    "id": 70467,
+    "scientific": "Quercus serrata"
+  },
+  "QUSH": {
+    "id": 70468,
+    "scientific": "Quercus shumardii"
+  },
+  "QUSHS": {
+    "id": 70469,
+    "scientific": "Quercus shumardii var. schneckii"
+  },
+  "QUSHS2": {
+    "id": 70471,
+    "scientific": "Quercus shumardii var. shumardii"
+  },
+  "QUSHS3": {
+    "id": 70472,
+    "scientific": "Quercus shumardii var. stenocarpa"
+  },
+  "QUSI": {
+    "id": 70473,
+    "scientific": "Quercus sinuata"
+  },
+  "QUSI2": {
+    "id": 70482,
+    "scientific": "Quercus similis"
+  },
+  "QUSIB": {
+    "id": 70474,
+    "scientific": "Quercus sinuata var. breviloba"
+  },
+  "QUSIS": {
+    "id": 70480,
+    "scientific": "Quercus sinuata var. sinuata"
+  },
+  "QUSM": {
+    "id": 70487,
+    "scientific": "Quercus ×smallii"
+  },
+  "QUST": {
+    "id": 70488,
+    "scientific": "Quercus stellata"
+  },
+  "QUST2": {
+    "id": 70491,
+    "scientific": "Quercus ×stelloides"
+  },
+  "QUST3": {
+    "id": 70492,
+    "scientific": "Quercus ×sterilis"
+  },
+  "QUST4": {
+    "id": 70493,
+    "scientific": "Quercus ×sterretii"
+  },
+  "QUSU2": {
+    "id": 70494,
+    "scientific": "Quercus ×subintegra"
+  },
+  "QUSU3": {
+    "id": 70496,
+    "scientific": "Quercus ×substellata"
+  },
+  "QUSU4": {
+    "id": 70497,
+    "scientific": "Quercus ×subconvexa"
+  },
+  "QUSU5": {
+    "id": 70498,
+    "scientific": "Quercus suber"
+  },
+  "QUSU6": {
+    "id": 70499,
+    "scientific": "Quercus ×subfalcata"
+  },
+  "QUTA": {
+    "id": 70500,
+    "scientific": "Quercus tardifolia"
+  },
+  "QUTE": {
+    "id": 70501,
+    "scientific": "Quercus texana"
+  },
+  "QUTH": {
+    "id": 70507,
+    "scientific": "Quercus ×tharpii"
+  },
+  "QUTO": {
+    "id": 70508,
+    "scientific": "Quercus tomentella"
+  },
+  "QUTO2": {
+    "id": 70509,
+    "scientific": "Quercus toumeyi"
+  },
+  "QUTO3": {
+    "id": 70510,
+    "scientific": "Quercus ×townei"
+  },
+  "QUTO4": {
+    "id": 70513,
+    "scientific": "Quercus ×tottenii"
+  },
+  "QUTR": {
+    "id": 70514,
+    "scientific": "Quercus ×tridentata"
+  },
+  "QUTU2": {
+    "id": 70515,
+    "scientific": "Quercus turbinella"
+  },
+  "QUVA": {
+    "id": 70517,
+    "scientific": "Quercus vacciniifolia"
+  },
+  "QUVA2": {
+    "id": 70518,
+    "scientific": "Quercus ×vaga"
+  },
+  "QUVA3": {
+    "id": 70519,
+    "scientific": "Quercus variabilis"
+  },
+  "QUVA5": {
+    "id": 70521,
+    "scientific": "Quercus vaseyana"
+  },
+  "QUVE": {
+    "id": 70523,
+    "scientific": "Quercus velutina"
+  },
+  "QUVE2": {
+    "id": 70525,
+    "scientific": "Quercus ×venulosa"
+  },
+  "QUVI": {
+    "id": 70526,
+    "scientific": "Quercus virginiana"
+  },
+  "QUVI2": {
+    "id": 70527,
+    "scientific": "Quercus viminea"
+  },
+  "QUWA": {
+    "id": 70528,
+    "scientific": "Quercus ×walteriana"
+  },
+  "QUWA2": {
+    "id": 70529,
+    "scientific": "Quercus ×wagneri"
+  },
+  "QUWI": {
+    "id": 70530,
+    "scientific": "Quercus ×willdenowiana"
+  },
+  "QUWI2": {
+    "id": 70532,
+    "scientific": "Quercus wislizeni"
+  },
+  "QUWIF": {
+    "id": 70533,
+    "scientific": "Quercus wislizeni var. frutescens"
+  },
+  "QUWIW": {
+    "id": 70534,
+    "scientific": "Quercus wislizeni var. wislizeni"
+  }
+}

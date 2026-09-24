@@ -1,1 +1,154 @@
-[]
+[
+  {
+    "a": "QUGA",
+    "b": "QUMA2",
+    "channel": "leaf",
+    "a_not_b": "Gambel oak has rounded lobes of even depth, and the sinuses cut a little more than halfway to the midrib.",
+    "b_not_a": "Bur oak has its deepest pair of sinuses near the middle of the blade, cutting nearly to the midrib, so the leaf looks fiddle-shaped.",
+    "ref": "FNA vol. 3, Quercus gambelii (taxon 233501032) and Quercus macrocarpa (taxon 233501058)"
+  },
+  {
+    "a": "ACSA2",
+    "b": "ACSA3",
+    "channel": "leaf",
+    "a_not_b": "Silver maple has deep narrow sinuses, coarse teeth on the lobe margins, and a silvery white underside.",
+    "b_not_a": "Sugar maple has shallow rounded sinuses, a smooth margin between the lobes, and a pale green underside.",
+    "ref": "Virginia Tech Dendrology fact sheets 5, Acer saccharinum, and 2, Acer saccharum"
+  },
+  {
+    "a": "ACSA3",
+    "b": "ACPL",
+    "channel": "leaf",
+    "a_not_b": "Sugar maple has 5 rounded lobes and a smooth margin between the lobe tips.",
+    "b_not_a": "Norway maple has 5 to 7 lobes with long pointed teeth, and a cut petiole leaks milky white sap.",
+    "ref": "Virginia Tech Dendrology fact sheets 2, Acer saccharum, and 6, Acer platanoides"
+  },
+  {
+    "a": "ACSA2",
+    "b": "ACPL",
+    "channel": "leaf",
+    "a_not_b": "Silver maple has 5 sinuses that cut deep toward the petiole, and the underside is silvery white.",
+    "b_not_a": "Norway maple has 5 to 7 broad lobes with long pointed teeth, and the underside is only a paler green.",
+    "ref": "Virginia Tech Dendrology fact sheets 5, Acer saccharinum, and 6, Acer platanoides"
+  },
+  {
+    "a": "ACGR3",
+    "b": "ACSA3",
+    "channel": "leaf",
+    "a_not_b": "Bigtooth maple has 3 blunt lobes with a few widely spaced rounded teeth, on a small blade about as wide as long.",
+    "b_not_a": "Sugar maple has 5 lobes on a longer blade, and the margin between the lobes carries no teeth.",
+    "ref": "Virginia Tech Dendrology fact sheets 587, Acer grandidentatum, and 2, Acer saccharum"
+  },
+  {
+    "a": "ACGL",
+    "b": "ACGR3",
+    "channel": "leaf",
+    "a_not_b": "Rocky Mountain maple has 3 to 5 sharply toothed lobes, and some leaves split into 3 separate leaflets.",
+    "b_not_a": "Bigtooth maple has 3 to 5 blunt lobes with only a few widely spaced rounded teeth, and the blade stays in one piece.",
+    "ref": "Virginia Tech Dendrology fact sheets 161, Acer glabrum, and 587, Acer grandidentatum"
+  },
+  {
+    "a": "PLOC",
+    "b": "ACPL",
+    "channel": "leaf",
+    "a_not_b": "American sycamore sets its leaves one at a time along the twig, and the swollen petiole base hides the bud.",
+    "b_not_a": "Norway maple sets its leaves in pairs, across from each other on the twig.",
+    "ref": "Virginia Tech Dendrology fact sheets 36, Platanus occidentalis, and 6, Acer platanoides"
+  },
+  {
+    "a": "QURU",
+    "b": "QUVE",
+    "channel": "leaf",
+    "a_not_b": "Northern red oak has sinuses that cut a third to halfway to the midvein, and the underside is smooth.",
+    "b_not_a": "Black oak has deeper sinuses, and the underside carries scruffy hairs with tufts in the vein angles.",
+    "ref": "Virginia Tech Dendrology fact sheets 38, Quercus rubra, and 39, Quercus velutina"
+  },
+  {
+    "a": "QURU",
+    "b": "QUVE",
+    "channel": "bark",
+    "a_not_b": "Northern red oak has wide flat-topped gray ridges with shallow furrows between them, in a pattern like ski tracks.",
+    "b_not_a": "Black oak has thick, nearly black bark, deeply furrowed up and down with horizontal breaks, over a yellow-orange inner bark.",
+    "ref": "Virginia Tech Dendrology fact sheets 38, Quercus rubra, and 39, Quercus velutina"
+  },
+  {
+    "a": "QURU",
+    "b": "QUSH",
+    "channel": "leaf",
+    "a_not_b": "Northern red oak has sinuses that cut less than halfway to the midrib, and the upper surface is dull green.",
+    "b_not_a": "Shumard's oak has sinuses that cut more than halfway to the midrib, a glossy upper surface, and large hair tufts in the vein angles below.",
+    "ref": "FNA vol. 3, Quercus rubra (taxon 233501079) and Quercus shumardii (taxon 233501082); Virginia Tech Dendrology fact sheet 169, Quercus shumardii"
+  },
+  {
+    "a": "QUSH",
+    "b": "QUBU2",
+    "channel": "leaf",
+    "a_not_b": "Shumard's oak has a long blade, 100 to 200 mm, broadly elliptic to obovate in outline.",
+    "b_not_a": "Texas red oak has a shorter blade, 55 to 100 mm, and the outline is nearly circular.",
+    "ref": "FNA vol. 3, Quercus shumardii (taxon 233501082) and Quercus buckleyi (taxon 233501014)"
+  },
+  {
+    "a": "QUPA2",
+    "b": "QURU",
+    "channel": "leaf",
+    "a_not_b": "Pin oak has deep U-shaped sinuses that cut nearly to the midrib, so little blade is left between the lobes.",
+    "b_not_a": "Northern red oak has sinuses that cut only a third to halfway to the midvein, so the blade looks solid and even.",
+    "ref": "Virginia Tech Dendrology fact sheets 74, Quercus palustris, and 38, Quercus rubra"
+  },
+  {
+    "a": "QUPA2",
+    "b": "QURU",
+    "channel": "bark",
+    "a_not_b": "Pin oak has thin, tight, gray-brown bark, and dead down-pointing branchlets stay on the lower trunk.",
+    "b_not_a": "Northern red oak has a clear lower trunk, and the bark breaks into wide flat-topped ridges with shallow furrows.",
+    "ref": "Virginia Tech Dendrology fact sheets 74, Quercus palustris, and 38, Quercus rubra"
+  },
+  {
+    "a": "QUAL",
+    "b": "QUMA2",
+    "channel": "leaf",
+    "a_not_b": "White oak has 7 to 10 rounded finger-like lobes, and no deep waist across the middle of the blade.",
+    "b_not_a": "Bur oak has two middle sinuses that nearly reach the midrib, and the lobes near the tip spread into a crown.",
+    "ref": "Virginia Tech Dendrology fact sheets 35, Quercus alba, and 72, Quercus macrocarpa"
+  },
+  {
+    "a": "QUAL",
+    "b": "QUMA2",
+    "channel": "bark",
+    "a_not_b": "White oak has whitish to ashy gray bark that breaks into irregular plates and blocks.",
+    "b_not_a": "Bur oak has darker gray-brown bark, scaly but cut by clear vertical ridges on a large trunk.",
+    "ref": "Virginia Tech Dendrology fact sheets 35, Quercus alba, and 72, Quercus macrocarpa"
+  },
+  {
+    "a": "QUAL",
+    "b": "QUST",
+    "channel": "leaf",
+    "a_not_b": "White oak has 7 to 10 narrow rounded lobes along an oblong blade.",
+    "b_not_a": "Post oak has 5 lobes, and the two middle lobes are square, so the blade makes a cross.",
+    "ref": "Virginia Tech Dendrology fact sheets 35, Quercus alba, and 77, Quercus stellata"
+  },
+  {
+    "a": "QUMA2",
+    "b": "QUST",
+    "channel": "fruit",
+    "a_not_b": "Bur oak has a cup that covers at least half the nut, and soft awns on the rim make a fringe around it.",
+    "b_not_a": "Post oak has a shallower saucer-shaped cup with flat tight scales, and the rim carries no fringe.",
+    "ref": "FNA vol. 3, Quercus macrocarpa (taxon 233501058) and Quercus stellata (taxon 233501087)"
+  },
+  {
+    "a": "QUMA3",
+    "b": "QUVE",
+    "channel": "leaf",
+    "a_not_b": "Blackjack oak has 3 shallow bristle-tipped lobes at the wide end of a thick blade, so the leaf looks like a bell.",
+    "b_not_a": "Black oak has 5 to 7 deeper bristle-tipped lobes and a more even outline.",
+    "ref": "Virginia Tech Dendrology fact sheets 168, Quercus marilandica, and 39, Quercus velutina"
+  },
+  {
+    "a": "QUGA",
+    "b": "QUHA3",
+    "channel": "leaf",
+    "a_not_b": "Gambel oak has deep rounded lobes, with sinuses that cut more than halfway to the midrib.",
+    "b_not_a": "Havard oak has a wavy margin with only 2 or 3 rounded teeth on each side, on a thick blade with a gray woolly underside.",
+    "ref": "FNA vol. 3, Quercus gambelii (taxon 233501032) and Quercus havardii (taxon 233501042)"
+  }
+]

@@ -94,6 +94,7 @@ downstream of it.
 - Berry / drupe
 - Capsule
 - Cone (woody / soft / fleshy)
+- Ball / aggregate head
 
 **Flower**
 - Catkin
@@ -577,7 +578,7 @@ Decisions from the review of the app spec. Each line changes a rule above or in
   re-answer writes no log row and no state change. It does not apply in the placement
   test.
 - **A placement pass sets tier `mc8`,** interval 21, ease 2.5, reps 1, due today + 21. The
-  deck is one card per level-1 concept in every channel present, 21 cards in v0.
+  deck is one card per level-1 concept in every channel present, 22 cards in v0.
 - **Distractors come only from species with a card on this channel**, for names and for
   photos.
 - **Typed grading covers concept and group cards:** the `accept` list for a concept, the
@@ -592,3 +593,5 @@ Decisions from the review of the app spec. Each line changes a rule above or in
 - **The v0 confusion edges are a shipping requirement:** 15 to 25 edges for the
   `simple_lobed` bucket, drafted by agents from named references, read by the owner
   before merge.
+- **Added 2026-09-23: an eighth fruit concept, `ball`.** A sycamore fruit is a head of
+  many small dry fruits and fits none of the seven. The placement deck is 22 cards.

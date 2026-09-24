@@ -66,6 +66,25 @@ const STRING_AUTHORED: string[] = ['audubon_name', 'genus_common', 'arrangement'
 /** The app prints this when PLANTS gave no native status. */
 const NATIVE_STATUS_UNKNOWN = 'unknown';
 
+/** A genus and an epithet. A name with no epithet is a genus row, not a species. */
+const BINOMIAL_WORDS = 2;
+
+/**
+ * True when the name carries an epithet after the genus.
+ *
+ * The live checklist writes a genus row as `Acer L.`, the genus and its author,
+ * so counting the words is not enough. An epithet is one lowercase word, which
+ * an author never is. A hybrid writes `×` on the epithet, as in
+ * `Platanus ×hispanica`, or as a word of its own, as in `Quercus x undulata`.
+ */
+function isSpeciesName(name: string): boolean {
+  const words = name.trim().split(/\s+/).filter((word) => word !== '');
+  if (words.length < BINOMIAL_WORDS) return false;
+  const marker = words[1] === '×' || words[1].toLowerCase() === 'x';
+  const epithet = marker ? (words[2] ?? '') : words[1];
+  return /^[×xX]?[a-z]+(-[a-z]+)?$/.test(epithet);
+}
+
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -296,8 +315,20 @@ export function enumerateRun(input: {
   const kept: string[] = [];
   const dropped: { symbol: string; reason: string }[] = [];
 
+  const included = new Set(include);
+  const nameOf = new Map(
+    rows.filter((row) => row.synonym_symbol === '').map((row) => [row.symbol, row.scientific]),
+  );
+
   // acceptedSymbols drops the synonym rows and the other genera, and sorts.
   for (const symbol of acceptedSymbols(rows, genera)) {
+    // A name with no epithet is a genus row, not a species. The live checklist
+    // carries `Acer L.`, `Quercus L.`, and `Platanus L.` as accepted rows of
+    // their own, and each one matches its genus.
+    if (!isSpeciesName(nameOf.get(symbol) ?? '')) {
+      dropped.push({ symbol, reason: 'not a species' });
+      continue;
+    }
     const profile = profiles[symbol];
     if (profile === undefined) {
       dropped.push({ symbol, reason: 'no profile' });
@@ -307,13 +338,14 @@ export function enumerateRun(input: {
       dropped.push({ symbol, reason: 'not a tree' });
       continue;
     }
-    if (isHybrid(profile.scientific)) {
+    // An include symbol is the owner's own choice, so it bypasses the hybrid
+    // gate and the range gate. The tree gate still applies to it.
+    if (isHybrid(profile.scientific) && !included.has(symbol)) {
       dropped.push({ symbol, reason: 'hybrid' });
       continue;
     }
-    // include bypasses the range gate only. The tree and hybrid gates still apply.
     const inRange = (distribution[symbol] ?? []).some((state) => states.includes(state));
-    if (!inRange && !include.includes(symbol)) {
+    if (!inRange && !included.has(symbol)) {
       dropped.push({ symbol, reason: 'out of range' });
       continue;
     }

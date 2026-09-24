@@ -1,0 +1,1105 @@
+{
+  "name": "simple_lobed_co",
+  "bucket": "simple_lobed",
+  "concepts": [],
+  "concept_exemplars": {},
+  "states": [
+    "CO",
+    "UT",
+    "NM",
+    "WY",
+    "NE",
+    "KS"
+  ],
+  "genera": [
+    "Acer",
+    "Quercus",
+    "Platanus",
+    "Liquidambar",
+    "Liriodendron"
+  ],
+  "include": [
+    "ACPL",
+    "QURU",
+    "ACSA2",
+    "PLHI",
+    "QUPA2"
+  ],
+  "channels": [
+    "leaf",
+    "bark",
+    "fruit"
+  ],
+  "created_at": "2026-09-24T00:17:45Z",
+  "species": [
+    "ACGL",
+    "ACGLD3",
+    "ACGLD4",
+    "ACGLG2",
+    "ACGLN2",
+    "ACGR3",
+    "ACGRG",
+    "ACGRS",
+    "ACNE2",
+    "ACNEA",
+    "ACNEI2",
+    "ACNEN",
+    "ACNET",
+    "ACNEV",
+    "ACNI5",
+    "ACPL",
+    "ACSA2",
+    "ACSA3",
+    "ACSAS",
+    "PLHI",
+    "PLOC",
+    "PLWR2",
+    "QUAJ",
+    "QUAL",
+    "QUAR",
+    "QUBU2",
+    "QUCH2",
+    "QUCHC",
+    "QUEM",
+    "QUGA",
+    "QUGAB2",
+    "QUGAG",
+    "QUGR3",
+    "QUHA3",
+    "QUHAH",
+    "QUHAT",
+    "QUHY",
+    "QUIM",
+    "QUMA2",
+    "QUMA3",
+    "QUMAA2",
+    "QUMAD",
+    "QUMAM",
+    "QUMAM2",
+    "QUMO",
+    "QUMU",
+    "QUOB",
+    "QUPA10",
+    "QUPA2",
+    "QUPR",
+    "QUPU",
+    "QURU",
+    "QURU4",
+    "QURUA",
+    "QURUR",
+    "QUSH",
+    "QUSHS",
+    "QUSHS2",
+    "QUST",
+    "QUTO2",
+    "QUTU2",
+    "QUVE",
+    "QUVI"
+  ],
+  "dropped": [
+    {
+      "symbol": "ACBU4",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACCA5",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACCI",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACCI5",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACDI12",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACER",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "ACFL",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACFR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "ACGI",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACGLG",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACGLT2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACGR14",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACJA2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACLE",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACLE2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACMA3",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACNEC2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACOP3",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACOPO",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACPA2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACPE",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACPS",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACRU",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACRUD",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACRUR",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACRUT",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACSAS2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACSP2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACTA80",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACTAT2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "LICH6",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "LIOR2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "LIQUI",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "LIRIO",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "LIST2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "LITU",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "PLATA",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "PLOR6",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "PLRA",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAC2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAC3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUAC80",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAG",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAGA",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAGO",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAL2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUAL3",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAR2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAS3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUAT",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUAU",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUBE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE5",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUBE8",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE9",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBI",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUBI2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBL",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBO2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUBR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBR2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUBU",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBU3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBY",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCA3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCA7",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCE",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCE2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCH",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCH4",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCH5",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUCHN",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCO2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCO3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCO4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCO5",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCO7",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCOC",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCOT",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUCR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDE3",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUDE4",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUDI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDI2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDO",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUDU",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUDU4",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUDUD",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUDUD2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUDUE",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUDUG",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUEG",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUEL",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUEN",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUEP",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUERC",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "QUEX",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFA",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUFA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFR",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUFU",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUGA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUGA3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUGA4",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUGAF",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUGAG2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUGAS",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUGE",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUGE2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUGI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUGL2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUGR",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUGR2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUGR4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUGU",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHA4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHE2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUHEH",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUHEM",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUHI",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUHO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHU",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUIL",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUIL2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUIN",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUIN2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUIN3",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUIN4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUIN5",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUIN6",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUIN7",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUJA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUJO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUJO3",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUJO4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUKE",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QULA",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QULA2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QULA3",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QULE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QULO",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QULU",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QULY",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUMA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMA13",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUMA4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMA5",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUME",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUME2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMI",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUMI2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUMO2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMO3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMO4",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUMO5",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUMU2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMU3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMY",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUNE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUNE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUNE3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUNI",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUOG",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUOR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUOV",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPA3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPA4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPA5",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUPA6",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUPA8",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUPAP2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUPAS2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUPAT",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUPE2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUPH",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUPO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPO2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUPS",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPU80",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QURE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURO2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QURO3",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QURO4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURU2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURU3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSA2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUSA3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSC",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSC2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSE2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUSHS3",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUSI",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUSI2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUSIB",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUSIS",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUSM",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUST2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUST3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUST4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSU2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSU3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSU4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSU5",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUSU6",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUTA",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUTE",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUTH",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUTO",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUTO3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUTO4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUTR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUVA",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUVA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUVA3",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUVA5",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUVE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUVI2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUWA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUWA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUWI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUWI2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUWIF",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUWIW",
+      "reason": "out of range"
+    }
+  ],
+  "fetch_failures": 0,
+  "capped": [
+    "ACER: inat any listing capped at 4 pages",
+    "ACGL: inat any listing capped at 4 pages",
+    "ACGR3: inat any listing capped at 4 pages",
+    "ACNE2: inat any listing capped at 4 pages",
+    "ACNE2: inat flowering listing capped at 4 pages",
+    "ACNE2: inat fruiting listing capped at 4 pages",
+    "ACNI5: inat any listing capped at 4 pages",
+    "ACPL: inat any listing capped at 4 pages",
+    "ACPL: inat flowering listing capped at 4 pages",
+    "ACSA2: inat any listing capped at 4 pages",
+    "ACSA3: commons listing capped at 4 pages",
+    "ACSA3: inat any listing capped at 4 pages",
+    "PLOC: inat any listing capped at 4 pages",
+    "PLOC: inat fruiting listing capped at 4 pages",
+    "PLWR2: inat any listing capped at 4 pages",
+    "QUAL: inat any listing capped at 4 pages",
+    "QUAR: inat any listing capped at 4 pages",
+    "QUBU2: inat any listing capped at 4 pages",
+    "QUCH2: inat any listing capped at 4 pages",
+    "QUEM: inat any listing capped at 4 pages",
+    "QUERC: inat any listing capped at 4 pages",
+    "QUGA: inat any listing capped at 4 pages",
+    "QUGR3: inat any listing capped at 4 pages",
+    "QUHY: inat any listing capped at 4 pages",
+    "QUIM: inat any listing capped at 4 pages",
+    "QUMA2: inat any listing capped at 4 pages",
+    "QUMA3: inat any listing capped at 4 pages",
+    "QUMU: inat any listing capped at 4 pages",
+    "QUPA2: inat any listing capped at 4 pages",
+    "QUPR: inat any listing capped at 4 pages",
+    "QURU: inat any listing capped at 4 pages",
+    "QURU4: inat any listing capped at 4 pages",
+    "QUSH: inat any listing capped at 4 pages",
+    "QUST: inat any listing capped at 4 pages",
+    "QUTU2: inat any listing capped at 4 pages",
+    "QUVE: inat any listing capped at 4 pages",
+    "QUVI: inat any listing capped at 4 pages"
+  ]
+}

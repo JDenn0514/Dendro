@@ -51,9 +51,10 @@ import { captureConsole, fakeExec } from './helpers.ts';
 const NOW = '2026-09-22T15:04:00Z';
 const CDN_BASE = 'https://images.dendro.test/';
 const SCIENTIFIC = 'Quercus gambelii';
-const QUGA_ID = 25297;
-const QUUN_ID = 25298;
-const INAT_TAXON_ID = 47851;
+const QUGA_ID = 70265;
+// The live PlantProfile answer for the symbol QUUN is the accepted hybrid QUPA4.
+const QUPA4_ID = 70415;
+const INAT_TAXON_ID = 116377;
 const FLOWERING_VALUE_ID = 13;
 const EMPTY_OBSERVATIONS = '{ "total_results": 0, "page": 1, "results": [] }';
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -138,11 +139,11 @@ function checklistRoutes(): Map<string, Route> {
   const routes = new Map<string, Route>();
   routes.set(CHECKLIST_URL, { body: fixture('plantlst_sample.txt') });
   routes.set(profileUrl('QUGA'), { body: fixture('plants_profile_quga.json') });
-  routes.set(profileUrl('QUUN'), { body: fixture('plants_profile_quun.json') });
+  routes.set(profileUrl('QUPA4'), { body: fixture('plants_profile_quun.json') });
   routes.set(`${DISTRIBUTION_URL} {"MasterId":${QUGA_ID}}`, {
     body: fixture('plants_distribution_quga.csv'),
   });
-  routes.set(`${DISTRIBUTION_URL} {"MasterId":${QUUN_ID}}`, {
+  routes.set(`${DISTRIBUTION_URL} {"MasterId":${QUPA4_ID}}`, {
     body: 'Symbol,Country,State,State FIP,County,County FIP\n',
   });
   return routes;
@@ -245,7 +246,9 @@ const EMPTY_SECTION_PAGE = [
 
 /** The first page of each section, and the page its next anchor points at. */
 const SECTION_WALK: { first: string; second: string | null }[] = [
-  { first: 'fna_lobatae.html', second: 'fna_lobatae_page2.html' },
+  // No recorded section page links a second page, so the walk over a next link
+  // is covered by the hand-built pair.
+  { first: 'fna_hand_built_page1.html', second: 'fna_lobatae_page2.html' },
   { first: 'fna_protobalanus.html', second: null },
   { first: 'fna_quercus.html', second: null },
 ];
@@ -540,7 +543,7 @@ test('species list enumerates the checklist and commits the result', async (t) =
 
   const scope = readRun(root, 'demo');
   assert.deepEqual(scope.species, ['QUGA']);
-  assert.deepEqual(scope.dropped, [{ symbol: 'QUUN', reason: 'hybrid' }]);
+  assert.deepEqual(scope.dropped, [{ symbol: 'QUPA4', reason: 'hybrid' }]);
   assert.equal(scope.fetch_failures, 0);
   assert.deepEqual(exec.calls[0], { command: 'git', args: ['add', '-A'] });
   assert.equal(exec.calls[1].args[2], 'content(demo): species list');
@@ -570,23 +573,23 @@ test('species list writes plants_ids.json with the id and the scientific name', 
   const text = fs.readFileSync(file, 'utf8');
   const table = JSON.parse(text) as Record<string, { id: number; scientific: string }>;
   assert.deepEqual(table.QUGA, { id: QUGA_ID, scientific: SCIENTIFIC });
-  assert.equal(table.QUUN.id, QUUN_ID);
-  assert.ok(table.QUUN.scientific.includes('undulata'));
+  assert.equal(table.QUPA4.id, QUPA4_ID);
+  assert.ok(table.QUPA4.scientific.includes('pauciloba'));
   assert.ok(text.endsWith('}\n'));
 });
 
 test('species list reports a symbol with no profile and drops it', async (t) => {
   const routes = checklistRoutes();
-  routes.delete(profileUrl('QUUN'));
+  routes.delete(profileUrl('QUPA4'));
   const { root, deps, err } = setup(t, routes);
   seedRun(root, { bucket: 'simple_lobed', states: 'CO', genera: 'Quercus', channels: 'leaf' }, () => {});
 
   assert.equal(await runCommand(['species', 'list', 'demo'], deps), 0);
 
-  assert.ok(err.includes(`QUUN: ${NO_PROFILE}`));
+  assert.ok(err.includes(`QUPA4: ${NO_PROFILE}`));
   const scope = readRun(root, 'demo');
   assert.deepEqual(scope.species, ['QUGA']);
-  assert.deepEqual(scope.dropped, [{ symbol: 'QUUN', reason: NO_PROFILE }]);
+  assert.deepEqual(scope.dropped, [{ symbol: 'QUPA4', reason: NO_PROFILE }]);
   assert.ok(scope.fetch_failures > 0);
 });
 
@@ -1087,7 +1090,7 @@ test('data sections follows every next link and writes one table', async (t) => 
   assert.deepEqual(out, [
     `${names.size} rows written to pipeline/data/quercus_sections.json`,
   ]);
-  assert.equal(walk.urls.length, 5, 'two of the three first pages link a second page');
+  assert.equal(walk.urls.length, 4, 'one of the three first pages links a second page');
   assert.deepEqual(http.urls, walk.urls, 'each page is read once, in section order');
   assert.deepEqual(http.failures, []);
 });

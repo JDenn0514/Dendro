@@ -1,26 +1,41 @@
 {
+  "batchcomplete": "",
   "query": {
     "pages": {
-      "888": {
-        "pageid": 888,
+      "8870148": {
+        "pageid": 8870148,
         "ns": 6,
-        "title": "File:Quercus gambelii leaf detail.jpg",
+        "title": "File:Quercus gambelii leaves.jpg",
         "imageinfo": [
           {
-            "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Quercus_gambelii_leaf_detail.jpg",
-            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_leaf_detail.jpg",
-            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Quercus_gambelii_leaf_detail.jpg/1280px-Quercus_gambelii_leaf_detail.jpg",
+            "size": 3832409,
+            "width": 3888,
+            "height": 2592,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Quercus_gambelii_leaves.jpg/1280px-Quercus_gambelii_leaves.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
             "thumbwidth": 1280,
             "thumbheight": 853,
-            "width": 3000,
-            "height": 2000,
-            "mime": "image/jpeg",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/61/Quercus_gambelii_leaves.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Quercus_gambelii_leaves.jpg",
             "extmetadata": {
-              "LicenseShortName": { "value": "CC BY-SA 4.0" },
-              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by-sa/4.0" },
-              "Artist": { "value": "<a href=\"https://commons.wikimedia.org/wiki/User:Jane_Doe\">Jane Doe</a>" },
-              "ImageDescription": { "value": "One leaf, upper surface" }
-            }
+              "ImageDescription": {
+                "value": "<i><a href=\"//commons.wikimedia.org/wiki/Quercus_gambelii\" title=\"Quercus gambelii\">Quercus gambelii</a></i> leaves. Zion National Park, Utah.",
+                "source": "commons-desc-page"
+              },
+              "Artist": {
+                "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/53326337@N00\">Quinn Dombrowski</a> from Chicago, USA",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 2.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/2.0",
+                "source": "commons-desc-page"
+              }
+            },
+            "mime": "image/jpeg"
           }
         ]
       }

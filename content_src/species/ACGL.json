@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "smooth", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Western mountains from Alaska south to New Mexico" },
+  "elevation_ft": [1500, 12700],
+  "height_ft": [20, 40],
+  "habitat": "Mountain streamsides, canyons, talus slopes and moist upland slopes",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer glabrum",
+    "Fire Effects Information System, Acer glabrum"
+  ]
+}

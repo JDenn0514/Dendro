@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Eastern North America from Maine to Texas" },
+  "elevation_ft": [0, 5250],
+  "height_ft": [80, 100],
+  "habitat": "Moist to fairly dry deciduous forests on well-drained loams and dry upland slopes",
+  "ref": [
+    "Silvics of North America, Quercus alba",
+    "Virginia Tech Dendrology fact sheet, Quercus alba",
+    "FNA vol. 3, Quercus alba"
+  ]
+}

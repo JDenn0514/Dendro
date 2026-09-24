@@ -8,7 +8,7 @@ import { makeRng } from './helpers/rng.js';
 test('the fixture parses and holds seven species', () => {
   const raw = loadFixture();
   assert.equal(Object.keys(raw.species).length, 7);
-  assert.equal(raw.concepts.length, 21);
+  assert.equal(raw.concepts.length, 22);
   assert.equal(raw.confusion.length, 3);
   assert.equal(raw.units.length, 9);
   assert.equal(raw.manifest.length, 17);

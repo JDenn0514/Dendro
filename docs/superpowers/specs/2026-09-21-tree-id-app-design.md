@@ -583,7 +583,7 @@ name options and for photo options, in every session and in the placement test.
 ### Placement test
 
 A fixed deck: one card per level-1 concept, in every channel present in content. In v0
-that is 21 cards: 8 leaf, 6 bark, 7 fruit. Format is always `mc4`.
+that is 22 cards: 8 leaf, 6 bark, 8 fruit. Format is always `mc4`.
 
 A right answer sets that card's state to tier `mc8`, `tier_passes` 0, interval 21, ease
 2.5, reps 1, due today + 21. A wrong answer leaves the card at level 0. Placement results
@@ -815,8 +815,8 @@ edge from a named dendrology reference: Sibley, a Virginia Tech fact sheet, or t
 silvics manual. The reference goes in the edge's `ref` field. The owner reads every edge
 before it merges.
 
-**Level-1 concept photos.** 3 to 5 photos for each of the 21 leaf, bark, and fruit
-categories, about 70 photos in total. Each one passes the photo approval in section 4.
+**Level-1 concept photos.** 3 to 5 photos for each of the 22 leaf, bark, and fruit
+categories, about 75 photos in total. Each one passes the photo approval in section 4.
 
 **The regional species set.** The `simple_lobed` species for Colorado and the states next
 to it, wild and planted, each with photos on at least one channel.

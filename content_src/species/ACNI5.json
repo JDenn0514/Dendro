@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Northeastern and midwestern United States, west to eastern Kansas" },
+  "elevation_ft": [0, 5250],
+  "height_ft": [70, 110],
+  "habitat": "Moist soils of river bottoms in mixed hardwood forests",
+  "ref": [
+    "Silvics of North America, Acer nigrum",
+    "Virginia Tech Dendrology fact sheet, Acer nigrum",
+    "Trees and Shrubs Online, Acer nigrum (elevation)"
+  ]
+}

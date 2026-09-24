@@ -14,22 +14,83 @@ export const DISTRIBUTION_URL: string =
 export const PLANTS_LICENSE: string = 'public domain (US government work)';
 
 /**
- * A PLANTS image file name ends in a three letter part code, as in
- * `quga_001_lvp.jpg`. The codes below are the ones the file names justify.
- * A code that is absent here gives a null hint. Task 19 checks this table
- * against a real PlantImages response and widens it.
+ * The channel a PLANTS file name code stands for. The table is empty, and every
+ * PLANTS image gets a null hint.
+ *
+ * Task 19 read the live file names and found that the three letters name the
+ * size, the orientation, and the kind of picture, not the part of the plant:
+ * `quga_001_lvp.jpg` is the large, vertical photo of image 001, and
+ * `qual_001_lvd.tif` is the drawing. The same code covers every channel:
+ * `quga_001_lvp` is bark, `quga_003_lvp` is flowers, `quga_004_lhp` is a leaf,
+ * and `quga_006_lhp` is a whole tree. So no code can carry a channel, and a
+ * hint read off the file name would bias the approval agent. The table stays,
+ * because a later response may add a code that does mean something.
  */
-export const PART_CODE_CHANNELS: Record<string, string> = {
-  lvp: 'leaf',
-  lvd: 'leaf',
-  lhp: 'leaf',
-  bkp: 'bark',
-  brp: 'bark',
-  frp: 'fruit',
-  fvp: 'fruit',
-  flp: 'flower',
-  twp: 'twig',
+export const PART_CODE_CHANNELS: Record<string, string> = {};
+
+/**
+ * The two letter code of each state name the live distribution file writes, in
+ * upper case. The file spells the state out, so the run's state scope, which
+ * uses the two letter codes, needs this table to compare the two.
+ */
+const US_STATE_CODES: Record<string, string> = {
+  ALABAMA: 'AL',
+  ALASKA: 'AK',
+  ARIZONA: 'AZ',
+  ARKANSAS: 'AR',
+  CALIFORNIA: 'CA',
+  COLORADO: 'CO',
+  CONNECTICUT: 'CT',
+  DELAWARE: 'DE',
+  'DISTRICT OF COLUMBIA': 'DC',
+  FLORIDA: 'FL',
+  GEORGIA: 'GA',
+  HAWAII: 'HI',
+  IDAHO: 'ID',
+  ILLINOIS: 'IL',
+  INDIANA: 'IN',
+  IOWA: 'IA',
+  KANSAS: 'KS',
+  KENTUCKY: 'KY',
+  LOUISIANA: 'LA',
+  MAINE: 'ME',
+  MARYLAND: 'MD',
+  MASSACHUSETTS: 'MA',
+  MICHIGAN: 'MI',
+  MINNESOTA: 'MN',
+  MISSISSIPPI: 'MS',
+  MISSOURI: 'MO',
+  MONTANA: 'MT',
+  NEBRASKA: 'NE',
+  NEVADA: 'NV',
+  'NEW HAMPSHIRE': 'NH',
+  'NEW JERSEY': 'NJ',
+  'NEW MEXICO': 'NM',
+  'NEW YORK': 'NY',
+  'NORTH CAROLINA': 'NC',
+  'NORTH DAKOTA': 'ND',
+  OHIO: 'OH',
+  OKLAHOMA: 'OK',
+  OREGON: 'OR',
+  PENNSYLVANIA: 'PA',
+  'PUERTO RICO': 'PR',
+  'RHODE ISLAND': 'RI',
+  'SOUTH CAROLINA': 'SC',
+  'SOUTH DAKOTA': 'SD',
+  TENNESSEE: 'TN',
+  TEXAS: 'TX',
+  UTAH: 'UT',
+  VERMONT: 'VT',
+  VIRGINIA: 'VA',
+  'VIRGIN ISLANDS': 'VI',
+  WASHINGTON: 'WA',
+  'WEST VIRGINIA': 'WV',
+  WISCONSIN: 'WI',
+  WYOMING: 'WY',
 };
+
+/** The walk of the subordinate taxa pages stops here, whatever the source says. */
+const MAX_SUBORDINATE_ROWS = 500;
 
 const RANK_MARKERS: string[] = ['var.', 'subsp.', 'ssp.', 'f.'];
 
@@ -120,7 +181,8 @@ export function parseProfile(json: unknown): PlantsProfile {
     // A missing field is null, never an empty string. Task 7 rejects a record
     // with no family or no common name, and defaults a null native_status.
     common: orNull(str(row.CommonName)),
-    family: familyOf(row.AncestorRanks),
+    // The live profile names the ancestor list `Ancestors`.
+    family: familyOf(row.Ancestors ?? row.AncestorRanks),
     genus: orNull(genus),
     rank: str(row.Rank),
     growth_habits: strList(row.GrowthHabits),
@@ -141,7 +203,7 @@ export function isHybrid(scientific: string): boolean {
 }
 
 export function parseSubordinateTaxa(json: unknown): { key: string; name: string }[] {
-  return listOf(json, 'PlantResults')
+  return subordinateList(json)
     .map((raw) => {
       const row = recordOf(raw);
       return {
@@ -152,13 +214,20 @@ export function parseSubordinateTaxa(json: unknown): { key: string; name: string
     .filter((row) => row.key !== '' && row.name !== '');
 }
 
-/** The unique US state codes in the distribution CSV, sorted. */
+/**
+ * The unique US state codes in the distribution CSV, sorted.
+ *
+ * The live file writes the country as `United States` and the state as its full
+ * name, as in `QUGA,United States,New Mexico,35,Santa Fe,049`. A two letter code
+ * is also accepted, because a row can carry one. A row of another country, or of
+ * a state name the table does not hold, is dropped.
+ */
 export function parseDistribution(csv: string): string[] {
   const states = new Set<string>();
   for (const cells of dataLines(csv)) {
-    if ((cells[1] ?? '').trim().toUpperCase() !== 'US') continue;
-    const state = (cells[2] ?? '').trim().toUpperCase();
-    if (state !== '') states.add(state);
+    if (!isUnitedStates(cells[1] ?? '')) continue;
+    const state = stateCode((cells[2] ?? '').trim());
+    if (state !== null) states.add(state);
   }
   return [...states].sort();
 }
@@ -184,9 +253,20 @@ export function acceptedSymbols(rows: ChecklistRow[], genera: string[]): string[
   return [...new Set(symbols)].sort();
 }
 
-/** The names of the rows that point at this symbol. The identity check reads them. */
+/**
+ * The synonym names of an accepted symbol. The identity check reads them.
+ *
+ * Every row of the live `plantlst.txt` carries the accepted symbol in the first
+ * column. A row for an accepted name leaves the second column empty; a row for a
+ * synonym puts the synonym's own symbol there and its own name in the third
+ * column. So the synonyms of `QUGAG` are the rows whose first column is `QUGAG`
+ * and whose second column is filled, as in
+ * `"QUGAG","QUUT","Quercus utahensis (A. DC.) Rydb."`.
+ */
 export function synonymNames(rows: ChecklistRow[], symbol: string): string[] {
-  return rows.filter((row) => row.synonym_symbol === symbol).map((row) => row.scientific);
+  return rows
+    .filter((row) => row.symbol === symbol && row.synonym_symbol !== '')
+    .map((row) => row.scientific);
 }
 
 /** The three letter part code at the end of a PLANTS file name, lower cased. */
@@ -197,11 +277,20 @@ export function partCodeOf(path: string): string | null {
   return match === null ? null : match[1].toLowerCase();
 }
 
+/**
+ * One row per image in a PlantImages response.
+ *
+ * The live response is a bare array, and it names each size in its own field:
+ * `LargeSizeImageLibraryPath`, `StandardSizeImageLibraryPath`, and
+ * `OriginalSizeImageLibraryPath`. The large path is taken first, because the
+ * original is a TIFF for a drawing and is larger than the pipeline needs. A row
+ * with no large path falls back to the standard path, then to the original.
+ */
 export function parseImages(json: unknown): PlantsImage[] {
   return listOf(json, 'PlantImages')
     .map((raw) => {
       const row = recordOf(raw);
-      const path = str(row.OriginalImagePath);
+      const path = imagePath(row);
       return {
         path,
         copyright: row.Copyright === true,
@@ -305,11 +394,16 @@ export async function fetchSubordinateTaxa(
       http.failures.push({ url, status: result.status, message: NOT_JSON, at: now });
       return rows;
     }
-    const onPage = listOf(parsed.value, 'PlantResults').length;
+    const onPage = subordinateList(parsed.value).length;
     if (onPage === 0) return rows;
     rows.push(...parseSubordinateTaxa(parsed.value));
     read += onPage;
-    if (read >= totalResults(parsed.value)) return rows;
+    // The live response writes `NumTotalResults` as null, so the count is 0 and
+    // the empty page above is what ends the walk. A response that does carry a
+    // total still ends the walk on that total.
+    const total = totalResults(parsed.value);
+    if (total > 0 && read >= total) return rows;
+    if (read >= MAX_SUBORDINATE_ROWS) return rows;
   }
 }
 
@@ -377,10 +471,26 @@ function rankMarkerAt(words: string[]): number {
   for (let i = BINOMIAL_WORDS; i + 1 < words.length; i += 1) {
     const marker = words[i].toLowerCase();
     if (!RANK_MARKERS.includes(marker)) continue;
-    if (marker === 'f.' && !isLowercaseEpithet(words[i - 1])) continue;
+    if (marker === 'f.' && !isFormaEpithet(words[i + 1])) continue;
     return i;
   }
   return -1;
+}
+
+/**
+ * True when the word after an `f.` is the epithet of a forma.
+ *
+ * `f.` reads two ways in the live `plantlst.txt`. In `Acer nigrum Michx. f. var.
+ * floridanum` and in `Cleistanthus Hook. f. ex Planch.` it is filius, the son of
+ * the author. In `Abies grandis (Douglas ex D. Don) Lindl. f. johnsonii` it is
+ * forma. The word after the `f.` settles which: a forma carries a lowercase
+ * epithet, and filius carries an author, an `&`, another rank marker, or the
+ * connecting word `ex`. The rule reads all 64 forma rows of the live file, and
+ * all 32 of its `f. ex` rows, the right way. The word before the `f.` does not
+ * settle it, because a forma epithet follows an author as often as filius does.
+ */
+function isFormaEpithet(word: string): boolean {
+  return word.toLowerCase() !== 'ex' && isLowercaseEpithet(word);
 }
 
 /** All lowercase letters, optionally with one hyphen, as a botanical epithet is written. */
@@ -404,11 +514,18 @@ function orNull(text: string): string | null {
   return text === '' ? null : text;
 }
 
+/**
+ * The native status of the lower 48 states.
+ *
+ * The live row reads `{ "Region": "L48", "Status": "N", "Type": "Native" }`, so
+ * the letter is in `Status`. `NativeStatus` is read as well, because the field
+ * shape the plan documented named it that way.
+ */
 function nativeStatusL48(value: unknown): string | null {
   for (const raw of asList(value)) {
     const row = recordOf(raw);
     if (str(row.Region).toUpperCase() !== 'L48') continue;
-    const status = str(row.NativeStatus).toUpperCase();
+    const status = (str(row.Status) || str(row.NativeStatus)).toUpperCase();
     if (status === 'N') return 'native';
     if (status === 'I') return 'introduced';
     return null;
@@ -416,13 +533,41 @@ function nativeStatusL48(value: unknown): string | null {
   return null;
 }
 
+/**
+ * The family name in the ancestor list.
+ *
+ * The live profile names the list `Ancestors`, and writes the family with its
+ * author, as `<i>Fagaceae</i> Dumort.`, so only the first word is the family.
+ */
 function familyOf(value: unknown): string | null {
   for (const raw of asList(value)) {
     const row = recordOf(raw);
     if (str(row.Rank).toLowerCase() !== 'family') continue;
-    return orNull(stripItalics(str(row.ScientificName)));
+    return orNull(stripItalics(str(row.ScientificName)).split(' ')[0] ?? '');
   }
   return null;
+}
+
+/** The path of the size the pipeline downloads: large, else standard, else original. */
+function imagePath(row: Record<string, unknown>): string {
+  const large = str(row.LargeSizeImageLibraryPath);
+  if (large !== '') return large;
+  const standard = str(row.StandardSizeImageLibraryPath);
+  if (standard !== '') return standard;
+  return str(row.OriginalSizeImageLibraryPath);
+}
+
+/** True when the country cell names the United States, in either of the two forms. */
+function isUnitedStates(cell: string): boolean {
+  const country = cell.trim().toUpperCase();
+  return country === 'US' || country === 'UNITED STATES';
+}
+
+/** The two letter code of a state cell, or null when the cell names no US state. */
+function stateCode(cell: string): string | null {
+  const upper = cell.toUpperCase();
+  if (/^[A-Z]{2}$/.test(upper)) return upper;
+  return US_STATE_CODES[upper] ?? null;
 }
 
 /** True when the first line reads like the distribution CSV header, not a maintenance page. */
@@ -437,14 +582,30 @@ function looksLikeChecklistCsv(body: string): boolean {
   return header.includes('symbol') && header.includes('scientific name');
 }
 
+/**
+ * The header line, lower cased. The live distribution file writes a title line,
+ * `Distribution Data`, above its header, so the header is the first line that
+ * carries a comma, not always the first line.
+ */
 function headerLine(body: string): string {
-  return (body.split(/\r?\n/)[0] ?? '').toLowerCase();
+  return (nonEmptyLines(body)[headerIndex(body)] ?? '').toLowerCase();
 }
 
-/** The data lines of a comma separated file, with the header line dropped. */
+/** The data lines of a comma separated file, with the header line and any title dropped. */
 function dataLines(body: string): string[][] {
-  const lines = body.split(/\r?\n/).filter((line) => line.trim() !== '');
-  return lines.slice(1).map(splitCsvLine);
+  return nonEmptyLines(body)
+    .slice(headerIndex(body) + 1)
+    .map(splitCsvLine);
+}
+
+function nonEmptyLines(body: string): string[] {
+  return body.split(/\r?\n/).filter((line) => line.trim() !== '');
+}
+
+/** The index of the first line that carries a comma, or 0 when no line does. */
+function headerIndex(body: string): number {
+  const index = nonEmptyLines(body).findIndex((line) => line.includes(','));
+  return index === -1 ? 0 : index;
 }
 
 function splitCsvLine(line: string): string[] {
@@ -476,7 +637,18 @@ function splitCsvLine(line: string): string[] {
 }
 
 function totalResults(json: unknown): number {
-  return num(recordOf(json).TotalResults);
+  const row = recordOf(json);
+  return num(row.NumTotalResults ?? row.TotalResults);
+}
+
+/**
+ * The rows of a subordinate taxa page. The live response names the list
+ * `SubordinateTaxa` and pages it 20 rows at a time from the `offset` query.
+ */
+function subordinateList(json: unknown): unknown[] {
+  const row = recordOf(json);
+  if (Array.isArray(row.SubordinateTaxa)) return row.SubordinateTaxa;
+  return listOf(json, 'PlantResults');
 }
 
 function recordOf(value: unknown): Record<string, unknown> {

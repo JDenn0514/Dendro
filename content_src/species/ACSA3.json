@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Eastern North America from Nova Scotia to eastern Kansas and Georgia" },
+  "elevation_ft": [0, 5500],
+  "height_ft": [90, 120],
+  "habitat": "Rich mesic woods, coves, stream terraces and sheltered lower slopes",
+  "ref": [
+    "Silvics of North America, Acer saccharum",
+    "Virginia Tech Dendrology fact sheet, Acer saccharum",
+    "Fire Effects Information System, Acer saccharum"
+  ]
+}

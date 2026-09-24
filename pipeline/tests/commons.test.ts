@@ -37,57 +37,73 @@ const SCIENTIFIC = 'Quercus gambelii';
 test('parseCategoryListing reads page 1 sorted by title and returns the continue token', () => {
   const { files, next, error } = page1();
   assert.equal(error, null);
-  assert.equal(files.length, 7);
+  assert.equal(files.length, 6);
   assert.deepEqual(
     files.map((file) => file.title),
     [
-      'File:Quercus gambelii acorn.jpg',
-      'File:Quercus gambelii bark.jpg',
-      'File:Quercus gambelii habit.jpg',
-      'File:Quercus gambelii in autumn.jpg',
-      'File:Quercus gambelii range map.svg',
-      'File:Quercus gambelii sapling.jpg',
-      'File:Quercus gambelii twig.jpg',
+      'File:Autumn Gambel Oak Leaf.jpg',
+      'File:Economic considerations in use and management of Gambel oak for fuelwood (IA CAT31118970).pdf',
+      'File:Gambel oak bark.jpg',
+      'File:Quercus gambelii - Flickr - aspidoscelis.jpg',
+      'File:Quercus gambelii Grand Canyon 1.jpg',
+      'File:Quercus gambelii kz02.jpg',
     ],
   );
-  assert.equal(next, 'file|515545524355532047414d42454c49492e6a7067|60113541');
+  assert.equal(next, 'file|515545524355532047414d42454c4949204b5a31392e4a5047|75963421');
 
-  const bark = fileNamed(files, 'File:Quercus gambelii bark.jpg');
-  assert.equal(bark.mime, 'image/jpeg');
-  assert.equal(bark.width, 4000);
-  assert.equal(bark.height, 2667);
-  assert.equal(bark.license, 'CC BY-SA 4.0');
+  const kz = fileNamed(files, 'File:Quercus gambelii kz02.jpg');
+  assert.equal(kz.mime, 'image/jpeg');
+  assert.equal(kz.width, 2878);
+  assert.equal(kz.height, 3837);
+  assert.equal(kz.license, 'CC BY-SA 4.0');
   // Commons sends the license url with no trailing slash. The pipeline adds one.
-  assert.equal(bark.license_url, 'https://creativecommons.org/licenses/by-sa/4.0/');
-  assert.equal(bark.artist, 'Jane Doe');
-  assert.equal(bark.description, 'Bark of Quercus gambelii in autumn');
+  assert.equal(kz.license_url, 'https://creativecommons.org/licenses/by-sa/4.0/');
+  assert.equal(kz.artist, 'Kenraiz');
+  assert.equal(kz.description, 'Quercus gambelii at Cape Royal in Grand Canyon NP, Arizona USA');
   assert.equal(
-    bark.description_url,
-    'https://commons.wikimedia.org/wiki/File:Quercus_gambelii_bark.jpg',
+    kz.description_url,
+    'https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz02.jpg',
   );
 });
 
+// The recorded listing carries neither a page without imageinfo nor a file
+// without a description page, so a built body covers those two rules.
 test('parseCategoryListing skips a page with no imageinfo and a file with no description page', () => {
-  const { files } = page1();
-  // The audio file carries no imageinfo.
-  assert.equal(
-    files.some((file) => file.title === 'File:Quercus gambelii wind.ogg'),
-    false,
-  );
-  // The winter JPEG carries no descriptionurl. A candidate id is the sha1 of
-  // `<target>|<origin>`, so two rows of one target with no origin carry one id.
-  assert.equal(
-    files.some((file) => file.title === 'File:Quercus gambelii winter.jpg'),
-    false,
-  );
+  const { files } = parseCategoryListing({
+    query: {
+      pages: {
+        '1': { pageid: 1, ns: 6, title: 'File:Quercus gambelii wind.ogg' },
+        '2': {
+          pageid: 2,
+          ns: 6,
+          title: 'File:Quercus gambelii winter.jpg',
+          imageinfo: [
+            {
+              url: 'https://upload.wikimedia.org/wikipedia/commons/a/aa/Quercus_gambelii_winter.jpg',
+              width: 3000,
+              height: 2000,
+              mime: 'image/jpeg',
+              extmetadata: {
+                LicenseShortName: { value: 'CC0' },
+                Artist: { value: 'Ada Lovelace' },
+              },
+            },
+          ],
+        },
+      },
+    },
+  });
+  // A candidate id is the sha1 of `<target>|<origin>`, so two rows of one target
+  // with no origin would carry one id.
+  assert.deepEqual(files, []);
 });
 
 test('parseCategoryListing reads page 2 and reports no continuation', () => {
   const { files, next, error } = parseCategoryListing(readFixture(page2Fixture));
   assert.equal(error, null);
   assert.equal(files.length, 1);
-  assert.equal(files[0].title, 'File:Quercus gambelii leaf detail.jpg');
-  assert.equal(files[0].description, 'One leaf, upper surface');
+  assert.equal(files[0].title, 'File:Quercus gambelii leaves.jpg');
+  assert.equal(files[0].description, 'Quercus gambelii leaves. Zion National Park, Utah.');
   assert.equal(next, null);
 });
 
@@ -140,18 +156,25 @@ test('stripHtml decodes numeric character references, decimal and hex', () => {
   assert.equal(stripHtml('&#x41;&#X42;'), 'AB');
 });
 
-test('commonsCandidates drops the NC file and the non-JPEG file', () => {
+// The live category holds no NC file. The PDF stands for the non-JPEG rule, and
+// `licenseAllowed` covers NC on its own.
+test('commonsCandidates drops the non-JPEG file and the file with no artist', () => {
   const { files } = page1();
   const candidates = commonsCandidates(files, 'QUGA', SCIENTIFIC, NOW);
   assert.equal(candidates.length, 4);
+  // The live file url carries a utm query, which the pipeline passes through.
   assert.deepEqual(
-    candidates.map((row) => row.file_url.split('/').pop()),
+    candidates.map((row) => row.file_url.split('/').pop()?.split('?')[0]),
     [
-      '1280px-Quercus_gambelii_acorn.jpg',
-      '1280px-Quercus_gambelii_bark.jpg',
-      'Quercus_gambelii_habit.jpg',
-      '1280px-Quercus_gambelii_in_autumn.jpg',
+      'Autumn_Gambel_Oak_Leaf.jpg',
+      '1280px-Quercus_gambelii_-_Flickr_-_aspidoscelis.jpg',
+      '1280px-Quercus_gambelii_Grand_Canyon_1.jpg',
+      '1280px-Quercus_gambelii_kz02.jpg',
     ],
+  );
+  assert.equal(
+    candidates.some((row) => row.file_url.includes('.pdf')),
+    false,
   );
   for (const row of candidates) {
     assert.equal(row.source_key, 'commons');
@@ -167,10 +190,10 @@ test('commonsCandidates drops the NC file and the non-JPEG file', () => {
 
 test('commonsCandidates excludes a file with an empty artist', () => {
   const { files } = page1();
-  const twig = fileNamed(files, 'File:Quercus gambelii twig.jpg');
+  const twig = fileNamed(files, 'File:Gambel oak bark.jpg');
   assert.equal(twig.artist, '');
   assert.equal(twig.mime, 'image/jpeg');
-  assert.equal(twig.license, 'CC0');
+  assert.equal(twig.license, 'CC BY-SA 3.0');
 
   // The app prints the credit verbatim, so a row with no author can never publish.
   const candidates = commonsCandidates(files, 'QUGA', SCIENTIFIC, NOW);
@@ -185,44 +208,38 @@ test('the hint comes from the title and the description', () => {
   const candidates = commonsCandidates(files, 'QUGA', SCIENTIFIC, NOW);
   const byOrigin = new Map(candidates.map((row) => [row.origin, row]));
 
-  const bark = byOrigin.get('https://commons.wikimedia.org/wiki/File:Quercus_gambelii_bark.jpg');
-  assert.equal(bark?.channel_hint, 'bark');
+  const leaf = byOrigin.get('https://commons.wikimedia.org/wiki/File:Autumn_Gambel_Oak_Leaf.jpg');
+  assert.equal(leaf?.channel_hint, 'leaf');
 
-  const leaves = byOrigin.get(
-    'https://commons.wikimedia.org/wiki/File:Quercus_gambelii_in_autumn.jpg',
-  );
-  assert.equal(leaves?.channel_hint, 'leaf');
-
-  const acorn = byOrigin.get('https://commons.wikimedia.org/wiki/File:Quercus_gambelii_acorn.jpg');
-  assert.equal(acorn?.channel_hint, 'fruit');
+  const second = parseCategoryListing(readFixture(page2Fixture));
+  const leaves = commonsCandidates(second.files, 'QUGA', SCIENTIFIC, NOW)[0];
+  assert.equal(leaves.channel_hint, 'leaf');
 });
 
 test('a file with no keyword gets a null hint', () => {
   const { files } = page1();
   const candidates = commonsCandidates(files, 'QUGA', SCIENTIFIC, NOW);
-  const habit = candidates.find(
-    (row) => row.origin === 'https://commons.wikimedia.org/wiki/File:Quercus_gambelii_habit.jpg',
+  const canyon = candidates.find(
+    (row) =>
+      row.origin ===
+      'https://commons.wikimedia.org/wiki/File:Quercus_gambelii_Grand_Canyon_1.jpg',
   );
-  assert.equal(habit?.channel_hint, null);
+  assert.equal(canyon?.channel_hint, null);
 });
 
 test('thumb_url is the thumbnail for a wide original and the original when it is smaller', () => {
   const { files } = page1();
 
-  const bark = fileNamed(files, 'File:Quercus gambelii bark.jpg');
-  assert.ok(bark.width > THUMB_WIDTH);
-  assert.equal(
-    bark.thumb_url,
-    'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Quercus_gambelii_bark.jpg/1280px-Quercus_gambelii_bark.jpg',
-  );
+  const kz = fileNamed(files, 'File:Quercus gambelii kz02.jpg');
+  assert.ok(kz.width > THUMB_WIDTH);
+  assert.ok(kz.thumb_url.includes('/thumb/'));
+  assert.ok(kz.thumb_url.includes(`${THUMB_WIDTH}px-Quercus_gambelii_kz02.jpg`));
 
-  const habit = fileNamed(files, 'File:Quercus gambelii habit.jpg');
-  assert.ok(habit.width < THUMB_WIDTH);
-  assert.equal(
-    habit.thumb_url,
-    'https://upload.wikimedia.org/wikipedia/commons/4/44/Quercus_gambelii_habit.jpg',
-  );
-  assert.equal(habit.thumb_url, habit.url);
+  // Commons sends the original as the thumbnail when the original is narrower
+  // than the width asked for, and the two urls are then the same.
+  const leaf = fileNamed(files, 'File:Autumn Gambel Oak Leaf.jpg');
+  assert.ok(leaf.width < THUMB_WIDTH);
+  assert.equal(leaf.thumb_url, leaf.url);
 });
 
 test('categoryUrl builds the documented parameters and leaves gcmcontinue out', () => {
@@ -252,14 +269,13 @@ test('categoryUrl adds the continuation token url-encoded', () => {
 test('the origin is the description page, not the file url', () => {
   const { files } = page1();
   const candidates = commonsCandidates(files, 'QUGA', SCIENTIFIC, NOW);
-  const bark = candidates.find((row) => row.channel_hint === 'bark');
+  const kz = candidates.find((row) => row.author === 'Kenraiz');
   assert.equal(
-    bark?.origin,
-    'https://commons.wikimedia.org/wiki/File:Quercus_gambelii_bark.jpg',
+    kz?.origin,
+    'https://commons.wikimedia.org/wiki/File:Quercus_gambelii_kz02.jpg',
   );
-  assert.ok(bark?.origin.startsWith('https://commons.wikimedia.org/wiki/File:'));
-  assert.notEqual(bark?.origin, bark?.file_url);
-  assert.equal(bark?.author, 'Jane Doe');
-  assert.equal(bark?.license, 'CC BY-SA 4.0');
-  assert.equal(bark?.license_url, 'https://creativecommons.org/licenses/by-sa/4.0/');
+  assert.ok(kz?.origin.startsWith('https://commons.wikimedia.org/wiki/File:'));
+  assert.notEqual(kz?.origin, kz?.file_url);
+  assert.equal(kz?.license, 'CC BY-SA 4.0');
+  assert.equal(kz?.license_url, 'https://creativecommons.org/licenses/by-sa/4.0/');
 });

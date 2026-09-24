@@ -1,7 +1,12 @@
+Distribution Data
 Symbol,Country,State,State FIP,County,County FIP
-QUGA,US,CO,08,Boulder,013
-QUGA,US,CO,08,Larimer,069
-QUGA,US,NM,35,Santa Fe,049
-QUGA,US,AZ,04,Coconino,005
-QUGA,US,UT,49,Utah,049
-QUGA,CA,AB,,,
+QUGA,United States,Arizona,04,,
+QUGA,United States,Arizona,04,Apache,001
+QUGA,United States,Arizona,04,Coconino,005
+QUGA,United States,Colorado,08,,
+QUGA,United States,Colorado,08,Archuleta,007
+QUGA,United States,Colorado,08,Boulder,013
+QUGA,United States,New Mexico,35,,
+QUGA,United States,New Mexico,35,Bernalillo,001
+QUGA,United States,Utah,49,,
+QUGA,United States,Utah,49,Box Elder,003

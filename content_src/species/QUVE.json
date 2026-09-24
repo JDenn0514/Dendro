@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Eastern United States from Maine to Texas" },
+  "elevation_ft": [0, 4900],
+  "height_ft": [60, 80],
+  "habitat": "Dry slopes and uplands, sometimes sandy lowlands",
+  "ref": [
+    "Silvics of North America, Quercus velutina",
+    "Virginia Tech Dendrology fact sheet, Quercus velutina",
+    "FNA vol. 3, Quercus velutina"
+  ]
+}

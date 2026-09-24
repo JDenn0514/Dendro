@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Eastern North America from Nova Scotia to Oklahoma" },
+  "planted_states": ["CO", "WY"],
+  "elevation_ft": [0, 5900],
+  "height_ft": [65, 98],
+  "habitat": "Mesic slopes and well-drained uplands, occasionally dry slopes",
+  "ref": [
+    "Silvics of North America, Quercus rubra",
+    "Virginia Tech Dendrology fact sheet, Quercus rubra",
+    "FNA vol. 3, Quercus rubra"
+  ]
+}

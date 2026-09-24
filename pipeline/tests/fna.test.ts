@@ -23,6 +23,9 @@ function fixture(name: string): string {
 }
 
 const lobatae = fixture('fna_lobatae.html');
+// The live section pages hold every species on one page, carry no hybrid, and
+// link no genus on its own. This pair is hand-built and covers those three.
+const paged = fixture('fna_hand_built_page1.html');
 const lobataePage2 = fixture('fna_lobatae_page2.html');
 const quercus = fixture('fna_quercus.html');
 const protobalanus = fixture('fna_protobalanus.html');
@@ -39,7 +42,7 @@ test('the Lobatae first page parses to its four species, in page order', () => {
     'Quercus rubra',
     'Quercus velutina',
     'Quercus palustris',
-    'Quercus coccinea',
+    'Quercus acerifolia',
   ]);
 });
 
@@ -59,41 +62,56 @@ test('the Quercus page parses to its four species, in page order', () => {
   ]);
 });
 
-test('the Protobalanus page parses to its three species, in page order', () => {
+test('the Protobalanus page parses to its four species, in page order', () => {
   assert.deepEqual(parseSectionPage(protobalanus), [
     'Quercus chrysolepis',
     'Quercus palmeri',
+    'Quercus tomentella',
     'Quercus vacciniifolia',
   ]);
 });
 
+// The live page links its own heading the way it links a species. Task 19 found
+// three such headings in the 93 row table that the first build wrote.
+test('the section heading of the page is not a species', () => {
+  for (const page of [lobatae, quercus, protobalanus]) {
+    assert.match(page, /Sect\./);
+    for (const name of parseSectionPage(page)) assert.doesNotMatch(name, /Sect\./);
+  }
+});
+
 test('a navigation anchor is not a species', () => {
-  assert.match(protobalanus, /How to use this key/);
-  assert.match(lobatae, /start_taxon_id=302020&amp;page=2/);
+  assert.match(paged, /How to use this key/);
+  assert.match(paged, /start_taxon_id=302020&amp;page=2/);
   const names = parseSectionPage(protobalanus).concat(parseSectionPage(lobatae));
-  assert.equal(names.length, 7);
+  assert.equal(names.length, 8);
   for (const name of names) {
     assert.doesNotMatch(name, /key|page|Home|eFloras/i);
   }
 });
 
 test('a genus-only name is dropped', () => {
-  assert.match(quercus, /taxon_id=233501301"><i>Quercus<\/i>/);
-  assert.equal(parseSectionPage(quercus).includes('Quercus'), false);
+  assert.match(paged, /taxon_id=233501301'[\s\S]*?<b>Quercus<\/b>/);
+  assert.equal(parseSectionPage(paged).includes('Quercus'), false);
 });
 
 test('a hybrid name is dropped', () => {
-  assert.match(lobatae, /runcinata/);
-  const names = parseSectionPage(lobatae);
-  assert.equal(names.length, 4);
+  assert.match(paged, /runcinata/);
+  const names = parseSectionPage(paged);
+  assert.equal(names.length, 2);
   assert.equal(names.some((name) => name.includes('runcinata')), false);
   assert.equal(names.some((name) => name.includes('×')), false);
 });
 
 test('nextPageUrl gives the absolute url of the next page anchor', () => {
   assert.equal(LOBATAE.section, 'Lobatae');
-  assert.equal(nextPageUrl(lobatae, LOBATAE.url), LOBATAE_PAGE_2);
-  assert.equal(nextPageUrl(quercus, QUERCUS.url), `${QUERCUS.url}&page=2`);
+  assert.equal(nextPageUrl(paged, LOBATAE.url), LOBATAE_PAGE_2);
+});
+
+// No live section page carries a next page anchor, so every walk is one page.
+test('a recorded section page holds no next page anchor', () => {
+  assert.equal(nextPageUrl(lobatae, LOBATAE.url), null);
+  assert.equal(nextPageUrl(quercus, QUERCUS.url), null);
 });
 
 test('nextPageUrl gives null when the page holds no next page anchor', () => {
@@ -113,7 +131,7 @@ test('buildSectionTable gives one section per name', () => {
     parseSectionPage(quercus).length +
     parseSectionPage(protobalanus).length;
   assert.equal(Object.keys(table).length, total);
-  assert.equal(total, 11);
+  assert.equal(total, 12);
   assert.equal(table['Quercus rubra'], 'Lobatae');
   assert.equal(table['Quercus gambelii'], 'Quercus');
   assert.equal(table['Quercus palmeri'], 'Protobalanus');
@@ -121,12 +139,12 @@ test('buildSectionTable gives one section per name', () => {
 
 test('buildSectionTable joins two pages of one section', () => {
   const table = buildSectionTable([
-    { section: 'Lobatae', html: lobatae },
+    { section: 'Lobatae', html: paged },
     { section: 'Lobatae', html: lobataePage2 },
   ]);
   assert.equal(
     Object.keys(table).length,
-    parseSectionPage(lobatae).length + parseSectionPage(lobataePage2).length,
+    parseSectionPage(paged).length + parseSectionPage(lobataePage2).length,
   );
   assert.equal(table['Quercus rubra'], 'Lobatae');
   assert.equal(table['Quercus texana'], 'Lobatae');

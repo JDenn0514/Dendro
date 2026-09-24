@@ -1,13 +1,27 @@
 {
-  "Id": 25298,
-  "Symbol": "QUUN",
-  "ScientificName": "<i>Quercus</i> <i>×undulata</i> Torr.",
-  "CommonName": "wavyleaf oak",
+  "Id": 70415,
+  "Symbol": "QUPA4",
+  "ScientificName": "<i>Quercus ×pauciloba</i> Rydb. (pro sp.) [<i>gambelii × turbinella</i>]",
+  "CommonName": null,
+  "Group": "Dicot",
+  "RankId": 180,
   "Rank": "Species",
-  "GrowthHabits": ["Tree", "Shrub"],
-  "NativeStatuses": [{ "Region": "L48", "NativeStatus": "N" }],
-  "AncestorRanks": [
-    { "Rank": "Family", "ScientificName": "Fagaceae" },
-    { "Rank": "Genus", "ScientificName": "<i>Quercus</i>" }
-  ]
+  "Durations": ["Perennial"],
+  "GrowthHabits": ["Shrub", "Tree"],
+  "NativeStatuses": [{ "Region": "L48", "Status": "N", "Type": "Native" }],
+  "AcceptedId": 70415,
+  "HasSynonyms": true,
+  "Ancestors": [
+    { "Rank": "Kingdom", "ScientificName": "<i>Plantae</i>", "Symbol": "Plantae" },
+    { "Rank": "Order", "ScientificName": "<i>Fagales</i>", "Symbol": "Fagales" },
+    { "Rank": "Family", "ScientificName": "<i>Fagaceae</i> Dumort.", "Symbol": "FAGACE" },
+    { "Rank": "Genus", "ScientificName": "<i>Quercus</i> L.", "Symbol": "QUERC" },
+    {
+      "Rank": "Species",
+      "ScientificName": "<i>Quercus ×pauciloba</i> Rydb. (pro sp.) [<i>gambelii × turbinella</i>]",
+      "Symbol": "QUPA4"
+    }
+  ],
+  "HasImages": true,
+  "HasDistributionData": true
 }

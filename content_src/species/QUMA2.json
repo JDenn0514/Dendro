@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Great Plains and eastern North America" },
+  "elevation_ft": [0, 3280],
+  "height_ft": [80, 100],
+  "habitat": "Bottomlands, riparian slopes and prairies, often on limestone or calcareous clays",
+  "ref": [
+    "Silvics of North America, Quercus macrocarpa",
+    "Virginia Tech Dendrology fact sheet, Quercus macrocarpa",
+    "FNA vol. 3, Quercus macrocarpa"
+  ]
+}
