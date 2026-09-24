@@ -8186,5 +8186,1096 @@
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T20:34:30Z",
     "note": "One whole green Osage orange ball lies on the grass, close and sharp, and fills most of the frame."
+  },
+  {
+    "hash": "52ce43ef331f7fa6501539c6194ec6b75104bd81192ae690aa881184cb857c19",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Tom Norton, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/287843210#photo=517591723",
+    "tags": [
+      "mature",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:45:01Z",
+    "note": "Smooth unbroken grey beech trunk fills the frame, sharp. Beech is out of region."
+  },
+  {
+    "hash": "49d5c6826bc69454594d1856af3b86a49615447491fbd968d13123bcb8597467",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Steven Lamonde, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/312465349#photo=564155888",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:45:02Z",
+    "note": "Pale smooth beech bole with no ridges, sharp and well framed. Beech is out of region."
+  },
+  {
+    "hash": "7d0913bb2ad91b8389f8f8784c9c40bc5eee736c63c52fc6f2223f0888c7efcc",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Photo by and (c)2014 Derek Ramsey (Ram-Man)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:American_Beech_Fagus_grandifolia_Trunk_Bark.JPG",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:45:02Z",
+    "note": "Close view of an unbroken smooth grey beech trunk. Beech is out of region."
+  },
+  {
+    "hash": "74fe1b91a7ba6dc0c5ddb10a1165a00fc0073db8aee3f49a26347a958a9f29ad",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "E bailey",
+    "license": "CC0 1.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bark_close-up_-_American_Aspen_-_Populus_tremuloides.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:45:03Z",
+    "note": "Pale smooth aspen bark with a dark branch scar, upper trunk, no furrows."
+  },
+  {
+    "hash": "5828edf6e7532058365657e18d6e0ecbe7b032e287f67e900b5f700e3d821198",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "NPS",
+    "license": "public domain (US government work)",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quaking_Aspen_Tree_Trunk_(97cb49eb-7497-405a-9838-e2e9b12b4b17).jpg",
+    "tags": [
+      "young",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T20:45:03Z",
+    "note": "Slender aspen stem with a smooth unbroken pale surface and lenticel lines. Lichen covers part of the right side."
+  },
+  {
+    "hash": "95610b43a2f0a54cf942c85304fb0de33c1c7f98004c0b702ea2b9e3af5000c6",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Cohee",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Bark_on_bole_of_mature_Eastern_Cottonwood.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:20:33Z",
+    "note": "Mature cottonwood trunk with long ridges and deep vertical grooves, sharp and filling the frame."
+  },
+  {
+    "hash": "1dd0ea1223c76869c81f080f428f2286f8aea0c65efd0c2b255a70c06f99635c",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Jay Sturner from USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Eastern_Cottonwood_(Populus_deltoides)_bark_-_Flickr_-_Jay_Sturner.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:20:33Z",
+    "note": "Close view of cottonwood bark, long ridges and deep grooves read plainly."
+  },
+  {
+    "hash": "a2c5889c63f0f2cb33dad502ee0365084bbe20748f06b3fa3b0b95bee28d83f6",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-03_09_16_07_Green_Ash_bark_along_Terrace_Boulevard_in_the_Parkway_Village_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:20:34Z",
+    "note": "Green ash bark filling the frame, ridges and deep vertical grooves are clear."
+  },
+  {
+    "hash": "e592a31500097021c4821f3528cf6c90e5d795ecf60264cda389df02014bdb1f",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Katrin Schneider / korina.info",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Korina_2014-09-23_Fraxinus_pennsylvanica_7.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:20:34Z",
+    "note": "Green ash trunk with long ridges and deep grooves, sharp and well framed."
+  },
+  {
+    "hash": "983038f1f6ffc5a8763bacf215a30a56edd61c5e803d99891b80ef3159c067ee",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-05-24_15_48_06_Bur_Oak_bark_on_the_grounds_of_College_Hall_on_the_Douglass_College_campus_of_Rutgers_University_in_New_Brunswick,_Middlesex_County,_New_Jersey.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:20:35Z",
+    "note": "Bur oak bark with long ridges and deep vertical grooves, sharp close view."
+  },
+  {
+    "hash": "962ab3202db0138791470a84613b970b06f3571736a32beff88461e22b76d4c4",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Kretyen at Flickr",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Juniperus_deppeana_bark.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:21:09Z",
+    "note": "Alligator juniper trunk with the square checkered plates filling the frame."
+  },
+  {
+    "hash": "fbfa702bd849148dd80a671b01be0ed5231b26317f82837d9e0c697ac1a9da92",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Jryandoherty",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Common_Persimmon_Bark.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:21:10Z",
+    "note": "Persimmon trunk broken into blocky rectangular plates, sharp and well framed."
+  },
+  {
+    "hash": "826710af01287dac3f7429b85c196acc16278a6f885adf7c10c767c451a44e34",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "KATHERINE WAGNER-REISS",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Diospyros_virginiana_(bark).jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:21:10Z",
+    "note": "Close view of persimmon bark, the blocky plates and deep grooves read plainly."
+  },
+  {
+    "hash": "fe3f30f45e79657cf307679c0b09b4a900712bfcd9442a513a21e44a8348a23e",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Matt Lavin from Bozeman, Montana, USA",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Pinus_ponderosa_-_ponderosa_pine_-_Flickr_-_Matt_Lavin_(1).jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:21:11Z",
+    "note": "Mature ponderosa pine trunk with orange plates separated by dark grooves."
+  },
+  {
+    "hash": "28f749cabda46b1257ea4db02d325f6a8faa3b9a463cb018b5b2e410093e887a",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Rhododendrites",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Ponderosa_pine_bark_(68449).jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:21:11Z",
+    "note": "Close view of mature orange ponderosa bark, the plates and dark grooves are clear."
+  },
+  {
+    "hash": "47dce0e253184fd5f980f163d0254785ba10bbe984c810dd9383c35071a61cdf",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/249532715#photo=446079400",
+    "tags": [
+      "autumn",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:21:59Z",
+    "note": "Shagbark hickory trunk covered in long strips that lift away at both ends."
+  },
+  {
+    "hash": "4b932e487c240697d3f2fabdbf768a63545581a444cd2812ddceda4036a51082",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "William (Ned) Friedman",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Carya_ovata_bark_AA.jpg",
+    "tags": [
+      "close_up",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:21:59Z",
+    "note": "Large bark strips curling away from the trunk fill the frame, the lifting plates read plainly."
+  },
+  {
+    "hash": "1184989ef8b41296ed680926af3b8c702622391e335029d8d28fd449bb96cd97",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "User:Ekem",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Hickory_Carya_ovata_Bark.jpg",
+    "tags": [
+      "mature",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:22:00Z",
+    "note": "Hickory trunk with long strips lifting free at their ends, sharp and well framed."
+  },
+  {
+    "hash": "474ae0f73940f686c92b919afe379d8d317256d8c4b2314491c2eada7c95c79c",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "SusquehannaMan",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Shagbark_Hickory_bark_in_Perry_County%2C_PA.jpg",
+    "tags": [
+      "autumn",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:22:00Z",
+    "note": "Shagbark hickory trunk, the loose strips lift clear of the trunk along both edges."
+  },
+  {
+    "hash": "ad15fe9fcebc60e2055008a885e3be1afc1c794921d9bd36c0e7d3c94d88064f",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-01_16_36_06_Eastern_Red_Cedar_bark_along_Stone_Heather_Drive_in_the_Franklin_Farm_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:22:01Z",
+    "note": "Eastern redcedar bark in long fibrous strips that lift and shred away from the trunk."
+  },
+  {
+    "hash": "b0c7d2df5a861046e04999248c96378f0a5ff73f1dcdd63de4aa1924e29c9d3c",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-03_09_34_31_Eastern_Red_Cedar_bark_along_Terrace_Boulevard_in_the_Parkway_Village_section_of_Ewing_Township%2C_Mercer_County%2C_New_Jersey.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:22:37Z",
+    "note": "Eastern redcedar trunk with long fibrous strips that lift and peel away."
+  },
+  {
+    "hash": "11f04fba3d6b3e4a66aad9d1eb5b9771e1466bf4b0aaa76ee10bb3e0b731bf60",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Rob Duval",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Betula_papyrifera-bark.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:22:37Z",
+    "note": "Paper birch trunk with thin sheets peeling back and showing a paler layer below."
+  },
+  {
+    "hash": "ad2f80c917f74863dce33ccd0cdb4ff639c701f38377d878df19528b80aae8cc",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2025-09-09_13_44_33_Paper_Birch_bark_along_Hill_%28Ridge%29_Road_in_Berlin%2C_Rensselaer_County%2C_New_York.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:22:38Z",
+    "note": "Paper birch bark in thin curling sheets that lift and show the layer below."
+  },
+  {
+    "hash": "407d26dba6a12451a34e4a9fb2e082bf724ec9ea6c1fbb99f9b035e61bb4e933",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Betula_papyrifera_15-p.bot-bet.papyr-027.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:22:39Z",
+    "note": "Close view of birch bark peeling in thin flat sheets over a paler pink layer."
+  },
+  {
+    "hash": "88244818df7741f3938ef01d083e226798cd717fa32aa6a54ed72affa5dd693f",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-02-23_16_44_04_American_Sycamore_bark_along_Tranquility_Lane_in_the_Franklin_Farm_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:22:39Z",
+    "note": "Sycamore trunk frame with the mottled flaking patches that show paler layers below."
+  },
+  {
+    "hash": "798ea1824a5e81038231ebd043aa3405911bf962161e14438b750bf1cffaf113",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Cbaile19",
+    "license": "CC0 1.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Sycamore_Bark%2C_2015-05-24%2C_Smithfield_East_End_Cemetery%2C_01.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:23:25Z",
+    "note": "Sycamore upper trunk with mottled flaking patches over paler grey and cream layers."
+  },
+  {
+    "hash": "5d8c323ca847242a9fc64d42cdf17e1fe524851a6bf65e05d7632cc8b7cea18f",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Adam Shaw",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Hackberry_bark_%28Celtis_occidentalis%29.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:23:26Z",
+    "note": "Hackberry trunk with raised corky warty ridges across the surface."
+  },
+  {
+    "hash": "266b5af0a1262512ef5c1de1333511182d59e987bc38567a54ce411b50a06722",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2023-04-12_12_37_53_Hackberry_bark_along_Windybush_Way_in_the_Mountainview_section_of_Ewing_Township%2C_Mercer_County%2C_New_Jersey.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:23:26Z",
+    "note": "Close view of hackberry bark, the raised corky bumps and warts read plainly."
+  },
+  {
+    "hash": "bf1544038ed06dd09520313a06f5a70114c7e6fa170047340c9f514bc5c6c9fb",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/330625468#photo=599584881",
+    "tags": [
+      "close_up",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:23:27Z",
+    "note": "Hackberry trunk with thick corky warts standing out from the surface."
+  },
+  {
+    "hash": "4b2175d83a66d3ab0120bcfdc82305e8a140a5ff930007cccd2b3890fab6b246",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/13977.htm",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:23:27Z",
+    "note": "Pale smooth upper trunk of quaking aspen, the unbroken surface fills the frame."
+  },
+  {
+    "hash": "973c4f8a056ee5e70f9b8bddb5a462dbc39e214f7cdae8ff29a9f1852b0703f4",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/ac1516.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:05Z",
+    "note": "American beech trunk with an unbroken smooth grey surface. Beech is out of region."
+  },
+  {
+    "hash": "86965bbd111d3e8f31ce4c7d040a5e33bbfccf55cf582adf64f06a533202db7b",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2192.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:06Z",
+    "note": "Smooth unbroken grey beech trunk filling the frame. Beech is out of region."
+  },
+  {
+    "hash": "de9e74a99bbe2a278d5d74c891814b49fd0f10fbc7d9f16b13d8fb9690564a55",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/10432.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:06Z",
+    "note": "Beech trunk with a smooth unbroken surface, sharp and well framed. Beech is out of region."
+  },
+  {
+    "hash": "2b7ca3f48e452b9369431549ee35cc542f381139cece0661435f507f5209441f",
+    "target": "bark/smooth",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/fagus/fagus-grandifolia/#image=fagus-grandifolia-12.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:07Z",
+    "note": "Smooth grey beech trunk with old carved marks on the tree, the smooth surface still reads. Beech is out of region."
+  },
+  {
+    "hash": "04c65e886c59e39baea1111a908fd82ae1ef57fb7c025364045e60a494f59232",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Cole Sullivan",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/sullivanc/20190918_160059.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:47Z",
+    "note": "Green ash trunk with long ridges and deep vertical grooves filling the frame."
+  },
+  {
+    "hash": "13fb743d88bed4223bcccd274a5ef7245853d3ecbabb72b6d35043f364c74bb3",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/13406.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:47Z",
+    "note": "Green ash trunk, the ridges and deep grooves are sharp and easy to read."
+  },
+  {
+    "hash": "e77545a8ab3554ea4702a3e63f83ce6e11e1bec3cdd6dc19195c3b4e96d82e77",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Robin Young",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/youngr/20190918_151656.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:48Z",
+    "note": "Bur oak trunk with long ridges separated by deep vertical grooves."
+  },
+  {
+    "hash": "336667fc4430adb9ee244d55f39cb3de005dda86c8623a283809f727e63c87ce",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Cole Sullivan",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/sullivanc/20191004_084634.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:48Z",
+    "note": "Bur oak trunk filling the frame, the ridge and groove pattern reads plainly."
+  },
+  {
+    "hash": "3e894bba329c155c58e22608612b4859d2c76298c314d7aef0e6a94c3d4b2280",
+    "target": "bark/furrowed",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Cole Sullivan",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/sullivanc/191016153658693.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:24:49Z",
+    "note": "Bur oak trunk in raking light, the long ridges and deep grooves are clear."
+  },
+  {
+    "hash": "51ec395d348757c9339a0569bbd2f81573e285eeae187486ac6717c890af2cf5",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/70831.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:25:24Z",
+    "note": "Persimmon trunk broken into small blocky plates, the pattern reads along the whole trunk."
+  },
+  {
+    "hash": "c9cc7458ca33d4db49fa86f362711d67322ffff0144abaf0a862cbfe73244fc9",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/d0150.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:25:25Z",
+    "note": "Persimmon trunk with the blocky plates and deep grooves clear and sharp."
+  },
+  {
+    "hash": "56fc13cf1a94f5a584ea6f40078777d6c095f28b716e95f1e40149de609b950b",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/juniperus/juniperus-deppeana/#image=juniperus-deppeana-4.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:25:25Z",
+    "note": "Alligator juniper trunk with square plates in a checkered pattern filling the frame."
+  },
+  {
+    "hash": "a1b36f00d02789428e8eac7445fc750c823336037d6bf793070845dbfc0ae57d",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/pinus/pinus-ponderosa/#image=pinus-ponderosa-10.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:25:26Z",
+    "note": "Mature ponderosa pine trunk, broad plates in tan and orange split by dark grooves."
+  },
+  {
+    "hash": "b789ad8a2c69090aa0ce461b96810f7775faf26ffa0831da8b55513f3e35e923",
+    "target": "bark/plated",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/pinus/pinus-ponderosa/#image=pinus-ponderosa-6.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:25:26Z",
+    "note": "Mature ponderosa pine trunk with orange plates outlined by dark grooves."
+  },
+  {
+    "hash": "81d97cc496e9910d673d596d1b3032fa67a5e6923ff3e77a370e7fdd9357ffba",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/13650.htm",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:26:16Z",
+    "note": "Shagbark hickory trunk with long strips whose ends lift away from the trunk."
+  },
+  {
+    "hash": "9fe48b5fbd86bae2728fbc3cf8919f8d612be368d7817ac6912e6cf45fbb39fd",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/carya/carya-ovata/#image=carya-ovata-3.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:26:18Z",
+    "note": "Close view of hickory bark, the strip edges stand proud and lift away from the trunk."
+  },
+  {
+    "hash": "c424077c358f7f886e1e9dc0674178ca93236eda8cb405d3cb56f0f3d6a78b92",
+    "target": "bark/shaggy",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/carya/carya-ovata/#image=carya-ovata-2.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:26:18Z",
+    "note": "Hickory trunk filled with long vertical strips whose raised edges lift clear of the trunk."
+  },
+  {
+    "hash": "62400f3b0445ad1acb9c2c7e6fc3026d39344d668e7efa7c01919b6d188c5183",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/10462.htm",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:26:58Z",
+    "note": "Sycamore trunk frame with brown flakes peeling off over pale green and white layers."
+  },
+  {
+    "hash": "474c4873af0a4c190d5aadeb1ab2a89b7dcba9d4bf2ca71fade61fce2d632238",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/betula/betula-papyrifera/#image=betula-papyrifera-1.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:26:58Z",
+    "note": "Paper birch trunk with thin sheets peeling back to show a tan layer below."
+  },
+  {
+    "hash": "2adc8167e377cbcf41cf4484d7ed73830d977b5a0e09cd7eb4ce9e286c077893",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/betula/betula-papyrifera/#image=betula-papyrifera-2.jpg",
+    "tags": [
+      "close_up",
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:26:59Z",
+    "note": "Paper birch trunk with curling sheets lifting off pink and cream layers."
+  },
+  {
+    "hash": "7c687b21e0af06beafb6ba4ca31e0660c982c93a5433d5be398ef41a57254290",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-occidentalis/#image=platanus-occidentalis-7.jpg",
+    "tags": [
+      "mature",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:27:00Z",
+    "note": "Sycamore upper limbs with the white and grey mottled flaking filling the lower frame."
+  },
+  {
+    "hash": "0518507649ee090bb1ae099ea489a39f4378517d983013de21a0ce8b96868e09",
+    "target": "bark/papery",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-occidentalis/#image=platanus-occidentalis-3.jpg",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:27:48Z",
+    "note": "Sycamore trunk with large brown sheets peeling off over a pale green layer."
+  },
+  {
+    "hash": "1da918fe573eebc820dc38df2179adf6145df485e8bd8f86e6ccb8699a86e242",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/11213.htm",
+    "tags": [
+      "close_up",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:27:49Z",
+    "note": "Young black cherry stem with rows of raised horizontal lenticels along the bark."
+  },
+  {
+    "hash": "d057a6b71a4975b2e3aad1f35c7252677f7eec11627f2d435b97d01a49767653",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/92400.htm",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:27:50Z",
+    "note": "Chokecherry stem covered in small raised corky lenticel warts, sharp and filling the frame."
+  },
+  {
+    "hash": "861ee72f704fb9f1621dea5f53072ac2572f7489c091e592346040434cdb3d7e",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/35306.htm",
+    "tags": [
+      "close_up",
+      "young"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:27:50Z",
+    "note": "Young chokecherry stem with raised orange lenticels standing out along the bark."
+  },
+  {
+    "hash": "8ee1cb9dc536becfddf113d9aab10622bb8dd31b701d7ed7b3fc01142543f67a",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/celtis/celtis-occidentalis/#image=celtis-occidentalis-3.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:28:27Z",
+    "note": "Hackberry trunk covered in heavy corky warts and ridges, sharp and clear."
+  },
+  {
+    "hash": "a4b207444f38396749431457520dec7850e47cdd6051d25871d2e356ac91c0ec",
+    "target": "bark/warty",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Owen Johnson",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/celtis/celtis-occidentalis/#image=celtis-occidentalis-2.jpg",
+    "tags": [
+      "mature",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:28:27Z",
+    "note": "Hackberry trunk with raised corky warts scattered over a pale smooth surface."
+  },
+  {
+    "hash": "efcab690286782705619759d8bb541f51d432884404b46cba4d77778e8fe18d4",
+    "target": "fruit/acorn",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Rupert Clayton, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/394568357#photo=723366631",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:28:28Z",
+    "note": "Bur oak acorn with the scaly fringed cup covering most of the nut, sharp and filling the frame."
+  },
+  {
+    "hash": "9f57cbe5b081592bfda756eebf12f2e0e583492f59ba4667f0bebcb08b2a658c",
+    "target": "fruit/acorn",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) florawhite, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/333245529#photo=604966496",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:28:29Z",
+    "note": "Fallen bur oak cup on the ground, the scaly fringed cup is plain and fills the middle of the frame."
+  },
+  {
+    "hash": "4d718a4e0c5a3a35f96dbf4ce8e2fada2f1f2c5c69447ee10e61b0ac2237b925",
+    "target": "fruit/acorn",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Daughter Dad, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/342199369#photo=623112115",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:28:29Z",
+    "note": "Gambel oak nut seated in its scaly cup on a twig against a clean background."
+  },
+  {
+    "hash": "8fdfbe43f94da8d5b41b9e550c7a6b355d977da50f6a27cbbed8886447923036",
+    "target": "fruit/acorn",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Jo Roberts, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/400512339#photo=734972730",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:29:14Z",
+    "note": "Two green Gambel oak acorns on a twig, each nut seated in a scaly cup and in focus."
+  },
+  {
+    "hash": "6b6d1d573ebba3663a2143c1280c5c95f7e9f2cb87a2cc1e8e5c746237262cae",
+    "target": "fruit/acorn",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/401129890#photo=736212946",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:29:15Z",
+    "note": "Single red oak acorn with the nut seated in its scaly cup, sharp and close."
+  },
+  {
+    "hash": "628f18e077c387ba2cfe4d1e4dc47d6deb3c0729437dee109d6210c64cb5073a",
+    "target": "fruit/acorn",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Ilona, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/396524763#photo=727175958",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:29:15Z",
+    "note": "Red oak branch with many acorns, each nut sits in a shallow scaly cup."
+  },
+  {
+    "hash": "1d037046971d37948faa6b9737cc5c6852d086a213eafcc888c6865e2780f3ef",
+    "target": "fruit/samara",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/402032374#photo=737984214",
+    "tags": [
+      "close_up",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:29:16Z",
+    "note": "Hanging cluster of dry boxelder samaras, each seed with its papery wing."
+  },
+  {
+    "hash": "d10f4563f1af681db12344f6f8f6090ec9282661fc830d008002b77b23770be9",
+    "target": "fruit/samara",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Andrey Polstianoi, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/398401297#photo=730838308",
+    "tags": [
+      "close_up",
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:29:16Z",
+    "note": "Green boxelder samaras hanging in a cluster, the paired papery wings are clear."
+  },
+  {
+    "hash": "16d23158da4592116a6b7a280b34ba717285568acc6818a25cb0d3927fe07708",
+    "target": "fruit/samara",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/282789344#photo=508091954",
+    "tags": [
+      "close_up",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:29:46Z",
+    "note": "Hanging cluster of silver maple samaras, the broad papery wings are large and sharp."
+  },
+  {
+    "hash": "819b442a22042a4bd7477ee7f0f603efe20b980d4de4867a6422241b79cebef8",
+    "target": "fruit/ball",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Kevin, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/354905918#photo=647383600",
+    "tags": [
+      "close_up",
+      "spring"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:32:13Z",
+    "note": "A brown sycamore ball on its long stalk fills the frame, sharp and unobstructed."
+  },
+  {
+    "hash": "61c4ae01f16db5a04362d465e41b4c0c59b1146bcc034e797f65852cb9612853",
+    "target": "fruit/ball",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Rachel Stepek, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/386968007#photo=708556484",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:32:13Z",
+    "note": "A single green sycamore ball hangs on a long stalk, in focus against a blurred background."
+  },
+  {
+    "hash": "38a45ead324c6c9f404653223c9e13f1c6c20dba913bf063ec55bde4bf77a898",
+    "target": "fruit/ball",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Nick Butcher, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/327496324#photo=593330079",
+    "tags": [
+      "close_up",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:32:14Z",
+    "note": "One London plane ball fills the frame, sharp, with the bristly head and the stalk clear."
+  },
+  {
+    "hash": "4510f43b60ac558fa031adbe76b29f4cfafea7579b7408359297a50866076014",
+    "target": "fruit/ball",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Trey Philips, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/400132565#photo=734202793",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T23:32:15Z",
+    "note": "Four large green Osage orange balls on the branches, sharp and large in the frame."
   }
 ]
