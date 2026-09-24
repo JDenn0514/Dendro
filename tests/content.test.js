@@ -16,6 +16,8 @@ test('the channel list derives from concepts.json', () => {
 test('imageUrl builds the object URL from the base and the hash', () => {
   const photo = { hash: 'a'.repeat(64) };
   assert.ok(CDN_BASE.endsWith('/'));
+  assert.ok(CDN_BASE.startsWith('https://'));
+  assert.ok(!CDN_BASE.includes('r2.dev'));
   assert.equal(imageUrl(photo, 'content_dev/images/'), `content_dev/images/img/${'a'.repeat(64)}.jpg`);
   assert.equal(imageUrl(photo, CDN_BASE), `${CDN_BASE}img/${'a'.repeat(64)}.jpg`);
 });
