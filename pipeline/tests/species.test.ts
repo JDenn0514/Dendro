@@ -378,11 +378,12 @@ test('enumerateRun keeps an include symbol that is a hybrid, and still drops an 
   assert.equal(reasonFor(out.dropped, 'QUGAM'), 'not a tree');
 });
 
-// The live checklist holds `Acer`, `Quercus`, and `Platanus` as accepted rows,
-// and each one matches its own genus.
-test('enumerateRun drops a genus row, whose name is one word', () => {
+// The live checklist holds `Acer L.`, `Quercus L.`, and `Platanus L.` as
+// accepted rows, and each one matches its own genus. The author stands where an
+// epithet would, so the row carries two words and still names no species.
+test('enumerateRun drops a genus row, whose name carries no epithet', () => {
   const out = enumerateRun({
-    rows: [...RUN_ROWS, row('QUERC', 'Quercus')],
+    rows: [...RUN_ROWS, row('QUERC', 'Quercus L.'), row('QUONE', 'Quercus')],
     genera: ['Quercus'],
     states: ['CO'],
     include: [],
@@ -391,6 +392,10 @@ test('enumerateRun drops a genus row, whose name is one word', () => {
   });
   assert.equal(out.kept.includes('QUERC'), false);
   assert.equal(reasonFor(out.dropped, 'QUERC'), 'not a species');
+  assert.equal(out.kept.includes('QUONE'), false);
+  assert.equal(reasonFor(out.dropped, 'QUONE'), 'not a species');
+  // A hybrid still reaches the hybrid rule, and the include rule before it.
+  assert.equal(reasonFor(out.dropped, 'QUXBE'), 'hybrid');
 });
 
 test('mergeSpecies emits the fields in the app fixture order', () => {

@@ -66,12 +66,23 @@ const STRING_AUTHORED: string[] = ['audubon_name', 'genus_common', 'arrangement'
 /** The app prints this when PLANTS gave no native status. */
 const NATIVE_STATUS_UNKNOWN = 'unknown';
 
-/** A genus and an epithet. A name of one word is a genus row, not a species. */
+/** A genus and an epithet. A name with no epithet is a genus row, not a species. */
 const BINOMIAL_WORDS = 2;
 
-function wordCount(name: string): number {
-  const trimmed = name.trim();
-  return trimmed === '' ? 0 : trimmed.split(/\s+/).length;
+/**
+ * True when the name carries an epithet after the genus.
+ *
+ * The live checklist writes a genus row as `Acer L.`, the genus and its author,
+ * so counting the words is not enough. An epithet is one lowercase word, which
+ * an author never is. A hybrid writes `×` on the epithet, as in
+ * `Platanus ×hispanica`, or as a word of its own, as in `Quercus x undulata`.
+ */
+function isSpeciesName(name: string): boolean {
+  const words = name.trim().split(/\s+/).filter((word) => word !== '');
+  if (words.length < BINOMIAL_WORDS) return false;
+  const marker = words[1] === '×' || words[1].toLowerCase() === 'x';
+  const epithet = marker ? (words[2] ?? '') : words[1];
+  return /^[×xX]?[a-z]+(-[a-z]+)?$/.test(epithet);
 }
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
@@ -311,10 +322,10 @@ export function enumerateRun(input: {
 
   // acceptedSymbols drops the synonym rows and the other genera, and sorts.
   for (const symbol of acceptedSymbols(rows, genera)) {
-    // A name of one word is a genus row, not a species. The live checklist
-    // carries `Acer`, `Quercus`, and `Platanus` as accepted rows of their own,
-    // and each one matches its genus.
-    if (wordCount(nameOf.get(symbol) ?? '') < BINOMIAL_WORDS) {
+    // A name with no epithet is a genus row, not a species. The live checklist
+    // carries `Acer L.`, `Quercus L.`, and `Platanus L.` as accepted rows of
+    // their own, and each one matches its genus.
+    if (!isSpeciesName(nameOf.get(symbol) ?? '')) {
       dropped.push({ symbol, reason: 'not a species' });
       continue;
     }
