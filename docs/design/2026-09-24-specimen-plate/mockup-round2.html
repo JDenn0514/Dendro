@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Dendro — the printed plate, eight screens</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   DENDRO — one system, eight screens.
+
+   session, reveal and species come from final.html, the plate the client
+   approved. home, progress, progress-shape, lessons and lessons-leaf come
+   from the round-2 winner, the 58px depth column, rebuilt so that every
+   screen still spends most of itself on one print.
+
+   THE BOLD MOVE, restated: depth is drawn as pressed sheets. A shapes rung
+   prints one sheet. A genera rung prints two, the second showing behind the
+   first. A species rung prints three. All of them hang in the same 58px
+   column at the left edge of every channel, so the client's three numbers
+   stack in one column and read top to bottom. Beside each sheet stack sit
+   the plain figures, and under each card band sits a moss waterline cut to
+   the share of cards at familiar or better, all three measured against one
+   reference length.
+   ========================================================================= */
+:root{
+  --paper:#F1ECDF;
+  --mount:#E8E2D1;          /* derived tint 1: a darker paper for panels */
+  --ink:#22231E;
+  --ink-soft:#57584C;        /* derived tint 2: softened ink, 5.7:1 on paper */
+  --moss:#3A5A3C;
+  --bark:#5C4634;
+  --lichen:#C9D2B4;
+  --sap:#B8892E;
+  --m0:#E6DFCE; --m1:#C9D2B4; --m2:#9DB595; --m3:#6B8F6A; --m4:#3A5A3C;
+  --fr:"Fraunces",Georgia,serif;
+  --lit:"Literata",Georgia,serif;
+  --gut:22px;
+  --col:58px;               /* the depth column, on every channel, every screen */
+  --hair:rgba(92,70,52,.26);
+}
+
+/* ---------- paper ---------- */
+html{background:var(--paper);}
+body{
+  margin:0; width:390px; max-width:100vw;
+  color:var(--ink);
+  font-family:var(--lit);
+  font-size:17px; line-height:1.6;
+  font-variation-settings:"opsz" 17;
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+  background-blend-mode:multiply;
+  -webkit-font-smoothing:antialiased;
+}
+
+.screen{display:none;}
+.screen:target{display:block;}
+body:not(:has(.screen:target)) #session{display:block;}
+/* clip, not hidden: `hidden` would make each screen its own scroll box and
+   the running foot would stop sticking to the bottom of the phone */
+.screen{min-height:844px; padding:0 var(--gut) 40px; box-sizing:border-box; overflow-x:clip;}
+
+/* ---------- type scale ---------- */
+.display{
+  font-family:var(--fr); font-weight:400; font-size:44px; line-height:.97;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
+  letter-spacing:-.02em; margin:0;
+}
+.h2{
+  font-family:var(--fr); font-weight:400; font-size:36px; line-height:1.03;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
+  letter-spacing:-.018em; margin:0;
+}
+.sec-h{
+  font-family:var(--fr); font-weight:600; font-size:19px; line-height:1.2;
+  font-variation-settings:"opsz" 24; margin:0;
+}
+.nm{font-family:var(--fr); font-weight:500; font-size:19px; font-variation-settings:"opsz" 22; line-height:1.2;}
+.bn{font-size:14.5px; font-style:italic; color:var(--bark);}
+.cap{font-size:13px; line-height:1.4; font-style:italic; color:var(--bark); font-variation-settings:"opsz" 12; margin:0;}
+
+/* a short printer's tick marks a new section; it is not a full rule */
+.tick{width:38px; height:2px; background:var(--bark); margin:0 0 9px;}
+
+/* =======================================================================
+   PLATES — the bold move of the session card, and its fallback.
+
+   A plate never ends on a straight line. There are two ways to reach that,
+   and the photograph makes the choice, not the screen.
+
+   .plate.print   The scan has a bright studio ground (quru-leaf, quve-leaf).
+                  The image multiplies into the paper, so the white ground
+                  BECOMES paper and the specimen has no edge at all.
+
+   .plate.field   The photograph carries its own ground: dark (quru-bark) or
+                  in colour (acgl-leaf). Multiply would turn that ground into
+                  a dirty grey rectangle, so a field plate does not blend. It
+                  is held back in saturation, dissolved on four sides by a
+                  mask, and covered with a paper vignette, so it fades into
+                  the page instead of stopping.
+
+   Every screen in this file carries one of them. That is the ratio the
+   approved plate earned its look from, and it is held here: one photograph
+   or one full-width bed of specimens per screen, and fewer rows underneath.
+   ======================================================================= */
+.plate{margin:0; overflow:hidden; position:relative;}
+.bleed{margin-left:calc(var(--gut)*-1); margin-right:calc(var(--gut)*-1);}
+
+.plate.print img{display:block; mix-blend-mode:multiply; filter:grayscale(1) contrast(1.06);}
+.plate.print.lift img{filter:grayscale(1) brightness(1.09) contrast(1.14);}
+
+.plate.field img{display:block; mix-blend-mode:normal;
+  filter:saturate(.62) contrast(.97) brightness(1.05);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 13%,#000 58%,transparent 100%),
+                     linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 13%,#000 58%,transparent 100%),
+             linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
+  -webkit-mask-composite:source-in; mask-composite:intersect;}
+.plate.field::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(118% 92% at 50% 46%,rgba(241,236,223,0) 44%,var(--paper) 100%);}
+.plate.field.mono img{filter:grayscale(1) brightness(1.16) contrast(.95);}
+.plate.field.spot img{-webkit-mask-image:none; mask-image:none;}
+.plate.field.spot{
+  -webkit-mask-image:radial-gradient(closest-side,#000 40%,rgba(0,0,0,.7) 70%,transparent 100%);
+  mask-image:radial-gradient(closest-side,#000 40%,rgba(0,0,0,.7) 70%,transparent 100%);}
+.plate.field.spot img{filter:saturate(.8) contrast(1) brightness(1);}
+.plate.field.spot::after{
+  background:radial-gradient(closest-side,rgba(241,236,223,0) 40%,var(--paper) 100%);}
+/* A wide field plate is cropped by its own frame, so the four fades cut into
+   the mask can fall outside the window and the print stops on a line after
+   all. .soft dissolves the frame itself, top and bottom, whatever the crop. */
+.plate.field.soft::after{
+  background:
+    linear-gradient(to bottom,var(--paper) 0,rgba(241,236,223,0) 24%,
+      rgba(241,236,223,0) 70%,var(--paper) 100%),
+    radial-gradient(120% 96% at 50% 46%,rgba(241,236,223,0) 38%,var(--paper) 100%);}
+
+/* session: the specimen entire, cut to its own bounding box so no lobe tip
+   is lost and the leaves touch both edges. Percentages, so it holds at 360. */
+.pl-hero{aspect-ratio:390/528;}
+.pl-hero img{width:108.7%; margin:-11.54% 0 0 -5.92%;}
+/* species and progress-shape: the same specimen, lower edge dissolved */
+.pl-leaf{aspect-ratio:390/452;}
+.pl-leaf img{width:108.7%; margin:-11.54% 0 0 -5.92%;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 100%);}
+.pl-shape{aspect-ratio:390/430;}
+.pl-shape img{width:108.7%; margin:-11.54% 0 0 -5.92%;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 72%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0,#000 72%,transparent 100%);}
+/* species and progress: the bark, a field plate */
+.pl-bark{aspect-ratio:390/342;}
+.pl-bark img{width:100%;}
+/* lessons-leaf: the one colour plate in the app */
+.pl-colour{aspect-ratio:390/400;}
+.pl-colour img{width:104%; margin:-3% 0 0 -2%;}
+/* home and lessons: a small print of one card inside the recommended unit */
+.pl-thumb{width:124px; aspect-ratio:600/900;}
+.pl-thumb img{width:100%; margin:0;}
+/* the specimen's own ground is paper once it multiplies, so the empty lower
+   band of the scan can be cut away and the caption sits under the print */
+.pl-thumb.wide{width:148px; aspect-ratio:600/745;}
+
+/* reveal: the pair, matched to one scale and one baseline so the sentence
+   about lobe depth can actually be checked */
+.pair{display:grid; grid-template-columns:1fr 1fr; gap:0 6px;}
+.pair figure{aspect-ratio:183/244;}
+.pair figure img{width:100.5%;}
+.pl-a img{margin:-7.65% 0 0 -1.64%;}
+.pl-b img{margin:-7.65% 0 0 0;}
+
+/* ---------- running head + printed gauge (session and reveal) ---------- */
+.head{padding-top:16px; display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+.head .unit{font-family:var(--fr); font-weight:500; font-size:14.5px; font-variation-settings:"opsz" 14;}
+.head .where{font-size:13px; font-style:italic; color:var(--bark);}
+.gauge{display:flex; gap:3px; margin:8px 0 0; height:5px;}
+.gauge i{flex:1; height:2px; background:rgba(92,70,52,.22); align-self:end;}
+.gauge i.done{background:var(--bark); opacity:.8;}
+.gauge i.now{background:var(--moss); height:5px;}
+
+/* ---------- the key ----------
+   The client's fixed change: the four labels share one width. They are now
+   one printed key, common name at the left margin and binomial ranged right,
+   so the four names line up the way an index lines up. The moss bar is not
+   decoration: it appears only on the label your finger or keyboard is on.
+   ---------- */
+.prompt{font-family:var(--fr); font-weight:400; font-size:26px; line-height:1.14;
+  font-variation-settings:"opsz" 60,"WONK" 1; letter-spacing:-.012em; margin:20px 0 0;}
+.key{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:9px;}
+.pick{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  width:100%; min-height:56px; padding:13px 15px;
+  box-sizing:border-box;
+  background:rgba(201,210,180,.46); border-radius:2px;
+  border-left:0 solid var(--moss);
+  text-decoration:none; color:var(--ink);
+}
+.pick .nm{flex:0 1 auto;}
+.pick .bn{flex:0 0 auto; text-align:right;}
+.pick:active{background:var(--lichen); border-left-width:5px; padding-left:10px;}
+.pick:focus-visible{outline:2px solid var(--moss); outline-offset:2px;
+  border-left-width:5px; padding-left:10px; background:var(--lichen);}
+
+/* ---------- I guessed ---------- */
+.guessed{display:flex; align-items:center; gap:11px; min-height:48px; margin-top:8px;}
+.guessed .box{width:20px; height:20px; border:1.5px solid var(--bark); flex:0 0 auto;}
+.guessed span{font-size:16px;}
+.guessed:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- reveal ---------- */
+.verdict-wrap{margin-top:26px;}
+.verdict{font-family:var(--fr); font-weight:500; font-size:17px; line-height:1.2;
+  font-variation-settings:"opsz" 18; color:var(--bark); margin:0 0 10px;}
+.answer-link{color:var(--ink); text-decoration:none;}
+.answer-link:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+.sci-small{margin:9px 0 0; font-family:var(--fr); font-style:italic; font-weight:400;
+  font-size:19px; font-variation-settings:"opsz" 24; color:var(--bark);}
+.pair-head{display:grid; grid-template-columns:1fr 1fr; gap:0 6px; margin:0 0 8px;}
+.pair-head span{display:block; font-family:var(--fr); font-weight:600; font-size:15px;
+  font-variation-settings:"opsz" 18; line-height:1.25;}
+.pair-head .ok{color:var(--moss);}
+.pair-head .no{color:var(--bark);}
+.pair-head .no b{font-weight:600; text-decoration:line-through;
+  text-decoration-color:var(--bark); text-decoration-thickness:1.5px;}
+.pair-head i{display:block; height:3px; margin-bottom:7px; background:var(--moss);}
+.pair-head .no i{background:rgba(92,70,52,.4);}
+.compare{margin:22px 0 0; font-size:17px; line-height:1.56;}
+.levelrow{display:flex; align-items:center; gap:12px; margin-top:24px;}
+.levelrow .lv{font-size:17px;}
+
+/* the five level squares: the secondary rollup, on unit rows and on reveal */
+.ramp{display:flex; gap:2px;}
+.ramp b{width:12px; height:12px; display:block; background:var(--m0);
+  border:1px solid rgba(92,70,52,.3); box-sizing:border-box;}
+.ramp b.f1{background:var(--m1)} .ramp b.f2{background:var(--m2)}
+.ramp b.f3{background:var(--m3)} .ramp b.f4{background:var(--m4)}
+.ramp b.lost{background:transparent; border:2px solid var(--sap);}
+.ramp.dim b{opacity:.45;}
+.ramp.lg{gap:3px;} .ramp.lg b{width:14px; height:14px;}
+
+.btn{
+  display:block; margin-top:26px; min-height:54px; line-height:54px;
+  background:var(--moss); color:var(--paper); text-align:center; text-decoration:none;
+  font-family:var(--fr); font-weight:600; font-size:18px; font-variation-settings:"opsz" 20;
+  border-radius:2px;
+}
+.btn:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+
+/* ---------- the running foot ----------
+   A printed foot, not a tab bar: three words, no icons, no pill, a hairline
+   above and a moss rule under the word you are on. It sticks to the bottom
+   of the phone so a long progress page always has a way back up.
+   ---------- */
+.footnav{position:relative; margin:36px 0 0; padding:13px 0 0;
+  display:flex; gap:4px;}
+.footnav::before{content:""; position:absolute; left:0; right:0; top:0;
+  height:1px; background:var(--hair);}
+.footnav a{flex:1; min-height:48px; display:flex; align-items:center; justify-content:center;
+  text-decoration:none; color:var(--bark);
+  font-family:var(--fr); font-weight:500; font-size:16px; font-variation-settings:"opsz" 18;}
+.footnav a span{padding-bottom:5px;}
+.footnav a.on{color:var(--ink); font-weight:600;}
+.footnav a.on span{box-shadow:inset 0 -3px 0 var(--moss);}
+.footnav a:focus-visible{outline:2px solid var(--moss); outline-offset:-2px;}
+
+/* ---------- the trail ----------
+   Kept only where it names a parent the foot cannot: the two pages one tap
+   in. On home, progress and lessons the foot already says where you are.
+   ---------- */
+.trail{display:flex; align-items:center; flex-wrap:wrap; padding-top:8px;
+  font-family:var(--fr); font-size:14.5px; font-variation-settings:"opsz" 14;}
+.trail a,.trail strong{display:flex; align-items:center; justify-content:center;
+  min-height:44px; min-width:44px; padding:0 8px; box-sizing:border-box;}
+.trail a{color:var(--bark); text-decoration:none; font-weight:400;}
+.trail strong{color:var(--ink); font-weight:600;}
+.trail > :first-child{margin-left:-8px;}
+.trail i{width:1px; height:13px; background:rgba(92,70,52,.4); flex:0 0 auto;}
+.trail a:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+
+/* =======================================================================
+   THE MARK
+
+   One pressed object per card, filled to that card's level on the five-step
+   ramp. The mark is never a stand-in: a leaf card carries a leaf of its own
+   shape, a bark card carries a bark plate of its own texture, a fruit card
+   carries its own fruit, and a genus card carries that genus's leaf, because
+   a genus is a tree and not a channel. The level shows twice over, in the
+   fill and in how firm the outline is, so seen and familiar stay apart at
+   fingernail size and in sun.
+   ======================================================================= */
+.mk{display:block; flex:0 0 auto;}
+.v0{--lf-fill:none; --lf-so:.5; --lf-sw:5; --lf-vo:.22; --lf-to:.24;}
+.v1{color:var(--m1); --lf-so:.26; --lf-to:.3;}
+.v2{color:var(--m2); --lf-so:.42; --lf-to:.36;}
+.v3{color:var(--m3); --lf-so:.58; --lf-to:.5; --lf-tc:#F1ECDF; --lf-vo:.42;}
+.v4{color:var(--m4); --lf-so:.74; --lf-to:.52; --lf-tc:#F1ECDF; --lf-vo:.4;}
+/* a sheet lying behind another sheet: pressed, out of ink, its edge just read */
+.gh{--lf-fill:#DFD7C2; --lf-so:.2; --lf-sw:2; --lf-vo:0; --lf-to:.12;}
+.s20{width:20px; height:25px}
+.s24{width:24px; height:30px}
+.s26{width:26px; height:33px}
+.s28{width:28px; height:35px}
+.s30{width:30px; height:38px}
+.s32{width:32px; height:40px}
+.s34{width:34px; height:43px}
+.s40{width:40px; height:50px}
+.s86{width:86px; height:108px}
+
+.legend{display:flex; justify-content:space-between; margin:18px 0 0; padding-top:11px;
+  border-top:1px solid var(--hair);}
+.legend div{text-align:center; width:19%;}
+.legend .mk{margin:0 auto 5px;}
+.legend span{font-size:12px; color:var(--bark); line-height:1.2;}
+
+/* ---------- home ---------- */
+.masthead{padding-top:18px;}
+.masthead .sub{margin:9px 0 0; font-size:15px; font-style:italic; color:var(--bark);}
+.mastrule{height:2px; background:var(--bark); margin:14px 0 0; opacity:.85;}
+.state1{margin:15px 0 0; font-size:17px; line-height:1.5;}
+.state1 b{font-family:var(--fr); font-weight:500; font-variation-settings:"opsz" 40;
+  font-size:22px; color:var(--moss);}
+
+.rec{margin-top:24px;}
+.rec .tick{background:var(--moss); width:52px; height:3px;}
+.rec .figcol{float:right; width:124px; margin:0 0 6px 16px;}
+.rec .figcol.wide{width:148px;}
+.rec .why{margin:9px 0 0; font-size:16px; color:var(--bark);}
+.rec .thumbcap{margin-top:7px;}
+.rec .btn{clear:both;}
+
+.doors{margin-top:34px;}
+.door{display:block; padding:14px 15px 16px; box-sizing:border-box;
+  background:var(--mount); border-left:3px solid var(--moss); border-radius:2px;
+  text-decoration:none; color:var(--ink); margin-top:10px; overflow:hidden;}
+.door:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.door .dn{display:block; font-family:var(--fr); font-weight:500; font-size:25px;
+  line-height:1.1; font-variation-settings:"opsz" 44,"WONK" 1; letter-spacing:-.012em;}
+.door .dd{display:block; margin-top:5px; font-size:14.5px; line-height:1.4; color:var(--bark);}
+/* each door carries a live small copy of what is behind it */
+.dthumb{float:right; width:118px; margin:2px 0 4px 14px; display:grid; row-gap:7px;}
+.dthumb .dr{display:flex; align-items:center; gap:7px;}
+.dthumb .dr em{display:block; flex:1; height:3px; background:rgba(92,70,52,.18);}
+.dthumb .dr em b{display:block; height:3px; background:var(--moss);}
+.dthumb .dq{display:flex; gap:4px;}
+.dthumb .dq i{width:13px; height:13px; display:block; background:var(--moss);}
+.dthumb .dq i.shut{background:none; box-shadow:inset 0 0 0 1.5px rgba(92,70,52,.5);}
+
+.placement{display:inline-flex; align-items:center; margin-top:22px; font-size:16px;
+  font-style:italic; color:var(--bark); text-decoration:none;
+  box-shadow:inset 0 -1px 0 rgba(92,70,52,.55); min-height:46px;}
+.placement:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- progress: the finding comes before the marks ---------- */
+.finding{margin-top:2px; padding:20px var(--gut) 22px; background:var(--mount);}
+.finding .tick{background:var(--moss); width:52px; height:3px;}
+.finding .state{margin:14px 0 0; font-size:15px; line-height:1.55; color:var(--bark);}
+.evid{margin-top:0;}
+.evid-cap{margin-top:8px;}
+
+/* =======================================================================
+   THE RUNG — depth drawn as pressed sheets
+
+   One channel is three rungs. Each rung prints its depth as a stack of
+   sheets: one for shapes, two for genera, three for species, the sheets
+   behind showing at the corner. The front sheet is that depth's own object
+   at that depth's own level. The stack sits in the 58px column; the figures
+   sit beside it; the band of individual cards runs to the right, indented to
+   the column, so band length can never be mistaken for band weight.
+   ======================================================================= */
+.chblock{margin-top:30px;}
+.chblock > .tick{margin:0 0 11px;}
+.cbh{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+.cbh h3{font-family:var(--fr); font-weight:400; font-size:30px; line-height:1;
+  font-variation-settings:"opsz" 96,"SOFT" 0,"WONK" 1; letter-spacing:-.018em; margin:0;}
+.cbh .due{font-size:13.5px; font-style:italic; color:var(--bark);}
+/* the one-sentence finding sits above the marks it is about */
+.claim{margin:9px 0 4px; font-size:16px; line-height:1.45;}
+
+.rung{display:grid; grid-template-columns:var(--col) 1fr; align-items:center;
+  min-height:66px; margin-top:16px; color:var(--ink);}
+.rung .cn{display:block; font-family:var(--fr); font-weight:500; font-size:14.5px;
+  font-variation-settings:"opsz" 14; color:var(--bark); line-height:1.2;}
+.lvw{display:block; font-family:var(--fr); font-weight:500; line-height:1.05;
+  color:var(--ink); margin-top:2px;}
+.l0{font-size:17px; font-variation-settings:"opsz" 20; color:var(--ink-soft);}
+.l1{font-size:19px; font-variation-settings:"opsz" 26;}
+.l2{font-size:22px; font-variation-settings:"opsz" 40;}
+.l3{font-size:25px; font-variation-settings:"opsz" 56,"WONK" 1; letter-spacing:-.012em;}
+.l4{font-size:28px; font-variation-settings:"opsz" 72,"WONK" 1; letter-spacing:-.018em;}
+/* the count, printed as figures, so the answer never rests on telling two
+   greens apart */
+.figs{display:block; margin-top:3px; font-family:var(--fr); font-weight:500;
+  font-size:15px; font-variation-settings:"opsz" 16; color:var(--bark);}
+
+/* the sheet stack */
+.rmk{position:relative; width:var(--col); height:66px;}
+.rmk svg{position:absolute; left:0; bottom:0;}
+.rmk .g1{left:6px; bottom:6px;}
+.rmk .g2{left:12px; bottom:12px;}
+
+.band{display:flex; flex-wrap:wrap; gap:2px; row-gap:7px;
+  margin:0 calc(var(--gut)*-1) 0 var(--col);}
+.band .grp{display:flex; gap:2px; margin-right:15px;}
+.band .grp:last-child{margin-right:0;}
+/* the waterline: one rule per rung, cut to the share of that rung's cards at
+   familiar or better, every rule measured against the same length, so the
+   three lengths in a channel compare by eye */
+.wline{margin:8px calc(var(--gut)*-1) 0 var(--col); height:3px;
+  background:rgba(92,70,52,.15);}
+.wline b{display:block; height:3px; background:var(--moss);}
+.opens{display:inline-flex; align-items:center; margin-top:16px; font-size:15.5px;
+  font-style:italic; color:var(--bark); text-decoration:none;
+  box-shadow:inset 0 -1px 0 rgba(92,70,52,.55); min-height:46px;}
+.opens:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- progress, one shape ---------- */
+.pagehead{padding-top:4px;}
+.pagehead .where2{margin:10px 0 0; font-size:15px; line-height:1.5; color:var(--bark);}
+/* the parent bed: all eight shapes, the one you opened underlined in moss */
+.strip{display:flex; justify-content:space-between; align-items:flex-end; gap:3px;
+  margin-top:20px;}
+.strip span{display:block; padding-bottom:7px;}
+.strip span.here{box-shadow:inset 0 -3px 0 var(--moss);}
+.strip-cap{margin-top:4px;}
+
+.shapecard{display:flex; align-items:center; gap:18px; margin-top:22px;
+  padding:16px var(--gut); background:var(--mount);}
+.shapecard .lvw{font-size:34px; font-variation-settings:"opsz" 110,"WONK" 1;
+  letter-spacing:-.02em; margin:0;}
+.shapecard .lvn{display:block; margin-top:6px; font-size:14px; font-style:italic; color:var(--bark);}
+.shapecard .lvx{display:block; margin-top:8px; font-size:14px; line-height:1.4; color:var(--bark);}
+
+.gengroup{margin-top:28px;}
+.gengroup > .tick{margin:0 0 11px;}
+.genhead{display:grid; grid-template-columns:var(--col) 1fr auto; align-items:center;
+  column-gap:8px; min-height:66px;}
+.gnm{display:block; font-family:var(--fr); font-weight:500; font-size:24px; line-height:1.05;
+  font-variation-settings:"opsz" 44,"WONK" 1; letter-spacing:-.01em;}
+.gsci{display:block; margin-top:2px; font-size:14px; font-style:italic; color:var(--bark);}
+.genhead .lvw{text-align:right; margin:0;}
+.secname{margin:12px 0 2px; font-size:13px; font-style:italic; color:var(--bark);}
+/* the species are a printed index, not a stack of cards: no fill, no rail,
+   one hairline baseline each, so the paper carries the list */
+.splist{margin-left:var(--col); padding-left:0;}
+.spx{display:grid; grid-template-columns:26px 1fr auto; align-items:center; column-gap:12px;
+  min-height:48px; padding:4px 0; text-decoration:none; color:var(--ink);
+  border-bottom:1px solid rgba(92,70,52,.15);}
+.spx:last-child{border-bottom:0;}
+.spx .sn{font-family:var(--fr); font-weight:500; font-size:17px; line-height:1.2;
+  font-variation-settings:"opsz" 20;}
+.spx .lvw{margin:0; text-align:right;}
+.spx:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.foot{display:inline-flex; align-items:center; margin-top:26px; font-size:16px;
+  font-style:italic; color:var(--bark); text-decoration:none;
+  box-shadow:inset 0 -1px 0 rgba(92,70,52,.55); min-height:46px;}
+.foot:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- lessons ---------- */
+.nextu{margin-top:6px;}
+.nextu .tick{background:var(--moss); width:52px; height:3px;}
+.nextu .why{margin:9px 0 0; font-size:16px; color:var(--bark);}
+.newrow{display:flex; margin-top:14px; gap:3px;}
+.nextu .newcap{margin-top:8px;}
+.nextu .rampline{display:flex; align-items:center; gap:11px; margin-top:14px;}
+.nextu .rampline span{font-size:14px; color:var(--bark);}
+
+.keyline{margin:24px 0 0; font-size:14.5px; line-height:1.5; color:var(--bark);}
+.chdoor{display:block; margin-top:10px; padding:13px 15px 15px; box-sizing:border-box;
+  background:var(--mount); border-left:3px solid var(--moss); border-radius:2px;
+  text-decoration:none; color:var(--ink);}
+.chdoor:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.cdh{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+.cdh .dn{font-family:var(--fr); font-weight:500; font-size:25px; line-height:1.1;
+  font-variation-settings:"opsz" 44,"WONK" 1; letter-spacing:-.012em;}
+.cdh .cdd{font-size:13.5px; font-style:italic; color:var(--bark);}
+.ustrip{display:grid; grid-template-columns:72px 1fr; row-gap:10px; align-items:center;
+  margin-top:13px;}
+.ustrip .dn2{font-size:14px; color:var(--bark);}
+.sqs{display:flex; gap:6px; align-items:center;}
+.sqs i{width:18px; height:18px; background:var(--moss); display:block; position:relative;}
+.sqs i.shut{background:none; box-shadow:inset 0 0 0 1.5px rgba(92,70,52,.5);}
+.sqs i.next::after{content:""; position:absolute; left:0; right:0; bottom:-7px;
+  height:3px; background:var(--moss);}
+.sqs .none{font-size:14px; font-style:italic; color:var(--ink-soft);}
+.cdl{display:block; margin-top:15px; font-size:14.5px; line-height:1.45; color:var(--bark);}
+
+/* ---------- lessons, one channel: the printed stem ----------
+   Depth is drawn. A unit's children hang off a stem that runs down from it
+   and a tick reaches in to each child, so three unit depths are one figure
+   and not an indented list. Every open unit carries a real Start control,
+   and the one unit that is next carries the only filled Start on the page.
+   ---------- */
+.tree{margin-top:22px;}
+.kids{margin-left:8px; padding-left:11px; border-left:1.5px solid rgba(92,70,52,.32);}
+.kids > .node > .urow::before{content:""; position:absolute; left:-11px; top:50%;
+  width:8px; height:1.5px; background:rgba(92,70,52,.32);}
+.urow{position:relative; display:grid; grid-template-columns:30px 1fr auto; align-items:center;
+  column-gap:9px; min-height:70px; margin-top:8px; padding:10px; box-sizing:border-box;
+  border-radius:2px; color:var(--ink);
+  background:var(--mount); border-left:3px solid var(--moss);}
+.urow .un{display:block; font-family:var(--fr); font-weight:500; font-size:18px;
+  font-variation-settings:"opsz" 22; line-height:1.2;}
+.urow .ust{display:block; font-size:13.5px; line-height:1.35; color:var(--bark); margin-top:2px;}
+.urow .ramp{margin-top:7px;}
+.urow .done-sq{width:11px; height:11px; background:var(--moss); display:inline-block; margin-right:5px;}
+.node.shut .urow{background:none; border-left-color:rgba(92,70,52,.22);}
+.node.shut .un{color:var(--ink-soft);}
+.node.now .urow{border-left-width:7px;}
+.node.now .ust{color:var(--moss);}
+/* a Start a finger can find: an outlined control on every open unit, filled
+   solid on the one that is next */
+.startb{display:inline-flex; align-items:center; justify-content:center;
+  min-height:44px; min-width:72px; padding:0 13px; box-sizing:border-box;
+  font-family:var(--fr); font-weight:600; font-size:15px; font-variation-settings:"opsz" 16;
+  color:var(--moss); text-decoration:none; border:1.5px solid var(--moss); border-radius:2px;}
+.startb.solid{background:var(--moss); color:var(--paper);}
+.startb:active{background:rgba(58,90,60,.14);}
+.startb.solid:active{background:#314e33;}
+.startb:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+.shutnote{font-size:13px; font-style:italic; color:var(--ink-soft); text-align:right;
+  max-width:72px; line-height:1.3;}
+
+/* ---------- species ---------- */
+.sp-title{padding-top:18px;}
+.sp-title .display{font-size:41px;}
+.sp-title .sci{margin:10px 0 0; font-family:var(--fr); font-style:italic; font-weight:400;
+  font-size:22px; font-variation-settings:"opsz" 30; color:var(--bark);}
+.sp-title .det2{margin:8px 0 0; font-size:15px; font-style:italic; color:var(--bark);}
+.spans{display:grid; grid-template-columns:1fr 1fr; gap:0 14px; margin:24px 0 0;}
+.spans b{display:block; font-family:var(--fr); font-weight:400; font-size:34px; line-height:1;
+  font-variation-settings:"opsz" 110,"SOFT" 0,"WONK" 1; letter-spacing:-.022em;}
+.spans span{display:block; margin-top:6px; font-size:14px; color:var(--bark);}
+.sp-prose{margin:20px 0 0; font-size:17px; line-height:1.56;}
+dl.facts{margin:20px 0 0; display:grid; grid-template-columns:96px 1fr; row-gap:8px; column-gap:12px;}
+dl.facts dt{font-style:italic; color:var(--bark); font-size:14.5px; line-height:1.45;}
+dl.facts dd{margin:0; font-size:16px; line-height:1.45;}
+.sec{margin-top:30px;}
+.card-row{
+  display:grid; grid-template-columns:1fr auto; align-items:center; column-gap:12px;
+  background:var(--mount); border-radius:2px; padding:11px 13px; margin-top:8px;
+}
+.card-row .cn{display:block; font-family:var(--fr); font-weight:500; font-size:14.5px;
+  font-variation-settings:"opsz" 14; color:var(--bark); line-height:1.2;}
+.card-row .lvw{margin-top:2px;}
+.card-row .lvn{display:block; margin-top:3px; font-family:var(--lit); font-size:13px;
+  font-style:italic; color:var(--bark);}
+.card-row .rt{display:flex; flex-direction:column; align-items:flex-end; text-align:right;}
+.card-row .due{display:block; font-size:14px; color:var(--bark); margin-top:6px;}
+.fact-line{margin:16px 0 0; font-size:16px; color:var(--bark);}
+.plate-cap{margin-top:9px;}
+
+/* ---------- the one motion moment: the reveal answers the tap ---------- */
+@media (prefers-reduced-motion:no-preference){
+  #reveal:target .verdict-wrap{animation:rise .26s ease-out both;}
+  #reveal:target .pair-head i{animation:ink .3s .1s ease-out both; transform-origin:left;}
+  #reveal:target .pl-a img{animation:press .38s .06s ease-out both;}
+  #reveal:target .pl-b img{animation:press .38s .2s ease-out both;}
+  #reveal:target .pair-head .no b{animation:strike .3s .34s ease-out both;}
+  @keyframes rise{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  @keyframes ink{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+  @keyframes press{from{opacity:0} to{opacity:1}}
+  @keyframes strike{from{text-decoration-color:transparent} to{text-decoration-color:var(--bark)}}
+}
+/* and the guard, for anyone who asked the system to hold still */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- ======== leaf channel: one silhouette per leaf type ======== -->
+  <symbol id="lf-oak" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 120 C48 118 34 118 24 112 C16 107 22 102 44 100 C36 94 20 92 12 86 C4 80 14 76 40 74 C30 66 14 64 8 56 C2 48 12 46 38 46 C30 38 20 32 18 24 C16 14 28 12 44 16 C46 10 50 5 56 2 C62 5 66 10 68 16 C84 12 96 14 94 24 C92 32 82 38 74 46 C100 46 110 48 104 56 C98 64 82 66 72 74 C98 76 108 80 100 86 C92 92 76 94 68 100 C90 102 96 107 88 112 C78 118 64 118 56 120 Z M53 119 L53 140 L59 140 L59 119 Z"/>
+    </g>
+    <path d="M56 116 L56 12" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-maple" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 124 C50 118 42 112 30 106 C20 101 12 99 4 98 C10 92 16 86 20 78 C12 76 6 71 0 64 C10 61 22 59 32 60 C27 51 24 40 24 30 C33 36 43 45 50 54 C49 39 51 22 56 6 C61 22 63 39 62 54 C69 45 79 36 88 30 C88 40 85 51 80 60 C90 59 102 61 112 64 C106 71 100 76 92 78 C96 86 102 92 108 98 C100 99 92 101 82 106 C70 112 62 118 56 124 Z M53 123 L53 140 L59 140 L59 123 Z"/>
+    </g>
+    <path d="M56 120 L56 10" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <!-- the plane tree: broad as it is long, shallow sinuses, a wide flat base.
+       Cut to be told apart from the maple at 28px. -->
+  <symbol id="lf-plat" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 14 Q47 33 34 42 Q20 41 7 47 Q16 64 20 82 Q20 100 24 114 Q40 109 56 109 Q72 109 88 114 Q92 100 92 82 Q96 64 105 47 Q92 41 78 42 Q65 33 56 14 Z M53 109 L53 140 L59 140 L59 109 Z"/>
+    </g>
+    <path d="M56 107 L56 26 M56 90 L22 55 M56 90 L90 55" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-entire" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 128 C36 114 24 92 24 66 C24 38 40 14 56 4 C72 14 88 38 88 66 C88 92 76 114 56 128 Z M53 126 L53 140 L59 140 L59 126 Z"/>
+    </g>
+    <path d="M56 124 L56 12" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-tooth" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 4 L68 16 L64 21 L78 32 L72 37 L86 50 L79 54 L89 69 L81 71 L89 87 L80 88 L84 103 L75 101 L74 116 L65 110 L60 124 L56 132 L52 124 L47 110 L38 116 L37 101 L28 103 L32 88 L23 87 L31 71 L23 69 L33 54 L26 50 L40 37 L34 32 L48 21 L44 16 Z M53 130 L53 140 L59 140 L59 130 Z"/>
+    </g>
+    <path d="M56 128 L56 12" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-pinnate" viewBox="0 0 112 140">
+    <path d="M56 140 L56 14" fill="none" stroke="#22231E" stroke-opacity="var(--lf-so,.3)" stroke-width="3"/>
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <ellipse cx="56" cy="16" rx="10" ry="15"/>
+      <ellipse cx="34" cy="40" rx="19" ry="9" transform="rotate(-24 34 40)"/>
+      <ellipse cx="78" cy="40" rx="19" ry="9" transform="rotate(24 78 40)"/>
+      <ellipse cx="32" cy="68" rx="20" ry="10" transform="rotate(-17 32 68)"/>
+      <ellipse cx="80" cy="68" rx="20" ry="10" transform="rotate(17 80 68)"/>
+      <ellipse cx="34" cy="96" rx="18" ry="9" transform="rotate(-12 34 96)"/>
+      <ellipse cx="78" cy="96" rx="18" ry="9" transform="rotate(12 78 96)"/>
+    </g>
+  </symbol>
+  <symbol id="lf-palmate" viewBox="0 0 112 140">
+    <path d="M56 140 L56 96" fill="none" stroke="#22231E" stroke-opacity="var(--lf-so,.3)" stroke-width="3"/>
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <ellipse cx="56" cy="46" rx="11" ry="35"/>
+      <ellipse cx="30" cy="56" rx="10" ry="31" transform="rotate(-32 30 56)"/>
+      <ellipse cx="82" cy="56" rx="10" ry="31" transform="rotate(32 82 56)"/>
+      <ellipse cx="15" cy="78" rx="9" ry="26" transform="rotate(-62 15 78)"/>
+      <ellipse cx="97" cy="78" rx="9" ry="26" transform="rotate(62 97 78)"/>
+    </g>
+  </symbol>
+  <symbol id="lf-scale" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 6 C67 17 71 29 69 42 C62 35 50 35 43 42 C41 29 45 17 56 6 Z"/>
+      <path d="M56 40 C68 51 72 63 70 76 C63 69 49 69 42 76 C40 63 44 51 56 40 Z"/>
+      <path d="M56 74 C68 85 72 97 70 110 C63 103 49 103 42 110 C40 97 44 85 56 74 Z"/>
+      <path d="M53 106 L53 140 L59 140 L59 106 Z"/>
+    </g>
+  </symbol>
+  <symbol id="lf-needle" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M52 126 C48 126 46 122 46 116 L28 16 C27 8 33 6 35 12 L54 114 C55 120 56 126 52 126 Z"/>
+      <path d="M56 128 C52 128 51 124 51 118 L51 14 C51 6 61 6 61 14 L61 118 C61 124 60 128 56 128 Z"/>
+      <path d="M60 126 C64 126 66 122 66 116 L84 16 C85 8 79 6 77 12 L58 114 C57 120 56 126 60 126 Z"/>
+      <path d="M49 124 L63 124 L63 140 L49 140 Z"/>
+    </g>
+  </symbol>
+  <symbol id="lf-fan" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 116 C30 110 10 86 8 52 C24 40 40 34 56 32 C72 34 88 40 104 52 C102 86 82 110 56 116 Z M53 114 L53 140 L59 140 L59 114 Z"/>
+    </g>
+    <path d="M56 112 L56 34 M56 112 L26 52 M56 112 L86 52 M56 112 L14 70 M56 112 L98 70" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.4"/>
+  </symbol>
+
+  <!-- ======== bark channel: one plate, six textures ======== -->
+  <symbol id="bk-smooth" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M38 24 C34 58 34 90 38 118" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.2)" stroke-width="2.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-furrowed" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M38 14 C31 46 33 82 38 126 M56 12 C49 48 51 86 56 128 M74 14 C81 46 79 82 74 126" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.42)" stroke-width="4.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-plated" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M23 44 L90 40 M23 76 L90 74 M23 108 L90 106 M56 8 L56 42 M40 42 L40 75 M72 42 L72 75 M56 75 L56 107 M40 107 L40 136 M74 106 L74 134" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.38)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-shaggy" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M32 12 C46 30 40 56 28 70 C42 86 36 112 26 128 M76 14 C62 32 70 58 82 72 C68 88 74 112 84 126" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.42)" stroke-width="4.2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-papery" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M23 30 Q56 23 90 30 M23 54 Q56 47 90 54 M23 78 Q56 71 90 78 M23 102 Q56 95 90 102 M23 124 Q56 117 90 124" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.32)" stroke-width="2.6" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-warty" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <g fill="var(--lf-tc,#22231E)" fill-opacity="var(--lf-to,.34)">
+      <circle cx="38" cy="30" r="5.5"/><circle cx="68" cy="44" r="6.5"/>
+      <circle cx="44" cy="66" r="5.5"/><circle cx="72" cy="86" r="6.5"/>
+      <circle cx="40" cy="104" r="5"/><circle cx="64" cy="120" r="4.5"/>
+    </g>
+  </symbol>
+
+  <!-- ======== fruit channel: one silhouette per fruit type ======== -->
+  <symbol id="fr-samara" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M50 92 C36 88 20 70 14 48 C8 26 18 10 32 16 C46 22 56 46 58 70 C59 84 58 94 50 92 Z"/>
+      <path d="M58 72 C72 72 82 86 82 104 C82 122 72 134 58 134 C44 134 34 122 34 104 C34 86 44 72 58 72 Z"/>
+    </g>
+  </symbol>
+  <symbol id="fr-acorn" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M38 60 L76 60 C76 96 69 124 57 134 C45 124 38 96 38 60 Z"/>
+      <path d="M28 54 C28 36 41 24 57 24 C73 24 86 36 86 54 C86 59 81 62 76 62 L38 62 C33 62 28 59 28 54 Z"/>
+      <path d="M54 24 L54 8 L60 8 L60 24 Z"/>
+    </g>
+  </symbol>
+  <symbol id="fr-nut" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 36 C80 36 96 60 96 86 C96 112 78 132 56 132 C34 132 16 112 16 86 C16 60 32 36 56 36 Z"/>
+    </g>
+    <path d="M24 104 Q56 118 88 104 M56 40 L56 30" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.34)" stroke-width="3.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fr-pod" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M52 6 C66 26 72 58 70 90 C68 116 62 132 55 138 C44 130 39 108 39 84 C39 52 43 24 52 6 Z"/>
+    </g>
+    <path d="M44 30 Q58 36 57 54 M42 62 Q57 68 56 86 M43 96 Q58 102 57 120" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.34)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fr-berry" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <circle cx="56" cy="98" r="27"/>
+      <path d="M53 71 L53 26 L59 26 L59 71 Z"/>
+      <path d="M56 30 C44 24 36 14 33 4 L40 1 C44 11 50 20 59 26 Z"/>
+    </g>
+  </symbol>
+  <!-- a dry urn that splits: flat shoulder, a tip, two seams -->
+  <symbol id="fr-capsule" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M32 44 Q56 34 80 44 L84 74 Q86 110 56 134 Q26 110 28 74 Z M53 44 L53 16 L59 16 L59 44 Z"/>
+    </g>
+    <path d="M32 50 Q56 60 80 50 M56 58 L56 128" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.34)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fr-cone" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 6 C70 32 82 76 82 106 C82 124 70 134 56 134 C42 134 30 124 30 106 C30 76 42 32 56 6 Z"/>
+    </g>
+    <path d="M41 40 Q56 48 71 40 M36 66 Q56 76 76 66 M33 92 Q56 104 79 92 M32 116 Q56 128 80 116" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.36)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fr-ball" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <circle cx="56" cy="84" r="33"/>
+      <path d="M53 51 L53 20 L59 20 L59 51 Z"/>
+      <path d="M56 24 C48 16 42 8 40 2 L46 0 C48 8 53 15 59 20 Z"/>
+    </g>
+    <path d="M56 51 L54 42 M77 61 L84 53 M90 84 L100 84 M77 107 L84 115 M56 117 L56 127 M35 107 L28 115 M22 84 L12 84 M35 61 L28 53" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.42)" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- ============================= SESSION ============================= -->
+<section class="screen" id="session">
+  <div class="head">
+    <span class="unit">Red oaks</span>
+    <span class="where">leaf card 4 of 12</span>
+  </div>
+  <div class="gauge" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="now"></i>
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <figure class="plate print bleed pl-hero" style="margin-top:12px">
+    <img src="./quru-leaf.jpg" alt="Pressed oak twig with four lobed leaves and two acorns">
+  </figure>
+  <p class="cap" style="margin-top:10px">Pressed specimen, undetermined. W. D. Brush.</p>
+
+  <p class="prompt">Name this tree.</p>
+  <div class="key">
+    <a class="pick" href="#reveal"><span class="nm">Northern red oak</span><span class="bn">Quercus rubra</span></a>
+    <a class="pick" href="#reveal"><span class="nm">Black oak</span><span class="bn">Quercus velutina</span></a>
+    <a class="pick" href="#reveal"><span class="nm">Shumard's oak</span><span class="bn">Quercus shumardii</span></a>
+    <a class="pick" href="#reveal"><span class="nm">Pin oak</span><span class="bn">Quercus palustris</span></a>
+  </div>
+  <label class="guessed" tabindex="0"><span class="box"></span><span>I guessed</span></label>
+</section>
+
+<!-- ============================= REVEAL ============================= -->
+<section class="screen" id="reveal">
+  <div class="head">
+    <span class="unit">Red oaks</span>
+    <span class="where">leaf card 4 of 12</span>
+  </div>
+  <div class="gauge" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="now"></i>
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <div class="verdict-wrap">
+    <p class="verdict">Not this one.</p>
+    <h1 class="display"><a class="answer-link" href="#species">Northern<br>red oak</a></h1>
+    <p class="sci-small">Quercus rubra</p>
+  </div>
+
+  <div class="pair-head" style="margin-top:24px">
+    <span class="ok"><i></i>Red oak, correct</span>
+    <span class="no"><i></i><b>Black oak</b>, your pick</span>
+  </div>
+  <div class="pair bleed">
+    <figure class="plate print pl-a"><img src="./quru-leaf.jpg" alt="Northern red oak leaf, lobes cut to about half the blade"></figure>
+    <figure class="plate print lift pl-b"><img src="./quve-leaf.jpg" alt="Black oak leaf, lobes cut much deeper"></figure>
+  </div>
+
+  <p class="compare">Red oak leaves have 7 to 11 bristle-tipped lobes with shallow sinuses; black oak lobes cut deeper and the leaf is glossier.</p>
+
+  <div class="levelrow">
+    <span class="ramp lg" aria-hidden="true"><b class="f1"></b><b class="lost"></b><b></b><b></b><b></b></span>
+    <span class="lv">Level 1, down from 2</span>
+  </div>
+
+  <a class="btn" href="#session">Next</a>
+</section>
+
+<!-- ============================== HOME ============================== -->
+<section class="screen" id="home">
+  <div class="masthead">
+    <h1 class="display">Dendro</h1>
+    <p class="sub">Trees of the Colorado Front Range.</p>
+    <div class="mastrule"></div>
+  </div>
+
+  <p class="state1"><b>Fourteen cards</b> are due today: nine leaf, three bark, two fruit.</p>
+
+  <div class="rec">
+    <div class="tick"></div>
+    <div class="figcol wide">
+      <figure class="plate print lift pl-thumb wide">
+        <img src="./quve-leaf.jpg" alt="Pressed black oak leaf">
+      </figure>
+      <p class="cap thumbcap">Black oak, one of the six.</p>
+    </div>
+    <h2 class="h2">Red oaks</h2>
+    <p class="why">Unit 5, six new cards. The six species of section Lobatae, quizzed by leaf.</p>
+    <a class="btn" href="#session">Start</a>
+  </div>
+
+  <div class="doors">
+    <!-- each door shows the mark you will find behind it -->
+    <a class="door" href="#lessons">
+      <span class="dthumb" aria-hidden="true">
+        <span class="dq"><i></i><i></i><i></i></span>
+        <span class="dq"><i></i><i></i><i></i><i class="shut"></i><i class="shut"></i><i class="shut"></i></span>
+        <span class="dq"><i></i><i class="next"></i><i class="shut"></i><i class="shut"></i></span>
+      </span>
+      <span class="dn">Lessons</span>
+      <span class="dd">Thirteen units, three deep, from leaf types down to the red oaks.</span>
+    </a>
+    <a class="door" href="#progress">
+      <span class="dthumb" aria-hidden="true">
+        <span class="dr"><svg viewBox="0 0 112 140" class="mk s20 v2"><use href="#lf-oak"/></svg><em><b style="width:50%"></b></em></span>
+        <span class="dr"><svg viewBox="0 0 112 140" class="mk s20 v3"><use href="#lf-oak"/></svg><em><b style="width:67%"></b></em></span>
+        <span class="dr"><svg viewBox="0 0 112 140" class="mk s20 v2"><use href="#lf-oak"/></svg><em><b style="width:47%"></b></em></span>
+      </span>
+      <span class="dn">Progress</span>
+      <span class="dd">Every card you hold, kept apart by shape, genus, and species.</span>
+    </a>
+  </div>
+
+  <a class="placement" href="#lessons">Take the placement test</a>
+
+  <nav class="footnav">
+    <a class="on" href="#home"><span>Home</span></a>
+    <a href="#lessons"><span>Lessons</span></a>
+    <a href="#progress"><span>Progress</span></a>
+  </nav>
+</section>
+
+<!-- ============================ PROGRESS ============================ -->
+<section class="screen" id="progress">
+  <div class="finding bleed" style="margin-top:0">
+    <div class="tick"></div>
+    <h1 class="h2">You know the<br>shapes. Not the<br>trees inside them.</h1>
+    <p class="state">Nine shape cards of twenty-two are familiar or better. Of the
+      twelve genus cards behind them, four are. Of the thirty-two species cards, twelve.
+      Each channel below prints three rungs in one column: one pressed sheet for shapes,
+      two for genera, three for species. Read down the column.</p>
+  </div>
+
+  <figure class="plate field mono soft bleed pl-bark evid">
+    <img src="./quru-bark.jpg" alt="Trunk of a mature northern red oak, bark in narrow ridges">
+  </figure>
+  <p class="cap evid-cap">Furrowed bark, northern red oak. You name the furrows. You do
+    not yet name the tree. W. R. Mattoon, public domain.</p>
+
+  <div class="legend" aria-hidden="true">
+    <div><svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-oak"/></svg><span>new</span></div>
+    <div><svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-oak"/></svg><span>seen</span></div>
+    <div><svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-oak"/></svg><span>familiar</span></div>
+    <div><svg viewBox="0 0 112 140" class="mk s24 v3"><use href="#lf-oak"/></svg><span>strong</span></div>
+    <div><svg viewBox="0 0 112 140" class="mk s24 v4"><use href="#lf-oak"/></svg><span>expert</span></div>
+  </div>
+
+  <!-- LEAF -->
+  <section class="chblock">
+    <div class="tick"></div>
+    <div class="cbh"><h3>Leaf</h3><span class="due">nine cards due</span></div>
+    <p class="claim">Simple lobed sits at expert. The nineteen species behind it do not.</p>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 v2"><use href="#lf-oak"/></svg>
+      </span>
+      <span><span class="cn">shapes</span><span class="lvw l2">familiar</span><span class="figs">4 of 8</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Eight leaf shape cards. Needles strong. Scale-like familiar. Simple untoothed seen. Simple toothed familiar. Simple lobed expert. Pinnately compound seen. Palmately compound new. Fan or strap new.">
+      <svg viewBox="0 0 112 140" class="mk s32 v3"><use href="#lf-needle"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v2"><use href="#lf-scale"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#lf-entire"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v2"><use href="#lf-tooth"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v4"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#lf-pinnate"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v0"><use href="#lf-palmate"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v0"><use href="#lf-fan"/></svg>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:50%"></b></div>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v3"><use href="#lf-oak"/></svg>
+      </span>
+      <span><span class="cn">genera</span><span class="lvw l3">strong</span><span class="figs">2 of 3</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Three leaf genus cards, all inside simple lobed. Maples strong. Oaks expert. Sycamores seen.">
+      <svg viewBox="0 0 112 140" class="mk s28 v3"><use href="#lf-maple"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v4"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v1"><use href="#lf-plat"/></svg>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:66.7%"></b></div>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g2"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v2"><use href="#lf-oak"/></svg>
+      </span>
+      <span><span class="cn">species</span><span class="lvw l2">familiar</span><span class="figs">9 of 19</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Nineteen leaf species cards in four groups: six red oaks, five white oaks, six maples, two sycamores. Most sit at seen or familiar.">
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v4"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-oak"/></svg>
+      </span>
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v3"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v4"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-oak"/></svg>
+      </span>
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-maple"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-maple"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-maple"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-maple"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-maple"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v3"><use href="#lf-maple"/></svg>
+      </span>
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-plat"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-plat"/></svg>
+      </span>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:47.4%"></b></div>
+    <a class="opens" href="#progress-shape">Open simple lobed</a>
+  </section>
+
+  <!-- BARK -->
+  <section class="chblock">
+    <div class="tick"></div>
+    <div class="cbh"><h3>Bark</h3><span class="due">three cards due</span></div>
+    <p class="claim">You read bark by its shape. You cannot yet say whose bark it is.</p>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 v2"><use href="#bk-furrowed"/></svg>
+      </span>
+      <span><span class="cn">shapes</span><span class="lvw l2">familiar</span><span class="figs">3 of 6</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Six bark shape cards. Smooth familiar. Furrowed strong. Plated seen. Shaggy seen. Papery familiar. Warty new.">
+      <svg viewBox="0 0 112 140" class="mk s32 v2"><use href="#bk-smooth"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v3"><use href="#bk-furrowed"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#bk-plated"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#bk-shaggy"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v2"><use href="#bk-papery"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v0"><use href="#bk-warty"/></svg>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:50%"></b></div>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#bk-furrowed"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v1"><use href="#lf-oak"/></svg>
+      </span>
+      <span><span class="cn">genera</span><span class="lvw l1">seen</span><span class="figs">1 of 6</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Six bark genus cards. Maples in furrowed bark seen. Oaks in furrowed bark familiar. Oaks in plated bark seen. Sycamores in papery bark new. Maples in smooth bark seen. Maples in shaggy bark new.">
+      <svg viewBox="0 0 112 140" class="mk s28 v1"><use href="#lf-maple"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v2"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v1"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v0"><use href="#lf-plat"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v1"><use href="#lf-maple"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v0"><use href="#lf-maple"/></svg>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:16.7%"></b></div>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g2"><use href="#bk-furrowed"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v1"><use href="#bk-furrowed"/></svg>
+      </span>
+      <span><span class="cn">species</span><span class="lvw l1">seen</span><span class="figs">2 of 8</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Eight bark species cards: four oaks, three maples, one sycamore. None has passed familiar.">
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-oak"/></svg>
+      </span>
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-maple"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-maple"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-maple"/></svg>
+      </span>
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-plat"/></svg>
+      </span>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:25%"></b></div>
+    <a class="opens" href="#progress-shape">Open furrowed bark</a>
+  </section>
+
+  <!-- FRUIT -->
+  <section class="chblock">
+    <div class="tick"></div>
+    <div class="cbh"><h3>Fruit</h3><span class="due">two cards due</span></div>
+    <p class="claim">Acorns lead. Every other fruit is new, or barely seen.</p>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 v1"><use href="#fr-acorn"/></svg>
+      </span>
+      <span><span class="cn">shapes</span><span class="lvw l1">seen</span><span class="figs">2 of 8</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Eight fruit shape cards. Samara familiar. Acorn strong. Nut new. Pod new. Berry seen. Capsule new. Cone seen. Ball seen.">
+      <svg viewBox="0 0 112 140" class="mk s32 v2"><use href="#fr-samara"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v3"><use href="#fr-acorn"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v0"><use href="#fr-nut"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v0"><use href="#fr-pod"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#fr-berry"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v0"><use href="#fr-capsule"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#fr-cone"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#fr-ball"/></svg>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:25%"></b></div>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#fr-acorn"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v1"><use href="#lf-oak"/></svg>
+      </span>
+      <span><span class="cn">genera</span><span class="lvw l1">seen</span><span class="figs">1 of 3</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Three fruit genus cards. Oaks in acorns familiar. Maples in samaras seen. Sycamores in balls new.">
+      <svg viewBox="0 0 112 140" class="mk s28 v2"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v1"><use href="#lf-maple"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s28 v0"><use href="#lf-plat"/></svg>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:33.3%"></b></div>
+
+    <div class="rung">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g2"><use href="#fr-acorn"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v1"><use href="#fr-acorn"/></svg>
+      </span>
+      <span><span class="cn">species</span><span class="lvw l1">seen</span><span class="figs">1 of 5</span></span>
+    </div>
+    <div class="band" role="img" aria-label="Five fruit species cards: three oaks and two maples. Only Gambel oak has passed familiar.">
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v2"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-oak"/></svg>
+      </span>
+      <span class="grp">
+        <svg viewBox="0 0 112 140" class="mk s24 v1"><use href="#lf-maple"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s24 v0"><use href="#lf-maple"/></svg>
+      </span>
+    </div>
+    <div class="wline" aria-hidden="true"><b style="width:20%"></b></div>
+    <a class="opens" href="#progress-shape">Open acorns</a>
+  </section>
+
+  <nav class="footnav">
+    <a href="#home"><span>Home</span></a>
+    <a href="#lessons"><span>Lessons</span></a>
+    <a class="on" href="#progress"><span>Progress</span></a>
+  </nav>
+</section>
+
+<!-- ======================= PROGRESS, ONE SHAPE ======================= -->
+<section class="screen" id="progress-shape">
+  <nav class="trail">
+    <a href="#progress">Progress</a><i></i><strong>Simple lobed</strong>
+  </nav>
+
+  <div class="pagehead">
+    <h1 class="display">Simple<br>lobed</h1>
+    <p class="where2">A leaf shape. Three genera sit under it, and nineteen species
+      under those.</p>
+  </div>
+
+  <figure class="plate print bleed pl-shape" style="margin-top:16px">
+    <img src="./quru-leaf.jpg" alt="Pressed oak twig with four simple lobed leaves and two acorns">
+  </figure>
+  <p class="cap plate-cap">A simple lobed leaf, northern red oak. W. D. Brush, public domain.</p>
+
+  <!-- where this shape sits among all eight -->
+  <div class="strip" role="img" aria-label="The eight leaf shapes, with simple lobed marked. Needles strong, scale-like familiar, simple untoothed seen, simple toothed familiar, simple lobed expert, pinnately compound seen, palmately compound new, fan or strap new.">
+    <span><svg viewBox="0 0 112 140" class="mk s32 v3"><use href="#lf-needle"/></svg></span>
+    <span><svg viewBox="0 0 112 140" class="mk s32 v2"><use href="#lf-scale"/></svg></span>
+    <span><svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#lf-entire"/></svg></span>
+    <span><svg viewBox="0 0 112 140" class="mk s32 v2"><use href="#lf-tooth"/></svg></span>
+    <span class="here"><svg viewBox="0 0 112 140" class="mk s32 v4"><use href="#lf-oak"/></svg></span>
+    <span><svg viewBox="0 0 112 140" class="mk s32 v1"><use href="#lf-pinnate"/></svg></span>
+    <span><svg viewBox="0 0 112 140" class="mk s32 v0"><use href="#lf-palmate"/></svg></span>
+    <span><svg viewBox="0 0 112 140" class="mk s32 v0"><use href="#lf-fan"/></svg></span>
+  </div>
+  <p class="cap strip-cap">The fifth of eight leaf shapes, and the only one at expert.</p>
+
+  <div class="shapecard bleed">
+    <svg viewBox="0 0 112 140" class="mk s86 v4" aria-hidden="true"><use href="#lf-oak"/></svg>
+    <span>
+      <span class="lvw l4">expert</span>
+      <span class="lvn">level 4 of 4, due in 26 days</span>
+      <span class="lvx">You name this shape on sight. The work left is below it.</span>
+    </span>
+  </div>
+
+  <!-- OAKS -->
+  <div class="gengroup">
+    <div class="tick"></div>
+    <div class="genhead">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v4"><use href="#lf-oak"/></svg>
+      </span>
+      <span><span class="gnm">Oaks</span><span class="gsci">Quercus</span></span>
+      <span class="lvw l4">expert</span>
+    </div>
+    <p class="secname">red oaks, section Lobatae</p>
+    <div class="splist">
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v0" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Texas red oak</span><span class="lvw l0">new</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v1" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Blackjack oak</span><span class="lvw l1">seen</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v2" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Pin oak</span><span class="lvw l2">familiar</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v4" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Northern red oak</span><span class="lvw l4">expert</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v1" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Shumard's oak</span><span class="lvw l1">seen</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v2" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Black oak</span><span class="lvw l2">familiar</span></a>
+    </div>
+    <p class="secname">white oaks, section Quercus</p>
+    <div class="splist">
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v3" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">White oak</span><span class="lvw l3">strong</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v4" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Gambel oak</span><span class="lvw l4">expert</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v0" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Havard oak</span><span class="lvw l0">new</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v2" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Bur oak</span><span class="lvw l2">familiar</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v1" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span class="sn">Post oak</span><span class="lvw l1">seen</span></a>
+    </div>
+  </div>
+
+  <!-- MAPLES -->
+  <div class="gengroup">
+    <div class="tick"></div>
+    <div class="genhead">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v3"><use href="#lf-maple"/></svg>
+      </span>
+      <span><span class="gnm">Maples</span><span class="gsci">Acer</span></span>
+      <span class="lvw l3">strong</span>
+    </div>
+    <div class="splist">
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v2" aria-hidden="true"><use href="#lf-maple"/></svg>
+        <span class="sn">Rocky Mountain maple</span><span class="lvw l2">familiar</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v2" aria-hidden="true"><use href="#lf-maple"/></svg>
+        <span class="sn">Bigtooth maple</span><span class="lvw l2">familiar</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v0" aria-hidden="true"><use href="#lf-maple"/></svg>
+        <span class="sn">Black maple</span><span class="lvw l0">new</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v1" aria-hidden="true"><use href="#lf-maple"/></svg>
+        <span class="sn">Norway maple</span><span class="lvw l1">seen</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v1" aria-hidden="true"><use href="#lf-maple"/></svg>
+        <span class="sn">Silver maple</span><span class="lvw l1">seen</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v3" aria-hidden="true"><use href="#lf-maple"/></svg>
+        <span class="sn">Sugar maple</span><span class="lvw l3">strong</span></a>
+    </div>
+  </div>
+
+  <!-- SYCAMORES -->
+  <div class="gengroup">
+    <div class="tick"></div>
+    <div class="genhead">
+      <span class="rmk" aria-hidden="true">
+        <svg viewBox="0 0 112 140" class="mk s40 gh g1"><use href="#lf-oak"/></svg>
+        <svg viewBox="0 0 112 140" class="mk s40 v1"><use href="#lf-plat"/></svg>
+      </span>
+      <span><span class="gnm">Sycamores</span><span class="gsci">Platanus</span></span>
+      <span class="lvw l1">seen</span>
+    </div>
+    <div class="splist">
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v1" aria-hidden="true"><use href="#lf-plat"/></svg>
+        <span class="sn">American sycamore</span><span class="lvw l1">seen</span></a>
+      <a class="spx" href="#species">
+        <svg viewBox="0 0 112 140" class="mk s26 v0" aria-hidden="true"><use href="#lf-plat"/></svg>
+        <span class="sn">Arizona sycamore</span><span class="lvw l0">new</span></a>
+    </div>
+  </div>
+
+  <a class="foot" href="#progress">All three channels</a>
+
+  <nav class="footnav">
+    <a href="#home"><span>Home</span></a>
+    <a href="#lessons"><span>Lessons</span></a>
+    <a class="on" href="#progress"><span>Progress</span></a>
+  </nav>
+</section>
+
+<!-- ============================= LESSONS ============================= -->
+<section class="screen" id="lessons">
+  <div class="nextu" style="padding-top:20px">
+    <div class="tick"></div>
+    <div class="figcol wide" style="float:right; width:148px; margin:0 0 6px 16px">
+      <figure class="plate print lift pl-thumb wide">
+        <img src="./quve-leaf.jpg" alt="Pressed black oak leaf">
+      </figure>
+      <p class="cap thumbcap">Black oak, one of the six.</p>
+    </div>
+    <h1 class="display">Red oaks</h1>
+    <p class="why">Unit 5, inside Simple lobed leaves.</p>
+    <div class="newrow" aria-hidden="true" style="clear:both">
+      <svg viewBox="0 0 112 140" class="mk s34 v0"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s34 v0"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s34 v0"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s34 v0"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s34 v0"><use href="#lf-oak"/></svg>
+      <svg viewBox="0 0 112 140" class="mk s34 v0"><use href="#lf-oak"/></svg>
+    </div>
+    <p class="cap newcap">Six cards in this unit you have not met yet.</p>
+    <div class="rampline">
+      <span class="ramp" aria-hidden="true"><b class="f1"></b><b></b><b></b><b></b><b></b></span>
+      <span>Unit level 1 of 4.</span>
+    </div>
+    <a class="btn" href="#session">Start</a>
+  </div>
+
+  <p class="keyline">One square per unit, in three rows, one row per depth. A filled
+    square is a unit you can start now. An outline waits on its parent. The moss tick
+    marks what is next.</p>
+
+  <a class="chdoor" href="#lessons-leaf">
+    <span class="cdh"><span class="dn">Leaf</span><span class="cdd">nine cards due, six of eight units open</span></span>
+    <span class="ustrip">
+      <span class="dn2">shapes</span><span class="sqs"><i></i></span>
+      <span class="dn2">genera</span><span class="sqs"><i></i><i></i><i></i></span>
+      <span class="dn2">species</span><span class="sqs"><i></i><i class="next"></i><i class="shut"></i><i class="shut"></i></span>
+    </span>
+  </a>
+
+  <a class="chdoor" href="#lessons-leaf">
+    <span class="cdh"><span class="dn">Bark</span><span class="cdd">three cards due, one of three units open</span></span>
+    <span class="ustrip">
+      <span class="dn2">shapes</span><span class="sqs"><i></i></span>
+      <span class="dn2">genera</span><span class="sqs"><i class="shut"></i><i class="shut"></i></span>
+      <span class="dn2">species</span><span class="sqs"><span class="none">none yet</span></span>
+    </span>
+  </a>
+
+  <a class="chdoor" href="#lessons-leaf">
+    <span class="cdh"><span class="dn">Fruit</span><span class="cdd">two cards due, one of two units open</span></span>
+    <span class="ustrip">
+      <span class="dn2">shapes</span><span class="sqs"><i></i></span>
+      <span class="dn2">genera</span><span class="sqs"><i class="shut"></i></span>
+      <span class="dn2">species</span><span class="sqs"><span class="none">none yet</span></span>
+    </span>
+  </a>
+
+  <a class="placement" href="#lessons">Take the placement test</a>
+
+  <nav class="footnav">
+    <a href="#home"><span>Home</span></a>
+    <a class="on" href="#lessons"><span>Lessons</span></a>
+    <a href="#progress"><span>Progress</span></a>
+  </nav>
+</section>
+
+<!-- ====================== LESSONS, ONE CHANNEL ====================== -->
+<section class="screen" id="lessons-leaf">
+  <nav class="trail">
+    <a href="#lessons">Lessons</a><i></i><strong>Leaf</strong>
+  </nav>
+
+  <div class="pagehead">
+    <h1 class="display">Leaf</h1>
+    <p class="where2">Eight units on one stem. A unit opens once four in five of its
+      parent's cards reach familiar.</p>
+  </div>
+
+  <figure class="plate field soft bleed pl-colour" style="margin-top:16px">
+    <img src="./acgl-leaf.jpg" alt="Rocky Mountain maple leaves in colour, on the branch">
+  </figure>
+  <p class="cap plate-cap">Rocky Mountain maple, in the Maples unit. Alex Abair, CC BY 4.0.</p>
+
+  <div class="tree">
+    <div class="node">
+      <div class="urow">
+        <svg viewBox="0 0 112 140" class="mk s30 v4" aria-hidden="true"><use href="#lf-oak"/></svg>
+        <span>
+          <span class="un">Leaf types</span>
+          <span class="ust"><span class="done-sq" aria-hidden="true"></span>complete, eight shape cards</span>
+          <span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b class="f3"></b><b class="f4"></b><b class="f4"></b></span>
+        </span>
+        <a class="startb" href="#session">Start</a>
+      </div>
+
+      <div class="kids">
+        <div class="node">
+          <div class="urow">
+            <svg viewBox="0 0 112 140" class="mk s30 v2" aria-hidden="true"><use href="#lf-oak"/></svg>
+            <span>
+              <span class="un">Simple lobed leaves</span>
+              <span class="ust">2 new cards</span>
+              <span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b class="f3"></b><b></b><b></b></span>
+            </span>
+            <a class="startb" href="#session">Start</a>
+          </div>
+
+          <div class="kids">
+            <div class="node">
+              <div class="urow">
+                <svg viewBox="0 0 112 140" class="mk s30 v1" aria-hidden="true"><use href="#lf-oak"/></svg>
+                <span>
+                  <span class="un">White oaks</span>
+                  <span class="ust">4 new cards</span>
+                  <span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b></b><b></b><b></b></span>
+                </span>
+                <a class="startb" href="#session">Start</a>
+              </div>
+            </div>
+            <div class="node now">
+              <div class="urow">
+                <svg viewBox="0 0 112 140" class="mk s30 v0" aria-hidden="true"><use href="#lf-oak"/></svg>
+                <span>
+                  <span class="un">Red oaks</span>
+                  <span class="ust">6 new cards, next up</span>
+                  <span class="ramp" aria-hidden="true"><b class="f1"></b><b></b><b></b><b></b><b></b></span>
+                </span>
+                <a class="startb solid" href="#session">Start</a>
+              </div>
+            </div>
+            <div class="node shut">
+              <div class="urow">
+                <svg viewBox="0 0 112 140" class="mk s30 v0" aria-hidden="true"><use href="#lf-maple"/></svg>
+                <span>
+                  <span class="un">Maples</span>
+                  <span class="ust">6 new cards. Opens with Simple lobed.</span>
+                  <span class="ramp dim" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></span>
+                </span>
+                <span class="shutnote">shut</span>
+              </div>
+            </div>
+            <div class="node shut">
+              <div class="urow">
+                <svg viewBox="0 0 112 140" class="mk s30 v0" aria-hidden="true"><use href="#lf-plat"/></svg>
+                <span>
+                  <span class="un">Sycamores</span>
+                  <span class="ust">2 new cards. Opens with Simple lobed.</span>
+                  <span class="ramp dim" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></span>
+                </span>
+                <span class="shutnote">shut</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="node">
+          <div class="urow">
+            <svg viewBox="0 0 112 140" class="mk s30 v0" aria-hidden="true"><use href="#lf-tooth"/></svg>
+            <span>
+              <span class="un">Simple toothed leaves</span>
+              <span class="ust">5 new cards</span>
+              <span class="ramp" aria-hidden="true"><b class="f1"></b><b></b><b></b><b></b><b></b></span>
+            </span>
+            <a class="startb" href="#session">Start</a>
+          </div>
+        </div>
+        <div class="node">
+          <div class="urow">
+            <svg viewBox="0 0 112 140" class="mk s30 v1" aria-hidden="true"><use href="#lf-needle"/></svg>
+            <span>
+              <span class="un">Needles</span>
+              <span class="ust">4 new cards</span>
+              <span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b></b><b></b><b></b></span>
+            </span>
+            <a class="startb" href="#session">Start</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a class="foot" href="#lessons">All three channels</a>
+
+  <nav class="footnav">
+    <a href="#home"><span>Home</span></a>
+    <a class="on" href="#lessons"><span>Lessons</span></a>
+    <a href="#progress"><span>Progress</span></a>
+  </nav>
+</section>
+
+<!-- ============================= SPECIES ============================= -->
+<section class="screen" id="species">
+  <nav class="trail">
+    <a href="#progress-shape">Simple lobed</a><i></i><strong>Northern red oak</strong>
+  </nav>
+  <div class="sp-title" style="padding-top:6px">
+    <h1 class="display">Northern<br>red oak</h1>
+    <p class="sci">Quercus rubra</p>
+    <p class="det2">Native. Section Lobatae, the red oaks.</p>
+  </div>
+
+  <figure class="plate print bleed pl-leaf" style="margin-top:20px">
+    <img src="./quru-leaf.jpg" alt="Pressed oak twig with lobed leaves and two acorns">
+  </figure>
+  <p class="cap plate-cap">Leaf and fruit. W. D. Brush, public domain.</p>
+
+  <div class="spans">
+    <div><b>60&#8211;90</b><span>feet tall</span></div>
+    <div><b>0&#8211;5,500</b><span>feet elevation</span></div>
+  </div>
+
+  <p class="sp-prose">Eastern North America. In Colorado it grows as a planted
+    street and park tree in Front Range towns; in its own range it holds mesic
+    upland forests and well-drained slopes.</p>
+
+  <dl class="facts">
+    <dt>native in</dt><dd>30 states</dd>
+    <dt>planted in</dt><dd>Colorado, Utah</dd>
+    <dt>leaf</dt><dd>simple, lobed, alternate</dd>
+    <dt>Audubon</dt><dd>Northern Red Oak</dd>
+    <dt>symbol</dt><dd>QURU</dd>
+  </dl>
+
+  <div class="sec">
+    <div class="tick"></div>
+    <h3 class="sec-h">Your cards</h3>
+    <div class="card-row">
+      <span><span class="cn">Leaf</span><span class="lvw l4">expert</span><span class="lvn">level 4 of 4</span></span>
+      <span class="rt"><span class="ramp lg" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b class="f3"></b><b class="f4"></b><b class="f4"></b></span><span class="due">Due in 21 days</span></span>
+    </div>
+    <div class="card-row">
+      <span><span class="cn">Bark</span><span class="lvw l2">familiar</span><span class="lvn">level 2 of 4</span></span>
+      <span class="rt"><span class="ramp lg" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b></b><b></b><b></b></span><span class="due">Due tomorrow</span></span>
+    </div>
+    <div class="card-row">
+      <span><span class="cn">Fruit</span><span class="lvw l0">new</span><span class="lvn">level 0 of 4</span></span>
+      <span class="rt"><span class="ramp lg" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></span><span class="due">Not started</span></span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="tick"></div>
+    <h3 class="sec-h">Bark</h3>
+    <figure class="plate field mono soft bleed pl-bark" style="margin-top:14px">
+      <img src="./quru-bark.jpg" alt="Trunk of a mature northern red oak, bark in narrow ridges">
+    </figure>
+    <p class="cap plate-cap">W. R. Mattoon, public domain.</p>
+    <p class="fact-line">No fruit plate is collected yet.</p>
+  </div>
+
+  <div class="sec">
+    <div class="tick"></div>
+    <h3 class="sec-h">Varieties</h3>
+    <p class="fact-line" style="margin-top:12px">No varieties are recognized for this species.</p>
+  </div>
+
+  <a class="btn" href="#session">Quiz this tree</a>
+
+  <nav class="footnav">
+    <a href="#home"><span>Home</span></a>
+    <a href="#lessons"><span>Lessons</span></a>
+    <a class="on" href="#progress"><span>Progress</span></a>
+  </nav>
+</section>
+
+</body>
+</html>

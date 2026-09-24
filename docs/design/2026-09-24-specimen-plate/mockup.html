@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>Dendro — the printed plate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1ECDF;
+  --mount:#E8E2D1;          /* derived tint 1: a darker paper for panels */
+  --ink:#22231E;
+  --ink-soft:#57584C;        /* derived tint 2: softened ink, 5.7:1 on paper */
+  --moss:#3A5A3C;
+  --bark:#5C4634;
+  --lichen:#C9D2B4;
+  --sap:#B8892E;
+  --m0:#E6DFCE; --m1:#C9D2B4; --m2:#9DB595; --m3:#6B8F6A; --m4:#3A5A3C;
+  --fr:"Fraunces",Georgia,serif;
+  --lit:"Literata",Georgia,serif;
+  --gut:22px;
+}
+
+/* ---------- paper ---------- */
+html{background:var(--paper);}
+body{
+  margin:0; width:390px; max-width:100vw;
+  color:var(--ink);
+  font-family:var(--lit);
+  font-size:17px; line-height:1.6;
+  font-variation-settings:"opsz" 17;
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+  background-blend-mode:multiply;
+  -webkit-font-smoothing:antialiased;
+}
+
+.screen{display:none;}
+.screen:target{display:block;}
+body:not(:has(.screen:target)) #session{display:block;}
+.screen{min-height:844px; padding:0 var(--gut) 46px; box-sizing:border-box; overflow-x:hidden;}
+
+/* ---------- type scale ---------- */
+.display{
+  font-family:var(--fr); font-weight:400; font-size:44px; line-height:.97;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
+  letter-spacing:-.02em; margin:0;
+}
+.h2{
+  font-family:var(--fr); font-weight:400; font-size:34px; line-height:1.04;
+  font-variation-settings:"opsz" 120,"SOFT" 0,"WONK" 1;
+  letter-spacing:-.016em; margin:0;
+}
+.sec-h{
+  font-family:var(--fr); font-weight:600; font-size:19px; line-height:1.2;
+  font-variation-settings:"opsz" 24; margin:0;
+}
+.nm{font-family:var(--fr); font-weight:500; font-size:19px; font-variation-settings:"opsz" 22; line-height:1.2;}
+.bn{font-size:14.5px; font-style:italic; color:var(--bark);}
+.cap{font-size:13px; line-height:1.4; font-style:italic; color:var(--bark); font-variation-settings:"opsz" 12; margin:0;}
+
+/* a short printer's tick marks a new section; it is not a full rule */
+.tick{width:38px; height:2px; background:var(--bark); margin:0 0 9px;}
+
+/* =======================================================================
+   PLATES — the bold move, and its fallback
+
+   A plate never ends on a straight line. There are two ways to reach that,
+   and the choice is made by the photograph, not by the screen:
+
+   .plate.print   The scan has a bright studio ground (quru-leaf, quve-leaf).
+                  The image multiplies into the paper, so the white ground
+                  BECOMES paper and the specimen has no edge at all.
+
+   .plate.field   The photograph carries its own ground: dark (quru-bark) or
+                  in colour (acgl-leaf). Multiply would turn that ground into
+                  a dirty grey rectangle with a hard edge, so a field plate
+                  does not blend. It is held back in saturation and then
+                  dissolved on all four sides by a mask, with a paper vignette
+                  over it, so it fades into the page instead of stopping.
+
+   Every plate in this file is one or the other. There is no third case and
+   no bordered panel anywhere.
+   ======================================================================= */
+.plate{margin:0; overflow:hidden; position:relative;}
+.bleed{margin-left:calc(var(--gut)*-1); margin-right:calc(var(--gut)*-1);}
+
+.plate.print img{display:block; mix-blend-mode:multiply; filter:grayscale(1) contrast(1.06);}
+/* the black oak scan carries a grey cast; lift its ground to white so that
+   plate has no rectangle either */
+.plate.print.lift img{filter:grayscale(1) brightness(1.09) contrast(1.14);}
+
+.plate.field img{display:block; mix-blend-mode:normal;
+  filter:saturate(.62) contrast(.97) brightness(1.05);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 13%,#000 58%,transparent 100%),
+                     linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 13%,#000 58%,transparent 100%),
+             linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
+  -webkit-mask-composite:source-in; mask-composite:intersect;}
+.plate.field::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(118% 92% at 50% 46%,rgba(241,236,223,0) 44%,var(--paper) 100%);}
+.plate.field.mono img{filter:grayscale(1) brightness(1.16) contrast(.95);}
+/* A field plate small enough that four linear fades would read as a square
+   dissolves as a spot instead. Same rule, smaller print. Safe on the figure
+   because a field plate carries no blend mode to isolate. */
+.plate.field.spot img{-webkit-mask-image:none; mask-image:none;}
+.plate.field.spot{
+  -webkit-mask-image:radial-gradient(closest-side,#000 40%,rgba(0,0,0,.7) 70%,transparent 100%);
+  mask-image:radial-gradient(closest-side,#000 40%,rgba(0,0,0,.7) 70%,transparent 100%);}
+.plate.field.spot img{filter:saturate(.8) contrast(1) brightness(1);}
+.plate.field.spot::after{
+  background:radial-gradient(closest-side,rgba(241,236,223,0) 40%,var(--paper) 100%);}
+
+/* --- session: the specimen entire. It spans the page from edge to edge and
+       not one lobe tip is lost: the frame is cut to the specimen's own
+       bounding box, so the leaves touch both edges instead of running past
+       them. All offsets are percentages of the figure width, so the framing
+       holds at 360px. --- */
+.pl-hero{aspect-ratio:390/528;}
+.pl-hero img{width:108.7%; margin:-11.54% 0 0 -5.92%;}
+/* --- species: the same specimen, full width, with the lower edge dissolved
+       so the print does not stop on a line --- */
+.pl-leaf{aspect-ratio:390/452;}
+.pl-leaf img{width:108.7%; margin:-11.54% 0 0 -5.92%;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 100%);}
+/* --- species: the bark, a field plate --- */
+.pl-bark{aspect-ratio:390/342;}
+.pl-bark img{width:100%;}
+/* --- home: a small print of one card inside the recommended unit. The whole
+       specimen fits, so the thumbnail is a print and not a crop. --- */
+.pl-thumb{width:96px; aspect-ratio:600/900;}
+.pl-thumb img{width:100%; margin:0;}
+/* --- home: the colour plate. Same object, the other treatment. --- */
+.pl-mini{width:92px; aspect-ratio:1/1; flex:0 0 auto;}
+.pl-mini img{width:196%; margin:-131% 0 0 -61.5%;}
+
+/* --- reveal: the pair, matched to one scale and one baseline so the
+       sentence about lobe depth can actually be checked --- */
+.pair{display:grid; grid-template-columns:1fr 1fr; gap:0 6px;}
+.pair figure{aspect-ratio:183/244;}
+.pair figure img{width:100.5%;}
+.pl-a img{margin:-7.65% 0 0 -1.64%;}
+.pl-b img{margin:-7.65% 0 0 0;}
+
+/* ---------- running head + printed gauge ---------- */
+.head{padding-top:16px; display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+.head .unit{font-family:var(--fr); font-weight:500; font-size:14.5px; font-variation-settings:"opsz" 14;}
+.head .where{font-size:13px; font-style:italic; color:var(--bark);}
+.gauge{display:flex; gap:3px; margin:8px 0 0; height:5px;}
+.gauge i{flex:1; height:2px; background:rgba(92,70,52,.22); align-self:end;}
+.gauge i.done{background:var(--bark); opacity:.8;}
+.gauge i.now{background:var(--moss); height:5px;}
+
+/* ---------- the key ----------
+   Four pressed labels, each cut to the length of the name it carries, so the
+   answers make a ragged right edge instead of a stack of matched boxes. The
+   moss bar is not decoration: it appears only on the label your finger or
+   your keyboard is on. ---------- */
+.prompt{font-family:var(--fr); font-weight:400; font-size:26px; line-height:1.14;
+  font-variation-settings:"opsz" 60,"WONK" 1; letter-spacing:-.012em; margin:20px 0 0;}
+.key{margin:12px 0 0; padding:0; list-style:none;
+  display:flex; flex-direction:column; align-items:flex-start; gap:9px;}
+.pick{
+  display:flex; align-items:baseline; gap:9px; white-space:nowrap;
+  min-height:52px; min-width:200px; max-width:100%; padding:13px 15px;
+  box-sizing:border-box; align-items:center;
+  background:rgba(201,210,180,.46); border-radius:2px;
+  border-left:0 solid var(--moss);
+  text-decoration:none; color:var(--ink);
+}
+.pick:active{background:var(--lichen); border-left-width:5px; padding-left:10px;}
+.pick:focus-visible{outline:2px solid var(--moss); outline-offset:2px;
+  border-left-width:5px; padding-left:10px; background:var(--lichen);}
+
+/* ---------- I guessed ---------- */
+.guessed{display:flex; align-items:center; gap:11px; min-height:48px; margin-top:8px;}
+.guessed .box{width:20px; height:20px; border:1.5px solid var(--bark); flex:0 0 auto;}
+.guessed span{font-size:16px;}
+.guessed:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- reveal ---------- */
+.verdict-wrap{margin-top:26px;}
+.verdict{font-family:var(--fr); font-weight:500; font-size:17px; line-height:1.2;
+  font-variation-settings:"opsz" 18; color:var(--bark); margin:0 0 10px;}
+.answer-link{color:var(--ink); text-decoration:none;}
+.answer-link:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+.sci-small{margin:9px 0 0; font-family:var(--fr); font-style:italic; font-weight:400;
+  font-size:19px; font-variation-settings:"opsz" 24; color:var(--bark);}
+.pair-head{display:grid; grid-template-columns:1fr 1fr; gap:0 6px; margin:0 0 8px;}
+.pair-head span{display:block; font-family:var(--fr); font-weight:600; font-size:15px;
+  font-variation-settings:"opsz" 18; line-height:1.25;}
+.pair-head .ok{color:var(--moss);}
+.pair-head .no{color:var(--bark);}
+.pair-head .no b{font-weight:600; text-decoration:line-through;
+  text-decoration-color:var(--bark); text-decoration-thickness:1.5px;}
+.pair-head i{display:block; height:3px; margin-bottom:7px; background:var(--moss);}
+.pair-head .no i{background:rgba(92,70,52,.4);}
+.compare{margin:22px 0 0; font-size:17px; line-height:1.56;}
+.levelrow{display:flex; align-items:center; gap:12px; margin-top:24px;}
+.levelrow .lv{font-size:17px;}
+.ramp{display:flex; gap:3px;}
+.ramp b{width:14px; height:14px; display:block; background:var(--m0);
+  border:1px solid rgba(92,70,52,.3); box-sizing:border-box;}
+.ramp b.f1{background:var(--m1)} .ramp b.f2{background:var(--m2)}
+.ramp b.f3{background:var(--m3)} .ramp b.f4{background:var(--m4)}
+.ramp b.lost{background:transparent; border:2px solid var(--sap);}
+.ramp.dim b{opacity:.45;}
+.btn{
+  display:block; margin-top:26px; min-height:54px; line-height:54px;
+  background:var(--moss); color:var(--paper); text-align:center; text-decoration:none;
+  font-family:var(--fr); font-weight:600; font-size:18px; font-variation-settings:"opsz" 20;
+  border-radius:2px;
+}
+.btn:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+
+/* ---------- home ---------- */
+.masthead{padding-top:22px;}
+.masthead .sub{margin:9px 0 0; font-size:15px; font-style:italic; color:var(--bark);}
+.mastrule{height:2px; background:var(--bark); margin:14px 0 0; opacity:.85;}
+
+/* four counts, set as numerals. The selected channel carries a moss rule
+   across its whole column. No boxes. */
+.chans{display:grid; grid-template-columns:repeat(4,1fr); margin-top:10px;}
+.chan{
+  position:relative; min-height:62px; padding:10px 0 12px; text-align:center;
+  text-decoration:none; color:var(--ink-soft); border-radius:2px;
+}
+.chan b{display:block; font-family:var(--fr); font-weight:400; font-size:31px; line-height:1;
+  font-variation-settings:"opsz" 96,"SOFT" 0,"WONK" 1; letter-spacing:-.02em;}
+.chan span{display:block; margin-top:5px; font-size:13.5px;}
+.chan.on{color:var(--ink);}
+.chan.on b{color:var(--moss);}
+.chan.on::after{content:""; position:absolute; left:0; right:0; bottom:0;
+  height:4px; background:var(--moss);}
+.chan:focus-visible{outline:2px solid var(--moss); outline-offset:1px;}
+
+.rec{margin-top:24px;}
+.rec .tick{background:var(--moss); width:52px; height:3px;}
+.rec .top{display:flex; align-items:flex-start; gap:14px; justify-content:space-between;}
+.rec .why{margin:7px 0 0; font-size:16px; color:var(--bark);}
+.rec .thumbcap{margin-top:6px; width:96px;}
+.rec .btn{margin-top:16px;}
+
+/* the pressed sheet: the whole collection as one picture */
+.sheetblock{margin-top:30px;}
+.sheetblock .lede{margin:0; font-size:15px; line-height:1.45; color:var(--bark);}
+svg.sheetleaves{display:block; width:100%; height:auto; margin-top:12px;}
+.legend{display:flex; justify-content:space-between; margin-top:10px; padding-top:11px;
+  border-top:1px solid rgba(92,70,52,.25);}
+.legend div{text-align:center; width:19%;}
+.legend svg{display:block; width:24px; height:30px; margin:0 auto 5px;}
+.legend span{font-size:12px; color:var(--bark); line-height:1.2;}
+
+.units{margin:30px 0 0; padding:0; list-style:none; display:grid; gap:8px;}
+.units li{margin:0;}
+.unit-row{
+  display:grid; grid-template-columns:1fr auto; align-items:center; column-gap:12px;
+  min-height:62px; padding:10px 13px; box-sizing:border-box; border-radius:2px;
+  text-decoration:none; color:var(--ink);
+  background:var(--mount); border-left:3px solid var(--moss);
+}
+.unit-row:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.unit-row .un{font-family:var(--fr); font-weight:500; font-size:19px;
+  font-variation-settings:"opsz" 22; line-height:1.2;}
+.unit-row .ust{display:block; font-size:14px; color:var(--bark); margin-top:1px;}
+.unit-row .done-sq{width:11px; height:11px; background:var(--moss); display:inline-block; margin-right:5px;}
+li.shut .unit-row{background:none; border-left:3px solid rgba(92,70,52,.22);}
+li.shut .un{color:var(--ink-soft);}
+li.shut .ust{color:var(--ink-soft);}
+.unit-row .withmini{display:flex; align-items:center; gap:12px;}
+.placement{display:inline-flex; align-items:center; margin-top:22px; font-size:16px;
+  font-style:italic; color:var(--bark); text-decoration:none;
+  box-shadow:inset 0 -1px 0 rgba(92,70,52,.55); min-height:46px;}
+.placement:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- species ---------- */
+.sp-title{padding-top:18px;}
+.sp-title .display{font-size:41px;}
+.sp-title .sci{margin:10px 0 0; font-family:var(--fr); font-style:italic; font-weight:400;
+  font-size:22px; font-variation-settings:"opsz" 30; color:var(--bark);}
+.sp-title .det2{margin:8px 0 0; font-size:15px; font-style:italic; color:var(--bark);}
+
+/* the two numbers a person says out loud */
+.spans{display:grid; grid-template-columns:1fr 1fr; gap:0 14px; margin:24px 0 0;}
+.spans b{display:block; font-family:var(--fr); font-weight:400; font-size:34px; line-height:1;
+  font-variation-settings:"opsz" 110,"SOFT" 0,"WONK" 1; letter-spacing:-.022em;}
+.spans span{display:block; margin-top:6px; font-size:14px; color:var(--bark);}
+.sp-prose{margin:20px 0 0; font-size:17px; line-height:1.56;}
+dl.facts{margin:20px 0 0; display:grid; grid-template-columns:96px 1fr; row-gap:8px; column-gap:12px;}
+dl.facts dt{font-style:italic; color:var(--bark); font-size:14.5px; line-height:1.45;}
+dl.facts dd{margin:0; font-size:16px; line-height:1.45;}
+.sec{margin-top:32px;}
+
+/* your cards: the level word is set off the level, so the row's weight reads
+   before any number does. The colour stays legible; the ramp carries hue. */
+.card-row{
+  display:grid; grid-template-columns:1fr auto; align-items:center; column-gap:12px;
+  background:var(--mount); border-radius:2px; padding:11px 13px; margin-top:8px;
+}
+.card-row .cn{display:block; font-family:var(--fr); font-weight:500; font-size:14.5px;
+  font-variation-settings:"opsz" 14; color:var(--bark); line-height:1.2;}
+.card-row .lvw{display:block; font-family:var(--fr); font-weight:500; line-height:1.05;
+  margin-top:2px; color:var(--ink);}
+.card-row .l4 .lvw{font-size:28px; font-variation-settings:"opsz" 72,"WONK" 1; letter-spacing:-.018em;}
+.card-row .l2 .lvw{font-size:22px; font-variation-settings:"opsz" 40;}
+.card-row .l0 .lvw{font-size:17px; font-variation-settings:"opsz" 20; color:var(--ink-soft);}
+.card-row .lvn{display:block; margin-top:3px; font-family:var(--lit); font-size:13px;
+  font-style:italic; color:var(--bark);}
+.card-row .rt{display:flex; flex-direction:column; align-items:flex-end; text-align:right;}
+.card-row .due{display:block; font-size:14px; color:var(--bark); margin-top:6px;}
+.fact-line{margin:16px 0 0; font-size:16px; color:var(--bark);}
+.plate-cap{margin-top:9px;}
+
+/* ---------- the one motion moment: the reveal answers the tap ---------- */
+@media (prefers-reduced-motion:no-preference){
+  #reveal:target .verdict-wrap{animation:rise .26s ease-out both;}
+  #reveal:target .pair-head i{animation:ink .3s .1s ease-out both; transform-origin:left;}
+  #reveal:target .pl-a img{animation:press .38s .06s ease-out both;}
+  #reveal:target .pl-b img{animation:press .38s .2s ease-out both;}
+  #reveal:target .pair-head .no b{animation:strike .3s .34s ease-out both;}
+  @keyframes rise{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  @keyframes ink{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+  @keyframes press{from{opacity:0} to{opacity:1}}
+  @keyframes strike{from{text-decoration-color:transparent} to{text-decoration-color:var(--bark)}}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="lf-oak" viewBox="0 0 112 140">
+    <path d="M56 120 C48 118 34 118 24 112 C16 107 22 102 44 100 C36 94 20 92 12 86 C4 80 14 76 40 74 C30 66 14 64 8 56 C2 48 12 46 38 46 C30 38 20 32 18 24 C16 14 28 12 44 16 C46 10 50 5 56 2 C62 5 66 10 68 16 C84 12 96 14 94 24 C92 32 82 38 74 46 C100 46 110 48 104 56 C98 64 82 66 72 74 C98 76 108 80 100 86 C92 92 76 94 68 100 C90 102 96 107 88 112 C78 118 64 118 56 120 Z M53 119 L53 140 L59 140 L59 119 Z"
+      fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)"
+      stroke-width="var(--lf-sw,2)"/>
+    <path d="M56 116 L56 12" fill="none" stroke="#22231E" stroke-opacity="var(--lf-vo,.15)"
+      stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-maple" viewBox="0 0 112 140">
+    <path d="M56 124 C50 118 42 112 30 106 C20 101 12 99 4 98 C10 92 16 86 20 78 C12 76 6 71 0 64 C10 61 22 59 32 60 C27 51 24 40 24 30 C33 36 43 45 50 54 C49 39 51 22 56 6 C61 22 63 39 62 54 C69 45 79 36 88 30 C88 40 85 51 80 60 C90 59 102 61 112 64 C106 71 100 76 92 78 C96 86 102 92 108 98 C100 99 92 101 82 106 C70 112 62 118 56 124 Z M53 123 L53 140 L59 140 L59 123 Z"
+      fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)"
+      stroke-width="var(--lf-sw,2)"/>
+    <path d="M56 120 L56 10" fill="none" stroke="#22231E" stroke-opacity="var(--lf-vo,.15)"
+      stroke-width="2.6"/>
+  </symbol>
+</svg>
+
+<!-- ============ SESSION ============ -->
+<section class="screen" id="session">
+  <div class="head">
+    <span class="unit">Red oaks</span>
+    <span class="where">leaf card 4 of 12</span>
+  </div>
+  <div class="gauge" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="now"></i>
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <figure class="plate print bleed pl-hero" style="margin-top:12px">
+    <img src="./quru-leaf.jpg" alt="Pressed oak twig with four lobed leaves and two acorns">
+  </figure>
+  <p class="cap" style="margin-top:10px">Pressed specimen, undetermined. W. D. Brush.</p>
+
+  <p class="prompt">Name this tree.</p>
+  <div class="key">
+    <a class="pick" href="#reveal"><span class="nm">Northern red oak</span><span class="bn">Quercus rubra</span></a>
+    <a class="pick" href="#reveal"><span class="nm">Black oak</span><span class="bn">Quercus velutina</span></a>
+    <a class="pick" href="#reveal"><span class="nm">Shumard's oak</span><span class="bn">Quercus shumardii</span></a>
+    <a class="pick" href="#reveal"><span class="nm">Pin oak</span><span class="bn">Quercus palustris</span></a>
+  </div>
+  <label class="guessed" tabindex="0"><span class="box"></span><span>I guessed</span></label>
+</section>
+
+<!-- ============ REVEAL ============ -->
+<section class="screen" id="reveal">
+  <div class="head">
+    <span class="unit">Red oaks</span>
+    <span class="where">leaf card 4 of 12</span>
+  </div>
+  <div class="gauge" aria-hidden="true">
+    <i class="done"></i><i class="done"></i><i class="done"></i><i class="now"></i>
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <div class="verdict-wrap">
+    <p class="verdict">Not this one.</p>
+    <h1 class="display"><a class="answer-link" href="#species">Northern<br>red oak</a></h1>
+    <p class="sci-small">Quercus rubra</p>
+  </div>
+
+  <div class="pair-head" style="margin-top:24px">
+    <span class="ok"><i></i>Red oak, correct</span>
+    <span class="no"><i></i><b>Black oak</b>, your pick</span>
+  </div>
+  <div class="pair bleed">
+    <figure class="plate print pl-a"><img src="./quru-leaf.jpg" alt="Northern red oak leaf, lobes cut to about half the blade"></figure>
+    <figure class="plate print lift pl-b"><img src="./quve-leaf.jpg" alt="Black oak leaf, lobes cut much deeper"></figure>
+  </div>
+
+  <p class="compare">Red oak leaves have 7 to 11 bristle-tipped lobes with shallow sinuses; black oak lobes cut deeper and the leaf is glossier.</p>
+
+  <div class="levelrow">
+    <span class="ramp" aria-hidden="true"><b class="f1"></b><b class="lost"></b><b></b><b></b><b></b></span>
+    <span class="lv">Level 1, down from 2</span>
+  </div>
+
+  <a class="btn" href="#home">Next</a>
+</section>
+
+<!-- ============ HOME ============ -->
+<section class="screen" id="home">
+  <div class="masthead">
+    <h1 class="display">Dendro</h1>
+    <p class="sub">Trees of the Colorado Front Range.</p>
+    <div class="mastrule"></div>
+  </div>
+
+  <nav class="chans">
+    <a class="chan on" href="#home"><b>14</b><span>All</span></a>
+    <a class="chan" href="#home"><b>9</b><span>Leaf</span></a>
+    <a class="chan" href="#home"><b>3</b><span>Bark</span></a>
+    <a class="chan" href="#home"><b>2</b><span>Fruit</span></a>
+  </nav>
+
+  <div class="rec">
+    <div class="tick"></div>
+    <div class="top">
+      <div>
+        <h2 class="h2">Red oaks</h2>
+        <p class="why">Unit 5, six new cards.</p>
+      </div>
+      <div>
+        <figure class="plate print lift pl-thumb">
+          <img src="./quve-leaf.jpg" alt="Pressed black oak leaf">
+        </figure>
+        <p class="cap thumbcap">Black oak, one of the six.</p>
+      </div>
+    </div>
+    <a class="btn" href="#session">Start</a>
+  </div>
+
+  <div class="sheetblock">
+    <p class="lede">Your forty cards, pressed on one sheet. The pale outlines are
+      the twelve you have not met.</p>
+    <svg class="sheetleaves" viewBox="0 0 340 172" role="img" aria-label="Forty pressed leaves shaded by how well each card is known. Twelve are drawn as pale outlines because they are new.">
+      <g transform="rotate(-1.4 15.5 21)"><use href="#lf-oak" x="0.5" y="2" width="30" height="38" style="color:var(--m4)"/></g>
+      <g transform="rotate(2.2 49.5 21)"><use href="#lf-oak" x="34.5" y="2" width="30" height="38" style="color:var(--m4)"/></g>
+      <g transform="rotate(-3.1 83.5 21)"><use href="#lf-maple" x="68.5" y="2" width="30" height="38" style="color:var(--m4)"/></g>
+      <g transform="rotate(1.1 117.5 21)"><use href="#lf-oak" x="102.5" y="2" width="30" height="38" style="color:var(--m4)"/></g>
+      <g transform="rotate(4.6 151.5 21)"><use href="#lf-oak" x="136.5" y="2" width="30" height="38" style="color:var(--m2)"/></g>
+      <g transform="rotate(-2.4 185.5 21)"><use href="#lf-oak" x="170.5" y="2" width="30" height="38" style="color:var(--m3)"/></g>
+      <g transform="rotate(3.8 219.5 21)"><use href="#lf-maple" x="204.5" y="2" width="30" height="38" style="color:var(--m1)"/></g>
+      <g transform="rotate(-5.2 253.5 21)"><use href="#lf-oak" x="238.5" y="2" width="30" height="38" style="color:var(--m3)"/></g>
+      <g transform="rotate(0.6 287.5 21)"><use href="#lf-oak" x="272.5" y="2" width="30" height="38" style="color:var(--m4)"/></g>
+      <g transform="rotate(2.9 321.5 21)"><use href="#lf-oak" x="306.5" y="2" width="30" height="38" style="color:var(--m2)"/></g>
+
+      <g transform="rotate(4.1 15.5 64)"><use href="#lf-oak" x="0.5" y="45" width="30" height="38" style="color:var(--m3)"/></g>
+      <g transform="rotate(-3.6 49.5 64)"><use href="#lf-oak" x="34.5" y="45" width="30" height="38" style="color:var(--m1)"/></g>
+      <g transform="rotate(1.8 83.5 64)"><use href="#lf-maple" x="68.5" y="45" width="30" height="38" style="color:var(--m3)"/></g>
+      <g transform="rotate(-6.0 117.5 64)"><use href="#lf-oak" x="102.5" y="45" width="30" height="38" style="color:var(--m2)"/></g>
+      <g transform="rotate(2.5 151.5 64)"><use href="#lf-oak" x="136.5" y="45" width="30" height="38" style="color:var(--m4)"/></g>
+      <g transform="rotate(5.3 185.5 64)"><use href="#lf-oak" x="170.5" y="45" width="30" height="38" style="color:var(--m2)"/></g>
+      <g transform="rotate(-1.2 219.5 64)"><use href="#lf-maple" x="204.5" y="45" width="30" height="38" style="color:var(--m1)"/></g>
+      <g transform="rotate(3.3 253.5 64)"><use href="#lf-oak" x="238.5" y="45" width="30" height="38" style="color:var(--m3)"/></g>
+      <g transform="rotate(-4.4 287.5 64)"><use href="#lf-oak" x="272.5" y="45" width="30" height="38" style="color:var(--m2)"/></g>
+      <g transform="rotate(1.5 321.5 64)"><use href="#lf-maple" x="306.5" y="45" width="30" height="38" style="color:var(--m1)"/></g>
+
+      <g transform="rotate(-2.8 15.5 107)"><use href="#lf-oak" x="0.5" y="88" width="30" height="38" style="color:var(--m2)"/></g>
+      <g transform="rotate(5.9 49.5 107)"><use href="#lf-maple" x="34.5" y="88" width="30" height="38" style="color:var(--m1)"/></g>
+      <g transform="rotate(-1.0 83.5 107)"><use href="#lf-oak" x="68.5" y="88" width="30" height="38" style="color:var(--m3)"/></g>
+      <g transform="rotate(3.1 117.5 107)"><use href="#lf-oak" x="102.5" y="88" width="30" height="38" style="color:var(--m1)"/></g>
+      <g transform="rotate(-5.7 151.5 107)"><use href="#lf-oak" x="136.5" y="88" width="30" height="38" style="color:var(--m2)"/></g>
+      <g transform="rotate(2.0 185.5 107)"><use href="#lf-maple" x="170.5" y="88" width="30" height="38" style="color:var(--m1)"/></g>
+      <g transform="rotate(-3.3 219.5 107)"><use href="#lf-oak" x="204.5" y="88" width="30" height="38" style="color:var(--m1)"/></g>
+      <g transform="rotate(4.8 253.5 107)"><use href="#lf-oak" x="238.5" y="88" width="30" height="38" style="color:var(--m2)"/></g>
+      <g transform="rotate(-0.7 287.5 107)"><use href="#lf-oak" x="272.5" y="88" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(6.2 321.5 107)"><use href="#lf-maple" x="306.5" y="88" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+
+      <g transform="rotate(2.6 15.5 150)"><use href="#lf-oak" x="0.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(-4.9 49.5 150)"><use href="#lf-oak" x="34.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(1.3 83.5 150)"><use href="#lf-maple" x="68.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(-2.1 117.5 150)"><use href="#lf-oak" x="102.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(5.5 151.5 150)"><use href="#lf-oak" x="136.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(-1.7 185.5 150)"><use href="#lf-oak" x="170.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(3.6 219.5 150)"><use href="#lf-maple" x="204.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(-5.4 253.5 150)"><use href="#lf-oak" x="238.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(0.9 287.5 150)"><use href="#lf-oak" x="272.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+      <g transform="rotate(-3.9 321.5 150)"><use href="#lf-maple" x="306.5" y="131" width="30" height="38" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></g>
+    </svg>
+    <div class="legend" aria-hidden="true">
+      <div><svg viewBox="0 0 112 140"><use href="#lf-oak" style="--lf-fill:none;--lf-so:.45;--lf-sw:6;--lf-vo:.22"/></svg><span>new</span></div>
+      <div><svg viewBox="0 0 112 140" style="color:var(--m1)"><use href="#lf-oak"/></svg><span>seen</span></div>
+      <div><svg viewBox="0 0 112 140" style="color:var(--m2)"><use href="#lf-oak"/></svg><span>familiar</span></div>
+      <div><svg viewBox="0 0 112 140" style="color:var(--m3)"><use href="#lf-oak"/></svg><span>strong</span></div>
+      <div><svg viewBox="0 0 112 140" style="color:var(--m4)"><use href="#lf-oak"/></svg><span>expert</span></div>
+    </div>
+  </div>
+
+  <ul class="units">
+    <li>
+      <a class="unit-row" href="#session">
+        <span><span class="un">Leaf types</span><span class="ust"><span class="done-sq" aria-hidden="true"></span>complete</span></span>
+        <span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b class="f3"></b><b class="f4"></b><b class="f4"></b></span>
+      </a>
+    </li>
+    <li>
+      <a class="unit-row" href="#session">
+        <span><span class="un">Simple lobed leaves</span><span class="ust">2 new cards</span></span>
+        <span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b class="f3"></b><b></b><b></b></span>
+      </a>
+    </li>
+    <li>
+      <a class="unit-row" href="#session">
+        <span><span class="un">White oaks</span><span class="ust">4 new cards</span></span>
+        <span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b></b><b></b><b></b></span>
+      </a>
+    </li>
+    <li>
+      <a class="unit-row" href="#session">
+        <span><span class="un">Red oaks</span><span class="ust">6 new cards</span></span>
+        <span class="ramp" aria-hidden="true"><b class="f1"></b><b></b><b></b><b></b><b></b></span>
+      </a>
+    </li>
+    <li class="shut">
+      <span class="unit-row">
+        <span><span class="un">Bark types</span><span class="ust">3 new cards. Opens after Simple lobed leaves.</span></span>
+        <span class="ramp dim" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></span>
+      </span>
+    </li>
+    <li class="shut">
+      <span class="unit-row">
+        <span class="withmini">
+          <figure class="plate field spot pl-mini">
+            <img src="./acgl-leaf.jpg" alt="Rocky Mountain maple leaves in colour">
+          </figure>
+          <span><span class="un">Maples</span><span class="ust">8 new cards. Opens after Bark types.</span></span>
+        </span>
+        <span class="ramp dim" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></span>
+      </span>
+    </li>
+  </ul>
+
+  <a class="placement" href="#session">Take the placement test</a>
+</section>
+
+<!-- ============ SPECIES ============ -->
+<section class="screen" id="species">
+  <div class="head">
+    <span class="unit">Red oaks</span>
+  </div>
+  <div class="sp-title">
+    <h1 class="display">Northern<br>red oak</h1>
+    <p class="sci">Quercus rubra</p>
+    <p class="det2">Native. Section Lobatae, the red oaks.</p>
+  </div>
+
+  <figure class="plate print bleed pl-leaf" style="margin-top:20px">
+    <img src="./quru-leaf.jpg" alt="Pressed oak twig with lobed leaves and two acorns">
+  </figure>
+  <p class="cap plate-cap">Leaf and fruit. W. D. Brush, public domain.</p>
+
+  <div class="spans">
+    <div><b>60&#8211;90</b><span>feet tall</span></div>
+    <div><b>0&#8211;5,500</b><span>feet elevation</span></div>
+  </div>
+
+  <p class="sp-prose">Eastern North America. In Colorado it grows as a planted
+    street and park tree in Front Range towns; in its own range it holds mesic
+    upland forests and well-drained slopes.</p>
+
+  <dl class="facts">
+    <dt>native in</dt><dd>30 states</dd>
+    <dt>planted in</dt><dd>Colorado, Utah</dd>
+    <dt>leaf</dt><dd>simple, lobed, alternate</dd>
+    <dt>Audubon</dt><dd>Northern Red Oak</dd>
+    <dt>symbol</dt><dd>QURU</dd>
+  </dl>
+
+  <div class="sec">
+    <div class="tick"></div>
+    <h3 class="sec-h">Your cards</h3>
+    <div class="card-row">
+      <span class="l4"><span class="cn">Leaf</span><span class="lvw">expert</span><span class="lvn">level 4 of 4</span></span>
+      <span class="rt"><span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b class="f3"></b><b class="f4"></b><b class="f4"></b></span><span class="due">Due in 21 days</span></span>
+    </div>
+    <div class="card-row">
+      <span class="l2"><span class="cn">Bark</span><span class="lvw">familiar</span><span class="lvn">level 2 of 4</span></span>
+      <span class="rt"><span class="ramp" aria-hidden="true"><b class="f1"></b><b class="f2"></b><b></b><b></b><b></b></span><span class="due">Due tomorrow</span></span>
+    </div>
+    <div class="card-row">
+      <span class="l0"><span class="cn">Fruit</span><span class="lvw">new</span><span class="lvn">level 0 of 4</span></span>
+      <span class="rt"><span class="ramp" aria-hidden="true"><b></b><b></b><b></b><b></b><b></b></span><span class="due">Not started</span></span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="tick"></div>
+    <h3 class="sec-h">Bark</h3>
+    <figure class="plate field mono bleed pl-bark" style="margin-top:14px">
+      <img src="./quru-bark.jpg" alt="Trunk of a mature northern red oak, bark in narrow ridges">
+    </figure>
+    <p class="cap plate-cap">W. R. Mattoon, public domain.</p>
+    <p class="fact-line">No fruit plate is collected yet.</p>
+  </div>
+
+  <div class="sec">
+    <div class="tick"></div>
+    <h3 class="sec-h">Varieties</h3>
+    <p class="fact-line" style="margin-top:12px">No varieties are recognized for this species.</p>
+  </div>
+
+  <a class="btn" href="#session">Quiz this tree</a>
+</section>
+
+</body>
+</html>
