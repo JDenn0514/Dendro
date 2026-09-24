@@ -4942,5 +4942,787 @@
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:50:21Z",
     "note": "Foliage seen from below, with large lobed simple leaves sharp and clear across most of the frame."
+  },
+  {
+    "hash": "ff8d6b4568f98914b44f0d9b239274619cb7fca889fb432d79cb14ca83509ae1",
+    "target": "ACPL",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-03_09_22_05_Norway_Maple_bark_along_Terrace_Boulevard_in_the_Parkway_Village_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:28:52Z",
+    "note": "Sharp close frame of a mature furrowed trunk. Deep vertical ridges fill the frame, no hand or scale or text."
+  },
+  {
+    "hash": "85f03af551e13928b95764108348fd3df55289e796eaa8f9e56052decc33c16b",
+    "target": "ACPL",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-09_12_51_38_Norway_Maple_bark_along_Allness_Lane_in_the_Chantilly_Highlands_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:28:52Z",
+    "note": "Sharp close frame of a mature furrowed trunk. Ridged bark fills the frame, nothing else in the shot."
+  },
+  {
+    "hash": "c65332aa82ada0ef6bc6e2060056650b4b9245163efbd7979027bd97bc22665b",
+    "target": "ACPL",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2023-03-24_16_08_18_Norway_Maple_bark_along_Aquetong_Lane_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:28:53Z",
+    "note": "Sharp close frame of a mature furrowed trunk with narrow interlacing ridges. No hand, scale, or text."
+  },
+  {
+    "hash": "7e5b763221a4e3fa4780879ec5e57e3e008c37638096a0d733ee099be1529086",
+    "target": "ACSA3",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-03_09_51_20_Sugar_Maple_bark_along_Dunmore_Avenue_in_the_Parkway_Village_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:28:53Z",
+    "note": "Sharp close frame of a mature furrowed sugar maple trunk. Bark fills the frame, no hand or scale."
+  },
+  {
+    "hash": "ee3704f149c880284dc429a569a32742317efa787662aeab428d95ddc441cb59",
+    "target": "ACSA3",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2023-04-06_16_08_41_Bark_on_a_Sugar_Maple_along_High_Acres_Drive_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:28:54Z",
+    "note": "Sharp close frame of a mature furrowed trunk with long plate-like ridges. No hand, scale, or text."
+  },
+  {
+    "hash": "2fec0b243304ed7fef7dc6029341bbe9bccbebbef6842aef1358d10837863d2f",
+    "target": "ACSA3",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Photo (c)2007 Derek Ramsey (Ram-Man)",
+    "license": "CC BY-SA 2.5",
+    "origin": "https://commons.wikimedia.org/wiki/File:Sugar_Maple_Acer_saccharum_Trunk_Bark_2000px.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:29:26Z",
+    "note": "Sharp close frame of a mature furrowed trunk with long narrow ridges. No hand, scale, or text."
+  },
+  {
+    "hash": "04eba311143a3041b4b3b6ba95eb4aae47eba9114b42ff454b86a73759d658b7",
+    "target": "ACSA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-03_09_31_54_Silver_Maple_bark_along_Terrace_Boulevard_in_the_Parkway_Village_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:29:27Z",
+    "note": "Sharp close frame of a mature trunk with loose shaggy plates lifting at the edges. Bark fills the frame."
+  },
+  {
+    "hash": "0d2a5e0779f5c39966d1404e445603bd69f9eb6be32425e72e7168af3b21b516",
+    "target": "ACSA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-02-23_16_42_35_Silver_Maple_bark_along_Tranquility_Lane_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:29:27Z",
+    "note": "Sharp close frame of a mature trunk with shaggy curling plates. Bark fills the frame, no hand or scale."
+  },
+  {
+    "hash": "f22c38dbb6203577af63ba9ed45296353c29e97cc1747c9df930d7b9d5d5a287",
+    "target": "ACPL",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Krzysztof Ziarnek",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_platanoides_fruit_kz.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:29:28Z",
+    "note": "Sharp close frame of green paired samaras on the twig. The wings and the seed bodies read clearly."
+  },
+  {
+    "hash": "c50af44c699beb6492fcd9e772fa48963fa18d9e365b5f38303854e7f6ded469",
+    "target": "ACPL",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Robert Flogaus-Faust",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_platanoides_4_RF.jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:29:28Z",
+    "note": "Sharp close frame of one ripe brown samara pair against autumn leaves. The wide wing angle reads clearly."
+  },
+  {
+    "hash": "0288de165edc5509675d8035f785386baae84d43c558bf2d207fae57096eff4f",
+    "target": "ACSA3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2023-08-29_10_43_53_Immature_fruit_on_a_Sugar_Maple_along_Aquetong_Lane_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:30:08Z",
+    "note": "Sharp close frame of a hanging cluster of immature samaras. The paired wings and green seed bodies read clearly."
+  },
+  {
+    "hash": "fcb2899475897c38bec1e3046aabad5d06af128410eeec453f0661fc9886996f",
+    "target": "ACSA3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2023-11-08_10_07_48_Sugar_Maple_seeds_in_autumn_along_Windybush_Way_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:30:08Z",
+    "note": "Sharp close frame of ripe brown samaras hanging on the twig. The wing venation reads clearly."
+  },
+  {
+    "hash": "0f1fbfcbc92819c9f0ad5960f7b20a9f129f9287f556cf9e1e61b5ec46f271ff",
+    "target": "ACSA2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Jason Sturner",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharinum_samaras_Churchill_Woods_Glen_Ellyn_Illinois.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:30:09Z",
+    "note": "Sharp close frame of a cluster of green samaras. The long paired wings fill the middle of the frame."
+  },
+  {
+    "hash": "ae58ea346986b38b743567ed6d85c6c95784f434c7db02759c0b7f1096b33ddf",
+    "target": "ACSA2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2019-04-26_12_37_17_Ripe_Silver_Maple_seeds_along_Tranquility_Lane_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:30:09Z",
+    "note": "Sharp close frame of ripe samaras on a twig. The fruit fills the middle of the frame over a blurred street."
+  },
+  {
+    "hash": "e9a48a66917c0725b20f70b0e8bc484e5c1076d7cfa4b4157af94c5a00fa49ea",
+    "target": "ACPL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "T. Kebert",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_platanoides_TK_2023-05-03_2.jpg",
+    "tags": [
+      "spring",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:30:10Z",
+    "note": "Sharp single leaf against a dark background. The five lobes and the long pointed teeth read clearly."
+  },
+  {
+    "hash": "3af9e64e0ba1f2b4aa1911cda66e6bd90007755ce228707c6c9d4ec15e0e0ba7",
+    "target": "ACPL",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Sten Porse",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer-platanoides-blade.JPG",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:03Z",
+    "note": "Foliage mass of maple leaves filling the frame. The five lobes and the shallow sinuses read on several leaves in front."
+  },
+  {
+    "hash": "27b3c125f02f3a36a5b28e8d43a227f90d021b387ea2a80bbcdb61b540121c6e",
+    "target": "QUPA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-02-23_16_38_09_Pin_Oak_bark_along_Franklin_Farm_Road_in_the_Franklin_Farm_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:04Z",
+    "note": "Sharp close frame of a mature furrowed trunk with narrow scaly ridges. Bark fills the frame, no hand or scale."
+  },
+  {
+    "hash": "06f43704a54ddc2f216a70c4b1050174eb201eee7f37d8699ca134f7c0f5692d",
+    "target": "QUPA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-09_13_45_02_Pin_Oak_bark_along_Ladybank_Lane_in_the_Chantilly_Highlands_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:05Z",
+    "note": "Sharp close frame of a mature furrowed trunk with shallow gray ridges. Bark fills the frame, nothing else in the shot."
+  },
+  {
+    "hash": "b05a260b2832ef814fa8b591a5bb488d890bf12a69de75e3da9691071ce2bfde",
+    "target": "QUPA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2023-08-27_09_57_16_The_bark_of_a_Pin_Oak_along_Aquetong_Lane_in_the_Mountainview_section_of_Ewing_Township%2C_Mercer_County%2C_New_Jersey.jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:05Z",
+    "note": "Sharp frame of a whole mature trunk from the ground up. The shallow furrowed ridges read across the width of the trunk."
+  },
+  {
+    "hash": "f2e9feabfe4f7e4b9be285041ca80432bde64229042b2d39f6294a6e55df5577",
+    "target": "QUMA3",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2024-09-23_11_54_31_Blackjack_Oak_immature_acorns_along_the_Mullica_River_Trail_and_Mullica_River_Road_within_Wharton_State_Forest_in_Washington_Township%2C_Burlington_County%2C_New_Jersey.jpg",
+    "tags": [
+      "autumn",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:48Z",
+    "note": "Sharp close frame of an acorn in its scaly cap on the twig. The cap scales and the green nut read clearly."
+  },
+  {
+    "hash": "c97a410d8c247c9b85adcee6f5deef55f60e895b673f403fb4fa19d00760e1fc",
+    "target": "QUMA3",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Joshua, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/321752473#photo=581930795",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:49Z",
+    "note": "Sharp macro frame of one acorn in its cap against a dark background. The cap scales read clearly."
+  },
+  {
+    "hash": "196783a5dc170dcc139859d4775cf215d9105ccda1a627f0e51549291fa7a3a5",
+    "target": "QURU",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Jamain",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_rubra_acorn_J1.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:49Z",
+    "note": "Sharp close frame of one acorn hanging on a twig. The shallow cap and the barrel-shaped nut read clearly."
+  },
+  {
+    "hash": "df2c195800d81a7372fa1f8adb457a6cf1800629e498fd7e6af5404bab9eeecc",
+    "target": "QURU",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_rubra-Acorn_R_84_k_edit_(23871483189).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:50Z",
+    "note": "Sharp studio frame of four picked acorns on a plain black ground. No hand, ruler, or text in the shot."
+  },
+  {
+    "hash": "138747226be8b655e7bb59461f0cfffaa6662d610a87ac8ef003613137dc76dd",
+    "target": "QURU",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Jamain",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_rubra_acorns_J1.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:31:50Z",
+    "note": "Sharp studio frame of five picked acorns on a plain gray ground. The shallow saucer caps read clearly."
+  },
+  {
+    "hash": "4caf5e2849df293755c166e198c3ebd7b2968efcc6aa20023db63e714a1e7d4b",
+    "target": "QUSH",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii_(23852299030).jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:32:27Z",
+    "note": "Sharp frame of a mature trunk filling the middle of the picture. The narrow furrowed ridges read across the trunk."
+  },
+  {
+    "hash": "2be66edc1ed14b1247539c5ca1269e91a6e6bb1b634d95e98d31676da2241adc",
+    "target": "QUSH",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii_(23563836163).jpg",
+    "tags": [
+      "mature",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:32:27Z",
+    "note": "Sharp frame of a mature trunk in winter. The narrow gray ridges and shallow furrows read across the trunk."
+  },
+  {
+    "hash": "e2b693b8a87ff461a71e9c10d1945de8c59ef7bf70c9cbbf63b0a3d4c5d5866d",
+    "target": "QUSH",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_shumardii_(23570767763).jpg",
+    "tags": [
+      "mature"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:32:28Z",
+    "note": "Sharp frame of a mature trunk filling most of the picture. The furrowed ridges with reddish fissures read clearly."
+  },
+  {
+    "hash": "defadca4ece0fe95b0cb087442a2ad9c8cec61584449116b7b464468b7e1e014",
+    "target": "QUPA2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2023-08-29_09_30_42_Immature_acorns_on_a_Pin_Oak_along_Willis_Drive_in_the_Mountainview_section_of_Ewing_Township%2C_Mercer_County%2C_New_Jersey.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:32:28Z",
+    "note": "Sharp close frame of two immature green acorns in shallow caps on the twig. The fruit fills the middle of the frame."
+  },
+  {
+    "hash": "ed180a8653741ced3e92aaf49cbf2c6d51f5a1286c8da2e696fcdb265df788bb",
+    "target": "QUVE",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_(23561523063).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:32:29Z",
+    "note": "Sharp close frame of one acorn in a deep scaly cap against a black ground. The cap scales read clearly."
+  },
+  {
+    "hash": "2a164f4f0bc9708b92a8807824aedb954f3c99c3c592f48b907d2e26906cc477",
+    "target": "QUVE",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_velutina_(24219896195).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:33:14Z",
+    "note": "Sharp close frame of one acorn in a scaly cap against a black ground. The cap and the nut read clearly."
+  },
+  {
+    "hash": "14541a161cda14401d120e6fc0e46ead40782a448cad1125e948810980dc3f56",
+    "target": "QURU",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "MONGO",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Northern_Red_Oak_(Quercus_rubra)_bark_detail.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:33:14Z",
+    "note": "Sharp close frame of a mature furrowed trunk with flat gray ridges. Bark fills the frame, no hand or scale."
+  },
+  {
+    "hash": "69f1cac402930c0d64b80aee19b0427d7f8ca2760f67747ff4efc0117cf50885",
+    "target": "QURU",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-02-24_17_18_05_Red_Oak_bark_along_Franklin_Farm_Road_in_the_Franklin_Farm_section_of_Oak_Hill%2C_Fairfax_County%2C_Virginia.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:33:15Z",
+    "note": "Sharp close frame of a mature furrowed trunk with lichen on the ridges. Bark fills the frame, no hand or scale."
+  },
+  {
+    "hash": "812df363efd221f93d4b1684a2c15d0e2e51a5f9d5a34022ccd9c87ee7e8b6e2",
+    "target": "QUST",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Andrew Conboy, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/314222741#photo=567527094",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:33:15Z",
+    "note": "Sharp close frame of a tight cluster of acorns in scaly caps on the twig. The fruit fills the middle of the frame."
+  },
+  {
+    "hash": "bc2142bb2e6b8ee007f096639be4257e46df0d445a0c67b97bc1c8c1a37eb7dd",
+    "target": "QUST",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Alexandria Szakacs, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/243506185#photo=434209627",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:33:16Z",
+    "note": "Sharp frame of a group of green acorns in scaly caps among the leaves. The caps and the nuts read clearly."
+  },
+  {
+    "hash": "7494ccd4009cdde228df3a1a7e0494da6a32346537ad554ea6800735859ffc22",
+    "target": "QUAL",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/400060997#photo=734062290",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:33:59Z",
+    "note": "Sharp close frame of one green acorn in a warty cap above a leaf. The cap and the nut read clearly."
+  },
+  {
+    "hash": "37ce584bf0bcd842600c7903fa034a47298e6ed04257b03d87785e20725d50af",
+    "target": "QUAL",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/397058463#photo=728205895",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:34:00Z",
+    "note": "Sharp close frame of one green acorn in a warty cap on the twig. The fruit fills the middle of the frame."
+  },
+  {
+    "hash": "0b62d43694ecc98ccd29dcae79ee85ab3918473826fcf4529af48f92f5d6d72e",
+    "target": "QUAL",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Sandy Wolkenberg, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/397058434#photo=728205851",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:34:00Z",
+    "note": "Sharp frame of three green acorns in warty caps along the twig. The fruit fills a wide band across the middle."
+  },
+  {
+    "hash": "7b650309a315eb457cd3dc2a6a888f8d143d48323c4fd2a6fc9ea3458d5dfec0",
+    "target": "QUAL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Bob, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/377201535#photo=689749297",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:34:01Z",
+    "note": "Sharp frame of a leafy branch from below. The deep rounded lobes of the leaves read clearly across the frame."
+  },
+  {
+    "hash": "e527043357f2e18d8ef2f75baea5f9cc1e793e2c8430c62ed34d3bab4f7197f3",
+    "target": "QUAL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) John Baur, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/376491533#photo=688378229",
+    "tags": [
+      "summer"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:34:55Z",
+    "note": "Sharp frame of a leafy branch filling the picture. The deep rounded lobes read on many separate leaves."
+  },
+  {
+    "hash": "6bcb29a61da94bb62eedb46055c8eb1b701c3397c092af7008862e47dc045bbb",
+    "target": "QUAL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Mark Apgar, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/376415393#photo=688212820",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:34:55Z",
+    "note": "Sharp close frame of one leaf with deep rounded lobes. A few small yellow galls sit on one lobe but the outline reads."
+  },
+  {
+    "hash": "2e4d97b95421a978b9c9100d750b96e6e9783f730abe3d27f5e52090425c8da7",
+    "target": "QUGA",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Cory Maylett",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Gambel_oak_bark.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:34:56Z",
+    "note": "Sharp close frame of a mature trunk with small plates. Orange and gray lichen covers part of the surface but the plated pattern reads."
+  },
+  {
+    "hash": "b8be399ede8ac5539529e7ea65fd9f045e7e64f65cfa0679680b3ce478db146e",
+    "target": "PLOC",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2025-12-12_15_23_11_An_American_Sycamore_fruit_along_Willis_Drive_in_the_Mountainview_section_of_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [
+      "winter",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:34:56Z",
+    "note": "Sharp close frame of one dry brown seed ball on its stalk. The bristly surface fills the middle of the frame."
+  },
+  {
+    "hash": "e34efd49bb05597c84c50a989318e97f90fef1059bf90dfcc59ff755f3214e55",
+    "target": "PLOC",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2020-07-25_08_39_33_American_Sycamore_leaves_in_mid-summer_along_Tranquility_Lane_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:36:03Z",
+    "note": "Sharp close frame of one large leaf filling the picture. The broad shallow lobes and the coarse teeth read clearly."
+  },
+  {
+    "hash": "9bd57d580863df4c216ff1d0c4413d3d6da254ab35cdf3193018588ac3b2725c",
+    "target": "PLOC",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Katja Schulz from Washington, D. C., USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_occidentalis_(30133997444).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:36:03Z",
+    "note": "Sharp frame of several large leaves on a shoot. The broad lobes and the toothed margins read clearly."
+  },
+  {
+    "hash": "99954ffe4502c55bf1b83de60430c6149d8224779c27f60f301fc9a2cee8407c",
+    "target": "PLOC",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Patrick Alexander from Las Cruces, NM",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_occidentalis_-_Flickr_-_aspidoscelis_(1).jpg",
+    "tags": [
+      "summer",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:36:04Z",
+    "note": "Sharp close frame of one large leaf filling the picture. The broad lobes and the wavy toothed margin read clearly."
+  },
+  {
+    "hash": "f3e29056f94cb8d7c37cb456fd1f08345404f71b70b776739676ed449e959548",
+    "target": "PLOC",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Judy Gallagher",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:American_Sycamore_bark_-_Platanus_occidentalis,_Leesylvania_State_Park,_Woodbridge,_Virginia.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:36:04Z",
+    "note": "Sharp close frame of the mottled papery bark on an upper trunk. Green, white, and brown flaking patches fill the frame."
+  },
+  {
+    "hash": "798ea1824a5e81038231ebd043aa3405911bf962161e14438b750bf1cffaf113",
+    "target": "PLOC",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Cbaile19",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Sycamore_Bark,_2015-05-24,_Smithfield_East_End_Cemetery,_01.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:36:47Z",
+    "note": "Sharp close frame of the mottled papery bark on an upper trunk. Gray, cream, and yellow flaking patches fill the frame."
+  },
+  {
+    "hash": "891e4352e3f635789ce71751b8b0bc876e87b4cca7ba7aa129ea2f9c97d6f36b",
+    "target": "PLWR2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Leslie Seaton from Seattle, WA, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:AZ_sycamore_pods_(8344384178).jpg",
+    "tags": [
+      "winter",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:36:47Z",
+    "note": "Sharp frame of three dry seed balls hanging on their stalks. The knobby surface of each ball reads clearly."
+  },
+  {
+    "hash": "1c7f16d84d6b5c22ed8feaa479832db4bbd933224ba34ff9c9de9ab7cf1f0680",
+    "target": "QUST",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2024-09-23_11_50_03_Post_Oak_bark_along_the_Mullica_River_Trail_and_Mullica_River_Road_within_Wharton_State_Forest_in_Washington_Township,_Burlington_County,_New_Jersey.jpg",
+    "tags": [
+      "mature",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:36:48Z",
+    "note": "Sharp close frame of a mature trunk with blocky gray plates and lichen. The plated pattern fills the frame."
+  },
+  {
+    "hash": "1824943ed0b303b0021032c860c252aba57a54e66c30bba339f69ff8c528dcde",
+    "target": "QUST",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Katja Schulz from Washington, D. C., USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Post_Oak_(30361658423).jpg",
+    "tags": [
+      "mature",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-24T06:36:48Z",
+    "note": "Sharp frame of a mature trunk filling most of the picture. The blocky plates and shallow furrows read across the trunk."
   }
 ]
