@@ -13,8 +13,8 @@ const BROWSE = 'http://www.efloras.org/browse.aspx?flora_id=1&start_taxon_id=';
 // The efloras certificate is self-signed, so the fetch uses http.
 export const SECTION_PAGES: SectionPage[] = [
   { section: 'Lobatae', taxonId: '302020', url: `${BROWSE}302020` },
-  { section: 'Quercus', taxonId: '302027', url: `${BROWSE}302027` },
-  { section: 'Protobalanus', taxonId: '302029', url: `${BROWSE}302029` },
+  { section: 'Protobalanus', taxonId: '302027', url: `${BROWSE}302027` },
+  { section: 'Quercus', taxonId: '302029', url: `${BROWSE}302029` },
 ];
 
 const ANCHOR = /<a\b([^>]*)>([\s\S]*?)<\/a>/gi;
