@@ -14,7 +14,9 @@
   "genera": [
     "Acer",
     "Quercus",
-    "Platanus"
+    "Platanus",
+    "Liquidambar",
+    "Liriodendron"
   ],
   "include": [
     "ACPL",
@@ -28,9 +30,8 @@
     "bark",
     "fruit"
   ],
-  "created_at": "2026-09-24T01:31:05Z",
+  "created_at": "2026-09-24T00:17:45Z",
   "species": [
-    "ACER",
     "ACGL",
     "ACGLD3",
     "ACGLD4",
@@ -50,7 +51,6 @@
     "ACSA2",
     "ACSA3",
     "ACSAS",
-    "PLATA",
     "PLHI",
     "PLOC",
     "PLWR2",
@@ -61,7 +61,6 @@
     "QUCH2",
     "QUCHC",
     "QUEM",
-    "QUERC",
     "QUGA",
     "QUGAB2",
     "QUGAG",
@@ -117,6 +116,10 @@
     {
       "symbol": "ACDI12",
       "reason": "not a tree"
+    },
+    {
+      "symbol": "ACER",
+      "reason": "not a species"
     },
     {
       "symbol": "ACFL",
@@ -213,6 +216,34 @@
     {
       "symbol": "ACTAT2",
       "reason": "not a tree"
+    },
+    {
+      "symbol": "LICH6",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "LIOR2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "LIQUI",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "LIRIO",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "LIST2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "LITU",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "PLATA",
+      "reason": "not a species"
     },
     {
       "symbol": "PLOR6",
@@ -473,6 +504,10 @@
     {
       "symbol": "QUEP",
       "reason": "hybrid"
+    },
+    {
+      "symbol": "QUERC",
+      "reason": "not a species"
     },
     {
       "symbol": "QUEX",
@@ -1028,5 +1063,43 @@
     }
   ],
   "fetch_failures": 0,
-  "capped": []
+  "capped": [
+    "ACER: inat any listing capped at 4 pages",
+    "ACGL: inat any listing capped at 4 pages",
+    "ACGR3: inat any listing capped at 4 pages",
+    "ACNE2: inat any listing capped at 4 pages",
+    "ACNE2: inat flowering listing capped at 4 pages",
+    "ACNE2: inat fruiting listing capped at 4 pages",
+    "ACNI5: inat any listing capped at 4 pages",
+    "ACPL: inat any listing capped at 4 pages",
+    "ACPL: inat flowering listing capped at 4 pages",
+    "ACSA2: inat any listing capped at 4 pages",
+    "ACSA3: commons listing capped at 4 pages",
+    "ACSA3: inat any listing capped at 4 pages",
+    "PLOC: inat any listing capped at 4 pages",
+    "PLOC: inat fruiting listing capped at 4 pages",
+    "PLWR2: inat any listing capped at 4 pages",
+    "QUAL: inat any listing capped at 4 pages",
+    "QUAR: inat any listing capped at 4 pages",
+    "QUBU2: inat any listing capped at 4 pages",
+    "QUCH2: inat any listing capped at 4 pages",
+    "QUEM: inat any listing capped at 4 pages",
+    "QUERC: inat any listing capped at 4 pages",
+    "QUGA: inat any listing capped at 4 pages",
+    "QUGR3: inat any listing capped at 4 pages",
+    "QUHY: inat any listing capped at 4 pages",
+    "QUIM: inat any listing capped at 4 pages",
+    "QUMA2: inat any listing capped at 4 pages",
+    "QUMA3: inat any listing capped at 4 pages",
+    "QUMU: inat any listing capped at 4 pages",
+    "QUPA2: inat any listing capped at 4 pages",
+    "QUPR: inat any listing capped at 4 pages",
+    "QURU: inat any listing capped at 4 pages",
+    "QURU4: inat any listing capped at 4 pages",
+    "QUSH: inat any listing capped at 4 pages",
+    "QUST: inat any listing capped at 4 pages",
+    "QUTU2: inat any listing capped at 4 pages",
+    "QUVE: inat any listing capped at 4 pages",
+    "QUVI: inat any listing capped at 4 pages"
+  ]
 }

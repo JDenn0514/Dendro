@@ -195,6 +195,30 @@
     "id": 92877,
     "scientific": "Acer tataricum var. torminaloides"
   },
+  "LICH6": {
+    "id": 71550,
+    "scientific": "Liriodendron chinense"
+  },
+  "LIOR2": {
+    "id": 70556,
+    "scientific": "Liquidambar orientalis"
+  },
+  "LIQUI": {
+    "id": 70555,
+    "scientific": "Liquidambar L."
+  },
+  "LIRIO": {
+    "id": 71549,
+    "scientific": "Liriodendron L."
+  },
+  "LIST2": {
+    "id": 70557,
+    "scientific": "Liquidambar styraciflua"
+  },
+  "LITU": {
+    "id": 71551,
+    "scientific": "Liriodendron tulipifera"
+  },
   "PLATA": {
     "id": 70561,
     "scientific": "Platanus L."
