@@ -815,8 +815,6 @@ button.btn{width:100%; padding:0;}
 button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
 button:disabled { opacity: 0.5; cursor: default; }
 
-.channel-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
-
 .card {
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -858,16 +856,6 @@ button:disabled { opacity: 0.5; cursor: default; }
 .options.inv { flex-direction: row; flex-wrap: wrap; }
 .options.inv img { width: 9rem; height: 9rem; object-fit: cover; }
 .option-sub { display: block; font-style: italic; color: #5c5850; font-size: 0.85rem; }
-
-.grid { border-collapse: collapse; width: 100%; }
-.grid th, .grid td { border: 1px solid var(--line); padding: 0.3rem 0.5rem; text-align: left; }
-.grid td.cell { text-align: center; width: 3rem; }
-.lv-0 { background: var(--level-0); }
-.lv-1 { background: var(--level-1); }
-.lv-2 { background: var(--level-2); }
-.lv-3 { background: var(--level-3); }
-.lv-4 { background: var(--level-4); color: #fff; }
-.cell-empty { background: repeating-linear-gradient(45deg, #fff, #fff 4px, #eee 4px, #eee 8px); }
 
 label { display: block; margin: 0.75rem 0; }
 input[type="number"], input[type="text"] { font: inherit; padding: 0.3rem; border: 1px solid var(--line); border-radius: 4px; }
