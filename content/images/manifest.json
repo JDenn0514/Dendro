@@ -1864,7 +1864,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T03:36:34Z",
-    "note": "Sharp black and white plate of a shoot with several lobed simple leaves. The bristle tipped lobes fill the frame."
+    "note": "Sharp black and white plate of a shoot with several lobed simple leaves. The bristle tipped lobes fill the frame.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "66ccb385b85a24322da7be0c1771bee45fbad7488de6ce7d9cd817203a784e0e",
