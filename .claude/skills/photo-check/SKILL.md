@@ -55,6 +55,13 @@ escalation.**
 **Quality.** The photo is sharp. The subject fills the frame. No hand and no ruler are in
 the shot. Below that threshold, escalate with `--case quality`.
 
+The photo shows natural colour, so the tree looks the way it does in real life. A
+black-and-white or greyscale image is a reject, not an escalation (owner ruling
+2026-09-24). The fetch drops these before you see them, so one that reaches you came
+through `photos add`. A sepia, toned, tinted, or heavily filtered image is an escalation
+with `--case quality` (owner ruling 2026-09-25). The owner judges whether the filter is
+light enough to keep.
+
 **License.** The license text on the row is in the allowlist and matches the source page.
 The allowlist is public domain, US government work, CC0 any version, CC BY any version,
 and CC BY-SA any version. NC and ND variants are not allowed. When the license is missing,
@@ -86,7 +93,8 @@ Escalate in these three cases and no others:
 1. `mismatch`: the species on the source page and the species on the row differ, or the
    page names none.
 2. `license`: the license is missing, ambiguous, or not redistributable.
-3. `quality`: the channel or the quality falls below the threshold.
+3. `quality`: the channel or the quality falls below the threshold, or the colour is
+   toned or filtered so the tree does not look real.
 
 Everything else is an approve or a reject.
 
