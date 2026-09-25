@@ -67,6 +67,15 @@ The allowlist is public domain, US government work, CC0 any version, CC BY any v
 and CC BY-SA any version. NC and ND variants are not allowed. When the license is missing,
 ambiguous, or not redistributable, escalate with `--case license`.
 
+One written permission takes the place of the allowlist for one host (owner ruling
+2026-09-25, `docs/decisions/2026-09-25-wildflower-permission.md`). A row whose `origin` is
+on `www.wildflower.org` may carry the license `used with permission, non-commercial`. That
+text is valid for wildflower.org rows, and for no other host. On a row from any other host,
+escalate it with `--case license`.
+
+A Kew POWO row carries the holder in front of the label, such as `© RBG Kew, CC BY 3.0`.
+That is a CC BY license, and it is on the allowlist.
+
 **Identity.** Read `identity_match` on the candidate row. The fetch step set it by
 comparing the row's `source_species` to the PLANTS scientific name and its PLANTS
 synonyms, after normalization.
@@ -77,11 +86,31 @@ synonyms, after normalization.
 - `null`: the row carries no name to compare, which is the normal state of a manual
   candidate. Open the source page at `origin` and confirm the species yourself. When the
   page names a different species, escalate with `--case mismatch`. When the page names no
-  species, escalate with `--case mismatch`.
+  species, escalate with `--case mismatch`. For a Kew POWO row, do not open `origin`. Read
+  the saved gallery, as **A Kew POWO row** below tells you.
 
 Eligible identity sources are iNaturalist at research grade, USDA PLANTS, US Forest
 Service and NRCS through a manual candidate, Wikimedia Commons with a species-level
-category, and university dendrology collections that name the species.
+category, and university dendrology collections that name the species. Bioimages, Trees
+and Shrubs Online, the Lady Bird Johnson Wildflower Center (wildflower.org), and Kew Plants
+of the World Online are eligible too, because each page names the species.
+
+**A Kew POWO row.** A POWO row is a manual candidate whose `origin` is on
+`powo.science.kew.org`. For a POWO row, the saved gallery takes the place of the source
+page. The `powo-harvest` skill gives you two paths for each species (see its "After the
+harvest" section): the saved gallery, `<scratch>/<SYMBOL>-<IPNI id>.html`, and the rows
+file, `<scratch>/<SYMBOL>-rows.json`. Confirm the species and the licence of a POWO row from
+these files:
+
+- **Species.** Find the file hash of the row in the saved gallery. The hash is the text after
+  `#image=` in `origin`. Read the name at the start of the caption of that image. Judge that
+  name as you judge the name on a source page.
+- **Licence.** In the same caption, read the licence text after `ID:<n>`. The row's
+  `license` must show the same holder and the label of the same Creative Commons URL.
+
+Never open the `origin` URL of a POWO row, with WebFetch, the browser, or any other tool.
+Each origin is a Kew page, and a new load breaks the rules of the `powo-harvest` skill.
+When a saved file is missing, do not load the Kew page again. Tell the owner.
 
 **You never set or change the species from what you see in the photo.** Identity comes from
 the source page. Your own recognition of the plant is not evidence.

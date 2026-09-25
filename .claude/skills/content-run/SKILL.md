@@ -67,13 +67,14 @@ node pipeline/cli.ts photos fetch <name>
 
 This appends rows to `pipeline/runs/<name>/candidates.jsonl` and downloads each image into
 `pipeline/cache/`. The sources take turns: each source gives one row per round, in this
-order: Wikimedia Commons, iNaturalist. A source that runs out drops out of the rounds. USDA
-PLANTS rows come after all the turn rows. A target keeps 60 rows at most.
+order: Bioimages, the Lady Bird Johnson Wildflower Center (wildflower.org), Trees and
+Shrubs Online, Wikimedia Commons, iNaturalist. A source that runs out drops out of the
+rounds. USDA PLANTS rows come after all the turn rows. A target keeps 60 rows at most.
 
 It prints one line per fetch failure, then
 `<n> candidates appended to pipeline/runs/<name>/candidates.jsonl, <m> download failures, <k> monochrome dropped`.
 The last line gives the appended rows per source, in fetch order, for example
-`by source: commons 17, inat 16, plants 0`. It records the failure count in `run.json` as
+`by source: bioimages 10, wildflower 12, tso 5, commons 17, inat 16, plants 0`. It records the failure count in `run.json` as
 `fetch_failures`.
 
 - [ ] **Step 5: Approve the photos (agent)**
@@ -107,8 +108,52 @@ Run `node pipeline/cli.ts photos audit <name>` to list any candidate under the c
 - [ ] **Step 7: Hunt for the thin channels (agent)**
 
 Read the gap list in `build.json` under `gaps`. Each row names a species or a concept, a
-channel, and the count of approved images. Find photos by hand in a browser for the thin
-pairs. Append each one as a manual candidate:
+channel, and the count of approved images.
+
+`photos fetch` already reads six sources: Bioimages, the Lady Bird Johnson Wildflower
+Center (wildflower.org), Trees and Shrubs Online, Wikimedia Commons, iNaturalist, and USDA
+PLANTS. For each thin pair, do a targeted search: a search for that one species and
+channel only. Use these tools, in this order, and stop when the pair has 4 approved images:
+
+1. **The harvester.** `pipeline/scripts/harvest.cjs` looks for one channel of a species on
+   Bioimages and Trees and Shrubs Online, past the rows that the fetch took. Write the gap
+   rows to a JSON file in the session scratchpad, one object per row:
+   `{ "symbol": "<target>", "sci": "<scientific name>", "channel": "<channel>", "approved": <count> }`.
+   Then run:
+
+   ```bash
+   node pipeline/scripts/harvest.cjs --rows <scratchpad>/gap-rows.json --run <name> --out-dir <scratchpad>/harvest
+   ```
+
+   It writes `harvest-rows.json` and `harvest-report.md` into `--out-dir`. Look at each image
+   at its `local` path. Copy the rows that you keep into
+   `<scratchpad>/harvest/keep-rows.json`. Then run:
+
+   ```bash
+   node pipeline/scripts/mkadds.cjs --run <name> --in <scratchpad>/harvest/keep-rows.json --out <scratchpad>/harvest/adds.sh
+   ```
+
+   It prints `lines`, `max bytes`, and `problems`. Fix each problem before you go on. Then
+   run the lines of `adds.sh` one at a time, from the repo root.
+2. **The other sites.** Look for that channel on Wikimedia Commons, iNaturalist, and
+   wildflower.org, in the built-in browser or with a script that calls the site over HTTP.
+   Take only images whose licence is on the allowlist. Append each one as a manual
+   candidate, as below.
+3. **Kew POWO, last.** Run the `powo-harvest` skill only for a pair that is still thin after
+   steps 1 and 2. Before you start it, write down which sites you searched for that pair and
+   what each gave. The skill saves the Kew gallery in the built-in browser, makes the rows
+   with `pipeline/scripts/powo-rows.ts`, makes the commands with
+   `pipeline/scripts/mkadds.cjs`, and runs them.
+
+Do not use WebFetch to make a photo row. WebFetch passes the page through a model, so a
+credit or a licence can come back in other words, and `photos add` needs both word for
+word. Read the credit and the licence off the page in the browser, or from the output of a
+script.
+
+Give the scripts paths in the scratchpad only, never in the repo. The CLI commits with
+`git add -A`, so a file inside the repo reaches a commit.
+
+A manual candidate:
 
 ```bash
 node pipeline/cli.ts photos add <name> --target <t> --origin <url> --file-url <url> --author <a> --license <l> --source <s> [--license-url <u>] [--source-species <n>] [--channel-hint <c>] [--local <path>]
@@ -120,11 +165,17 @@ missing.
 
 - `--author` and `--license` are the credit the app prints under the photo, word for word.
   Copy them off the source page. Do not write `unknown`.
+- `--license` must be on the allowlist. The one exception is
+  `used with permission, non-commercial`, which `photos add` accepts only when `--origin` is
+  on `www.wildflower.org`.
 - `--source` is the display name of the source, such as `US Forest Service`. It goes on the
   manifest row as it is.
 - `--source-species` is the species the source page names. The identity check reads it.
 - `--local <path>` names an image file you already downloaded. Without it the command
   downloads `--file-url`.
+- `photos add` refuses a monochrome image, and a candidate id that the run already holds.
+  When one page holds many images, add a fragment such as `#image=<file name>` to
+  `--origin`.
 
 Then run steps 5 and 6 again.
 

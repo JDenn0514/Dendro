@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { loadContent } from '../../app/logic/content.js';
+import { bioimagesRows } from './bioimages.ts';
 import {
   MONO_THRESHOLD,
   candidateId,
@@ -98,6 +99,7 @@ import {
   type SpeciesRecord,
 } from './species.ts';
 import { deferredStorage, type Storage } from './storage.ts';
+import { tsoRows } from './tso.ts';
 import {
   VERDICT_KINDS,
   countByTargetChannel,
@@ -110,6 +112,7 @@ import {
   type Verdict,
   type VerdictKind,
 } from './verdicts.ts';
+import { wildflowerRows } from './wildflower.ts';
 
 export interface ValidationMessage {
   file: string;
@@ -164,7 +167,7 @@ export const MAX_INAT_PAGES = 4;
  * one row per round, and a source that runs out drops out of the rounds. PLANTS rows come
  * after every turn row.
  */
-export const TURN_ORDER: SourceKey[] = ['commons', 'inat'];
+export const TURN_ORDER: SourceKey[] = ['bioimages', 'wildflower', 'tso', 'commons', 'inat'];
 
 /** Every source that `photos fetch` reads, in fetch order. The last line names them in this order. */
 export const FETCH_ORDER: SourceKey[] = [...TURN_ORDER, 'plants'];
@@ -800,6 +803,13 @@ async function plantOf(
 /** One turn source's rows for one symbol, best first. */
 async function turnRows(key: SourceKey, context: FetchContext): Promise<Candidate[]> {
   switch (key) {
+    case 'bioimages':
+      return bioimagesRows(context.deps.http, context.names, context.target, context.now);
+    case 'wildflower':
+      // The site keys plants by PLANTS symbol.
+      return wildflowerRows(context.deps.http, context.symbol, context.target, context.now);
+    case 'tso':
+      return tsoRows(context.deps.http, context.names, context.target, context.now);
     case 'commons':
       return commonsRows(context);
     case 'inat':

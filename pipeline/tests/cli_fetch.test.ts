@@ -1,6 +1,7 @@
 import { test, type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -15,6 +16,11 @@ import {
   makeCandidate,
   type Candidate,
 } from '../lib/candidates.ts';
+import {
+  BIOIMAGES_CATALOGUE_URL,
+  bioimagesCandidates,
+  parseBioimagesCatalogue,
+} from '../lib/bioimages.ts';
 import {
   CHECK_AGENT,
   FETCH_ORDER,
@@ -50,9 +56,18 @@ import {
   plantsCandidates,
   profileUrl,
 } from '../lib/plants.ts';
+import { parsePowoImages } from '../lib/powo.ts';
 import { newScope, readRun, runDir, writeRun, type RunScope } from '../lib/run.ts';
 import { memoryStorage } from '../lib/storage.ts';
+import { TSO_SITEMAP_URL, parseTsoPage, tsoCandidates } from '../lib/tso.ts';
 import type { Verdict } from '../lib/verdicts.ts';
+import {
+  decodeWindows1252,
+  parseWildflowerImage,
+  wildflowerCandidate,
+  wildflowerGalleryUrl,
+  wildflowerImageUrl,
+} from '../lib/wildflower.ts';
 import { greyJpeg, redJpeg } from './fixtures/images.ts';
 import { captureConsole, fakeExec } from './helpers.ts';
 
@@ -68,6 +83,13 @@ const EMPTY_OBSERVATIONS = '{ "total_results": 0, "page": 1, "results": [] }';
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 /** Bytes that sharp cannot decode. */
 const NOT_AN_IMAGE = new Uint8Array([1, 2, 3, 4]);
+const TSO_QUGA_URL = 'https://www.treesandshrubsonline.org/articles/quercus/quercus-gambelii/';
+/** The QUGA image ids that the wildflower.org gallery fixture lists, in list order. */
+const WILDFLOWER_QUGA_IDS = ['3424', '24045', '66070', '121699'];
+const POWO_PAGE = 'https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:685854-1/images';
+const mkadds = createRequire(import.meta.url)(
+  path.join(REPO_ROOT, 'pipeline', 'scripts', 'mkadds.cjs'),
+) as { buildCommand: (row: unknown, run: string) => { line: string; problems: string[] } };
 
 interface Route {
   status?: number;
@@ -77,6 +99,10 @@ interface Route {
 
 function fixture(name: string): string {
   return fs.readFileSync(new URL(`./fixtures/${name}`, import.meta.url), 'utf8');
+}
+
+function fixtureBytes(name: string): Uint8Array {
+  return new Uint8Array(fs.readFileSync(new URL(`./fixtures/${name}`, import.meta.url)));
 }
 
 function jpeg(seed: number): Uint8Array {
@@ -183,6 +209,17 @@ function photoRoutes(): Map<string, Route> {
     routes.set(observationsUrl(INAT_TAXON_ID, 1, pass), { body });
   }
 
+  routes.set(BIOIMAGES_CATALOGUE_URL, { body: fixture('bioimages/images_sample.csv') });
+
+  // The wildflower.org pages are windows-1252 bytes, so the source reads them as bytes.
+  routes.set(wildflowerGalleryUrl('QUGA'), { bytes: fixtureBytes('wildflower/quga_gallery.html') });
+  for (const id of WILDFLOWER_QUGA_IDS) {
+    routes.set(wildflowerImageUrl(id), { bytes: fixtureBytes(`wildflower/image_${id}.html`) });
+  }
+
+  routes.set(TSO_SITEMAP_URL, { body: fixture('tso/sitemap_sample.xml') });
+  routes.set(TSO_QUGA_URL, { body: fixture('tso/quercus_gambelii.html') });
+
   for (const [index, url] of fileUrls('QUGA').entries()) routes.set(url, { bytes: jpeg(index) });
   return routes;
 }
@@ -229,9 +266,38 @@ function inatRowsOf(target: string): Candidate[] {
   return inatCandidates(parsed.photos, target, floweringPass(), NOW);
 }
 
+/** The rows the Bioimages catalogue fixture gives for QUGA. */
+function bioimagesRowsOf(target: string): Candidate[] {
+  const rows = parseBioimagesCatalogue(fixture('bioimages/images_sample.csv'));
+  return bioimagesCandidates(rows, [SCIENTIFIC], target, NOW);
+}
+
+/** The rows the four saved wildflower.org image pages give, in gallery order. */
+function wildflowerRowsOf(target: string): Candidate[] {
+  const rows: Candidate[] = [];
+  for (const id of WILDFLOWER_QUGA_IDS) {
+    const page = decodeWindows1252(fixtureBytes(`wildflower/image_${id}.html`));
+    const row = wildflowerCandidate(parseWildflowerImage(page), wildflowerImageUrl(id), target, NOW);
+    if (row !== null) rows.push(row);
+  }
+  return rows;
+}
+
+/** The rows the saved Trees and Shrubs Online article gives. */
+function tsoRowsOf(target: string): Candidate[] {
+  return tsoCandidates(parseTsoPage(fixture('tso/quercus_gambelii.html')), TSO_QUGA_URL, target, NOW);
+}
+
 /** Every candidate a `photos fetch` of QUGA should write under `target`. */
 function expectedRows(target: string): Candidate[] {
-  return [...plantsRowsOf(target), ...commonsRowsOf(target), ...inatRowsOf(target)];
+  return [
+    ...plantsRowsOf(target),
+    ...commonsRowsOf(target),
+    ...inatRowsOf(target),
+    ...bioimagesRowsOf(target),
+    ...wildflowerRowsOf(target),
+    ...tsoRowsOf(target),
+  ];
 }
 
 function fileUrls(target: string): string[] {
@@ -638,14 +704,17 @@ test('photos fetch appends candidates with their bytes and commits', async (t) =
   assert.deepEqual(
     originsOf(rows),
     originsOf(expected),
-    'one row per candidate the three sources name, and no row for an excluded image',
+    'one row per candidate the six sources name, and no row for an excluded image',
   );
   assert.deepEqual([...new Set(rows.map((row) => row.source_key))].sort(), [
+    'bioimages',
     'commons',
     'inat',
     'plants',
+    'tso',
+    'wildflower',
   ]);
-  for (const key of ['commons', 'inat', 'plants'] as const) {
+  for (const key of ['bioimages', 'commons', 'inat', 'plants', 'tso', 'wildflower'] as const) {
     const row = rows.find((candidate) => candidate.source_key === key);
     assert.ok(row !== undefined, `the run found a ${key} row`);
     assert.equal(row.source, SOURCE_NAMES[key], 'the display name reaches the row');
@@ -709,12 +778,12 @@ test('photos fetch pages the Commons listing', async (t) => {
   assert.deepEqual(readRun(root, 'demo').capped, []);
 });
 
-test('the turn order is Commons, then iNaturalist, and PLANTS comes last', () => {
-  assert.deepEqual(TURN_ORDER, ['commons', 'inat']);
-  assert.deepEqual(FETCH_ORDER, ['commons', 'inat', 'plants']);
+test('the turn order is Bioimages, wildflower.org, TSO, Commons, iNaturalist, then PLANTS', () => {
+  assert.deepEqual(TURN_ORDER, ['bioimages', 'wildflower', 'tso', 'commons', 'inat']);
+  assert.deepEqual(FETCH_ORDER, ['bioimages', 'wildflower', 'tso', 'commons', 'inat', 'plants']);
 });
 
-test('photos fetch takes Commons and iNaturalist in turns, then PLANTS', async (t) => {
+test('photos fetch takes the five turn sources in turns, then PLANTS', async (t) => {
   const { root, deps } = setup(t, photoRoutes());
   seedInatTerms(root);
   seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
@@ -723,11 +792,23 @@ test('photos fetch takes Commons and iNaturalist in turns, then PLANTS', async (
 
   assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
 
-  const turns = interleave([commonsRowsOf('QUGA'), inatRowsOf('QUGA')]);
+  const turns = interleave([
+    bioimagesRowsOf('QUGA'),
+    wildflowerRowsOf('QUGA'),
+    tsoRowsOf('QUGA'),
+    commonsRowsOf('QUGA'),
+    inatRowsOf('QUGA'),
+  ]);
+  const rows = fetchedOf(root);
   assert.deepEqual(
-    fetchedOf(root).map((row) => row.origin),
+    rows.map((row) => row.origin),
     [...turns, ...plantsRowsOf('QUGA')].map((row) => row.origin),
     'one row from each turn source per round, and PLANTS after every turn row',
+  );
+  assert.deepEqual(
+    rows.slice(0, 5).map((row) => row.source_key),
+    ['bioimages', 'wildflower', 'tso', 'commons', 'inat'],
+    'the first round takes one row from each turn source, in the owner order',
   );
 });
 
@@ -738,7 +819,13 @@ test('photos fetch gives the cap to the turn sources ahead of PLANTS', async (t)
     scope.species = ['QUGA'];
   });
   // The seeded rows leave room for the turn rows only, so every PLANTS row meets the cap.
-  const room = commonsRowsOf('QUGA').length + inatRowsOf('QUGA').length;
+  const room = [
+    bioimagesRowsOf('QUGA'),
+    wildflowerRowsOf('QUGA'),
+    tsoRowsOf('QUGA'),
+    commonsRowsOf('QUGA'),
+    inatRowsOf('QUGA'),
+  ].reduce((sum, group) => sum + group.length, 0);
   assert.ok(plantsRowsOf('QUGA').length > 0, 'the fixture holds PLANTS rows for the cap to stop');
   assert.ok(room < MAX_PER_SPECIES, 'the fixture rows fit under the cap');
   for (let index = 0; index < MAX_PER_SPECIES - room; index += 1) {
@@ -751,7 +838,7 @@ test('photos fetch gives the cap to the turn sources ahead of PLANTS', async (t)
   assert.equal(rows.length, room);
   assert.deepEqual(
     [...new Set(rows.map((row) => row.source_key))].sort(),
-    ['commons', 'inat'],
+    ['bioimages', 'commons', 'inat', 'tso', 'wildflower'],
     'no PLANTS row reaches the queue ahead of the turn sources',
   );
   assert.ok(http.urls.includes(imagesUrl(QUGA_ID)), 'the PLANTS listing was still fetched');
@@ -773,8 +860,14 @@ test('photos fetch prints a failed listing and still exits 0', async (t) => {
   const rows = fetchedOf(root);
   assert.deepEqual(
     originsOf(rows),
-    originsOf([...plantsRowsOf('QUGA'), ...inatRowsOf('QUGA')]),
-    'the other two sources still fill the queue',
+    originsOf([
+      ...plantsRowsOf('QUGA'),
+      ...inatRowsOf('QUGA'),
+      ...bioimagesRowsOf('QUGA'),
+      ...wildflowerRowsOf('QUGA'),
+      ...tsoRowsOf('QUGA'),
+    ]),
+    'the other five sources still fill the queue',
   );
   assert.equal(rows.filter((row) => row.source_key === 'commons').length, 0);
   assert.ok(err.includes(`fetch failed: 500 ${failing}: status 500`));
@@ -1214,6 +1307,37 @@ test('photos add refuses the permission label for any other host', async (t) => 
   assert.equal(code, 1);
   assert.deepEqual(err, ['photos add license is not allowed: used with permission, non-commercial']);
   assert.deepEqual(candidatesOf(root), []);
+});
+
+test('the POWO rows go through mkadds.cjs and photos add with no refusal', async (t) => {
+  const { rows } = parsePowoImages(fixture('powo/platanus_x_hispanica_images.html'), POWO_PAGE, 'PLHI');
+  assert.equal(rows.length, 2);
+  const routes = new Map<string, Route>();
+  rows.forEach((row, index) => routes.set(row.file_url, { bytes: jpeg(index) }));
+  const { root, deps, out } = setup(t, routes);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark,fruit' }, () => {});
+
+  for (const row of rows) {
+    const built = mkadds.buildCommand(row, 'demo');
+    assert.deepEqual(built.problems, []);
+    // The shell reads each double-quoted value as one word.
+    const words = (built.line.match(/"[^"]*"|\S+/g) ?? []).map((word) =>
+      word.replace(/^"(.*)"$/, '$1'),
+    );
+    assert.deepEqual(words.slice(0, 2), ['node', 'pipeline/cli.ts']);
+    assert.equal(await runCommand(words.slice(2), deps), 0);
+  }
+
+  const added = candidatesOf(root);
+  assert.equal(added.length, 2);
+  assert.deepEqual(out, added.map((row) => `manual candidate ${row.id} added for PLHI`));
+  for (const row of added) {
+    assert.equal(row.source_key, 'manual');
+    assert.equal(row.source, 'Plants of the World Online (Kew)');
+    assert.equal(row.license, '© RBG Kew, CC BY 3.0');
+    assert.equal(row.license_url, 'https://creativecommons.org/licenses/by/3.0/');
+    assert.equal(row.channel_hint, null);
+  }
 });
 
 test('photos add refuses a monochrome image and writes nothing', async (t) => {
