@@ -4088,7 +4088,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:06:58Z",
-    "note": "A sharp archival bark frame. The pale flaky plates read clearly across the trunk."
+    "note": "A sharp archival bark frame. The pale flaky plates read clearly across the trunk.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "82eff691fd2f976103627a5330b34e24aec966b872d8a60d7431940ff5b389b6",
