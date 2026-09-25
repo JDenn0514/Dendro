@@ -194,6 +194,11 @@ export function readRun(root: string, name: string): RunScope {
     throw new Error(`run ${name} does not exist. Run "cli run init ${name}" first.`);
   }
   const raw = readJsonFile(file);
+  // An older run.json has no mono_dropped field. Default it to 0 so that run still loads.
+  const scope = asRecord(raw);
+  if (scope !== null && scope.mono_dropped === undefined) {
+    scope.mono_dropped = 0;
+  }
   const errors = validateScope(raw);
   if (errors.length > 0) {
     throw new Error(`${file} is not a run scope: ${errors.join(' ')}`);

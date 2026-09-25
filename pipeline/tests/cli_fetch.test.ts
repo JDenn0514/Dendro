@@ -699,7 +699,7 @@ test('photos fetch pages the Commons listing', async (t) => {
 });
 
 test('photos fetch ranks Commons and iNaturalist ahead of PLANTS under the cap', async (t) => {
-  const { root, deps, out } = setup(t, photoRoutes());
+  const { root, deps, out, http } = setup(t, photoRoutes());
   seedInatTerms(root);
   seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
     scope.species = ['QUGA'];
@@ -722,6 +722,7 @@ test('photos fetch ranks Commons and iNaturalist ahead of PLANTS under the cap',
     ['commons', 'inat'],
     'no PLANTS row reaches the queue ahead of Commons and iNaturalist',
   );
+  assert.ok(http.urls.includes(imagesUrl(QUGA_ID)), 'the PLANTS listing was still fetched');
   assert.deepEqual(out, [appendedLine(room, 0)]);
 });
 

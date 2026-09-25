@@ -191,6 +191,18 @@ test('readRun lists every field validateScope rejects', (t) => {
   });
 });
 
+test('readRun defaults mono_dropped to 0 when an older run.json omits it', (t) => {
+  const root = tempRoot();
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+
+  const scope = newScope('older', scopeFlags(), CREATED_AT) as unknown as Record<string, unknown>;
+  delete scope.mono_dropped;
+  writeScopeFile(root, 'older', scope);
+
+  const result = readRun(root, 'older');
+  assert.equal(result.mono_dropped, 0);
+});
+
 test("readRun keeps the JSON parser's message", (t) => {
   const root = tempRoot();
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
