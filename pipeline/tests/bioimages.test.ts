@@ -7,6 +7,7 @@ import {
   BIOIMAGES_LICENSES,
   bioimagesAuthor,
   bioimagesCandidates,
+  bioimagesFileUrl,
   bioimagesName,
   bioimagesRows,
   normalizeBioimagesName,
@@ -139,11 +140,21 @@ test('bioimagesCandidates builds the three Quercus gambelii rows', () => {
   assert.equal(first.author, 'Steven J. Baskauf');
   assert.equal(first.license, 'CC BY 4.0');
   assert.equal(first.license_url, 'https://creativecommons.org/licenses/by/4.0/');
-  assert.equal(first.file_url, 'https://zenodo.org/records/11021527/files/qugag-fr14133.jpg');
+  assert.equal(first.file_url, 'http://bioimages.vanderbilt.edu/gq/baskauf/gqugag-fr14133.jpg');
   assert.equal(first.source_species, 'Quercus gambelii');
   assert.equal(first.fetched_at, NOW);
   assert.equal(first.identity_match, null);
   assert.deepEqual(first.tags_hint, []);
+});
+
+test('bioimagesFileUrl gives the gq file that harvest.cjs downloads for the 14133 row', () => {
+  const row = rowNamed('qugag-fr14133.jpg');
+  assert.equal(row.dcterms_identifier, `${BASKAUF}/14133`);
+  // harvest.cjs builds `http://bioimages.vanderbilt.edu/gq/${code}/g${im.fileName}`, where
+  // `code` is the path segment of dcterms_identifier before the image id.
+  assert.equal(bioimagesFileUrl(row), 'http://bioimages.vanderbilt.edu/gq/baskauf/gqugag-fr14133.jpg');
+  assert.equal(bioimagesFileUrl({ ...row, fileName: '' }), null);
+  assert.equal(bioimagesFileUrl({ ...row, dcterms_identifier: '' }), null);
 });
 
 /** The channel hint that bioimagesCandidates gives the Quercus gambelii fruit row under `title`. */
@@ -214,7 +225,9 @@ test('bioimagesCandidates keeps suppress 0 and skips a row with no file, author,
   const count = (row: BioimagesRow): number =>
     bioimagesCandidates([row], ['Quercus gambelii'], 'QUGA', NOW).length;
   assert.equal(count({ ...base, suppress: '0' }), 1);
-  assert.equal(count({ ...base, ac_hasServiceAccessPoint: '' }), 0);
+  assert.equal(count({ ...base, ac_hasServiceAccessPoint: '' }), 1, 'the gq file needs no Zenodo url');
+  assert.equal(count({ ...base, fileName: '' }), 0);
+  assert.equal(count({ ...base, dcterms_identifier: '' }), 0);
   assert.equal(count({ ...base, photoshop_Credit: '', xmpRights_Owner: '' }), 0);
   assert.equal(count({ ...base, usageTermsIndex: '9' }), 0);
   assert.equal(count({ ...base, ac_attributionLinkURL: '' }), 0);

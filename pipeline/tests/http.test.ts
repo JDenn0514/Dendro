@@ -401,7 +401,7 @@ test('a thrown fetch retries and records a failure with status 0', async (t) => 
 
 const NEW_HOSTS = [
   'raw.githubusercontent.com',
-  'zenodo.org',
+  'bioimages.vanderbilt.edu',
   'www.treesandshrubsonline.org',
   'www.wildflower.org',
   'd2seqvvyy3b8p2.cloudfront.net',
@@ -409,7 +409,10 @@ const NEW_HOSTS = [
 
 test('the photo source hosts carry the rates and the cache days of the spec', () => {
   assert.equal(RATE_PER_SECOND['raw.githubusercontent.com'], 1);
-  assert.equal(RATE_PER_SECOND['zenodo.org'], 0.5);
+  assert.equal(RATE_PER_SECOND['bioimages.vanderbilt.edu'], 1);
+  // The Bioimages files come from the gq folder on the site, not from Zenodo.
+  assert.equal(RATE_PER_SECOND['zenodo.org'], undefined);
+  assert.equal(MAX_IN_FLIGHT['zenodo.org'], undefined);
   assert.equal(RATE_PER_SECOND['www.treesandshrubsonline.org'], 1);
   assert.equal(RATE_PER_SECOND['www.wildflower.org'], 1);
   assert.equal(RATE_PER_SECOND['d2seqvvyy3b8p2.cloudfront.net'], 0.2);
@@ -418,7 +421,7 @@ test('the photo source hosts carry the rates and the cache days of the spec', ()
   assert.equal(CACHE_DAYS['www.treesandshrubsonline.org'], 30);
   assert.equal(CACHE_DAYS['www.wildflower.org'], 3650);
   // These two hosts serve image files only, so the default applies.
-  assert.equal(CACHE_DAYS['zenodo.org'], undefined);
+  assert.equal(CACHE_DAYS['bioimages.vanderbilt.edu'], undefined);
   assert.equal(CACHE_DAYS['d2seqvvyy3b8p2.cloudfront.net'], undefined);
 });
 
@@ -433,12 +436,12 @@ test('a rate below 1 spaces requests by more than a second', async (t) => {
   const http = createHttp({
     cacheDir: tmpCacheDir(t), fetchImpl: fake.impl, now: clock.now, sleep: clock.sleep,
   });
-  await http.getBytes('https://zenodo.org/records/1/files/a.jpg');
-  await http.getBytes('https://zenodo.org/records/2/files/b.jpg');
+  await http.getBytes('http://bioimages.vanderbilt.edu/gq/baskauf/ga.jpg');
+  await http.getBytes('http://bioimages.vanderbilt.edu/gq/baskauf/gb.jpg');
   await http.getBytes('https://d2seqvvyy3b8p2.cloudfront.net/a.jpg');
   await http.getBytes('https://d2seqvvyy3b8p2.cloudfront.net/b.jpg');
-  // 0.5 per second is a 2000 ms gap. 0.2 per second is a 5000 ms gap. The two hosts do not
+  // 1 per second is a 1000 ms gap. 0.2 per second is a 5000 ms gap. The two hosts do not
   // share a gate.
-  assert.deepEqual(fake.calls.map((c) => c.at), [0, 2000, 2000, 7000]);
-  assert.deepEqual(clock.sleeps, [2000, 5000]);
+  assert.deepEqual(fake.calls.map((c) => c.at), [0, 1000, 1000, 6000]);
+  assert.deepEqual(clock.sleeps, [1000, 5000]);
 });

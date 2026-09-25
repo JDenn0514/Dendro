@@ -75,7 +75,7 @@ Every place that checks the licence of one row changes from `licenseAllowed` to 
 | Host | Requests per second | In flight | Cache days | Why |
 |---|---|---|---|---|
 | `raw.githubusercontent.com` | 1 | 1 | 30 | The Bioimages catalogue is 12 MB and last changed 2024-04-24. |
-| `zenodo.org` | 0.5 | 1 | default | Bioimages files. Zenodo allows guests 60 requests a minute. |
+| `bioimages.vanderbilt.edu` | 1 | 1 | default | Bioimages files, from the `gq` folder on the site (see the Bioimages "File." rule). |
 | `www.treesandshrubsonline.org` | 1 | 1 | 30 | No robots.txt (404). |
 | `www.wildflower.org` | 1 | 1 | 3650 | The policy allows 1 request per second at most. It also asks apps to store pages and not ask for them again. |
 | `d2seqvvyy3b8p2.cloudfront.net` | 0.2 | 1 | default | POWO image files for `photos add`. Kew asks for low rates. |
@@ -105,7 +105,7 @@ Module: `pipeline/lib/bioimages.ts`.
 - **Licence.** `usageTermsIndex` maps to a label: 0 `CC0 1.0`, 1 `CC BY 4.0`, 2 `CC BY-SA 4.0`, 3 `CC BY-NC 4.0`, 4 `CC BY-NC-SA 4.0`. The mapping comes from `license.xml` in the same repository. The label then goes through `licenseAllowed`. An unknown index skips the row. `license_url` is the matching Creative Commons URL. In the catalogue today, 12,417 rows are CC BY 4.0, 3,816 are CC BY-NC-SA 4.0 (out), and 8 are CC0.
 - **Credit.** `author` is the text of `photoshop_Credit` before ` http`, trimmed (for example `Steven J. Baskauf`). If that is empty, `xmpRights_Owner` is used. A row with no author is skipped.
 - **Origin.** `ac_attributionLinkURL`, as it is (for example `http://bioimages.vanderbilt.edu/baskauf/14133.htm`). Each image has its own page, so no fragment is needed. This matches the 27 Bioimages rows in the manifest.
-- **File.** `ac_hasServiceAccessPoint`, the Zenodo original (median width 2160 px). The build resizes to `MAX_SIDE = 1200`.
+- **File.** The `gq` file on the site: `http://bioimages.vanderbilt.edu/gq/<ns>/g<fileName>`. `<ns>` is the path segment of `dcterms_identifier` before the image id (for example `baskauf` in `http://bioimages.vanderbilt.edu/baskauf/14133`). The case of the file extension stays as it is. `pipeline/scripts/harvest.cjs` builds the same URL, and the 27 Bioimages rows in the manifest came from those files. The manifest finds a retired row or a duplicate by the hash of the image, not by the origin. So the fetch must download the same file, or a retired photo can come back with a new hash. The fetch does not use `ac_hasServiceAccessPoint` (the Zenodo original, median width 2160 px) for this reason. A `gq` file is 1024 px on the long side, so these photos publish at 1024 px, below `MAX_SIDE = 1200`.
 - **Hints.** `channel_hint` is `channelHint` of the title text after the name. `source_species` is the name from the title, as written.
 
 ## Trees and Shrubs Online (fetch source)

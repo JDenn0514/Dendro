@@ -29,8 +29,8 @@ export const RATE_PER_SECOND: Record<string, number> = {
   'commons.wikimedia.org': 2,
   // The Bioimages catalogue.
   'raw.githubusercontent.com': 1,
-  // Bioimages files. Zenodo allows a guest 60 requests a minute.
-  'zenodo.org': 0.5,
+  // Bioimages files, from the gq folder on the site.
+  'bioimages.vanderbilt.edu': 1,
   'www.treesandshrubsonline.org': 1,
   // The wildflower.org policy allows 1 request per second at most.
   'www.wildflower.org': 1,
@@ -41,7 +41,7 @@ export const RATE_PER_SECOND: Record<string, number> = {
 export const MAX_IN_FLIGHT: Record<string, number> = {
   'commons.wikimedia.org': 3,
   'raw.githubusercontent.com': 1,
-  'zenodo.org': 1,
+  'bioimages.vanderbilt.edu': 1,
   'www.treesandshrubsonline.org': 1,
   'www.wildflower.org': 1,
   'd2seqvvyy3b8p2.cloudfront.net': 1,

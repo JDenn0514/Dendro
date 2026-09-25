@@ -64,6 +64,21 @@ export function bioimagesAuthor(row: BioimagesRow): string {
 }
 
 /**
+ * The `gq` file of a row: `http://bioimages.vanderbilt.edu/gq/<ns>/g<fileName>`. `<ns>` is the
+ * path segment of `dcterms_identifier` before the image id, as `baskauf` in
+ * `http://bioimages.vanderbilt.edu/baskauf/14133`. pipeline/scripts/harvest.cjs builds the same
+ * URL, and the manifest rows came from those files. The manifest finds a retired or a published
+ * photo by the hash of its image, so the fetch must download the same file. A `gq` file is
+ * 1024 px on the long side. The value is null when the row has no file name or no `<ns>`.
+ */
+export function bioimagesFileUrl(row: BioimagesRow): string | null {
+  const ns = (row.dcterms_identifier ?? '').split('/').slice(-2)[0] ?? '';
+  const fileName = row.fileName ?? '';
+  if (ns === '' || fileName === '') return null;
+  return `http://bioimages.vanderbilt.edu/gq/${ns}/g${fileName}`;
+}
+
+/**
  * The channel hint of a title. A title names the view after `) - `, up to the next ` - `, as
  * `twig` in `Quercus rubra (Fagaceae) - twig - close-up winter leaf scar/bud`. The view word
  * comes first, because `channelHint` takes the first keyword in its own order and `leaf` comes
@@ -100,8 +115,8 @@ export function bioimagesCandidates(
     // One bit of the suppress flag has no documented meaning, so every flagged row is skipped.
     const suppress = (row.suppress ?? '').trim();
     if (suppress !== '' && suppress !== '0') continue;
-    const fileUrl = (row.ac_hasServiceAccessPoint ?? '').trim();
-    if (fileUrl === '') continue;
+    const fileUrl = bioimagesFileUrl(row);
+    if (fileUrl === null) continue;
     const license = BIOIMAGES_LICENSES[(row.usageTermsIndex ?? '').trim()];
     if (license === undefined || !licenseAllowed(license.label)) continue;
     const author = bioimagesAuthor(row);
