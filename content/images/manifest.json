@@ -8673,7 +8673,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T23:24:05Z",
-    "note": "American beech trunk with an unbroken smooth grey surface. Beech is out of region."
+    "note": "American beech trunk with an unbroken smooth grey surface. Beech is out of region.",
+    "retired": true,
+    "retired_reason": "Task 19 step 17: second frame of the same carved American beech trunk as Bioimages em2192, retired as a duplicate",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "86965bbd111d3e8f31ce4c7d040a5e33bbfccf55cf582adf64f06a533202db7b",
