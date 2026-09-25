@@ -4069,7 +4069,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:06:57Z",
-    "note": "A sharp archival bark frame of a straight trunk. The flaky plated surface fills the frame."
+    "note": "A sharp archival bark frame of a straight trunk. The flaky plated surface fills the frame.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "c9c5c458eee63aa8c5118157ca42a1cd03a6850f085674ca8826f727785c9223",
