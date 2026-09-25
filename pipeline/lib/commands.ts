@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { loadContent } from '../../app/logic/content.js';
 import {
+  MONO_THRESHOLD,
   collect,
   interleave,
   licenseAllowed,
@@ -20,6 +21,7 @@ import {
   objectKey,
   reviewKey,
   sha256Hex,
+  type Chroma,
   type Resize,
 } from './images.ts';
 import {
@@ -137,6 +139,8 @@ export interface CliDeps {
   http: Http;
   storage: Storage;
   resize: Resize;
+  /** The colour measure. `pipeline/cli.ts` loads `chromaOf` on first use, so `ids check` needs no sharp. */
+  chroma: Chroma;
   validate: (raw: RawContent) => ValidationResult;
   cdnBase: string;
   now: () => Date;
@@ -309,6 +313,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
 
   const noProfile: string[] = [];
   let appended = 0;
+  let monoDropped = 0;
   for (const target of targetsOf(scope)) {
     if (target.lookups.length === 0) {
       console.error(`${target.key}: no exemplars in run.json`);
@@ -353,21 +358,55 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
       target: target.key,
       approvedByChannel: counts[target.key] ?? {},
     });
-    for (const row of collected.added) await download(deps, row);
+    // The colour check runs after the download and before the append. A dropped row keeps
+    // its cache file, so a rerun measures it again with no new download.
+    const kept: Candidate[] = [];
+    let mono = 0;
+    for (const row of collected.added) {
+      await download(deps, row);
+      const bytes = localBytes(deps.root, row);
+      // A failed download has no cached file. Its row is still appended, as before.
+      if (bytes === null) {
+        kept.push(row);
+        continue;
+      }
+      let score: number;
+      try {
+        score = await deps.chroma(bytes);
+      } catch (error) {
+        // The bytes arrived but do not decode. That counts as a download failure.
+        recordFailure(
+          deps.http,
+          row.file_url,
+          200,
+          `the image does not decode: ${errorMessage(error)}`,
+          now,
+        );
+        continue;
+      }
+      if (score < MONO_THRESHOLD) {
+        mono += 1;
+        continue;
+      }
+      kept.push(row);
+    }
+    if (mono > 0) console.error(`${target.key}: ${mono} monochrome dropped`);
     // The append happens per target, so a run that stops on the third target keeps the
     // rows of the first two.
-    if (collected.added.length > 0) appendJsonl(candidatesPath, collected.added);
-    existing = existing.concat(collected.added);
-    appended += collected.added.length;
+    if (kept.length > 0) appendJsonl(candidatesPath, kept);
+    existing = existing.concat(kept);
+    appended += kept.length;
+    monoDropped += mono;
   }
 
   scope.dropped = withNoProfile(scope.dropped, noProfile);
   scope.fetch_failures = deps.http.failures.length;
+  scope.mono_dropped = monoDropped;
   writeRun(deps.root, scope);
   gitCommitAll(deps.exec, `content(${name}): photo candidates`);
   printFailures(deps);
   console.log(
-    `${appended} candidates appended to ${relative(deps.root, candidatesPath)}, ${scope.fetch_failures} download failures`,
+    `${appended} candidates appended to ${relative(deps.root, candidatesPath)}, ${scope.fetch_failures} download failures, ${scope.mono_dropped} monochrome dropped`,
   );
   return 0;
 }

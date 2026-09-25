@@ -147,6 +147,7 @@
   "species": [],
   "dropped": [],
   "fetch_failures": 0,
+  "mono_dropped": 0,
   "capped": [
     "leaf/needles: inat any listing capped at 4 pages",
     "leaf/scale_like: inat any listing capped at 4 pages",

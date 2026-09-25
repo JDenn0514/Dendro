@@ -22,7 +22,9 @@ import {
 } from '../lib/commands.ts';
 import { categoryUrl, commonsCandidates, parseCategoryListing } from '../lib/commons.ts';
 import { SECTION_PAGES, nextPageUrl, parseSectionPage } from '../lib/fna.ts';
+import { chromaOf } from '../lib/chroma.ts';
 import type { BytesResult, Http, HttpFailure, TextResult } from '../lib/http.ts';
+import { sha256Hex } from '../lib/images.ts';
 import {
   FRUITING_VALUE_ID,
   PER_PAGE,
@@ -47,6 +49,7 @@ import {
 import { newScope, readRun, runDir, writeRun, type RunScope } from '../lib/run.ts';
 import { memoryStorage } from '../lib/storage.ts';
 import type { Verdict } from '../lib/verdicts.ts';
+import { greyJpeg, redJpeg } from './fixtures/images.ts';
 import { captureConsole, fakeExec } from './helpers.ts';
 
 const NOW = '2026-09-22T15:04:00Z';
@@ -59,6 +62,8 @@ const INAT_TAXON_ID = 116377;
 const FLOWERING_VALUE_ID = 13;
 const EMPTY_OBSERVATIONS = '{ "total_results": 0, "page": 1, "results": [] }';
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+/** Bytes that sharp cannot decode. */
+const NOT_AN_IMAGE = new Uint8Array([1, 2, 3, 4]);
 
 interface Route {
   status?: number;
@@ -304,6 +309,9 @@ function setup(t: TestContext, routes: Map<string, Route> = new Map(), throwOn?:
     http,
     storage: memoryStorage(),
     resize: async (bytes) => bytes,
+    // The fixture bytes are five-byte stand-ins, not JPEGs. Every row scores as colour here.
+    // A colour test sets `deps.chroma = chromaOf` and serves real JPEGs.
+    chroma: async () => 100,
     validate: validateContent,
     cdnBase: CDN_BASE,
     now: () => new Date(NOW),
@@ -409,8 +417,8 @@ function fetchedOf(root: string): Candidate[] {
 }
 
 /** The line `photos fetch` prints last. The count comes from the rows, never from a literal. */
-function appendedLine(appended: number, failures: number): string {
-  return `${appended} candidates appended to pipeline/runs/demo/candidates.jsonl, ${failures} download failures`;
+function appendedLine(appended: number, failures: number, mono = 0): string {
+  return `${appended} candidates appended to pipeline/runs/demo/candidates.jsonl, ${failures} download failures, ${mono} monochrome dropped`;
 }
 
 test('no argument prints the usage block and fails', async (t) => {
@@ -759,6 +767,64 @@ test('photos fetch records a failed download and keeps the row', async (t) => {
   const failures = readRun(root, 'demo').fetch_failures;
   assert.ok(failures > 0);
   assert.deepEqual(out, [appendedLine(rows.length, failures)]);
+});
+
+test('photos fetch drops a monochrome row and counts it', async (t) => {
+  const routes = photoRoutes();
+  const red = await redJpeg();
+  const grey = await greyJpeg();
+  for (const url of fileUrls('QUGA')) routes.set(url, { bytes: red });
+  const greyUrl = commonsRowsOf('QUGA')[0].file_url;
+  routes.set(greyUrl, { bytes: grey });
+  const { root, deps, out, err } = setup(t, routes);
+  deps.chroma = chromaOf;
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  const expected = expectedRows('QUGA');
+  assert.equal(rows.length, expected.length - 1);
+  assert.ok(!rows.some((row) => row.file_url === greyUrl), 'the grey row is not appended');
+  const scope = readRun(root, 'demo');
+  assert.equal(scope.mono_dropped, 1);
+  assert.equal(scope.fetch_failures, 0);
+  assert.ok(err.includes('QUGA: 1 monochrome dropped'));
+  assert.deepEqual(out, [appendedLine(expected.length - 1, 0, 1)]);
+  const cached = path.join(root, 'pipeline', 'cache', 'commons', `${sha256Hex(grey)}.jpg`);
+  assert.ok(fs.existsSync(cached), 'the cache keeps the grey file for a rerun');
+});
+
+test('photos fetch counts an image that does not decode as a download failure', async (t) => {
+  const routes = photoRoutes();
+  const red = await redJpeg();
+  for (const url of fileUrls('QUGA')) routes.set(url, { bytes: red });
+  const brokenUrl = commonsRowsOf('QUGA')[0].file_url;
+  routes.set(brokenUrl, { bytes: NOT_AN_IMAGE });
+  const { root, deps, out, err } = setup(t, routes);
+  deps.chroma = chromaOf;
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  const expected = expectedRows('QUGA');
+  assert.equal(rows.length, expected.length - 1);
+  assert.ok(!rows.some((row) => row.file_url === brokenUrl), 'the broken row is not appended');
+  const scope = readRun(root, 'demo');
+  assert.equal(scope.fetch_failures, 1);
+  assert.equal(scope.mono_dropped, 0);
+  assert.ok(
+    err.some((line) => line.startsWith(`fetch failed: 200 ${brokenUrl}: the image does not decode:`)),
+    'the failure line names the url',
+  );
+  assert.deepEqual(out, [appendedLine(expected.length - 1, 1, 0)]);
 });
 
 test('photos fetch skips the profile call for a symbol in plants_ids.json', async (t) => {

@@ -19,6 +19,8 @@ export interface RunScope {
   dropped: { symbol: string; reason: string }[];
   /** How many urls this run gave up on. The report prints it. */
   fetch_failures: number;
+  /** How many fetched rows the last `photos fetch` dropped as monochrome. */
+  mono_dropped: number;
   /** One message per listing this run cut short at a page cap. */
   capped: string[];
 }
@@ -135,6 +137,7 @@ export function newScope(
     species: [],
     dropped: [],
     fetch_failures: 0,
+    mono_dropped: 0,
     capped: [],
   };
 }
@@ -155,6 +158,7 @@ export function validateScope(raw: unknown): string[] {
   }
   if (asString(scope.created_at) === null) errors.push('created_at is not a string.');
   if (asNumber(scope.fetch_failures) === null) errors.push('fetch_failures is not a number.');
+  if (asNumber(scope.mono_dropped) === null) errors.push('mono_dropped is not a number.');
   for (const field of LIST_FIELDS) {
     if (!isStringList(scope[field])) errors.push(`${field} is not an array of strings.`);
   }

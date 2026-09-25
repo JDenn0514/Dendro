@@ -96,6 +96,7 @@ test('newScope splits every csv list and trims each part', () => {
   assert.deepEqual(scope.species, []);
   assert.deepEqual(scope.dropped, []);
   assert.equal(scope.fetch_failures, 0);
+  assert.equal(scope.mono_dropped, 0);
   assert.deepEqual(scope.capped, []);
 });
 
@@ -148,6 +149,7 @@ test('writeRun then readRun round-trips the scope', (t) => {
   scope.dropped = [{ symbol: 'QUUN', reason: 'hybrid' }];
   scope.concept_exemplars = { 'leaf/simple_lobed': ['QUGA'] };
   scope.fetch_failures = 2;
+  scope.mono_dropped = 3;
   scope.capped = ['QUGA: commons listing capped at 4 pages'];
   writeRun(root, scope);
 
@@ -175,6 +177,7 @@ test('readRun lists every field validateScope rejects', (t) => {
   const scope = newScope('broken', scopeFlags(), CREATED_AT) as unknown as Record<string, unknown>;
   delete scope.channels;
   scope.fetch_failures = 'two';
+  scope.mono_dropped = 'three';
   scope.dropped = [{ symbol: 'QUUN' }];
   writeScopeFile(root, 'broken', scope);
 
@@ -182,6 +185,7 @@ test('readRun lists every field validateScope rejects', (t) => {
     assert.ok(error.message.includes('run.json'));
     assert.ok(error.message.includes('channels is not an array of strings'));
     assert.ok(error.message.includes('fetch_failures is not a number'));
+    assert.ok(error.message.includes('mono_dropped is not a number'));
     assert.ok(error.message.includes('a dropped row needs a symbol and a reason'));
     return true;
   });

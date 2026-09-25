@@ -386,6 +386,8 @@ function setup(t: TestContext, routes: Map<string, Route> = defaultRoutes()) {
     http,
     storage,
     resize,
+    // No build test measures colour. Every row scores as colour here.
+    chroma: async () => 100,
     cdnBase: CDN,
     validate: validateContent,
     now: () => new Date(NOW),

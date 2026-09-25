@@ -67,7 +67,7 @@ node pipeline/cli.ts photos fetch <name>
 
 This appends rows to `pipeline/runs/<name>/candidates.jsonl` and downloads each image into
 `pipeline/cache/`. It prints
-`<n> candidates appended to pipeline/runs/<name>/candidates.jsonl, <m> download failures`,
+`<n> candidates appended to pipeline/runs/<name>/candidates.jsonl, <m> download failures, <k> monochrome dropped`,
 then one line per fetch failure, and it records the count in `run.json` as
 `fetch_failures`.
 
