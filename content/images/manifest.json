@@ -3783,7 +3783,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:56:15Z",
-    "note": "An archival black and white studio shot of one acorn in a deep fringed cup on a short twig. The cup fringe reads clearly."
+    "note": "An archival black and white studio shot of one acorn in a deep fringed cup on a short twig. The cup fringe reads clearly.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "9917db0a8e74599ef94bc8ecc9956dfc0793406da05c4f46879b050c5f24feec",
