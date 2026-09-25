@@ -774,6 +774,21 @@ button.btn{width:100%; padding:0;}
    screen takes its own rules out as it is rebuilt, and the last one takes
    out whatever is left, along with this comment.
    ======================================================================= */
+
+/* The old token names, aliased to the new ones. They go when the last legacy
+   rule goes, in Task 16. `--warn` takes bark and not sap, because white on sap
+   is 3.16:1 and white on bark is 8.82:1. */
+:root{
+  --accent: var(--moss);
+  --warn: var(--bark);
+  --line: var(--mount);
+  --level-0: var(--m0);
+  --level-1: var(--m1);
+  --level-2: var(--m2);
+  --level-3: var(--m3);
+  --level-4: var(--m4);
+}
+
 .nav {
   display: flex;
   gap: 1rem;
