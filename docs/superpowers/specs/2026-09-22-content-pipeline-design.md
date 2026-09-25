@@ -356,7 +356,7 @@ never gets a manifest row.
 
 The source order is Commons, iNaturalist, PLANTS. The cap takes rows in that order, so
 PLANTS plates enter only when the cap has room. After each download the fetch measures
-the colour of the image and drops a row that scores under `MONO_THRESHOLD` (12, in
+the colour of the image and drops a row that scores under `MONO_THRESHOLD` (3, in
 `pipeline/lib/candidates.ts`). Owner ruling 2026-09-24: colour photographs only. See
 `docs/superpowers/specs/2026-09-24-pipeline-batch-design.md`.
 

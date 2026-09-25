@@ -177,10 +177,11 @@ export const MAX_PER_SPECIES = 60;
 export const CHANNEL_TARGET = 8;
 
 /**
- * A chroma score under this value marks an image as monochrome. Owner ruling 2026-09-24:
- * colour photographs only. `mono-check.cjs` used this cut on the concept run.
+ * A chroma score under this value marks an image as monochrome. The threshold is 3.
+ * A greyscale file scores 0. Colour bark and acorn photographs score from about 2 to 12
+ * (manifest audit 2026-09-25). Owner ruling 2026-09-24: colour photographs only.
  */
-export const MONO_THRESHOLD = 12;
+export const MONO_THRESHOLD = 3;
 
 /**
  * Rows that share an id become one row. The three iNaturalist passes return the same

@@ -5,8 +5,8 @@ import { MONO_THRESHOLD } from '../lib/candidates.ts';
 import { chromaOf } from '../lib/chroma.ts';
 import { greyJpeg, redJpeg } from './fixtures/images.ts';
 
-test('MONO_THRESHOLD is 12', () => {
-  assert.equal(MONO_THRESHOLD, 12);
+test('MONO_THRESHOLD is 3', () => {
+  assert.equal(MONO_THRESHOLD, 3);
 });
 
 test('a flat grey image scores under the threshold', async () => {

@@ -1134,7 +1134,7 @@ test('photos add refuses a monochrome image and writes nothing', async (t) => {
   const id = candidateId('https://www.fs.usda.gov/database/feis/quga.html', 'QUGA');
   const score = (await chromaOf(grey)).toFixed(1);
   assert.deepEqual(err, [
-    `refused: ${id} for QUGA is monochrome (chroma ${score}, threshold 12). Colour photographs only (owner ruling 2026-09-24).`,
+    `refused: ${id} for QUGA is monochrome (chroma ${score}, threshold 3). Colour photographs only (owner ruling 2026-09-24).`,
   ]);
   assert.deepEqual(candidatesOf(root), [seeded], 'candidates.jsonl is unchanged');
 });

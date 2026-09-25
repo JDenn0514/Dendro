@@ -140,7 +140,7 @@ test('photos audit <run> prints each row under the threshold and a summary', asy
 
   assert.deepEqual(out, [
     `${grey.id} QUGA bark ${await scoreText(await greyJpeg())} ${grey.origin}`,
-    '2 measured, 1 skipped, 1 under threshold 12',
+    '2 measured, 1 skipped, 1 under threshold 3',
   ]);
 });
 
@@ -164,7 +164,7 @@ test('photos audit --manifest measures the live rows and never requests a retire
 
   assert.deepEqual(out, [
     `${GREY_HASH} QUGA leaf ${await scoreText(grey)} ${rows[0].origin}`,
-    '2 measured, 0 skipped, 1 under threshold 12',
+    '2 measured, 0 skipped, 1 under threshold 3',
   ]);
   assert.ok(!http.urls.includes(retiredUrl), 'the retired hash was never requested');
 });

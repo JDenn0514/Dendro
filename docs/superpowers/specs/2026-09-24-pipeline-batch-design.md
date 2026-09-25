@@ -79,6 +79,9 @@ export const MONO_THRESHOLD = 12;
 If `sharp` cannot decode the bytes, `chromaOf` throws. Callers decide what a
 throw means (see below).
 
+Lowered to 3 on 2026-09-25. The manifest audit showed greyscale files at 0.0 and
+colour bark from 2.4 up, so 12 dropped colour bark.
+
 ### 4.2 In `photos fetch`
 
 In `photosFetch`, after `download(deps, row)` and before the append:
