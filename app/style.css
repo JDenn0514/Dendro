@@ -800,7 +800,10 @@ button.btn{width:100%; padding:0;}
 
 .nav a { color: var(--accent); text-decoration: none; }
 
-button {
+/* This rule sits after the new sheet, so a bare `button` would outweigh the
+   `:where()` reset above and frame every new button in white. The `:where()`
+   and the `:not()` keep it off the classes the rebuilt screens print. */
+:where(button:not(.pick, .btn, .startb, .leave, .chev, .choice)) {
   font: inherit;
   padding: 0.4rem 0.9rem;
   border: 1px solid var(--line);

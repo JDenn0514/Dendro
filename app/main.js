@@ -72,15 +72,15 @@ function showError(title, lines) {
     list.append(item);
   }
   box.append(list);
-  const settings = document.createElement('a');
-  settings.className = 'placement';
-  settings.href = '#/settings';
-  settings.textContent = 'Settings';
-  const home = document.createElement('a');
-  home.className = 'placement';
-  home.href = '#/';
-  home.textContent = 'Home';
-  box.append(settings, home);
+  const settingsLink = document.createElement('a');
+  settingsLink.className = 'placement';
+  settingsLink.href = '#/settings';
+  settingsLink.textContent = 'Settings';
+  const homeLink = document.createElement('a');
+  homeLink.className = 'placement';
+  homeLink.href = '#/';
+  homeLink.textContent = 'Home';
+  box.append(settingsLink, homeLink);
   root.append(box);
 }
 
