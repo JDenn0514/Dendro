@@ -2943,7 +2943,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:38:19Z",
-    "note": "Archival black and white plate of a shoot with lobed simple leaves that fill the frame, sharp, with only a small archival number in the corner."
+    "note": "Archival black and white plate of a shoot with lobed simple leaves that fill the frame, sharp, with only a small archival number in the corner.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "4745482d90f84a90c96172d3325ff44260bbe017f10c2c692b3bc78469d85a1b",
