@@ -97,19 +97,32 @@ export function ownImages(page: TsoPage): TsoImage[] {
 }
 
 // A caption with its own rights text may differ from the site licence, so it is skipped.
-const OWN_RIGHTS = /©|\(c\)|permission/i;
+const OWN_RIGHTS = /©|\(c\)|permission|courtesy|rights reserved/i;
 const CREDIT = 'Image ';
+// The words in lower case that can be part of a name, as in `Jan van der Berg`.
+const NAME_JOINERS = new Set([
+  'and', '&', 'de', 'del', 'della', 'der', 'den', 'di', 'da', 'do', 'dos', 'du', 'la', 'le',
+  'van', 'von', 'y',
+]);
+
+/** True when the text can be a name: no digit, and each word in lower case is a name joiner. */
+function looksLikeName(name: string): boolean {
+  if (/\d/.test(name)) return false;
+  return name.split(/\s+/).every((word) => !/^\p{Ll}/u.test(word) || NAME_JOINERS.has(word));
+}
 
 /**
  * The photographer of a caption that ends `Image <Name>.`, or null. A name can hold a period,
- * as in `Paul W. Meyer`, so the name is the text after the last `Image `.
+ * as in `Paul W. Meyer`, so the name is the text after the last `Image `. When that text holds
+ * a digit or a word in lower case, the caption goes on after the name, and the value is null.
  */
 export function tsoCredit(text: string): string | null {
   if (OWN_RIGHTS.test(text)) return null;
   const at = text.lastIndexOf(CREDIT);
   if (at === -1 || (at > 0 && text[at - 1] !== ' ')) return null;
   const name = text.slice(at + CREDIT.length).replace(/\.\s*$/, '').trim();
-  return name === '' ? null : name;
+  if (name === '' || !looksLikeName(name)) return null;
+  return name;
 }
 
 /** One row for each credited image of the species. The origin carries the file name as a fragment. */

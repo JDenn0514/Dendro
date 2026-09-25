@@ -119,6 +119,30 @@ test('tsoCredit reads the name after the last "Image " and refuses rights text',
   assert.equal(tsoCredit("Foliage and fruit of the 'Acerifolia' at Kew. June 2025."), null);
 });
 
+test('tsoCredit refuses a caption that goes on after the name', () => {
+  // The text after `Image ` holds a digit, so it is not a name.
+  assert.equal(tsoCredit('Bark in Kent. Image X. Planted 1990.'), null);
+  assert.equal(tsoCredit('Bark in Kent. Image Owen Johnson, 2019.'), null);
+  // A word in lower case that is not a name joiner is not part of a name.
+  assert.equal(tsoCredit('Bark in Kent. Image Owen Johnson. Taken at dusk.'), null);
+});
+
+test('tsoCredit refuses courtesy and rights reserved text', () => {
+  assert.equal(tsoCredit('Bark in Kent. Image courtesy of Kew.'), null);
+  assert.equal(tsoCredit('Bark in Kent. Image Courtesy Of Kew.'), null, 'case does not matter');
+  assert.equal(tsoCredit('Bark in Kent. Image X. All rights reserved.'), null);
+  assert.equal(tsoCredit('Bark in Kent. Image X. All Rights Reserved.'), null);
+});
+
+test('tsoCredit keeps a name that holds a name joiner', () => {
+  assert.equal(
+    tsoCredit('Bark in Kent. Image John Grimshaw and Tom Christian.'),
+    'John Grimshaw and Tom Christian',
+  );
+  assert.equal(tsoCredit('Bark in Kent. Image Jan van der Berg.'), 'Jan van der Berg');
+  assert.equal(tsoCredit('Bark in Kent. Image A. Coombes & J. Smith.'), 'A. Coombes & J. Smith');
+});
+
 test('tsoCandidates builds one CC BY-SA row for each credited image of the species', () => {
   const rows = tsoCandidates(parseTsoPage(QUGA_PAGE), QUGA_URL, 'QUGA', NOW);
   assert.deepEqual(
