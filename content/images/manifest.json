@@ -1882,7 +1882,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T03:36:34Z",
-    "note": "Sharp archival black and white plate of one lobed simple leaf on a dark ground. The lobe outline reads clearly."
+    "note": "Sharp archival black and white plate of one lobed simple leaf on a dark ground. The lobe outline reads clearly.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "1a0bae522c6028bdd369abc72369ad6a29ad06f26b0dac110a38583e272c4cc5",
