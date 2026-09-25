@@ -1,7 +1,8 @@
 // Card levels, species levels, unit numbers, and the unit gate.
-import { cardId } from './content.js';
+import { cardId, conceptFor } from './content.js';
+import { numberWord } from './words.js';
 
-export const LEVEL_NAMES = ['novice', 'beginner', 'intermediate', 'advanced', 'expert'];
+export const LEVEL_NAMES = ['new', 'seen', 'familiar', 'strong', 'expert'];
 export const GATE_THRESHOLD = 0.8;
 
 export function cardLevel(state) {
@@ -101,4 +102,140 @@ export function progressGrid(content, states) {
     };
   });
   return { channels: content.channels, units };
+}
+
+export const RUNG_KINDS = ['concept', 'group', 'species'];
+export const RUNG_NAMES = { concept: 'shapes', group: 'genera', species: 'species' };
+
+// A card at this level or higher counts toward a rung's waterline.
+export const FAMILIAR = 2;
+
+// A rung's own level is the mean of its cards, rounded. It is the same rule
+// `unitNumber` uses for a unit, without the percent.
+export function rollupLevel(levels) {
+  if (levels.length === 0) return 0;
+  const sum = levels.reduce((total, level) => total + level, 0);
+  return Math.round(sum / levels.length);
+}
+
+function liveGenera(content) {
+  const genera = new Set();
+  for (const record of Object.values(content.species)) {
+    if (!record.retired) genera.add(record.genus);
+  }
+  return [...genera].sort();
+}
+
+// The band order is the reading order. Concepts keep the order of
+// concepts.json, so "the fifth of eight leaf shapes" stays true. Genera and
+// species sort by genus, so the species band can be grouped by parent.
+function orderedCards(content, channel, kind) {
+  const find = (key) => content.cards[cardId(kind, channel, key)] ?? null;
+  if (kind === 'concept') {
+    return (content.concepts_by_channel[channel] ?? [])
+      .map((concept) => find(concept.key))
+      .filter(Boolean);
+  }
+  const genera = liveGenera(content);
+  if (kind === 'group') return genera.map(find).filter(Boolean);
+  const out = [];
+  for (const genus of genera) {
+    const symbols = Object.entries(content.species)
+      .filter(([, record]) => !record.retired && record.genus === genus)
+      .map(([symbol]) => symbol)
+      .sort();
+    for (const symbol of symbols) {
+      const card = find(symbol);
+      if (card) out.push(card);
+    }
+  }
+  return out;
+}
+
+export function channelRung(content, states, channel, kind) {
+  const cards = orderedCards(content, channel, kind);
+  const rows = cards.map((card) => ({
+    id: card.id,
+    key: card.key,
+    bucket: card.bucket,
+    genus: kind === 'species' ? content.species[card.key].genus : null,
+    level: cardLevel(states[card.id])
+  }));
+  const counts = [0, 0, 0, 0, 0];
+  for (const row of rows) counts[row.level] += 1;
+  const atFamiliar = rows.filter((row) => row.level >= FAMILIAR).length;
+  return {
+    channel,
+    kind,
+    name: RUNG_NAMES[kind],
+    cards: rows,
+    counts,
+    total: rows.length,
+    at_familiar: atFamiliar,
+    share: rows.length === 0 ? 0 : atFamiliar / rows.length,
+    level: rollupLevel(rows.map((row) => row.level))
+  };
+}
+
+export function channelRungs(content, states, channel) {
+  return RUNG_KINDS.map((kind) => channelRung(content, states, channel, kind));
+}
+
+// The channel's leading shape: the concept card that stands highest. A tie
+// goes to the first one in concepts.json, so the answer never flickers.
+export function leadingConcept(content, states, channel) {
+  const rung = channelRung(content, states, channel, 'concept');
+  if (rung.cards.length === 0) return null;
+  let best = 0;
+  for (let i = 1; i < rung.cards.length; i += 1) {
+    if (rung.cards[i].level > rung.cards[best].level) best = i;
+  }
+  const row = rung.cards[best];
+  const concept = conceptFor(content, channel, row.key);
+  return {
+    key: row.key,
+    name: concept?.name ?? row.key,
+    level: row.level,
+    index: best,
+    total: rung.cards.length
+  };
+}
+
+export function channelClaim(content, states, channel) {
+  const leading = leadingConcept(content, states, channel);
+  if (!leading) return 'This channel holds no shape cards yet.';
+  const species = channelRung(content, states, channel, 'species');
+  if (species.total === 0) {
+    return `${leading.name} sits at ${LEVEL_NAMES[leading.level]}. No species hangs off it yet.`;
+  }
+  const verdict = species.level >= leading.level ? 'keep up' : 'do not';
+  return `${leading.name} sits at ${LEVEL_NAMES[leading.level]}. `
+    + `The ${numberWord(species.total)} species behind it ${verdict}.`;
+}
+
+export function overallTally(content, states) {
+  const rungs = content.channels.flatMap((channel) => channelRungs(content, states, channel));
+  const add = (kind) => {
+    const rows = rungs.filter((rung) => rung.kind === kind);
+    return {
+      at: rows.reduce((total, rung) => total + rung.at_familiar, 0),
+      total: rows.reduce((total, rung) => total + rung.total, 0)
+    };
+  };
+  return { shapes: add('concept'), genera: add('group'), species: add('species') };
+}
+
+export function overallFinding(content, states) {
+  const tally = overallTally(content, states);
+  const held = tally.shapes.total + tally.genera.total + tally.species.total;
+  if (held === 0) return 'No cards are built yet.';
+  const rungs = content.channels.flatMap((channel) => channelRungs(content, states, channel));
+  const started = rungs.some((rung) => rung.counts.slice(1).some((count) => count > 0));
+  if (!started) return 'Nothing is started yet. The shapes come first.';
+  const share = (part) => (part.total === 0 ? 0 : part.at / part.total);
+  const shapes = share(tally.shapes);
+  const species = share(tally.species);
+  if (shapes - species >= 0.1) return 'You know the shapes. Not the trees inside them.';
+  if (species >= shapes) return 'The trees keep pace with the shapes.';
+  return 'The shapes lead. The trees are close behind.';
 }
