@@ -218,6 +218,32 @@ test('a payload from a newer build is left alone and blocks every write', () => 
   assert.equal(store.readCards()['species:QURU:leaf'], undefined);
 });
 
+test('a rescue export from a newer store can be imported again', () => {
+  // The banner on a newer store tells the reader to export, reset, and
+  // import. Every section of the file therefore has to say the version this
+  // app reads, not the version the sections were stored under.
+  const storage = memoryStorage();
+  storage.setItem('dendro_settings', JSON.stringify({
+    ...defaultSettings(), version: 9, session_size: 15
+  }));
+  storage.setItem('dendro_cards', JSON.stringify({
+    version: 9, cards: { 'species:QUGA:leaf': { interval: 30, tier: 'typed', tier_passes: 1 } }
+  }));
+  const first = createStore(storage);
+  assert.equal(first.newer_version, true);
+
+  const blob = first.exportBlob('2026-03-10');
+  const payload = JSON.parse(blob.json);
+  for (const key of Object.values(KEYS)) {
+    assert.equal(payload[key].version, STORE_VERSION);
+  }
+
+  const second = createStore(memoryStorage());
+  assert.deepEqual(second.importBlob(blob.json), { ok: true, errors: [] });
+  assert.equal(second.readSettings().session_size, 15);
+  assert.equal(second.readCards()['species:QUGA:leaf'].interval, 30);
+});
+
 test('corrupt stored JSON is copied aside once and not overwritten', () => {
   const storage = memoryStorage();
   storage.setItem('dendro_cards', '{oops');

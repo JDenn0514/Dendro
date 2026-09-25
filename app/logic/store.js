@@ -244,13 +244,20 @@ export function createStore(storage) {
     },
 
     exportBlob(today) {
+      // Every section carries the version this app writes, the same as the
+      // top level. A store flagged newer hands back its sections with the
+      // version it stored, and the import rejects a section that says a
+      // version the app cannot read. Export, reset, import is the only
+      // recovery a user has, so the file the app writes has to be a file the
+      // app reads. The shape of each section is checked on import anyway.
+      const stamp = (section) => ({ ...section, version: STORE_VERSION });
       const payload = {
         version: STORE_VERSION,
         exported_at: today,
-        [KEYS.cards]: read(KEYS.cards),
-        [KEYS.log]: read(KEYS.log),
-        [KEYS.settings]: api.readSettings(),
-        [KEYS.missing_edges]: read(KEYS.missing_edges)
+        [KEYS.cards]: stamp(read(KEYS.cards)),
+        [KEYS.log]: stamp(read(KEYS.log)),
+        [KEYS.settings]: stamp(api.readSettings()),
+        [KEYS.missing_edges]: stamp(read(KEYS.missing_edges))
       };
       return { filename: `dendro-progress-${today}.json`, json: JSON.stringify(payload, null, 2) };
     },
