@@ -67,6 +67,8 @@ const SMALL = /<small>([\s\S]*)<\/small>\s*$/i;
 const PHOTO_ID = /^ID:(\d+)\s*([\s\S]*)$/;
 const CC_LINK = /https?:\/\/(?:www\.)?creativecommons\.org\/\S+/i;
 const FILE_HASH = /\/([0-9a-f]{32})\.jpg$/i;
+// A licence text that limits use to non-commercial or forbids derivatives.
+const NOT_FREE = /non.?commercial|no.?deriv/i;
 
 /**
  * One add row, or the reason for no row. The caption reads
@@ -89,6 +91,9 @@ export function powoRow(anchor: PowoAnchor, pageUrl: string, target: string): Ad
   const holder = licenseText.slice(0, link.index).trim().replace(/[,;.]$/, '').trim();
   const license = holder === '' ? label : `${holder}, ${label}`;
   if (!licenseAllowed(license)) return 'license_not_allowed';
+  // The holder is free text. licenseAllowed splits `non-commercial` into two words, so the text
+  // itself is checked here.
+  if (NOT_FREE.test(license)) return 'license_not_allowed';
   // A credit can start with a name link: `<a>Platanus × acerifolia</a> | <credit>`.
   const creditText = small === null ? '' : htmlText(small[1]);
   const bar = creditText.lastIndexOf(' | ');

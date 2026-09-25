@@ -99,6 +99,22 @@ test('powoRow skips a display-only licence and an NC licence', () => {
   assert.equal(powoRow(nc, PAGE, 'PLHI'), 'license_not_allowed');
 });
 
+test('powoRow skips a holder text that says non-commercial or no derivatives', () => {
+  const caption = (holder: string): PowoAnchor =>
+    anchor(
+      `Platanus × hispanica - Park\n<br>ID:1 ${holder} https://creativecommons.org/licenses/by/4.0/<small>A Person</small>`,
+    );
+  // licenseAllowed splits `non-commercial` into two words, so powoRow checks the text itself.
+  assert.equal(powoRow(caption('© X, non-commercial use only,'), PAGE, 'PLHI'), 'license_not_allowed');
+  assert.equal(powoRow(caption('© X, Non Commercial,'), PAGE, 'PLHI'), 'license_not_allowed');
+  assert.equal(powoRow(caption('© X, noncommercial,'), PAGE, 'PLHI'), 'license_not_allowed');
+  assert.equal(powoRow(caption('© X, no derivatives,'), PAGE, 'PLHI'), 'license_not_allowed');
+  assert.equal(powoRow(caption('© X, No-Derivs,'), PAGE, 'PLHI'), 'license_not_allowed');
+  const kept = powoRow(caption('© X,'), PAGE, 'PLHI');
+  assert.ok(typeof kept !== 'string');
+  assert.equal(kept.license, '© X, CC BY 4.0');
+});
+
 test('powoRow skips a photo with no credit or with no file hash', () => {
   const caption = 'Platanus × hispanica - Park\n<br>ID:1 © RBG Kew https://creativecommons.org/licenses/by/3.0/';
   assert.equal(powoRow(anchor(caption), PAGE, 'PLHI'), 'no_credit');
