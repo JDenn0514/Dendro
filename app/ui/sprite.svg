@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
+  <!-- ======== leaf channel: one silhouette per leaf type ======== -->
+  <symbol id="lf-oak" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 120 C48 118 34 118 24 112 C16 107 22 102 44 100 C36 94 20 92 12 86 C4 80 14 76 40 74 C30 66 14 64 8 56 C2 48 12 46 38 46 C30 38 20 32 18 24 C16 14 28 12 44 16 C46 10 50 5 56 2 C62 5 66 10 68 16 C84 12 96 14 94 24 C92 32 82 38 74 46 C100 46 110 48 104 56 C98 64 82 66 72 74 C98 76 108 80 100 86 C92 92 76 94 68 100 C90 102 96 107 88 112 C78 118 64 118 56 120 Z M53 119 L53 140 L59 140 L59 119 Z"/>
+    </g>
+    <path d="M56 116 L56 12" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-maple" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 124 C50 118 42 112 30 106 C20 101 12 99 4 98 C10 92 16 86 20 78 C12 76 6 71 0 64 C10 61 22 59 32 60 C27 51 24 40 24 30 C33 36 43 45 50 54 C49 39 51 22 56 6 C61 22 63 39 62 54 C69 45 79 36 88 30 C88 40 85 51 80 60 C90 59 102 61 112 64 C106 71 100 76 92 78 C96 86 102 92 108 98 C100 99 92 101 82 106 C70 112 62 118 56 124 Z M53 123 L53 140 L59 140 L59 123 Z"/>
+    </g>
+    <path d="M56 120 L56 10" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <!-- the plane tree: broad as it is long, shallow sinuses, a wide flat base.
+       Cut to be told apart from the maple at 28px. -->
+  <symbol id="lf-plat" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 14 Q47 33 34 42 Q20 41 7 47 Q16 64 20 82 Q20 100 24 114 Q40 109 56 109 Q72 109 88 114 Q92 100 92 82 Q96 64 105 47 Q92 41 78 42 Q65 33 56 14 Z M53 109 L53 140 L59 140 L59 109 Z"/>
+    </g>
+    <path d="M56 107 L56 26 M56 90 L22 55 M56 90 L90 55" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-entire" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 128 C36 114 24 92 24 66 C24 38 40 14 56 4 C72 14 88 38 88 66 C88 92 76 114 56 128 Z M53 126 L53 140 L59 140 L59 126 Z"/>
+    </g>
+    <path d="M56 124 L56 12" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-tooth" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 4 L68 16 L64 21 L78 32 L72 37 L86 50 L79 54 L89 69 L81 71 L89 87 L80 88 L84 103 L75 101 L74 116 L65 110 L60 124 L56 132 L52 124 L47 110 L38 116 L37 101 L28 103 L32 88 L23 87 L31 71 L23 69 L33 54 L26 50 L40 37 L34 32 L48 21 L44 16 Z M53 130 L53 140 L59 140 L59 130 Z"/>
+    </g>
+    <path d="M56 128 L56 12" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.6"/>
+  </symbol>
+  <symbol id="lf-pinnate" viewBox="0 0 112 140">
+    <path d="M56 140 L56 14" fill="none" stroke="#22231E" stroke-opacity="var(--lf-so,.3)" stroke-width="3"/>
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <ellipse cx="56" cy="16" rx="10" ry="15"/>
+      <ellipse cx="34" cy="40" rx="19" ry="9" transform="rotate(-24 34 40)"/>
+      <ellipse cx="78" cy="40" rx="19" ry="9" transform="rotate(24 78 40)"/>
+      <ellipse cx="32" cy="68" rx="20" ry="10" transform="rotate(-17 32 68)"/>
+      <ellipse cx="80" cy="68" rx="20" ry="10" transform="rotate(17 80 68)"/>
+      <ellipse cx="34" cy="96" rx="18" ry="9" transform="rotate(-12 34 96)"/>
+      <ellipse cx="78" cy="96" rx="18" ry="9" transform="rotate(12 78 96)"/>
+    </g>
+  </symbol>
+  <symbol id="lf-palmate" viewBox="0 0 112 140">
+    <path d="M56 140 L56 96" fill="none" stroke="#22231E" stroke-opacity="var(--lf-so,.3)" stroke-width="3"/>
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <ellipse cx="56" cy="46" rx="11" ry="35"/>
+      <ellipse cx="30" cy="56" rx="10" ry="31" transform="rotate(-32 30 56)"/>
+      <ellipse cx="82" cy="56" rx="10" ry="31" transform="rotate(32 82 56)"/>
+      <ellipse cx="15" cy="78" rx="9" ry="26" transform="rotate(-62 15 78)"/>
+      <ellipse cx="97" cy="78" rx="9" ry="26" transform="rotate(62 97 78)"/>
+    </g>
+  </symbol>
+  <symbol id="lf-scale" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 6 C67 17 71 29 69 42 C62 35 50 35 43 42 C41 29 45 17 56 6 Z"/>
+      <path d="M56 40 C68 51 72 63 70 76 C63 69 49 69 42 76 C40 63 44 51 56 40 Z"/>
+      <path d="M56 74 C68 85 72 97 70 110 C63 103 49 103 42 110 C40 97 44 85 56 74 Z"/>
+      <path d="M53 106 L53 140 L59 140 L59 106 Z"/>
+    </g>
+  </symbol>
+  <symbol id="lf-needle" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M52 126 C48 126 46 122 46 116 L28 16 C27 8 33 6 35 12 L54 114 C55 120 56 126 52 126 Z"/>
+      <path d="M56 128 C52 128 51 124 51 118 L51 14 C51 6 61 6 61 14 L61 118 C61 124 60 128 56 128 Z"/>
+      <path d="M60 126 C64 126 66 122 66 116 L84 16 C85 8 79 6 77 12 L58 114 C57 120 56 126 60 126 Z"/>
+      <path d="M49 124 L63 124 L63 140 L49 140 Z"/>
+    </g>
+  </symbol>
+  <symbol id="lf-fan" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 116 C30 110 10 86 8 52 C24 40 40 34 56 32 C72 34 88 40 104 52 C102 86 82 110 56 116 Z M53 114 L53 140 L59 140 L59 114 Z"/>
+    </g>
+    <path d="M56 112 L56 34 M56 112 L26 52 M56 112 L86 52 M56 112 L14 70 M56 112 L98 70" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-vo,.15)" stroke-width="2.4"/>
+  </symbol>
+
+  <!-- ======== bark channel: one plate, six textures ======== -->
+  <symbol id="bk-smooth" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M38 24 C34 58 34 90 38 118" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.2)" stroke-width="2.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-furrowed" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M38 14 C31 46 33 82 38 126 M56 12 C49 48 51 86 56 128 M74 14 C81 46 79 82 74 126" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.42)" stroke-width="4.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-plated" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M23 44 L90 40 M23 76 L90 74 M23 108 L90 106 M56 8 L56 42 M40 42 L40 75 M72 42 L72 75 M56 75 L56 107 M40 107 L40 136 M74 106 L74 134" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.38)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-shaggy" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M32 12 C46 30 40 56 28 70 C42 86 36 112 26 128 M76 14 C62 32 70 58 82 72 C68 88 74 112 84 126" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.42)" stroke-width="4.2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-papery" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <path d="M23 30 Q56 23 90 30 M23 54 Q56 47 90 54 M23 78 Q56 71 90 78 M23 102 Q56 95 90 102 M23 124 Q56 117 90 124" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.32)" stroke-width="2.6" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="bk-warty" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M22 8 Q56 2 90 8 L90 132 Q56 138 22 132 Z"/>
+    </g>
+    <g fill="var(--lf-tc,#22231E)" fill-opacity="var(--lf-to,.34)">
+      <circle cx="38" cy="30" r="5.5"/><circle cx="68" cy="44" r="6.5"/>
+      <circle cx="44" cy="66" r="5.5"/><circle cx="72" cy="86" r="6.5"/>
+      <circle cx="40" cy="104" r="5"/><circle cx="64" cy="120" r="4.5"/>
+    </g>
+  </symbol>
+
+  <!-- ======== fruit channel: one silhouette per fruit type ======== -->
+  <symbol id="fr-samara" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M50 92 C36 88 20 70 14 48 C8 26 18 10 32 16 C46 22 56 46 58 70 C59 84 58 94 50 92 Z"/>
+      <path d="M58 72 C72 72 82 86 82 104 C82 122 72 134 58 134 C44 134 34 122 34 104 C34 86 44 72 58 72 Z"/>
+    </g>
+  </symbol>
+  <symbol id="fr-acorn" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M38 60 L76 60 C76 96 69 124 57 134 C45 124 38 96 38 60 Z"/>
+      <path d="M28 54 C28 36 41 24 57 24 C73 24 86 36 86 54 C86 59 81 62 76 62 L38 62 C33 62 28 59 28 54 Z"/>
+      <path d="M54 24 L54 8 L60 8 L60 24 Z"/>
+    </g>
+  </symbol>
+  <symbol id="fr-nut" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 36 C80 36 96 60 96 86 C96 112 78 132 56 132 C34 132 16 112 16 86 C16 60 32 36 56 36 Z"/>
+    </g>
+    <path d="M24 104 Q56 118 88 104 M56 40 L56 30" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.34)" stroke-width="3.4" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fr-pod" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M52 6 C66 26 72 58 70 90 C68 116 62 132 55 138 C44 130 39 108 39 84 C39 52 43 24 52 6 Z"/>
+    </g>
+    <path d="M44 30 Q58 36 57 54 M42 62 Q57 68 56 86 M43 96 Q58 102 57 120" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.34)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fr-berry" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <circle cx="56" cy="98" r="27"/>
+      <path d="M53 71 L53 26 L59 26 L59 71 Z"/>
+      <path d="M56 30 C44 24 36 14 33 4 L40 1 C44 11 50 20 59 26 Z"/>
+    </g>
+  </symbol>
+  <!-- a dry urn that splits: flat shoulder, a tip, two seams -->
+  <symbol id="fr-capsule" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M32 44 Q56 34 80 44 L84 74 Q86 110 56 134 Q26 110 28 74 Z M53 44 L53 16 L59 16 L59 44 Z"/>
+    </g>
+    <path d="M32 50 Q56 60 80 50 M56 58 L56 128" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.34)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fr-cone" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <path d="M56 6 C70 32 82 76 82 106 C82 124 70 134 56 134 C42 134 30 124 30 106 C30 76 42 32 56 6 Z"/>
+    </g>
+    <path d="M41 40 Q56 48 71 40 M36 66 Q56 76 76 66 M33 92 Q56 104 79 92 M32 116 Q56 128 80 116" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.36)" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="fr-ball" viewBox="0 0 112 140">
+    <g fill="var(--lf-fill,currentColor)" stroke="#22231E" stroke-opacity="var(--lf-so,.22)" stroke-width="var(--lf-sw,2)">
+      <circle cx="56" cy="84" r="33"/>
+      <path d="M53 51 L53 20 L59 20 L59 51 Z"/>
+      <path d="M56 24 C48 16 42 8 40 2 L46 0 C48 8 53 15 59 20 Z"/>
+    </g>
+    <path d="M56 51 L54 42 M77 61 L84 53 M90 84 L100 84 M77 107 L84 115 M56 117 L56 127 M35 107 L28 115 M22 84 L12 84 M35 61 L28 53" fill="none" stroke="var(--lf-tc,#22231E)" stroke-opacity="var(--lf-to,.42)" stroke-width="4" stroke-linecap="round"/>
+  </symbol>
+</svg>
