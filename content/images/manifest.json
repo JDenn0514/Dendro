@@ -4050,7 +4050,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:06:57Z",
-    "note": "A sharp archival bark frame. The narrow plates and shallow furrows fill the frame."
+    "note": "A sharp archival bark frame. The narrow plates and shallow furrows fill the frame.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "62f9ab433968b6a639fc95b2068628739a6d808e412ecb50ba032717137044da",
