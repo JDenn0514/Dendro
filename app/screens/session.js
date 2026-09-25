@@ -1,5 +1,6 @@
-// The quiz loop and the summary. Computes nothing: every value comes from a logic module.
-import { imageUrl } from '../logic/content.js';
+// The quiz loop, the reveal, and the summary. Computes nothing: every value
+// comes from a logic module.
+import { unitFor, channelLabel } from '../logic/content.js';
 import {
   buildSession, buildPlacementDeck, answerEffects, requeueCard,
   dueTomorrowCount, sessionPosition, emptyResults, accumulateAnswer
@@ -9,28 +10,13 @@ import {
 } from '../logic/question.js';
 import { gradeChoice, gradeTyped, resolveTyped } from '../logic/grader.js';
 import { deriveGrade } from '../logic/scheduler.js';
+import { LEVEL_NAMES, cardLevel } from '../logic/progress.js';
+import { el, link, srOnly } from '../ui/dom.js';
+import { ramp } from '../ui/chrome.js';
+import { plate, credit } from '../ui/plate.js';
 
-function el(tag, className, text) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
-}
-
-// The author links to the photo's origin page, so the credit reaches the source.
-function creditInto(node, photo) {
-  if (photo.origin) {
-    const link = el('a', null, photo.author);
-    link.href = photo.origin;
-    link.target = '_blank';
-    link.rel = 'noopener';
-    node.append(link);
-  } else {
-    node.append(document.createTextNode(photo.author));
-  }
-  node.append(document.createTextNode(`, ${photo.source}, ${photo.license}.`));
-  return node;
-}
+// The caption on a question plate never names the tree.
+const UNDETERMINED = 'Pressed specimen, undetermined.';
 
 export function render(root, ctx) {
   const { content, store, today, image_base: imageBase } = ctx;
@@ -39,29 +25,34 @@ export function render(root, ctx) {
   const chosenUnit = ctx.params.get('unit') || null;
   const userSettings = store.readSettings();
 
-  const deck = mode === 'placement'
-    ? buildPlacementDeck(content)
+  const built = mode === 'placement'
+    ? { card_ids: buildPlacementDeck(content), unit_key: null }
     : buildSession({
       content, states: store.readCards(), log: store.readLog(),
       settings: userSettings, today, focus, chosen_unit: chosenUnit
-    }).card_ids;
+    });
+  const deck = built.card_ids;
+  const unit = built.unit_key ? unitFor(content, built.unit_key) : null;
+  const where = mode === 'placement' ? 'Placement test' : (unit?.name ?? 'Review');
 
-  const totalPlanned = deck.length;
   const lastHash = {};
   const failedHashes = {};
   const requeuedOnce = new Set();
   const answered = new Set();
   let results = emptyResults();
   let index = 0;
-  // The counter names the card on screen. It is fixed when the card renders, so
-  // the reveal keeps the number the question had, and a second render of the
-  // same card, after a photo fails, keeps it too.
+  // The counter names the card on screen. It is fixed when the card renders,
+  // so the reveal keeps the number the question had, and a second render of
+  // the same card, after a photo fails, keeps it too.
   let answerCount = 0;
   let shown = 0;
+  // The view on screen right now, so Resume can paint it again without
+  // sampling a new photo or a new set of options.
+  let lastView = null;
 
-  // Every render takes the next number. An image handler belongs to the render
-  // that made it, so it does nothing once a later render has replaced that one,
-  // and nothing once the router has called the teardown.
+  // Every render takes the next number. An image handler belongs to the
+  // render that made it, so it does nothing once a later render has replaced
+  // that one, and nothing once the router has called the teardown.
   let renderId = 0;
   let cancelled = false;
   const teardown = () => { cancelled = true; };
@@ -71,29 +62,228 @@ export function render(root, ctx) {
     if (!store.available) ctx.banner(ctx.storage_banner);
   }
 
-  if (totalPlanned === 0) {
+  // A screen with no running head has no top padding of its own, so the
+  // heading would sit on the top edge of the phone. Every other screen opens
+  // 18px down, so these two open there too.
+  function openingHead(text) {
+    const title = el('h1', 'display', text);
+    title.style.paddingTop = '18px';
+    return title;
+  }
+
+  if (deck.length === 0) {
     const placement = mode === 'placement';
-    root.append(el('h1', null, placement ? 'No cards to place' : 'Nothing to study'));
-    root.append(el('p', null, placement
+    root.append(openingHead(placement ? 'No cards to place' : 'Nothing to study'));
+    root.append(el('p', 'where2', placement
       ? 'The placement test needs level-1 concept cards, and this content set has none.'
       : 'Nothing is due in this focus, and no new card is ready for it today.'));
-    const back = el('button', 'primary', 'Home');
-    back.addEventListener('click', () => ctx.navigate('/'));
-    root.append(back);
+    root.append(link('#/', 'btn', 'Home'));
     return teardown;
   }
+
+  // ---------- the running head and the printed gauge ----------
+
+  function head(question) {
+    const place = sessionPosition(shown, deck.length);
+    const bar = el('div', 'head');
+    const leave = el('button', 'leave', 'Leave');
+    leave.type = 'button';
+    leave.addEventListener('click', () => onLeave());
+    bar.append(leave);
+    bar.append(el('span', 'where',
+      `${where}, ${channelLabel(question.channel)} card `
+      + `${place.position} of ${place.total}`));
+    root.append(bar);
+
+    const gauge = el('div', 'gauge');
+    gauge.setAttribute('aria-hidden', 'true');
+    for (let i = 1; i <= place.total; i += 1) {
+      if (i < place.position) gauge.append(el('i', 'done'));
+      else if (i === place.position) gauge.append(el('i', 'now'));
+      else gauge.append(el('i'));
+    }
+    root.append(gauge);
+    root.append(srOnly(`Card ${place.position} of ${place.total}.`));
+  }
+
+  // ---------- the question ----------
 
   function excludedFor(cardId) {
     const failed = failedHashes[cardId] ?? [];
     return lastHash[cardId] ? [...failed, lastHash[cardId]] : [...failed];
   }
 
-  function answerCard(question, card, chosenKey, typedText, guess, elapsedMs) {
+  function guessBox() {
+    const label = el('label', 'guessed');
+    const input = document.createElement('input');
+    input.type = 'checkbox';
+    input.id = 'guess_box';
+    // The printed box sits after the input, so `input:checked ~ .box` inks it.
+    label.append(input, el('span', 'box'), el('span', null, 'I guessed'));
+    return { label, input };
+  }
+
+  function paintQuestion(question, card, generation, resumeElapsed = 0) {
+    root.textContent = '';
+    head(question);
+
+    // The answer clock. `deriveGrade` reads the elapsed time against the
+    // format's own threshold, so a card painted again by Resume must carry
+    // the time it already spent rather than start from zero.
+    //
+    // What crosses a Resume is the elapsed time, not the start time. The
+    // clock is then rebased on the new paint, so the seconds the reader
+    // spent on the leave summary do not count towards the answer. `lastView`
+    // is set here, inside the closure, so it can read the clock.
+    let startedAt = resumeElapsed ? Date.now() - resumeElapsed : 0;
+    lastView = () => paintQuestion(
+      question, card, (renderId += 1), startedAt ? Date.now() - startedAt : 0
+    );
+
+    const guess = guessBox();
+    const submit = (chosenKey, typedText) => {
+      const elapsed = startedAt ? Date.now() - startedAt : 0;
+      answerCard(question, card, chosenKey, typedText, guess.input.checked, elapsed);
+    };
+
+    if (question.format === 'inv') {
+      const grid = el('div', 'invkey');
+      let pending = question.options.length;
+      for (const option of question.options) {
+        const button = el('button');
+        button.type = 'button';
+        // The session keeps its own failure handling, so it passes `onError`
+        // rather than letting `plate` drop the figure on its own.
+        const figure = plate(option.photo, {
+          image_base: imageBase,
+          alt: 'Option photo',
+          shape: null,
+          soft: true,
+          onError: () => {
+            if (stale(generation)) return;
+            pending -= 1;
+            if (option.key === question.answer_key) {
+              console.warn(`Answer photo failed for ${card.id}. Skipping the card this session.`);
+              index += 1;
+              showCard();
+              return;
+            }
+            button.remove();
+            if (pending === 0 && !startedAt) startedAt = Date.now();
+          }
+        });
+        const image = figure.querySelector('img');
+        image.addEventListener('load', () => {
+          if (stale(generation)) return;
+          pending -= 1;
+          if (pending === 0 && !startedAt) startedAt = Date.now();
+        });
+        button.append(figure);
+        button.addEventListener('click', () => submit(option.key, ''));
+        grid.append(button);
+      }
+      root.append(el('p', 'prompt', question.prompt));
+      root.append(grid);
+      root.append(guess.label);
+      lastHash[card.id] = answerPhoto(question)?.hash ?? null;
+      return;
+    }
+
+    const figure = plate(question.photo, {
+      image_base: imageBase,
+      alt: UNDETERMINED,
+      shape: 'pl-hero',
+      bleed: true,
+      onError: () => {
+        if (stale(generation)) return;
+        failedHashes[card.id] = [...(failedHashes[card.id] ?? []), question.photo.hash];
+        console.warn(`Image failed: img/${question.photo.hash}.jpg`);
+        showCard();
+      }
+    });
+    figure.style.marginTop = '12px';
+    const image = figure.querySelector('img');
+    image.addEventListener('load', () => {
+      if (stale(generation)) return;
+      // Resume paints this view again and the cached image fires load again.
+      // The clock only starts once.
+      if (!startedAt) startedAt = Date.now();
+    });
+    root.append(figure);
+    root.append(credit(question.photo, UNDETERMINED));
+    lastHash[card.id] = question.photo.hash;
+
+    root.append(el('p', 'prompt', question.prompt));
+
+    if (question.format === 'typed') {
+      const form = el('div', 'typed');
+      const field = document.createElement('input');
+      field.type = 'text';
+      field.id = 'typed_answer';
+      field.autocomplete = 'off';
+      field.setAttribute('aria-label', question.prompt);
+      const go = el('button', 'btn', 'Answer');
+      go.type = 'button';
+      go.addEventListener('click', () => submit(null, field.value));
+      field.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') submit(null, field.value);
+      });
+      form.append(field, go);
+      root.append(form);
+    } else {
+      // The four labels share one width: common name at the left margin,
+      // binomial ranged right, so the names line up the way an index does.
+      const key = el('div', 'key');
+      for (const option of question.options) {
+        const button = el('button', 'pick');
+        button.type = 'button';
+        button.append(el('span', 'nm', option.label));
+        if (option.sublabel) button.append(el('span', 'bn', option.sublabel));
+        button.addEventListener('click', () => submit(option.key, ''));
+        key.append(button);
+      }
+      root.append(key);
+    }
+    root.append(guess.label);
+  }
+
+  function showCard() {
+    if (index >= deck.length) { showSummary(); return; }
+    const cardId = deck[index];
+    const card = content.cards[cardId];
+    const state = mode === 'placement' ? null : store.readCards()[cardId];
+    const question = buildQuestion({
+      card, content, state, excluded_hashes: excludedFor(cardId)
+    });
+
+    // buildQuestion samples again with nothing excluded when the exclusion
+    // list covers the whole pool, so it can hand back a photo that already
+    // failed. The card waits for another session once every photo has failed.
+    const failed = failedHashes[cardId] ?? [];
+    const exhausted = question.format !== 'inv'
+      && (!question.photo || card.photos.every((photo) => failed.includes(photo.hash)));
+    if (exhausted) {
+      console.warn(`Photo pool exhausted for ${cardId}. Skipping the card this session.`);
+      index += 1;
+      showCard();
+      return;
+    }
+
+    const generation = (renderId += 1);
+    shown = answerCount + 1;
+    // `paintQuestion` sets `lastView` itself, because only it can see the
+    // answer clock that Resume has to carry over.
+    paintQuestion(question, card, generation);
+  }
+
+  // ---------- one answer ----------
+
+  function answerCard(question, card, chosenKey, typedText, guessed, elapsedMs) {
     const correct = question.format === 'typed'
       ? gradeTyped(card, typedText, content)
       : gradeChoice(question.answer_key, chosenKey);
     const grade = deriveGrade({
-      correct, guess, elapsed_ms: elapsedMs, format: question.format
+      correct, guess: guessed, elapsed_ms: elapsedMs, format: question.format
     });
     const repeat = answered.has(card.id);
     answered.add(card.id);
@@ -101,12 +291,7 @@ export function render(root, ctx) {
     const before = store.readCards()[card.id];
 
     const effects = answerEffects({
-      mode,
-      repeat,
-      correct,
-      grade,
-      before,
-      today,
+      mode, repeat, correct, grade, before, today,
       inv_available: invAvailable(content, card),
       requeued: requeuedOnce.has(card.id)
     });
@@ -161,242 +346,180 @@ export function render(root, ctx) {
       deck.splice(0, deck.length, ...requeueCard(deck, index, card.id));
       index -= 1;
     }
-    showReveal(question, reveal, typedText, correct);
+
+    const levels = {
+      before: before ? cardLevel(before) : 0,
+      after: effects.state ? cardLevel(effects.state) : (before ? cardLevel(before) : 0)
+    };
+    lastView = () => paintReveal(question, reveal, typedText, correct, levels);
+    paintReveal(question, reveal, typedText, correct, levels);
   }
 
-  function showReveal(question, reveal, typedText, correct) {
+  // ---------- the reveal ----------
+
+  function levelLine(levels) {
+    const row = el('div', 'levelrow');
+    row.append(ramp(levels.after, { large: true, lost: levels.after < levels.before }));
+    let text = `Level ${levels.after}, ${LEVEL_NAMES[levels.after]}`;
+    if (levels.after > levels.before) text += `, up from ${levels.before}`;
+    else if (levels.after < levels.before) text += `, down from ${levels.before}`;
+    row.append(el('span', 'lv', `${text}.`));
+    return row;
+  }
+
+  function paintReveal(question, reveal, typedText, correct, levels) {
     renderId += 1;
     root.textContent = '';
-    header(question);
-    root.append(el('h2', null, correct ? 'Right' : 'Wrong'));
+    head(question);
 
-    const pair = el('div', 'photo-pair');
-    pair.append(photoBlock(reveal.answer.photo, `${reveal.answer.label} (the answer)`));
-    if (!correct && reveal.chosen && reveal.chosen.photo) {
-      pair.append(photoBlock(reveal.chosen.photo, `${reveal.chosen.label} (you picked)`));
+    const panel = el('div', 'reveal');
+    const verdictWrap = el('div', 'verdict-wrap');
+    verdictWrap.append(el('p', 'verdict', correct ? 'Right.' : 'Not this one.'));
+    const title = el('h1', 'display');
+    if (question.kind === 'species') {
+      title.append(link(`#/species/${reveal.answer.key}`, 'answer-link', reveal.answer.label));
+    } else {
+      title.textContent = reveal.answer.label;
     }
-    root.append(pair);
+    verdictWrap.append(title);
+    if (reveal.answer.sublabel) {
+      verdictWrap.append(el('p', 'sci-small', reveal.answer.sublabel));
+    }
+    panel.append(verdictWrap);
+
+    if (!correct && reveal.chosen && reveal.chosen.photo && reveal.answer.photo) {
+      const heads = el('div', 'pair-head');
+      // The two labels open a new block under the name, as they do on the
+      // mockup. Without the gap the moss rule lands on the binomial.
+      heads.style.marginTop = '24px';
+      const right = el('span', 'ok');
+      right.append(el('i'));
+      right.append(document.createTextNode(`${reveal.answer.label}, correct`));
+      const wrong = el('span', 'no');
+      wrong.append(el('i'));
+      wrong.append(el('b', null, reveal.chosen.label));
+      wrong.append(document.createTextNode(', your pick'));
+      heads.append(right, wrong);
+      panel.append(heads);
+
+      const pair = el('div', 'pair bleed');
+      // A pair is a comparison. One plate of two is not a comparison, and the
+      // default `onError` would put a line of prose into a two-column grid
+      // beside a photograph. So either plate failing takes the pair and the
+      // two labels above it, and leaves one printed line in their place.
+      const dropPair = () => {
+        if (!pair.isConnected) return;
+        heads.remove();
+        pair.replaceWith(el('p', 'fact-line',
+          'The two plates for this pair did not load.'));
+      };
+      const a = plate(reveal.answer.photo, {
+        image_base: imageBase, alt: `${reveal.answer.label}, the answer`,
+        shape: 'pl-a', onError: dropPair
+      });
+      const b = plate(reveal.chosen.photo, {
+        image_base: imageBase, alt: `${reveal.chosen.label}, your pick`,
+        shape: 'pl-b', lift: true, onError: dropPair
+      });
+      pair.append(a, b);
+      panel.append(pair);
+    } else if (reveal.answer.photo) {
+      const only = plate(reveal.answer.photo, {
+        image_base: imageBase,
+        alt: `${reveal.answer.label}, the answer`,
+        shape: 'pl-leaf',
+        bleed: true
+      });
+      // The one plate opens a new block under the name, the same gap the pair
+      // takes. Without it the print cuts straight into the binomial.
+      only.style.marginTop = '24px';
+      panel.append(only);
+      panel.append(credit(reveal.answer.photo));
+    }
 
     if (!correct && question.format === 'typed') {
-      root.append(el('p', null, `You typed: ${typedText}`));
+      panel.append(el('p', 'compare', `You typed: ${typedText}`));
     }
     if (reveal.diagnostic) {
-      root.append(el('p', 'notice', reveal.diagnostic.text));
-      if (reveal.diagnostic.ref) root.append(el('p', 'attribution', reveal.diagnostic.ref));
+      panel.append(el('p', 'compare', reveal.diagnostic.text));
+      if (reveal.diagnostic.ref) panel.append(el('p', 'cap', reveal.diagnostic.ref));
     }
 
-    root.append(el('p', null, reveal.answer.label));
-    if (reveal.answer.sublabel) root.append(el('p', 'option-sub', reveal.answer.sublabel));
-    const facts = reveal.answer.facts;
-    if (facts.range_text) {
-      root.append(el('p', null, facts.range_text));
-      // A species record may carry no elevation and no height, so guard each one.
-      const sizes = [];
-      if (facts.elevation_ft) {
-        sizes.push(`Elevation ${facts.elevation_ft[0]} to ${facts.elevation_ft[1]} ft.`);
-      }
-      if (facts.height_ft) {
-        sizes.push(`Height ${facts.height_ft[0]} to ${facts.height_ft[1]} ft.`);
-      }
-      if (sizes.length) root.append(el('p', null, sizes.join(' ')));
-      root.append(el('p', null, facts.habitat));
-    } else if (facts.description) {
-      root.append(el('p', null, facts.description));
-    }
+    panel.append(levelLine(levels));
 
-    const next = el('button', 'primary', 'Next');
+    const next = el('button', 'btn', 'Next');
+    next.type = 'button';
     next.addEventListener('click', () => { index += 1; showCard(); });
-    root.append(next);
+    panel.append(next);
+    root.append(panel);
   }
 
-  function photoBlock(photo, caption) {
-    const box = el('figure', null);
-    if (photo) {
-      const img = document.createElement('img');
-      img.className = 'photo';
-      img.src = imageUrl(photo, imageBase);
-      img.alt = caption;
-      box.append(img);
-      box.append(creditInto(el('figcaption', 'attribution', `${caption}. `), photo));
-    } else {
-      box.append(el('p', 'attribution', `${caption}. No photo.`));
-    }
-    return box;
+  // ---------- the summary ----------
+
+  function sumRow(key, value) {
+    const row = el('div', 'sumrow');
+    row.append(el('span', 'sk', key));
+    row.append(el('span', 'sv', value));
+    return row;
   }
 
-  // A re-queued card does not add to the total, so sessionPosition clamps the counter.
-  function header(question) {
-    const place = sessionPosition(shown, deck.length);
-    const bar = el('div', 'progress-bar');
-    const fill = el('div');
-    fill.style.width = `${place.percent}%`;
-    bar.append(fill);
-    root.append(el('p', null, `Card ${place.position} of ${place.total}`));
-    root.append(bar);
-    const line = el('p', null, question.prompt);
-    line.append(document.createTextNode(' '));
-    line.append(el('span', 'chip', question.format));
-    root.append(line);
-  }
-
-  function showCard() {
-    if (index >= deck.length) { showSummary(); return; }
-    const cardId = deck[index];
-    const card = content.cards[cardId];
-    const state = mode === 'placement' ? null : store.readCards()[cardId];
-    const question = buildQuestion({
-      card, content, state, excluded_hashes: excludedFor(cardId)
-    });
-
-    // buildQuestion samples again with nothing excluded when the exclusion list
-    // covers the whole pool, so it can hand back a photo that already failed.
-    // The card waits for another session once every photo in its pool has failed.
-    const failed = failedHashes[cardId] ?? [];
-    const exhausted = question.format !== 'inv'
-      && (!question.photo || card.photos.every((photo) => failed.includes(photo.hash)));
-    if (exhausted) {
-      console.warn(`Photo pool exhausted for ${cardId}. Skipping the card this session.`);
-      index += 1;
-      showCard();
-      return;
+  function missList() {
+    const list = el('ul', 'misslist');
+    for (const miss of results.misses) {
+      list.append(el('li', null,
+        `${miss.label} against ${miss.chosen}. ${miss.diagnostic}`));
     }
-
-    const generation = (renderId += 1);
-    shown = answerCount + 1;
-    root.textContent = '';
-    header(question);
-
-    let startedAt = 0;
-    const guessBox = document.createElement('input');
-    guessBox.type = 'checkbox';
-    guessBox.id = 'guess_box';
-    const guessLabel = el('label', null, ' I guessed');
-    guessLabel.prepend(guessBox);
-
-    const answerArea = el('div', 'answer-area');
-
-    const submit = (chosenKey, typedText) => {
-      const elapsed = startedAt ? Date.now() - startedAt : 0;
-      answerCard(question, card, chosenKey, typedText, guessBox.checked, elapsed);
-    };
-
-    if (question.format === 'inv') {
-      const list = el('div', 'options inv');
-      let pending = question.options.length;
-      for (const option of question.options) {
-        const button = el('button', null);
-        const img = document.createElement('img');
-        img.src = imageUrl(option.photo, imageBase);
-        img.alt = 'Option photo';
-        img.addEventListener('load', () => {
-          if (stale(generation)) return;
-          pending -= 1;
-          if (pending === 0 && !startedAt) startedAt = Date.now();
-        });
-        img.addEventListener('error', () => {
-          if (stale(generation)) return;
-          pending -= 1;
-          if (option.key === question.answer_key) {
-            console.warn(`Answer photo failed for ${cardId}. Skipping the card this session.`);
-            index += 1;
-            showCard();
-            return;
-          }
-          button.remove();
-          if (pending === 0 && !startedAt) startedAt = Date.now();
-        });
-        button.append(img);
-        button.addEventListener('click', () => submit(option.key, ''));
-        list.append(button);
-      }
-      root.append(list);
-      root.append(guessLabel);
-      lastHash[cardId] = answerPhoto(question)?.hash ?? null;
-    } else {
-      const img = document.createElement('img');
-      img.className = 'photo';
-      img.src = imageUrl(question.photo, imageBase);
-      img.alt = question.prompt;
-      img.addEventListener('load', () => {
-        if (stale(generation)) return;
-        startedAt = Date.now();
-      });
-      img.addEventListener('error', () => {
-        if (stale(generation)) return;
-        failedHashes[cardId] = [...(failedHashes[cardId] ?? []), question.photo.hash];
-        console.warn(`Image failed: img/${question.photo.hash}.jpg`);
-        showCard();
-      });
-      root.append(img);
-      root.append(creditInto(el('p', 'attribution'), question.photo));
-      lastHash[cardId] = question.photo.hash;
-
-      if (question.format === 'typed') {
-        const field = document.createElement('input');
-        field.type = 'text';
-        field.id = 'typed_answer';
-        field.autocomplete = 'off';
-        const go = el('button', 'primary', 'Answer');
-        go.addEventListener('click', () => submit(null, field.value));
-        field.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter') submit(null, field.value);
-        });
-        answerArea.append(field, go);
-      } else {
-        const list = el('div', 'options');
-        for (const option of question.options) {
-          const button = el('button', null, option.label);
-          if (option.sublabel) button.append(el('span', 'option-sub', option.sublabel));
-          button.addEventListener('click', () => submit(option.key, ''));
-          list.append(button);
-        }
-        answerArea.append(list);
-      }
-      root.append(answerArea);
-      root.append(guessLabel);
-    }
+    return list;
   }
 
   function showSummary() {
     renderId += 1;
+    lastView = null;
     root.textContent = '';
-    root.append(el('h1', null, 'Session summary'));
-    root.append(el('p', null, `Right: ${results.right}. Missed: ${results.missed}.`));
-
-    root.append(el('p', null,
-      `Due tomorrow: ${dueTomorrowCount(store.readCards(), today)}.`));
-
-    const name = (id) => content.cards[id] ? `${content.cards[id].kind} ${content.cards[id].key} (${content.cards[id].channel})` : id;
-    root.append(el('p', null,
-      `Promoted: ${results.promoted.length ? results.promoted.map(name).join(', ') : 'none'}.`));
-    root.append(el('p', null,
-      `Demoted: ${results.demoted.length ? results.demoted.map(name).join(', ') : 'none'}.`));
+    root.append(openingHead('Session done'));
+    root.append(sumRow('right', String(results.right)));
+    root.append(sumRow('missed', String(results.missed)));
+    root.append(sumRow('promoted', String(results.promoted.length)));
+    root.append(sumRow('demoted', String(results.demoted.length)));
+    root.append(sumRow('due tomorrow',
+      String(dueTomorrowCount(store.readCards(), today))));
 
     if (results.misses.length) {
-      root.append(el('h2', null, 'Missed cards'));
-      const list = el('ul');
-      for (const miss of results.misses) {
-        list.append(el('li', null, `${miss.label} against ${miss.chosen}. ${miss.diagnostic}`));
-      }
-      root.append(list);
+      // The tick opens a new section, so it clears the hairline under the
+      // last row instead of printing on top of it.
+      const mark = el('div', 'tick');
+      mark.style.marginTop = '24px';
+      root.append(mark);
+      root.append(el('h2', 'sec-h', 'The ones you missed'));
+      root.append(missList());
     }
 
     if (!store.available) {
-      root.append(el('p', 'notice',
-        'This browser blocks local storage, so nothing was saved. Open Settings and export before you close the tab.'));
+      root.append(el('p', 'note',
+        'This browser blocks local storage, so nothing was saved. Open Settings '
+        + 'and export before you close the tab.'));
     } else if (store.shouldPromptExport(today)) {
-      root.append(el('p', 'notice',
-        'It has been a month since your last export. Open Settings and export your progress.'));
+      root.append(el('p', 'note',
+        'It has been a month since your last export. Open Settings and export '
+        + 'your progress.'));
     }
 
-    const again = el('button', 'primary', 'Another session');
+    const row = el('div', 'btnrow');
+    const again = el('button', 'btn', 'Another session');
+    again.type = 'button';
     again.addEventListener('click', () => {
       ctx.navigate(`/session?focus=${focus}${chosenUnit ? `&unit=${chosenUnit}` : ''}`);
       window.location.reload();
     });
-    const home = el('button', null, 'Home');
-    home.addEventListener('click', () => ctx.navigate('/'));
-    root.append(again, home);
+    row.append(again);
+    row.append(link('#/', 'btn ghost', 'Home'));
+    root.append(row);
+  }
+
+  // Leaving ends the session and goes home. Every answer is graded and stored
+  // the moment it is given, so nothing on the way out is lost.
+  function onLeave() {
+    ctx.navigate('/');
   }
 
   showCard();
