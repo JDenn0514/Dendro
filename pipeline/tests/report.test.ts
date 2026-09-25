@@ -143,6 +143,31 @@ test('buildGaps counts a channel the species has no entry for as 0', () => {
   ]);
 });
 
+test('a concept target gets a gap row for its own channel only', () => {
+  const species: ReportSpeciesRow[] = [
+    speciesRow('bark/plated', 'included', { bark: 2 }),
+    speciesRow('fruit/cone', 'included', { fruit: 5 }),
+  ];
+  const channels = ['bark', 'fruit', 'leaf'];
+
+  assert.deepEqual(buildGaps(species, channels, ['bark/plated', 'fruit/cone']), [
+    { symbol: 'bark/plated', channel: 'bark', count: 2 },
+  ]);
+  // Without the run's list, the qualified key alone marks the concept.
+  assert.deepEqual(buildGaps(species, channels), [
+    { symbol: 'bark/plated', channel: 'bark', count: 2 },
+  ]);
+});
+
+test('a species target keeps one gap row per run channel under the threshold', () => {
+  const species: ReportSpeciesRow[] = [speciesRow('QUAL', 'included', { bark: 2, fruit: 5 })];
+
+  assert.deepEqual(buildGaps(species, ['bark', 'fruit', 'leaf'], []), [
+    { symbol: 'QUAL', channel: 'leaf', count: 0 },
+    { symbol: 'QUAL', channel: 'bark', count: 2 },
+  ]);
+});
+
 test('an empty escalation list renders a sentence and no table header', () => {
   const text = renderReport(makeData());
 

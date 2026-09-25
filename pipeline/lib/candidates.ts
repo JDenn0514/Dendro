@@ -196,6 +196,28 @@ export function mergeFound(found: Candidate[]): Candidate[] {
   return [...byId.values()];
 }
 
+/**
+ * Merges one row list per exemplar into one list, round-robin: row 0 of every group,
+ * then row 1 of every group, and so on until every group is empty.
+ *
+ * A concept target looks its photos up through two or three exemplar species. `collect`
+ * walks one list in order and stops at MAX_PER_SPECIES, so a plain concatenation gives
+ * the whole cap to the first exemplar and the others reach no row. Round-robin splits
+ * the cap about evenly, and a short group leaves its share to the others.
+ *
+ * One group in, the same order out, so a bucket run does not change.
+ */
+export function interleave(groups: Candidate[][]): Candidate[] {
+  const out: Candidate[] = [];
+  const longest = groups.reduce((max, group) => Math.max(max, group.length), 0);
+  for (let i = 0; i < longest; i += 1) {
+    for (const group of groups) {
+      if (i < group.length) out.push(group[i]);
+    }
+  }
+  return out;
+}
+
 /** How many more rows the target may take before it reaches MAX_PER_SPECIES. */
 export function underCap(existing: Candidate[], target: string): number {
   const count = existing.filter((candidate) => candidate.target === target).length;

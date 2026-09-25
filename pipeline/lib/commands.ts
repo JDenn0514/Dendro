@@ -4,6 +4,7 @@ import path from 'node:path';
 import { loadContent } from '../../app/logic/content.js';
 import {
   collect,
+  interleave,
   licenseAllowed,
   makeCandidate,
   mergeFound,
@@ -312,7 +313,9 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
     if (target.lookups.length === 0) {
       console.error(`${target.key}: no exemplars in run.json`);
     }
-    const found: Candidate[] = [];
+    // One list per exemplar. `interleave` merges them round-robin below, so the cap in
+    // `collect` splits across the exemplars instead of filling on the first one.
+    const perSymbol: Candidate[][] = [];
     for (const symbol of target.lookups) {
       const plant = await plantOf(deps, ids, symbol, now);
       if (plant === null) {
@@ -339,12 +342,12 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
       for (const row of fromSources) {
         row.identity_match = identityMatches(row.source_species, names);
       }
-      found.push(...fromSources);
+      perSymbol.push(fromSources);
     }
     // `collect` never reads a row's target, so one call takes one target's rows only.
     const collected = collect({
       existing,
-      found: mergeFound(found),
+      found: mergeFound(interleave(perSymbol)),
       target: target.key,
       approvedByChannel: counts[target.key] ?? {},
     });
@@ -1229,7 +1232,7 @@ function reportData(input: {
     run: name,
     channels: scope.channels,
     species: rows,
-    gaps: buildGaps(rows, scope.channels),
+    gaps: buildGaps(rows, scope.channels, scope.concepts),
     units: unitRows(raw.units, loaded, warnings),
     counts: {
       candidates_by_source: sortKeys(sources),

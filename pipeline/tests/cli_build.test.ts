@@ -945,6 +945,11 @@ test('a concept run writes manifest rows whose target is the qualified key', asy
     { symbol: 'leaf/simple_lobed', status: 'included', reason: null, counts: { leaf: 1 } },
     { symbol: 'bark/furrowed', status: 'included', reason: null, counts: { bark: 1 } },
   ]);
+  // Each concept target gets one gap row, on the channel of its own prefix.
+  assert.deepEqual(data.gaps, [
+    { symbol: 'bark/furrowed', channel: 'bark', count: 1 },
+    { symbol: 'leaf/simple_lobed', channel: 'leaf', count: 1 },
+  ]);
 });
 
 test('report writes report.md, uploads each escalated candidate, and links it through cdnBase', async (t) => {
