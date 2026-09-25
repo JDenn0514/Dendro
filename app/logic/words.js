@@ -25,6 +25,17 @@ export function capitalize(text) {
   return text.length === 0 ? text : text[0].toUpperCase() + text.slice(1);
 }
 
+// The content set holds a common name the way a flora does: lowercase unless
+// a part of the name is a proper noun, so `silver maple` sits beside
+// `Norway maple`. A heading, a button, or the start of a sentence prints the
+// first letter capital. The content files keep the botanical form; every
+// display position goes through here. A missing record prints nothing, so a
+// caller can fall back to the symbol.
+export function displayName(record) {
+  const name = record?.common?.[0];
+  return typeof name === 'string' ? capitalize(name) : '';
+}
+
 export function plural(word, count = 2) {
   if (count === 1) return word;
   if (/(s|x|z|ch|sh)$/u.test(word)) return `${word}es`;

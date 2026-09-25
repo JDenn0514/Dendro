@@ -81,7 +81,7 @@ function speciesList(content, channel, rows) {
     line.append(card
       ? glyph(glyphIdFor(card, content), row.level, 's26')
       : glyph(FALLBACK_GLYPH, row.level, 's26'));
-    line.append(el('span', 'sn', row.common));
+    line.append(el('span', 'sn', capitalize(row.common)));
     line.append(levelWord(row.level));
     list.append(line);
   }

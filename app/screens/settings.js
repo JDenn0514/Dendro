@@ -1,6 +1,7 @@
 // Session size, new cards per day, text size, export, import, reset, and the
 // missing diagnostics. The one screen that opens with no content.
 import { isCount } from '../logic/store.js';
+import { displayName } from '../logic/words.js';
 import { TEXT_SIZE_STEPS, applyTextSize } from '../ui/textsize.js';
 import { el } from '../ui/dom.js';
 import { footNav, tick, trail } from '../ui/chrome.js';
@@ -185,8 +186,8 @@ function diagnosticsGroup(root, ctx) {
   const list = el('div', 'splist');
   for (const edge of edges) {
     // Settings opens when the content failed to load, so fall back to the symbol.
-    const a = content?.species[edge.a]?.common[0] ?? edge.a;
-    const b = content?.species[edge.b]?.common[0] ?? edge.b;
+    const a = displayName(content?.species[edge.a]) || edge.a;
+    const b = displayName(content?.species[edge.b]) || edge.b;
     const row = el('div', 'spx');
     row.append(el('span', 'sn', `${a} against ${b}`));
     row.append(el('span', 'due',

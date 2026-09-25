@@ -5,7 +5,7 @@ import {
 } from '../logic/content.js';
 import { cardLevel, speciesLevel } from '../logic/progress.js';
 import { daysBetween } from '../logic/scheduler.js';
-import { numberWord, capitalize } from '../logic/words.js';
+import { numberWord, capitalize, displayName } from '../logic/words.js';
 import { el } from '../ui/dom.js';
 import { footNav, tick, trail, ramp, levelWord } from '../ui/chrome.js';
 import { plate, credit } from '../ui/plate.js';
@@ -47,7 +47,7 @@ function trailFor(content, record) {
   const parent = concept
     ? { text: concept.name, href: `#/progress/leaf/${bucket}` }
     : { text: 'Progress', href: '#/progress' };
-  return trail([parent, { text: record.common[0] }]);
+  return trail([parent, { text: displayName(record) }]);
 }
 
 function cardRow(content, states, symbol, channel, today) {
@@ -84,7 +84,7 @@ function plateSection(content, symbol, channel, imageBase, record) {
   }
   section.append(plate(photo, {
     image_base: imageBase,
-    alt: `${record.common[0]}, ${channelLabel(channel)}`,
+    alt: `${displayName(record)}, ${channelLabel(channel)}`,
     shape: PLATE_SHAPES[channel] ?? 'pl-bark',
     bleed: true,
     soft: true,
@@ -109,7 +109,7 @@ export function render(root, ctx) {
   root.append(trailFor(content, record));
 
   const title = el('div', 'sp-title');
-  title.append(el('h1', 'display', record.common[0]));
+  title.append(el('h1', 'display', displayName(record)));
   title.append(el('p', 'sci', record.scientific));
   title.append(el('p', 'det2', statusLine(record)));
   root.append(title);
@@ -131,7 +131,7 @@ export function render(root, ctx) {
     const photo = content.cards[cardId('species', heroChannel, symbol)].photos[0];
     const figure = plate(photo, {
       image_base: imageBase,
-      alt: `${record.common[0]}, ${channelLabel(heroChannel)}`,
+      alt: `${displayName(record)}, ${channelLabel(heroChannel)}`,
       shape: PLATE_SHAPES[heroChannel] ?? 'pl-leaf',
       bleed: true,
       soft: true
