@@ -74,9 +74,12 @@ function plateSection(content, symbol, channel, imageBase, record) {
   section.append(el('h3', 'sec-h', capitalize(channelLabel(channel))));
   const card = content.cards[cardId('species', channel, symbol)];
   const photo = card?.photos[0] ?? null;
+  // A retired species collects nothing more, so "yet" would promise a plate
+  // that is not coming.
   if (!photo) {
-    section.append(el('p', 'fact-line',
-      `No ${channelLabel(channel)} plate is collected yet.`));
+    section.append(el('p', 'fact-line', record.retired
+      ? `No ${channelLabel(channel)} plate was collected.`
+      : `No ${channelLabel(channel)} plate is collected yet.`));
     return section;
   }
   section.append(plate(photo, {
@@ -130,7 +133,8 @@ export function render(root, ctx) {
       image_base: imageBase,
       alt: `${record.common[0]}, ${channelLabel(heroChannel)}`,
       shape: PLATE_SHAPES[heroChannel] ?? 'pl-leaf',
-      bleed: true
+      bleed: true,
+      soft: true
     });
     // The sheet holds the hero plate clear of the title.
     figure.classList.add('sp-hero');
@@ -189,7 +193,9 @@ export function render(root, ctx) {
     if (row) { cards.append(row); anyCard = true; }
   }
   if (!anyCard) {
-    cards.append(el('p', 'fact-line', 'This species carries no card yet.'));
+    cards.append(el('p', 'fact-line', record.retired
+      ? 'This species is retired and carries no card.'
+      : 'This species carries no card yet.'));
   } else {
     cards.append(el('p', 'fact-line',
       `Overall level ${speciesLevel(symbol, content, states)} of 4, `
@@ -226,7 +232,11 @@ export function render(root, ctx) {
         ? `card on ${channels.join(', ')}`
         : 'no card'));
       list.append(line);
-      list.append(el('p', 'secname', variety.note));
+      // Most varieties carry no note. An empty paragraph would print a blank
+      // line and take the last row's baseline with it.
+      if (typeof variety.note === 'string' && variety.note !== '') {
+        list.append(el('p', 'secname', variety.note));
+      }
     }
     varieties.append(list);
   }

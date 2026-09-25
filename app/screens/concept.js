@@ -165,7 +165,8 @@ export function render(root, ctx) {
       image_base: ctx.image_base,
       alt: `A ${breakdown.concept.name.toLowerCase()} ${channelLabel(channel)}`,
       shape: 'pl-shape',
-      bleed: true
+      bleed: true,
+      soft: true
     }));
     root.append(credit(photo, `${breakdown.concept.name}, ${channelLabel(channel)}.`));
   }
