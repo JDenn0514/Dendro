@@ -109,11 +109,6 @@ async function start() {
   const dir = contentDir();
   const imageBase = imageBaseFor(dir);
 
-  // The nav goes up before the content fetch. Content that fails to load must
-  // not lock the user out of Settings, where the export button rescues the
-  // progress that is already stored.
-  document.getElementById('nav').hidden = false;
-
   let storage = DEAD_STORAGE;
   try {
     storage = window.localStorage ?? DEAD_STORAGE;
