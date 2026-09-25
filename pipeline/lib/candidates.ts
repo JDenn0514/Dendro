@@ -177,6 +177,12 @@ export const MAX_PER_SPECIES = 60;
 export const CHANNEL_TARGET = 8;
 
 /**
+ * A chroma score under this value marks an image as monochrome. Owner ruling 2026-09-24:
+ * colour photographs only. `mono-check.cjs` used this cut on the concept run.
+ */
+export const MONO_THRESHOLD = 12;
+
+/**
  * Rows that share an id become one row. The three iNaturalist passes return the same
  * photo more than once, and each pass carries its own hints.
  */
