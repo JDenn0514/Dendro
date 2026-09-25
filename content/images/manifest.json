@@ -2961,7 +2961,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:38:20Z",
-    "note": "Archival plate of two acorns in scaly cups, sharp and centred, with only a small archival number in the corner."
+    "note": "Archival plate of two acorns in scaly cups, sharp and centred, with only a small archival number in the corner.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "7f715b4a7cae5c13bb58afefdef336bfe1eb714a72265e39d806ad317576f5dc",
