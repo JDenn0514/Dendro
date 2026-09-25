@@ -11,8 +11,30 @@ export const KEYS = {
   missing_edges: 'dendro_missing_edges'
 };
 
+export const TEXT_SIZES = ['smaller', 'small', 'standard', 'large', 'largest'];
+
 export function defaultSettings() {
-  return { version: STORE_VERSION, session_size: 20, new_per_day: 10, last_export: null };
+  return {
+    version: STORE_VERSION,
+    session_size: 20,
+    new_per_day: 10,
+    last_export: null,
+    // The name of a text size step. `standard` leaves the root size alone.
+    text_size: 'standard',
+    // The unit keys the user left unfolded on a channel lessons page. `null`
+    // means the user has folded nothing yet, so the default rule applies.
+    open_units: null
+  };
+}
+
+function cleanTextSize(value, fallback) {
+  return TEXT_SIZES.includes(value) ? value : fallback;
+}
+
+function cleanOpenUnits(value, fallback) {
+  if (value === null) return null;
+  if (Array.isArray(value) && value.every((key) => typeof key === 'string')) return value;
+  return fallback;
 }
 
 function emptyPayload(key) {
@@ -197,6 +219,8 @@ export function createStore(storage) {
       for (const field of ['session_size', 'new_per_day']) {
         if (!isCount(settings[field])) settings[field] = defaults[field];
       }
+      settings.text_size = cleanTextSize(settings.text_size, defaults.text_size);
+      settings.open_units = cleanOpenUnits(settings.open_units, defaults.open_units);
       return settings;
     },
 
@@ -206,6 +230,8 @@ export function createStore(storage) {
       for (const field of ['session_size', 'new_per_day']) {
         if (!isCount(next[field])) next[field] = current[field];
       }
+      next.text_size = cleanTextSize(next.text_size, current.text_size);
+      next.open_units = cleanOpenUnits(next.open_units, current.open_units);
       write(KEYS.settings, next);
       return next;
     },

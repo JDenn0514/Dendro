@@ -394,3 +394,27 @@ test('an unavailable storage leaves the store running and not available', () => 
   store.writeCard('species:QUGA:leaf', { interval: 1, tier: 'mc4', tier_passes: 0 });
   assert.deepEqual(store.readCards(), {});
 });
+
+test('the settings carry a text size and a fold list', () => {
+  const store = createStore(memoryStorage());
+  const settings = store.readSettings();
+  assert.equal(settings.text_size, 'standard');
+  assert.equal(settings.open_units, null);
+  assert.equal(store.writeSettings({ text_size: 'large' }).text_size, 'large');
+  assert.equal(store.readSettings().text_size, 'large');
+  assert.deepEqual(
+    store.writeSettings({ open_units: ['leaf_types'] }).open_units,
+    ['leaf_types']
+  );
+});
+
+test('a text size or a fold list from a hand edit falls back to the default', () => {
+  const store = createStore(memoryStorage({
+    dendro_settings: JSON.stringify({
+      version: 1, session_size: 20, new_per_day: 10, last_export: null,
+      text_size: 'enormous', open_units: 'leaf_types'
+    })
+  }));
+  assert.equal(store.readSettings().text_size, 'standard');
+  assert.equal(store.readSettings().open_units, null);
+});

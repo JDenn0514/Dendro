@@ -8,6 +8,7 @@ import * as progress from './screens/progress.js';
 import * as species from './screens/species.js';
 import * as settings from './screens/settings.js';
 import { injectSprite } from './ui/glyphs.js';
+import { applyTextSize } from './ui/textsize.js';
 
 const CONTENT_FILES = {
   species: 'species.json',
@@ -127,6 +128,10 @@ async function start() {
 
   if (!store.available) showBanner(STORAGE_BANNER);
   else if (store.newer_version) showBanner(NEWER_VERSION_BANNER);
+
+  // The root size goes on before the first render, so no screen ever paints
+  // at one size and reflows to another.
+  applyTextSize(store.readSettings().text_size);
 
   // A content failure is kept rather than thrown away. Settings still opens;
   // every other route shows the failure again instead of a blank page.
