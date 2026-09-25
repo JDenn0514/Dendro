@@ -3434,7 +3434,7 @@ Create `.claude/skills/powo-harvest/SKILL.md`:
 ````markdown
 ---
 name: powo-harvest
-description: Use when collecting photo rows from Kew Plants of the World Online (POWO) for a Dendro content run, in the built-in browser.
+description: Use only as the last resort for a Dendro content run, when a species and channel is still thin after the targeted search in content-run Step 7. Collects photo rows from Kew Plants of the World Online (POWO) in the built-in browser.
 ---
 
 # POWO harvest
@@ -3449,6 +3449,11 @@ challenge (HTTP 403) to Node, to WebFetch, and to headless browsers. The built-i
 These rules come from Kew's `robots.txt` and from the owner rulings of 2026-09-25. Obey
 each one.
 
+- POWO is the last resort. Start only for a species and channel that is still thin after
+  the targeted search in `content-run` Step 7 (the harvester, then Commons, iNaturalist,
+  and wildflower.org). If no pair is still thin, do not start. The best run never needs
+  this skill. Before you start, write down which sites you searched for each pair and what
+  each gave.
 - Use the built-in browser only: the `mcp__Claude_Browser__*` tools. Do not ask for a Kew
   page with Node, curl, WebFetch, or a headless browser.
 - Load each Kew page once. Wait 10 seconds at least between two Kew page loads. Kew's
@@ -3917,12 +3922,10 @@ channel, and the count of approved images.
 
 `photos fetch` already reads six sources: Bioimages, the Lady Bird Johnson Wildflower
 Center (wildflower.org), Trees and Shrubs Online, Wikimedia Commons, iNaturalist, and USDA
-PLANTS. For the thin pairs, use these three tools, in this order:
+PLANTS. For each thin pair, do a targeted search: a search for that one species and
+channel only. Use these tools, in this order, and stop when the pair has 4 approved images:
 
-1. **Kew POWO.** Run the `powo-harvest` skill for each thin species. It saves the Kew gallery
-   in the built-in browser, makes the rows with `pipeline/scripts/powo-rows.ts`, makes the
-   commands with `pipeline/scripts/mkadds.cjs`, and runs them.
-2. **The harvester.** `pipeline/scripts/harvest.cjs` looks for one channel of a species on
+1. **The harvester.** `pipeline/scripts/harvest.cjs` looks for one channel of a species on
    Bioimages and Trees and Shrubs Online, past the rows that the fetch took. Write the gap
    rows to a JSON file in the session scratchpad, one object per row:
    `{ "symbol": "<target>", "sci": "<scientific name>", "channel": "<channel>", "approved": <count> }`.
@@ -3942,10 +3945,22 @@ PLANTS. For the thin pairs, use these three tools, in this order:
 
    It prints `lines`, `max bytes`, and `problems`. Fix each problem before you go on. Then
    run the lines of `adds.sh` one at a time, from the repo root.
-3. **A search by hand.** Find photos in a browser on other sites whose licence is on the
-   allowlist. Append each one as a manual candidate, as below.
+2. **The other sites.** Look for that channel on Wikimedia Commons, iNaturalist, and
+   wildflower.org, in the built-in browser or with a script that calls the site over HTTP.
+   Take only images whose licence is on the allowlist. Append each one as a manual
+   candidate, as below.
+3. **Kew POWO, last.** Run the `powo-harvest` skill only for a pair that is still thin after
+   steps 1 and 2. Before you start it, write down which sites you searched for that pair and
+   what each gave. The skill saves the Kew gallery in the built-in browser, makes the rows
+   with `pipeline/scripts/powo-rows.ts`, makes the commands with
+   `pipeline/scripts/mkadds.cjs`, and runs them.
 
-Give the two scripts paths in the scratchpad only, never in the repo. The CLI commits with
+Do not use WebFetch to make a photo row. WebFetch passes the page through a model, so a
+credit or a licence can come back in other words, and `photos add` needs both word for
+word. Read the credit and the licence off the page in the browser, or from the output of a
+script.
+
+Give the scripts paths in the scratchpad only, never in the repo. The CLI commits with
 `git add -A`, so a file inside the repo reaches a commit.
 
 A manual candidate:

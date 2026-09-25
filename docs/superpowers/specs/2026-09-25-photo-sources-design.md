@@ -137,7 +137,7 @@ Module: `pipeline/lib/wildflower.ts`.
 
 ## Kew POWO (browser harvest)
 
-Kew POWO is not a fetch source. It has three parts:
+Kew POWO is not a fetch source, and it is the last resort (owner ruling 2026-09-25). An agent runs it only for a species and channel that is still thin after the targeted search in `content-run` Step 7. The best run never needs it. It has three parts:
 
 1. **Skill** `.claude/skills/powo-harvest/SKILL.md`. An agent follows it with the built-in browser:
    - It opens `https://powo.science.kew.org/taxon/<IPNI id>/images`, and finds the IPNI id through the POWO search page in the browser.
@@ -169,7 +169,11 @@ On the London plane page (`urn:lsid:ipni.org:names:685854-1`, target PLHI), the 
 
 ## Skills
 
-- `content-run` Step 7 (hand-added rows) names the new fetch sources, the POWO skill, and the two scripts.
+- `content-run` Step 7 becomes a targeted search: a search for one thin species and channel at a time, in this order, until the pair has 4 approved images:
+  1. `harvest.cjs` for Bioimages and TSO.
+  2. Commons, iNaturalist, and wildflower.org, in the built-in browser or with a script over HTTP.
+  3. The `powo-harvest` skill, only for a pair that is still thin. The agent first writes down which sites it searched and what each gave.
+- No photo row comes from WebFetch. WebFetch passes a page through a model, so a credit or a licence can come back in other words. The agent reads the credit and the licence off the page in the browser, or from a script's output.
 - `photo-check` states that `used with permission, non-commercial` is a valid licence for wildflower.org rows, and for no other host.
 - The new `powo-harvest` skill holds the procedure above.
 
