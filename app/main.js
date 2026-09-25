@@ -4,9 +4,13 @@ import { createStore } from './logic/store.js';
 import { todayString } from './logic/session.js';
 import * as home from './screens/home.js';
 import * as session from './screens/session.js';
+import * as lessons from './screens/lessons.js';
 import * as progress from './screens/progress.js';
+import * as concept from './screens/concept.js';
 import * as species from './screens/species.js';
 import * as settings from './screens/settings.js';
+import { injectSprite } from './ui/glyphs.js';
+import { applyTextSize } from './ui/textsize.js';
 
 const CONTENT_FILES = {
   species: 'species.json',
@@ -54,6 +58,8 @@ function parseRoute() {
   };
 }
 
+// A content failure must not lock the user out of Settings, where the export
+// button rescues the progress that is already stored.
 function showError(title, lines) {
   const root = document.getElementById('app');
   root.textContent = '';
@@ -69,6 +75,15 @@ function showError(title, lines) {
     list.append(item);
   }
   box.append(list);
+  const settingsLink = document.createElement('a');
+  settingsLink.className = 'placement';
+  settingsLink.href = '#/settings';
+  settingsLink.textContent = 'Settings';
+  const homeLink = document.createElement('a');
+  homeLink.className = 'placement';
+  homeLink.href = '#/';
+  homeLink.textContent = 'Home';
+  box.append(settingsLink, homeLink);
   root.append(box);
 }
 
@@ -96,11 +111,6 @@ async function start() {
   const dir = contentDir();
   const imageBase = imageBaseFor(dir);
 
-  // The nav goes up before the content fetch. Content that fails to load must
-  // not lock the user out of Settings, where the export button rescues the
-  // progress that is already stored.
-  document.getElementById('nav').hidden = false;
-
   let storage = DEAD_STORAGE;
   try {
     storage = window.localStorage ?? DEAD_STORAGE;
@@ -111,6 +121,15 @@ async function start() {
 
   if (!store.available) showBanner(STORAGE_BANNER);
   else if (store.newer_version) showBanner(NEWER_VERSION_BANNER);
+
+  // The root size goes on before the sprite fetch and the first render, so
+  // nothing the boot screen shows (the nav, the loading line) ever paints at
+  // the phone's size and then resizes.
+  applyTextSize(store.readSettings().text_size);
+
+  // The sprite holds every mark the screens draw. It goes in before the first
+  // render and never throws, so a failed fetch costs the marks and nothing else.
+  await injectSprite();
 
   // A content failure is kept rather than thrown away. Settings still opens;
   // every other route shows the failure again instead of a blank page.
@@ -171,9 +190,17 @@ async function start() {
     try {
       if (parts[0] === 'session') leave = session.render(root, { ...ctx, mode: 'review' });
       else if (parts[0] === 'placement') leave = session.render(root, { ...ctx, mode: 'placement' });
+      else if (parts[0] === 'progress' && parts.length >= 3) {
+        leave = concept.render(root, {
+          ...ctx, channel: parts[1], concept_key: parts.slice(2).join('/')
+        });
+      }
       else if (parts[0] === 'progress') leave = progress.render(root, ctx);
       else if (parts[0] === 'species') leave = species.render(root, { ...ctx, symbol: parts[1] });
       else if (parts[0] === 'settings') leave = settings.render(root, ctx);
+      else if (parts[0] === 'lessons') {
+        leave = lessons.render(root, { ...ctx, channel: parts[1] ?? null });
+      }
       else leave = home.render(root, ctx);
     } catch (error) {
       console.error('The screen failed to open.', error);

@@ -218,6 +218,32 @@ test('a payload from a newer build is left alone and blocks every write', () => 
   assert.equal(store.readCards()['species:QURU:leaf'], undefined);
 });
 
+test('a rescue export from a newer store can be imported again', () => {
+  // The banner on a newer store tells the reader to export, reset, and
+  // import. Every section of the file therefore has to say the version this
+  // app reads, not the version the sections were stored under.
+  const storage = memoryStorage();
+  storage.setItem('dendro_settings', JSON.stringify({
+    ...defaultSettings(), version: 9, session_size: 15
+  }));
+  storage.setItem('dendro_cards', JSON.stringify({
+    version: 9, cards: { 'species:QUGA:leaf': { interval: 30, tier: 'typed', tier_passes: 1 } }
+  }));
+  const first = createStore(storage);
+  assert.equal(first.newer_version, true);
+
+  const blob = first.exportBlob('2026-03-10');
+  const payload = JSON.parse(blob.json);
+  for (const key of Object.values(KEYS)) {
+    assert.equal(payload[key].version, STORE_VERSION);
+  }
+
+  const second = createStore(memoryStorage());
+  assert.deepEqual(second.importBlob(blob.json), { ok: true, errors: [] });
+  assert.equal(second.readSettings().session_size, 15);
+  assert.equal(second.readCards()['species:QUGA:leaf'].interval, 30);
+});
+
 test('corrupt stored JSON is copied aside once and not overwritten', () => {
   const storage = memoryStorage();
   storage.setItem('dendro_cards', '{oops');
@@ -393,4 +419,37 @@ test('an unavailable storage leaves the store running and not available', () => 
   assert.deepEqual(store.readCards(), {});
   store.writeCard('species:QUGA:leaf', { interval: 1, tier: 'mc4', tier_passes: 0 });
   assert.deepEqual(store.readCards(), {});
+});
+
+test('the settings carry a text size and a fold list', () => {
+  const store = createStore(memoryStorage());
+  const settings = store.readSettings();
+  assert.equal(settings.text_size, 'standard');
+  assert.equal(settings.open_units, null);
+  assert.equal(store.writeSettings({ text_size: 'large' }).text_size, 'large');
+  assert.equal(store.readSettings().text_size, 'large');
+  assert.deepEqual(
+    store.writeSettings({ open_units: ['leaf_types'] }).open_units,
+    ['leaf_types']
+  );
+});
+
+test('the fold list keeps the channel marks the lessons page writes', () => {
+  const store = createStore(memoryStorage());
+  // The lessons page marks each channel it has written, so a channel with
+  // every branch folded reads back as written and not as untouched.
+  const list = ['@bark', 'bark_types', '@leaf'];
+  assert.deepEqual(store.writeSettings({ open_units: list }).open_units, list);
+  assert.deepEqual(store.readSettings().open_units, list);
+});
+
+test('a text size or a fold list from a hand edit falls back to the default', () => {
+  const store = createStore(memoryStorage({
+    dendro_settings: JSON.stringify({
+      version: 1, session_size: 20, new_per_day: 10, last_export: null,
+      text_size: 'enormous', open_units: 'leaf_types'
+    })
+  }));
+  assert.equal(store.readSettings().text_size, 'standard');
+  assert.equal(store.readSettings().open_units, null);
 });

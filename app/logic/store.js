@@ -1,4 +1,5 @@
 // Owns the four localStorage keys. Pure apart from the injected storage object.
+import { daysBetween } from './scheduler.js';
 
 export const STORE_VERSION = 1;
 export const LOG_CAP = 5000;
@@ -11,8 +12,30 @@ export const KEYS = {
   missing_edges: 'dendro_missing_edges'
 };
 
+export const TEXT_SIZES = ['smaller', 'small', 'standard', 'large', 'largest'];
+
 export function defaultSettings() {
-  return { version: STORE_VERSION, session_size: 20, new_per_day: 10, last_export: null };
+  return {
+    version: STORE_VERSION,
+    session_size: 20,
+    new_per_day: 10,
+    last_export: null,
+    // The name of a text size step. `standard` leaves the root size alone.
+    text_size: 'standard',
+    // The unit keys the user left unfolded on a channel lessons page. `null`
+    // means the user has folded nothing yet, so the default rule applies.
+    open_units: null
+  };
+}
+
+function cleanTextSize(value, fallback) {
+  return TEXT_SIZES.includes(value) ? value : fallback;
+}
+
+function cleanOpenUnits(value, fallback) {
+  if (value === null) return null;
+  if (Array.isArray(value) && value.every((key) => typeof key === 'string')) return value;
+  return fallback;
 }
 
 function emptyPayload(key) {
@@ -81,11 +104,6 @@ export function memoryStorage(initial = {}) {
     setItem: (key, value) => { map.set(key, value); },
     removeItem: (key) => { map.delete(key); }
   };
-}
-
-function daysBetween(fromDate, toDate) {
-  const parse = (d) => Date.UTC(...d.split('-').map((n, i) => (i === 1 ? Number(n) - 1 : Number(n))));
-  return Math.round((parse(toDate) - parse(fromDate)) / 86400000);
 }
 
 export function createStore(storage) {
@@ -197,6 +215,8 @@ export function createStore(storage) {
       for (const field of ['session_size', 'new_per_day']) {
         if (!isCount(settings[field])) settings[field] = defaults[field];
       }
+      settings.text_size = cleanTextSize(settings.text_size, defaults.text_size);
+      settings.open_units = cleanOpenUnits(settings.open_units, defaults.open_units);
       return settings;
     },
 
@@ -206,6 +226,8 @@ export function createStore(storage) {
       for (const field of ['session_size', 'new_per_day']) {
         if (!isCount(next[field])) next[field] = current[field];
       }
+      next.text_size = cleanTextSize(next.text_size, current.text_size);
+      next.open_units = cleanOpenUnits(next.open_units, current.open_units);
       write(KEYS.settings, next);
       return next;
     },
@@ -222,13 +244,20 @@ export function createStore(storage) {
     },
 
     exportBlob(today) {
+      // Every section carries the version this app writes, the same as the
+      // top level. A store flagged newer hands back its sections with the
+      // version it stored, and the import rejects a section that says a
+      // version the app cannot read. Export, reset, import is the only
+      // recovery a user has, so the file the app writes has to be a file the
+      // app reads. The shape of each section is checked on import anyway.
+      const stamp = (section) => ({ ...section, version: STORE_VERSION });
       const payload = {
         version: STORE_VERSION,
         exported_at: today,
-        [KEYS.cards]: read(KEYS.cards),
-        [KEYS.log]: read(KEYS.log),
-        [KEYS.settings]: api.readSettings(),
-        [KEYS.missing_edges]: read(KEYS.missing_edges)
+        [KEYS.cards]: stamp(read(KEYS.cards)),
+        [KEYS.log]: stamp(read(KEYS.log)),
+        [KEYS.settings]: stamp(api.readSettings()),
+        [KEYS.missing_edges]: stamp(read(KEYS.missing_edges))
       };
       return { filename: `dendro-progress-${today}.json`, json: JSON.stringify(payload, null, 2) };
     },

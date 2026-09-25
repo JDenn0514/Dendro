@@ -175,6 +175,20 @@ test('a group option shows the genus common name over the genus', () => {
     { label: 'var. gambelii', sublabel: 'Quercus gambelii' });
 });
 
+test('a species label prints with a capital, whatever the content holds', () => {
+  // The production content set holds common names the way a flora does,
+  // lowercase unless a part of the name is a proper noun. Every label here is
+  // a display label: an answer button, the name on a reveal.
+  const lower = {
+    species: { ACSA2: { common: ['silver maple'], scientific: 'Acer saccharinum' } }
+  };
+  assert.deepEqual(labelFor(lower, 'species', 'leaf', 'ACSA2'),
+    { label: 'Silver maple', sublabel: 'Acer saccharinum' });
+  // A name the content already capitalized is left as it stands.
+  assert.deepEqual(labelFor(content, 'species', 'leaf', 'QURU'),
+    { label: 'Northern red oak', sublabel: 'Quercus rubra' });
+});
+
 test('a leaf group card also falls back to typed, because its bucket holds three genera', () => {
   const card = content.cards['group:leaf:Quercus'];
   const q = buildQuestion({

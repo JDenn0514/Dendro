@@ -1,90 +1,187 @@
-// Home: channel buttons, the recommendation, the unit list, the placement link.
-import { channelLabel, unitFor } from '../logic/content.js';
-import {
-  dueCardIds, newCardCapDone, recommendUnit, unitsForFocus
-} from '../logic/session.js';
-import { gateStatus, unseenCount } from '../logic/progress.js';
+// Home: the name, one sentence of state, the next unit, two doors, two links.
+// Computes nothing: every number comes from a logic module.
+import { cardId, channelLabel, unitFor, conceptFor } from '../logic/content.js';
+import { dueCardIds, newCardCapDone, recommendUnit } from '../logic/session.js';
+import { channelRung, leadingConcept } from '../logic/progress.js';
+import { channelLessons, unitOrdinal } from '../logic/lessons.js';
+import { numberWord, capitalize } from '../logic/words.js';
+import { el, link } from '../ui/dom.js';
+import { footNav, tick } from '../ui/chrome.js';
+import { unitThumbColumn } from '../ui/thumb.js';
+import { glyph, glyphIdFor, FALLBACK_GLYPH } from '../ui/glyphs.js';
 
-function el(tag, className, text) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
+// The one line of copy the content does not carry.
+const SUBTITLE = 'Trees of the Colorado Front Range.';
+
+// A door shows at most this many unit squares per depth, so it stays a mark
+// and not a second lessons page.
+const DOOR_SQUARES = 8;
+
+function stateSentence(content, states, today) {
+  const total = dueCardIds({ content, states, focus: 'all', today }).length;
+  const line = el('p', 'state1');
+  if (total === 0) {
+    line.append(el('b', null, 'No card'));
+    line.append(document.createTextNode(' is due today.'));
+    return line;
+  }
+  const parts = content.channels
+    .map((channel) => ({
+      channel,
+      count: dueCardIds({ content, states, focus: channel, today }).length
+    }))
+    .filter((part) => part.count > 0)
+    .map((part) => `${numberWord(part.count)} ${channelLabel(part.channel)}`);
+  line.append(el('b', null, `${capitalize(numberWord(total))} ${total === 1 ? 'card' : 'cards'}`));
+  line.append(document.createTextNode(
+    ` ${total === 1 ? 'is' : 'are'} due today: ${parts.join(', ')}.`
+  ));
+  return line;
+}
+
+// One line about the unit. A level-1 unit holds the channel's shapes; every
+// deeper unit holds the cards inside one shape.
+function whyLine(content, unit, cardCount, newCount) {
+  const ordinal = unitOrdinal(unit.key, content);
+  const opening = `Unit ${ordinal}, ${numberWord(newCount)} new `
+    + `${newCount === 1 ? 'card' : 'cards'}.`;
+  if (unit.level === 1) {
+    return `${opening} The ${numberWord(cardCount)} ${channelLabel(unit.channel)} shapes.`;
+  }
+  const concept = conceptFor(content, unit.channel, unit.bucket);
+  const inside = concept ? concept.name : unit.bucket;
+  return `${opening} ${capitalize(numberWord(cardCount))} `
+    + `${cardCount === 1 ? 'card' : 'cards'} inside ${inside}, `
+    + `quizzed by ${channelLabel(unit.channel)}.`;
+}
+
+function recommendation(root, ctx, states) {
+  const { content, today } = ctx;
+  const box = el('div', 'rec');
+  box.append(tick());
+  const found = recommendUnit({ content, states, focus: 'all' });
+
+  if (found.unit_key) {
+    const unit = unitFor(content, found.unit_key);
+    const ids = content.unit_cards[unit.key] ?? [];
+    const newCount = ids.filter((id) => !states[id]).length;
+    const thumb = unitThumbColumn(content, unit.key, ctx.image_base);
+    if (thumb) box.append(thumb);
+    box.append(el('h2', 'h2', unit.name));
+    box.append(el('p', 'why', whyLine(content, unit, ids.length, newCount)));
+    box.append(link(`#/session?focus=${unit.channel}&unit=${unit.key}`, 'btn', 'Start'));
+    root.append(box);
+    return;
+  }
+
+  if (found.next_closed) {
+    const next = found.next_closed;
+    const parent = unitFor(content, next.parent_key);
+    box.append(el('h2', 'h2', 'Nothing is open yet'));
+    box.append(el('p', 'why',
+      `${next.unit_name} opens when ${numberWord(next.needed_cards)} more `
+      + `${next.needed_cards === 1 ? 'card' : 'cards'} in ${parent.name} reach familiar.`));
+    box.append(link('#/lessons', 'btn', 'Open Lessons'));
+    root.append(box);
+    return;
+  }
+
+  box.append(el('h2', 'h2', 'Every unit is started'));
+  const dueCount = dueCardIds({ content, states, focus: 'all', today }).length;
+  box.append(el('p', 'why', dueCount > 0
+    ? `${capitalize(numberWord(dueCount))} ${dueCount === 1 ? 'card is' : 'cards are'} waiting for a review.`
+    : 'Nothing is waiting. Come back tomorrow.'));
+  if (dueCount > 0) box.append(link('#/session?focus=all', 'btn', 'Start'));
+  root.append(box);
+}
+
+function lessonsDoor(content, states) {
+  const door = link('#/lessons', 'door');
+  const summaries = content.channels.map((channel) => channelLessons(content, states, channel));
+  const thumb = el('span', 'dthumb');
+  thumb.setAttribute('aria-hidden', 'true');
+  for (const depth of [1, 2, 3]) {
+    const row = el('span', 'dq');
+    const units = summaries
+      .flatMap((summary) => summary.depths.find((item) => item.level === depth).units)
+      .slice(0, DOOR_SQUARES);
+    for (const unit of units) {
+      const square = el('i', unit.open ? null : 'shut');
+      if (unit.next_up) square.classList.add('next');
+      row.append(square);
+    }
+    thumb.append(row);
+  }
+  door.append(thumb);
+  door.append(el('span', 'dn', 'Lessons'));
+  const total = summaries.reduce((count, summary) => count + summary.total_count, 0);
+  const open = summaries.reduce((count, summary) => count + summary.open_count, 0);
+  door.append(el('span', 'dd',
+    `${capitalize(numberWord(total))} units, three deep, `
+    + `with ${numberWord(open)} open now.`));
+  return door;
+}
+
+function progressDoor(content, states) {
+  const door = link('#/progress', 'door');
+  const thumb = el('span', 'dthumb');
+  thumb.setAttribute('aria-hidden', 'true');
+  for (const channel of content.channels) {
+    const leading = leadingConcept(content, states, channel);
+    const species = channelRung(content, states, channel, 'species');
+    const row = el('span', 'dr');
+    const card = leading
+      ? content.cards[cardId('concept', channel, leading.key)]
+      : null;
+    row.append(card
+      ? glyph(glyphIdFor(card, content), leading.level, 's20')
+      : glyph(FALLBACK_GLYPH, 0, 's20'));
+    const bar = el('em');
+    const fill = el('b');
+    fill.style.width = `${Math.round(species.share * 1000) / 10}%`;
+    bar.append(fill);
+    row.append(bar);
+    thumb.append(row);
+  }
+  door.append(thumb);
+  door.append(el('span', 'dn', 'Progress'));
+  door.append(el('span', 'dd',
+    'Every card you hold, kept apart by shape, genus, and species.'));
+  return door;
 }
 
 export function render(root, ctx) {
-  const { content, store, today, params } = ctx;
-  const focus = params.get('focus') ?? 'all';
+  const { content, store, today } = ctx;
   const states = store.readCards();
   const log = store.readLog();
   const userSettings = store.readSettings();
 
-  root.append(el('h1', null, 'Dendro'));
+  const masthead = el('div', 'masthead');
+  masthead.append(el('h1', 'display', 'Dendro'));
+  masthead.append(el('p', 'sub', SUBTITLE));
+  masthead.append(el('div', 'mastrule'));
+  root.append(masthead);
 
-  const row = el('div', 'channel-row');
-  const choices = [
-    { key: 'all', name: 'All channels' },
-    ...content.channels.map((c) => ({ key: c, name: channelLabel(c) }))
-  ];
-  for (const choice of choices) {
-    const count = dueCardIds({ content, states, focus: choice.key, today }).length;
-    const button = el('button', choice.key === focus ? 'channel is-active' : 'channel',
-      `${choice.name} (${count} due)`);
-    button.addEventListener('click', () => ctx.navigate(`/?focus=${choice.key}`));
-    row.append(button);
-  }
-  root.append(row);
+  root.append(stateSentence(content, states, today));
 
-  const recommendation = recommendUnit({ content, states, focus });
-  const box = el('section', 'card');
-  if (recommendation.unit_key) {
-    const unit = unitFor(content, recommendation.unit_key);
-    box.append(el('h2', null, `Next up: ${unit.name}`));
-    const start = el('button', 'primary', 'Start');
-    start.addEventListener('click',
-      () => ctx.navigate(`/session?focus=${focus}&unit=${unit.key}`));
-    box.append(start);
-  } else if (recommendation.next_closed) {
-    const next = recommendation.next_closed;
-    const parent = unitFor(content, next.parent_key);
-    box.append(el('h2', null, 'No unit is open yet'));
-    box.append(el('p', null,
-      `${next.unit_name} opens when ${next.needed_cards} more card(s) in ${parent.name} reach level 2.`));
-  } else {
-    box.append(el('h2', null, 'Every unit in this focus is started'));
-  }
-  root.append(box);
-
-  if (newCardCapDone({ content, states, log, settings: userSettings, focus, today })) {
-    root.append(el('p', 'notice',
-      `Nothing is due and today's ${userSettings.new_per_day} new cards are done. Come back tomorrow.`));
+  if (newCardCapDone({ content, states, log, settings: userSettings, focus: 'all', today })) {
+    root.append(el('p', 'note',
+      `Nothing is due and today's ${userSettings.new_per_day} new cards are done. `
+      + 'Come back tomorrow.'));
   }
 
-  const list = el('section', 'unit-list');
-  list.append(el('h2', null, 'Units'));
-  for (const unit of unitsForFocus(content, focus)) {
-    const ids = content.unit_cards[unit.key] ?? [];
-    const unseen = unseenCount(ids, states);
-    const gate = gateStatus(unit.key, content, states);
-    const line = el('div', 'unit-row');
-    line.append(el('span', 'unit-name', unit.name));
-    line.append(el('span', 'unit-meta',
-      `${unseen} of ${ids.length} not started`));
-    line.append(el('span', gate.open ? 'pill pill-open' : 'pill pill-closed',
-      gate.open ? 'open' : 'closed'));
-    const start = el('button', null, 'Start');
-    start.addEventListener('click',
-      () => ctx.navigate(`/session?focus=${unit.channel}&unit=${unit.key}`));
-    line.append(start);
-    list.append(line);
-  }
-  root.append(list);
+  recommendation(root, ctx, states);
 
-  const paragraph = el('p', 'placement-link');
-  const link = el('a', null, 'Take the placement test');
-  link.href = '#/placement';
-  paragraph.append(link);
-  root.append(paragraph);
-  root.append(el('p', 'attribution',
-    'The placement test sets a level on cards you have not studied yet. A retake leaves every card you have already studied as it is.'));
+  const doors = el('div', 'doors');
+  doors.append(lessonsDoor(content, states));
+  doors.append(progressDoor(content, states));
+  root.append(doors);
+
+  // One row, so each link keeps its own width and its own rule under it.
+  const links = el('div', 'links');
+  links.append(link('#/placement', 'placement', 'Take the placement test'));
+  links.append(link('#/settings', 'placement', 'Settings'));
+  root.append(links);
+
+  root.append(footNav('home'));
 }

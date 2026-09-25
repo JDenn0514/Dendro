@@ -1,121 +1,857 @@
-:root {
-  --ink: #1b1b1b;
-  --paper: #fbfaf7;
-  --line: #d8d4cc;
-  --accent: #2f6f4e;
-  --warn: #8a4b1f;
-  --level-0: #eeeae2;
-  --level-1: #d7e4d2;
-  --level-2: #b2cfae;
-  --level-3: #7fb389;
-  --level-4: #3f8b5e;
+/* =========================================================================
+   DENDRO — one system, eight screens.
+
+   session, reveal and species come from final.html, the plate the client
+   approved. home, progress, progress-shape, lessons and lessons-leaf come
+   from the round-2 winner, the 58px depth column, rebuilt so that every
+   screen still spends most of itself on one print.
+
+   THE BOLD MOVE, restated: depth is drawn as pressed sheets. A shapes rung
+   prints one sheet. A genera rung prints two, the second showing behind the
+   first. A species rung prints three. All of them hang in the same 58px
+   column at the left edge of every channel, so the client's three numbers
+   stack in one column and read top to bottom. Beside each sheet stack sit
+   the plain figures, and under each card band sits a moss waterline cut to
+   the share of cards at familiar or better, all three measured against one
+   reference length.
+   ========================================================================= */
+:root{
+  --paper:#F1ECDF;
+  --mount:#E8E2D1;          /* derived tint 1: a darker paper for panels */
+  --ink:#22231E;
+  --ink-soft:#57584C;        /* derived tint 2: softened ink, 5.7:1 on paper */
+  --moss:#3A5A3C;
+  --bark:#5C4634;
+  --lichen:#C9D2B4;
+  --sap:#B8892E;
+  --m0:#E6DFCE; --m1:#C9D2B4; --m2:#9DB595; --m3:#6B8F6A; --m4:#3A5A3C;
+  --fr:"Fraunces",Georgia,serif;
+  --lit:"Literata",Georgia,serif;
+  --gut:22px;
+  --col:58px;               /* the depth column, on every channel, every screen */
+  --hair:rgba(92,70,52,.26);
 }
 
+/* ---------- paper ----------
+   Every font size in this sheet is set in rem, so the whole page follows the
+   root size. The root sits at 100 percent, which is whatever size the reader
+   asked the browser for; the Text size control on the settings screen moves
+   it. Photographs, leaf glyphs, level squares and the 58px depth column stay
+   in px on purpose: a specimen plate is a picture at a fixed size, and the
+   glyph is a mark, not a letter.
+   ---------- */
+html{background:var(--paper); font-size:100%;}
 * { box-sizing: border-box; }
 
-body {
-  margin: 0;
-  padding: 0 1rem 3rem;
-  font: 16px/1.5 system-ui, sans-serif;
-  color: var(--ink);
-  background: var(--paper);
+/* The column runs the height of the phone, and it runs on `body`, not on
+   `#app`. `#banner` is a sibling of `#app` above it, so a `min-height:100dvh`
+   on `#app` alone would push the page past the viewport by the height of the
+   banner and put a scrollbar on every screen that shows one. */
+body{
+  margin:0 auto; max-width:430px;
+  display:flex; flex-direction:column; min-height:100dvh;
+  color:var(--ink);
+  font-family:var(--lit);
+  font-size:1.0625rem; line-height:1.6;
+  font-variation-settings:"opsz" 17;
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+  background-blend-mode:multiply;
+  -webkit-font-smoothing:antialiased;
 }
 
-main { max-width: 52rem; margin: 0 auto; }
-
-h1 { font-size: 1.6rem; }
-h2 { font-size: 1.15rem; }
-
-.banner {
-  background: var(--warn);
-  color: #fff;
-  padding: 0.6rem 1rem;
-  margin: 0 -1rem 1rem;
+/* The app renders one screen into #app. `flex:1` takes whatever height the
+   banner leaves, so the running foot still sits at the bottom of a short
+   page and no screen gains a scrollbar it does not need. */
+#app{
+  display:flex; flex-direction:column;
+  flex:1;
+  padding:0 var(--gut) 40px;
+  overflow-x:clip;
 }
 
-.nav {
-  display: flex;
-  gap: 1rem;
-  max-width: 52rem;
-  margin: 0 auto;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--line);
+/* The sprite is in the document but never drawn. */
+#dendro-sprite{position:absolute; width:0; height:0; overflow:hidden;}
+
+/* ---------- type scale ---------- */
+.display{
+  font-family:var(--fr); font-weight:400; font-size:calc(22px + 1.375rem); line-height:.97;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
+  letter-spacing:-.02em; margin:0;
+}
+.h2{
+  font-family:var(--fr); font-weight:400; font-size:calc(18px + 1.125rem); line-height:1.03;
+  font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
+  letter-spacing:-.018em; margin:0;
+}
+.sec-h{
+  font-family:var(--fr); font-weight:600; font-size:1.1875rem; line-height:1.2;
+  font-variation-settings:"opsz" 24; margin:0;
+}
+.nm{font-family:var(--fr); font-weight:500; font-size:1.1875rem; font-variation-settings:"opsz" 22; line-height:1.2;}
+.bn{font-size:0.90625rem; font-style:italic; color:var(--bark);}
+.cap{font-size:0.8125rem; line-height:1.4; font-style:italic; color:var(--bark); font-variation-settings:"opsz" 12; margin:0;}
+
+/* a short printer's tick marks a new section; it is not a full rule */
+.tick{width:38px; height:2px; background:var(--bark); margin:0 0 9px;}
+
+/* =======================================================================
+   PLATES — the bold move of the session card, and its fallback.
+
+   A plate never ends on a straight line. There are two ways to reach that,
+   and the photograph makes the choice, not the screen.
+
+   .plate.print   The scan has a bright studio ground (quru-leaf, quve-leaf).
+                  The image multiplies into the paper, so the white ground
+                  BECOMES paper and the specimen has no edge at all.
+
+   .plate.field   The photograph carries its own ground: dark (quru-bark) or
+                  in colour (acgl-leaf). Multiply would turn that ground into
+                  a dirty grey rectangle, so a field plate does not blend. It
+                  is held back in saturation, dissolved on four sides by a
+                  mask, and covered with a paper vignette, so it fades into
+                  the page instead of stopping.
+
+   Every screen in this file carries one of them. That is the ratio the
+   approved plate earned its look from, and it is held here: one photograph
+   or one full-width bed of specimens per screen, and fewer rows underneath.
+   ======================================================================= */
+.plate{margin:0; overflow:hidden; position:relative;}
+.bleed{margin-left:calc(var(--gut)*-1); margin-right:calc(var(--gut)*-1);}
+
+.plate.print img{display:block; mix-blend-mode:multiply; filter:grayscale(1) contrast(1.06);}
+.plate.print.lift img{filter:grayscale(1) brightness(1.09) contrast(1.14);}
+
+.plate.field img{display:block; mix-blend-mode:normal;
+  filter:saturate(.62) contrast(.97) brightness(1.05);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 13%,#000 58%,transparent 100%),
+                     linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 13%,#000 58%,transparent 100%),
+             linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
+  -webkit-mask-composite:source-in; mask-composite:intersect;}
+.plate.field::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(118% 92% at 50% 46%,rgba(241,236,223,0) 44%,var(--paper) 100%);}
+.plate.field.mono img{filter:grayscale(1) brightness(1.16) contrast(.95);}
+/* A wide field plate is cropped by its own frame, so the four fades cut into
+   the mask can fall outside the window and the print stops on a line after
+   all. .soft dissolves the frame itself, top and bottom, whatever the crop. */
+.plate.field.soft::after{
+  background:
+    linear-gradient(to bottom,var(--paper) 0,rgba(241,236,223,0) 24%,
+      rgba(241,236,223,0) 70%,var(--paper) 100%),
+    radial-gradient(120% 96% at 50% 46%,rgba(241,236,223,0) 38%,var(--paper) 100%);}
+
+/* session: the specimen entire, cut to its own bounding box so no lobe tip
+   is lost and the leaves touch both edges. Percentages, so it holds at 360. */
+.pl-hero{aspect-ratio:390/528;}
+.pl-hero img{width:108.7%; margin:-11.54% 0 0 -5.92%;}
+/* species and progress-shape: the same specimen, lower edge dissolved */
+.pl-leaf{aspect-ratio:390/452;}
+.pl-leaf img{width:108.7%; margin:-11.54% 0 0 -5.92%;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 100%);}
+.pl-shape{aspect-ratio:390/430;}
+.pl-shape img{width:108.7%; margin:-11.54% 0 0 -5.92%;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 72%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0,#000 72%,transparent 100%);}
+/* species and progress: the bark, a field plate */
+.pl-bark{aspect-ratio:390/342;}
+.pl-bark img{width:100%;}
+/* home and lessons: a small print of one card inside the recommended unit */
+.pl-thumb{width:124px; aspect-ratio:600/900;}
+.pl-thumb img{width:100%; margin:0;}
+/* the specimen's own ground is paper once it multiplies, so the empty lower
+   band of the scan can be cut away and the caption sits under the print */
+.pl-thumb.wide{width:148px; aspect-ratio:600/745;}
+
+/* reveal: the pair, matched to one scale and one baseline so the sentence
+   about lobe depth can actually be checked */
+.pair{display:grid; grid-template-columns:1fr 1fr; gap:0 6px;}
+.pair figure{aspect-ratio:183/244;}
+.pair figure img{width:100.5%;}
+.pl-a img{margin:-7.65% 0 0 -1.64%;}
+.pl-b img{margin:-7.65% 0 0 0;}
+
+/* ---------- running head + printed gauge (session and reveal) ---------- */
+.head{padding-top:16px; display:flex; flex-wrap:wrap; align-items:baseline;
+  justify-content:space-between; gap:2px 10px;}
+.head .leave{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0;color:var(--bark);text-decoration:underline;text-decoration-color:#cfc6b6;text-underline-offset:3px;font-family:var(--fr);font-size:0.90625rem;font-variation-settings:"opsz" 14;}
+.head .where{font-size:0.8125rem; font-style:italic; color:var(--bark);}
+.gauge{display:flex; gap:3px; margin:8px 0 0; height:5px;}
+.gauge i{flex:1; height:2px; background:rgba(92,70,52,.22); align-self:end;}
+.gauge i.done{background:var(--bark); opacity:.8;}
+.gauge i.now{background:var(--moss); height:5px;}
+
+/* ---------- the key ----------
+   The client's fixed change: the four labels share one width. They are now
+   one printed key, common name at the left margin and binomial ranged right,
+   so the four names line up the way an index lines up. The moss bar is not
+   decoration: it appears only on the label your finger or keyboard is on.
+   ---------- */
+.prompt{font-family:var(--fr); font-weight:400; font-size:calc(13px + 0.8125rem); line-height:1.14;
+  font-variation-settings:"opsz" 60,"WONK" 1; letter-spacing:-.012em; margin:20px 0 0;}
+.key{margin:12px 0 0; padding:0; list-style:none; display:grid; gap:9px;}
+/* at a large root size the binomial drops to its own line instead of
+   squeezing the common name */
+.pick{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:1px 10px;
+  width:100%; min-height:56px; padding:13px 15px;
+  box-sizing:border-box;
+  background:rgba(201,210,180,.46); border-radius:2px;
+  border-left:0 solid var(--moss);
+  text-decoration:none; color:var(--ink);
+}
+.pick .nm{flex:0 1 auto;}
+.pick .bn{flex:0 0 auto; text-align:right; margin-left:auto;}
+.pick:active{background:var(--lichen); border-left-width:5px; padding-left:10px;}
+.pick:focus-visible{outline:2px solid var(--moss); outline-offset:2px;
+  border-left-width:5px; padding-left:10px; background:var(--lichen);}
+
+/* ---------- I guessed ---------- */
+.guessed{display:flex; align-items:center; gap:11px; min-height:48px; margin-top:8px;}
+.guessed .box{width:20px; height:20px; border:1.5px solid var(--bark); flex:0 0 auto;}
+.guessed span{font-size:1rem;}
+.guessed:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- reveal ---------- */
+.verdict-wrap{margin-top:26px;}
+.verdict{font-family:var(--fr); font-weight:500; font-size:1.0625rem; line-height:1.2;
+  font-variation-settings:"opsz" 18; color:var(--bark); margin:0 0 10px;}
+.answer-link{color:var(--ink); text-decoration:none;}
+.answer-link:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+.sci-small{margin:9px 0 0; font-family:var(--fr); font-style:italic; font-weight:400;
+  font-size:1.1875rem; font-variation-settings:"opsz" 24; color:var(--bark);}
+.pair-head{display:grid; grid-template-columns:1fr 1fr; gap:0 6px; margin:0 0 8px;}
+.pair-head span{display:block; font-family:var(--fr); font-weight:600; font-size:0.9375rem;
+  font-variation-settings:"opsz" 18; line-height:1.25;}
+.pair-head .ok{color:var(--moss);}
+.pair-head .no{color:var(--bark);}
+.pair-head .no b{font-weight:600; text-decoration:line-through;
+  text-decoration-color:var(--bark); text-decoration-thickness:1.5px;}
+.pair-head i{display:block; height:3px; margin-bottom:7px; background:var(--moss);}
+.pair-head .no i{background:rgba(92,70,52,.4);}
+.compare{margin:22px 0 0; font-size:1.0625rem; line-height:1.56;}
+.levelrow{display:flex; align-items:center; gap:12px; margin-top:24px;}
+.levelrow .lv{font-size:1.0625rem;}
+
+/* the five level squares: the secondary rollup, on unit rows and on reveal */
+.ramp{display:flex; gap:2px;}
+.ramp b{width:12px; height:12px; display:block; background:var(--m0);
+  border:1px solid rgba(92,70,52,.3); box-sizing:border-box;}
+.ramp b.f1{background:var(--m1)} .ramp b.f2{background:var(--m2)}
+.ramp b.f3{background:var(--m3)} .ramp b.f4{background:var(--m4)}
+.ramp b.lost{background:transparent; border:2px solid var(--sap);}
+.ramp.dim b{opacity:.45;}
+.ramp.lg{gap:3px;} .ramp.lg b{width:14px; height:14px;}
+
+.btn{
+  display:block; margin-top:26px; min-height:54px; line-height:54px;
+  background:var(--moss); color:var(--paper); text-align:center; text-decoration:none;
+  font-family:var(--fr); font-weight:600; font-size:1.125rem; font-variation-settings:"opsz" 20;
+  border-radius:2px;
+}
+.btn:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+
+/* ---------- the running foot ----------
+   A printed foot, not a tab bar: three words, no icons, no pill, a hairline
+   above and a moss rule under the word you are on. It sticks to the bottom
+   of the phone so a long progress page always has a way back up.
+   ---------- */
+.footnav{position:relative; margin:36px 0 0; padding:13px 0 0;
+  display:flex; gap:4px;}
+.footnav::before{content:""; position:absolute; left:0; right:0; top:0;
+  height:1px; background:var(--hair);}
+.footnav a{flex:1; min-height:48px; display:flex; align-items:center; justify-content:center;
+  text-decoration:none; color:var(--bark);
+  font-family:var(--fr); font-weight:500; font-size:1rem; font-variation-settings:"opsz" 18;}
+.footnav a span{padding-bottom:5px;}
+.footnav a.on{color:var(--ink); font-weight:600;}
+.footnav a.on span{box-shadow:inset 0 -3px 0 var(--moss);}
+.footnav a:focus-visible{outline:2px solid var(--moss); outline-offset:-2px;}
+
+/* ---------- the trail ----------
+   Kept only where it names a parent the foot cannot: the two pages one tap
+   in. On home, progress and lessons the foot already says where you are.
+   ---------- */
+.trail{display:flex; align-items:center; flex-wrap:wrap; padding-top:8px;
+  font-family:var(--fr); font-size:0.90625rem; font-variation-settings:"opsz" 14;}
+.trail a,.trail strong{display:flex; align-items:center; justify-content:center;
+  min-height:44px; min-width:44px; padding:0 8px; box-sizing:border-box;}
+.trail a{color:var(--bark); text-decoration:none; font-weight:400;}
+.trail strong{color:var(--ink); font-weight:600;}
+.trail > :first-child{margin-left:-8px;}
+.trail i{width:1px; height:13px; background:rgba(92,70,52,.4); flex:0 0 auto;}
+.trail a:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+
+/* =======================================================================
+   THE MARK
+
+   One pressed object per card, filled to that card's level on the five-step
+   ramp. The mark is never a stand-in: a leaf card carries a leaf of its own
+   shape, a bark card carries a bark plate of its own texture, a fruit card
+   carries its own fruit, and a genus card carries that genus's leaf, because
+   a genus is a tree and not a channel. The level shows twice over, in the
+   fill and in how firm the outline is, so seen and familiar stay apart at
+   fingernail size and in sun.
+   ======================================================================= */
+.mk{display:block; flex:0 0 auto;}
+.v0{--lf-fill:none; --lf-so:.5; --lf-sw:5; --lf-vo:.22; --lf-to:.24;}
+.v1{color:var(--m1); --lf-so:.26; --lf-to:.3;}
+.v2{color:var(--m2); --lf-so:.42; --lf-to:.36;}
+.v3{color:var(--m3); --lf-so:.58; --lf-to:.5; --lf-tc:#F1ECDF; --lf-vo:.42;}
+.v4{color:var(--m4); --lf-so:.74; --lf-to:.52; --lf-tc:#F1ECDF; --lf-vo:.4;}
+/* a sheet lying behind another sheet: pressed, out of ink, its edge just read */
+.gh{--lf-fill:#DFD7C2; --lf-so:.2; --lf-sw:2; --lf-vo:0; --lf-to:.12;}
+.s20{width:20px; height:25px}
+.s24{width:24px; height:30px}
+.s26{width:26px; height:33px}
+.s28{width:28px; height:35px}
+.s30{width:30px; height:38px}
+.s32{width:32px; height:40px}
+.s34{width:34px; height:43px}
+.s40{width:40px; height:50px}
+.s86{width:86px; height:108px}
+
+.legend{display:flex; justify-content:space-between; margin:18px 0 0; padding-top:11px;
+  border-top:1px solid var(--hair);}
+.legend div{text-align:center; width:19%;}
+.legend .mk{margin:0 auto 5px;}
+.legend span{font-size:0.75rem; color:var(--bark); line-height:1.2;}
+
+/* ---------- home ---------- */
+.masthead{padding-top:18px;}
+.masthead .sub{margin:9px 0 0; font-size:0.9375rem; font-style:italic; color:var(--bark);}
+.mastrule{height:2px; background:var(--bark); margin:14px 0 0; opacity:.85;}
+.state1{margin:15px 0 0; font-size:1.0625rem; line-height:1.5;}
+.state1 b{font-family:var(--fr); font-weight:500; font-variation-settings:"opsz" 40;
+  font-size:calc(11px + 0.6875rem); color:var(--moss);}
+
+.rec{margin-top:24px;}
+.rec .tick{background:var(--moss); width:52px; height:3px;}
+.rec .figcol{float:right; width:124px; margin:0 0 6px 16px;}
+.rec .figcol.wide{width:148px;}
+.rec .why{margin:9px 0 0; font-size:1rem; color:var(--bark);}
+.rec .thumbcap{margin-top:7px;}
+.rec .btn{clear:both;}
+
+.doors{margin-top:34px;}
+.door{display:block; padding:14px 15px 16px; box-sizing:border-box;
+  background:var(--mount); border-left:3px solid var(--moss); border-radius:2px;
+  text-decoration:none; color:var(--ink); margin-top:10px; overflow:hidden;}
+.door:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.door .dn{display:block; font-family:var(--fr); font-weight:500; font-size:calc(12.5px + 0.78125rem);
+  line-height:1.1; font-variation-settings:"opsz" 44,"WONK" 1; letter-spacing:-.012em;}
+.door .dd{display:block; margin-top:5px; font-size:0.90625rem; line-height:1.4; color:var(--bark);}
+/* each door carries a live small copy of what is behind it */
+.dthumb{float:right; width:118px; margin:2px 0 4px 14px; display:grid; row-gap:7px;}
+.dthumb .dr{display:flex; align-items:center; gap:7px;}
+.dthumb .dr em{display:block; flex:1; height:3px; background:rgba(92,70,52,.18);}
+.dthumb .dr em b{display:block; height:3px; background:var(--moss);}
+.dthumb .dq{display:flex; gap:4px;}
+.dthumb .dq i{width:13px; height:13px; display:block; position:relative;
+  background:var(--moss);}
+.dthumb .dq i.shut{background:none; box-shadow:inset 0 0 0 1.5px rgba(92,70,52,.5);}
+/* the next-up unit carries the moss tick the lessons strip draws, at the
+   door's own scale, inside the gap between the rows */
+.dthumb .dq i.next::after{content:""; position:absolute; left:0; right:0;
+  bottom:-4px; height:2px; background:var(--moss);}
+
+/* The two foot links sit on one line. `#app` is a flex column, so an anchor
+   appended to it on its own is stretched to the full width and the rule under
+   the word runs the whole way. This row holds them at their own width. */
+.links{display:flex; flex-wrap:wrap; gap:18px;}
+.placement{display:inline-flex; align-items:center; margin-top:22px; font-size:1rem;
+  font-style:italic; color:var(--bark); text-decoration:none;
+  box-shadow:inset 0 -1px 0 rgba(92,70,52,.55); min-height:46px;}
+.placement:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- progress: the finding comes before the marks ---------- */
+.finding{margin-top:2px; padding:20px var(--gut) 22px; background:var(--mount);}
+.finding .tick{background:var(--moss); width:52px; height:3px;}
+.finding .state{margin:14px 0 0; font-size:0.9375rem; line-height:1.55; color:var(--bark);}
+
+/* =======================================================================
+   THE RUNG — depth drawn as pressed sheets
+
+   One channel is three rungs. Each rung prints its depth as a stack of
+   sheets: one for shapes, two for genera, three for species, the sheets
+   behind showing at the corner. The front sheet is that depth's own object
+   at that depth's own level. The stack sits in the 58px column; the figures
+   sit beside it; the band of individual cards runs to the right, indented to
+   the column, so band length can never be mistaken for band weight.
+   ======================================================================= */
+.chblock{margin-top:30px;}
+.chblock > .tick{margin:0 0 11px;}
+.cbh{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+.cbh h3{font-family:var(--fr); font-weight:400; font-size:calc(15px + 0.9375rem); line-height:1;
+  font-variation-settings:"opsz" 96,"SOFT" 0,"WONK" 1; letter-spacing:-.018em; margin:0;}
+.cbh .due{font-size:0.84375rem; font-style:italic; color:var(--bark);}
+/* the one-sentence finding sits above the marks it is about */
+.claim{margin:9px 0 4px; font-size:1rem; line-height:1.45;}
+
+.rung{display:grid; grid-template-columns:var(--col) 1fr; align-items:center;
+  min-height:66px; margin-top:16px; color:var(--ink);}
+.rung .cn{display:block; font-family:var(--fr); font-weight:500; font-size:0.90625rem;
+  font-variation-settings:"opsz" 14; color:var(--bark); line-height:1.2;}
+.lvw{display:block; font-family:var(--fr); font-weight:500; line-height:1.05;
+  color:var(--ink); margin-top:2px;}
+.l0{font-size:calc(8.5px + 0.53125rem); font-variation-settings:"opsz" 20; color:var(--ink-soft);}
+.l1{font-size:calc(9.5px + 0.59375rem); font-variation-settings:"opsz" 26;}
+.l2{font-size:calc(11px + 0.6875rem); font-variation-settings:"opsz" 40;}
+.l3{font-size:calc(12.5px + 0.78125rem); font-variation-settings:"opsz" 56,"WONK" 1; letter-spacing:-.012em;}
+.l4{font-size:calc(14px + 0.875rem); font-variation-settings:"opsz" 72,"WONK" 1; letter-spacing:-.018em;}
+/* the count, printed as figures, so the answer never rests on telling two
+   greens apart */
+.figs{display:block; margin-top:3px; font-family:var(--fr); font-weight:500;
+  font-size:0.9375rem; font-variation-settings:"opsz" 16; color:var(--bark);}
+
+/* the sheet stack */
+.rmk{position:relative; width:var(--col); height:66px;}
+.rmk svg{position:absolute; left:0; bottom:0;}
+.rmk .g1{left:6px; bottom:6px;}
+.rmk .g2{left:12px; bottom:12px;}
+
+.band{display:flex; flex-wrap:wrap; gap:2px; row-gap:7px;
+  margin:0 calc(var(--gut)*-1) 0 var(--col);}
+.band .grp{display:flex; gap:2px; margin-right:15px;}
+.band .grp:last-child{margin-right:0;}
+/* the waterline: one rule per rung, cut to the share of that rung's cards at
+   familiar or better, every rule measured against the same length, so the
+   three lengths in a channel compare by eye */
+.wline{margin:8px calc(var(--gut)*-1) 0 var(--col); height:3px;
+  background:rgba(92,70,52,.15);}
+.wline b{display:block; height:3px; background:var(--moss);}
+.opens{display:inline-flex; align-items:center; margin-top:16px; font-size:0.96875rem;
+  font-style:italic; color:var(--bark); text-decoration:none;
+  box-shadow:inset 0 -1px 0 rgba(92,70,52,.55); min-height:46px;}
+.opens:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- progress, one shape ---------- */
+.pagehead{padding-top:4px;}
+/* the line under a display heading. Most of them sit in a pagehead; the
+   not-found pages print one straight into the page, so the rule is the base
+   one and not scoped to the pagehead. */
+.where2{margin:10px 0 0; font-size:0.9375rem; line-height:1.5; color:var(--bark);}
+/* the parent bed: all eight shapes, the one you opened underlined in moss */
+.strip{display:flex; justify-content:space-between; align-items:flex-end; gap:3px;
+  margin-top:20px;}
+.strip span{display:block; padding-bottom:7px;}
+.strip span.here{box-shadow:inset 0 -3px 0 var(--moss);}
+.strip-cap{margin-top:4px;}
+
+.shapecard{display:flex; align-items:center; gap:18px; margin-top:22px;
+  padding:16px var(--gut); background:var(--mount);}
+.shapecard .lvw{font-size:calc(17px + 1.0625rem); font-variation-settings:"opsz" 110,"WONK" 1;
+  letter-spacing:-.02em; margin:0;}
+.shapecard .lvn{display:block; margin-top:6px; font-size:0.875rem; font-style:italic; color:var(--bark);}
+.shapecard .lvx{display:block; margin-top:8px; font-size:0.875rem; line-height:1.4; color:var(--bark);}
+
+.gengroup{margin-top:28px;}
+.gengroup > .tick{margin:0 0 11px;}
+/* the genus head is a heading, so the browser's own h2 size, weight, and
+   margin are reset here and every part inside it keeps its own type */
+.genhead{display:grid; grid-template-columns:var(--col) 1fr auto; align-items:center;
+  column-gap:8px; min-height:66px; margin:0; font-size:1rem; font-weight:400;}
+.gnm{display:block; font-family:var(--fr); font-weight:500; font-size:calc(12px + 0.75rem); line-height:1.05;
+  font-variation-settings:"opsz" 44,"WONK" 1; letter-spacing:-.01em;}
+.gsci{display:block; margin-top:2px; font-size:0.875rem; font-style:italic; color:var(--bark);}
+.genhead .lvw{text-align:right; margin:0;}
+.secname{margin:12px 0 2px; font-size:0.8125rem; font-weight:400; font-style:italic;
+  color:var(--bark);}
+/* the species are a printed index, not a stack of cards: no fill, no rail,
+   one hairline baseline each, so the paper carries the list */
+.splist{margin-left:var(--col); padding-left:0;}
+.spx{display:grid; grid-template-columns:26px 1fr auto; align-items:center; column-gap:12px;
+  min-height:48px; padding:4px 0; text-decoration:none; color:var(--ink);
+  border-bottom:1px solid rgba(92,70,52,.15);}
+.spx:last-child{border-bottom:0;}
+.spx .sn{font-family:var(--fr); font-weight:500; font-size:1.0625rem; line-height:1.2;
+  font-variation-settings:"opsz" 20;}
+.spx .lvw{margin:0; text-align:right;}
+.spx:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.foot{display:inline-flex; align-items:center; margin-top:26px; font-size:1rem;
+  font-style:italic; color:var(--bark); text-decoration:none;
+  box-shadow:inset 0 -1px 0 rgba(92,70,52,.55); min-height:46px;}
+.foot:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+/* ---------- lessons ---------- */
+.nextu{margin-top:6px;}
+.nextu .tick{background:var(--moss); width:52px; height:3px;}
+/* The print sits beside the unit name, as it does on home. The row of new
+   leaves clears it, and the Start control clears it when there is no row. */
+.nextu .figcol{float:right; width:148px; margin:0 0 6px 16px;}
+.nextu .thumbcap{margin-top:7px;}
+.nextu .btn{clear:both;}
+.nextu .why{margin:9px 0 0; font-size:1rem; color:var(--bark);}
+/* The row wraps, so a unit with nine or more new cards keeps every leaf on
+   the page at 360px instead of losing the last ones off the right edge. */
+.newrow{display:flex; flex-wrap:wrap; margin-top:14px; gap:3px;}
+.nextu .newcap{margin-top:8px;}
+.nextu .rampline{display:flex; align-items:center; gap:11px; margin-top:14px;}
+.nextu .rampline span{font-size:0.875rem; color:var(--bark);}
+
+.keyline{margin:24px 0 0; font-size:0.90625rem; line-height:1.5; color:var(--bark);}
+.chdoor{display:block; margin-top:10px; padding:13px 15px 15px; box-sizing:border-box;
+  background:var(--mount); border-left:3px solid var(--moss); border-radius:2px;
+  text-decoration:none; color:var(--ink);}
+.chdoor:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.cdh{display:flex; align-items:baseline; justify-content:space-between; gap:10px;}
+.cdh .dn{font-family:var(--fr); font-weight:500; font-size:calc(12.5px + 0.78125rem); line-height:1.1;
+  font-variation-settings:"opsz" 44,"WONK" 1; letter-spacing:-.012em;}
+.cdh .cdd{font-size:0.84375rem; font-style:italic; color:var(--bark);}
+.ustrip{display:grid; grid-template-columns:4.5rem 1fr; row-gap:10px; align-items:center;
+  margin-top:13px;}
+.ustrip .dn2{font-size:0.875rem; color:var(--bark);}
+.sqs{display:flex; gap:6px; align-items:center;}
+.sqs i{width:18px; height:18px; background:var(--moss); display:block; position:relative;}
+.sqs i.shut{background:none; box-shadow:inset 0 0 0 1.5px rgba(92,70,52,.5);}
+.sqs i.next::after{content:""; position:absolute; left:0; right:0; bottom:-7px;
+  height:3px; background:var(--moss);}
+.sqs .none{font-size:0.875rem; font-style:italic; color:var(--ink-soft);}
+
+/* ---------- lessons, one channel: the printed stem ----------
+   Depth is drawn. A unit's children hang off a stem that runs down from it
+   and a tick reaches in to each child, so three unit depths are one figure
+   and not an indented list. Every open unit carries a real Start control,
+   and the one unit that is next carries the only filled Start on the page.
+   ---------- */
+.tree{margin-top:22px;}
+.kids{margin-left:8px; padding-left:11px; border-left:1.5px solid rgba(92,70,52,.32);}
+.kids > .node > .urow::before{content:""; position:absolute; left:-11px; top:50%;
+  width:8px; height:1.5px; background:rgba(92,70,52,.32);}
+.urow{position:relative; display:flex; flex-wrap:wrap; align-items:center;
+  gap:8px 9px; min-height:70px; margin-top:8px; padding:10px; box-sizing:border-box;
+  border-radius:2px; color:var(--ink);
+  background:var(--mount); border-left:3px solid var(--moss);}
+.urow > .mk{flex:0 0 auto;}
+.urow .ubody{flex:1 1 6.5rem; min-width:0;}
+.urow .uctl{flex:0 0 auto; margin-left:auto; display:flex; align-items:center; gap:4px;}
+.urow .un{display:block; font-family:var(--fr); font-weight:500; font-size:1.125rem;
+  font-variation-settings:"opsz" 22; line-height:1.2;}
+.urow .ust{display:block; font-size:0.84375rem; line-height:1.35; color:var(--bark); margin-top:2px;}
+.urow .ramp{margin-top:7px;}
+.urow .done-sq{width:11px; height:11px; background:var(--moss); display:inline-block; margin-right:5px;}
+.node.shut .urow{background:none; border-left-color:rgba(92,70,52,.22);}
+.node.shut .un{color:var(--ink-soft);}
+.node.now .urow{border-left-width:7px;}
+.node.now .ust{color:var(--moss);}
+/* a Start a finger can find: an outlined control on every open unit, filled
+   solid on the one that is next */
+.startb{display:inline-flex; align-items:center; justify-content:center;
+  min-height:44px; min-width:72px; padding:0 13px; box-sizing:border-box;
+  font-family:var(--fr); font-weight:600; font-size:0.9375rem; font-variation-settings:"opsz" 16;
+  color:var(--moss); text-decoration:none; border:1.5px solid var(--moss); border-radius:2px;}
+.startb.solid{background:var(--moss); color:var(--paper);}
+.startb:active{background:rgba(58,90,60,.14);}
+.startb.solid:active{background:#314e33;}
+.startb:focus-visible{outline:2px solid var(--ink); outline-offset:2px;}
+.shutnote{font-size:0.8125rem; font-style:italic; color:var(--ink-soft); text-align:right;
+  max-width:72px; line-height:1.3;}
+
+/* ---------- the fold ----------
+   A unit that holds units carries a printer's corner at its right: a real
+   button, 44px square, that folds its children away and turns a quarter turn
+   when they are back. A folded row says in its own meta line how many units
+   sit inside and whether the next one is among them, so the fold never hides
+   a fact without leaving the count behind.
+   ---------- */
+.chev{appearance:none; -webkit-appearance:none; background:none; border:0; margin:0;
+  padding:0; width:44px; height:44px; flex:0 0 auto; display:flex; align-items:center;
+  justify-content:center; color:var(--moss); cursor:pointer;}
+.chev svg{width:19px; height:19px; display:block; transform:rotate(0deg);}
+.chev[aria-expanded="true"] svg{transform:rotate(90deg);}
+.chev:focus-visible{outline:2px solid var(--moss); outline-offset:-2px;}
+/* a sibling with no units inside holds the fold's place, so every Start at
+   one depth lines up down the page */
+.chevpad{width:44px; height:1px; flex:0 0 auto;}
+.node.folded > .kids{display:none;}
+.usum{display:none;}
+.node.folded > .urow .usum{display:inline;}
+
+/* ---------- species ---------- */
+.sp-title{padding-top:18px;}
+.sp-title .display{font-size:calc(20.5px + 1.28125rem);}
+.sp-title .sci{margin:10px 0 0; font-family:var(--fr); font-style:italic; font-weight:400;
+  font-size:calc(11px + 0.6875rem); font-variation-settings:"opsz" 30; color:var(--bark);}
+.sp-title .det2{margin:8px 0 0; font-size:0.9375rem; font-style:italic; color:var(--bark);}
+.spans{display:grid; grid-template-columns:1fr 1fr; gap:0 14px; margin:24px 0 0;}
+.spans b{display:block; font-family:var(--fr); font-weight:400; font-size:calc(17px + 1.0625rem); line-height:1;
+  font-variation-settings:"opsz" 110,"SOFT" 0,"WONK" 1; letter-spacing:-.022em;}
+.spans span{display:block; margin-top:6px; font-size:0.875rem; color:var(--bark);}
+.sp-prose{margin:20px 0 0; font-size:1.0625rem; line-height:1.56;}
+dl.facts{margin:20px 0 0; display:grid; grid-template-columns:6.5rem 1fr; row-gap:8px; column-gap:12px;}
+dl.facts dt{font-style:italic; color:var(--bark); font-size:0.90625rem; line-height:1.45;}
+dl.facts dd{margin:0; font-size:1rem; line-height:1.45;}
+.sec{margin-top:30px;}
+.card-row{
+  display:grid; grid-template-columns:1fr auto; align-items:center; column-gap:12px;
+  background:var(--mount); border-radius:2px; padding:11px 13px; margin-top:8px;
+}
+.card-row .cn{display:block; font-family:var(--fr); font-weight:500; font-size:0.90625rem;
+  font-variation-settings:"opsz" 14; color:var(--bark); line-height:1.2;}
+.card-row .lvw{margin-top:2px;}
+.card-row .lvn{display:block; margin-top:3px; font-family:var(--lit); font-size:0.8125rem;
+  font-style:italic; color:var(--bark);}
+.card-row .rt{display:flex; flex-direction:column; align-items:flex-end; text-align:right;}
+.card-row .due{display:block; font-size:0.875rem; color:var(--bark); margin-top:6px;}
+.fact-line{margin:16px 0 0; font-size:1rem; color:var(--bark);}
+.plate-cap{margin-top:9px;}
+/* the hero plate under the title, and the plate a channel section carries */
+.plate.sp-hero{margin-top:20px;}
+.sec > .plate{margin-top:14px;}
+/* a variety line names the channels its card sits on, in place of the level
+   word a species line prints there */
+.spx .due{font-size:0.875rem; font-style:italic; color:var(--bark); text-align:right;}
+
+/* ---------- settings ----------
+   The same printed panels as everywhere else. Each setting is a row of
+   choices; the chosen one is inked, the rest are outlined. Text size is the
+   one setting that shows itself: each step prints a sample word at the size
+   that step gives you, so the choice is the thing and not a number.
+   ---------- */
+.setgroup{margin-top:30px;}
+.setgroup > .tick{margin:0 0 10px;}
+.setgroup .sub2{margin:7px 0 0; font-size:0.9375rem; line-height:1.45; color:var(--bark);}
+.choices{display:flex; flex-wrap:wrap; gap:8px; margin:13px 0 0; padding:0; border:0;}
+.choice{position:relative; display:inline-flex; align-items:center; justify-content:center;
+  min-height:44px; min-width:56px; padding:0 14px; box-sizing:border-box;
+  font-family:var(--fr); font-weight:500; font-size:1rem; font-variation-settings:"opsz" 18;
+  color:var(--moss); border:1.5px solid var(--moss); border-radius:2px; cursor:pointer;}
+.choice input{position:absolute; inset:0; margin:0; opacity:0; cursor:pointer;}
+.choice:has(input:checked){background:var(--moss); color:var(--paper);}
+.choice:has(input:focus-visible){outline:2px solid var(--ink); outline-offset:2px;}
+
+/* text size: five steps, each one printed at its own size */
+.tsteps{margin:14px 0 0; padding:0; border:0;}
+.tstep{display:flex; align-items:center; gap:13px; min-height:52px; padding:5px 0;
+  border-bottom:1px solid var(--hair); cursor:pointer;}
+.tstep:last-child{border-bottom:0;}
+.tstep input{appearance:none; -webkit-appearance:none; flex:0 0 auto;
+  width:22px; height:22px; margin:0; box-sizing:border-box;
+  border:1.5px solid var(--bark); background:none; cursor:pointer;}
+.tstep input:checked{border-color:var(--moss); background:var(--moss);
+  box-shadow:inset 0 0 0 3.5px var(--paper);}
+.tstep input:focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+/* the sample words are sized in px: they must show what each step does,
+   whatever the step in force right now */
+.tsample{flex:1 1 auto; font-family:var(--lit); line-height:1.15;}
+/* one class per step size, and the sizes match `sample_px` in
+   `app/ui/textsize.js` */
+.tsample.px14{font-size:14px;}
+.tsample.px15{font-size:15px;}
+.tsample.px17{font-size:17px;}
+.tsample.px20{font-size:20px;}
+.tsample.px22{font-size:22px;}
+.tname{flex:0 0 auto; font-size:0.875rem; font-style:italic; color:var(--bark);}
+.tstep input:checked ~ .tname{font-style:normal; color:var(--ink);}
+
+.setbtn{display:flex; align-items:center; justify-content:space-between; gap:12px;
+  min-height:54px; margin-top:9px; padding:0 15px; box-sizing:border-box;
+  background:var(--mount); border-left:3px solid var(--moss); border-radius:2px;
+  text-decoration:none; color:var(--ink);}
+/* Export and Reset are real controls, so the row holds a button and Import
+   holds a label over a file input. The reset comes first and the type rule
+   under it carries the face for the span and the button alike, so the four
+   type declarations are written once. */
+.setbtn button.sbn{appearance:none; -webkit-appearance:none; background:none;
+  border:0; padding:0; color:inherit; font:inherit; text-align:left;
+  cursor:pointer; min-height:54px; flex:1 1 auto;}
+.setbtn .sbn, .setbtn button.sbn{font-family:var(--fr); font-weight:600;
+  font-size:1.0625rem; font-variation-settings:"opsz" 20;}
+.setbtn .sbd{font-size:0.84375rem; font-style:italic; color:var(--bark); text-align:right;}
+.setbtn:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.setbtn button.sbn:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+label.setbtn{cursor:pointer;}
+label.setbtn:has(input:focus-visible){outline:2px solid var(--moss); outline-offset:2px;}
+/* `.setbtn` sets `display:flex`, which outweighs the browser's own rule for
+   the `hidden` attribute. The reset's confirm row starts hidden, so it needs
+   this rule to stay off the page until the reset is tapped. */
+.setbtn[hidden]{display:none;}
+.setbtn.warn{border-left-color:var(--sap);}
+
+/* The diagnostics list reuses the printed species rows, but it prints no
+   glyph and it sits inside a setting panel, not against the depth column.
+   Two columns and no left margin, so a pair name gets the width of the page
+   in place of the 26px the glyph would take. */
+.setgroup .splist{margin-left:0;}
+.setgroup .spx{grid-template-columns:1fr auto;}
+/* a legend the screen reader hears and the page does not print */
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%);
+  white-space:nowrap;}
+
+/* ---------- the one motion moment: the reveal answers the tap ---------- */
+@media (prefers-reduced-motion:no-preference){
+  /* the fold turns a quarter turn; the only other motion in the app */
+  .chev svg{transition:transform .18s ease-out;}
+  .reveal .verdict-wrap{animation:rise .26s ease-out both;}
+  .reveal .pair-head i{animation:ink .3s .1s ease-out both; transform-origin:left;}
+  .reveal .pl-a img{animation:press .38s .06s ease-out both;}
+  .reveal .pl-b img{animation:press .38s .2s ease-out both;}
+  .reveal .pair-head .no b{animation:strike .3s .34s ease-out both;}
+  @keyframes rise{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  @keyframes ink{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+  @keyframes press{from{opacity:0} to{opacity:1}}
+  @keyframes strike{from{text-decoration-color:transparent} to{text-decoration-color:var(--bark)}}
+}
+/* and the guard, for anyone who asked the system to hold still */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important; transition:none !important;}
+  html{scroll-behavior:auto;}
 }
 
-.nav a { color: var(--accent); text-decoration: none; }
+/* =======================================================================
+   THE LIVE APP
 
-button {
-  font: inherit;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: #fff;
-  cursor: pointer;
+   The mockup prints anchors where the app needs real controls, and it never
+   renders a banner, an error, a typed answer, a photo key, or a summary.
+   These rules add exactly those, in the same system.
+   ======================================================================= */
+
+/* A plate with no crop class still fills its column. The `.pl-*` rules above
+   set their own width and a negative margin, which is what crops the scan, so
+   this rule must not reach them: `.plate img` and `.pl-hero img` weigh the
+   same and this one comes later, which would reset the width and leave the
+   negative margin behind, shifting every cropped plate up and left. */
+.plate:not([class*="pl-"]) img{width:100%;}
+
+/* A plate whose treatment has not been measured yet draws nothing. The
+   measurement needs the image loaded, so without this every bright scan
+   paints once as a field plate and snaps to a print a frame later, which on
+   the session hero is a visible flash. The figure keeps its box, so nothing
+   moves when the image appears. */
+.plate.measuring img{visibility:hidden;}
+
+/* The running foot sits at the bottom of a short page. `.footnav` carries the
+   36px clearance in its own top margin, so the pusher adds none. */
+.footpush{flex:1 0 0; min-height:0;}
+
+/* A control that acts is a button; a control that moves you is a link. The
+   reset is wrapped in `:where()`, which weighs nothing, so `.btn`, `.pick`,
+   and `.startb` above keep their family, their size, and their 54px line
+   height. Without the wrapper `button.btn` would outweigh `.btn` and
+   `font:inherit` would strip the display face off every button.
+
+   Three classes, and only three. The settings screen's choices are labels
+   wrapping a radio, not buttons, so there is no `choice-btn` to reset. */
+:where(button.pick, button.btn, button.startb){
+  appearance:none; -webkit-appearance:none; border:0; font:inherit; cursor:pointer;
 }
+button.pick{text-align:left; width:100%;}
+button.btn{width:100%; padding:0;}
+.btn.ghost{background:none; color:var(--moss); box-shadow:inset 0 0 0 1.5px var(--moss);}
+.btn.ghost:active{background:rgba(58,90,60,.14);}
+.btnrow{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:26px;}
+.btnrow .btn{margin-top:0;}
 
-button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-button:disabled { opacity: 0.5; cursor: default; }
+/* I guessed: a real checkbox under the printed box */
+.guessed{position:relative;}
+.guessed input{position:absolute; inset:0; width:100%; height:100%; margin:0;
+  opacity:0; cursor:pointer;}
+.guessed input:checked ~ .box{background:var(--moss); border-color:var(--moss);}
+.guessed input:focus-visible ~ .box{outline:2px solid var(--moss); outline-offset:3px;}
 
-.channel-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
-.channel.is-active { background: var(--accent); color: #fff; border-color: var(--accent); }
+/* the typed format */
+.typed{display:flex; flex-wrap:wrap; gap:9px; margin:12px 0 0;}
+.typed input{flex:1 1 10rem; min-height:56px; padding:0 15px; box-sizing:border-box;
+  font:inherit; font-family:var(--fr); color:var(--ink);
+  background:rgba(201,210,180,.46); border:0; border-bottom:2px solid var(--moss);
+  border-radius:2px;}
+.typed input:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.typed .btn{flex:0 0 auto; width:auto; min-width:104px; margin:0; padding:0 18px;}
 
-.card {
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 1rem;
-  margin: 1rem 0;
-  background: #fff;
-}
+/* the inverted format: pick the photo, four plates at one scale */
+.invkey{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:12px 0 0;}
+/* The one button in the app that carries no class. It held the paper's type
+   from the legacy element rule, which is gone, so it takes `font:inherit`
+   here. The button holds a plate and no words today, so nothing on screen
+   moved; the rule keeps a word the format may add later on the page's face. */
+.invkey button{appearance:none; border:0; padding:0; background:none; cursor:pointer;
+  font:inherit; min-height:44px;}
+.invkey .plate{aspect-ratio:1/1;}
+.invkey button:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
 
-.notice { background: #fff4e0; border-left: 4px solid var(--warn); padding: 0.75rem; }
+/* the session summary, and the summary the Leave link shows */
+.sumrow{display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+  min-height:44px; padding:7px 0; border-bottom:1px solid var(--hair);}
+.sumrow:last-child{border-bottom:0;}
+.sumrow .sk{font-size:1rem; color:var(--bark);}
+.sumrow .sv{font-family:var(--fr); font-weight:500; font-size:calc(9.5px + 0.59375rem);
+  font-variation-settings:"opsz" 26;}
+.misslist{margin:16px 0 0; padding:0; list-style:none;}
+.misslist li{padding:9px 0; border-bottom:1px solid var(--hair); font-size:1rem;
+  line-height:1.45;}
+.misslist li:last-child{border-bottom:0;}
 
-.unit-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto;
-  gap: 0.75rem;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--line);
-}
+/* The head of a session. `Leave` is a word, about 38px wide, so it needs a
+   floor on the width as well as on the height. `flex-start` is already the
+   default on the mockup's `display:inline-flex`, so the word sits at the left
+   edge of the 44px target with no rule of its own. */
+.head .leave{min-width:44px;}
 
-.unit-meta { color: #5c5850; font-size: 0.9rem; }
+/* the banner and the error panel: the app's two failure surfaces */
+.banner{margin:0; padding:13px var(--gut); background:var(--mount);
+  border-bottom:3px solid var(--sap); font-size:0.9375rem; line-height:1.45;
+  color:var(--ink);}
+/* The error panel is a mounted panel like `.finding`, so it runs to both
+   edges of the phone. Without the negative margins it sits 22px inside them
+   and reads as a different kind of object.
 
-.pill { font-size: 0.8rem; padding: 0.1rem 0.5rem; border-radius: 999px; border: 1px solid var(--line); }
-.pill-open { background: var(--level-2); }
-.pill-closed { background: var(--level-0); }
+   The sap rule runs along the bottom, not down the left. A left rail marks a
+   panel that is inset from the page, which is what `.note` is. A bled panel
+   has no left edge to rail, so it takes the rule the banner takes, edge to
+   edge under the panel. */
+.error{margin:24px calc(var(--gut)*-1) 0; padding:18px var(--gut);
+  background:var(--mount); border-bottom:3px solid var(--sap);}
+.error h1{font-family:var(--fr); font-weight:400; font-size:calc(18px + 1.125rem);
+  line-height:1.03; font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
+  letter-spacing:-.018em; margin:0;}
+.error ul{margin:12px 0 0; padding-left:1.1rem; font-size:1rem; line-height:1.5;}
+.error .placement{margin-right:18px;}
 
-.chip {
-  display: inline-block;
-  font-size: 0.8rem;
-  padding: 0.1rem 0.5rem;
-  border: 1px solid var(--accent);
-  border-radius: 999px;
-  color: var(--accent);
-}
+/* one printed note, for a state that is a fact and not an error */
+.note{margin:16px 0 0; padding:13px 15px; background:var(--mount);
+  border-left:3px solid var(--bark); font-size:1rem; line-height:1.5;}
 
-.progress-bar { height: 6px; background: var(--level-0); border-radius: 3px; margin: 0.5rem 0 1rem; }
-.progress-bar > div { height: 100%; background: var(--accent); border-radius: 3px; }
+/* Leave is a control, not a link. With a card answered it paints the leave
+   summary in place; with nothing answered it goes home. The reset is wrapped
+   in `:where()`, which weighs nothing, so the `.head .leave` rule above keeps
+   the underline, the bark, and the 44px floor. */
+:where(button.leave){appearance:none; -webkit-appearance:none; background:none;
+  border:0; padding:0; font:inherit; cursor:pointer;}
+button.leave:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
 
-.photo { max-width: 100%; max-height: 22rem; border: 1px solid var(--line); background: #fff; }
-.photo-pair { display: flex; gap: 1rem; flex-wrap: wrap; }
-.attribution { font-size: 0.8rem; color: #5c5850; }
+/* The gauge draws one tick per card in the deck. `session_size` reaches 30,
+   and a placement deck can be longer, so the mockup's single row of `flex:1`
+   ticks would squeeze each tick towards nothing. A tick has a floor of 2px
+   and the row wraps instead, so a long deck prints two or three short rows
+   and every card still has its own tick. `height` comes off the row, because
+   a wrapped row is as tall as the lines it holds. */
+.gauge{flex-wrap:wrap; row-gap:3px; height:auto; min-height:5px;}
+.gauge i{min-width:2px;}
 
-.options { display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0; }
-.options.inv { flex-direction: row; flex-wrap: wrap; }
-.options.inv img { width: 9rem; height: 9rem; object-fit: cover; }
-.option-sub { display: block; font-style: italic; color: #5c5850; font-size: 0.85rem; }
+/* The space the mockup carries as inline styles on the session and the
+   reveal. A screen builds the DOM; the sheet sets the space around it. Each
+   rule is keyed on a class the screen already prints, or on where the node
+   sits, so no screen gains a class for spacing alone. */
 
-.grid { border-collapse: collapse; width: 100%; }
-.grid th, .grid td { border: 1px solid var(--line); padding: 0.3rem 0.5rem; text-align: left; }
-.grid td.cell { text-align: center; width: 3rem; }
-.lv-0 { background: var(--level-0); }
-.lv-1 { background: var(--level-1); }
-.lv-2 { background: var(--level-2); }
-.lv-3 { background: var(--level-3); }
-.lv-4 { background: var(--level-4); color: #fff; }
-.cell-empty { background: repeating-linear-gradient(45deg, #fff, #fff 4px, #eee 4px, #eee 8px); }
+/* the question's hero print opens a gap under the gauge */
+.pl-hero{margin-top:12px;}
+/* the reveal: the two labels over the pair, and the one plate a right answer
+   prints, both open a new block under the name. The plates of a pair sit
+   inside `.pair`, so the child selector reaches the single plate only. */
+.reveal .pair-head{margin-top:24px;}
+.reveal > .plate{margin-top:24px;}
+/* The summary and the empty deck carry no running head, and `#app` has no top
+   padding, so the heading would sit on the top edge of the phone. Every other
+   screen opens 18px down. The two error screens put a trail first, so this
+   rule reaches the session's two headings and nothing else. */
+#app > .display:first-child{padding-top:18px;}
+/* the tick opens a new section, so it clears the hairline under the last row */
+.sumrow + .tick{margin-top:24px;}
 
-.error { border: 2px solid var(--warn); padding: 1rem; margin-top: 1rem; }
+/* The credit's author is a link. With no rule it prints in the browser's blue
+   and breaks the italic bark of the caption around it. Bark on paper is
+   7.5:1, and the underline stays, so the link still reads as a link. */
+.cap a{color:var(--bark);}
 
-label { display: block; margin: 0.75rem 0; }
-input[type="number"], input[type="text"] { font: inherit; padding: 0.3rem; border: 1px solid var(--line); border-radius: 4px; }

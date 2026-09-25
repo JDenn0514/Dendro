@@ -35,7 +35,7 @@ function speciesImages(raw, symbol, channel) {
 }
 
 // A variety key is not a key of raw.species, so find the species that owns it.
-function ownerOfVariety(raw, varietyKey) {
+export function ownerOfVariety(raw, varietyKey) {
   for (const record of Object.values(raw.species)) {
     if ((record.varieties ?? []).some((v) => v.key === varietyKey)) return record;
   }

@@ -16,6 +16,7 @@ test('the card level comes from the tier table', () => {
   assert.equal(cardLevel({ tier: 'typed', tier_passes: 0 }), 3);
   assert.equal(cardLevel({ tier: 'typed', tier_passes: 1 }), 4);
   assert.equal(LEVEL_NAMES[4], 'expert');
+  assert.equal(LEVEL_NAMES[0], 'new');
 });
 
 test('the species level is the lowest of its cards', () => {

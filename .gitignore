@@ -1,6 +1,8 @@
 .claude/worktrees/
 .superpowers/
 node_modules/
+out/
+__pycache__/
 pipeline/cache/
 .DS_Store
 Thumbs.db

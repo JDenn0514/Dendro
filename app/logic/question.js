@@ -1,5 +1,6 @@
 // Picks the format, samples a photo, builds options and distractors, builds the reveal.
 import { cardId } from './content.js';
+import { displayName } from './words.js';
 
 // An inv question asks the learner to pick the photo. Below this many photo
 // options the card asks mc8 instead.
@@ -131,7 +132,10 @@ function conceptRecord(content, channel, key) {
 export function labelFor(content, kind, channel, key) {
   if (kind === 'species') {
     const record = content.species[key];
-    return { label: record.common[0], sublabel: record.scientific };
+    // Every label here is a display label: an answer button, the name on the
+    // reveal, the caption under a thumb. The content keeps the botanical
+    // lowercase form.
+    return { label: displayName(record), sublabel: record.scientific };
   }
   if (kind === 'concept') {
     const concept = conceptRecord(content, channel, key);
@@ -303,7 +307,7 @@ function fallbackText(content, kind, channel, answerKey, chosenKey) {
     const describe = (symbol) => {
       const record = content.species[symbol];
       const bucket = conceptRecord(content, channel, record.concepts?.[channel]);
-      return `${record.common[0]} is ${bucket?.name ?? 'uncategorised'}, genus ${record.genus}.`;
+      return `${displayName(record)} is ${bucket?.name ?? 'uncategorised'}, genus ${record.genus}.`;
     };
     return `${describe(answerSymbol)} ${describe(chosenSymbol)}`;
   }
