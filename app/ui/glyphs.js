@@ -4,6 +4,8 @@
 //
 // The map functions touch no DOM, so `node --test` covers them.
 
+import { ownerOfVariety } from '../logic/content.js';
+
 export const SPRITE_PATH = 'app/ui/sprite.svg';
 export const SPRITE_ID = 'dendro-sprite';
 
@@ -70,15 +72,6 @@ export function genusGlyph(genus, content) {
   return FALLBACK_GLYPH;
 }
 
-function genusOfVariety(content, varietyKey) {
-  for (const record of Object.values(content.species ?? {})) {
-    if ((record.varieties ?? []).some((variety) => variety.key === varietyKey)) {
-      return record.genus;
-    }
-  }
-  return null;
-}
-
 export function glyphIdFor(card, content) {
   if (card.kind === 'concept') {
     return conceptGlyph(card.channel, card.key) ?? FALLBACK_GLYPH;
@@ -87,7 +80,7 @@ export function glyphIdFor(card, content) {
   if (card.kind === 'species') {
     return genusGlyph(content.species[card.key]?.genus ?? null, content);
   }
-  return genusGlyph(genusOfVariety(content, card.key), content);
+  return genusGlyph(ownerOfVariety(content, card.key)?.genus ?? null, content);
 }
 
 // One mark. `level` fills it on the five-step ramp; `ghost` draws a pressed
@@ -95,7 +88,8 @@ export function glyphIdFor(card, content) {
 export function glyph(id, level, sizeClass, options = {}) {
   const node = document.createElementNS(SVG_NS, 'svg');
   node.setAttribute('viewBox', '0 0 112 140');
-  const fill = options.ghost ? 'gh' : `v${Math.max(0, Math.min(4, level))}`;
+  const step = Number.isFinite(level) ? Math.round(level) : 0;
+  const fill = options.ghost ? 'gh' : `v${Math.max(0, Math.min(4, step))}`;
   node.setAttribute('class', `mk ${sizeClass} ${fill}`);
   node.setAttribute('aria-hidden', 'true');
   const use = document.createElementNS(SVG_NS, 'use');
