@@ -3802,7 +3802,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:56:58Z",
-    "note": "An archival black and white plate of two leaves on a twig against a plain ground. The lobes and wide leaf top read clearly."
+    "note": "An archival black and white plate of two leaves on a twig against a plain ground. The lobes and wide leaf top read clearly.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "870bf70bec051e93724f9e9651b3e76359f79d606112d88959cf37842b8632cf",
