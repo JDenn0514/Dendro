@@ -138,7 +138,9 @@ channel only. Use these tools, in this order, and stop when the pair has 4 appro
 2. **The other sites.** Look for that channel on Wikimedia Commons, iNaturalist, and
    wildflower.org, in the built-in browser or with a script that calls the site over HTTP.
    Take only images whose licence is on the allowlist. Append each one as a manual
-   candidate, as below.
+   candidate, as below. A script that calls wildflower.org sends 1 request per second at
+   most, and reads 20 image pages per species at most. The wildflower.org policy forbids
+   bulk harvesting.
 3. **Kew POWO, last.** Run the `powo-harvest` skill only for a pair that is still thin after
    steps 1 and 2. Before you start it, write down which sites you searched for that pair and
    what each gave. The skill saves the Kew gallery in the built-in browser, makes the rows
@@ -168,8 +170,21 @@ missing.
 - `--license` must be on the allowlist. The one exception is
   `used with permission, non-commercial`, which `photos add` accepts only when `--origin` is
   on `www.wildflower.org`.
-- `--source` is the display name of the source, such as `US Forest Service`. It goes on the
-  manifest row as it is.
+- `--source` is the display name of the source. It goes on the manifest row as it is. For a
+  manual row from one of these sites, use the value exactly as written here:
+  - `Wikimedia Commons`
+  - `iNaturalist`
+  - `Bioimages`
+  - `Trees and Shrubs Online`
+  - `Lady Bird Johnson Wildflower Center`
+  - `Plants of the World Online (Kew)`
+
+  For another site, write the name that the site gives itself, such as `US Forest Service`.
+- A wildflower.org row takes `--license "used with permission, non-commercial"`. The
+  permission and the policy need the credit to name the Center, so `--source` is
+  `Lady Bird Johnson Wildflower Center`. `--author` is the photographer as `First Last`. The
+  page writes `Last, First`, so turn the two parts around: `Smith, Jane` becomes
+  `Jane Smith`.
 - `--source-species` is the species the source page names. The identity check reads it.
 - `--local <path>` names an image file you already downloaded. Without it the command
   downloads `--file-url`.
