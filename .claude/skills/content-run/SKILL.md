@@ -66,9 +66,14 @@ node pipeline/cli.ts photos fetch <name>
 ```
 
 This appends rows to `pipeline/runs/<name>/candidates.jsonl` and downloads each image into
-`pipeline/cache/`. It prints
-`<n> candidates appended to pipeline/runs/<name>/candidates.jsonl, <m> download failures, <k> monochrome dropped`,
-then one line per fetch failure, and it records the count in `run.json` as
+`pipeline/cache/`. The sources take turns: each source gives one row per round, in this
+order: Wikimedia Commons, iNaturalist. A source that runs out drops out of the rounds. USDA
+PLANTS rows come after all the turn rows. A target keeps 60 rows at most.
+
+It prints one line per fetch failure, then
+`<n> candidates appended to pipeline/runs/<name>/candidates.jsonl, <m> download failures, <k> monochrome dropped`.
+The last line gives the appended rows per source, in fetch order, for example
+`by source: commons 17, inat 16, plants 0`. It records the failure count in `run.json` as
 `fetch_failures`.
 
 - [ ] **Step 5: Approve the photos (agent)**

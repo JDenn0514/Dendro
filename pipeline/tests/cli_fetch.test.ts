@@ -11,13 +11,16 @@ import {
   MAX_PER_SPECIES,
   SOURCE_NAMES,
   candidateId,
+  interleave,
   makeCandidate,
   type Candidate,
 } from '../lib/candidates.ts';
 import {
   CHECK_AGENT,
+  FETCH_ORDER,
   MAX_COMMONS_PAGES,
   NO_PROFILE,
+  TURN_ORDER,
   runCommand,
   type CliDeps,
 } from '../lib/commands.ts';
@@ -425,9 +428,17 @@ function fetchedOf(root: string): Candidate[] {
   return candidatesOf(root).filter((row) => row.source_key !== 'manual');
 }
 
-/** The line `photos fetch` prints last. The count comes from the rows, never from a literal. */
+/** The count line of `photos fetch`, before the line per source. The count comes from the rows, never from a literal. */
 function appendedLine(appended: number, failures: number, mono = 0): string {
   return `${appended} candidates appended to pipeline/runs/demo/candidates.jsonl, ${failures} download failures, ${mono} monochrome dropped`;
+}
+
+/** The line `photos fetch` prints last. The counts come from the rows, never from a literal. */
+function sourceLineOf(rows: Candidate[]): string {
+  const parts = FETCH_ORDER.map(
+    (key) => `${key} ${rows.filter((row) => row.source_key === key).length}`,
+  );
+  return `by source: ${parts.join(', ')}`;
 }
 
 test('no argument prints the usage block and fails', async (t) => {
@@ -649,7 +660,7 @@ test('photos fetch appends candidates with their bytes and commits', async (t) =
     assert.ok(fs.existsSync(path.join(root, row.local)));
   }
   assert.equal(readRun(root, 'demo').fetch_failures, 0);
-  assert.deepEqual(out, [appendedLine(expected.length, 0)]);
+  assert.deepEqual(out, [appendedLine(expected.length, 0), sourceLineOf(rows)]);
   assert.equal(exec.calls[1].args[2], 'content(demo): photo candidates');
 });
 
@@ -698,14 +709,35 @@ test('photos fetch pages the Commons listing', async (t) => {
   assert.deepEqual(readRun(root, 'demo').capped, []);
 });
 
-test('photos fetch ranks Commons and iNaturalist ahead of PLANTS under the cap', async (t) => {
+test('the turn order is Commons, then iNaturalist, and PLANTS comes last', () => {
+  assert.deepEqual(TURN_ORDER, ['commons', 'inat']);
+  assert.deepEqual(FETCH_ORDER, ['commons', 'inat', 'plants']);
+});
+
+test('photos fetch takes Commons and iNaturalist in turns, then PLANTS', async (t) => {
+  const { root, deps } = setup(t, photoRoutes());
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const turns = interleave([commonsRowsOf('QUGA'), inatRowsOf('QUGA')]);
+  assert.deepEqual(
+    fetchedOf(root).map((row) => row.origin),
+    [...turns, ...plantsRowsOf('QUGA')].map((row) => row.origin),
+    'one row from each turn source per round, and PLANTS after every turn row',
+  );
+});
+
+test('photos fetch gives the cap to the turn sources ahead of PLANTS', async (t) => {
   const { root, deps, out, http } = setup(t, photoRoutes());
   seedInatTerms(root);
   seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
     scope.species = ['QUGA'];
   });
-  // The seeded rows leave room for the Commons and iNaturalist rows only, so every PLANTS
-  // row meets the cap.
+  // The seeded rows leave room for the turn rows only, so every PLANTS row meets the cap.
   const room = commonsRowsOf('QUGA').length + inatRowsOf('QUGA').length;
   assert.ok(plantsRowsOf('QUGA').length > 0, 'the fixture holds PLANTS rows for the cap to stop');
   assert.ok(room < MAX_PER_SPECIES, 'the fixture rows fit under the cap');
@@ -720,10 +752,10 @@ test('photos fetch ranks Commons and iNaturalist ahead of PLANTS under the cap',
   assert.deepEqual(
     [...new Set(rows.map((row) => row.source_key))].sort(),
     ['commons', 'inat'],
-    'no PLANTS row reaches the queue ahead of Commons and iNaturalist',
+    'no PLANTS row reaches the queue ahead of the turn sources',
   );
   assert.ok(http.urls.includes(imagesUrl(QUGA_ID)), 'the PLANTS listing was still fetched');
-  assert.deepEqual(out, [appendedLine(room, 0)]);
+  assert.deepEqual(out, [appendedLine(room, 0), sourceLineOf(rows)]);
 });
 
 test('photos fetch prints a failed listing and still exits 0', async (t) => {
@@ -777,7 +809,7 @@ test('photos fetch records a failed download and keeps the row', async (t) => {
   }
   const failures = readRun(root, 'demo').fetch_failures;
   assert.ok(failures > 0);
-  assert.deepEqual(out, [appendedLine(rows.length, failures)]);
+  assert.deepEqual(out, [appendedLine(rows.length, failures), sourceLineOf(rows)]);
 });
 
 test('photos fetch drops a monochrome row and counts it', async (t) => {
@@ -804,7 +836,7 @@ test('photos fetch drops a monochrome row and counts it', async (t) => {
   assert.equal(scope.mono_dropped, 1);
   assert.equal(scope.fetch_failures, 0);
   assert.ok(err.includes('QUGA: 1 monochrome dropped'));
-  assert.deepEqual(out, [appendedLine(expected.length - 1, 0, 1)]);
+  assert.deepEqual(out, [appendedLine(expected.length - 1, 0, 1), sourceLineOf(rows)]);
   const cached = path.join(root, 'pipeline', 'cache', 'commons', `${sha256Hex(grey)}.jpg`);
   assert.ok(fs.existsSync(cached), 'the cache keeps the grey file for a rerun');
 });
@@ -835,7 +867,7 @@ test('photos fetch counts an image that does not decode as a download failure', 
     err.some((line) => line.startsWith(`fetch failed: 200 ${brokenUrl}: the image does not decode:`)),
     'the failure line names the url',
   );
-  assert.deepEqual(out, [appendedLine(expected.length - 1, 1, 0)]);
+  assert.deepEqual(out, [appendedLine(expected.length - 1, 1, 0), sourceLineOf(rows)]);
 });
 
 test('photos fetch skips the profile call for a symbol in plants_ids.json', async (t) => {

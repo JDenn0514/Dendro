@@ -159,6 +159,16 @@ export const NO_PROFILE = 'no profile';
 export const MAX_COMMONS_PAGES = 4;
 export const MAX_INAT_PAGES = 4;
 
+/**
+ * The sources that take turns, in the owner's quality order (ruling 2026-09-25). Each gives
+ * one row per round, and a source that runs out drops out of the rounds. PLANTS rows come
+ * after every turn row.
+ */
+export const TURN_ORDER: SourceKey[] = ['commons', 'inat'];
+
+/** Every source that `photos fetch` reads, in fetch order. The last line names them in this order. */
+export const FETCH_ORDER: SourceKey[] = [...TURN_ORDER, 'plants'];
+
 const USAGE = `usage: node pipeline/cli.ts <command> [flags]
 
   run init <name> --bucket <b> --states <csv> --genera <csv> --include <csv> --channels <csv>
@@ -316,6 +326,8 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
   const rows = checklist.ok ? parseChecklist(checklist.body) : [];
 
   const noProfile: string[] = [];
+  // The appended rows per source, after the colour drop. The last line prints them.
+  const bySource: Record<string, number> = {};
   let appended = 0;
   let monoDropped = 0;
   for (const target of targetsOf(scope)) {
@@ -332,6 +344,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
         noProfile.push(symbol);
         continue;
       }
+      const names = [plant.scientific, ...synonymNames(rows, symbol)];
       const context: FetchContext = {
         deps,
         scope,
@@ -339,15 +352,16 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
         symbol,
         scientific: plant.scientific,
         plantsId: plant.id,
+        names,
+        passes,
         now,
       };
-      const names = [plant.scientific, ...synonymNames(rows, symbol)];
-      // Commons and iNaturalist come first. `collect` takes rows in order up to the cap, and
-      // PLANTS images are mostly monochrome herbarium plates, so PLANTS takes the room left.
-      const fromSources: Candidate[] = [];
-      fromSources.push(...(await commonsRows(context)));
-      fromSources.push(...(await inatRows(context, passes)));
-      fromSources.push(...(await plantsRows(context)));
+      // Owner ruling 2026-09-25: the turn sources take turns, one row each per round, so a
+      // source late in TURN_ORDER still gets rows before `collect` reaches the cap. PLANTS
+      // images are mostly monochrome herbarium plates, so PLANTS takes the room left.
+      const turns: Candidate[][] = [];
+      for (const key of TURN_ORDER) turns.push(await turnRows(key, context));
+      const fromSources = [...interleave(turns), ...(await plantsRows(context))];
       // D17: the script compares the source's own name with the accepted name and its
       // synonyms, so the photo-check agent reads a verdict instead of guessing.
       for (const row of fromSources) {
@@ -401,6 +415,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
     existing = existing.concat(kept);
     appended += kept.length;
     monoDropped += mono;
+    for (const row of kept) bySource[row.source_key] = (bySource[row.source_key] ?? 0) + 1;
   }
 
   scope.dropped = withNoProfile(scope.dropped, noProfile);
@@ -412,6 +427,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
   console.log(
     `${appended} candidates appended to ${relative(deps.root, candidatesPath)}, ${scope.fetch_failures} download failures, ${scope.mono_dropped} monochrome dropped`,
   );
+  console.log(sourceLine(bySource));
   return 0;
 }
 
@@ -739,6 +755,9 @@ interface FetchContext {
   symbol: string;
   scientific: string;
   plantsId: number;
+  /** The scientific name and its PLANTS synonyms. A source that looks a species up by name reads them. */
+  names: string[];
+  passes: InatPass[];
   now: string;
 }
 
@@ -776,6 +795,23 @@ async function plantOf(
   const profile = await fetchProfile(deps.http, symbol, now);
   if (profile === null) return null;
   return { id: profile.plants_id, scientific: profile.scientific };
+}
+
+/** One turn source's rows for one symbol, best first. */
+async function turnRows(key: SourceKey, context: FetchContext): Promise<Candidate[]> {
+  switch (key) {
+    case 'commons':
+      return commonsRows(context);
+    case 'inat':
+      return inatRows(context, context.passes);
+    default:
+      throw new Error(`${key} is not a turn source`);
+  }
+}
+
+/** The last line of `photos fetch`: the appended rows per source, after the colour drop. */
+function sourceLine(counts: Record<string, number>): string {
+  return `by source: ${FETCH_ORDER.map((key) => `${key} ${counts[key] ?? 0}`).join(', ')}`;
 }
 
 async function plantsRows(context: FetchContext): Promise<Candidate[]> {
