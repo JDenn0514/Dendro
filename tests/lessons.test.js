@@ -13,6 +13,20 @@ const { content } = loadContent(loadFixture());
 // card reaches level 2, so this state opens the tree below it.
 const OPEN_LEAF = { 'concept:leaf:simple_lobed': { tier: 'mc8', tier_passes: 0 } };
 
+const SEEN = { tier: 'mc8', tier_passes: 0 };
+
+// One unit is next in the whole content. Bark and fruit come before the leaf
+// genus in the content order, so the leaf branch holds the next unit only
+// once every bark and fruit card is seen.
+const LEAF_NEXT = {
+  ...OPEN_LEAF,
+  'concept:bark:furrowed': SEEN,
+  'concept:bark:plated': SEEN,
+  'concept:bark:papery': SEEN,
+  'concept:fruit:samara': SEEN,
+  'concept:fruit:acorn': SEEN
+};
+
 test('a channel keeps its units in the order of units.json', () => {
   assert.deepEqual(channelUnits(content, 'leaf').map((u) => u.key), [
     'leaf_types', 'simple_lobed_genus', 'simple_lobed_white_oaks_co',
@@ -61,12 +75,22 @@ test('a closed unit says which unit opens it and how many cards are left', () =>
 });
 
 test('the next-up unit is marked, and so is every branch above it', () => {
-  const tree = unitTree(content, OPEN_LEAF, 'leaf');
+  const tree = unitTree(content, LEAF_NEXT, 'leaf');
   assert.equal(tree[0].next_up, false);
   assert.equal(tree[0].holds_next, true);
   const genus = tree[0].children[0];
   assert.equal(genus.next_up, true);
   assert.equal(genus.holds_next, false);
+});
+
+test('the next unit is one unit in the whole content, not one per channel', () => {
+  // With only the leaf concept seen, bark is the next unit, so the leaf tree
+  // carries no mark at all.
+  const tree = unitTree(content, OPEN_LEAF, 'leaf');
+  assert.equal(tree[0].next_up, false);
+  assert.equal(tree[0].holds_next, false);
+  assert.equal(tree[0].children[0].next_up, false);
+  assert.equal(unitTree(content, OPEN_LEAF, 'bark')[0].next_up, true);
 });
 
 test('the new count and the card count come off the unit cards', () => {
@@ -77,9 +101,9 @@ test('the new count and the card count come off the unit cards', () => {
 });
 
 test('level 1 opens by default, and so does the branch holding the next unit', () => {
-  assert.deepEqual(defaultOpenUnits(content, OPEN_LEAF, 'leaf'), ['leaf_types']);
+  assert.deepEqual(defaultOpenUnits(content, LEAF_NEXT, 'leaf'), ['leaf_types']);
   const deeper = {
-    ...OPEN_LEAF,
+    ...LEAF_NEXT,
     'group:leaf:Quercus': { tier: 'mc8', tier_passes: 0 },
     'group:leaf:Acer': { tier: 'mc8', tier_passes: 0 },
     'group:leaf:Platanus': { tier: 'mc8', tier_passes: 0 }
@@ -89,7 +113,7 @@ test('level 1 opens by default, and so does the branch holding the next unit', (
 });
 
 test('one channel summarises as three depths of unit squares', () => {
-  const summary = channelLessons(content, OPEN_LEAF, 'leaf');
+  const summary = channelLessons(content, LEAF_NEXT, 'leaf');
   assert.equal(summary.channel, 'leaf');
   assert.equal(summary.next_up_key, 'simple_lobed_genus');
   assert.equal(summary.total_count, 7);
@@ -102,6 +126,27 @@ test('one channel summarises as three depths of unit squares', () => {
     'simple_lobed_white_oaks_co', 'simple_lobed_red_oaks_co',
     'simple_lobed_maples_co', 'simple_lobed_other_co', 'quga_varieties'
   ]);
+});
+
+test('one channel carries the next unit and the others carry none', () => {
+  const summaries = content.channels
+    .map((channel) => channelLessons(content, LEAF_NEXT, channel));
+  const carrying = summaries.filter((summary) => summary.next_up_key !== null);
+  assert.deepEqual(carrying.map((summary) => summary.channel), ['leaf']);
+  assert.equal(carrying[0].next_up_key, 'simple_lobed_genus');
+  const marked = summaries
+    .flatMap((summary) => summary.depths)
+    .flatMap((depth) => depth.units)
+    .filter((unit) => unit.next_up);
+  assert.deepEqual(marked.map((unit) => unit.key), ['simple_lobed_genus']);
+});
+
+test('with the leaf concept alone the bark door carries the next unit', () => {
+  const summaries = content.channels
+    .map((channel) => channelLessons(content, OPEN_LEAF, channel));
+  const carrying = summaries.filter((summary) => summary.next_up_key !== null);
+  assert.deepEqual(carrying.map((summary) => summary.channel), ['bark']);
+  assert.equal(carrying[0].next_up_key, 'bark_types');
 });
 
 test('the unit thumbnail is the first card in the unit that carries a photo', () => {

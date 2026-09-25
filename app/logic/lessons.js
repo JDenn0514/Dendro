@@ -27,6 +27,13 @@ export function unitLevel(unitKey, content, states) {
   return rollupLevel(ids.map((id) => cardLevel(states[id])));
 }
 
+// One unit is next in the whole app, not one per channel. Home, the lessons
+// doors, and the channel page all mark the same unit, and the fold opens the
+// one branch that holds it. With nothing open anywhere, no unit is next.
+function nextUnitKey(content, states) {
+  return recommendUnit({ content, states, focus: 'all' }).unit_key;
+}
+
 function buildNode(content, states, unit, nextUpKey) {
   const ids = content.unit_cards[unit.key] ?? [];
   const gate = gateStatus(unit.key, content, states);
@@ -55,10 +62,10 @@ function buildNode(content, states, unit, nextUpKey) {
 }
 
 export function unitTree(content, states, channel) {
-  const nextUpKey = recommendUnit({ content, states, focus: channel }).unit_key;
+  const nextKey = nextUnitKey(content, states);
   return channelUnits(content, channel)
     .filter((unit) => unit.parent === null)
-    .map((unit) => buildNode(content, states, unit, nextUpKey));
+    .map((unit) => buildNode(content, states, unit, nextKey));
 }
 
 // The fold the app opens with. A level-1 row shows its children, so the
@@ -83,7 +90,7 @@ export function defaultOpenUnits(content, states, channel) {
 // species row rather than disappearing.
 export function channelLessons(content, states, channel) {
   const units = channelUnits(content, channel);
-  const nextUpKey = recommendUnit({ content, states, focus: channel }).unit_key;
+  const nextKey = nextUnitKey(content, states);
   const depthOf = (unit) => Math.min(unit.level, 3);
   const depths = [1, 2, 3].map((level) => ({
     level,
@@ -92,15 +99,18 @@ export function channelLessons(content, states, channel) {
       key: unit.key,
       name: unit.name,
       open: gateStatus(unit.key, content, states).open,
-      next_up: unit.key === nextUpKey
+      next_up: unit.key === nextKey
     }))
   }));
   const openCount = depths
     .flatMap((depth) => depth.units)
     .filter((unit) => unit.open).length;
+  // The next unit belongs to one channel. Every other channel reads null, so
+  // only one door on the lessons page carries the tick.
+  const mine = units.some((unit) => unit.key === nextKey);
   return {
     channel,
-    next_up_key: nextUpKey,
+    next_up_key: mine ? nextKey : null,
     open_count: openCount,
     total_count: units.length,
     depths
