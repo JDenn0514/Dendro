@@ -2226,7 +2226,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:06:31Z",
-    "note": "Archival black and white plate of a leafy twig with acorns. The lobed simple leaves are sharp and fill the frame."
+    "note": "Archival black and white plate of a leafy twig with acorns. The lobed simple leaves are sharp and fill the frame.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "09d73373abcf151d0db5164a62b94b3e59d9403ed69955f4a19a53ccb7b97314",
