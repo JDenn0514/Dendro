@@ -333,10 +333,12 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
         now,
       };
       const names = [plant.scientific, ...synonymNames(rows, symbol)];
+      // Commons and iNaturalist come first. `collect` takes rows in order up to the cap, and
+      // PLANTS images are mostly monochrome herbarium plates, so PLANTS takes the room left.
       const fromSources: Candidate[] = [];
-      fromSources.push(...(await plantsRows(context)));
       fromSources.push(...(await commonsRows(context)));
       fromSources.push(...(await inatRows(context, passes)));
+      fromSources.push(...(await plantsRows(context)));
       // D17: the script compares the source's own name with the accepted name and its
       // synonyms, so the photo-check agent reads a verdict instead of guessing.
       for (const row of fromSources) {

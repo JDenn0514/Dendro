@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { validateContent } from '../../app/logic/content.js';
 import {
   CHANNEL_TARGET,
+  MAX_PER_SPECIES,
   SOURCE_NAMES,
   makeCandidate,
   type Candidate,
@@ -677,6 +678,33 @@ test('photos fetch pages the Commons listing', async (t) => {
     'both pages of the listing reach the queue',
   );
   assert.deepEqual(readRun(root, 'demo').capped, []);
+});
+
+test('photos fetch ranks Commons and iNaturalist ahead of PLANTS under the cap', async (t) => {
+  const { root, deps, out } = setup(t, photoRoutes());
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+  // The seeded rows leave room for the Commons and iNaturalist rows only, so every PLANTS
+  // row meets the cap.
+  const room = commonsRowsOf('QUGA').length + inatRowsOf('QUGA').length;
+  assert.ok(plantsRowsOf('QUGA').length > 0, 'the fixture holds PLANTS rows for the cap to stop');
+  assert.ok(room < MAX_PER_SPECIES, 'the fixture rows fit under the cap');
+  for (let index = 0; index < MAX_PER_SPECIES - room; index += 1) {
+    seedCandidate(root, 'QUGA', index);
+  }
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  assert.equal(rows.length, room);
+  assert.deepEqual(
+    [...new Set(rows.map((row) => row.source_key))].sort(),
+    ['commons', 'inat'],
+    'no PLANTS row reaches the queue ahead of Commons and iNaturalist',
+  );
+  assert.deepEqual(out, [appendedLine(room, 0)]);
 });
 
 test('photos fetch prints a failed listing and still exits 0', async (t) => {

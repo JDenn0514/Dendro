@@ -354,6 +354,12 @@ never gets a manifest row.
 `cli photos fetch <run>` finds candidates per species and per source and appends rows to
 `runs/<run>/candidates.jsonl`. It skips any origin URL already in the file.
 
+The source order is Commons, iNaturalist, PLANTS. The cap takes rows in that order, so
+PLANTS plates enter only when the cap has room. After each download the fetch measures
+the colour of the image and drops a row that scores under `MONO_THRESHOLD` (12, in
+`pipeline/lib/candidates.ts`). Owner ruling 2026-09-24: colour photographs only. See
+`docs/superpowers/specs/2026-09-24-pipeline-batch-design.md`.
+
 ### Per source
 
 **PLANTS.** `GET /api/PlantImages?plantId=<id>`. Keep rows with `Copyright: false`.
