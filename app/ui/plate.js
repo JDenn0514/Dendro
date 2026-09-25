@@ -32,9 +32,13 @@ const SAMPLE = 24;
 const CORNER = 4;
 const treatments = new Map();
 
-// Set the first time a cross-origin probe is refused. A CDN sends the CORS
-// header for every image or for none, so one refusal settles the whole
-// origin and no later plate pays for a probe that cannot succeed.
+// Set only when a canvas read on the probe throws. A throw there is the
+// tainted-canvas signature a missing CORS header leaves behind, so it means
+// the origin refuses the probe outright. A CDN sends the header for every
+// image or for none, so one such throw settles the whole origin and no later
+// plate pays for a probe that cannot succeed. A plain load failure (a 404, a
+// DNS failure, a timeout) says nothing about CORS, so it never sets this
+// flag; it only settles that one photo's hash as a field plate.
 let corsBlocked = false;
 
 export function plateTreatment(photo) {
@@ -95,7 +99,6 @@ function probe(src, done) {
     }
   });
   sample.addEventListener('error', () => {
-    if (cross) corsBlocked = true;
     done('field');
   });
   sample.src = src;
@@ -103,7 +106,7 @@ function probe(src, done) {
 
 function dress(figure, photo) {
   figure.classList.remove('print', 'field', 'measuring');
-  figure.classList.add(treatments.get(photo.hash) ?? 'field');
+  figure.classList.add(plateTreatment(photo));
 }
 
 // Runs on the displayed image's own load event. The corner sample runs once
