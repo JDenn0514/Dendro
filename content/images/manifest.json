@@ -785,7 +785,10 @@
     "tags": [],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T03:02:08Z",
-    "note": "Black and white studio photo of a spray of lobed simple leaves, sharp and filling the frame."
+    "note": "Black and white studio photo of a spray of lobed simple leaves, sharp and filling the frame.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "2b51525440868b4c37f4ec9b055e83de80c6cc155a17cd749732ef035089a3c8",
