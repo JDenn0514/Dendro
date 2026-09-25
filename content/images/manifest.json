@@ -1900,7 +1900,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T03:37:09Z",
-    "note": "Sharp archival black and white photo of a mature furrowed trunk that fills the frame. Only a small archival number sits in the corner."
+    "note": "Sharp archival black and white photo of a mature furrowed trunk that fills the frame. Only a small archival number sits in the corner.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "8ce5eb703ad5aca6d3a44d66ffe18b182e20acdf8a1d1923e5bb8d5545dbe53f",
