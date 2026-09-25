@@ -55,10 +55,13 @@ Dendro is expected to fit the Cloudflare free plan. The figures below come from 
 - The photos take about 150 MB, which is 1.5% of the free R2 storage.
 - Static asset requests do not count toward the Workers request limit. Only the account requests do.
 - The R2 free tier covers Standard storage only, not Infrequent Access storage.
+- Static assets have file limits for each deploy: 20,000 files on the free plan, 100,000 on the paid plan, and 25 MiB for each file. Dendro is far under these limits, because the photos are in R2.
+- `run_worker_first` sends requests through the Worker before the static assets. Those requests count toward the Workers request limit, and they are not free static asset requests. Send only the account API paths through the Worker. Do not send every page through it to check the sign-in.
 
 Sources:
 
 - Workers and D1: https://developers.cloudflare.com/workers/platform/pricing/
+- Static asset limits and billing: https://developers.cloudflare.com/workers/platform/limits/#static-assets and https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/
 - R2: https://developers.cloudflare.com/r2/pricing/
 
 ## Options
