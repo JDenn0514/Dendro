@@ -6,18 +6,29 @@ import crypto from 'node:crypto';
  */
 export const CHANNELS: string[] = ['leaf', 'bark', 'fruit', 'flower', 'twig'];
 
-export const SOURCE_KEYS = ['plants', 'inat', 'commons', 'manual'] as const;
+export const SOURCE_KEYS = [
+  'plants',
+  'inat',
+  'commons',
+  'bioimages',
+  'tso',
+  'wildflower',
+  'manual',
+] as const;
 export type SourceKey = (typeof SOURCE_KEYS)[number];
 
 /**
  * The credit line the app prints. `source_key` drives machinery: the cache directory
  * and the report count. A manual row has no default name, so `cli photos add`
- * requires --source.
+ * requires --source. The three newer names match the rows already in the manifest.
  */
 export const SOURCE_NAMES: Record<SourceKey, string> = {
   plants: 'USDA PLANTS Database',
   inat: 'iNaturalist',
   commons: 'Wikimedia Commons',
+  bioimages: 'Bioimages',
+  tso: 'Trees and Shrubs Online',
+  wildflower: 'Lady Bird Johnson Wildflower Center',
   manual: '',
 };
 

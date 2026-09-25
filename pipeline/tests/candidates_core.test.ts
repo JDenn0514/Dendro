@@ -36,6 +36,16 @@ test('SOURCE_NAMES holds one display name per source key, and manual has none', 
   }
 });
 
+test('SOURCE_KEYS holds the three new fetch sources with the manifest display names', () => {
+  assert.deepEqual(
+    [...SOURCE_KEYS],
+    ['plants', 'inat', 'commons', 'bioimages', 'tso', 'wildflower', 'manual'],
+  );
+  assert.equal(SOURCE_NAMES.bioimages, 'Bioimages');
+  assert.equal(SOURCE_NAMES.tso, 'Trees and Shrubs Online');
+  assert.equal(SOURCE_NAMES.wildflower, 'Lady Bird Johnson Wildflower Center');
+});
+
 test('every LICENSE_ALLOWLIST label names a license licenseAllowed admits', () => {
   // The report prints the labels. licenseAllowed holds the machine rule. This ties them.
   const sample: Record<string, string> = {
