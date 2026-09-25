@@ -7,6 +7,7 @@ import * as session from './screens/session.js';
 import * as progress from './screens/progress.js';
 import * as species from './screens/species.js';
 import * as settings from './screens/settings.js';
+import { injectSprite } from './ui/glyphs.js';
 
 const CONTENT_FILES = {
   species: 'species.json',
@@ -54,6 +55,8 @@ function parseRoute() {
   };
 }
 
+// A content failure must not lock the user out of Settings, where the export
+// button rescues the progress that is already stored.
 function showError(title, lines) {
   const root = document.getElementById('app');
   root.textContent = '';
@@ -69,6 +72,15 @@ function showError(title, lines) {
     list.append(item);
   }
   box.append(list);
+  const settings = document.createElement('a');
+  settings.className = 'placement';
+  settings.href = '#/settings';
+  settings.textContent = 'Settings';
+  const home = document.createElement('a');
+  home.className = 'placement';
+  home.href = '#/';
+  home.textContent = 'Home';
+  box.append(settings, home);
   root.append(box);
 }
 
@@ -100,6 +112,10 @@ async function start() {
   // not lock the user out of Settings, where the export button rescues the
   // progress that is already stored.
   document.getElementById('nav').hidden = false;
+
+  // The sprite holds every mark the screens draw. It goes in before the first
+  // render and never throws, so a failed fetch costs the marks and nothing else.
+  await injectSprite();
 
   let storage = DEAD_STORAGE;
   try {
