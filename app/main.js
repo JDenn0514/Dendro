@@ -6,6 +6,7 @@ import * as home from './screens/home.js';
 import * as session from './screens/session.js';
 import * as lessons from './screens/lessons.js';
 import * as progress from './screens/progress.js';
+import * as concept from './screens/concept.js';
 import * as species from './screens/species.js';
 import * as settings from './screens/settings.js';
 import { injectSprite } from './ui/glyphs.js';
@@ -189,6 +190,11 @@ async function start() {
     try {
       if (parts[0] === 'session') leave = session.render(root, { ...ctx, mode: 'review' });
       else if (parts[0] === 'placement') leave = session.render(root, { ...ctx, mode: 'placement' });
+      else if (parts[0] === 'progress' && parts.length >= 3) {
+        leave = concept.render(root, {
+          ...ctx, channel: parts[1], concept_key: parts.slice(2).join('/')
+        });
+      }
       else if (parts[0] === 'progress') leave = progress.render(root, ctx);
       else if (parts[0] === 'species') leave = species.render(root, { ...ctx, symbol: parts[1] });
       else if (parts[0] === 'settings') leave = settings.render(root, ctx);
