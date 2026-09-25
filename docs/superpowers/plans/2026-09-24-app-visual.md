@@ -65,7 +65,13 @@
 `content_dev/`, and `content_src/`, and everything under `pipeline/`. The two
 new scripts are developer tools and never run in CI.
 
-**Photo treatment decision.** The app picks the treatment at run time from the image's own pixels: after a plate's `<img>` fires `load`, `measure` draws it into a 24 by 24 canvas, reads the four corner blocks, and caches `print` for a mean corner luminance of 0.86 or more, `field` for anything lower or for a `getImageData` that throws. A plate whose treatment is not yet known draws nothing until that measurement lands, so no photo is ever seen in the wrong treatment first. A per-photo flag in the manifest would be better, but the manifest is written by the pipeline under an append-only check in CI, so a new field means a pipeline change and a content rebuild, while a corner sample of an image the page has already downloaded costs no extra request and no new content field. The probe never sets `crossOrigin`, so a cross-origin CDN image taints the canvas, the read throws, the catch keeps `field`, and no image load can regress. `plateTreatment` reads `photo.ground` first, so a manifest flag can take over later with no other change.
+**Photo treatment decision.** The app picks the treatment at run time from the image's own pixels: after a plate's `<img>` fires `load`, `measure` reads the four corner blocks of a 24 by 24 canvas and caches `print` for a mean corner luminance of 0.86 or more, `field` for anything lower or for a read that throws. A plate whose treatment is not yet known draws nothing until that measurement lands, so no photo is ever seen in the wrong treatment first. A per-photo flag in the manifest would be better, but the manifest is written by the pipeline under an append-only check in CI, so a new field means a pipeline change and a content rebuild, while a corner sample of an image the page has already downloaded costs no extra request and no new content field. `plateTreatment` reads `photo.ground` first, so a manifest flag can take over later with no other change.
+
+**The measurement runs on a separate probe image.** The displayed `<img>` never sets `crossOrigin`, because a `crossOrigin` attribute on it would make a CDN with no CORS header fail the image load itself. So `measure` makes a second `Image`, sets `crossOrigin = 'anonymous'`, gives it the same `src`, and draws that one into the canvas. The browser serves the probe from its own cache when the CORS check passes, so the probe costs no second download. If the probe errors, or `getImageData` still throws, the photo is cached as `field` and the plate draws at once.
+
+On the live site the images come from `https://img.learndendro.com`, a different origin, so the probe only succeeds when that host sends `Access-Control-Allow-Origin: *`. Until it does, every live plate is a `field` plate. Task 6 records that; Task 17 checks it on the live site.
+
+**The probe runs at most once per origin that refuses it.** A module-level flag records the first cross-origin probe error. After that, `measure` skips the probe for any image whose origin is not the page's own and caches `field` directly, so a live plate never pays for a probe that cannot succeed.
 
 ---
 
@@ -1306,8 +1312,13 @@ can tune rather than a separate file per weight:
 ```css
 * { box-sizing: border-box; }
 
+/* The column runs the height of the phone, and it runs on `body`, not on
+   `#app`. `#banner` is a sibling of `#app` above it, so a `min-height:100dvh`
+   on `#app` alone would push the page past the viewport by the height of the
+   banner and put a scrollbar on every screen that shows one. */
 body{
   margin:0 auto; max-width:430px;
+  display:flex; flex-direction:column; min-height:100dvh;
   color:var(--ink);
   font-family:var(--lit);
   font-size:1.0625rem; line-height:1.6;
@@ -1318,11 +1329,12 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-/* The app renders one screen into #app. The column runs the height of the
-   phone so the running foot can sit at the bottom of a short page. */
+/* The app renders one screen into #app. `flex:1` takes whatever height the
+   banner leaves, so the running foot still sits at the bottom of a short
+   page and no screen gains a scrollbar it does not need. */
 #app{
   display:flex; flex-direction:column;
-  min-height:100dvh;
+  flex:1;
   padding:0 var(--gut) 40px;
   overflow-x:clip;
 }
@@ -1344,6 +1356,10 @@ The app has no `:target`, so in the
   .reveal .pl-b img{animation:press .38s .2s ease-out both;}
   .reveal .pair-head .no b{animation:strike .3s .34s ease-out both;}
 ```
+
+Run: `grep -c '#reveal:target' app/style.css`
+Expected: `0`. Then run `grep -c '^  \.reveal ' app/style.css`
+Expected: `5`.
 
 - [ ] **Step 4: Append the rules the live app needs and the mockup lacks**
 
@@ -1380,8 +1396,11 @@ Append to `app/style.css`:
    reset is wrapped in `:where()`, which weighs nothing, so `.btn`, `.pick`,
    and `.startb` above keep their family, their size, and their 54px line
    height. Without the wrapper `button.btn` would outweigh `.btn` and
-   `font:inherit` would strip the display face off every button. */
-:where(button.pick, button.btn, button.startb, button.choice-btn){
+   `font:inherit` would strip the display face off every button.
+
+   Three classes, and only three. The settings screen's choices are labels
+   wrapping a radio, not buttons, so there is no `choice-btn` to reset. */
+:where(button.pick, button.btn, button.startb){
   appearance:none; -webkit-appearance:none; border:0; font:inherit; cursor:pointer;
 }
 button.pick{text-align:left; width:100%;}
@@ -1427,9 +1446,10 @@ button.btn{width:100%; padding:0;}
 .misslist li:last-child{border-bottom:0;}
 
 /* The head of a session. `Leave` is a word, about 38px wide, so it needs a
-   floor on the width as well as on the height. The text stays at the left
-   edge of that 44px target rather than centring inside it. */
-.head .leave{min-width:44px; justify-content:flex-start;}
+   floor on the width as well as on the height. `flex-start` is already the
+   default on the mockup's `display:inline-flex`, so the word sits at the left
+   edge of the 44px target with no rule of its own. */
+.head .leave{min-width:44px;}
 
 /* the banner and the error panel: the app's two failure surfaces */
 .banner{margin:0; padding:13px var(--gut); background:var(--mount);
@@ -1437,9 +1457,14 @@ button.btn{width:100%; padding:0;}
   color:var(--ink);}
 /* The error panel is a mounted panel like `.finding`, so it runs to both
    edges of the phone. Without the negative margins it sits 22px inside them
-   and reads as a different kind of object. */
+   and reads as a different kind of object.
+
+   The sap rule runs along the bottom, not down the left. A left rail marks a
+   panel that is inset from the page, which is what `.note` is. A bled panel
+   has no left edge to rail, so it takes the rule the banner takes, edge to
+   edge under the panel. */
 .error{margin:24px calc(var(--gut)*-1) 0; padding:18px var(--gut);
-  background:var(--mount); border-left:3px solid var(--sap);}
+  background:var(--mount); border-bottom:3px solid var(--sap);}
 .error h1{font-family:var(--fr); font-weight:400; font-size:calc(18px + 1.125rem);
   line-height:1.03; font-variation-settings:"opsz" 144,"SOFT" 0,"WONK" 1;
   letter-spacing:-.018em; margin:0;}
@@ -1468,7 +1493,9 @@ tail -n +14 out/legacy.css >> app/style.css
 grep -c "" app/style.css
 ```
 
-Expected: about 830 lines.
+Expected: between 840 and 900 lines. The count is taken before the duplicate
+rules below are deleted, so it is the high-water mark of the sheet. A count
+far outside that band means Step 1 or Step 4 did not land.
 
 `tail -n +14` drops the old `:root` token block, which the new tokens
 replace, and keeps every class rule from `* { box-sizing: border-box; }` down.
@@ -1478,6 +1505,20 @@ because the new sheet above owns those selectors.
 
 Keep `.nav` and `.nav a`. The new sheet claims neither, the old nav is still
 in `index.html`, and Task 8 takes the rules out when it takes the nav out.
+
+When the deletions are done, run:
+
+```bash
+grep -c "" app/style.css
+grep -c '^\* { box-sizing' app/style.css
+grep -cE '^(body|main|h1|h2)[ ,{]' app/style.css
+grep -cE '^\.(banner|error)\{' app/style.css
+grep -c '^\.nav' app/style.css
+```
+
+Expected, in order: between 800 and 880; `1`; `1`, which is the new sheet's
+own `body` rule; `2`, the new `.banner` and `.error` rules, each once; `2`,
+the two nav rules Task 8 removes.
 
 - [ ] **Step 6: Rewrite `index.html`**
 
@@ -1512,6 +1553,9 @@ Only the two font links are new. The old `<nav>` stays until Task 8 prints
 the running foot, so the app is navigable at every commit. The error panel
 carries its own way out either way, so Settings stays reachable when the
 content fails.
+
+Run: `grep -c 'fonts.googleapis.com\|fonts.gstatic.com' index.html`
+Expected: `3`, the two preconnects and the stylesheet link.
 
 - [ ] **Step 7: Give the error panel a way out**
 
@@ -1548,6 +1592,9 @@ function showError(title, lines) {
 }
 ```
 
+Run: `node --check app/main.js`
+Expected: nothing printed.
+
 - [ ] **Step 8: Inject the sprite at boot**
 
 In `app/main.js`, add to the imports at the top:
@@ -1566,6 +1613,9 @@ and in `start()`, directly under the line
 ```
 
 Leave the nav line and its comment where they are. Task 8 removes both.
+
+Run: `node --check app/main.js`
+Expected: nothing printed.
 
 - [ ] **Step 9: Check the sheet parses and the page loads**
 
@@ -1640,6 +1690,24 @@ sheet already defines, and `plate` only puts it on the figure:
 - `lift` — the scan prints lighter, so a thumbnail holds up on a mounted panel.
 - `soft` — the dissolve on the four edges is wider and gentler.
 - `mono` — the colour comes out and the contrast is held back, for bark.
+
+**The live site needs one header before `print` can appear.** Under
+`?content=dev` the images are served from the same origin as the page, so the
+probe reads them and a bright scan prints as a `print` plate. On the live
+site the images come from `https://img.learndendro.com`, a different origin.
+A browser only lets a page read the pixels of a cross-origin image when that
+host sends `Access-Control-Allow-Origin: *`. Without the header every live
+plate stays a `field` plate. The header is a setting on the CDN bucket, not a
+change to any file in this repo, so it is outside this plan. Task 17 has a
+checklist line that says whether the live site has it yet.
+
+**The credit's author stays a link.** `credit` puts the author's name in an
+anchor about 18 px tall, which is under the 44 px floor in section 5 of the
+spec. WCAG 2.5.8 exempts a link that sits inside a run of text: the line of
+type sets its size, and growing it to 44 px would break the line. So the
+credit keeps its link, and Task 17's `audit.py` skips an anchor whose
+computed `display` is `inline`. Every other control, including every anchor
+the app lays out as a block or a flex box, keeps the 44 px rule.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1810,10 +1878,14 @@ Create `app/ui/plate.js`:
 // Which one a photo gets is measured, not guessed. `plateTreatment` reads a
 // `ground` field on the manifest row first, so the pipeline can decide later
 // with no other change. With no field it reads the cache, and the cache is
-// filled by `measure`, which samples the four corners of the image the page
-// has already downloaded. A cross-origin image taints the canvas and the read
-// throws; the catch leaves the photo a field plate, so no image load can
-// regress and no second request is ever made.
+// filled by `measure`, which samples the four corners of the photo.
+//
+// The sample runs on a second `Image` that sets `crossOrigin`, never on the
+// one the page shows. A `crossOrigin` attribute on the displayed image would
+// make a CDN with no CORS header fail the image load itself, and the photo
+// would not appear at all. The probe is served from the browser cache when
+// the CORS check passes, so it costs no second download. A probe that errors,
+// and a read that still throws, both leave the photo a field plate.
 //
 // A photo with no `ground` field and no cache entry cannot be placed until
 // its image has loaded, so the figure carries `measuring` and the sheet keeps
@@ -1829,6 +1901,11 @@ const SAMPLE = 24;
 const CORNER = 4;
 const treatments = new Map();
 
+// Set the first time a cross-origin probe is refused. A CDN sends the CORS
+// header for every image or for none, so one refusal settles the whole
+// origin and no later plate pays for a probe that cannot succeed.
+let corsBlocked = false;
+
 export function plateTreatment(photo) {
   if (photo.ground === 'bright') return 'print';
   if (photo.ground === 'own') return 'field';
@@ -1841,6 +1918,14 @@ export function plateTreatment(photo) {
 function settled(photo) {
   return photo.ground === 'bright' || photo.ground === 'own'
     || treatments.has(photo.hash);
+}
+
+function sameOrigin(src) {
+  try {
+    return new URL(src, location.href).origin === location.origin;
+  } catch {
+    return false;
+  }
 }
 
 function cornerLuminance(image) {
@@ -1863,21 +1948,43 @@ function cornerLuminance(image) {
   return count === 0 ? 0 : total / count;
 }
 
-// Runs on the image's own load event. The corner sample runs once per hash;
-// the class swap runs every time, because a second figure on the same photo
-// reaches this point with the cache already warm and still needs its class.
-function measure(figure, image, photo) {
-  if (!treatments.has(photo.hash)) {
-    let treatment = 'field';
+// The corner sample, on its own `crossOrigin` image. `done` always runs, on
+// the good path and on both failure paths, so a figure never stays hidden.
+function probe(src, done) {
+  const cross = !sameOrigin(src);
+  if (cross && corsBlocked) { done('field'); return; }
+  const sample = new Image();
+  sample.crossOrigin = 'anonymous';
+  sample.addEventListener('load', () => {
     try {
-      treatment = cornerLuminance(image) >= PRINT_THRESHOLD ? 'print' : 'field';
+      done(cornerLuminance(sample) >= PRINT_THRESHOLD ? 'print' : 'field');
     } catch {
-      treatment = 'field';
+      if (cross) corsBlocked = true;
+      done('field');
     }
-    treatments.set(photo.hash, treatment);
-  }
+  });
+  sample.addEventListener('error', () => {
+    if (cross) corsBlocked = true;
+    done('field');
+  });
+  sample.src = src;
+}
+
+function dress(figure, photo) {
   figure.classList.remove('print', 'field', 'measuring');
-  figure.classList.add(treatments.get(photo.hash));
+  figure.classList.add(treatments.get(photo.hash) ?? 'field');
+}
+
+// Runs on the displayed image's own load event. The corner sample runs once
+// per hash; the class swap runs every time, because a second figure on the
+// same photo reaches this point with the cache already warm and still needs
+// its class.
+function measure(figure, image, photo) {
+  if (treatments.has(photo.hash)) { dress(figure, photo); return; }
+  probe(image.src, (treatment) => {
+    if (!treatments.has(photo.hash)) treatments.set(photo.hash, treatment);
+    dress(figure, photo);
+  });
 }
 
 // A plate that cannot load leaves no broken image and no caption for a
@@ -2212,6 +2319,14 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
   - `unitFor(content, unitKey) => Unit` — `app/logic/content.js`
   - `conceptFor(content, channel, key) => { key, name, description } | null` — `app/logic/content.js`
   - `labelFor(content, kind, channel, key) => { label, sublabel }` — `app/logic/question.js`
+  - `content.channels: string[]` — the channel names, in content order
+  - `content.cards: Record<string, Card>`, `Card` is `{ id, kind, channel, key, bucket, photos }`
+  - `content.unit_cards: Record<string, string[]>` — the card ids of a unit
+  - `store.readCards() => Record<string, CardState>`
+  - `store.readLog() => LogRow[]`
+  - `store.readSettings() => { version, session_size, new_per_day, last_export, text_size, open_units }`
+  - `ctx.content`, `ctx.store`, `ctx.today: string` (`YYYY-MM-DD`), and
+    `ctx.image_base: string` — all four built in `app/main.js`
 - Produces: `render(root, ctx)`. The unit list, the channel buttons, and the level-0 counts are gone; they live on Lessons now.
 
 **One transient state.** The running foot carries a Lessons word, and the
@@ -2478,6 +2593,18 @@ comes out now. Three edits:
 3. In `app/style.css`, in the legacy block, delete the `.nav` and `.nav a`
    rules.
 
+Run:
+
+```bash
+grep -c 'id="nav"' index.html
+grep -c "getElementById('nav')" app/main.js
+grep -c '^\.nav' app/style.css
+node --check app/main.js
+```
+
+Expected: `0` on each of the three greps, and nothing printed by
+`node --check`.
+
 - [ ] **Step 6: Delete the home rules from the legacy CSS block**
 
 In `app/style.css`, in the legacy block, delete the `.channel.is-active`,
@@ -2486,6 +2613,16 @@ that used them.
 
 Keep `.channel-row`: `app/screens/progress.js` still uses it until Task 11
 lands. Keep `.chip`: the session head still uses it until Task 13 lands.
+
+Run:
+
+```bash
+grep -cE '^\.(channel\.is-active|pill)' app/style.css
+grep -cE '^\.(channel-row|chip)' app/style.css
+```
+
+Expected: `0` on the first, and a count of 1 or more on the second, because
+both of those rules stay until Tasks 11 and 13.
 
 - [ ] **Step 7: Check the screen in a browser**
 
@@ -2554,6 +2691,12 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
   - `recommendUnit({ content, states, focus }) => { unit_key, next_closed }` — `app/logic/session.js`
   - `channelLabel(channel) => string`, `unitFor(content, unitKey) => Unit` — `app/logic/content.js`
   - `labelFor(content, kind, channel, key) => { label, sublabel }` — `app/logic/question.js`
+  - `content.channels: string[]` — the channel names, in content order
+  - `content.cards: Record<string, Card>`, `Card` is `{ id, kind, channel, key, bucket, photos }`
+  - `content.unit_cards: Record<string, string[]>` — the card ids of a unit
+  - `store.readCards() => Record<string, CardState>`
+  - `ctx.content`, `ctx.store`, `ctx.today: string` (`YYYY-MM-DD`), and
+    `ctx.image_base: string` — all four built in `app/main.js`
 - Produces: `render(root, ctx)` for `#/lessons`. `ctx.channel` is `null` on this route; Task 10 adds the channel branch to the same module.
 
 - [ ] **Step 1: Write the head and the next-unit block**
@@ -2729,6 +2872,9 @@ reads `else leave = home.render(root, ctx);`:
       }
 ```
 
+Run: `node --check app/main.js`
+Expected: nothing printed.
+
 - [ ] **Step 4: Check the screen in a browser**
 
 Open `http://localhost:8000/?content=dev#/lessons`.
@@ -2765,7 +2911,7 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
 
 **Interfaces:**
 - Consumes, all of them already imported by the module Task 9 created, except
-  the four this task adds to the import lines in Step 4:
+  the three this task adds to the import lines in Step 1:
   - `unitTree(content, states, channel) => Node[]`, `Node` is `{ key, name, level, channel, card_count, new_count, rollup, open, opens_with, needed_cards, next_up, holds_next, inside_count, children }` — `app/logic/lessons.js`, Task 3
   - `defaultOpenUnits(content, states, channel) => string[]` — `app/logic/lessons.js`, Task 3
   - `channelLessons(content, states, channel) => { channel, next_up_key, open_count, total_count, depths }` — `app/logic/lessons.js`, Task 3
@@ -2781,7 +2927,24 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
   - `store.writeSettings(patch) => Settings` — Task 7
 - Produces: `render(root, ctx)` branches on `ctx.channel`. A non-null `ctx.channel` that is not in `content.channels` renders an error panel, not a blank page.
 
-- [ ] **Step 1: Add the chevron and the fold state**
+- [ ] **Step 1: Extend the imports**
+
+The steps below use `unitTree`, `defaultOpenUnits`, and `trail`, none of which
+Task 9 imported, so the imports go in first. At the top of
+`app/screens/lessons.js`, replace the two import lines that name
+`../logic/lessons.js` and `../ui/chrome.js` with:
+
+```js
+import {
+  channelLessons, defaultOpenUnits, unitLevel, unitOrdinal, unitThumb, unitTree
+} from '../logic/lessons.js';
+import { footNav, tick, ramp, trail } from '../ui/chrome.js';
+```
+
+Run: `node --check app/screens/lessons.js`
+Expected: nothing printed.
+
+- [ ] **Step 2: Add the chevron and the fold state**
 
 Append to `app/screens/lessons.js`:
 
@@ -2818,7 +2981,7 @@ function openSet(content, states, store) {
 
 Expected: `node --check app/screens/lessons.js` prints nothing.
 
-- [ ] **Step 2: Add the unit row**
+- [ ] **Step 3: Add the unit row**
 
 Append to `app/screens/lessons.js`:
 
@@ -2902,7 +3065,7 @@ function unitRow(content, node, folded, onToggle) {
 
 Expected: `node --check app/screens/lessons.js` prints nothing.
 
-- [ ] **Step 3: Add the tree and the channel wiring**
+- [ ] **Step 4: Add the tree and the channel wiring**
 
 Append to `app/screens/lessons.js`:
 
@@ -2971,18 +3134,6 @@ function renderChannel(root, ctx) {
 ```
 
 Expected: `node --check app/screens/lessons.js` prints nothing.
-
-- [ ] **Step 4: Extend the imports**
-
-At the top of `app/screens/lessons.js`, replace the two import lines that name
-`../logic/lessons.js` and `../ui/chrome.js` with:
-
-```js
-import {
-  channelLessons, defaultOpenUnits, unitLevel, unitOrdinal, unitThumb, unitTree
-} from '../logic/lessons.js';
-import { footNav, tick, ramp, trail } from '../ui/chrome.js';
-```
 
 - [ ] **Step 5: Branch the render on the channel**
 
@@ -3097,8 +3248,14 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
   - `el(tag, className?, text?) => HTMLElement`, `link(href, className?, text?) => HTMLAnchorElement` — `app/ui/dom.js`, Task 6
   - `footNav(current) => DocumentFragment`, `tick(className?) => HTMLElement`, `levelWord(level) => HTMLElement` — `app/ui/chrome.js`, Task 6
   - `numberWord(count) => string`, `capitalize(text) => string` — `app/logic/words.js`, Task 1
-  - `content.cards: Record<string, Card>`, `content.channels: string[]`
-- Produces: `render(root, ctx)` for `#/progress`. `leadingRow(rung)` and `markOf(content, row)` stay local to this screen; the shape page builds its own genus marks from `conceptBreakdown`.
+  - `conceptGlyph(channel, conceptKey) => string | null` — `app/ui/glyphs.js`, Task 4
+  - `content.cards: Record<string, Card>`, `Card` is `{ id, kind, channel, key, bucket, photos }`
+  - `content.channels: string[]` — the channel names, in content order
+  - `content.species: Record<string, SpeciesRecord>` — each row carries `concepts`, a channel-to-concept-key map
+  - `store.readCards() => Record<string, CardState>`
+  - `ctx.content`, `ctx.store`, and `ctx.today: string` (`YYYY-MM-DD`) — all
+    three built in `app/main.js`
+- Produces: `render(root, ctx)` for `#/progress`. `leadingRow(rung)`, `markOf(content, kind, channel, row)`, and `speciesMark(content, channel, row)` stay local to this screen; the shape page builds its own genus marks from `conceptBreakdown`.
 
 **The rung, restated.** One channel is three rungs, and each rung prints its
 depth as a stack of pressed sheets in the 58 px column at the left edge:
@@ -3109,10 +3266,23 @@ depth as a stack of pressed sheets in the 58 px column at the left edge:
 - the species rung, three sheets, a ghost of the leading shape, a ghost of
   the leading genus, and the leading species in front.
 
-The front sheet is always the leading card of the rung it stands for, so the
-three stacks in a channel do not print the same mark three times. The two
-ghost classes place the sheets behind: `g1` is the sheet one step back, `g2`
-is the sheet two steps back, each one shifted and turned a little further.
+The front sheet is the leading card of the rung it stands for, drawn from
+that card's own object. A concept card gives its own shape. A genus card
+gives the genus leaf, on every channel, because a genus is a tree and not a
+channel. A species card would give the same genus leaf, which would print the
+leading genus and the leading species as the same mark 6 px apart, so the
+species rung takes a different rule: the species' own concept on this
+channel, through `conceptGlyph`. On bark that is a bark plate and on fruit a
+fruit, so the genera stack and the species stack read apart.
+
+On the leaf channel the two can still coincide, because `GENUS_GLYPHS` maps a
+genus to the leaf shape its species mostly have: Quercus is `lf-oak` and
+`simple_lobed` is `lf-oak` too. The depth of the stack, one sheet, two, or
+three, is what tells the three rungs apart; the mark says which card leads.
+
+The two ghost classes place the sheets behind: `g1` is the sheet one step
+back, `g2` is the sheet two steps back, each one shifted and turned a little
+further.
 
 Beside the stack sit the rung name, the level word sized by level, and the
 count. Under it runs the band of that rung's cards, one mark each, filled by
@@ -3136,7 +3306,7 @@ import {
 import { numberWord, capitalize } from '../logic/words.js';
 import { el, link } from '../ui/dom.js';
 import { footNav, tick, levelWord } from '../ui/chrome.js';
-import { glyph, glyphIdFor, FALLBACK_GLYPH } from '../ui/glyphs.js';
+import { glyph, glyphIdFor, conceptGlyph, FALLBACK_GLYPH } from '../ui/glyphs.js';
 
 // The glyph size each rung's band uses. A deeper rung holds more cards, so
 // its marks are smaller and the three bands still fit one column.
@@ -3158,16 +3328,24 @@ function markOf(content, row) {
   return card ? glyphIdFor(card, content) : FALLBACK_GLYPH;
 }
 
+// The species rung's own mark. `glyphIdFor` gives a species card the genus
+// leaf, which is right on a card and wrong on a stack: the sheet in front
+// would carry the same mark as the ghost 6 px behind it. So the leading
+// species is drawn as the shape it sits in on this channel.
+function speciesMark(content, channel, row) {
+  if (!row) return FALLBACK_GLYPH;
+  const bucket = content.species[row.key]?.concepts?.[channel];
+  return conceptGlyph(channel, bucket) ?? markOf(content, row);
+}
+
 // The sheet stack. The sheets behind are pressed and out of ink, so only
-// their edge reads, and the depth of the stack is the depth of the rung. The
-// front sheet is the leading card of this rung, so the species stack does not
-// repeat the shape the shapes stack already prints.
-function sheetStack(content, rungs, kind, level) {
+// their edge reads, and the depth of the stack is the depth of the rung.
+function sheetStack(content, channel, rungs, kind, level) {
   const stack = el('span', 'rmk');
   stack.setAttribute('aria-hidden', 'true');
   const shapeId = markOf(content, leadingRow(rungs[0]));
   const genusId = markOf(content, leadingRow(rungs[1]));
-  const speciesId = markOf(content, leadingRow(rungs[2]));
+  const speciesId = speciesMark(content, channel, leadingRow(rungs[2]));
 
   if (kind === 'concept') {
     stack.append(glyph(shapeId, level, 's40'));
@@ -3250,9 +3428,9 @@ Expected: `node --check app/screens/progress.js` prints nothing.
 Append to `app/screens/progress.js`:
 
 ```js
-function rungRow(content, rungs, rung) {
+function rungRow(content, channel, rungs, rung) {
   const row = el('div', 'rung');
-  row.append(sheetStack(content, rungs, rung.kind, rung.level));
+  row.append(sheetStack(content, channel, rungs, rung.kind, rung.level));
   const body = el('span');
   body.append(el('span', 'cn', rung.name));
   body.append(levelWord(rung.level));
@@ -3276,7 +3454,7 @@ function channelBlock(content, states, today, channel) {
   // read the same three leading cards.
   const rungs = channelRungs(content, states, channel);
   for (const rung of rungs) {
-    block.append(rungRow(content, rungs, rung));
+    block.append(rungRow(content, channel, rungs, rung));
     block.append(band(content, rung));
     block.append(waterline(rung.share));
   }
@@ -3334,6 +3512,16 @@ Keep `.progress-bar`: the session head still uses it until Task 13 lands.
 Keep `.card`: Task 16 takes it out, and nothing else prints it after this
 commit.
 
+Run:
+
+```bash
+grep -cE '^\.(channel-row|grid|lv-[0-4]|cell-empty)' app/style.css
+grep -cE '^\.(progress-bar|card)[ ,{:]' app/style.css
+```
+
+Expected: `0` on the first, and a count of 1 or more on the second, because
+both of those rules stay until Tasks 13 and 16.
+
 - [ ] **Step 5: Check the screen in a browser**
 
 Open `http://localhost:8000/?content=dev#/progress`.
@@ -3348,10 +3536,12 @@ Expected:
   two for genera, three for species; the rung name, the level word sized by
   level, and "N of M" beside it; the band of marks indented to the column and
   bleeding to the right edge; the moss waterline under the band.
-- The front sheet of the species stack is the leading species mark, which on
-  a channel whose leading genus and leading species sit in different genera
-  is a different leaf from the genera stack's front sheet.
-- An italic "Open simple lobed" link at the end of the leaf block.
+- The front sheet of the species stack is the shape the leading species sits
+  in on this channel. On bark and on fruit that is a bark plate or a fruit,
+  so it is plainly not the leaf the genera stack prints in front.
+- An italic "Open simple, lobed" link at the end of the leaf block. The link
+  text is the concept's own name, lowercased, and the name in the content is
+  "Simple, lobed", comma included.
 - The foot with the moss rule under Progress.
 
 - [ ] **Step 6: Check the waterlines against the figures**
@@ -3581,11 +3771,15 @@ export function render(root, ctx) {
     root.append(credit(photo, `${breakdown.concept.name}, ${channelLabel(channel)}.`));
   }
 
+  // A shape with no photo pool carries no card, so the strip has no cell for
+  // it and `index` comes back -1. "Shape 0 of 1" would be a lie, so the
+  // caption says what is true instead.
   const siblings = siblingStrip(content, states, channel, conceptKey);
   root.append(siblings.strip);
-  root.append(el('p', 'cap strip-cap',
-    `Shape ${siblings.index + 1} of ${siblings.total} on the `
-    + `${channelLabel(channel)} channel.`));
+  root.append(el('p', 'cap strip-cap', siblings.index < 0
+    ? 'This shape carries no card yet.'
+    : `Shape ${siblings.index + 1} of ${siblings.total} on the `
+      + `${channelLabel(channel)} channel.`));
 
   root.append(shapeCard(content, states, channel, breakdown));
 
@@ -3627,6 +3821,9 @@ with:
 `#/progress` keeps working exactly as before, so nothing that links to it
 breaks.
 
+Run: `node --check app/main.js`
+Expected: nothing printed.
+
 - [ ] **Step 5: Check the screen in a browser**
 
 Open `http://localhost:8000/?content=dev#/progress/leaf/simple_lobed`.
@@ -3646,11 +3843,27 @@ Expected:
   "section Lobatae".
 - An italic "All three channels" link, then the foot.
 
-- [ ] **Step 6: Check the two error paths**
+- [ ] **Step 6: Check the two error paths and the shape with no card**
 
 Open `#/progress/leaf/no_such_shape`, then `#/progress/no_such_channel/x`.
 Expected: both render the "Unknown shape" panel with a way back, and neither
 leaves a blank page or logs an error.
+
+Then open `#/progress/bark/smooth`. That shape is in
+`content_dev/concepts.json`, but the dev set builds bark concept cards only
+for `furrowed`, `plated`, and `papery`, so `smooth` has no card and the strip
+has no cell for it.
+Expected:
+
+- The page renders, with the trail, the heading, and the strip of the three
+  bark shapes that do have cards.
+- No cell in the strip is marked. Run
+  `document.querySelectorAll('.strip .here').length` in the console; it
+  returns `0`.
+- The caption under the strip reads "This shape carries no card yet.", not
+  "Shape 0 of 3".
+- The mounted shape card below reads "no card on this shape yet".
+- The page ends with "No species hangs off this shape yet."
 
 - [ ] **Step 7: Run the tests**
 
@@ -3697,6 +3910,25 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
   - `ramp(level, options?) => HTMLElement`, `options` is `{ large?, dim?, lost? }`
   - `plate(photo, options) => HTMLElement`, `options` is `{ image_base, alt, shape, bleed?, lift?, soft?, mono?, onError? }`
   - `credit(photo, lead?) => HTMLParagraphElement`
+- Consumes, from `app/logic/store.js`, all already in the repo:
+  - `store.readCards() => Record<string, CardState>`
+  - `store.readLog() => LogRow[]`
+  - `store.readSettings() => { version, session_size, new_per_day, last_export, text_size, open_units }`
+  - `store.writeCard(cardId, state) => void`
+  - `store.appendLog(row) => void`
+  - `store.recordMissingEdge(edge) => void`
+  - `store.available: boolean` — false when the browser blocks local storage
+  - `store.shouldPromptExport(today) => boolean`
+- Consumes, from the `ctx` object `app/main.js` builds:
+  - `ctx.content`, `ctx.store`, `ctx.today: string` (`YYYY-MM-DD`),
+    `ctx.image_base: string`
+  - `ctx.params: URLSearchParams` — the query of the route hash, read for
+    `focus` and `unit`
+  - `ctx.mode: 'review'|'placement'|undefined` — `placement` on `#/placement`
+  - `ctx.navigate(path) => void` — sets the hash, which the router picks up
+  - `ctx.banner(text) => void` and `ctx.storage_banner: string` — the one
+    line shown when a write did not land
+  - `content.cards: Record<string, Card>` and `content.channels: string[]`
 - Produces: `render(root, ctx)` returning the teardown function, as now. Task 14 adds `Leave` and the back button to this same file, and relies on these names being in scope: `answerCount`, `deck`, `index`, `results`, `showCard`, `lastView`, `cancelled`, `renderId`, `sumRow`, `missList`, `ctx.navigate`.
 
 **What changes, and what does not.** The grading, the scheduling, the photo
@@ -3713,7 +3945,7 @@ they are. Only the markup changes. Two contents change with it:
   two prints, the one-line difference, the level change, and Next. The facts
   live on the species page, and the answer's name is the link to it.
 
-- [ ] **Step 1: Add the rule the head needs**
+- [ ] **Step 1: Add the two rules the head needs**
 
 Append to `app/style.css`, above the legacy block:
 
@@ -3724,11 +3956,29 @@ Append to `app/style.css`, above the legacy block:
 :where(button.leave){appearance:none; -webkit-appearance:none; background:none;
   border:0; padding:0; font:inherit; cursor:pointer;}
 button.leave:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+
+/* The gauge draws one tick per card in the deck. `session_size` reaches 30,
+   and a placement deck can be longer, so the mockup's single row of `flex:1`
+   ticks would squeeze each tick towards nothing. A tick has a floor of 2px
+   and the row wraps instead, so a long deck prints two or three short rows
+   and every card still has its own tick. `height` comes off the row, because
+   a wrapped row is as tall as the lines it holds. */
+.gauge{flex-wrap:wrap; row-gap:3px; height:auto; min-height:5px;}
+.gauge i{min-width:2px;}
 ```
 
 No rule for the screen-reader line under the gauge. `.sr` already takes it
 out of the page and leaves it to the screen reader, and `display` does not
 change that.
+
+Run:
+
+```bash
+grep -c 'button\.leave' app/style.css
+grep -c 'min-width:2px' app/style.css
+```
+
+Expected: `2` on the first, the reset and the focus rule; `1` on the second.
 
 - [ ] **Step 2: Replace the screen with its head and its state**
 
@@ -3861,16 +4111,22 @@ Inside `render`, below the head, append:
     return { label, input };
   }
 
-  function paintQuestion(question, card, generation, resumeAt = 0) {
+  function paintQuestion(question, card, generation, resumeElapsed = 0) {
     root.textContent = '';
     head(question);
 
     // The answer clock. `deriveGrade` reads the elapsed time against the
     // format's own threshold, so a card painted again by Resume must carry
-    // the time it already spent rather than start from zero. `lastView` is
-    // set here, inside the closure, so it can hand the clock back.
-    let startedAt = resumeAt;
-    lastView = () => paintQuestion(question, card, (renderId += 1), startedAt);
+    // the time it already spent rather than start from zero.
+    //
+    // What crosses a Resume is the elapsed time, not the start time. The
+    // clock is then rebased on the new paint, so the seconds the reader
+    // spent on the leave summary do not count towards the answer. `lastView`
+    // is set here, inside the closure, so it can read the clock.
+    let startedAt = resumeElapsed ? Date.now() - resumeElapsed : 0;
+    lastView = () => paintQuestion(
+      question, card, (renderId += 1), startedAt ? Date.now() - startedAt : 0
+    );
 
     const guess = guessBox();
     const submit = (chosenKey, typedText) => {
@@ -4148,11 +4404,23 @@ Inside `render`, below the answer, append:
       panel.append(heads);
 
       const pair = el('div', 'pair bleed');
+      // A pair is a comparison. One plate of two is not a comparison, and the
+      // default `onError` would put a line of prose into a two-column grid
+      // beside a photograph. So either plate failing takes the pair and the
+      // two labels above it, and leaves one printed line in their place.
+      const dropPair = () => {
+        if (!pair.isConnected) return;
+        heads.remove();
+        pair.replaceWith(el('p', 'fact-line',
+          'The two plates for this pair did not load.'));
+      };
       const a = plate(reveal.answer.photo, {
-        image_base: imageBase, alt: `${reveal.answer.label}, the answer`, shape: 'pl-a'
+        image_base: imageBase, alt: `${reveal.answer.label}, the answer`,
+        shape: 'pl-a', onError: dropPair
       });
       const b = plate(reveal.chosen.photo, {
-        image_base: imageBase, alt: `${reveal.chosen.label}, your pick`, shape: 'pl-b', lift: true
+        image_base: imageBase, alt: `${reveal.chosen.label}, your pick`,
+        shape: 'pl-b', lift: true, onError: dropPair
       });
       pair.append(a, b);
       panel.append(pair);
@@ -4296,6 +4564,13 @@ Expected:
 - The verdict rises, the rules ink in, the prints press in, and the strike
   lands, all within about half a second.
 
+Then break one of the two plates on purpose. Answer another card wrongly,
+and in the browser's network panel block the request for one of the two
+images, then reload the reveal by answering the same way again.
+Expected: the two labels and the two-column grid are both gone, and one
+printed line reads "The two plates for this pair did not load." The verdict,
+the name, the difference, the level squares, and Next are all still there.
+
 - [ ] **Step 9: Check the motion guard**
 
 In the browser's rendering panel set `prefers-reduced-motion` to `reduce` and
@@ -4318,6 +4593,16 @@ In `app/style.css`, in the legacy block, delete `.progress-bar`,
 
 Keep `.photo`, `.photo-pair`, `.attribution`, and `.option-sub`:
 `app/screens/species.js` still prints all four until Task 15 lands.
+
+Run:
+
+```bash
+grep -cE '^\.(progress-bar|options|chip)[ ,{.:]' app/style.css
+grep -cE '^\.(photo|photo-pair|attribution|option-sub)[ ,{:]' app/style.css
+```
+
+Expected: `0` on the first, and a count of 1 or more on the second, because
+those four rules stay until Task 15.
 
 - [ ] **Step 12: Run the tests**
 
@@ -4360,9 +4645,11 @@ still in memory, and Resume paints the same view again, with the same photo
 and the same options, because `lastView` is a closure over the question that
 was already built.
 
-**Resume keeps the answer clock.** `paintQuestion` takes the elapsed time it
-already holds and hands it back through `lastView`, so a card you left and
-came back to is graded on the time you actually spent on it. Without that,
+**Resume keeps the answer clock.** `paintQuestion` hands `lastView` the
+elapsed time the card has already run up, and the new paint rebases the clock
+on that: `startedAt = Date.now() - resumeElapsed`. So a card you left and
+came back to is graded on the time you actually spent looking at it, and the
+time you spent reading the leave summary is not added to it. Without that,
 `deriveGrade` would read the time from the moment the image loaded again,
 which is under every format's threshold, and a resumed card would grade
 `good` on time it never took.
@@ -4377,11 +4664,20 @@ back press behaves the same way.
 hash, which pushes an entry. After a pop that would put a session entry back
 in front of the reader, so a second back press would return to a session that
 is over. `leaveToHome` replaces the current entry with `#/` instead and tells
-the router by hand, because a replace fires no `hashchange` of its own. One
-case is left over: leaving by the Leave control, with nothing answered, and
-before any back press. The duplicate is replaced but the session's own entry
-is still behind it, so a back press from home opens that URL and starts a
-fresh session, which is what the URL means.
+the router by hand, because a replace fires no `hashchange` of its own.
+
+**The session URL stays one back press behind home.** A replace only drops
+the entry it replaces. The session's own entry, the one the reader arrived
+on, is still behind it in every way out of a session:
+
+- Leave, with nothing answered, before any back press.
+- The leave summary's Home button.
+- The end-of-session summary's Home link.
+
+In all three a back press from home opens the session URL again and starts a
+fresh session. That is what the URL means, so it is the right answer rather
+than a bug to fix; it is written down here so a reviewer does not read it as
+one.
 
 - [ ] **Step 1: Replace `onLeave` and add the summary**
 
@@ -4453,6 +4749,11 @@ with:
   }
 ```
 
+Run: `node --check app/screens/session.js`
+Expected: nothing printed. Then run
+`grep -c "ctx.navigate('/')" app/screens/session.js`
+Expected: `0`. The stub is gone and `leaveToHome` has taken its place.
+
 - [ ] **Step 2: Declare the popstate handler and the teardown**
 
 In `app/screens/session.js`, replace the three lines that declare the
@@ -4496,6 +4797,11 @@ teardown that works. `onPopState` calls `leaveToHome` and `showLeaveSummary`,
 which Step 1 declared near the bottom of the same function. A function
 declaration hoists to the top of its own scope, so both names resolve.
 
+Run: `node --check app/screens/session.js`
+Expected: nothing printed. Then run
+`grep -c 'removeEventListener' app/screens/session.js`
+Expected: `1`.
+
 - [ ] **Step 3: Arm the history entry below the empty-deck branch**
 
 The entry and the listener must go on after the empty-deck branch, not
@@ -4537,9 +4843,17 @@ Expected:
 - Two buttons side by side, Resume filled moss and Home outlined.
 - Resume paints the same card again, with the same photo and the same four
   labels, and the gauge shows the same tick in moss.
-- Resume does not restart the answer clock. Leave a card on screen for a
-  minute, tap Leave, tap Resume, answer it at once, and the reveal still
-  reports the level a slow answer earns, not a fast one.
+- Resume does not restart the answer clock. Leave a four-option card on
+  screen for 25 seconds, tap Leave, tap Resume, then answer it correctly at
+  once without ticking "I guessed". `deriveGrade` grades a correct `mc4`
+  answer `hard` over 8 seconds and `good` under it, so the answer must grade
+  `hard`. Check it in the console with
+  `JSON.parse(localStorage.dendro_log).rows.at(-1)`: `grade` reads `hard` and
+  `elapsed_ms` is about 25000, not a few hundred.
+
+  Stay under 60 seconds. `TIME_CEILING_MS` in `app/logic/scheduler.js` is
+  60000, and past it `deriveGrade` reads the answer as a walk away from the
+  phone and grades it `good` again. A check at a minute or more cannot fail.
 
 - [ ] **Step 6: Check the back button**
 
@@ -4599,6 +4913,12 @@ Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>"
   - `glyph(id, level, sizeClass, options?) => SVGSVGElement`, `glyphIdFor(card, content) => string` — `app/ui/glyphs.js`, Task 4
   - `numberWord(count) => string`, `capitalize(text) => string` — `app/logic/words.js`, Task 1
   - `content.species[symbol]` is `{ common, scientific, genus, genus_common, section, family, native_status, arrangement, audubon_name, habitat, range, planted_states, height_ft, elevation_ft, concepts, varieties, retired, retired_reason, retired_at }`
+  - `content.channels: string[]` — the channel names, in content order
+  - `content.cards: Record<string, Card>`, `Card` is `{ id, kind, channel, key, bucket, photos }`
+  - `store.readCards() => Record<string, CardState>`
+  - `ctx.content`, `ctx.store`, `ctx.today: string` (`YYYY-MM-DD`),
+    `ctx.image_base: string`, and `ctx.symbol: string` — the last one is the
+    route's own part, set by `app/main.js`
 - Produces: `render(root, ctx)`. One new export from `app/logic/scheduler.js`:
   `daysBetween(fromDate: string, toDate: string) => number`, which
   `app/logic/store.js` then imports in place of its own private copy.
@@ -5278,6 +5598,10 @@ label.setbtn{cursor:pointer;}
 label.setbtn:has(input:focus-visible){outline:2px solid var(--moss); outline-offset:2px;}
 ```
 
+Run: `grep -c 'setbtn' app/style.css`
+Expected: `5` or more: the three rules added here plus whatever the mockup's
+own `.setbtn` block already carries.
+
 - [ ] **Step 6: Delete the last legacy rules**
 
 In `app/style.css`, in the legacy block, delete the `.card`, `.notice`,
@@ -5285,6 +5609,17 @@ In `app/style.css`, in the legacy block, delete the `.card`, `.notice`,
 `button`, `button.primary`, and `button:disabled` rules. Every screen now
 brings its own controls. If that empties the legacy block, delete the block
 and its comment too.
+
+Run:
+
+```bash
+grep -cE '^\.(card|notice|unit-row|unit-meta)[ ,{:]' app/style.css
+grep -cE '^(label|button|input\[type)' app/style.css
+```
+
+Expected: `0` on both. `.card-row`, the species screen's own rule, does not
+match the first pattern, because the pattern requires a space, a comma, a
+brace, or a colon after the name.
 
 - [ ] **Step 7: Check the screen in a browser**
 
@@ -5581,6 +5916,12 @@ JS = """
       const hostBox = host.getBoundingClientRect();
       if (hostBox.width >= limits.target && hostBox.height >= limits.target) continue;
     }
+    // WCAG 2.5.8 exempts a link that sits inside a run of text: the line of
+    // type sets its size, and growing it to 44px would break the line. The
+    // credit's author link and the reveal title's answer link are both that
+    // case. Every anchor the app means as a control is laid out as a block,
+    // a flex box, or a grid, so `display: inline` is what tells them apart.
+    if (node.tagName === 'A' && getComputedStyle(node).display === 'inline') continue;
     if (box.width < limits.target || box.height < limits.target) {
       out.small.push(name(node) + ' ' + Math.round(box.width) + 'x' + Math.round(box.height));
     }
@@ -5588,8 +5929,13 @@ JS = """
 
   // ---------- text contrast ----------
   // Measured, not judged. Every text node's own computed colour against the
-  // first background above it that is not see-through. The sheet paints most
-  // panels on a tint, so the paper is not always the ground.
+  // ground under it. The sheet paints most panels on a tint, so the paper is
+  // not always the ground, and several of those tints are translucent:
+  // `.pick` is a lichen wash at .46 alpha and `.typed input` is the same.
+  // The walk therefore composites each translucent layer onto the one below
+  // it, `c = a*fg + (1-a)*bg`, rather than climbing past it. Climbing past
+  // would measure the text against the paper and report a ratio the reader
+  // never sees.
   const channel = (value) => {
     const v = value / 255;
     return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
@@ -5601,14 +5947,27 @@ JS = """
     if (!parts || parts.length < 3) return null;
     return { rgb: parts.slice(0, 3).map(Number), a: parts.length > 3 ? Number(parts[3]) : 1 };
   };
+  // Collect the layers from the text outwards, then paint them back to front.
   const backdrop = (node) => {
+    const layers = [];
     let walk = node;
+    let ground = [255, 255, 255];
     while (walk) {
       const paint = parse(getComputedStyle(walk).backgroundColor);
-      if (paint && paint.a >= 0.999) return paint.rgb;
+      if (paint && paint.a > 0.001) {
+        layers.push(paint);
+        if (paint.a >= 0.999) { ground = paint.rgb; break; }
+      }
       walk = walk.parentElement;
     }
-    return [255, 255, 255];
+    // layers[0] is nearest the text, so paint from the far end inwards.
+    for (let i = layers.length - 1; i >= 0; i -= 1) {
+      const layer = layers[i];
+      if (layer.a >= 0.999) { ground = layer.rgb; continue; }
+      ground = ground.map((below, band) =>
+        layer.a * layer.rgb[band] + (1 - layer.a) * below);
+    }
+    return ground;
   };
   const ratio = (one, two) => {
     const a = luminance(one);
@@ -5715,6 +6074,12 @@ Expected: 54 lines of `ok  `, six `=== width …` headings, every `scrollWidth`
 360 or 390, no `overflow >`, no `target >`, no `contrast >` line, and a last
 line reading `0 screen states with findings.`
 
+The tap-target check skips an anchor whose computed `display` is `inline`,
+which is the WCAG 2.5.8 exemption for a link inside a run of text. The
+credit's author link and the reveal title's answer link are both that case
+and are meant to be skipped. Every other control, and every anchor the app
+lays out as a block, a flex box, or a grid, still has to reach 44 px.
+
 Fix whatever it reports before going on. The usual causes and their fixes:
 
 - A `.band` or a `.wline` that overflows: it bleeds to the right edge by
@@ -5754,7 +6119,9 @@ belongs to a screen this plan has rewritten, so delete the block and the
 comment above it.
 
 Then run: `grep -c "" app/style.css`
-Expected: a sheet of roughly 720 lines, with no old rule left. Check with:
+Expected: between 700 and 820 lines. The band is wide because the count
+depends on how many rules each screen task deleted on its way past. The
+number is a sanity check; the grep below is the real one.
 
 ```bash
 grep -nE '^\.(grid|card|pill|pill-open|pill-closed|chip|photo|photo-pair|attribution|option-sub|options|channel|channel-row|unit-row|unit-meta|notice)([ ,{:.]|$)' app/style.css
@@ -5789,6 +6156,18 @@ each line yes or no. A no is a bug to fix before the commit.
 - [ ] Every photograph appeared in its own treatment. None paints once with
   its own ground and then snaps to a bright print.
 
+**The live site, once**
+
+- [ ] Open the deployed site, without `?content=dev`, and find a screen with
+  a bright studio scan on it: `#/session?focus=leaf` is the surest. Run
+  `document.querySelector('.plate').className` in the console. It reads
+  `print` on a bright scan, which means the CDN is sending
+  `Access-Control-Allow-Origin: *` and the corner probe can read the pixels.
+  If every plate reads `field`, the header is not set yet. That is a setting
+  on the `img.learndendro.com` bucket, outside this repo, so record it and
+  move on; the app is correct either way and every plate is legible as a
+  field plate.
+
 **Home**
 
 - [ ] "Dendro" is the largest thing on the screen.
@@ -5814,8 +6193,10 @@ each line yes or no. A no is a bug to fix before the commit.
 
 - [ ] The finding sentence is true of the numbers under it.
 - [ ] One sheet on the shapes rung, two on genera, three on species.
-- [ ] The front sheet of each stack is that rung's own leading card, so the
-  species stack does not repeat the mark the shapes stack already prints.
+- [ ] The front sheet of each stack is that rung's own leading card. On the
+  bark and fruit blocks the species stack's front sheet is a bark plate or a
+  fruit, not the genus leaf the genera stack prints, so no stack repeats the
+  ghost sitting 6 px behind it.
 - [ ] Each band's marks are the right objects: bark plates on the bark shapes
   rung, fruits on the fruit shapes rung, genus leaves on every genus and
   species band.
@@ -5833,6 +6214,10 @@ each line yes or no. A no is a bug to fix before the commit.
 - [ ] The caption never names the tree.
 - [ ] The four answer labels are exactly one width.
 - [ ] The gauge has one tick per card, and the current tick is taller.
+- [ ] Set the session size to 30 in Settings, start a review, and look at the
+  gauge again. Every tick is still at least 2 px wide, the row has wrapped to
+  a second line rather than squeezing, and the count of `.gauge i` matches the
+  number in "card 1 of N".
 
 **Reveal**
 
@@ -5919,7 +6304,7 @@ now do: the level names in section 2 (Task 1), the `aria-expanded` chevron
 (Task 10, which needs Task 3's `defaultOpenUnits`), and the running foot on
 every screen but session (Task 6's `footNav`, used by Tasks 8 to 12, 15, 16).
 
-**Three deliberate deviations**, each one recorded here so a reviewer does not
+**Five deliberate deviations**, each one recorded here so a reviewer does not
 read it as a miss:
 
 1. The session's format chip goes. The mockup prints no chip, and the
@@ -5929,15 +6314,33 @@ read it as a miss:
    which holds them.
 3. The species screen's "Quiz this tree" button goes. No route quizzes one
    species, and section 4.7 does not list one.
+4. Section 5 says every link is at least 44 px. Two links are not: the
+   author in a credit line and the answer's name in the reveal title. Both
+   sit inside a run of type that sets their size, which is the exemption
+   WCAG 2.5.8 grants, and growing either to 44 px would break the line it
+   sits in. `audit.py` skips an anchor whose computed `display` is `inline`
+   and holds every other control to the 44 px rule. Task 6 records the
+   decision where `credit` is written.
+5. Section 4.5 asks the three rungs to read apart. On bark and fruit they do:
+   the species rung's front sheet is the species' own shape on that channel.
+   On the leaf channel the genus leaf and that shape can be the same mark,
+   because `GENUS_GLYPHS` maps a genus to the leaf its species mostly have.
+   The depth of the stack carries the reading there. Task 11 records it.
 
 **2. Placeholder scan.** Ran a word scan over the plan for the eleven red
 flags the skill lists, and for "as needed", "later", and "appropriate". No
 hits inside a step. Every code step carries the code. Every test step carries
 the test, the command, and the expected result. Every browser step carries
-the URL and the lines to check. Every step that writes a file carries an
-expected result of its own, either `node --check <file>` for a step that
-leaves a parsable file or a stated "nothing to run yet" for a step inside an
-open function.
+the URL and the lines to check.
+
+Every step that writes a file carries an expected result of its own. There
+are four kinds: `node --check <file>` for a step that leaves a parsable
+JavaScript file, `node --check app/main.js` after every edit to the router, a
+`grep -c` on the selectors or names a step adds or deletes, and a stated
+"nothing to run yet" for a step inside a function that is still open. The
+`grep -c` counts are what cover the CSS steps, which `node --check` cannot
+reach: Task 5 Steps 3 to 8, Task 8 Steps 5 and 6, Task 11 Step 4, Task 13
+Steps 1 and 11, and Task 16 Steps 5 and 6.
 
 No step says "similar to an earlier task". Every Interfaces block names the
 full list it consumes, with signatures and source files, so no task sends the
@@ -5968,15 +6371,21 @@ against both ends:
 - `plate(photo, options)` (Task 6) is always called with
   `{ image_base, alt, shape, … }`, using `image_base` to match `ctx.image_base`
   from `app/main.js`, not `imageBase`. `options.onError` is
-  `(figure, photo) => void` and only Task 13 passes one; every other caller
-  takes the default, which replaces the figure with a printed note and takes
-  the orphaned caption with it.
+  `(figure, photo) => void` and only Task 13 passes one, at three call sites:
+  the inverted grid's option plates, the question hero, and both plates of
+  the reveal's pair, which share one handler so either failure takes the
+  whole comparison. Every other caller takes the default, which replaces the
+  figure with a printed note and takes the orphaned caption with it.
 - `metaLine(node, folded)` (Task 10) takes the fold as its second argument.
   Both call sites, `unitRow` and the toggle handler, pass it, and the toggle
   handler passes `wasOpen`, which is the fold state after the toggle.
-- `sheetStack(content, rungs, kind, level)` (Task 11) takes the three rungs in
-  `RUNG_KINDS` order, not a channel and a states object. `channelBlock` builds
-  them once with `channelRungs` and hands the same array to all three rows.
+- `sheetStack(content, channel, rungs, kind, level)` (Task 11) takes the
+  channel name and the three rungs in `RUNG_KINDS` order, not a states
+  object. `channelBlock` builds the rungs once with `channelRungs` and hands
+  the same array and the same channel to all three rows through
+  `rungRow(content, channel, rungs, rung)`. The channel is what
+  `speciesMark(content, channel, row)` needs to read the species' own concept
+  for that channel.
 - `notFound(root, message)` (Task 12) takes two arguments. Both call sites
   pass two.
 - `footNav(current)` takes `'home'`, `'lessons'`, `'progress'`, or `null`.
@@ -5992,10 +6401,14 @@ against both ends:
   Task 15, and the same task deletes the private copy in `app/logic/store.js`
   and imports the exported one. Neither module imported the other before, so
   the import adds no cycle. One rule, one copy.
-- `paintQuestion(question, card, generation, resumeAt)` (Task 13) takes the
-  answer clock as a fourth argument, defaulting to 0, and sets `lastView`
-  itself. Task 14 relies on that: Resume calls `lastView`, which calls
-  `paintQuestion` again with the elapsed time the card already holds.
+- `paintQuestion(question, card, generation, resumeElapsed)` (Task 13) takes
+  the answer clock as a fourth argument, defaulting to 0. It is an elapsed
+  time in milliseconds, not a timestamp: the paint rebases it with
+  `startedAt = Date.now() - resumeElapsed`, so the time spent on the leave
+  summary is not charged to the answer. `paintQuestion` sets `lastView`
+  itself, and `lastView` reads the clock back out as
+  `startedAt ? Date.now() - startedAt : 0`. Task 14 relies on that: Resume
+  calls `lastView`, which calls `paintQuestion` again.
 - `store.readSettings()` gains `text_size` (a step name, not a percent) and
   `open_units` (an array of unit keys, or `null`). Task 7 defines both; Task
   10 reads `open_units` and writes an array; Task 16 reads and writes
