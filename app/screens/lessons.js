@@ -1,12 +1,14 @@
 // Lessons: what is next, then one door per channel.
 import { channelLabel, unitFor } from '../logic/content.js';
 import { dueCardIds, recommendUnit } from '../logic/session.js';
-import { channelLessons, unitLevel, unitOrdinal } from '../logic/lessons.js';
+import {
+  channelLessons, defaultOpenUnits, unitLevel, unitOrdinal, unitTree
+} from '../logic/lessons.js';
 import { numberWord, capitalize } from '../logic/words.js';
 import { el, link } from '../ui/dom.js';
-import { footNav, tick, ramp } from '../ui/chrome.js';
+import { footNav, tick, ramp, trail } from '../ui/chrome.js';
 import { unitThumbColumn } from '../ui/thumb.js';
-import { glyph, glyphIdFor } from '../ui/glyphs.js';
+import { FALLBACK_GLYPH, glyph, glyphIdFor } from '../ui/glyphs.js';
 
 // The row of outline leaves shows at most this many new cards, so the block
 // keeps its size whatever the unit holds.
@@ -118,6 +120,25 @@ export function render(root, ctx) {
   const { content, store, today } = ctx;
   const states = store.readCards();
 
+  // One module, two routes. A channel that is not in the content renders a
+  // panel with a way out, not a blank page.
+  if (ctx.channel) {
+    if (!content.channels.includes(ctx.channel)) {
+      root.append(trail([
+        { text: 'Lessons', href: '#/lessons' },
+        { text: 'Unknown' }
+      ]));
+      root.append(el('h1', 'display', 'Unknown channel'));
+      root.append(el('p', 'where2',
+        `The content has no channel named ${ctx.channel}.`));
+      root.append(footLinks());
+      root.append(footNav('lessons'));
+      return;
+    }
+    renderChannel(root, ctx);
+    return;
+  }
+
   nextBlock(root, ctx, states);
   root.append(el('p', 'keyline', KEYLINE));
   for (const channel of content.channels) {
@@ -129,5 +150,185 @@ export function render(root, ctx) {
   links.append(link('#/placement', 'placement', 'Take the placement test'));
   root.append(links);
 
+  root.append(footNav('lessons'));
+}
+
+/* ---------- lessons, one channel ---------- */
+
+const CHEVRON_PATH = 'M9 4 L17 12 L9 20';
+
+function chevron() {
+  const node = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  node.setAttribute('viewBox', '0 0 24 24');
+  node.setAttribute('aria-hidden', 'true');
+  node.setAttribute('fill', 'none');
+  node.setAttribute('stroke', 'currentColor');
+  node.setAttribute('stroke-width', '2.6');
+  node.setAttribute('stroke-linecap', 'round');
+  node.setAttribute('stroke-linejoin', 'round');
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', CHEVRON_PATH);
+  node.append(path);
+  return node;
+}
+
+// The way back to the three channels. `#app` is a flex column, so a bare
+// anchor would take the whole width. One row holds it to its own words.
+function footLinks() {
+  const links = el('div', 'links');
+  links.append(link('#/lessons', 'foot', 'All three channels'));
+  return links;
+}
+
+// The fold list is one global set of unit keys, because a unit key is unique
+// across channels. `null` in storage means the user has folded nothing yet,
+// so the default rule decides, for every channel at once.
+function openSet(content, states, store) {
+  const stored = store.readSettings().open_units;
+  if (stored !== null) return new Set(stored);
+  return new Set(content.channels.flatMap(
+    (channel) => defaultOpenUnits(content, states, channel)
+  ));
+}
+
+// The meta line under a unit name. Only a folded row adds what is inside, so
+// the fold never hides a fact without leaving the count behind. An unfolded
+// row prints the children themselves, so the count would only repeat them.
+function metaLine(node, folded) {
+  const line = el('span', 'ust');
+  const cards = `${numberWord(node.new_count)} new `
+    + `${node.new_count === 1 ? 'card' : 'cards'}`;
+  if (!node.open) {
+    line.append(document.createTextNode(node.opens_with
+      ? `${cards}. Opens with ${node.opens_with}.`
+      : `${cards}. Closed.`));
+  } else if (node.new_count === 0) {
+    const done = el('span', 'done-sq');
+    done.setAttribute('aria-hidden', 'true');
+    line.append(done);
+    line.append(document.createTextNode(
+      `complete, ${numberWord(node.card_count)} `
+      + `${node.card_count === 1 ? 'card' : 'cards'}`));
+  } else if (node.next_up) {
+    line.append(document.createTextNode(`${cards}, next up`));
+  } else {
+    line.append(document.createTextNode(cards));
+  }
+  if (folded && node.inside_count > 0) {
+    const inside = `${numberWord(node.inside_count)} `
+      + `${node.inside_count === 1 ? 'unit' : 'units'} inside`
+      + (node.holds_next ? `, ${numberWord(1)} next up` : '');
+    // A closed row ends its line with a full stop of its own, so the tail
+    // joins with a space and a capital and the line never prints two stops.
+    const stopped = line.textContent.trimEnd().endsWith('.');
+    line.append(el('span', 'usum',
+      stopped ? ` ${capitalize(inside)}` : `. ${inside}`));
+  }
+  return line;
+}
+
+function unitRow(content, node, folded, onToggle) {
+  const row = el('div', 'urow');
+  const card = content.cards[(content.unit_cards[node.key] ?? [])[0]];
+  row.append(card
+    ? glyph(glyphIdFor(card, content), node.rollup, 's30')
+    : glyph(FALLBACK_GLYPH, node.rollup, 's30'));
+
+  const body = el('span', 'ubody');
+  body.append(el('span', 'un', node.name));
+  body.append(metaLine(node, folded));
+  body.append(ramp(node.rollup, { dim: !node.open }));
+  row.append(body);
+
+  const controls = el('span', 'uctl');
+  if (node.open) {
+    const start = link(
+      `#/session?focus=${node.channel}&unit=${node.key}`,
+      node.next_up ? 'startb solid' : 'startb',
+      'Start'
+    );
+    controls.append(start);
+  } else {
+    controls.append(el('span', 'shutnote', 'shut'));
+  }
+
+  if (node.children.length > 0) {
+    const button = el('button', 'chev');
+    button.type = 'button';
+    button.setAttribute('aria-expanded', folded ? 'false' : 'true');
+    button.setAttribute('aria-controls', `kids-${node.key}`);
+    button.setAttribute('aria-label',
+      `${folded ? 'Expand' : 'Collapse'} ${node.name}`);
+    button.append(chevron());
+    button.addEventListener('click', () => onToggle(node, button));
+    controls.append(button);
+  } else {
+    const pad = el('span', 'chevpad');
+    pad.setAttribute('aria-hidden', 'true');
+    controls.append(pad);
+  }
+  row.append(controls);
+  return row;
+}
+
+function unitNodeEl(content, node, open, onToggle) {
+  const folded = node.children.length > 0 && !open.has(node.key);
+  const box = el('div', 'node');
+  if (!node.open) box.classList.add('shut');
+  if (node.next_up) box.classList.add('now');
+  if (folded) box.classList.add('folded');
+  box.append(unitRow(content, node, folded, onToggle));
+  if (node.children.length > 0) {
+    const kids = el('div', 'kids');
+    kids.id = `kids-${node.key}`;
+    for (const child of node.children) {
+      kids.append(unitNodeEl(content, child, open, onToggle));
+    }
+    box.append(kids);
+  }
+  return box;
+}
+
+function renderChannel(root, ctx) {
+  const { content, store, channel } = ctx;
+  const states = store.readCards();
+  const open = openSet(content, states, store);
+
+  const onToggle = (node, button) => {
+    const wasOpen = button.getAttribute('aria-expanded') === 'true';
+    if (wasOpen) open.delete(node.key);
+    else open.add(node.key);
+    button.setAttribute('aria-expanded', wasOpen ? 'false' : 'true');
+    button.setAttribute('aria-label',
+      `${wasOpen ? 'Expand' : 'Collapse'} ${node.name}`);
+    button.closest('.node').classList.toggle('folded', wasOpen);
+    // The meta line prints what is inside only while the row is folded, so it
+    // is built again with the fold rather than left saying something untrue.
+    // After the toggle the row is folded exactly when it was open before.
+    button.closest('.urow').querySelector('.ust').replaceWith(metaLine(node, wasOpen));
+    store.writeSettings({ open_units: [...open] });
+    if (!store.available) ctx.banner(ctx.storage_banner);
+  };
+
+  root.append(trail([
+    { text: 'Lessons', href: '#/lessons' },
+    { text: capitalize(channelLabel(channel)) }
+  ]));
+
+  const head = el('div', 'pagehead');
+  head.append(el('h1', 'display', capitalize(channelLabel(channel))));
+  const summary = channelLessons(content, states, channel);
+  head.append(el('p', 'where2',
+    `${capitalize(numberWord(summary.total_count))} `
+    + `${summary.total_count === 1 ? 'unit' : 'units'} on one stem, three deep.`));
+  root.append(head);
+
+  const tree = el('div', 'tree');
+  for (const node of unitTree(content, states, channel)) {
+    tree.append(unitNodeEl(content, node, open, onToggle));
+  }
+  root.append(tree);
+
+  root.append(footLinks());
   root.append(footNav('lessons'));
 }
