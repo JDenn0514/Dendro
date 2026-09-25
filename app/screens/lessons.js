@@ -2,7 +2,7 @@
 import { channelLabel, unitFor } from '../logic/content.js';
 import { dueCardIds, recommendUnit } from '../logic/session.js';
 import {
-  channelLessons, defaultOpenUnits, unitLevel, unitOrdinal, unitTree
+  channelLessons, mergeOpenUnits, openUnitsFor, unitLevel, unitOrdinal, unitTree
 } from '../logic/lessons.js';
 import { numberWord, capitalize } from '../logic/words.js';
 import { el, link } from '../ui/dom.js';
@@ -118,7 +118,6 @@ function channelDoor(content, states, today, channel) {
 
 export function render(root, ctx) {
   const { content, store, today } = ctx;
-  const states = store.readCards();
 
   // One module, two routes. A channel that is not in the content renders a
   // panel with a way out, not a blank page.
@@ -139,6 +138,8 @@ export function render(root, ctx) {
     return;
   }
 
+  // The overview reads the card states; the channel page reads its own.
+  const states = store.readCards();
   nextBlock(root, ctx, states);
   root.append(el('p', 'keyline', KEYLINE));
   for (const channel of content.channels) {
@@ -180,17 +181,6 @@ function footLinks() {
   return links;
 }
 
-// The fold list is one global set of unit keys, because a unit key is unique
-// across channels. `null` in storage means the user has folded nothing yet,
-// so the default rule decides, for every channel at once.
-function openSet(content, states, store) {
-  const stored = store.readSettings().open_units;
-  if (stored !== null) return new Set(stored);
-  return new Set(content.channels.flatMap(
-    (channel) => defaultOpenUnits(content, states, channel)
-  ));
-}
-
 // The meta line under a unit name. Only a folded row adds what is inside, so
 // the fold never hides a fact without leaving the count behind. An unfolded
 // row prints the children themselves, so the count would only repeat them.
@@ -218,11 +208,12 @@ function metaLine(node, folded) {
     const inside = `${numberWord(node.inside_count)} `
       + `${node.inside_count === 1 ? 'unit' : 'units'} inside`
       + (node.holds_next ? `, ${numberWord(1)} next up` : '');
-    // A closed row ends its line with a full stop of its own, so the tail
-    // joins with a space and a capital and the line never prints two stops.
+    // The tail is its own sentence, so it always starts with a capital. A
+    // closed row already ends its line with a full stop, so the tail joins
+    // with a space there and the line never prints two stops.
     const stopped = line.textContent.trimEnd().endsWith('.');
     line.append(el('span', 'usum',
-      stopped ? ` ${capitalize(inside)}` : `. ${inside}`));
+      `${stopped ? ' ' : '. '}${capitalize(inside)}`));
   }
   return line;
 }
@@ -292,7 +283,12 @@ function unitNodeEl(content, node, open, onToggle) {
 function renderChannel(root, ctx) {
   const { content, store, channel } = ctx;
   const states = store.readCards();
-  const open = openSet(content, states, store);
+  const tree = unitTree(content, states, channel);
+  // The open list in settings covers every channel, so this page reads its own
+  // part of it and writes back only its own part.
+  const open = new Set(
+    openUnitsFor(store.readSettings().open_units, channel, tree, content)
+  );
 
   const onToggle = (node, button) => {
     const wasOpen = button.getAttribute('aria-expanded') === 'true';
@@ -306,7 +302,11 @@ function renderChannel(root, ctx) {
     // is built again with the fold rather than left saying something untrue.
     // After the toggle the row is folded exactly when it was open before.
     button.closest('.urow').querySelector('.ust').replaceWith(metaLine(node, wasOpen));
-    store.writeSettings({ open_units: [...open] });
+    store.writeSettings({
+      open_units: mergeOpenUnits(
+        store.readSettings().open_units, channel, open, content
+      )
+    });
     if (!store.available) ctx.banner(ctx.storage_banner);
   };
 
@@ -318,16 +318,18 @@ function renderChannel(root, ctx) {
   const head = el('div', 'pagehead');
   head.append(el('h1', 'display', capitalize(channelLabel(channel))));
   const summary = channelLessons(content, states, channel);
-  head.append(el('p', 'where2',
-    `${capitalize(numberWord(summary.total_count))} `
-    + `${summary.total_count === 1 ? 'unit' : 'units'} on one stem, three deep.`));
+  // One unit is not a stem, so the sentence stops at the count.
+  head.append(el('p', 'where2', summary.total_count === 1
+    ? 'One unit.'
+    : `${capitalize(numberWord(summary.total_count))} units on one stem, `
+      + `${numberWord(summary.depth)} deep.`));
   root.append(head);
 
-  const tree = el('div', 'tree');
-  for (const node of unitTree(content, states, channel)) {
-    tree.append(unitNodeEl(content, node, open, onToggle));
+  const stem = el('div', 'tree');
+  for (const node of tree) {
+    stem.append(unitNodeEl(content, node, open, onToggle));
   }
-  root.append(tree);
+  root.append(stem);
 
   root.append(footLinks());
   root.append(footNav('lessons'));

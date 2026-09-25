@@ -4,7 +4,7 @@ import { loadFixture } from './helpers/fixture.js';
 import { loadContent } from '../app/logic/content.js';
 import {
   channelUnits, unitOrdinal, unitLevel, unitTree,
-  defaultOpenUnits, channelLessons, unitThumb
+  defaultOpenUnits, openUnitsFor, mergeOpenUnits, channelLessons, unitThumb
 } from '../app/logic/lessons.js';
 
 const { content } = loadContent(loadFixture());
@@ -110,6 +110,44 @@ test('level 1 opens by default, and so does the branch holding the next unit', (
   };
   assert.deepEqual(defaultOpenUnits(content, deeper, 'leaf'),
     ['leaf_types', 'simple_lobed_genus']);
+});
+
+test('the channel depth is the deepest unit on the stem, not capped at three', () => {
+  // The leaf stem runs to a level-4 variety unit, so the channel page must not
+  // say three deep over it. Bark and fruit hold one level-1 unit each.
+  assert.equal(channelLessons(content, LEAF_NEXT, 'leaf').depth, 4);
+  assert.equal(channelLessons(content, LEAF_NEXT, 'bark').depth, 1);
+  assert.equal(channelLessons(content, LEAF_NEXT, 'fruit').depth, 1);
+});
+
+test('a channel page reads only its own keys out of the stored fold list', () => {
+  const tree = unitTree(content, LEAF_NEXT, 'leaf');
+  // Nothing stored at all: the default rule decides.
+  assert.deepEqual(openUnitsFor(null, 'leaf', tree, content), ['leaf_types']);
+  // A list written by another channel holds no leaf key, so leaf still reads
+  // its defaults rather than starting with every branch folded.
+  assert.deepEqual(openUnitsFor(['bark_types'], 'leaf', tree, content),
+    ['leaf_types']);
+  // A list with leaf keys is the user's own fold, so it stands.
+  assert.deepEqual(
+    openUnitsFor(['bark_types', 'simple_lobed_genus'], 'leaf', tree, content),
+    ['simple_lobed_genus']);
+  // A key that names no unit in this content is from an older set.
+  assert.deepEqual(openUnitsFor(['gone_away'], 'leaf', tree, content),
+    ['leaf_types']);
+});
+
+test('a fold on one channel keeps the other channels their keys', () => {
+  const stored = ['bark_types', 'gone_away', 'leaf_types'];
+  assert.deepEqual(
+    mergeOpenUnits(stored, 'leaf', new Set(['leaf_types', 'simple_lobed_genus']), content),
+    ['bark_types', 'leaf_types', 'simple_lobed_genus']);
+  // Folding every leaf branch leaves the other channels alone.
+  assert.deepEqual(mergeOpenUnits(stored, 'leaf', new Set(), content),
+    ['bark_types']);
+  // A key from another channel cannot enter through this channel's set.
+  assert.deepEqual(mergeOpenUnits(null, 'leaf', new Set(['bark_types']), content),
+    []);
 });
 
 test('one channel summarises as three depths of unit squares', () => {
