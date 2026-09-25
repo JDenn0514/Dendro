@@ -97,6 +97,8 @@ pass. On an error it prints each message and exits 1. Read the messages and fix 
 - `<id> is in the published … and is gone from the new content` — a published ID left the
   content. Never delete a published ID. Retire it instead.
 
+Run `node pipeline/cli.ts photos audit <name>` to list any candidate under the colour threshold. The fetch already drops these, so the list is normally empty.
+
 - [ ] **Step 7: Hunt for the thin channels (agent)**
 
 Read the gap list in `build.json` under `gaps`. Each row names a species or a concept, a

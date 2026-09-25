@@ -441,6 +441,7 @@ test('no argument prints the usage block and fails', async (t) => {
     'photos fetch',
     'photos add',
     'photos verdict',
+    'photos audit',
     'build',
     'report',
     'run pr',

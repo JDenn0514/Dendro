@@ -167,6 +167,8 @@ const USAGE = `usage: node pipeline/cli.ts <command> [flags]
   photos fetch <name>
   photos add <name> --target <t> --origin <url> --file-url <url> --source <s> --author <a> --license <l> [--license-url <u>] [--source-species <s>] [--channel-hint <c>] [--local <path>]
   photos verdict <name> --candidate <id> --verdict <${VERDICT_KINDS.join('|')}> [--channel <c>] [--tags a,b] [--case <case>] --note "<text>"
+  photos audit <name> [--threshold <n>]
+  photos audit --manifest [--threshold <n>]
   build <name> [--base <ref>]
   report <name>
   run pr <name>
@@ -530,6 +532,103 @@ async function photosVerdict(rest: string[], deps: CliDeps): Promise<number> {
   return 0;
 }
 
+interface AuditTally {
+  measured: number;
+  skipped: number;
+  under: number;
+}
+
+/**
+ * Lists every row under the colour threshold, in a run or in the published manifest. It
+ * reports only. Retiring an image is the owner's decision, through `images retire`.
+ */
+async function photosAudit(rest: string[], deps: CliDeps): Promise<number> {
+  const flags = parseFlags(rest);
+  const threshold = thresholdOf(flags);
+  if (threshold === null) {
+    console.error(`photos audit --threshold needs a number: ${flags.threshold}`);
+    return 1;
+  }
+  const tally: AuditTally = { measured: 0, skipped: 0, under: 0 };
+  if (flags.manifest === 'true') {
+    await auditManifest(deps, threshold, tally);
+  } else {
+    const name = positional(rest, 'photos audit <name> [--threshold <n>]');
+    await auditRun(deps, name, threshold, tally);
+  }
+  console.log(
+    `${tally.measured} measured, ${tally.skipped} skipped, ${tally.under} under threshold ${threshold}`,
+  );
+  return 0;
+}
+
+/** MONO_THRESHOLD when --threshold is absent. Null when the value is not a number. */
+function thresholdOf(flags: Record<string, string>): number | null {
+  const value = flags.threshold;
+  if (value === undefined) return MONO_THRESHOLD;
+  const number = Number(value);
+  return value.trim() !== '' && Number.isFinite(number) ? number : null;
+}
+
+/** Measures each row of the run that has a cached file. It does not read run.json. */
+async function auditRun(
+  deps: CliDeps,
+  name: string,
+  threshold: number,
+  tally: AuditTally,
+): Promise<void> {
+  const dir = runDir(deps.root, name);
+  if (!fs.existsSync(dir)) throw new Error(`run ${name} does not exist.`);
+  for (const row of readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'))) {
+    const bytes = localBytes(deps.root, row);
+    const score = bytes === null ? null : await auditScore(deps, row.id, bytes);
+    if (score === null) {
+      tally.skipped += 1;
+      continue;
+    }
+    tally.measured += 1;
+    if (score < threshold) {
+      tally.under += 1;
+      console.log(
+        `${row.id} ${row.target} ${row.channel_hint ?? '-'} ${chromaText(score)} ${row.origin}`,
+      );
+    }
+  }
+}
+
+/** Measures each live manifest row through the CDN. A retired row is not read and not counted. */
+async function auditManifest(deps: CliDeps, threshold: number, tally: AuditTally): Promise<void> {
+  for (const row of readManifest(deps.root)) {
+    if (row.retired === true) continue;
+    const result = await deps.http.getBytes(`${deps.cdnBase}${objectKey(row.hash)}`);
+    if (!result.ok || result.bytes === null) {
+      console.error(`${row.hash}: fetch failed: ${result.error ?? `status ${result.status}`}`);
+      tally.skipped += 1;
+      continue;
+    }
+    const score = await auditScore(deps, row.hash, result.bytes);
+    if (score === null) {
+      tally.skipped += 1;
+      continue;
+    }
+    tally.measured += 1;
+    if (score < threshold) {
+      tally.under += 1;
+      console.log(`${row.hash} ${row.target} ${row.channel} ${chromaText(score)} ${row.origin}`);
+    }
+  }
+}
+
+/** The chroma of the bytes. Null, with a line that names the row, when they do not decode. */
+async function auditScore(deps: CliDeps, label: string, bytes: Uint8Array): Promise<number | null> {
+  try {
+    return await deps.chroma(bytes);
+  } catch (error) {
+    console.error(`${label}: the image does not decode: ${errorMessage(error)}`);
+    return null;
+  }
+}
+
 async function dataSections(_rest: string[], deps: CliDeps): Promise<number> {
   const pages: { section: string; html: string }[] = [];
   for (const page of SECTION_PAGES) {
@@ -616,6 +715,7 @@ const COMMANDS: Record<string, Handler> = {
   'photos fetch': photosFetch,
   'photos add': photosAdd,
   'photos verdict': photosVerdict,
+  'photos audit': photosAudit,
   'data sections': dataSections,
   'data inat-terms': dataInatTerms,
   build,
