@@ -4012,7 +4012,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:04:14Z",
-    "note": "An archival black and white plate of one acorn in a warty cup on a twig. The nut and cup read clearly."
+    "note": "An archival black and white plate of one acorn in a warty cup on a twig. The nut and cup read clearly.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "3a44bdc6bb22282cb85cebc9ade3c1703cbbf1ea53e7dd697837eff8117f8ca6",
