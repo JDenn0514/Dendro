@@ -7,10 +7,10 @@ import {
   candidateId,
   collect,
   interleave,
-  licenseAllowed,
   makeCandidate,
   mergeFound,
   type Candidate,
+  type SourceKey,
 } from './candidates.ts';
 import { categoryUrl, commonsCandidates, parseCategoryListing } from './commons.ts';
 import { SECTION_PAGES, buildSectionTable, loadSectionTable, nextPageUrl, sectionFor } from './fna.ts';
@@ -48,6 +48,7 @@ import {
   parseJson as parseJsonBody,
 } from './json_fields.ts';
 import { appendJsonl, readJsonl } from './jsonl.ts';
+import { licenseAllowedAt } from './licenses.ts';
 import { publishApproved, retireRows, type ManifestRow } from './manifest.ts';
 import {
   CHECKLIST_URL,
@@ -425,7 +426,8 @@ async function photosAdd(rest: string[], deps: CliDeps): Promise<number> {
       return 1;
     }
   }
-  if (!licenseAllowed(flags.license)) {
+  // The origin decides a permission label. The allowlist decides every other licence.
+  if (!licenseAllowedAt(flags.license, flags.origin)) {
     console.error(`photos add license is not allowed: ${flags.license}`);
     return 1;
   }

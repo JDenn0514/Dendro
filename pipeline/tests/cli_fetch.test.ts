@@ -1121,6 +1121,69 @@ test('photos add refuses a license the allowlist rejects', async (t) => {
   assert.deepEqual(candidatesOf(root), []);
 });
 
+test('photos add takes the permission label for a www.wildflower.org origin', async (t) => {
+  const fileUrl = 'https://www.wildflower.org/image_archive/640x480/JLR/JLR_IMG8981.JPG';
+  const { root, deps, out } = setup(t, new Map([[fileUrl, { bytes: jpeg(3) }]]));
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+
+  const code = await runCommand(
+    [
+      'photos',
+      'add',
+      'demo',
+      '--target',
+      'QUGA',
+      '--origin',
+      'https://www.wildflower.org/gallery/result.php?id_image=66070',
+      '--file-url',
+      fileUrl,
+      '--source',
+      'Lady Bird Johnson Wildflower Center',
+      '--author',
+      'James L. Reveal',
+      '--license',
+      'used with permission, non-commercial',
+    ],
+    deps,
+  );
+
+  assert.equal(code, 0);
+  const rows = candidatesOf(root);
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].license, 'used with permission, non-commercial');
+  assert.deepEqual(out, [`manual candidate ${rows[0].id} added for QUGA`]);
+});
+
+test('photos add refuses the permission label for any other host', async (t) => {
+  const { root, deps, err } = setup(t);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+
+  const code = await runCommand(
+    [
+      'photos',
+      'add',
+      'demo',
+      '--target',
+      'QUGA',
+      '--origin',
+      'https://example.org/page',
+      '--file-url',
+      'https://example.org/a.jpg',
+      '--source',
+      'a blog',
+      '--author',
+      'A Photographer',
+      '--license',
+      'used with permission, non-commercial',
+    ],
+    deps,
+  );
+
+  assert.equal(code, 1);
+  assert.deepEqual(err, ['photos add license is not allowed: used with permission, non-commercial']);
+  assert.deepEqual(candidatesOf(root), []);
+});
+
 test('photos add refuses a monochrome image and writes nothing', async (t) => {
   const fileUrl = 'https://www.fs.usda.gov/images/quga_bark.jpg';
   const grey = await greyJpeg();
