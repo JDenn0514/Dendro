@@ -480,8 +480,15 @@ body{
 /* ---------- lessons ---------- */
 .nextu{margin-top:6px;}
 .nextu .tick{background:var(--moss); width:52px; height:3px;}
+/* The print sits beside the unit name, as it does on home. The row of new
+   leaves clears it, and the Start control clears it when there is no row. */
+.nextu .figcol{float:right; width:148px; margin:0 0 6px 16px;}
+.nextu .thumbcap{margin-top:7px;}
+.nextu .btn{clear:both;}
 .nextu .why{margin:9px 0 0; font-size:1rem; color:var(--bark);}
-.newrow{display:flex; margin-top:14px; gap:3px;}
+/* The row wraps, so a unit with nine or more new cards keeps every leaf on
+   the page at 360px instead of losing the last ones off the right edge. */
+.newrow{display:flex; flex-wrap:wrap; margin-top:14px; gap:3px;}
 .nextu .newcap{margin-top:8px;}
 .nextu .rampline{display:flex; align-items:center; gap:11px; margin-top:14px;}
 .nextu .rampline span{font-size:0.875rem; color:var(--bark);}
