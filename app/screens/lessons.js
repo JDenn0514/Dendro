@@ -1,12 +1,11 @@
 // Lessons: what is next, then one door per channel.
 import { channelLabel, unitFor } from '../logic/content.js';
 import { dueCardIds, recommendUnit } from '../logic/session.js';
-import { channelLessons, unitLevel, unitOrdinal, unitThumb } from '../logic/lessons.js';
+import { channelLessons, unitLevel, unitOrdinal } from '../logic/lessons.js';
 import { numberWord, capitalize } from '../logic/words.js';
-import { labelFor } from '../logic/question.js';
 import { el, link } from '../ui/dom.js';
 import { footNav, tick, ramp } from '../ui/chrome.js';
-import { plate, credit } from '../ui/plate.js';
+import { unitThumbColumn } from '../ui/thumb.js';
 import { glyph, glyphIdFor } from '../ui/glyphs.js';
 
 // The row of outline leaves shows at most this many new cards, so the block
@@ -33,13 +32,19 @@ function nextBlock(root, ctx, states) {
   box.append(tick());
   const found = recommendUnit({ content, states, focus: 'all' });
 
+  // Two different states. A closed unit waits on its parent; with no closed
+  // unit left, every unit is started and there is nothing to open.
   if (!found.unit_key) {
-    box.append(el('h1', 'display', 'Nothing is open'));
-    box.append(el('p', 'why', found.next_closed
-      ? `${found.next_closed.unit_name} opens when `
+    if (found.next_closed) {
+      box.append(el('h1', 'display', 'Nothing is open'));
+      box.append(el('p', 'why',
+        `${found.next_closed.unit_name} opens when `
         + `${numberWord(found.next_closed.needed_cards)} more `
-        + `${found.next_closed.needed_cards === 1 ? 'card' : 'cards'} reach familiar.`
-      : 'Every unit in the content is started.'));
+        + `${found.next_closed.needed_cards === 1 ? 'card' : 'cards'} reach familiar.`));
+    } else {
+      box.append(el('h1', 'display', 'Every unit is started'));
+      box.append(el('p', 'why', 'Nothing in the content is waiting to open.'));
+    }
     root.append(box);
     return;
   }
@@ -48,27 +53,8 @@ function nextBlock(root, ctx, states) {
   const ids = content.unit_cards[unit.key] ?? [];
   const newCount = ids.filter((id) => !states[id]).length;
 
-  const thumbCard = unitThumb(content, unit.key);
-  if (thumbCard) {
-    const column = el('div', 'figcol wide');
-    const { label } = labelFor(content, thumbCard.kind, thumbCard.channel, thumbCard.key);
-    const figure = plate(thumbCard.photo, {
-      image_base: ctx.image_base,
-      alt: `Pressed specimen, ${label}`,
-      shape: 'pl-thumb',
-      lift: true
-    });
-    figure.classList.add('wide');
-    column.append(figure);
-    const caption = credit(thumbCard.photo,
-      `${label}, one of the ${numberWord(ids.length)}.`);
-    // `plate-cap` stays on: a plate that fails to load removes the caption
-    // next to it by that class, and a credit for a picture that is not there
-    // must go with it.
-    caption.classList.add('thumbcap');
-    column.append(caption);
-    box.append(column);
-  }
+  const thumb = unitThumbColumn(content, unit.key, ctx.image_base);
+  if (thumb) box.append(thumb);
 
   box.append(el('h1', 'display', unit.name));
   const parent = unit.parent ? unitFor(content, unit.parent) : null;

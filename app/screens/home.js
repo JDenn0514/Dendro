@@ -3,12 +3,11 @@
 import { cardId, channelLabel, unitFor, conceptFor } from '../logic/content.js';
 import { dueCardIds, newCardCapDone, recommendUnit } from '../logic/session.js';
 import { channelRung, leadingConcept } from '../logic/progress.js';
-import { channelLessons, unitOrdinal, unitThumb } from '../logic/lessons.js';
+import { channelLessons, unitOrdinal } from '../logic/lessons.js';
 import { numberWord, capitalize } from '../logic/words.js';
-import { labelFor } from '../logic/question.js';
 import { el, link } from '../ui/dom.js';
 import { footNav, tick } from '../ui/chrome.js';
-import { plate, credit } from '../ui/plate.js';
+import { unitThumbColumn } from '../ui/thumb.js';
 import { glyph, glyphIdFor, FALLBACK_GLYPH } from '../ui/glyphs.js';
 
 // The one line of copy the content does not carry.
@@ -56,32 +55,6 @@ function whyLine(content, unit, cardCount, newCount) {
     + `quizzed by ${channelLabel(unit.channel)}.`;
 }
 
-// The small print beside the unit. `.wide` on both the column and the figure
-// cuts the empty lower band off the scan, so the caption sits under the print.
-function thumbFor(content, unitKey, imageBase) {
-  const found = unitThumb(content, unitKey);
-  if (!found) return null;
-  const column = el('div', 'figcol wide');
-  const { label } = labelFor(content, found.kind, found.channel, found.key);
-  const figure = plate(found.photo, {
-    image_base: imageBase,
-    alt: `Pressed specimen, ${label}`,
-    shape: 'pl-thumb',
-    lift: true
-  });
-  figure.classList.add('wide');
-  column.append(figure);
-  // Every photo the app prints carries its credit, the 124 px thumb included.
-  const count = (content.unit_cards[unitKey] ?? []).length;
-  const caption = credit(found.photo, `${label}, one of the ${numberWord(count)}.`);
-  // `plate-cap` stays on: a plate that fails to load removes the caption next
-  // to it by that class, and a credit for a picture that is not there must go
-  // with it.
-  caption.classList.add('thumbcap');
-  column.append(caption);
-  return column;
-}
-
 function recommendation(root, ctx, states) {
   const { content, today } = ctx;
   const box = el('div', 'rec');
@@ -92,7 +65,7 @@ function recommendation(root, ctx, states) {
     const unit = unitFor(content, found.unit_key);
     const ids = content.unit_cards[unit.key] ?? [];
     const newCount = ids.filter((id) => !states[id]).length;
-    const thumb = thumbFor(content, unit.key, ctx.image_base);
+    const thumb = unitThumbColumn(content, unit.key, ctx.image_base);
     if (thumb) box.append(thumb);
     box.append(el('h2', 'h2', unit.name));
     box.append(el('p', 'why', whyLine(content, unit, ids.length, newCount)));
