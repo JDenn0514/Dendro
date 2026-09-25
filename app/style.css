@@ -645,6 +645,13 @@ dl.facts dd{margin:0; font-size:1rem; line-height:1.45;}
 /* the sample words are sized in px: they must show what each step does,
    whatever the step in force right now */
 .tsample{flex:1 1 auto; font-family:var(--lit); line-height:1.15;}
+/* one class per step size, and the sizes match `sample_px` in
+   `app/ui/textsize.js` */
+.tsample.px14{font-size:14px;}
+.tsample.px15{font-size:15px;}
+.tsample.px17{font-size:17px;}
+.tsample.px20{font-size:20px;}
+.tsample.px22{font-size:22px;}
 .tname{flex:0 0 auto; font-size:0.875rem; font-style:italic; color:var(--bark);}
 .tstep input:checked ~ .tname{font-style:normal; color:var(--ink);}
 
@@ -652,11 +659,32 @@ dl.facts dd{margin:0; font-size:1rem; line-height:1.45;}
   min-height:54px; margin-top:9px; padding:0 15px; box-sizing:border-box;
   background:var(--mount); border-left:3px solid var(--moss); border-radius:2px;
   text-decoration:none; color:var(--ink);}
-.setbtn .sbn{font-family:var(--fr); font-weight:600; font-size:1.0625rem;
-  font-variation-settings:"opsz" 20;}
+/* Export and Reset are real controls, so the row holds a button and Import
+   holds a label over a file input. The reset comes first and the type rule
+   under it carries the face for the span and the button alike, so the four
+   type declarations are written once. */
+.setbtn button.sbn{appearance:none; -webkit-appearance:none; background:none;
+  border:0; padding:0; color:inherit; font:inherit; text-align:left;
+  cursor:pointer; min-height:54px; flex:1 1 auto;}
+.setbtn .sbn, .setbtn button.sbn{font-family:var(--fr); font-weight:600;
+  font-size:1.0625rem; font-variation-settings:"opsz" 20;}
 .setbtn .sbd{font-size:0.84375rem; font-style:italic; color:var(--bark); text-align:right;}
 .setbtn:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+.setbtn button.sbn:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+label.setbtn{cursor:pointer;}
+label.setbtn:has(input:focus-visible){outline:2px solid var(--moss); outline-offset:2px;}
+/* `.setbtn` sets `display:flex`, which outweighs the browser's own rule for
+   the `hidden` attribute. The reset's confirm row starts hidden, so it needs
+   this rule to stay off the page until the reset is tapped. */
+.setbtn[hidden]{display:none;}
 .setbtn.warn{border-left-color:var(--sap);}
+
+/* The diagnostics list reuses the printed species rows, but it prints no
+   glyph and it sits inside a setting panel, not against the depth column.
+   Two columns and no left margin, so a pair name gets the width of the page
+   in place of the 26px the glyph would take. */
+.setgroup .splist{margin-left:0;}
+.setgroup .spx{grid-template-columns:1fr auto;}
 /* a legend the screen reader hears and the page does not print */
 .sr{position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%);
   white-space:nowrap;}
@@ -836,34 +864,3 @@ button.leave:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
    7.5:1, and the underline stays, so the link still reads as a link. */
 .cap a{color:var(--bark);}
 
-/* A setbtn holds a real control, so the button carries the panel's own type.
-   This selector sets the family itself, so it needs no `:where()` guard: it
-   is the rule that decides, not a reset that has to lose to one. */
-.setbtn button.sbn{appearance:none; -webkit-appearance:none; background:none;
-  border:0; padding:0; color:inherit; font:inherit; font-family:var(--fr);
-  font-weight:600; font-size:1.0625rem; font-variation-settings:"opsz" 20;
-  text-align:left; cursor:pointer; min-height:54px; flex:1 1 auto;}
-.setbtn button.sbn:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
-/* Import is a label wrapping a file input the page never draws */
-label.setbtn{cursor:pointer;}
-label.setbtn:has(input:focus-visible){outline:2px solid var(--moss); outline-offset:2px;}
-/* `.setbtn` sets `display:flex`, which outweighs the browser's own rule for
-   the `hidden` attribute. The reset's confirm row starts hidden, so it needs
-   this rule to stay off the page until the reset is tapped. */
-.setbtn[hidden]{display:none;}
-
-/* The diagnostics list reuses the printed species rows, but it prints no
-   glyph and it sits inside a setting panel, not against the depth column.
-   Two columns and no left margin, so a pair name gets the width of the page
-   in place of the 26px the glyph would take. */
-.setgroup .splist{margin-left:0;}
-.setgroup .spx{grid-template-columns:1fr auto;}
-
-/* The five sample words of the text size steps. They are sized in px, so each
-   one shows what its own step does whatever step is in force. One class per
-   size, and the sizes match `sample_px` in `app/ui/textsize.js`. */
-.tsample.px14{font-size:14px;}
-.tsample.px15{font-size:15px;}
-.tsample.px17{font-size:17px;}
-.tsample.px20{font-size:20px;}
-.tsample.px22{font-size:22px;}

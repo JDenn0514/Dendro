@@ -76,7 +76,7 @@ function textSizeGroup(root, ctx) {
   root.append(group);
 }
 
-function cardsGroup(root, ctx) {
+function cardsGroup(root, ctx, state) {
   const { store, today } = ctx;
   const group = el('div', 'setgroup');
   group.append(tick());
@@ -123,7 +123,16 @@ function cardsGroup(root, ctx) {
   fileField.addEventListener('change', async () => {
     const chosen = fileField.files?.[0];
     if (!chosen) return;
-    const result = store.importBlob(await chosen.text());
+    // A file the browser cannot read rejects here. Say so, or the note would
+    // keep the line it printed before.
+    let text;
+    try {
+      text = await chosen.text();
+    } catch {
+      importNote.textContent = 'the file could not be read';
+      return;
+    }
+    const result = store.importBlob(text);
     importNote.textContent = result.ok
       ? 'imported, reload to see it'
       : `rejected: ${result.errors.join(' ')}`;
@@ -136,7 +145,9 @@ function cardsGroup(root, ctx) {
   const resetRow = el('div', 'setbtn warn');
   const resetButton = el('button', 'sbn', 'Reset');
   resetButton.type = 'button';
-  const resetNote = el('span', 'sbd', 'clears every level and date');
+  const resetNote = el('span', 'sbd', state.reset_done
+    ? 'progress reset'
+    : 'clears every level and date');
   resetRow.append(resetButton, resetNote);
   const confirmRow = el('div', 'setbtn warn');
   const confirmButton = el('button', 'sbn', 'Yes, delete everything');
@@ -146,9 +157,14 @@ function cardsGroup(root, ctx) {
   resetButton.addEventListener('click', () => { confirmRow.hidden = false; });
   confirmButton.addEventListener('click', () => {
     store.reset();
-    confirmRow.hidden = true;
-    resetNote.textContent = 'progress reset';
-    exportNote.textContent = noteText();
+    // Reset clears the settings as well, so every radio on the screen now
+    // shows a value the store no longer holds, and the page still carries the
+    // old root size. Take the root size from the store and print the screen
+    // again from what is left there.
+    const settings = store.readSettings();
+    applyTextSize(settings.text_size);
+    root.textContent = '';
+    render(root, ctx, { reset_done: true });
   });
   group.append(resetRow, confirmRow);
   root.append(group);
@@ -181,7 +197,10 @@ function diagnosticsGroup(root, ctx) {
   root.append(group);
 }
 
-export function render(root, ctx) {
+// `state` carries what the screen knows about itself and the store does not.
+// A confirmed reset prints the screen again, and `reset_done` keeps the note
+// beside Reset on the new print.
+export function render(root, ctx, state = {}) {
   const { store } = ctx;
 
   root.append(trail([{ text: 'Home', href: '#/' }, { text: 'Settings' }]));
@@ -209,7 +228,7 @@ export function render(root, ctx) {
     steps: NEW_PER_DAY
   });
   textSizeGroup(root, ctx);
-  cardsGroup(root, ctx);
+  cardsGroup(root, ctx, state);
   diagnosticsGroup(root, ctx);
 
   root.append(footNav(null));
