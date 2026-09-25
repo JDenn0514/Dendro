@@ -2244,7 +2244,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:06:31Z",
-    "note": "Archival black and white plate of two acorns on a twig. The acorns are sharp and fill a good part of the frame."
+    "note": "Archival black and white plate of two acorns on a twig. The acorns are sharp and fill a good part of the frame.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "619905cf25c67e1ff03cf74b237eb6d50618c48ca6159ca8a6da80b1938a0be3",
