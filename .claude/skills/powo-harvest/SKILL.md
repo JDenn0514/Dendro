@@ -47,11 +47,15 @@ each one.
 1. **Open the search page.** Use `mcp__Claude_Browser__navigate` with
    `https://powo.science.kew.org/results?q=<scientific name, URL-encoded>`. This is Kew page
    load 1. Check for a challenge.
-2. **Find the IPNI id.** Read the result list with `mcp__Claude_Browser__get_page_text` or
-   `mcp__Claude_Browser__find`. Pick the accepted name that matches the scientific name. Its
-   link is `/taxon/urn:lsid:ipni.org:names:<IPNI id>`. When the list is still empty, wait 5
-   seconds (`mcp__Claude_Browser__computer`, action `wait`) and read the same page again.
-   That is not a new page load.
+2. **Find the IPNI id.** The id is in the href of the result link, not in the visible text.
+   Run `mcp__Claude_Browser__javascript_tool` with
+   `[...document.querySelectorAll('a[href*="ipni.org:names:"]')].map((a) => [a.textContent.trim(), a.getAttribute('href')])`.
+   The script reads the open page, so it loads nothing new. Each href holds
+   `urn:lsid:ipni.org:names:<IPNI id>`. Pick the link of the accepted name that matches the
+   scientific name, and take the IPNI id from its href. Use `mcp__Claude_Browser__get_page_text`
+   only to confirm the result name. Do not click the result: that is one more Kew page load.
+   When the list is still empty, wait 5 seconds (`mcp__Claude_Browser__computer`, action
+   `wait`) and run the same script again. That is not a new page load.
 3. **Wait.** Use `mcp__Claude_Browser__computer`, action `wait`, duration 10.
 4. **Open the images page.** Use `mcp__Claude_Browser__navigate` with
    `https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:<IPNI id>/images`. This is
