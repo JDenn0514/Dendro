@@ -797,6 +797,31 @@ button.leave:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
 .gauge{flex-wrap:wrap; row-gap:3px; height:auto; min-height:5px;}
 .gauge i{min-width:2px;}
 
+/* The space the mockup carries as inline styles on the session and the
+   reveal. A screen builds the DOM; the sheet sets the space around it. Each
+   rule is keyed on a class the screen already prints, or on where the node
+   sits, so no screen gains a class for spacing alone. */
+
+/* the question's hero print opens a gap under the gauge */
+.pl-hero{margin-top:12px;}
+/* the reveal: the two labels over the pair, and the one plate a right answer
+   prints, both open a new block under the name. The plates of a pair sit
+   inside `.pair`, so the child selector reaches the single plate only. */
+.reveal .pair-head{margin-top:24px;}
+.reveal > .plate{margin-top:24px;}
+/* The summary and the empty deck carry no running head, and `#app` has no top
+   padding, so the heading would sit on the top edge of the phone. Every other
+   screen opens 18px down. The two error screens put a trail first, so this
+   rule reaches the session's two headings and nothing else. */
+#app > .display:first-child{padding-top:18px;}
+/* the tick opens a new section, so it clears the hairline under the last row */
+.sumrow + .tick{margin-top:24px;}
+
+/* The credit's author is a link. With no rule it prints in the browser's blue
+   and breaks the italic bark of the caption around it. Bark on paper is
+   7.5:1, and the underline stays, so the link still reads as a link. */
+.cap a{color:var(--bark);}
+
 /* =======================================================================
    LEGACY
 

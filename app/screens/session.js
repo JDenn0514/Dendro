@@ -62,18 +62,9 @@ export function render(root, ctx) {
     if (!store.available) ctx.banner(ctx.storage_banner);
   }
 
-  // A screen with no running head has no top padding of its own, so the
-  // heading would sit on the top edge of the phone. Every other screen opens
-  // 18px down, so these two open there too.
-  function openingHead(text) {
-    const title = el('h1', 'display', text);
-    title.style.paddingTop = '18px';
-    return title;
-  }
-
   if (deck.length === 0) {
     const placement = mode === 'placement';
-    root.append(openingHead(placement ? 'No cards to place' : 'Nothing to study'));
+    root.append(el('h1', 'display', placement ? 'No cards to place' : 'Nothing to study'));
     root.append(el('p', 'where2', placement
       ? 'The placement test needs level-1 concept cards, and this content set has none.'
       : 'Nothing is due in this focus, and no new card is ready for it today.'));
@@ -201,7 +192,6 @@ export function render(root, ctx) {
         showCard();
       }
     });
-    figure.style.marginTop = '12px';
     const image = figure.querySelector('img');
     image.addEventListener('load', () => {
       if (stale(generation)) return;
@@ -389,9 +379,6 @@ export function render(root, ctx) {
 
     if (!correct && reveal.chosen && reveal.chosen.photo && reveal.answer.photo) {
       const heads = el('div', 'pair-head');
-      // The two labels open a new block under the name, as they do on the
-      // mockup. Without the gap the moss rule lands on the binomial.
-      heads.style.marginTop = '24px';
       const right = el('span', 'ok');
       right.append(el('i'));
       right.append(document.createTextNode(`${reveal.answer.label}, correct`));
@@ -424,16 +411,12 @@ export function render(root, ctx) {
       pair.append(a, b);
       panel.append(pair);
     } else if (reveal.answer.photo) {
-      const only = plate(reveal.answer.photo, {
+      panel.append(plate(reveal.answer.photo, {
         image_base: imageBase,
         alt: `${reveal.answer.label}, the answer`,
         shape: 'pl-leaf',
         bleed: true
-      });
-      // The one plate opens a new block under the name, the same gap the pair
-      // takes. Without it the print cuts straight into the binomial.
-      only.style.marginTop = '24px';
-      panel.append(only);
+      }));
       panel.append(credit(reveal.answer.photo));
     }
 
@@ -476,7 +459,7 @@ export function render(root, ctx) {
     renderId += 1;
     lastView = null;
     root.textContent = '';
-    root.append(openingHead('Session done'));
+    root.append(el('h1', 'display', 'Session done'));
     root.append(sumRow('right', String(results.right)));
     root.append(sumRow('missed', String(results.missed)));
     root.append(sumRow('promoted', String(results.promoted.length)));
@@ -485,11 +468,7 @@ export function render(root, ctx) {
       String(dueTomorrowCount(store.readCards(), today))));
 
     if (results.misses.length) {
-      // The tick opens a new section, so it clears the hairline under the
-      // last row instead of printing on top of it.
-      const mark = el('div', 'tick');
-      mark.style.marginTop = '24px';
-      root.append(mark);
+      root.append(el('div', 'tick'));
       root.append(el('h2', 'sec-h', 'The ones you missed'));
       root.append(missList());
     }
