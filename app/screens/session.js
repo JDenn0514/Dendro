@@ -55,8 +55,27 @@ export function render(root, ctx) {
   // that one, and nothing once the router has called the teardown.
   let renderId = 0;
   let cancelled = false;
-  const teardown = () => { cancelled = true; };
   const stale = (generation) => cancelled || generation !== renderId;
+
+  // The back press. One extra history entry, a duplicate of this screen's own
+  // hash, goes on below the empty-deck branch. A back press pops that
+  // duplicate, so the URL does not change, no hashchange fires, and the
+  // router leaves this screen in place. Only popstate runs, and it does what
+  // Leave does. The handler pushes the duplicate again, so the next back
+  // press behaves the same way.
+  function onPopState() {
+    if (cancelled) return;
+    if (answerCount === 0) { leaveToHome(); return; }
+    history.pushState({ dendro: 'session' }, '', window.location.hash);
+    showLeaveSummary();
+  }
+
+  // `removeEventListener` on a listener that was never added does nothing, so
+  // this is safe on the empty deck, which returns before the listener goes on.
+  const teardown = () => {
+    cancelled = true;
+    window.removeEventListener('popstate', onPopState);
+  };
 
   function warnIfUnsaved() {
     if (!store.available) ctx.banner(ctx.storage_banner);
@@ -71,6 +90,11 @@ export function render(root, ctx) {
     root.append(link('#/', 'btn', 'Home'));
     return teardown;
   }
+
+  // The deck holds at least one card, so the screen is going to stay. Push a
+  // duplicate of this hash for the back press to pop.
+  history.pushState({ dendro: 'session' }, '', window.location.hash);
+  window.addEventListener('popstate', onPopState);
 
   // ---------- the running head and the printed gauge ----------
 
@@ -495,10 +519,57 @@ export function render(root, ctx) {
     root.append(row);
   }
 
-  // Leaving ends the session and goes home. Every answer is graded and stored
-  // the moment it is given, so nothing on the way out is lost.
+  // ---------- leaving ----------
+
+  // Home, without leaving the session in the history. `navigate` would push a
+  // new entry on top of the one the back press just took off, so a second
+  // back press would come straight back into a session that is over. A
+  // replace drops that entry instead. A replace fires no `hashchange`, so
+  // the router is told by hand.
+  function leaveToHome() {
+    history.replaceState({ dendro: 'left' }, '', '#/');
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+  }
+
+  function showLeaveSummary() {
+    renderId += 1;
+    root.textContent = '';
+    root.append(el('h1', 'display', 'Where you got to'));
+    const done = results.right + results.missed;
+    root.append(el('p', 'where2',
+      `${done} of ${deck.length} cards answered. Every answer is already saved. `
+      + 'The cards you have not reached stay due.'));
+    root.append(sumRow('right', String(results.right)));
+    root.append(sumRow('missed', String(results.missed)));
+    root.append(sumRow('promoted', String(results.promoted.length)));
+    root.append(sumRow('demoted', String(results.demoted.length)));
+
+    if (results.misses.length) {
+      root.append(el('div', 'tick'));
+      root.append(el('h2', 'sec-h', 'The ones you missed'));
+      root.append(missList());
+    }
+
+    const row = el('div', 'btnrow');
+    const resume = el('button', 'btn', 'Resume');
+    resume.type = 'button';
+    resume.addEventListener('click', () => {
+      if (lastView) lastView();
+      else showCard();
+    });
+    row.append(resume);
+    const home = el('button', 'btn ghost', 'Home');
+    home.type = 'button';
+    home.addEventListener('click', () => leaveToHome());
+    row.append(home);
+    root.append(row);
+  }
+
+  // With no card answered there is nothing to sum up, so Leave goes home at
+  // once. The browser's back button lands here too.
   function onLeave() {
-    ctx.navigate('/');
+    if (answerCount === 0) { leaveToHome(); return; }
+    showLeaveSummary();
   }
 
   showCard();

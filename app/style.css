@@ -781,9 +781,10 @@ button.btn{width:100%; padding:0;}
 .note{margin:16px 0 0; padding:13px 15px; background:var(--mount);
   border-left:3px solid var(--bark); font-size:1rem; line-height:1.5;}
 
-/* Leave is a control, not a link: it shows the summary in place. The reset
-   is wrapped in `:where()`, which weighs nothing, so the `.head .leave` rule
-   above keeps the underline, the bark, and the 44px floor. */
+/* Leave is a control, not a link. With a card answered it paints the leave
+   summary in place; with nothing answered it goes home. The reset is wrapped
+   in `:where()`, which weighs nothing, so the `.head .leave` rule above keeps
+   the underline, the bark, and the 44px floor. */
 :where(button.leave){appearance:none; -webkit-appearance:none; background:none;
   border:0; padding:0; font:inherit; cursor:pointer;}
 button.leave:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
