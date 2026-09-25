@@ -2262,7 +2262,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:07:08Z",
-    "note": "Archival black and white plate of a mature trunk. The deep furrowed bark is sharp and fills the frame."
+    "note": "Archival black and white plate of a mature trunk. The deep furrowed bark is sharp and fills the frame.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "97af73d6ead6399df1aa5745dbc579471ed5687d57b648610ef3928a72d893bb",
