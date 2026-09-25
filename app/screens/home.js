@@ -74,7 +74,10 @@ function thumbFor(content, unitKey, imageBase) {
   // Every photo the app prints carries its credit, the 124 px thumb included.
   const count = (content.unit_cards[unitKey] ?? []).length;
   const caption = credit(found.photo, `${label}, one of the ${numberWord(count)}.`);
-  caption.className = 'cap thumbcap';
+  // `plate-cap` stays on: a plate that fails to load removes the caption next
+  // to it by that class, and a credit for a picture that is not there must go
+  // with it.
+  caption.classList.add('thumbcap');
   column.append(caption);
   return column;
 }
@@ -199,10 +202,11 @@ export function render(root, ctx) {
   doors.append(progressDoor(content, states));
   root.append(doors);
 
-  root.append(link('#/placement', 'placement', 'Take the placement test'));
-  const settings = link('#/settings', 'placement', 'Settings');
-  settings.style.marginLeft = '18px';
-  root.append(settings);
+  // One row, so each link keeps its own width and its own rule under it.
+  const links = el('div', 'links');
+  links.append(link('#/placement', 'placement', 'Take the placement test'));
+  links.append(link('#/settings', 'placement', 'Settings'));
+  root.append(links);
 
   root.append(footNav('home'));
 }
