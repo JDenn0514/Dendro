@@ -208,12 +208,12 @@ function metaLine(node, folded) {
     const inside = `${numberWord(node.inside_count)} `
       + `${node.inside_count === 1 ? 'unit' : 'units'} inside`
       + (node.holds_next ? `, ${numberWord(1)} next up` : '');
-    // The tail is its own sentence, so it always starts with a capital. A
-    // closed row already ends its line with a full stop, so the tail joins
-    // with a space there and the line never prints two stops.
+    // The tail is its own sentence, so it starts with a capital and ends with
+    // a full stop. A closed row already ends its line with a full stop, so
+    // the tail joins with a space there and the line never prints two stops.
     const stopped = line.textContent.trimEnd().endsWith('.');
     line.append(el('span', 'usum',
-      `${stopped ? ' ' : '. '}${capitalize(inside)}`));
+      `${stopped ? ' ' : '. '}${capitalize(inside)}.`));
   }
   return line;
 }

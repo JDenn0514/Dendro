@@ -132,13 +132,6 @@ body{
 .plate.field::after{content:""; position:absolute; inset:0; pointer-events:none;
   background:radial-gradient(118% 92% at 50% 46%,rgba(241,236,223,0) 44%,var(--paper) 100%);}
 .plate.field.mono img{filter:grayscale(1) brightness(1.16) contrast(.95);}
-.plate.field.spot img{-webkit-mask-image:none; mask-image:none;}
-.plate.field.spot{
-  -webkit-mask-image:radial-gradient(closest-side,#000 40%,rgba(0,0,0,.7) 70%,transparent 100%);
-  mask-image:radial-gradient(closest-side,#000 40%,rgba(0,0,0,.7) 70%,transparent 100%);}
-.plate.field.spot img{filter:saturate(.8) contrast(1) brightness(1);}
-.plate.field.spot::after{
-  background:radial-gradient(closest-side,rgba(241,236,223,0) 40%,var(--paper) 100%);}
 /* A wide field plate is cropped by its own frame, so the four fades cut into
    the mask can fall outside the window and the print stops on a line after
    all. .soft dissolves the frame itself, top and bottom, whatever the crop. */
@@ -164,9 +157,6 @@ body{
 /* species and progress: the bark, a field plate */
 .pl-bark{aspect-ratio:390/342;}
 .pl-bark img{width:100%;}
-/* lessons-leaf: the one colour plate in the app */
-.pl-colour{aspect-ratio:390/400;}
-.pl-colour img{width:104%; margin:-3% 0 0 -2%;}
 /* home and lessons: a small print of one card inside the recommended unit */
 .pl-thumb{width:124px; aspect-ratio:600/900;}
 .pl-thumb img{width:100%; margin:0;}
@@ -186,7 +176,6 @@ body{
 .head{padding-top:16px; display:flex; flex-wrap:wrap; align-items:baseline;
   justify-content:space-between; gap:2px 10px;}
 .head .leave{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0;color:var(--bark);text-decoration:underline;text-decoration-color:#cfc6b6;text-underline-offset:3px;font-family:var(--fr);font-size:0.90625rem;font-variation-settings:"opsz" 14;}
-.head .unit{font-family:var(--fr); font-weight:500; font-size:0.90625rem; font-variation-settings:"opsz" 14;}
 .head .where{font-size:0.8125rem; font-style:italic; color:var(--bark);}
 .gauge{display:flex; gap:3px; margin:8px 0 0; height:5px;}
 .gauge i{flex:1; height:2px; background:rgba(92,70,52,.22); align-self:end;}
@@ -360,8 +349,13 @@ body{
 .dthumb .dr em{display:block; flex:1; height:3px; background:rgba(92,70,52,.18);}
 .dthumb .dr em b{display:block; height:3px; background:var(--moss);}
 .dthumb .dq{display:flex; gap:4px;}
-.dthumb .dq i{width:13px; height:13px; display:block; background:var(--moss);}
+.dthumb .dq i{width:13px; height:13px; display:block; position:relative;
+  background:var(--moss);}
 .dthumb .dq i.shut{background:none; box-shadow:inset 0 0 0 1.5px rgba(92,70,52,.5);}
+/* the next-up unit carries the moss tick the lessons strip draws, at the
+   door's own scale, inside the gap between the rows */
+.dthumb .dq i.next::after{content:""; position:absolute; left:0; right:0;
+  bottom:-4px; height:2px; background:var(--moss);}
 
 /* The two foot links sit on one line. `#app` is a flex column, so an anchor
    appended to it on its own is stretched to the full width and the rule under
@@ -376,8 +370,6 @@ body{
 .finding{margin-top:2px; padding:20px var(--gut) 22px; background:var(--mount);}
 .finding .tick{background:var(--moss); width:52px; height:3px;}
 .finding .state{margin:14px 0 0; font-size:0.9375rem; line-height:1.55; color:var(--bark);}
-.evid{margin-top:0;}
-.evid-cap{margin-top:8px;}
 
 /* =======================================================================
    THE RUNG — depth drawn as pressed sheets
@@ -517,7 +509,6 @@ body{
 .sqs i.next::after{content:""; position:absolute; left:0; right:0; bottom:-7px;
   height:3px; background:var(--moss);}
 .sqs .none{font-size:0.875rem; font-style:italic; color:var(--ink-soft);}
-.cdl{display:block; margin-top:15px; font-size:0.90625rem; line-height:1.45; color:var(--bark);}
 
 /* ---------- lessons, one channel: the printed stem ----------
    Depth is drawn. A unit's children hang off a stem that runs down from it
