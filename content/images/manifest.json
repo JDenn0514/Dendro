@@ -1671,7 +1671,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T03:18:18Z",
-    "note": "Black and white studio photo of one lobed simple leaf with a samara cluster, the leaf outline reads clearly."
+    "note": "Black and white studio photo of one lobed simple leaf with a samara cluster, the leaf outline reads clearly.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "89672c11b8cf52e6984ca4b3c6a879cf2f2f0b23015378de5d02f59d6e00b82d",
