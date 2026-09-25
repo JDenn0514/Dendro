@@ -437,7 +437,10 @@ body{
 
 /* ---------- progress, one shape ---------- */
 .pagehead{padding-top:4px;}
-.pagehead .where2{margin:10px 0 0; font-size:0.9375rem; line-height:1.5; color:var(--bark);}
+/* the line under a display heading. Most of them sit in a pagehead; the
+   not-found pages print one straight into the page, so the rule is the base
+   one and not scoped to the pagehead. */
+.where2{margin:10px 0 0; font-size:0.9375rem; line-height:1.5; color:var(--bark);}
 /* the parent bed: all eight shapes, the one you opened underlined in moss */
 .strip{display:flex; justify-content:space-between; align-items:flex-end; gap:3px;
   margin-top:20px;}
@@ -603,6 +606,12 @@ dl.facts dd{margin:0; font-size:1rem; line-height:1.45;}
 .card-row .due{display:block; font-size:0.875rem; color:var(--bark); margin-top:6px;}
 .fact-line{margin:16px 0 0; font-size:1rem; color:var(--bark);}
 .plate-cap{margin-top:9px;}
+/* the hero plate under the title, and the plate a channel section carries */
+.plate.sp-hero{margin-top:20px;}
+.sec > .plate{margin-top:14px;}
+/* a variety line names the channels its card sits on, in place of the level
+   word a species line prints there */
+.spx .due{font-size:0.875rem; font-style:italic; color:var(--bark); text-align:right;}
 
 /* ---------- settings ----------
    The same printed panels as everywhere else. Each setting is a row of
@@ -881,11 +890,9 @@ button:disabled { opacity: 0.5; cursor: default; }
 
 .unit-meta { color: #5c5850; font-size: 0.9rem; }
 
-.photo { max-width: 100%; max-height: 22rem; border: 1px solid var(--line); background: #fff; }
-.photo-pair { display: flex; gap: 1rem; flex-wrap: wrap; }
+/* the settings screen still prints this one. It goes with that screen in
+   Task 16. */
 .attribution { font-size: 0.8rem; color: #5c5850; }
-
-.option-sub { display: block; font-style: italic; color: #5c5850; font-size: 0.85rem; }
 
 label { display: block; margin: 0.75rem 0; }
 input[type="number"], input[type="text"] { font: inherit; padding: 0.3rem; border: 1px solid var(--line); border-radius: 4px; }

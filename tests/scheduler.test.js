@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  deriveGrade, newCardState, addDays, isDue,
+  deriveGrade, newCardState, addDays, daysBetween, isDue,
   FORMAT_THRESHOLDS_MS, TIME_CEILING_MS, PROMOTION_GATES,
   scheduleCard, nextTier, previousTier
 } from '../app/logic/scheduler.js';
@@ -185,4 +185,13 @@ test('addDays crosses a month and a year boundary', () => {
   assert.equal(addDays('2026-01-31', 1), '2026-02-01');
   assert.equal(addDays('2026-12-31', 1), '2027-01-01');
   assert.equal(addDays('2026-02-28', 1), '2026-03-01');
+});
+
+test('the day count between two local dates is a whole number of days', () => {
+  assert.equal(daysBetween('2026-09-24', '2026-09-24'), 0);
+  assert.equal(daysBetween('2026-09-24', '2026-09-25'), 1);
+  assert.equal(daysBetween('2026-09-24', '2026-10-15'), 21);
+  assert.equal(daysBetween('2026-09-25', '2026-09-24'), -1);
+  // across a daylight-saving change, which a local Date would get wrong
+  assert.equal(daysBetween('2026-10-30', '2026-11-06'), 7);
 });

@@ -1,4 +1,5 @@
 // Owns the four localStorage keys. Pure apart from the injected storage object.
+import { daysBetween } from './scheduler.js';
 
 export const STORE_VERSION = 1;
 export const LOG_CAP = 5000;
@@ -103,11 +104,6 @@ export function memoryStorage(initial = {}) {
     setItem: (key, value) => { map.set(key, value); },
     removeItem: (key) => { map.delete(key); }
   };
-}
-
-function daysBetween(fromDate, toDate) {
-  const parse = (d) => Date.UTC(...d.split('-').map((n, i) => (i === 1 ? Number(n) - 1 : Number(n))));
-  return Math.round((parse(toDate) - parse(fromDate)) / 86400000);
 }
 
 export function createStore(storage) {

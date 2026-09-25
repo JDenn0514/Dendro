@@ -34,6 +34,17 @@ export function addDays(dateString, days) {
   return new Date(base).toISOString().slice(0, 10);
 }
 
+// Whole days from one local date to another. Both dates are YYYY-MM-DD, and
+// the arithmetic runs in UTC, so a daylight-saving change cannot shift the
+// answer by a day.
+export function daysBetween(fromDate, toDate) {
+  const asUtc = (text) => {
+    const [year, month, day] = text.split('-').map(Number);
+    return Date.UTC(year, month - 1, day);
+  };
+  return Math.round((asUtc(toDate) - asUtc(fromDate)) / 86400000);
+}
+
 export function isDue(state, today) {
   if (!state || !state.due) return false;
   return state.due <= today;
