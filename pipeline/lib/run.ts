@@ -19,6 +19,8 @@ export interface RunScope {
   dropped: { symbol: string; reason: string }[];
   /** How many urls this run gave up on. The report prints it. */
   fetch_failures: number;
+  /** How many fetched rows the last `photos fetch` dropped as monochrome. */
+  mono_dropped: number;
   /** One message per listing this run cut short at a page cap. */
   capped: string[];
 }
@@ -27,8 +29,8 @@ export type Exec = (command: string, args: string[]) => { code: number; out: str
 
 const CO_AUTHOR = 'Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>';
 
-/** The only flag that takes no value. Every other flag needs one. */
-export const BOOLEAN_FLAGS: string[] = ['refresh'];
+/** The flags that take no value. Every other flag needs one. */
+export const BOOLEAN_FLAGS: string[] = ['refresh', 'manifest'];
 
 const LIST_FIELDS: string[] = [
   'concepts',
@@ -135,6 +137,7 @@ export function newScope(
     species: [],
     dropped: [],
     fetch_failures: 0,
+    mono_dropped: 0,
     capped: [],
   };
 }
@@ -155,6 +158,7 @@ export function validateScope(raw: unknown): string[] {
   }
   if (asString(scope.created_at) === null) errors.push('created_at is not a string.');
   if (asNumber(scope.fetch_failures) === null) errors.push('fetch_failures is not a number.');
+  if (asNumber(scope.mono_dropped) === null) errors.push('mono_dropped is not a number.');
   for (const field of LIST_FIELDS) {
     if (!isStringList(scope[field])) errors.push(`${field} is not an array of strings.`);
   }
@@ -190,6 +194,11 @@ export function readRun(root: string, name: string): RunScope {
     throw new Error(`run ${name} does not exist. Run "cli run init ${name}" first.`);
   }
   const raw = readJsonFile(file);
+  // An older run.json has no mono_dropped field. Default it to 0 so that run still loads.
+  const scope = asRecord(raw);
+  if (scope !== null && scope.mono_dropped === undefined) {
+    scope.mono_dropped = 0;
+  }
   const errors = validateScope(raw);
   if (errors.length > 0) {
     throw new Error(`${file} is not a run scope: ${errors.join(' ')}`);

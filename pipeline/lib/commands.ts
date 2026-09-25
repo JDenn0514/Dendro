@@ -3,7 +3,10 @@ import path from 'node:path';
 
 import { loadContent } from '../../app/logic/content.js';
 import {
+  MONO_THRESHOLD,
+  candidateId,
   collect,
+  interleave,
   licenseAllowed,
   makeCandidate,
   mergeFound,
@@ -19,6 +22,7 @@ import {
   objectKey,
   reviewKey,
   sha256Hex,
+  type Chroma,
   type Resize,
 } from './images.ts';
 import {
@@ -136,6 +140,8 @@ export interface CliDeps {
   http: Http;
   storage: Storage;
   resize: Resize;
+  /** The colour measure. `pipeline/cli.ts` loads `chromaOf` on first use, so `ids check` needs no sharp. */
+  chroma: Chroma;
   validate: (raw: RawContent) => ValidationResult;
   cdnBase: string;
   now: () => Date;
@@ -161,6 +167,8 @@ const USAGE = `usage: node pipeline/cli.ts <command> [flags]
   photos fetch <name>
   photos add <name> --target <t> --origin <url> --file-url <url> --source <s> --author <a> --license <l> [--license-url <u>] [--source-species <s>] [--channel-hint <c>] [--local <path>]
   photos verdict <name> --candidate <id> --verdict <${VERDICT_KINDS.join('|')}> [--channel <c>] [--tags a,b] [--case <case>] --note "<text>"
+  photos audit <name> [--threshold <n>]
+  photos audit --manifest [--threshold <n>]
   build <name> [--base <ref>]
   report <name>
   run pr <name>
@@ -308,11 +316,14 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
 
   const noProfile: string[] = [];
   let appended = 0;
+  let monoDropped = 0;
   for (const target of targetsOf(scope)) {
     if (target.lookups.length === 0) {
       console.error(`${target.key}: no exemplars in run.json`);
     }
-    const found: Candidate[] = [];
+    // One list per exemplar. `interleave` merges them round-robin below, so the cap in
+    // `collect` splits across the exemplars instead of filling on the first one.
+    const perSymbol: Candidate[][] = [];
     for (const symbol of target.lookups) {
       const plant = await plantOf(deps, ids, symbol, now);
       if (plant === null) {
@@ -330,39 +341,75 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
         now,
       };
       const names = [plant.scientific, ...synonymNames(rows, symbol)];
+      // Commons and iNaturalist come first. `collect` takes rows in order up to the cap, and
+      // PLANTS images are mostly monochrome herbarium plates, so PLANTS takes the room left.
       const fromSources: Candidate[] = [];
-      fromSources.push(...(await plantsRows(context)));
       fromSources.push(...(await commonsRows(context)));
       fromSources.push(...(await inatRows(context, passes)));
+      fromSources.push(...(await plantsRows(context)));
       // D17: the script compares the source's own name with the accepted name and its
       // synonyms, so the photo-check agent reads a verdict instead of guessing.
       for (const row of fromSources) {
         row.identity_match = identityMatches(row.source_species, names);
       }
-      found.push(...fromSources);
+      perSymbol.push(fromSources);
     }
     // `collect` never reads a row's target, so one call takes one target's rows only.
     const collected = collect({
       existing,
-      found: mergeFound(found),
+      found: mergeFound(interleave(perSymbol)),
       target: target.key,
       approvedByChannel: counts[target.key] ?? {},
     });
-    for (const row of collected.added) await download(deps, row);
+    // The colour check runs after the download and before the append. A dropped row keeps
+    // its cache file, so a rerun measures it again with no new download.
+    const kept: Candidate[] = [];
+    let mono = 0;
+    for (const row of collected.added) {
+      await download(deps, row);
+      const bytes = localBytes(deps.root, row);
+      // A failed download has no cached file. Its row is still appended, as before.
+      if (bytes === null) {
+        kept.push(row);
+        continue;
+      }
+      let score: number;
+      try {
+        score = await deps.chroma(bytes);
+      } catch (error) {
+        // The bytes arrived but do not decode. That counts as a download failure.
+        recordFailure(
+          deps.http,
+          row.file_url,
+          200,
+          `the image does not decode: ${errorMessage(error)}`,
+          now,
+        );
+        continue;
+      }
+      if (score < MONO_THRESHOLD) {
+        mono += 1;
+        continue;
+      }
+      kept.push(row);
+    }
+    if (mono > 0) console.error(`${target.key}: ${mono} monochrome dropped`);
     // The append happens per target, so a run that stops on the third target keeps the
     // rows of the first two.
-    if (collected.added.length > 0) appendJsonl(candidatesPath, collected.added);
-    existing = existing.concat(collected.added);
-    appended += collected.added.length;
+    if (kept.length > 0) appendJsonl(candidatesPath, kept);
+    existing = existing.concat(kept);
+    appended += kept.length;
+    monoDropped += mono;
   }
 
   scope.dropped = withNoProfile(scope.dropped, noProfile);
   scope.fetch_failures = deps.http.failures.length;
+  scope.mono_dropped = monoDropped;
   writeRun(deps.root, scope);
   gitCommitAll(deps.exec, `content(${name}): photo candidates`);
   printFailures(deps);
   console.log(
-    `${appended} candidates appended to ${relative(deps.root, candidatesPath)}, ${scope.fetch_failures} download failures`,
+    `${appended} candidates appended to ${relative(deps.root, candidatesPath)}, ${scope.fetch_failures} download failures, ${scope.mono_dropped} monochrome dropped`,
   );
   return 0;
 }
@@ -380,6 +427,19 @@ async function photosAdd(rest: string[], deps: CliDeps): Promise<number> {
   }
   if (!licenseAllowed(flags.license)) {
     console.error(`photos add license is not allowed: ${flags.license}`);
+    return 1;
+  }
+  // The id is sha1(target|origin), so a second image from one origin page collides. The
+  // check runs before the download, so a duplicate costs no request.
+  const candidatesPath = path.join(runDir(deps.root, name), 'candidates.jsonl');
+  const id = candidateId(flags.origin, flags.target);
+  const existing = readJsonl<Candidate>(candidatesPath).find((one) => one.id === id);
+  if (existing !== undefined) {
+    console.error(`refused: candidate ${id} already exists for ${flags.target}`);
+    console.error(`  existing origin: ${existing.origin}`);
+    console.error(
+      '  add a fragment to the origin URL (for example #img2) to distinguish a second image on the same page',
+    );
     return 1;
   }
   const row = makeCandidate({
@@ -410,7 +470,26 @@ async function photosAdd(rest: string[], deps: CliDeps): Promise<number> {
       return 1;
     }
   }
-  appendJsonl(path.join(runDir(deps.root, name), 'candidates.jsonl'), [row]);
+  // The colour check reads the downloaded file, or the --local file.
+  const bytes = localBytes(deps.root, row);
+  if (bytes === null) {
+    console.error(`photos add --local file is missing: ${row.local}`);
+    return 1;
+  }
+  let score: number;
+  try {
+    score = await deps.chroma(bytes);
+  } catch (error) {
+    console.error(`photos add could not read ${row.local} as an image: ${errorMessage(error)}`);
+    return 1;
+  }
+  if (score < MONO_THRESHOLD) {
+    console.error(
+      `refused: ${row.id} for ${row.target} is monochrome (chroma ${chromaText(score)}, threshold ${MONO_THRESHOLD}). Colour photographs only (owner ruling 2026-09-24).`,
+    );
+    return 1;
+  }
+  appendJsonl(candidatesPath, [row]);
   console.log(`manual candidate ${row.id} added for ${row.target}`);
   return 0;
 }
@@ -451,6 +530,103 @@ async function photosVerdict(rest: string[], deps: CliDeps): Promise<number> {
   appendJsonl(path.join(dir, 'verdicts.jsonl'), [row]);
   console.log(`${row.verdict} recorded for candidate ${row.candidate_id}`);
   return 0;
+}
+
+interface AuditTally {
+  measured: number;
+  skipped: number;
+  under: number;
+}
+
+/**
+ * Lists every row under the colour threshold, in a run or in the published manifest. It
+ * reports only. Retiring an image is the owner's decision, through `images retire`.
+ */
+async function photosAudit(rest: string[], deps: CliDeps): Promise<number> {
+  const flags = parseFlags(rest);
+  const threshold = thresholdOf(flags);
+  if (threshold === null) {
+    console.error(`photos audit --threshold needs a number: ${flags.threshold}`);
+    return 1;
+  }
+  const tally: AuditTally = { measured: 0, skipped: 0, under: 0 };
+  if (flags.manifest === 'true') {
+    await auditManifest(deps, threshold, tally);
+  } else {
+    const name = positional(rest, 'photos audit <name> [--threshold <n>]');
+    await auditRun(deps, name, threshold, tally);
+  }
+  console.log(
+    `${tally.measured} measured, ${tally.skipped} skipped, ${tally.under} under threshold ${threshold}`,
+  );
+  return 0;
+}
+
+/** MONO_THRESHOLD when --threshold is absent. Null when the value is not a number. */
+function thresholdOf(flags: Record<string, string>): number | null {
+  const value = flags.threshold;
+  if (value === undefined) return MONO_THRESHOLD;
+  const number = Number(value);
+  return value.trim() !== '' && Number.isFinite(number) ? number : null;
+}
+
+/** Measures each row of the run that has a cached file. It does not read run.json. */
+async function auditRun(
+  deps: CliDeps,
+  name: string,
+  threshold: number,
+  tally: AuditTally,
+): Promise<void> {
+  const dir = runDir(deps.root, name);
+  if (!fs.existsSync(dir)) throw new Error(`run ${name} does not exist.`);
+  for (const row of readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'))) {
+    const bytes = localBytes(deps.root, row);
+    const score = bytes === null ? null : await auditScore(deps, row.id, bytes);
+    if (score === null) {
+      tally.skipped += 1;
+      continue;
+    }
+    tally.measured += 1;
+    if (score < threshold) {
+      tally.under += 1;
+      console.log(
+        `${row.id} ${row.target} ${row.channel_hint ?? '-'} ${chromaText(score)} ${row.origin}`,
+      );
+    }
+  }
+}
+
+/** Measures each live manifest row through the CDN. A retired row is not read and not counted. */
+async function auditManifest(deps: CliDeps, threshold: number, tally: AuditTally): Promise<void> {
+  for (const row of readManifest(deps.root)) {
+    if (row.retired === true) continue;
+    const result = await deps.http.getBytes(`${deps.cdnBase}${objectKey(row.hash)}`);
+    if (!result.ok || result.bytes === null) {
+      console.error(`${row.hash}: fetch failed: ${result.error ?? `status ${result.status}`}`);
+      tally.skipped += 1;
+      continue;
+    }
+    const score = await auditScore(deps, row.hash, result.bytes);
+    if (score === null) {
+      tally.skipped += 1;
+      continue;
+    }
+    tally.measured += 1;
+    if (score < threshold) {
+      tally.under += 1;
+      console.log(`${row.hash} ${row.target} ${row.channel} ${chromaText(score)} ${row.origin}`);
+    }
+  }
+}
+
+/** The chroma of the bytes. Null, with a line that names the row, when they do not decode. */
+async function auditScore(deps: CliDeps, label: string, bytes: Uint8Array): Promise<number | null> {
+  try {
+    return await deps.chroma(bytes);
+  } catch (error) {
+    console.error(`${label}: the image does not decode: ${errorMessage(error)}`);
+    return null;
+  }
 }
 
 async function dataSections(_rest: string[], deps: CliDeps): Promise<number> {
@@ -539,6 +715,7 @@ const COMMANDS: Record<string, Handler> = {
   'photos fetch': photosFetch,
   'photos add': photosAdd,
   'photos verdict': photosVerdict,
+  'photos audit': photosAudit,
   'data sections': dataSections,
   'data inat-terms': dataInatTerms,
   build,
@@ -802,6 +979,11 @@ function positional(rest: string[], usage: string): string {
 
 function isoNow(deps: CliDeps): string {
   return deps.now().toISOString().replace(/\.\d+Z$/, 'Z');
+}
+
+/** A chroma score with one decimal place, as the refusal and the audit lines print it. */
+function chromaText(score: number): string {
+  return score.toFixed(1);
 }
 
 const MANIFEST_NAME = path.join('images', 'manifest.json');
@@ -1229,7 +1411,7 @@ function reportData(input: {
     run: name,
     channels: scope.channels,
     species: rows,
-    gaps: buildGaps(rows, scope.channels),
+    gaps: buildGaps(rows, scope.channels, scope.concepts),
     units: unitRows(raw.units, loaded, warnings),
     counts: {
       candidates_by_source: sortKeys(sources),

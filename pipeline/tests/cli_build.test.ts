@@ -386,6 +386,8 @@ function setup(t: TestContext, routes: Map<string, Route> = defaultRoutes()) {
     http,
     storage,
     resize,
+    // No build test measures colour. Every row scores as colour here.
+    chroma: async () => 100,
     cdnBase: CDN,
     validate: validateContent,
     now: () => new Date(NOW),
@@ -944,6 +946,11 @@ test('a concept run writes manifest rows whose target is the qualified key', asy
   assert.deepEqual(data.species.slice(0, 2), [
     { symbol: 'leaf/simple_lobed', status: 'included', reason: null, counts: { leaf: 1 } },
     { symbol: 'bark/furrowed', status: 'included', reason: null, counts: { bark: 1 } },
+  ]);
+  // Each concept target gets one gap row, on the channel of its own prefix.
+  assert.deepEqual(data.gaps, [
+    { symbol: 'bark/furrowed', channel: 'bark', count: 1 },
+    { symbol: 'leaf/simple_lobed', channel: 'leaf', count: 1 },
   ]);
 });
 

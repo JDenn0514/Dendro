@@ -10,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 import { CDN_BASE, validateContent } from '../app/logic/content.js';
 import { runCommand, type CliDeps } from './lib/commands.ts';
 import { createHttp } from './lib/http.ts';
-import type { Resize } from './lib/images.ts';
+import type { Chroma, Resize } from './lib/images.ts';
 import type { Exec } from './lib/run.ts';
 import type { Storage } from './lib/storage.ts';
 
@@ -28,6 +28,12 @@ const nodeExec: Exec = (command, args) => {
 const lazyResize: Resize = async (bytes, maxSide, quality) => {
   const { sharpResize } = await import('./lib/sharp_resizer.ts');
   return sharpResize(bytes, maxSide, quality);
+};
+
+// chroma.ts imports sharp too, so it also loads on first use.
+const lazyChroma: Chroma = async (bytes) => {
+  const { chromaOf } = await import('./lib/chroma.ts');
+  return chromaOf(bytes);
 };
 
 function lazyStorage(): Storage {
@@ -85,6 +91,7 @@ async function main(): Promise<void> {
     }),
     storage: lazyStorage(),
     resize: lazyResize,
+    chroma: lazyChroma,
     validate: validateContent,
     cdnBase: CDN_BASE,
     now: () => new Date(),

@@ -53,11 +53,26 @@ function compare(a: string, b: string): number {
   return 0;
 }
 
-export function buildGaps(species: ReportSpeciesRow[], channels: string[]): ReportGapRow[] {
+// A concept target such as `bark/plated` lives in one channel, the prefix of
+// its key. The other run channels hold no photo for it, so they are not gaps.
+// A species target does have every run channel.
+function gapChannels(symbol: string, channels: string[], concepts: string[]): string[] {
+  // The run's own list decides. Without one, a qualified key marks a concept.
+  const isConcept = concepts.length > 0 ? concepts.includes(symbol) : symbol.includes('/');
+  const slash = symbol.indexOf('/');
+  if (!isConcept || slash === -1) return channels;
+  return [symbol.slice(0, slash)];
+}
+
+export function buildGaps(
+  species: ReportSpeciesRow[],
+  channels: string[],
+  concepts: string[] = [],
+): ReportGapRow[] {
   const gaps: ReportGapRow[] = [];
   for (const row of species) {
     if (!GAP_STATUSES.includes(row.status)) continue;
-    for (const channel of channels) {
+    for (const channel of gapChannels(row.symbol, channels, concepts)) {
       const count = row.counts[channel] ?? 0;
       if (count < GAP_THRESHOLD) gaps.push({ symbol: row.symbol, channel, count });
     }

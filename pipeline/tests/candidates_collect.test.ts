@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   MAX_PER_SPECIES,
   CHANNEL_TARGET,
+  interleave,
   makeCandidate,
   mergeFound,
   underCap,
@@ -228,6 +229,74 @@ test('collect does not change the arrays it is given', () => {
   collect({ existing, found, target: 'QUGA', approvedByChannel: { bark: CHANNEL_TARGET } });
   assert.deepEqual(existing, existingBefore);
   assert.deepEqual(found, foundBefore);
+});
+
+/** `count` rows for one exemplar, each origin marked with the exemplar's letter. */
+function exemplarRows(letter: string, count: number): Candidate[] {
+  const rows: Candidate[] = [];
+  for (let i = 0; i < count; i += 1) {
+    rows.push(row({ origin: `https://example.org/${letter}/${i}` }));
+  }
+  return rows;
+}
+
+/** The exemplar letter of a row, read back out of its origin. */
+function letterOf(candidate: Candidate): string {
+  return candidate.origin.split('/')[3];
+}
+
+test('interleave takes one row per group in turn, over three groups of unequal length', () => {
+  const groups = [
+    [row({ origin: 'https://example.org/a/0' }), row({ origin: 'https://example.org/a/1' }), row({ origin: 'https://example.org/a/2' })],
+    [row({ origin: 'https://example.org/b/0' })],
+    [row({ origin: 'https://example.org/c/0' }), row({ origin: 'https://example.org/c/1' })],
+  ];
+  const before = structuredClone(groups);
+  assert.deepEqual(
+    interleave(groups).map((candidate) => candidate.origin),
+    [
+      'https://example.org/a/0',
+      'https://example.org/b/0',
+      'https://example.org/c/0',
+      'https://example.org/a/1',
+      'https://example.org/c/1',
+      'https://example.org/a/2',
+    ],
+  );
+  assert.deepEqual(groups, before);
+});
+
+test('interleave keeps the order of one group, so a bucket run does not change', () => {
+  const only = exemplarRows('a', 5);
+  assert.deepEqual(interleave([only]), only);
+});
+
+test('interleave returns an empty list for no group and for empty groups', () => {
+  assert.deepEqual(interleave([]), []);
+  assert.deepEqual(interleave([[], [], []]), []);
+});
+
+test('interleave skips an empty group and keeps the others in order', () => {
+  const groups = [[], exemplarRows('b', 2), []];
+  assert.deepEqual(
+    interleave(groups).map((candidate) => candidate.origin),
+    ['https://example.org/b/0', 'https://example.org/b/1'],
+  );
+});
+
+test('collect over an interleaved list keeps 20 rows of each of three exemplars', () => {
+  const found = interleave([
+    exemplarRows('a', 40),
+    exemplarRows('b', 40),
+    exemplarRows('c', 40),
+  ]);
+  const result = collect({ existing: [], found, target: 'QUGA', approvedByChannel: {} });
+  assert.equal(result.added.length, MAX_PER_SPECIES);
+  const perExemplar: Record<string, number> = {};
+  for (const candidate of result.added) {
+    perExemplar[letterOf(candidate)] = (perExemplar[letterOf(candidate)] ?? 0) + 1;
+  }
+  assert.deepEqual(perExemplar, { a: 20, b: 20, c: 20 });
 });
 
 test('mergeFound unions tags_hint in first-seen order for rows that share an id', () => {

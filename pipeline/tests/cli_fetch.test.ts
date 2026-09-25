@@ -8,7 +8,9 @@ import { fileURLToPath } from 'node:url';
 import { validateContent } from '../../app/logic/content.js';
 import {
   CHANNEL_TARGET,
+  MAX_PER_SPECIES,
   SOURCE_NAMES,
+  candidateId,
   makeCandidate,
   type Candidate,
 } from '../lib/candidates.ts';
@@ -21,7 +23,9 @@ import {
 } from '../lib/commands.ts';
 import { categoryUrl, commonsCandidates, parseCategoryListing } from '../lib/commons.ts';
 import { SECTION_PAGES, nextPageUrl, parseSectionPage } from '../lib/fna.ts';
+import { chromaOf } from '../lib/chroma.ts';
 import type { BytesResult, Http, HttpFailure, TextResult } from '../lib/http.ts';
+import { sha256Hex } from '../lib/images.ts';
 import {
   FRUITING_VALUE_ID,
   PER_PAGE,
@@ -46,6 +50,7 @@ import {
 import { newScope, readRun, runDir, writeRun, type RunScope } from '../lib/run.ts';
 import { memoryStorage } from '../lib/storage.ts';
 import type { Verdict } from '../lib/verdicts.ts';
+import { greyJpeg, redJpeg } from './fixtures/images.ts';
 import { captureConsole, fakeExec } from './helpers.ts';
 
 const NOW = '2026-09-22T15:04:00Z';
@@ -58,6 +63,8 @@ const INAT_TAXON_ID = 116377;
 const FLOWERING_VALUE_ID = 13;
 const EMPTY_OBSERVATIONS = '{ "total_results": 0, "page": 1, "results": [] }';
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+/** Bytes that sharp cannot decode. */
+const NOT_AN_IMAGE = new Uint8Array([1, 2, 3, 4]);
 
 interface Route {
   status?: number;
@@ -303,6 +310,9 @@ function setup(t: TestContext, routes: Map<string, Route> = new Map(), throwOn?:
     http,
     storage: memoryStorage(),
     resize: async (bytes) => bytes,
+    // The fixture bytes are five-byte stand-ins, not JPEGs. Every row scores as colour here.
+    // A colour test sets `deps.chroma = chromaOf` and serves real JPEGs.
+    chroma: async () => 100,
     validate: validateContent,
     cdnBase: CDN_BASE,
     now: () => new Date(NOW),
@@ -394,6 +404,14 @@ function manualAdd(fileUrl: string): string[] {
   ];
 }
 
+/** Writes a stand-in image where the `--local` tests point, and returns its absolute path. */
+function seedLocalFile(root: string): string {
+  const file = path.join(root, 'pipeline', 'cache', 'manual', 'quga_bark.jpg');
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, jpeg(1));
+  return file;
+}
+
 function candidatesOf(root: string): Candidate[] {
   return readJsonl<Candidate>(path.join(runDir(root, 'demo'), 'candidates.jsonl'));
 }
@@ -408,8 +426,8 @@ function fetchedOf(root: string): Candidate[] {
 }
 
 /** The line `photos fetch` prints last. The count comes from the rows, never from a literal. */
-function appendedLine(appended: number, failures: number): string {
-  return `${appended} candidates appended to pipeline/runs/demo/candidates.jsonl, ${failures} download failures`;
+function appendedLine(appended: number, failures: number, mono = 0): string {
+  return `${appended} candidates appended to pipeline/runs/demo/candidates.jsonl, ${failures} download failures, ${mono} monochrome dropped`;
 }
 
 test('no argument prints the usage block and fails', async (t) => {
@@ -423,6 +441,7 @@ test('no argument prints the usage block and fails', async (t) => {
     'photos fetch',
     'photos add',
     'photos verdict',
+    'photos audit',
     'build',
     'report',
     'run pr',
@@ -679,6 +698,34 @@ test('photos fetch pages the Commons listing', async (t) => {
   assert.deepEqual(readRun(root, 'demo').capped, []);
 });
 
+test('photos fetch ranks Commons and iNaturalist ahead of PLANTS under the cap', async (t) => {
+  const { root, deps, out, http } = setup(t, photoRoutes());
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+  // The seeded rows leave room for the Commons and iNaturalist rows only, so every PLANTS
+  // row meets the cap.
+  const room = commonsRowsOf('QUGA').length + inatRowsOf('QUGA').length;
+  assert.ok(plantsRowsOf('QUGA').length > 0, 'the fixture holds PLANTS rows for the cap to stop');
+  assert.ok(room < MAX_PER_SPECIES, 'the fixture rows fit under the cap');
+  for (let index = 0; index < MAX_PER_SPECIES - room; index += 1) {
+    seedCandidate(root, 'QUGA', index);
+  }
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  assert.equal(rows.length, room);
+  assert.deepEqual(
+    [...new Set(rows.map((row) => row.source_key))].sort(),
+    ['commons', 'inat'],
+    'no PLANTS row reaches the queue ahead of Commons and iNaturalist',
+  );
+  assert.ok(http.urls.includes(imagesUrl(QUGA_ID)), 'the PLANTS listing was still fetched');
+  assert.deepEqual(out, [appendedLine(room, 0)]);
+});
+
 test('photos fetch prints a failed listing and still exits 0', async (t) => {
   const routes = photoRoutes();
   const failing = categoryUrl(SCIENTIFIC, null);
@@ -731,6 +778,64 @@ test('photos fetch records a failed download and keeps the row', async (t) => {
   const failures = readRun(root, 'demo').fetch_failures;
   assert.ok(failures > 0);
   assert.deepEqual(out, [appendedLine(rows.length, failures)]);
+});
+
+test('photos fetch drops a monochrome row and counts it', async (t) => {
+  const routes = photoRoutes();
+  const red = await redJpeg();
+  const grey = await greyJpeg();
+  for (const url of fileUrls('QUGA')) routes.set(url, { bytes: red });
+  const greyUrl = commonsRowsOf('QUGA')[0].file_url;
+  routes.set(greyUrl, { bytes: grey });
+  const { root, deps, out, err } = setup(t, routes);
+  deps.chroma = chromaOf;
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  const expected = expectedRows('QUGA');
+  assert.equal(rows.length, expected.length - 1);
+  assert.ok(!rows.some((row) => row.file_url === greyUrl), 'the grey row is not appended');
+  const scope = readRun(root, 'demo');
+  assert.equal(scope.mono_dropped, 1);
+  assert.equal(scope.fetch_failures, 0);
+  assert.ok(err.includes('QUGA: 1 monochrome dropped'));
+  assert.deepEqual(out, [appendedLine(expected.length - 1, 0, 1)]);
+  const cached = path.join(root, 'pipeline', 'cache', 'commons', `${sha256Hex(grey)}.jpg`);
+  assert.ok(fs.existsSync(cached), 'the cache keeps the grey file for a rerun');
+});
+
+test('photos fetch counts an image that does not decode as a download failure', async (t) => {
+  const routes = photoRoutes();
+  const red = await redJpeg();
+  for (const url of fileUrls('QUGA')) routes.set(url, { bytes: red });
+  const brokenUrl = commonsRowsOf('QUGA')[0].file_url;
+  routes.set(brokenUrl, { bytes: NOT_AN_IMAGE });
+  const { root, deps, out, err } = setup(t, routes);
+  deps.chroma = chromaOf;
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  const expected = expectedRows('QUGA');
+  assert.equal(rows.length, expected.length - 1);
+  assert.ok(!rows.some((row) => row.file_url === brokenUrl), 'the broken row is not appended');
+  const scope = readRun(root, 'demo');
+  assert.equal(scope.fetch_failures, 1);
+  assert.equal(scope.mono_dropped, 0);
+  assert.ok(
+    err.some((line) => line.startsWith(`fetch failed: 200 ${brokenUrl}: the image does not decode:`)),
+    'the failure line names the url',
+  );
+  assert.deepEqual(out, [appendedLine(expected.length - 1, 1, 0)]);
 });
 
 test('photos fetch skips the profile call for a symbol in plants_ids.json', async (t) => {
@@ -901,6 +1006,7 @@ test('photos fetch reports an exemplar with no profile', async (t) => {
 test('photos add appends one manual row and names a missing flag', async (t) => {
   const { root, deps, err } = setup(t);
   seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+  seedLocalFile(root);
 
   const full = [
     'photos',
@@ -945,7 +1051,7 @@ test('photos add appends one manual row and names a missing flag', async (t) => 
 test('photos add stores an absolute --local path root-relative with forward slashes', async (t) => {
   const { root, deps } = setup(t);
   seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
-  const absolute = path.join(root, 'pipeline', 'cache', 'manual', 'quga_bark.jpg');
+  const absolute = seedLocalFile(root);
 
   const args = [...manualAdd('https://example.org/a.jpg'), '--local', absolute];
   assert.equal(await runCommand(args, deps), 0);
@@ -1013,6 +1119,52 @@ test('photos add refuses a license the allowlist rejects', async (t) => {
   assert.equal(code, 1);
   assert.deepEqual(err, ['photos add license is not allowed: CC BY-NC 2.0']);
   assert.deepEqual(candidatesOf(root), []);
+});
+
+test('photos add refuses a monochrome image and writes nothing', async (t) => {
+  const fileUrl = 'https://www.fs.usda.gov/images/quga_bark.jpg';
+  const grey = await greyJpeg();
+  const { root, deps, err } = setup(t, new Map([[fileUrl, { bytes: grey }]]));
+  deps.chroma = chromaOf;
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+  const seeded = seedCandidate(root, 'QUGA', 0);
+
+  assert.equal(await runCommand(manualAdd(fileUrl), deps), 1);
+
+  const id = candidateId('https://www.fs.usda.gov/database/feis/quga.html', 'QUGA');
+  const score = (await chromaOf(grey)).toFixed(1);
+  assert.deepEqual(err, [
+    `refused: ${id} for QUGA is monochrome (chroma ${score}, threshold 3). Colour photographs only (owner ruling 2026-09-24).`,
+  ]);
+  assert.deepEqual(candidatesOf(root), [seeded], 'candidates.jsonl is unchanged');
+});
+
+test('photos add refuses an id the run already holds and downloads nothing', async (t) => {
+  const { root, deps, http, err } = setup(t);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+  const origin = 'https://www.fs.usda.gov/database/feis/quga.html';
+  const first = makeCandidate({
+    target: 'QUGA',
+    source_key: 'manual',
+    source: 'USDA Forest Service',
+    origin,
+    file_url: 'https://www.fs.usda.gov/images/quga_first.jpg',
+    author: 'US Forest Service',
+    license: 'US government work',
+    fetched_at: NOW,
+  });
+  appendJsonl(path.join(runDir(root, 'demo'), 'candidates.jsonl'), [first]);
+
+  const code = await runCommand(manualAdd('https://www.fs.usda.gov/images/quga_second.jpg'), deps);
+
+  assert.equal(code, 1);
+  assert.deepEqual(err, [
+    `refused: candidate ${first.id} already exists for QUGA`,
+    `  existing origin: ${origin}`,
+    '  add a fragment to the origin URL (for example #img2) to distinguish a second image on the same page',
+  ]);
+  assert.deepEqual(http.urls, [], 'the fake HTTP saw no request');
+  assert.deepEqual(candidatesOf(root), [first], 'candidates.jsonl is unchanged');
 });
 
 test('photos verdict appends an approved row with the agent name', async (t) => {
