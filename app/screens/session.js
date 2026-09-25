@@ -63,9 +63,20 @@ export function render(root, ctx) {
   // router leaves this screen in place. Only popstate runs, and it does what
   // Leave does. The handler pushes the duplicate again, so the next back
   // press behaves the same way.
+  //
+  // Two states go home instead. With no card answered there is nothing to
+  // sum up. Once the deck is spent the screen is already the end-of-session
+  // summary, which has no Leave control, and its own Home link goes home.
+  // The leave summary over the top of it would read "the cards you have not
+  // reached stay due" when none is unreached, and would hide the row for
+  // tomorrow's count and the note about exporting.
+  //
+  // Neither state pushes the duplicate back on. The back press has already
+  // taken the duplicate off, so the entry the replace drops is the session's
+  // own, and the reader leaves the session behind for good.
   function onPopState() {
     if (cancelled) return;
-    if (answerCount === 0) { leaveToHome(); return; }
+    if (answerCount === 0 || index >= deck.length) { leaveToHome(); return; }
     history.pushState({ dendro: 'session' }, '', window.location.hash);
     showLeaveSummary();
   }
@@ -92,9 +103,9 @@ export function render(root, ctx) {
   }
 
   // The deck holds at least one card, so the screen is going to stay. Push a
-  // duplicate of this hash for the back press to pop.
+  // duplicate of this hash for the back press to pop. The listener itself
+  // goes on at the bottom, after the first paint.
   history.pushState({ dendro: 'session' }, '', window.location.hash);
-  window.addEventListener('popstate', onPopState);
 
   // ---------- the running head and the printed gauge ----------
 
@@ -573,5 +584,11 @@ export function render(root, ctx) {
   }
 
   showCard();
+  // The listener goes on only once the first paint is through. A throw in
+  // that paint leaves `render` without returning the teardown, so `main.js`
+  // paints the error panel and holds no way to take the listener off again.
+  // The listener would then answer every back press in the app for the rest
+  // of the visit.
+  window.addEventListener('popstate', onPopState);
   return teardown;
 }
