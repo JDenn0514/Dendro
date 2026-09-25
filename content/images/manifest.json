@@ -4031,7 +4031,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:06:14Z",
-    "note": "A sharp archival bark frame. The narrow vertical plates and ridges fill the whole frame."
+    "note": "A sharp archival bark frame. The narrow vertical plates and ridges fill the whole frame.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "8fbc23e45adeb324f26461a15ede0609b5313a28e5e52f77de39f4a028935dea",
