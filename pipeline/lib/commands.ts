@@ -4,6 +4,7 @@ import path from 'node:path';
 import { loadContent } from '../../app/logic/content.js';
 import {
   MONO_THRESHOLD,
+  candidateId,
   collect,
   interleave,
   licenseAllowed,
@@ -426,6 +427,19 @@ async function photosAdd(rest: string[], deps: CliDeps): Promise<number> {
     console.error(`photos add license is not allowed: ${flags.license}`);
     return 1;
   }
+  // The id is sha1(target|origin), so a second image from one origin page collides. The
+  // check runs before the download, so a duplicate costs no request.
+  const candidatesPath = path.join(runDir(deps.root, name), 'candidates.jsonl');
+  const id = candidateId(flags.origin, flags.target);
+  const existing = readJsonl<Candidate>(candidatesPath).find((one) => one.id === id);
+  if (existing !== undefined) {
+    console.error(`refused: candidate ${id} already exists for ${flags.target}`);
+    console.error(`  existing origin: ${existing.origin}`);
+    console.error(
+      '  add a fragment to the origin URL (for example #img2) to distinguish a second image on the same page',
+    );
+    return 1;
+  }
   const row = makeCandidate({
     target: flags.target,
     source_key: 'manual',
@@ -454,7 +468,26 @@ async function photosAdd(rest: string[], deps: CliDeps): Promise<number> {
       return 1;
     }
   }
-  appendJsonl(path.join(runDir(deps.root, name), 'candidates.jsonl'), [row]);
+  // The colour check reads the downloaded file, or the --local file.
+  const bytes = localBytes(deps.root, row);
+  if (bytes === null) {
+    console.error(`photos add --local file is missing: ${row.local}`);
+    return 1;
+  }
+  let score: number;
+  try {
+    score = await deps.chroma(bytes);
+  } catch (error) {
+    console.error(`photos add could not read ${row.local} as an image: ${errorMessage(error)}`);
+    return 1;
+  }
+  if (score < MONO_THRESHOLD) {
+    console.error(
+      `refused: ${row.id} for ${row.target} is monochrome (chroma ${chromaText(score)}, threshold ${MONO_THRESHOLD}). Colour photographs only (owner ruling 2026-09-24).`,
+    );
+    return 1;
+  }
+  appendJsonl(candidatesPath, [row]);
   console.log(`manual candidate ${row.id} added for ${row.target}`);
   return 0;
 }
@@ -846,6 +879,11 @@ function positional(rest: string[], usage: string): string {
 
 function isoNow(deps: CliDeps): string {
   return deps.now().toISOString().replace(/\.\d+Z$/, 'Z');
+}
+
+/** A chroma score with one decimal place, as the refusal and the audit lines print it. */
+function chromaText(score: number): string {
+  return score.toFixed(1);
 }
 
 const MANIFEST_NAME = path.join('images', 'manifest.json');

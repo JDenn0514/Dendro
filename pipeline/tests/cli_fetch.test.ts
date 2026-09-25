@@ -10,6 +10,7 @@ import {
   CHANNEL_TARGET,
   MAX_PER_SPECIES,
   SOURCE_NAMES,
+  candidateId,
   makeCandidate,
   type Candidate,
 } from '../lib/candidates.ts';
@@ -401,6 +402,14 @@ function manualAdd(fileUrl: string): string[] {
     '--channel-hint',
     'bark',
   ];
+}
+
+/** Writes a stand-in image where the `--local` tests point, and returns its absolute path. */
+function seedLocalFile(root: string): string {
+  const file = path.join(root, 'pipeline', 'cache', 'manual', 'quga_bark.jpg');
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, jpeg(1));
+  return file;
 }
 
 function candidatesOf(root: string): Candidate[] {
@@ -995,6 +1004,7 @@ test('photos fetch reports an exemplar with no profile', async (t) => {
 test('photos add appends one manual row and names a missing flag', async (t) => {
   const { root, deps, err } = setup(t);
   seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+  seedLocalFile(root);
 
   const full = [
     'photos',
@@ -1039,7 +1049,7 @@ test('photos add appends one manual row and names a missing flag', async (t) => 
 test('photos add stores an absolute --local path root-relative with forward slashes', async (t) => {
   const { root, deps } = setup(t);
   seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
-  const absolute = path.join(root, 'pipeline', 'cache', 'manual', 'quga_bark.jpg');
+  const absolute = seedLocalFile(root);
 
   const args = [...manualAdd('https://example.org/a.jpg'), '--local', absolute];
   assert.equal(await runCommand(args, deps), 0);
@@ -1107,6 +1117,52 @@ test('photos add refuses a license the allowlist rejects', async (t) => {
   assert.equal(code, 1);
   assert.deepEqual(err, ['photos add license is not allowed: CC BY-NC 2.0']);
   assert.deepEqual(candidatesOf(root), []);
+});
+
+test('photos add refuses a monochrome image and writes nothing', async (t) => {
+  const fileUrl = 'https://www.fs.usda.gov/images/quga_bark.jpg';
+  const grey = await greyJpeg();
+  const { root, deps, err } = setup(t, new Map([[fileUrl, { bytes: grey }]]));
+  deps.chroma = chromaOf;
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+  const seeded = seedCandidate(root, 'QUGA', 0);
+
+  assert.equal(await runCommand(manualAdd(fileUrl), deps), 1);
+
+  const id = candidateId('https://www.fs.usda.gov/database/feis/quga.html', 'QUGA');
+  const score = (await chromaOf(grey)).toFixed(1);
+  assert.deepEqual(err, [
+    `refused: ${id} for QUGA is monochrome (chroma ${score}, threshold 12). Colour photographs only (owner ruling 2026-09-24).`,
+  ]);
+  assert.deepEqual(candidatesOf(root), [seeded], 'candidates.jsonl is unchanged');
+});
+
+test('photos add refuses an id the run already holds and downloads nothing', async (t) => {
+  const { root, deps, http, err } = setup(t);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+  const origin = 'https://www.fs.usda.gov/database/feis/quga.html';
+  const first = makeCandidate({
+    target: 'QUGA',
+    source_key: 'manual',
+    source: 'USDA Forest Service',
+    origin,
+    file_url: 'https://www.fs.usda.gov/images/quga_first.jpg',
+    author: 'US Forest Service',
+    license: 'US government work',
+    fetched_at: NOW,
+  });
+  appendJsonl(path.join(runDir(root, 'demo'), 'candidates.jsonl'), [first]);
+
+  const code = await runCommand(manualAdd('https://www.fs.usda.gov/images/quga_second.jpg'), deps);
+
+  assert.equal(code, 1);
+  assert.deepEqual(err, [
+    `refused: candidate ${first.id} already exists for QUGA`,
+    `  existing origin: ${origin}`,
+    '  add a fragment to the origin URL (for example #img2) to distinguish a second image on the same page',
+  ]);
+  assert.deepEqual(http.urls, [], 'the fake HTTP saw no request');
+  assert.deepEqual(candidatesOf(root), [first], 'candidates.jsonl is unchanged');
 });
 
 test('photos verdict appends an approved row with the agent name', async (t) => {
