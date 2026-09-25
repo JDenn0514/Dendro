@@ -4680,7 +4680,10 @@
     "tags": [],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:34:31Z",
-    "note": "Archival black-and-white plate of a twig with three lobed simple leaves and one fruiting ball. Sharp and fills the frame, with only a small archival negative number in the corner."
+    "note": "Archival black-and-white plate of a twig with three lobed simple leaves and one fruiting ball. Sharp and fills the frame, with only a small archival negative number in the corner.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "592ce6b852d29506a10cebd6aa4ecb1d700331e770fb2e211d17f5ae01157c02",
