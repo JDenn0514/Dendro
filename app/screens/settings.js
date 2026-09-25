@@ -1,60 +1,98 @@
-// Session size, new cards per day, export, import, reset, and the missing diagnostics.
+// Session size, new cards per day, text size, export, import, reset, and the
+// missing diagnostics. The one screen that opens with no content.
 import { isCount } from '../logic/store.js';
+import { TEXT_SIZE_STEPS, applyTextSize } from '../ui/textsize.js';
+import { el } from '../ui/dom.js';
+import { footNav, tick, trail } from '../ui/chrome.js';
 
-// The store enforces only the floor (1) on session_size and new_per_day. This
-// is a UI hint on the number input's spinner, not an enforced ceiling: nothing
-// stops a user from typing a larger value, and writeSettings stores it as-is.
-// Both number fields (session_size and new_per_day) share this hint.
-const NUMBER_FIELD_UNENFORCED_MAX_HINT = 100;
+const SESSION_SIZES = [8, 12, 20, 30];
+const NEW_PER_DAY = [3, 6, 10, 15];
 
-function el(tag, className, text) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
+// The steps the group offers, with the stored value added when a hand edit or
+// an import has left a value outside them.
+function stepsWith(steps, current) {
+  return steps.includes(current) ? steps : [...steps, current].sort((a, b) => a - b);
 }
 
-export function render(root, ctx) {
-  const { store, today, content } = ctx;
-  const current = store.readSettings();
+function countGroup(root, ctx, options) {
+  const group = el('div', 'setgroup');
+  group.append(tick());
+  group.append(el('h2', 'sec-h', options.title));
+  group.append(el('p', 'sub2', options.note));
 
-  root.append(el('h1', null, 'Settings'));
-
-  if (!store.available) {
-    root.append(el('p', 'notice',
-      'This browser blocks local storage. Changes here are not saved.'));
-  }
-
-  // An empty field parses as 0, so the field is read back from the store after every change.
-  function numberField(labelText, field) {
-    const label = el('label', null, labelText);
+  const fieldset = el('fieldset', 'choices');
+  fieldset.append(el('legend', 'sr', options.title));
+  const current = ctx.store.readSettings()[options.field];
+  for (const value of stepsWith(options.steps, current)) {
+    const label = el('label', 'choice');
     const input = document.createElement('input');
-    input.type = 'number';
-    input.id = field;
-    input.min = '1';
-    input.max = String(NUMBER_FIELD_UNENFORCED_MAX_HINT);
-    input.value = String(current[field]);
+    input.type = 'radio';
+    input.name = options.field;
+    input.value = String(value);
+    input.checked = value === current;
     input.addEventListener('change', () => {
-      const parsed = Number(input.value);
-      if (isCount(parsed)) {
-        const stored = store.writeSettings({ [field]: parsed });
-        input.value = String(stored[field]);
-        if (!store.available) ctx.banner(ctx.storage_banner);
-      } else {
-        input.value = String(store.readSettings()[field]);
-      }
+      if (!isCount(value)) return;
+      ctx.store.writeSettings({ [options.field]: value });
+      if (!ctx.store.available) ctx.banner(ctx.storage_banner);
     });
-    label.append(input);
-    root.append(label);
+    label.append(input, el('span', null, String(value)));
+    fieldset.append(label);
   }
+  group.append(fieldset);
+  root.append(group);
+}
 
-  numberField('Cards per session ', 'session_size');
-  numberField('New cards per day ', 'new_per_day');
+function textSizeGroup(root, ctx) {
+  const group = el('div', 'setgroup');
+  group.append(tick());
+  group.append(el('h2', 'sec-h', 'Text size'));
+  group.append(el('p', 'sub2',
+    'Every word in Dendro follows this. The photographs and the leaf marks '
+    + 'keep their own size.'));
 
-  root.append(el('h2', null, 'Export'));
-  const exportLine = el('p', 'attribution',
-    `Last export: ${current.last_export ?? 'never'}.`);
-  const exportButton = el('button', 'primary', 'Export progress');
+  const fieldset = el('fieldset', 'tsteps');
+  fieldset.append(el('legend', 'sr', 'Text size'));
+  const current = ctx.store.readSettings().text_size;
+  for (const step of TEXT_SIZE_STEPS) {
+    const label = el('label', 'tstep');
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'text_size';
+    input.value = step.name;
+    input.checked = step.name === current;
+    input.addEventListener('change', () => {
+      applyTextSize(step.name);
+      ctx.store.writeSettings({ text_size: step.name });
+      if (!ctx.store.available) ctx.banner(ctx.storage_banner);
+    });
+    // The sample words are sized in px: each one must show what its own step
+    // does, whatever step is in force right now. The size itself sits in the
+    // sheet, in one class per step size.
+    const sample = el('span', `tsample px${step.sample_px}`, 'Quercus rubra');
+    label.append(input, sample, el('span', 'tname', step.name));
+    fieldset.append(label);
+  }
+  group.append(fieldset);
+  root.append(group);
+}
+
+function cardsGroup(root, ctx) {
+  const { store, today } = ctx;
+  const group = el('div', 'setgroup');
+  group.append(tick());
+  group.append(el('h2', 'sec-h', 'Your cards'));
+
+  // The count is read on every print, so a reset does not leave a stale one.
+  const exportRow = el('div', 'setbtn');
+  const exportButton = el('button', 'sbn', 'Export');
+  exportButton.type = 'button';
+  const noteText = () => {
+    const cardCount = Object.keys(store.readCards()).length;
+    return `${cardCount} ${cardCount === 1 ? 'card' : 'cards'}, last export `
+      + `${store.readSettings().last_export ?? 'never'}`;
+  };
+  const exportNote = el('span', 'sbd', noteText());
+  exportRow.append(exportButton, exportNote);
   exportButton.addEventListener('click', () => {
     const blob = store.exportBlob(today);
     const file = new Blob([blob.json], { type: 'application/json' });
@@ -69,58 +107,110 @@ export function render(root, ctx) {
     setTimeout(() => URL.revokeObjectURL(url), 0);
     store.markExported(today);
     if (!store.available) ctx.banner(ctx.storage_banner);
-    exportLine.textContent = `Last export: ${store.readSettings().last_export ?? 'never'}.`;
+    exportNote.textContent = noteText();
   });
-  root.append(exportButton);
-  root.append(exportLine);
+  group.append(exportRow);
 
-  root.append(el('h2', null, 'Import'));
-  const importStatus = el('p', 'attribution', '');
+  const importRow = el('label', 'setbtn');
+  importRow.append(el('span', 'sbn', 'Import'));
+  const importNote = el('span', 'sbd', 'read a file you exported');
+  importRow.append(importNote);
   const fileField = document.createElement('input');
   fileField.type = 'file';
   fileField.id = 'import_file';
   fileField.accept = 'application/json';
+  fileField.className = 'sr';
   fileField.addEventListener('change', async () => {
     const chosen = fileField.files?.[0];
     if (!chosen) return;
     const result = store.importBlob(await chosen.text());
-    if (result.ok) {
-      importStatus.textContent = 'Import done. Reload the page to see the new progress.';
-      if (!store.available) ctx.banner(ctx.storage_banner);
-    } else {
-      importStatus.textContent = `Import rejected: ${result.errors.join(' ')}`;
-    }
+    importNote.textContent = result.ok
+      ? 'imported, reload to see it'
+      : `rejected: ${result.errors.join(' ')}`;
+    if (result.ok && !store.available) ctx.banner(ctx.storage_banner);
+    if (result.ok) exportNote.textContent = noteText();
   });
-  root.append(fileField, importStatus);
+  importRow.append(fileField);
+  group.append(importRow);
 
-  root.append(el('h2', null, 'Reset'));
-  const resetStatus = el('p', 'attribution', '');
-  const resetButton = el('button', null, 'Reset all progress');
-  const confirmButton = el('button', 'primary', 'Yes, delete everything');
-  confirmButton.hidden = true;
-  resetButton.addEventListener('click', () => {
-    confirmButton.hidden = false;
-    resetStatus.textContent = 'This deletes every card state and the whole review log.';
-  });
+  const resetRow = el('div', 'setbtn warn');
+  const resetButton = el('button', 'sbn', 'Reset');
+  resetButton.type = 'button';
+  const resetNote = el('span', 'sbd', 'clears every level and date');
+  resetRow.append(resetButton, resetNote);
+  const confirmRow = el('div', 'setbtn warn');
+  const confirmButton = el('button', 'sbn', 'Yes, delete everything');
+  confirmButton.type = 'button';
+  confirmRow.append(confirmButton, el('span', 'sbd', 'this cannot be undone'));
+  confirmRow.hidden = true;
+  resetButton.addEventListener('click', () => { confirmRow.hidden = false; });
   confirmButton.addEventListener('click', () => {
     store.reset();
-    confirmButton.hidden = true;
-    resetStatus.textContent = 'Progress reset.';
+    confirmRow.hidden = true;
+    resetNote.textContent = 'progress reset';
+    exportNote.textContent = noteText();
   });
-  root.append(resetButton, confirmButton, resetStatus);
+  group.append(resetRow, confirmRow);
+  root.append(group);
+}
 
-  root.append(el('h2', null, 'Missing diagnostics'));
+function diagnosticsGroup(root, ctx) {
+  const { store, content } = ctx;
+  const group = el('div', 'setgroup');
+  group.append(tick());
+  group.append(el('h2', 'sec-h', 'Pairs with no note'));
   const edges = store.readMissingEdges();
   if (edges.length === 0) {
-    root.append(el('p', null, 'No missing confusion edges recorded.'));
-  } else {
-    const list = el('ul');
-    for (const edge of edges) {
-      // Settings opens when the content failed to load, so fall back to the symbol.
-      const a = content?.species[edge.a]?.common[0] ?? edge.a;
-      const b = content?.species[edge.b]?.common[0] ?? edge.b;
-      list.append(el('li', null, `${a} against ${b} on ${edge.channel}, missed ${edge.count} time(s)`));
-    }
-    root.append(list);
+    group.append(el('p', 'fact-line',
+      'Every pair you have confused carries a note.'));
+    root.append(group);
+    return;
   }
+  const list = el('div', 'splist');
+  for (const edge of edges) {
+    // Settings opens when the content failed to load, so fall back to the symbol.
+    const a = content?.species[edge.a]?.common[0] ?? edge.a;
+    const b = content?.species[edge.b]?.common[0] ?? edge.b;
+    const row = el('div', 'spx');
+    row.append(el('span', 'sn', `${a} against ${b}`));
+    row.append(el('span', 'due',
+      `${edge.channel}, ${edge.count} ${edge.count === 1 ? 'time' : 'times'}`));
+    list.append(row);
+  }
+  group.append(list);
+  root.append(group);
+}
+
+export function render(root, ctx) {
+  const { store } = ctx;
+
+  root.append(trail([{ text: 'Home', href: '#/' }, { text: 'Settings' }]));
+
+  const head = el('div', 'pagehead');
+  head.append(el('h1', 'display', 'Settings'));
+  head.append(el('p', 'where2', 'Everything here is kept on this phone.'));
+  root.append(head);
+
+  if (!store.available) {
+    root.append(el('p', 'note',
+      'This browser blocks local storage. Changes here are not saved.'));
+  }
+
+  countGroup(root, ctx, {
+    field: 'session_size',
+    title: 'Session size',
+    note: 'How many cards one session asks for.',
+    steps: SESSION_SIZES
+  });
+  countGroup(root, ctx, {
+    field: 'new_per_day',
+    title: 'New cards per day',
+    note: 'A cap on cards you have not met yet.',
+    steps: NEW_PER_DAY
+  });
+  textSizeGroup(root, ctx);
+  cardsGroup(root, ctx);
+  diagnosticsGroup(root, ctx);
+
+  root.append(footNav(null));
 }

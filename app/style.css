@@ -743,8 +743,12 @@ button.btn{width:100%; padding:0;}
 
 /* the inverted format: pick the photo, four plates at one scale */
 .invkey{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:12px 0 0;}
+/* The one button in the app that carries no class. It held the paper's type
+   from the legacy element rule, which is gone, so it takes `font:inherit`
+   here. The button holds a plate and no words today, so nothing on screen
+   moved; the rule keeps a word the format may add later on the page's face. */
 .invkey button{appearance:none; border:0; padding:0; background:none; cursor:pointer;
-  min-height:44px;}
+  font:inherit; min-height:44px;}
 .invkey .plate{aspect-ratio:1/1;}
 .invkey button:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
 
@@ -832,67 +836,34 @@ button.leave:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
    7.5:1, and the underline stays, so the link still reads as a link. */
 .cap a{color:var(--bark);}
 
-/* =======================================================================
-   LEGACY
+/* A setbtn holds a real control, so the button carries the panel's own type.
+   This selector sets the family itself, so it needs no `:where()` guard: it
+   is the rule that decides, not a reset that has to lose to one. */
+.setbtn button.sbn{appearance:none; -webkit-appearance:none; background:none;
+  border:0; padding:0; color:inherit; font:inherit; font-family:var(--fr);
+  font-weight:600; font-size:1.0625rem; font-variation-settings:"opsz" 20;
+  text-align:left; cursor:pointer; min-height:54px; flex:1 1 auto;}
+.setbtn button.sbn:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
+/* Import is a label wrapping a file input the page never draws */
+label.setbtn{cursor:pointer;}
+label.setbtn:has(input:focus-visible){outline:2px solid var(--moss); outline-offset:2px;}
+/* `.setbtn` sets `display:flex`, which outweighs the browser's own rule for
+   the `hidden` attribute. The reset's confirm row starts hidden, so it needs
+   this rule to stay off the page until the reset is tapped. */
+.setbtn[hidden]{display:none;}
 
-   The rules the screens that have not been rebuilt yet still use. Each
-   screen takes its own rules out as it is rebuilt, and the last one takes
-   out whatever is left, along with this comment.
-   ======================================================================= */
+/* The diagnostics list reuses the printed species rows, but it prints no
+   glyph and it sits inside a setting panel, not against the depth column.
+   Two columns and no left margin, so a pair name gets the width of the page
+   in place of the 26px the glyph would take. */
+.setgroup .splist{margin-left:0;}
+.setgroup .spx{grid-template-columns:1fr auto;}
 
-/* The old token names, aliased to the new ones. They go when the last legacy
-   rule goes, in Task 16. `--warn` takes bark and not sap, because white on sap
-   is 3.16:1 and white on bark is 8.82:1. */
-:root{
-  --accent: var(--moss);
-  --warn: var(--bark);
-  --line: var(--mount);
-  --level-0: var(--m0);
-  --level-1: var(--m1);
-  --level-2: var(--m2);
-  --level-3: var(--m3);
-  --level-4: var(--m4);
-}
-
-/* This rule sits after the new sheet, so a bare `button` would outweigh the
-   `:where()` reset above and frame every new button in white. The `:where()`
-   and the `:not()` keep it off the classes the rebuilt screens print. */
-:where(button:not(.pick, .btn, .startb, .leave, .chev, .choice)) {
-  font: inherit;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: #fff;
-  cursor: pointer;
-}
-
-button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-button:disabled { opacity: 0.5; cursor: default; }
-
-.card {
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  padding: 1rem;
-  margin: 1rem 0;
-  background: #fff;
-}
-
-.notice { background: #fff4e0; border-left: 4px solid var(--warn); padding: 0.75rem; }
-
-.unit-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto;
-  gap: 0.75rem;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.unit-meta { color: #5c5850; font-size: 0.9rem; }
-
-/* the settings screen still prints this one. It goes with that screen in
-   Task 16. */
-.attribution { font-size: 0.8rem; color: #5c5850; }
-
-label { display: block; margin: 0.75rem 0; }
-input[type="number"], input[type="text"] { font: inherit; padding: 0.3rem; border: 1px solid var(--line); border-radius: 4px; }
+/* The five sample words of the text size steps. They are sized in px, so each
+   one shows what its own step does whatever step is in force. One class per
+   size, and the sizes match `sample_px` in `app/ui/textsize.js`. */
+.tsample.px14{font-size:14px;}
+.tsample.px15{font-size:15px;}
+.tsample.px17{font-size:17px;}
+.tsample.px20{font-size:20px;}
+.tsample.px22{font-size:22px;}
