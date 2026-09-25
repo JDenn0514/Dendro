@@ -4,15 +4,20 @@ Usage:
     python -m http.server 8000                 # one terminal, at the repo root
     python scripts/shots.py out/shots          # another terminal
 
-Writes <out>/<screen>-<width>-<root>.png: nine routes at two widths at three
-root sizes, 54 files in all. A developer tool, not a CI step: CI has no
-browser and no server.
+Writes <out>/<screen>-<width>-<root>.png: one file per route per width per
+root size. A developer tool, not a CI step: CI has no browser and no server.
 
 Set DENDRO_BASE when the server is on another port, for example
     DENDRO_BASE=http://localhost:8011/?content=dev
 
+Every run draws the same screens. The page gets a seeded random number
+generator before the app boots, a seeded store of card levels, and, on a
+session route, a walk down the deck until the card is asked in the format the
+route names. Each route also names a selector it must print, so a route that
+silently falls back to another screen is reported rather than shot.
+
 A route that fails is reported and skipped. One screen that will not open
-must not cost the other 53 shots.
+must not cost the other shots.
 """
 import os
 import pathlib
@@ -24,32 +29,66 @@ BASE = os.environ.get("DENDRO_BASE", "http://localhost:8000/?content=dev")
 WIDTHS = [360, 390]
 ROOTS = ["80", "100", "130"]
 
-# name, hash, what to do once the page has loaded:
+# name, hash, what to do once the page has loaded, the selector the route must
+# print. The action is one of:
 #   None      shoot the page as it stands
-#   "wrong"   answer the card with something that is not the answer, then shoot
+#   "pick"    walk the deck to a card asked as a list of names, then shoot
+#   "typed"   walk the deck to a card asked as a text field, then shoot
+#   "inv"     walk the deck to a card asked as a grid of photos, then shoot
+#   "wrong"   answer a card with something that is not the answer, then shoot
 ROUTES = [
-    ("home", "#/", None),
-    ("lessons", "#/lessons", None),
-    ("lessons-leaf", "#/lessons/leaf", None),
-    ("progress", "#/progress", None),
-    ("progress-shape", "#/progress/leaf/simple_lobed", None),
-    ("species", "#/species/QURU", None),
-    ("settings", "#/settings", None),
-    ("session", "#/session?focus=leaf&unit=leaf_types", None),
-    ("reveal", "#/session?focus=leaf&unit=leaf_types", "wrong"),
+    ("home", "#/", None, ".masthead .display"),
+    ("lessons", "#/lessons", None, ".chdoor"),
+    ("lessons-leaf", "#/lessons/leaf", None, ".tree .urow"),
+    ("progress", "#/progress", None, ".chblock .rung"),
+    ("progress-shape", "#/progress/leaf/simple_lobed", None, ".strip"),
+    ("species", "#/species/QURU", None, ".sp-title"),
+    ("settings", "#/settings", None, ".tsteps .tstep"),
+    ("session", "#/session?focus=leaf&unit=leaf_types", "pick", ".key .pick"),
+    ("session-typed", "#/session?focus=all", "typed", ".typed input"),
+    ("session-inv", "#/session?focus=leaf", "inv", ".invkey button"),
+    ("reveal", "#/session?focus=leaf&unit=leaf_types", "wrong", ".reveal .pair"),
 ]
 
-# The script cannot see the answer, so on a choice card it tries one label,
-# and on a right answer opens a fresh page and tries another. `new_page` gives
-# each attempt its own storage, so the deck starts over and the labels are
-# shuffled again.
+# How far a walk down the deck may go, and how many fresh pages the reveal may
+# try. Every loop in this file is bounded by it, so no walk runs on for ever.
 MAX_TRIES = 6
+
+# What each answer format prints. The session routes walk the deck until one
+# of these is on screen.
+FORMAT_SELECTORS = {
+    "pick": ".key .pick",
+    "typed": ".typed input",
+    "inv": ".invkey button",
+}
+
+# The app shuffles the deck, the answer labels, and the photo it samples with
+# `Math.random`. A run that draws different cards each time cannot be compared
+# with the run before it, so the page gets a generator with a fixed seed
+# before any app script runs. This is mulberry32: short, and the same numbers
+# in the same order every time.
+RNG_JS = """
+(() => {
+  let state = 0x9E3779B9;
+  Math.random = () => {
+    state = (state + 0x6D2B79F5) | 0;
+    let t = Math.imul(state ^ (state >>> 15), 1 | state);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+})();
+"""
 
 # Every screen draws from the stored card levels: the rungs and the bands on
 # progress, the squares on lessons and species, the deck of the session. An
 # empty store prints an empty app, so each page is seeded before it is shot.
-# The seed reads the same content the app reads, derives the same card ids, and
-# gives one card in five each of the four levels, leaving the fifth new.
+# The seed reads the same content the app reads and derives the same card ids.
+#
+# The tier a card holds is what picks its answer format, so the seed also
+# decides which formats the deck can deal. A card can be asked as a grid of
+# photos only when it has four photo options, so every card that has them goes
+# to the inv tier and the rest cycle over new, mc4, mc8, and typed. That keeps
+# a spread of levels on every rung and puts all three answer formats in reach.
 SEED_JS = """
 async () => {
   const dir = new URLSearchParams(location.search).get('content') === 'dev'
@@ -65,34 +104,42 @@ async () => {
     if (!response.ok) throw new Error(dir + file + ' returned ' + response.status);
     raw[field] = await response.json();
   }
-  const module = await import('/app/logic/content.js');
-  const result = module.loadContent(raw);
+  const content = await import('/app/logic/content.js');
+  const question = await import('/app/logic/question.js');
+  const result = content.loadContent(raw);
   if (!result.ok) throw new Error('the content did not validate');
 
-  // Local dates, the way the app writes them.
+  // The local date, the way the app writes it.
   const today = new Date().toLocaleDateString('en-CA');
-  const later = new Date(Date.now() + 20 * 86400000).toLocaleDateString('en-CA');
 
-  // The two lower tiers are due today, so the session deck is drawn from them
-  // and the card on screen is a choice card. The two upper tiers are parked,
-  // so they count towards the levels and stay out of the deck.
+  // Only a card that is due today can be dealt into a session, so every tier
+  // here is due today. The one card in four that stays new is what keeps a
+  // level 0 on the rungs.
   const table = [
     null,
     { tier: 'mc4', tier_passes: 0, due: today, interval: 1, reps: 1 },
     { tier: 'mc8', tier_passes: 0, due: today, interval: 9, reps: 4 },
-    { tier: 'inv', tier_passes: 0, due: later, interval: 25, reps: 7 },
-    { tier: 'typed', tier_passes: 2, due: later, interval: 40, reps: 11 }
+    { tier: 'typed', tier_passes: 2, due: today, interval: 40, reps: 11 }
   ];
+  const inverted = { tier: 'inv', tier_passes: 0, due: today, interval: 25, reps: 7 };
+
+  const state = (seed) => ({
+    interval: seed.interval, ease: 2.5, due: seed.due, reps: seed.reps,
+    lapses: 0, recent: ['good'], tier: seed.tier, tier_passes: seed.tier_passes
+  });
 
   const cards = {};
-  Object.keys(result.content.cards).sort().forEach((id, index) => {
-    const seed = table[index % table.length];
-    if (!seed) return;
-    cards[id] = {
-      interval: seed.interval, ease: 2.5, due: seed.due, reps: seed.reps,
-      lapses: 0, recent: ['good'], tier: seed.tier, tier_passes: seed.tier_passes
-    };
-  });
+  let slot = 0;
+  for (const id of Object.keys(result.content.cards).sort()) {
+    const card = result.content.cards[id];
+    if (question.invAvailable(result.content, card)) {
+      cards[id] = state(inverted);
+      continue;
+    }
+    const seed = table[slot % table.length];
+    slot += 1;
+    if (seed) cards[id] = state(seed);
+  }
   localStorage.setItem('dendro_cards', JSON.stringify({ version: 1, cards }));
   return Object.keys(cards).length;
 }
@@ -105,17 +152,37 @@ def open_page(browser, width, root, frag, scale=1):
         viewport={"width": width, "height": 844},
         device_scale_factor=scale,
     )
-    # The store is read at boot, so the seed goes in on a first load and the
-    # route is opened again on top of it.
-    page.goto(BASE)
-    page.wait_for_load_state("networkidle")
-    page.evaluate(SEED_JS)
-    page.goto(BASE + frag)
-    page.reload()
-    page.wait_for_load_state("networkidle")
-    page.evaluate("s => document.documentElement.style.fontSize = s", root + "%")
-    page.wait_for_timeout(600)  # let the webfonts and the plates settle
+    # A page that never opens must not stay open. Without this a dead server
+    # would leave one page behind for every route in the sweep.
+    try:
+        page.add_init_script(RNG_JS)
+        # The store is read at boot, so the seed goes in on a first load and
+        # the route is opened again on top of it.
+        page.goto(BASE)
+        page.wait_for_load_state("networkidle")
+        page.evaluate(SEED_JS)
+        page.goto(BASE + frag)
+        page.reload()
+        page.wait_for_load_state("networkidle")
+        page.evaluate("s => document.documentElement.style.fontSize = s", root + "%")
+        page.wait_for_timeout(600)  # let the webfonts and the plates settle
+    except Exception:
+        page.close()
+        raise
     return page
+
+
+def require(page, must, name):
+    """Raise unless the screen on show is the one the route asked for.
+
+    A hash the router does not know prints Home, and a screen that threw on
+    its way in prints nothing. Both would otherwise pass every check on this
+    page, because there is nothing wrong with an empty screen.
+    """
+    if page.query_selector("#app *") is None:
+        raise RuntimeError(f"{name}: #app is empty")
+    if page.query_selector(must) is None:
+        raise RuntimeError(f"{name}: the screen printed no {must}")
 
 
 def answer(page, attempt):
@@ -143,6 +210,16 @@ def answer(page, attempt):
     return "right" if verdict.inner_text().startswith("Right") else "wrong"
 
 
+def next_card(page):
+    """Leave the reveal on screen and ask for the next card. True on success."""
+    button = page.query_selector(".reveal .btn")
+    if button is None:
+        return False
+    button.click()
+    page.wait_for_timeout(500)
+    return True
+
+
 def has_pair(page):
     """True when the reveal on screen prints the two plates side by side.
 
@@ -153,6 +230,25 @@ def has_pair(page):
     return page.query_selector(".reveal .pair") is not None
 
 
+def advance_to(page, want):
+    """Walk the deck until the card on screen is asked in the wanted format.
+
+    The deck holds cards at three tiers, so the card it deals first is not
+    always the format a route wants. Answering a card and pressing Next is the
+    only way past it. Returns True on the wanted format, False when the deck
+    runs out or the walk reaches its bound.
+    """
+    selector = FORMAT_SELECTORS[want]
+    for _ in range(MAX_TRIES):
+        if page.query_selector(selector) is not None:
+            return True
+        if answer(page, 0) == "":
+            return False
+        if not next_card(page):
+            return False
+    return page.query_selector(selector) is not None
+
+
 def wrong_pair(page, attempt):
     """Answer cards on this page until a wrong choice prints the pair.
 
@@ -160,40 +256,43 @@ def wrong_pair(page, attempt):
     past it to the next card. Returns True on the pair, and False when the
     deck runs out first. Both loops are bounded, so the walk always ends.
     """
-    for step in range(MAX_TRIES):
-        verdict = answer(page, attempt + step)
+    for _ in range(MAX_TRIES):
+        verdict = answer(page, attempt)
         if verdict == "":
             return False
         if verdict == "wrong" and has_pair(page):
             return True
-        next_button = page.query_selector(".reveal .btn")
-        if next_button is None:
+        if not next_card(page):
             return False
-        next_button.click()
-        page.wait_for_timeout(500)
     return False
 
 
-def shoot(browser, name, frag, action, width, root, out):
+def reach(page, action, attempt):
+    """Bring the page to the state the route names. True when it is there."""
+    if action is None:
+        return True
+    if action == "wrong":
+        return wrong_pair(page, attempt)
+    return advance_to(page, action)
+
+
+def shoot(browser, name, frag, action, must, width, root, out):
     target = out / f"{name}-{width}-{root}.png"
-    if action != "wrong":
-        page = open_page(browser, width, root, frag, scale=2)
-        try:
-            page.screenshot(path=str(target), full_page=True)
-        finally:
-            page.close()
-        return target
     # The reveal is only worth a shot in its wrong state: that is the one that
-    # prints two plates side by side.
-    for attempt in range(MAX_TRIES):
+    # prints two plates side by side. A fresh page reshuffles nothing, because
+    # the generator is seeded, so only `attempt` changes what is clicked.
+    tries = MAX_TRIES if action == "wrong" else 1
+    for attempt in range(tries):
         page = open_page(browser, width, root, frag, scale=2)
         try:
-            if wrong_pair(page, attempt):
-                page.screenshot(path=str(target), full_page=True)
-                return target
+            if not reach(page, action, attempt):
+                continue
+            require(page, must, name)
+            page.screenshot(path=str(target), full_page=True)
+            return target
         finally:
             page.close()
-    raise RuntimeError(f"no wrong answer with a pair in {MAX_TRIES} tries")
+    raise RuntimeError(f"no {action} state in {tries} tries")
 
 
 def main():
@@ -204,9 +303,9 @@ def main():
         browser = play.chromium.launch()
         for width in WIDTHS:
             for root in ROOTS:
-                for name, frag, action in ROUTES:
+                for name, frag, action, must in ROUTES:
                     try:
-                        print(shoot(browser, name, frag, action, width, root, out))
+                        print(shoot(browser, name, frag, action, must, width, root, out))
                     except Exception as error:
                         failures += 1
                         print(f"FAIL {name}-{width}-{root}: {error}")

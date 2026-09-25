@@ -8,16 +8,25 @@ Checks both phone widths at all three root sizes. Exits 1 when anything is
 reported, so it can be wired into a pre-push hook. A developer tool, not a
 CI step: CI has no browser and no server.
 
+Set DENDRO_BASE when the server is on another port, for example
+    DENDRO_BASE=http://localhost:8011/?content=dev
+`shots.py` reads it and this script takes `BASE` from there.
+
 The three checks answer the three lines of section 5 of the spec that a
 person cannot judge by eye: no horizontal scroll, every control 44px, every
 piece of text at 4.5 to 1 or better.
+
+Every run measures the same screens. `shots.py` seeds the random number
+generator and the store, walks a session route to the answer format the route
+names, and holds each route to a selector it must print, so a state that
+quietly fell back to another screen is reported rather than passed.
 """
 import sys
 
 from playwright.sync_api import sync_playwright
 
 from shots import (
-    MAX_TRIES, BASE, ROUTES, ROOTS, WIDTHS, open_page, wrong_pair
+    MAX_TRIES, BASE, ROUTES, ROOTS, WIDTHS, open_page, reach, require
 )
 
 MIN_TARGET = 44
@@ -168,13 +177,15 @@ JS = """
 """
 
 
-def check(browser, name, frag, action, width, root):
+def check(browser, frag, action, must, width, root):
     """Open one screen state and run the three checks over it."""
-    for attempt in range(MAX_TRIES if action == "wrong" else 1):
+    tries = MAX_TRIES if action == "wrong" else 1
+    for attempt in range(tries):
         page = open_page(browser, width, root, frag)
         try:
-            if action == "wrong" and not wrong_pair(page, attempt):
+            if not reach(page, action, attempt):
                 continue
+            require(page, must, frag)
             page.wait_for_timeout(350)
             return page.evaluate(
                 JS,
@@ -182,7 +193,7 @@ def check(browser, name, frag, action, width, root):
             )
         finally:
             page.close()
-    raise RuntimeError(f"no wrong answer with a pair in {MAX_TRIES} tries")
+    raise RuntimeError(f"no {action} state in {tries} tries")
 
 
 def main():
@@ -193,9 +204,9 @@ def main():
         for width in WIDTHS:
             for root in ROOTS:
                 print(f"=== width {width}, root {root}% ===")
-                for name, frag, action in ROUTES:
+                for name, frag, action, must in ROUTES:
                     try:
-                        got = check(browser, name, frag, action, width, root)
+                        got = check(browser, frag, action, must, width, root)
                     except Exception as error:
                         # A screen that will not open is a finding of its own,
                         # and the rest of the sweep still runs.
