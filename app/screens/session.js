@@ -18,6 +18,19 @@ import { plate, credit } from '../ui/plate.js';
 // The caption on a question plate never names the tree.
 const UNDETERMINED = 'Pressed specimen, undetermined.';
 
+// The session the reader stepped out of, to read about one tree. Tapping the
+// name on a reveal changes the route, and a route change tears this screen
+// down, so the place the reader left is kept here, outside `render`. The
+// history entry the reader comes back to carries the token that matches it.
+// One slot is enough: only one session is on screen at a time.
+let suspended = null;
+
+let tokens = 0;
+function newToken() {
+  tokens += 1;
+  return `${Date.now().toString(36)}-${tokens}`;
+}
+
 export function render(root, ctx) {
   const { content, store, today, image_base: imageBase } = ctx;
   const mode = ctx.mode ?? 'review';
@@ -25,27 +38,48 @@ export function render(root, ctx) {
   const chosenUnit = ctx.params.get('unit') || null;
   const userSettings = store.readSettings();
 
-  const built = mode === 'placement'
-    ? { card_ids: buildPlacementDeck(content), unit_key: null }
-    : buildSession({
-      content, states: store.readCards(), log: store.readLog(),
-      settings: userSettings, today, focus, chosen_unit: chosenUnit
-    });
-  const deck = built.card_ids;
-  const unit = built.unit_key ? unitFor(content, built.unit_key) : null;
-  const where = mode === 'placement' ? 'Placement test' : (unit?.name ?? 'Review');
+  // The history entry this render stands on. A fresh navigation carries no
+  // state of this screen's. A back press from a species page restores the
+  // state of the entry the session pushed, so the token on it matches the
+  // session the reader stepped out of, and this render is that session coming
+  // back rather than a new one. Anything else deals a new deck.
+  const entry = typeof history.state === 'object' ? history.state : null;
+  const returning = Boolean(suspended && entry && entry.dendro === 'session'
+    && entry.guard === true && entry.token === suspended.token);
+  const resumed = returning ? suspended : null;
+  suspended = null;
+  const token = resumed ? resumed.token : newToken();
 
-  const lastHash = {};
-  const failedHashes = {};
-  const requeuedOnce = new Set();
-  const answered = new Set();
-  let results = emptyResults();
-  let index = 0;
+  // A deck built again would not be the deck the reader left: the cards
+  // answered so far are no longer due. So the session that comes back carries
+  // its own deck, its own place in it, and its own tallies.
+  const built = resumed
+    ? null
+    : (mode === 'placement'
+      ? { card_ids: buildPlacementDeck(content), unit_key: null }
+      : buildSession({
+        content, states: store.readCards(), log: store.readLog(),
+        settings: userSettings, today, focus, chosen_unit: chosenUnit
+      }));
+  const unit = built?.unit_key ? unitFor(content, built.unit_key) : null;
+  const deck = resumed
+    ? [...resumed.deck]
+    : built.card_ids;
+  const where = resumed
+    ? resumed.where
+    : (mode === 'placement' ? 'Placement test' : (unit?.name ?? 'Review'));
+
+  const lastHash = resumed ? { ...resumed.last_hash } : {};
+  const failedHashes = resumed ? { ...resumed.failed_hashes } : {};
+  const requeuedOnce = new Set(resumed ? resumed.requeued : []);
+  const answered = new Set(resumed ? resumed.answered : []);
+  let results = resumed ? resumed.results : emptyResults();
+  let index = resumed ? resumed.index : 0;
   // The counter names the card on screen. It is fixed when the card renders,
   // so the reveal keeps the number the question had, and a second render of
   // the same card, after a photo fails, keeps it too.
-  let answerCount = 0;
-  let shown = 0;
+  let answerCount = resumed ? resumed.answer_count : 0;
+  let shown = resumed ? resumed.shown : 0;
   // The view on screen right now, so Resume can paint it again without
   // sampling a new photo or a new set of options.
   let lastView = null;
@@ -57,27 +91,60 @@ export function render(root, ctx) {
   let cancelled = false;
   const stale = (generation) => cancelled || generation !== renderId;
 
-  // The back press. One extra history entry, a duplicate of this screen's own
-  // hash, goes on below the empty-deck branch. A back press pops that
-  // duplicate, so the URL does not change, no hashchange fires, and the
-  // router leaves this screen in place. Only popstate runs, and it does what
-  // Leave does. The handler pushes the duplicate again, so the next back
-  // press behaves the same way.
+  // ---------- the back press ----------
   //
-  // Two states go home instead. With no card answered there is nothing to
-  // sum up. Once the deck is spent the screen is already the end-of-session
-  // summary, which has no Leave control, and its own Home link goes home.
-  // The leave summary over the top of it would read "the cards you have not
-  // reached stay due" when none is unreached, and would hide the row for
-  // tomorrow's count and the note about exporting.
+  // The session holds two history entries that carry its own hash: the entry
+  // the navigation made, and one duplicate above it, both stamped with this
+  // session's token. The pair goes on below, after the first paint. A back
+  // press pops the duplicate, so the URL does not change, no hashchange
+  // fires, and the router leaves this screen in place. Only popstate runs,
+  // and it does what Leave does.
   //
-  // Neither state pushes the duplicate back on. The back press has already
-  // taken the duplicate off, so the entry the replace drops is the session's
-  // own, and the reader leaves the session behind for good.
+  // `guardOn` says whether the duplicate is still up there. Every exit needs
+  // that one fact: an exit with the duplicate still up has two entries with
+  // the session's hash to clear, not one. See `leave`.
+  let guardOn = Boolean(resumed);
+  // The hash both of the session's entries carry.
+  const ownHash = window.location.hash;
+  // The leave summary is the last screen the session owns. A back press on it
+  // goes home: repainting the summary would leave the back gesture dead.
+  let leaveShowing = false;
+  // Where the screen is going, once an exit is under way.
+  let exitHash = null;
+  let exitReload = false;
+
   function onPopState() {
     if (cancelled) return;
-    if (answerCount === 0 || index >= deck.length) { leaveToHome(); return; }
-    history.pushState({ dendro: 'session' }, '', window.location.hash);
+    // A tap on a link inside this screen is a same-document navigation, and
+    // Chrome fires popstate for one, before the hashchange. Measured: the
+    // species link on a reveal fires popstate with the species hash already
+    // in place. This handler is only for the press that pops the duplicate,
+    // which leaves the session's own hash where it was. Everything else is
+    // the router's to answer, and answering it here is what used to cost the
+    // reader a second back press.
+    if (window.location.hash !== ownHash) return;
+    // The press took the duplicate off, so the screen now stands on the
+    // session's own entry.
+    guardOn = false;
+    if (exitHash) { finishExit(); return; }
+    // Three states go home. On the leave summary the back gesture is the way
+    // out. With no card answered there is nothing to sum up. Once the deck is
+    // spent the screen is already the end-of-session summary, and a leave
+    // summary over the top of it would read "the cards you have not reached
+    // stay due" when none is unreached, and would hide the row for tomorrow's
+    // count and the note about exporting.
+    //
+    // None of the three puts the duplicate back, so the entry the exit drops
+    // is the session's own, and the reader leaves the session behind for
+    // good.
+    if (leaveShowing || answerCount === 0 || index >= deck.length) {
+      leaveToHome();
+      return;
+    }
+    // The leave summary keeps a duplicate above it, so the next back press is
+    // the screen's to answer as well.
+    history.pushState({ dendro: 'session', token, guard: true }, '', ownHash);
+    guardOn = true;
     showLeaveSummary();
   }
 
@@ -101,11 +168,6 @@ export function render(root, ctx) {
     root.append(link('#/', 'btn', 'Home'));
     return teardown;
   }
-
-  // The deck holds at least one card, so the screen is going to stay. Push a
-  // duplicate of this hash for the back press to pop. The listener itself
-  // goes on at the bottom, after the first paint.
-  history.pushState({ dendro: 'session' }, '', window.location.hash);
 
   // ---------- the running head and the printed gauge ----------
 
@@ -150,6 +212,7 @@ export function render(root, ctx) {
   }
 
   function paintQuestion(question, card, generation, resumeElapsed = 0) {
+    leaveShowing = false;
     root.textContent = '';
     head(question);
 
@@ -393,6 +456,7 @@ export function render(root, ctx) {
   }
 
   function paintReveal(question, reveal, typedText, correct, levels) {
+    leaveShowing = false;
     renderId += 1;
     root.textContent = '';
     head(question);
@@ -402,7 +466,15 @@ export function render(root, ctx) {
     verdictWrap.append(el('p', 'verdict', correct ? 'Right.' : 'Not this one.'));
     const title = el('h1', 'display');
     if (question.kind === 'species') {
-      title.append(link(`#/species/${reveal.answer.key}`, 'answer-link', reveal.answer.label));
+      const out = link(`#/species/${reveal.answer.key}`, 'answer-link', reveal.answer.label);
+      // The reader is stepping out to read about this tree. Keep the place, so
+      // one back press brings this reveal back rather than a fresh question.
+      out.addEventListener('click', () => {
+        suspend({
+          question, reveal, typed_text: typedText, correct, levels
+        });
+      });
+      title.append(out);
     } else {
       title.textContent = reveal.answer.label;
     }
@@ -491,6 +563,7 @@ export function render(root, ctx) {
   }
 
   function showSummary() {
+    leaveShowing = false;
     renderId += 1;
     lastView = null;
     root.textContent = '';
@@ -521,35 +594,96 @@ export function render(root, ctx) {
     const row = el('div', 'btnrow');
     const again = el('button', 'btn', 'Another session');
     again.type = 'button';
+    // A fresh deck needs a fresh boot. The session that is over goes out of
+    // the history first, the same way every other exit does, so a back press
+    // from the new session does not land on the old one.
     again.addEventListener('click', () => {
-      ctx.navigate(`/session?focus=${focus}${chosenUnit ? `&unit=${chosenUnit}` : ''}`);
-      window.location.reload();
+      leave(`#/session?focus=${focus}${chosenUnit ? `&unit=${chosenUnit}` : ''}`, true);
     });
     row.append(again);
-    row.append(link('#/', 'btn ghost', 'Home'));
+    // Home is a button, not an anchor: an anchor would push an entry on top
+    // of the session's own, and the back press from home would open the spent
+    // session again.
+    const home = el('button', 'btn ghost', 'Home');
+    home.type = 'button';
+    home.addEventListener('click', () => leaveToHome());
+    row.append(home);
     root.append(row);
   }
 
   // ---------- leaving ----------
 
-  // Home, without leaving the session in the history. `navigate` would push a
-  // new entry on top of the one the back press just took off, so a second
-  // back press would come straight back into a session that is over. A
-  // replace drops that entry instead. A replace fires no `hashchange`, so
-  // the router is told by hand.
-  function leaveToHome() {
-    history.replaceState({ dendro: 'left' }, '', '#/');
+  // Stepping out to a species page, with the place kept. The route change
+  // tears this screen down, so the snapshot lives outside `render` and the
+  // token on the history entry is what matches it back up. Copies, not the
+  // live objects, so the session the reader comes back to is the session the
+  // reader left.
+  function suspend(view) {
+    suspended = {
+      token,
+      where,
+      deck: [...deck],
+      index,
+      answer_count: answerCount,
+      shown,
+      results,
+      answered: [...answered],
+      requeued: [...requeuedOnce],
+      last_hash: { ...lastHash },
+      failed_hashes: { ...failedHashes },
+      view
+    };
+  }
+
+  // Every way out of the session lands here.
+  //
+  // The screen stands on its own duplicate entry until a back press takes it
+  // off, and both of its entries carry the session's hash. A replace on the
+  // duplicate would leave the entry below it, so the next back press would
+  // open a fresh session on a spent deck. So the duplicate goes first, by a
+  // back press the screen makes itself, and `onPopState` finishes the exit
+  // with the replace landing on the session's own entry. Nothing with the
+  // session's hash is left behind.
+  //
+  // A replace fires no `hashchange`, so the router is told by hand.
+  function leave(hash, reload = false) {
+    suspended = null;
+    exitHash = hash;
+    exitReload = reload;
+    if (guardOn) {
+      guardOn = false;
+      history.back();
+      return;
+    }
+    finishExit();
+  }
+
+  function finishExit() {
+    history.replaceState({ dendro: 'left' }, '', exitHash);
+    if (exitReload) {
+      window.location.reload();
+      return;
+    }
     window.dispatchEvent(new HashChangeEvent('hashchange'));
   }
 
+  function leaveToHome() {
+    leave('#/');
+  }
+
   function showLeaveSummary() {
+    leaveShowing = true;
     renderId += 1;
     root.textContent = '';
     root.append(el('h1', 'display', 'Where you got to'));
     const done = results.right + results.missed;
+    // The claim that the answers are saved is only true when the store takes
+    // writes. A browser that blocks local storage gets the same note the
+    // end-of-session summary prints.
     root.append(el('p', 'where2',
-      `${done} of ${deck.length} cards answered. Every answer is already saved. `
-      + 'The cards you have not reached stay due.'));
+      `${done} of ${deck.length} cards answered.`
+      + `${store.available ? ' Every answer is already saved.' : ''}`
+      + ' The cards you have not reached stay due.'));
     root.append(sumRow('right', String(results.right)));
     root.append(sumRow('missed', String(results.missed)));
     root.append(sumRow('promoted', String(results.promoted.length)));
@@ -559,6 +693,12 @@ export function render(root, ctx) {
       root.append(el('div', 'tick'));
       root.append(el('h2', 'sec-h', 'The ones you missed'));
       root.append(missList());
+    }
+
+    if (!store.available) {
+      root.append(el('p', 'note',
+        'This browser blocks local storage, so nothing was saved. Open Settings '
+        + 'and export before you close the tab.'));
     }
 
     const row = el('div', 'btnrow');
@@ -577,18 +717,38 @@ export function render(root, ctx) {
   }
 
   // With no card answered there is nothing to sum up, so Leave goes home at
-  // once. The browser's back button lands here too.
+  // once.
   function onLeave() {
     if (answerCount === 0) { leaveToHome(); return; }
     showLeaveSummary();
   }
 
-  showCard();
-  // The listener goes on only once the first paint is through. A throw in
-  // that paint leaves `render` without returning the teardown, so `main.js`
-  // paints the error panel and holds no way to take the listener off again.
-  // The listener would then answer every back press in the app for the rest
-  // of the visit.
+  // A session that is coming back opens on the view the reader left, built
+  // from the snapshot. Anything else deals the first card.
+  if (resumed && resumed.view) {
+    const view = resumed.view;
+    lastView = () => paintReveal(
+      view.question, view.reveal, view.typed_text, view.correct, view.levels
+    );
+    lastView();
+  } else {
+    showCard();
+  }
+
+  // The duplicate entry and the listener go on only once the first paint is
+  // through. A throw in that paint leaves `render` without returning the
+  // teardown, so `main.js` paints the error panel and holds no way to take
+  // the listener off again; the listener would then answer every back press
+  // in the app for the rest of the visit, and the duplicate would be an entry
+  // nothing ever takes off.
+  //
+  // A session that is coming back already stands on its own duplicate, with
+  // its own entry below, so it pushes nothing.
+  if (!resumed) {
+    history.replaceState({ dendro: 'session', token, guard: false }, '', ownHash);
+    history.pushState({ dendro: 'session', token, guard: true }, '', ownHash);
+    guardOn = true;
+  }
   window.addEventListener('popstate', onPopState);
   return teardown;
 }
