@@ -64,6 +64,24 @@ export function bioimagesAuthor(row: BioimagesRow): string {
 }
 
 /**
+ * The channel hint of a title. A title names the view after `) - `, up to the next ` - `, as
+ * `twig` in `Quercus rubra (Fagaceae) - twig - close-up winter leaf scar/bud`. The view word
+ * comes first, because `channelHint` takes the first keyword in its own order and `leaf` comes
+ * before `twig`. When the view word gives no hint, the text after `) - ` gives it.
+ */
+function titleHint(title: string): string | null {
+  const cut = title.indexOf(' (');
+  if (cut === -1) return null;
+  const tail = title.slice(cut);
+  const open = tail.indexOf(') - ');
+  if (open === -1) return channelHint(tail);
+  const rest = tail.slice(open + ') - '.length);
+  const close = rest.indexOf(' - ');
+  const view = close === -1 ? rest : rest.slice(0, close);
+  return channelHint(view) ?? channelHint(rest);
+}
+
+/**
  * The rows of one target. `names` holds the scientific name and the PLANTS synonyms. A row
  * matches when its title name, normalised, equals one of them, normalised the same way.
  */
@@ -92,7 +110,6 @@ export function bioimagesCandidates(
     // Each image has its own page, so the origin needs no fragment.
     const origin = (row.ac_attributionLinkURL ?? '').trim();
     if (origin === '') continue;
-    const cut = title.indexOf(' (');
     out.push(
       makeCandidate({
         target,
@@ -103,7 +120,7 @@ export function bioimagesCandidates(
         license: license.label,
         license_url: license.url,
         source_species: name,
-        channel_hint: channelHint(cut === -1 ? '' : title.slice(cut)),
+        channel_hint: titleHint(title),
         fetched_at: now,
       }),
     );

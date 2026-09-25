@@ -13,7 +13,7 @@ import {
   parseBioimagesCatalogue,
   type BioimagesRow,
 } from '../lib/bioimages.ts';
-import { SOURCE_NAMES, licenseAllowed } from '../lib/candidates.ts';
+import { SOURCE_NAMES, channelHint, licenseAllowed } from '../lib/candidates.ts';
 import type { BytesResult, Http, HttpFailure, TextResult } from '../lib/http.ts';
 
 const NOW = '2026-09-25T12:00:00Z';
@@ -66,7 +66,7 @@ test('BIOIMAGES_CATALOGUE_URL names the catalogue in the Bioimages repository', 
 
 test('parseBioimagesCatalogue reads each row by header name', () => {
   const rows = catalogue();
-  assert.equal(rows.length, 6);
+  assert.equal(rows.length, 7);
   const fruit = rowNamed('qugag-fr14133.jpg');
   assert.equal(Object.keys(fruit).length, 40);
   assert.equal(fruit.dcterms_title, 'Quercus gambelii (Fagaceae) - fruit - as borne on the plant');
@@ -144,6 +144,43 @@ test('bioimagesCandidates builds the three Quercus gambelii rows', () => {
   assert.equal(first.fetched_at, NOW);
   assert.equal(first.identity_match, null);
   assert.deepEqual(first.tags_hint, []);
+});
+
+/** The channel hint that bioimagesCandidates gives the Quercus gambelii fruit row under `title`. */
+function hintFor(title: string): string | null {
+  const row = { ...rowNamed('qugag-fr14133.jpg'), dcterms_title: title };
+  const rows = bioimagesCandidates([row], ['Quercus gambelii'], 'QUGA', NOW);
+  assert.equal(rows.length, 1);
+  return rows[0].channel_hint;
+}
+
+test('bioimagesCandidates takes the hint from the view word before the rest of the title', () => {
+  assert.equal(
+    rowNamed('quru--twbud-13155.jpg').dcterms_title,
+    'Quercus rubra (Fagaceae) - twig - close-up winter leaf scar/bud',
+  );
+  const rows = bioimagesCandidates(catalogue(), ['Quercus rubra'], 'QURU', NOW);
+  assert.deepEqual(
+    rows.map((row) => row.channel_hint),
+    [channelHint('twig')],
+    'the word leaf after the view word does not win',
+  );
+});
+
+test('bioimagesCandidates keeps the fruit hint on a fruit row', () => {
+  assert.equal(
+    hintFor('Quercus gambelii (Fagaceae) - fruit - as borne on the plant'),
+    channelHint('fruit'),
+  );
+  assert.equal(hintFor('Quercus gambelii (Fagaceae) - fruit - with leaves'), channelHint('fruit'));
+});
+
+test('bioimagesCandidates reads the rest of the title when the view word gives no hint', () => {
+  assert.equal(
+    hintFor('Quercus gambelii (Fagaceae) - whole tree (or vine) - bark close-up'),
+    channelHint('bark'),
+  );
+  assert.equal(hintFor('Quercus gambelii (Fagaceae) - whole tree (or vine) - general view'), null);
 });
 
 test('bioimagesCandidates compares names after it normalises both', () => {
