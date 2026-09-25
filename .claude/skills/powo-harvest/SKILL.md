@@ -104,6 +104,29 @@ the parser skips it.
 
 Run the `photo-check` skill, then build (steps 5 and 6 of the `content-run` skill).
 
+The saved gallery file is the evidence for each POWO row. For each species, give the
+reviewer who runs `photo-check` these two paths:
+
+- The saved gallery: `<scratch>/<SYMBOL>-<IPNI id>.html`.
+- The rows file: `<scratch>/<SYMBOL>-rows.json`. It shows the fields that the parser read
+  from each caption.
+
+Keep both files until each POWO row has a verdict.
+
+The reviewer confirms the species and the licence of a POWO row from these files:
+
+- **Species.** Find the file hash of the row in the saved gallery. The hash is the text after
+  `#image=` in `origin`. Read the name at the start of the caption of that image. Judge that
+  name as `photo-check` judges the name on a source page.
+- **Licence.** In the same caption, read the licence text after `ID:<n>`. The row's
+  `license` must show the same holder and the label of the same Creative Commons URL.
+
+The reviewer never opens the `origin` URL of a POWO row, with WebFetch, the browser, or any
+other tool. `photo-check` tells the reviewer to open the source page at `origin`. For a POWO
+row, the saved gallery takes the place of that page. Each origin is a Kew page, and a new
+load breaks the rules above. When a saved file is missing, do not load the Kew page again.
+Tell the owner.
+
 ## What this skill does not do
 
 - It does not pass a challenge page, sign in, or accept non-essential cookies.
