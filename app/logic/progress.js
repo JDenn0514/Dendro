@@ -239,3 +239,52 @@ export function overallFinding(content, states) {
   if (species >= shapes) return 'The trees keep pace with the shapes.';
   return 'The shapes lead. The trees are close behind.';
 }
+
+// The species band of a rung, cut into the parents it hangs from. With a
+// concept key it holds only the species in that bucket; without one it holds
+// the whole channel.
+export function speciesByGenus(content, states, channel, conceptKey = null) {
+  const rung = channelRung(content, states, channel, 'species');
+  const rows = conceptKey === null
+    ? rung.cards
+    : rung.cards.filter((row) => row.bucket === conceptKey);
+  const groups = [];
+  for (const row of rows) {
+    const record = content.species[row.key];
+    let group = groups.find((item) => item.genus === record.genus);
+    if (!group) {
+      const groupCard = content.cards[cardId('group', channel, record.genus)] ?? null;
+      group = {
+        genus: record.genus,
+        genus_common: record.genus_common ?? record.genus,
+        level: groupCard ? cardLevel(states[groupCard.id]) : 0,
+        has_card: Boolean(groupCard),
+        species: []
+      };
+      groups.push(group);
+    }
+    group.species.push({
+      symbol: row.key,
+      common: record.common[0],
+      scientific: record.scientific,
+      section: record.section ?? null,
+      level: row.level
+    });
+  }
+  return groups;
+}
+
+export function conceptBreakdown(content, states, channel, conceptKey) {
+  const concept = conceptFor(content, channel, conceptKey);
+  if (!concept) return null;
+  const card = content.cards[cardId('concept', channel, conceptKey)] ?? null;
+  const state = card ? states[card.id] : null;
+  return {
+    channel,
+    concept: { key: conceptKey, name: concept.name, description: concept.description },
+    has_card: Boolean(card),
+    level: card ? cardLevel(state) : 0,
+    due: state?.due ?? null,
+    genera: speciesByGenus(content, states, channel, conceptKey)
+  };
+}

@@ -5,7 +5,8 @@ import { loadContent } from '../app/logic/content.js';
 import {
   LEVEL_NAMES, RUNG_KINDS, RUNG_NAMES, FAMILIAR,
   rollupLevel, channelRung, channelRungs, leadingConcept,
-  channelClaim, overallTally, overallFinding
+  channelClaim, overallTally, overallFinding,
+  speciesByGenus, conceptBreakdown
 } from '../app/logic/progress.js';
 
 const { content } = loadContent(loadFixture());
@@ -111,4 +112,44 @@ test('the finding reads the gap between the shapes and the species', () => {
   };
   assert.equal(overallFinding(content, shapesOnly),
     'You know the shapes. Not the trees inside them.');
+});
+
+test('the species of a channel group under their genus', () => {
+  const states = { 'species:QURU:leaf': { tier: 'mc8', tier_passes: 0 } };
+  const groups = speciesByGenus(content, states, 'leaf');
+  assert.deepEqual(groups.map((g) => g.genus), ['Acer', 'Platanus', 'Quercus']);
+  const oaks = groups.find((g) => g.genus === 'Quercus');
+  assert.equal(oaks.genus_common, 'oak');
+  assert.equal(oaks.has_card, true);
+  assert.deepEqual(oaks.species.map((s) => s.symbol), ['QUGA', 'QURU']);
+  const quru = oaks.species.find((s) => s.symbol === 'QURU');
+  assert.equal(quru.common, 'Northern red oak');
+  assert.equal(quru.scientific, 'Quercus rubra');
+  assert.equal(quru.section, 'Lobatae');
+  assert.equal(quru.level, 2);
+});
+
+test('a genus with no common name in the content falls back to the genus', () => {
+  const maples = speciesByGenus(content, {}, 'leaf').find((g) => g.genus === 'Acer');
+  assert.equal(maples.genus_common, 'Acer');
+});
+
+test('one concept breaks down into its genera and species', () => {
+  const states = { 'concept:leaf:simple_lobed': { tier: 'inv', tier_passes: 0 } };
+  const shape = conceptBreakdown(content, states, 'leaf', 'simple_lobed');
+  assert.equal(shape.concept.name, 'Simple, lobed');
+  assert.equal(shape.has_card, true);
+  assert.equal(shape.level, 3);
+  assert.deepEqual(shape.genera.map((g) => g.genus), ['Acer', 'Platanus', 'Quercus']);
+});
+
+test('the breakdown of a bark concept holds only the species in that bucket', () => {
+  const papery = conceptBreakdown(content, {}, 'bark', 'papery');
+  assert.deepEqual(papery.genera.map((g) => g.genus), ['Platanus']);
+  const furrowed = conceptBreakdown(content, {}, 'bark', 'furrowed');
+  assert.deepEqual(furrowed.genera[0].species.map((s) => s.symbol), ['QUGA', 'QURU']);
+});
+
+test('an unknown concept key gives back null', () => {
+  assert.equal(conceptBreakdown(content, {}, 'leaf', 'no_such_shape'), null);
 });
