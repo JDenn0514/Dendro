@@ -454,13 +454,16 @@ body{
 
 .gengroup{margin-top:28px;}
 .gengroup > .tick{margin:0 0 11px;}
+/* the genus head is a heading, so the browser's own h2 size, weight, and
+   margin are reset here and every part inside it keeps its own type */
 .genhead{display:grid; grid-template-columns:var(--col) 1fr auto; align-items:center;
-  column-gap:8px; min-height:66px;}
+  column-gap:8px; min-height:66px; margin:0; font-size:1rem; font-weight:400;}
 .gnm{display:block; font-family:var(--fr); font-weight:500; font-size:calc(12px + 0.75rem); line-height:1.05;
   font-variation-settings:"opsz" 44,"WONK" 1; letter-spacing:-.01em;}
 .gsci{display:block; margin-top:2px; font-size:0.875rem; font-style:italic; color:var(--bark);}
 .genhead .lvw{text-align:right; margin:0;}
-.secname{margin:12px 0 2px; font-size:0.8125rem; font-style:italic; color:var(--bark);}
+.secname{margin:12px 0 2px; font-size:0.8125rem; font-weight:400; font-style:italic;
+  color:var(--bark);}
 /* the species are a printed index, not a stack of cards: no fill, no rail,
    one hairline baseline each, so the paper carries the list */
 .splist{margin-left:var(--col); padding-left:0;}

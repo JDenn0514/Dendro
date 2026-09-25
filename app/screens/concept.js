@@ -32,22 +32,27 @@ function notFound(root, message) {
 }
 
 // The bed of every shape on this channel, with the one you opened underlined.
+// A shape with no card has no cell here, so the label says so rather than
+// promise a mark the reader cannot find.
 function siblingStrip(content, states, channel, conceptKey) {
   const rung = channelRung(content, states, channel, 'concept');
+  const index = rung.cards.findIndex((card) => card.key === conceptKey);
   const strip = el('div', 'strip');
   strip.setAttribute('role', 'img');
-  strip.setAttribute('aria-label',
-    `The ${numberWord(rung.total)} ${channelLabel(channel)} shapes, with this one marked.`);
+  const bed = `The ${numberWord(rung.total)} ${channelLabel(channel)} `
+    + plural('shape', rung.total);
+  strip.setAttribute('aria-label', index < 0
+    ? `${bed} that carry a card. This shape carries none, so no mark here is this one.`
+    : `${bed}, with this one marked.`);
   for (const card of rung.cards) {
     const cell = el('span', card.key === conceptKey ? 'here' : null);
     cell.append(glyph(glyphIdFor(content.cards[card.id], content), card.level, 's32'));
     strip.append(cell);
   }
-  const index = rung.cards.findIndex((card) => card.key === conceptKey);
   return { strip, index, total: rung.total };
 }
 
-function shapeCard(content, states, channel, breakdown) {
+function shapeCard(content, channel, breakdown) {
   const panel = el('div', 'shapecard bleed');
   const card = content.cards[cardId('concept', channel, breakdown.concept.key)];
   panel.append(card
@@ -83,11 +88,11 @@ function speciesList(content, channel, rows) {
   return list;
 }
 
-function genusBlock(content, states, channel, breakdown, group) {
+function genusBlock(content, channel, breakdown, group) {
   const block = el('div', 'gengroup');
   block.append(tick());
 
-  const head = el('div', 'genhead');
+  const head = el('h2', 'genhead');
   const stack = el('span', 'rmk');
   stack.setAttribute('aria-hidden', 'true');
   const shapeCardNode = content.cards[cardId('concept', channel, breakdown.concept.key)];
@@ -119,7 +124,7 @@ function genusBlock(content, states, channel, breakdown, group) {
   }
   for (const section of sections) {
     const rows = group.species.filter((row) => row.section === section);
-    block.append(el('p', 'secname', section ? `section ${section}` : 'no section'));
+    block.append(el('h3', 'secname', section ? `section ${section}` : 'no section'));
     block.append(speciesList(content, channel, rows));
   }
   return block;
@@ -150,8 +155,7 @@ export function render(root, ctx) {
   head.append(el('p', 'where2',
     `A ${channelLabel(channel)} shape with ${numberWord(breakdown.genera.length)} `
     + `${breakdown.genera.length === 1 ? 'genus' : 'genera'} under it, and `
-    + `${numberWord(speciesCount)} ${speciesCount === 1 ? 'species' : 'species'} `
-    + 'under those.'));
+    + `${numberWord(speciesCount)} species under those.`));
   root.append(head);
 
   const card = content.cards[cardId('concept', channel, conceptKey)];
@@ -176,10 +180,10 @@ export function render(root, ctx) {
     : `Shape ${siblings.index + 1} of ${siblings.total} on the `
       + `${channelLabel(channel)} channel.`));
 
-  root.append(shapeCard(content, states, channel, breakdown));
+  root.append(shapeCard(content, channel, breakdown));
 
   for (const group of breakdown.genera) {
-    root.append(genusBlock(content, states, channel, breakdown, group));
+    root.append(genusBlock(content, channel, breakdown, group));
   }
   if (breakdown.genera.length === 0) {
     root.append(el('p', 'note', 'No species hangs off this shape yet.'));

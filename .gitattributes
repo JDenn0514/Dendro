@@ -1,2 +1,10 @@
+# Git stores every text file with LF, whatever line ending the editor on this
+# machine writes. Without this a one-line change on Windows arrives as a diff
+# of the whole file.
+* text=auto eol=lf
+*.jpg binary
+*.jpeg binary
+*.png binary
+
 # A test compares a fixture's bytes to rendered output, so fixtures check out with LF on every platform.
 pipeline/tests/fixtures/** text eol=lf
