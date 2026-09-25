@@ -1,6 +1,6 @@
 // Home: the name, one sentence of state, the next unit, two doors, two links.
 // Computes nothing: every number comes from a logic module.
-import { channelLabel, unitFor, conceptFor } from '../logic/content.js';
+import { cardId, channelLabel, unitFor, conceptFor } from '../logic/content.js';
 import { dueCardIds, newCardCapDone, recommendUnit } from '../logic/session.js';
 import { channelRung, leadingConcept } from '../logic/progress.js';
 import { channelLessons, unitOrdinal, unitThumb } from '../logic/lessons.js';
@@ -9,7 +9,7 @@ import { labelFor } from '../logic/question.js';
 import { el, link } from '../ui/dom.js';
 import { footNav, tick } from '../ui/chrome.js';
 import { plate, credit } from '../ui/plate.js';
-import { glyph, glyphIdFor } from '../ui/glyphs.js';
+import { glyph, glyphIdFor, FALLBACK_GLYPH } from '../ui/glyphs.js';
 
 // The one line of copy the content does not carry.
 const SUBTITLE = 'Trees of the Colorado Front Range.';
@@ -157,10 +157,12 @@ function progressDoor(content, states) {
     const leading = leadingConcept(content, states, channel);
     const species = channelRung(content, states, channel, 'species');
     const row = el('span', 'dr');
-    const card = leading ? content.cards[`concept:${channel}:${leading.key}`] : null;
+    const card = leading
+      ? content.cards[cardId('concept', channel, leading.key)]
+      : null;
     row.append(card
       ? glyph(glyphIdFor(card, content), leading.level, 's20')
-      : glyph('lf-entire', 0, 's20'));
+      : glyph(FALLBACK_GLYPH, 0, 's20'));
     const bar = el('em');
     const fill = el('b');
     fill.style.width = `${Math.round(species.share * 1000) / 10}%`;
