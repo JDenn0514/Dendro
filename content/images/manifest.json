@@ -1846,7 +1846,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T03:36:33Z",
-    "note": "Sharp archival black and white plate of two acorns on a twig. The cap scales and the nut fill the frame, and only a small archival number sits in the corner."
+    "note": "Sharp archival black and white plate of two acorns on a twig. The cap scales and the nut fill the frame, and only a small archival number sits in the corner.",
+    "retired": true,
+    "retired_reason": "greyscale PLANTS plate, chroma 0.0; colour photographs only (owner ruling 2026-09-24); manifest audit 2026-09-25",
+    "retired_at": "2026-09-25"
   },
   {
     "hash": "13eacaa84bda0c103bacfebf1ca30faa23a6da7b0f2dc40f87a09f811b76b92c",
