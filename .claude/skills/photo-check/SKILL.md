@@ -5,7 +5,9 @@ description: Use when approving the photo candidates of a Dendro content run, on
 
 # Photo check
 
-You judge the photo candidates of one run. One candidate gets one verdict.
+You judge the photo candidates of one run. One candidate gets one verdict. The one
+exception is a Kew POWO row whose saved file is missing. That row gets no verdict (see
+**A Kew POWO row** below).
 
 ## The loop
 
@@ -14,7 +16,11 @@ You judge the photo candidates of one run. One candidate gets one verdict.
 3. Take every candidate whose `id` has no row in `verdicts.jsonl`. Those are the unjudged
    candidates.
 4. Dispatch subagents in batches of 10. Each subagent gets one candidate row. It reads the
-   image file at the row's `local` path and the row itself.
+   image file at the row's `local` path and the row itself. A Kew POWO row is a row whose
+   `origin` is on `powo.science.kew.org`. For a POWO row, also give the subagent the two
+   paths that the `powo-harvest` skill gave you for that species: the saved gallery and
+   the rows file. First check that both files exist. When one is missing, do not dispatch
+   the row. Follow **A Kew POWO row** below.
 5. **Each subagent returns its verdict as its result. It writes no file.** It does not
    touch `verdicts.jsonl`.
 6. For each returned verdict, run one command. Run them in sequence, one after the other,
@@ -40,6 +46,9 @@ Each subagent returns five things, and no more:
 - `tags`: zero or more words for `--tags`, comma separated, such as `winter,close_up`.
 - `case`: only on an escalation. It is `mismatch`, `license`, or `quality`.
 - `note`: one or two sentences that say what you saw.
+
+The one exception is a Kew POWO row whose saved file cannot be read. For that row the
+subagent returns only a `note` that names the file, and no verdict.
 
 `cli build` and `cli run finish` reject a verdict whose candidate id is unknown, whose kind
 is not one of the three, or whose approved channel is not in the run's channel list. Each
@@ -97,10 +106,11 @@ of the World Online are eligible too, because each page names the species.
 
 **A Kew POWO row.** A POWO row is a manual candidate whose `origin` is on
 `powo.science.kew.org`. For a POWO row, the saved gallery takes the place of the source
-page. The `powo-harvest` skill gives you two paths for each species (see its "After the
-harvest" section): the saved gallery, `<scratch>/<SYMBOL>-<IPNI id>.html`, and the rows
-file, `<scratch>/<SYMBOL>-rows.json`. Confirm the species and the licence of a POWO row from
-these files:
+page. The `powo-harvest` skill gives the agent that runs this skill two paths for each
+species (see its "After the harvest" section): the saved gallery,
+`<scratch>/<SYMBOL>-<IPNI id>.html`, and the rows file, `<scratch>/<SYMBOL>-rows.json`. The
+agent gives both paths to the subagent that judges the row (step 4 of the loop). The
+subagent confirms the species and the licence of a POWO row from these files:
 
 - **Species.** Find the file hash of the row in the saved gallery. The hash is the text after
   `#image=` in `origin`. Read the name at the start of the caption of that image. Judge that
@@ -110,7 +120,16 @@ these files:
 
 Never open the `origin` URL of a POWO row, with WebFetch, the browser, or any other tool.
 Each origin is a Kew page, and a new load breaks the rules of the `powo-harvest` skill.
-When a saved file is missing, do not load the Kew page again. Tell the owner.
+
+**When a saved file is missing.** No escalation case fits. The source page is not wrong:
+the evidence for the check is not on disk. The row gets no verdict:
+
+1. Do not load the Kew page again.
+2. Do not dispatch the row. When a subagent finds that a file is missing or cannot be
+   read, it returns only a `note` that names the file, and no verdict.
+3. Run no `photos verdict` command for the row. The row stays unjudged, so the next pass
+   of this skill takes it again. It does not count toward the stop rule.
+4. Tell the owner the candidate id and the path of the missing file.
 
 **You never set or change the species from what you see in the photo.** Identity comes from
 the source page. Your own recognition of the plant is not evidence.
@@ -125,7 +144,8 @@ Escalate in these three cases and no others:
 3. `quality`: the channel or the quality falls below the threshold, or the colour is
    toned or filtered so the tree does not look real.
 
-Everything else is an approve or a reject.
+Everything else is an approve or a reject. The one exception is a Kew POWO row whose saved
+file is missing. That row gets no verdict, as **A Kew POWO row** says.
 
 ## The stop rule
 
