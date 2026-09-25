@@ -7,6 +7,8 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { TSO_BASE, parseTsoPage, tsoCandidates, tsoCredit, tsoPath } from '../lib/tso.ts';
+
 const require = createRequire(import.meta.url);
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const HARVEST = path.join(REPO_ROOT, 'pipeline', 'scripts', 'harvest.cjs');
@@ -29,7 +31,16 @@ const harvest = require(HARVEST) as {
   shellSafe: (s: unknown) => string;
   parseArgs: (argv: string[]) => { rows: string; run: string; outDir: string };
   candidatesPath: (run: string) => string;
+  tsoPath: (name: string) => string | null;
+  tsoCredit: (caption: string) => string | null;
+  tsoPageImages: (body: string) => Array<{ href: string; cap: string; author: string }>;
 };
+
+const PLHI_PAGE = fs.readFileSync(
+  path.join(REPO_ROOT, 'pipeline', 'tests', 'fixtures', 'tso', 'platanus_x_hispanica.html'),
+  'utf8',
+);
+const PLHI_URL = 'https://www.treesandshrubsonline.org/articles/platanus/platanus-x-hispanica/';
 const mkadds = require(MKADDS) as {
   buildCommand: (row: AddRow, run: string) => { line: string; problems: string[] };
   parseArgs: (argv: string[]) => { run: string; input: string; output: string };
@@ -95,6 +106,58 @@ test('harvest.cjs started with no flag prints the usage line and exits 1', () =>
   const result = spawnSync(process.execPath, [HARVEST], { encoding: 'utf8' });
   assert.equal(result.status, 1);
   assert.match(result.stderr, /usage: node pipeline\/scripts\/harvest\.cjs/);
+});
+
+test('the harvest.cjs TSO step skips the caption that gives permission', () => {
+  const caption =
+    'Detail from a 1822 engraving. Reproduced by kind permission of the British Library. '
+    + 'Image The British Library, BL Add 36363 ff 170-171.';
+  assert.equal(harvest.tsoCredit(caption), null);
+  const hrefs = harvest.tsoPageImages(PLHI_PAGE).map((image) => image.href);
+  assert.ok(!hrefs.includes('/site/assets/files/6779/platanus-x-hispanica-15.jpg'));
+});
+
+test('the harvest.cjs TSO step skips a (c) with no year', () => {
+  assert.equal(harvest.tsoCredit('Bark in Kent (c) Owen Johnson. Image Owen Johnson.'), null);
+  assert.equal(harvest.tsoCredit('Bark in Kent. Image (C) Owen Johnson.'), null);
+});
+
+test('the harvest.cjs TSO step skips an image in the folder of a cultivar section', () => {
+  // `<h3 id=32676>` holds 'Alphen's Globe', and its image has a good credit.
+  const images = harvest.tsoPageImages(PLHI_PAGE);
+  assert.ok(!images.some((image) => image.href.includes('/32676/')));
+  assert.ok(!images.some((image) => image.href.includes('/33571/')));
+});
+
+test('the harvest.cjs TSO step keeps the images and the credits that the TSO fetch keeps', () => {
+  const fetched = tsoCandidates(parseTsoPage(PLHI_PAGE), PLHI_URL, 'PLHI', '2026-09-25T12:00:00Z');
+  assert.deepEqual(
+    harvest.tsoPageImages(PLHI_PAGE).map((image) => [TSO_BASE + image.href, image.author]),
+    fetched.map((row) => [row.file_url, row.author]),
+  );
+  assert.deepEqual(
+    harvest.tsoPageImages(PLHI_PAGE).map((image) => image.author),
+    ['John Grimshaw', 'Paul W. Meyer'],
+  );
+  for (const caption of [
+    'New Mexico, August 2017. Image Charles Snyers.',
+    'Eeklo, Belgium. Image © Jan De Langhe - Arboretum Wespelaar.',
+    'Bark in Kent. Image X. Planted 1990.',
+    'Bark in Kent. Image courtesy of Kew.',
+    'Bark in Kent. Image X. All rights reserved.',
+    'Bark in Kent. Image John Grimshaw and Tom Christian.',
+    "Foliage and fruit of the 'Acerifolia' at Kew. June 2025.",
+  ]) {
+    assert.equal(harvest.tsoCredit(caption), tsoCredit(caption), caption);
+  }
+});
+
+test('the harvest.cjs TSO step builds the article path of a hybrid as the TSO fetch does', () => {
+  assert.equal(harvest.tsoPath('Platanus x hispanica'), '/articles/platanus/platanus-x-hispanica/');
+  assert.equal(harvest.tsoPath('Platanus × hispanica'), '/articles/platanus/platanus-x-hispanica/');
+  assert.equal(harvest.tsoPath('Platanus ×hispanica'), tsoPath('Platanus ×hispanica'));
+  assert.equal(harvest.tsoPath('Quercus alba'), '/articles/quercus/quercus-alba/');
+  assert.equal(harvest.tsoPath('Quercus'), null);
 });
 
 test('buildCommand writes one photos add line and leaves out a null flag', () => {

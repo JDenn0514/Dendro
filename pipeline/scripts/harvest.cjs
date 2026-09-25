@@ -333,6 +333,78 @@ function bioHarvest(rows, seen) {
 
 const TSO_BASE = 'https://www.treesandshrubsonline.org';
 
+// The rules below are the same as the rules of the TSO fetch in pipeline/lib/tso.ts. This
+// script uses only Node built-ins, so it keeps its own copy. Change both files together.
+
+/** The article path of a name: `/articles/<genus>/<genus>-<epithet>/`, lower case, `×` as `x`. */
+function tsoPath(name) {
+  const words = String(name)
+    .normalize('NFC')
+    .replace(/×/g, ' x ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase()
+    .split(' ');
+  const genus = words[0] || '';
+  let epithet = words[1] || '';
+  if (epithet === 'x') epithet = words[2] === undefined ? '' : `x-${words[2]}`;
+  if (!/^[a-z]+$/.test(genus) || !/^[a-z][a-z-]*$/.test(epithet)) return null;
+  return `/articles/${genus}/${genus}-${epithet}/`;
+}
+
+// A caption with its own rights text may differ from the site licence, so it is skipped.
+const TSO_OWN_RIGHTS = /©|\(c\)|permission|courtesy|rights reserved/i;
+// The words in lower case that can be part of a name, as in `Jan van der Berg`.
+const TSO_NAME_JOINERS = new Set([
+  'and', '&', 'de', 'del', 'della', 'der', 'den', 'di', 'da', 'do', 'dos', 'du', 'la', 'le',
+  'van', 'von', 'y',
+]);
+
+/**
+ * The photographer of a caption that ends `Image <Name>.`, or null. The name is the text
+ * after the last `Image `. When that text holds a digit or a word in lower case that is not
+ * a name joiner, the caption goes on after the name, and the value is null.
+ */
+function tsoCredit(caption) {
+  const text = String(caption);
+  if (TSO_OWN_RIGHTS.test(text)) return null;
+  const at = text.lastIndexOf('Image ');
+  if (at === -1 || (at > 0 && text[at - 1] !== ' ')) return null;
+  const name = text.slice(at + 'Image '.length).replace(/\.\s*$/, '').trim();
+  if (name === '' || /\d/.test(name)) return null;
+  const words = name.split(/\s+/);
+  if (!words.every((w) => !/^\p{Ll}/u.test(w) || TSO_NAME_JOINERS.has(w))) return null;
+  return name;
+}
+
+/**
+ * The credited images of the species itself on one article: `{ href, cap, author }`, one for
+ * each href. An image in a `/site/assets/files/<pageId>/` folder whose `<pageId>` is the `id`
+ * of an `<h3>` on the page is skipped, because those sections hold cultivars and varieties.
+ */
+function tsoPageImages(body) {
+  const sections = new Set();
+  for (const m of body.matchAll(/<h3\s+id=["']?([^"'\s>]+)["']?/gi)) sections.add(m[1]);
+  // Each figure is an anchor to the file with the caption in data-caption.
+  const found = new Map();
+  const re = /href=["']?(\/site\/assets\/files\/[^"'\s>]+?\.(?:jpg|jpeg|png))["']?[^>]*?data-caption="([^"]*)"/gi;
+  let m;
+  while ((m = re.exec(body)) !== null) {
+    const href = m[1];
+    if (found.has(href)) continue;
+    found.set(href, decodeEntities(m[2]));
+  }
+  const images = [];
+  for (const [href, cap] of found) {
+    const folder = /^\/site\/assets\/files\/(\d+)\//.exec(href);
+    if (folder === null || sections.has(folder[1])) continue;
+    const author = tsoCredit(cap);
+    if (author === null) continue;
+    images.push({ href, cap, author });
+  }
+  return images;
+}
+
 function tsoHarvest(rows, seen, already) {
   const yielded = {};
   const out = [];
@@ -343,25 +415,18 @@ function tsoHarvest(rows, seen, already) {
     const have = (already && already[rowKey]) || 0;
     const cap = Math.max(0, budgetFor(row) - have);
     if (cap === 0) { yielded[rowKey] = 0; continue; }
-    const [g, s] = row.sci.toLowerCase().split(' ');
-    const url = `${TSO_BASE}/articles/${g}/${g}-${s}/`;
+    const articlePath = tsoPath(row.sci);
+    if (articlePath === null) { yielded[rowKey] = 0; continue; }
+    const url = TSO_BASE + articlePath;
     let body = articles.get(url);
     if (body === undefined) {
-      body = getText(url, `tso-${g}-${s}.html`);
+      body = getText(url, `tso-${articlePath.split('/')[3]}.html`);
       articles.set(url, body);
     }
     if (!body) { yielded[rowKey] = 0; continue; }
 
-    // Each figure is an anchor to the file with the caption in data-caption.
-    const found = new Map();
-    const re = /href=["']?(\/site\/assets\/files\/[^"'\s>]+?\.(?:jpg|jpeg|png))["']?[^>]*?data-caption="([^"]*)"/gi;
-    let m;
-    while ((m = re.exec(body)) !== null) {
-      const href = m[1];
-      if (found.has(href)) continue;
-      found.set(href, decodeEntities(m[2]));
-    }
-    if (found.size === 0) { yielded[rowKey] = 0; continue; }
+    const images = tsoPageImages(body);
+    if (images.length === 0) { yielded[rowKey] = 0; continue; }
 
     const want = CHANNEL_WORDS[row.channel];
     const other = Object.keys(CHANNEL_WORDS)
@@ -370,15 +435,9 @@ function tsoHarvest(rows, seen, already) {
 
     const onChannel = [];
     const unlabelled = [];
-    for (const [href, cap] of found) {
-      // A caption with its own copyright notice overrides the site licence.
-      if (/\u00a9|\(c\)\s*\d{4}|All rights reserved/i.test(cap)) continue;
-      const credit = cap.match(/Image\s+([^.]{2,60})\.?\s*$/);
-      const author = credit ? credit[1].trim() : '';
-      if (!author) continue;
-      const rec = { href, cap, author };
-      if (want.test(cap)) onChannel.push(rec);
-      else if (!other.some((r) => r.test(cap))) unlabelled.push(rec);
+    for (const rec of images) {
+      if (want.test(rec.cap)) onChannel.push(rec);
+      else if (!other.some((r) => r.test(rec.cap))) unlabelled.push(rec);
     }
 
     // The captions that name this channel come first. After them, and only
@@ -550,7 +609,10 @@ Kew returns a Cloudflare challenge to scripts. An agent collects POWO photos in 
 built-in browser with the powo-harvest skill (.claude/skills/powo-harvest/SKILL.md).
 `;
 
-module.exports = { parseArgs, candidatesPath, cleanCredit, shellSafe, decodeEntities, readPsv, budgetFor };
+module.exports = {
+  parseArgs, candidatesPath, cleanCredit, shellSafe, decodeEntities, readPsv, budgetFor,
+  tsoPath, tsoCredit, tsoPageImages,
+};
 
 // The tests load this file with createRequire, so main() runs only when Node starts it.
 if (require.main === module) main();
