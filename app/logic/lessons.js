@@ -95,28 +95,48 @@ function channelOfKey(content, key) {
   return content.units.find((item) => item.key === key)?.channel ?? null;
 }
 
-// The open list in settings is one list for the whole app, so one channel page
-// must read only its own part of it. A stored list that holds no key from this
-// channel has never been written for this channel, so the default rule still
-// decides. `stored` is null before the user folds anything at all.
-export function openUnitsFor(stored, channel, tree, content) {
-  if (stored === null) return defaultOpenFromTree(tree);
-  const mine = stored.filter((key) => channelOfKey(content, key) === channel);
-  return mine.length > 0 ? mine : defaultOpenFromTree(tree);
+// A channel that has been written carries a mark of its own in the list. The
+// mark tells "the user folded every branch here" apart from "this channel has
+// never been written", which otherwise both store no unit key. A unit key
+// never starts with the mark character, so the two cannot collide.
+const MARK = '@';
+
+export function channelMark(channel) {
+  return `${MARK}${channel}`;
 }
 
-// The stored list after a fold on this channel. Every key from another channel
-// stays where it is, this channel's keys become the open set, and a key that
-// names no unit in the content drops out.
+function isMark(key) {
+  return key.startsWith(MARK);
+}
+
+// The open list in settings is one list for the whole app, so one channel page
+// must read only its own part of it. Without this channel's mark the list has
+// never been written for it, so the default rule still decides. `stored` is
+// null before the user folds anything at all.
+export function openUnitsFor(stored, channel, tree, content) {
+  if (stored === null) return defaultOpenFromTree(tree);
+  if (!stored.includes(channelMark(channel))) return defaultOpenFromTree(tree);
+  return stored.filter((key) => channelOfKey(content, key) === channel);
+}
+
+// The stored list after a fold on this channel. Every key and every mark from
+// another channel stays where it is, this channel's keys become the open set,
+// and this channel's mark goes in front of them. A unit key that names no unit
+// and a mark that names no channel both drop out, because they come from an
+// older content set.
 export function mergeOpenUnits(stored, channel, openKeys, content) {
   const other = (stored ?? []).filter((key) => {
+    if (isMark(key)) {
+      return key !== channelMark(channel)
+        && content.channels.includes(key.slice(MARK.length));
+    }
     const owner = channelOfKey(content, key);
     return owner !== null && owner !== channel;
   });
   const mine = [...openKeys].filter(
     (key) => channelOfKey(content, key) === channel
   );
-  return [...other, ...mine];
+  return [...other, channelMark(channel), ...mine];
 }
 
 // One block on the lessons page: three rows of unit squares, one row per

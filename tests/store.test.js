@@ -408,6 +408,15 @@ test('the settings carry a text size and a fold list', () => {
   );
 });
 
+test('the fold list keeps the channel marks the lessons page writes', () => {
+  const store = createStore(memoryStorage());
+  // The lessons page marks each channel it has written, so a channel with
+  // every branch folded reads back as written and not as untouched.
+  const list = ['@bark', 'bark_types', '@leaf'];
+  assert.deepEqual(store.writeSettings({ open_units: list }).open_units, list);
+  assert.deepEqual(store.readSettings().open_units, list);
+});
+
 test('a text size or a fold list from a hand edit falls back to the default', () => {
   const store = createStore(memoryStorage({
     dendro_settings: JSON.stringify({
