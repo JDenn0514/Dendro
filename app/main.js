@@ -114,10 +114,6 @@ async function start() {
   // progress that is already stored.
   document.getElementById('nav').hidden = false;
 
-  // The sprite holds every mark the screens draw. It goes in before the first
-  // render and never throws, so a failed fetch costs the marks and nothing else.
-  await injectSprite();
-
   let storage = DEAD_STORAGE;
   try {
     storage = window.localStorage ?? DEAD_STORAGE;
@@ -129,9 +125,14 @@ async function start() {
   if (!store.available) showBanner(STORAGE_BANNER);
   else if (store.newer_version) showBanner(NEWER_VERSION_BANNER);
 
-  // The root size goes on before the first render, so no screen ever paints
-  // at one size and reflows to another.
+  // The root size goes on before the sprite fetch and the first render, so
+  // nothing the boot screen shows (the nav, the loading line) ever paints at
+  // the phone's size and then resizes.
   applyTextSize(store.readSettings().text_size);
+
+  // The sprite holds every mark the screens draw. It goes in before the first
+  // render and never throws, so a failed fetch costs the marks and nothing else.
+  await injectSprite();
 
   // A content failure is kept rather than thrown away. Settings still opens;
   // every other route shows the failure again instead of a blank page.
