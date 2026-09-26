@@ -11,7 +11,7 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 12,
+        "leaf": 13,
         "bark": 7,
         "fruit": 4
       }
@@ -21,9 +21,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 15,
-        "fruit": 4,
-        "bark": 2
+        "leaf": 16,
+        "fruit": 7,
+        "bark": 4
       }
     },
     {
@@ -31,8 +31,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 15,
-        "bark": 2
+        "leaf": 16,
+        "bark": 1,
+        "fruit": 1
       }
     },
     {
@@ -40,7 +41,7 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 16,
+        "leaf": 18,
         "fruit": 11
       }
     },
@@ -49,8 +50,8 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 9,
-        "fruit": 7
+        "leaf": 20,
+        "fruit": 9
       }
     },
     {
@@ -60,7 +61,7 @@
       "counts": {
         "leaf": 5,
         "bark": 4,
-        "fruit": 4
+        "fruit": 5
       }
     },
     {
@@ -68,8 +69,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 11,
-        "bark": 1
+        "leaf": 19,
+        "bark": 7,
+        "fruit": 6
       }
     },
     {
@@ -87,8 +89,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "bark": 2,
-        "leaf": 6
+        "bark": 13,
+        "leaf": 7,
+        "fruit": 6
       }
     },
     {
@@ -97,7 +100,8 @@
       "reason": null,
       "counts": {
         "leaf": 5,
-        "fruit": 2
+        "fruit": 9,
+        "bark": 9
       }
     },
     {
@@ -117,7 +121,7 @@
       "counts": {
         "leaf": 7,
         "fruit": 6,
-        "bark": 1
+        "bark": 6
       }
     },
     {
@@ -125,9 +129,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "bark": 3,
-        "fruit": 2,
-        "leaf": 5
+        "bark": 11,
+        "fruit": 13,
+        "leaf": 6
       }
     },
     {
@@ -135,9 +139,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "bark": 3,
+        "bark": 10,
         "leaf": 5,
-        "fruit": 3
+        "fruit": 8
       }
     },
     {
@@ -146,8 +150,8 @@
       "reason": null,
       "counts": {
         "bark": 2,
-        "leaf": 14,
-        "fruit": 5
+        "leaf": 16,
+        "fruit": 6
       }
     },
     {
@@ -155,7 +159,7 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 9,
+        "leaf": 12,
         "fruit": 4,
         "bark": 8
       }
@@ -165,8 +169,8 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "fruit": 8,
-        "leaf": 12,
+        "fruit": 9,
+        "leaf": 20,
         "bark": 1
       }
     },
@@ -175,9 +179,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "fruit": 5,
-        "leaf": 10,
-        "bark": 1
+        "fruit": 7,
+        "leaf": 12,
+        "bark": 5
       }
     },
     {
@@ -185,9 +189,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 10,
-        "bark": 1,
-        "fruit": 1
+        "leaf": 11,
+        "bark": 9,
+        "fruit": 6
       }
     },
     {
@@ -195,9 +199,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 12,
-        "bark": 2,
-        "fruit": 1
+        "leaf": 20,
+        "bark": 3,
+        "fruit": 5
       }
     },
     {
@@ -205,9 +209,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 9,
-        "bark": 7,
-        "fruit": 2
+        "leaf": 12,
+        "bark": 8,
+        "fruit": 6
       }
     },
     {
@@ -215,8 +219,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "bark": 1,
-        "leaf": 6
+        "bark": 2,
+        "leaf": 18,
+        "fruit": 2
       }
     },
     {
@@ -224,8 +229,8 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 30,
-        "bark": 2,
+        "leaf": 39,
+        "bark": 3,
         "fruit": 2
       }
     },
@@ -234,9 +239,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 19,
-        "fruit": 4,
-        "bark": 1
+        "leaf": 25,
+        "fruit": 5,
+        "bark": 2
       }
     },
     {
@@ -244,9 +249,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 20,
-        "fruit": 2,
-        "bark": 3
+        "leaf": 27,
+        "fruit": 6,
+        "bark": 6
       }
     },
     {
@@ -254,9 +259,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 14,
-        "bark": 4,
-        "fruit": 2
+        "leaf": 23,
+        "bark": 5,
+        "fruit": 7
       }
     },
     {
@@ -265,7 +270,7 @@
       "reason": null,
       "counts": {
         "leaf": 11,
-        "bark": 6,
+        "bark": 5,
         "fruit": 6
       }
     },
@@ -275,8 +280,8 @@
       "reason": null,
       "counts": {
         "bark": 7,
-        "leaf": 6,
-        "fruit": 2
+        "leaf": 7,
+        "fruit": 4
       }
     },
     {
@@ -284,9 +289,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "fruit": 3,
+        "fruit": 5,
         "leaf": 10,
-        "bark": 3
+        "bark": 4
       }
     },
     {
@@ -294,9 +299,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 8,
-        "bark": 4,
-        "fruit": 1
+        "leaf": 10,
+        "bark": 5,
+        "fruit": 3
       }
     },
     {
@@ -304,9 +309,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 7,
-        "fruit": 2,
-        "bark": 1
+        "leaf": 8,
+        "fruit": 6,
+        "bark": 6
       }
     },
     {
@@ -314,8 +319,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 6,
-        "bark": 1
+        "leaf": 21,
+        "bark": 7,
+        "fruit": 4
       }
     },
     {
@@ -324,7 +330,8 @@
       "reason": null,
       "counts": {
         "bark": 4,
-        "leaf": 13
+        "leaf": 16,
+        "fruit": 3
       }
     },
     {
@@ -333,8 +340,8 @@
       "reason": null,
       "counts": {
         "leaf": 7,
-        "bark": 2,
-        "fruit": 3
+        "bark": 6,
+        "fruit": 6
       }
     },
     {
@@ -1180,11 +1187,6 @@
   ],
   "gaps": [
     {
-      "symbol": "ACFL",
-      "channel": "fruit",
-      "count": 0
-    },
-    {
       "symbol": "ACGI",
       "channel": "bark",
       "count": 0
@@ -1195,43 +1197,13 @@
       "count": 0
     },
     {
-      "symbol": "ACPA2",
-      "channel": "fruit",
-      "count": 0
-    },
-    {
-      "symbol": "ACPS",
-      "channel": "fruit",
-      "count": 0
-    },
-    {
-      "symbol": "ACRU",
-      "channel": "bark",
-      "count": 0
-    },
-    {
-      "symbol": "QUGA4",
-      "channel": "fruit",
-      "count": 0
-    },
-    {
-      "symbol": "QUSI",
-      "channel": "fruit",
-      "count": 0
-    },
-    {
-      "symbol": "QUTE",
-      "channel": "fruit",
-      "count": 0
-    },
-    {
-      "symbol": "ACPA2",
+      "symbol": "ACFL",
       "channel": "bark",
       "count": 1
     },
     {
-      "symbol": "LIST2",
-      "channel": "bark",
+      "symbol": "ACFL",
+      "channel": "fruit",
       "count": 1
     },
     {
@@ -1240,157 +1212,47 @@
       "count": 1
     },
     {
-      "symbol": "QUCE",
-      "channel": "bark",
-      "count": 1
-    },
-    {
-      "symbol": "QUCO2",
-      "channel": "bark",
-      "count": 1
-    },
-    {
-      "symbol": "QUCO2",
-      "channel": "fruit",
-      "count": 1
-    },
-    {
-      "symbol": "QUEL",
-      "channel": "fruit",
-      "count": 1
-    },
-    {
-      "symbol": "QUGA4",
-      "channel": "bark",
-      "count": 1
-    },
-    {
-      "symbol": "QUIL",
-      "channel": "bark",
-      "count": 1
-    },
-    {
-      "symbol": "QUPA5",
-      "channel": "fruit",
-      "count": 1
-    },
-    {
-      "symbol": "QURO2",
-      "channel": "bark",
-      "count": 1
-    },
-    {
-      "symbol": "QUSI",
-      "channel": "bark",
-      "count": 1
-    },
-    {
-      "symbol": "ACCI",
-      "channel": "bark",
-      "count": 2
-    },
-    {
-      "symbol": "ACFL",
-      "channel": "bark",
-      "count": 2
-    },
-    {
-      "symbol": "ACPS",
-      "channel": "bark",
-      "count": 2
-    },
-    {
-      "symbol": "ACRU",
-      "channel": "fruit",
-      "count": 2
-    },
-    {
-      "symbol": "LITU",
-      "channel": "fruit",
-      "count": 2
-    },
-    {
       "symbol": "QUAC2",
       "channel": "bark",
       "count": 2
     },
     {
+      "symbol": "QUGA4",
+      "channel": "bark",
+      "count": 2
+    },
+    {
+      "symbol": "QUGA4",
+      "channel": "fruit",
+      "count": 2
+    },
+    {
+      "symbol": "QUGE",
+      "channel": "fruit",
+      "count": 2
+    },
+    {
+      "symbol": "QUIL",
+      "channel": "bark",
+      "count": 2
+    },
+    {
       "symbol": "QUEL",
       "channel": "bark",
-      "count": 2
-    },
-    {
-      "symbol": "QUFA",
-      "channel": "fruit",
-      "count": 2
+      "count": 3
     },
     {
       "symbol": "QUGE",
       "channel": "bark",
-      "count": 2
-    },
-    {
-      "symbol": "QUGE",
-      "channel": "fruit",
-      "count": 2
-    },
-    {
-      "symbol": "QUKE",
-      "channel": "fruit",
-      "count": 2
-    },
-    {
-      "symbol": "QULA",
-      "channel": "fruit",
-      "count": 2
-    },
-    {
-      "symbol": "QULO",
-      "channel": "fruit",
-      "count": 2
-    },
-    {
-      "symbol": "QURO2",
-      "channel": "fruit",
-      "count": 2
-    },
-    {
-      "symbol": "SAAL5",
-      "channel": "bark",
-      "count": 2
-    },
-    {
-      "symbol": "LITU",
-      "channel": "bark",
       "count": 3
     },
     {
-      "symbol": "PLRA",
-      "channel": "bark",
-      "count": 3
-    },
-    {
-      "symbol": "PLRA",
+      "symbol": "QUPA5",
       "channel": "fruit",
       "count": 3
     },
     {
-      "symbol": "QUKE",
-      "channel": "bark",
-      "count": 3
-    },
-    {
-      "symbol": "QULY",
-      "channel": "bark",
-      "count": 3
-    },
-    {
-      "symbol": "QULY",
-      "channel": "fruit",
-      "count": 3
-    },
-    {
-      "symbol": "SAAL5",
+      "symbol": "QUTE",
       "channel": "fruit",
       "count": 3
     }
@@ -1417,13 +1279,14 @@
       "bioimages": 198,
       "commons": 489,
       "inat": 766,
+      "manual": 373,
       "tso": 392,
       "wildflower": 184
     },
     "verdicts_by_kind": {
-      "approve": 956,
-      "escalate": 251,
-      "reject": 813
+      "approve": 1362,
+      "escalate": 118,
+      "reject": 882
     },
     "fetch_failures": 0,
     "stop_rule_fired": false

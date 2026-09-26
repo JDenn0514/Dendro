@@ -23,7 +23,7 @@
       "ref": "Virginia Tech Dendrology fact sheet, Acer circinatum (ID 186)"
     },
     "fruit": {
-      "text": "Paired samaras, 1 to 2 inches long, with the wings spread in a straight line, often bright red.",
+      "text": "Paired samaras, 1 to 2 inches long, bright red when young and tan when dry, with the wings spread wide, up to a straight line.",
       "ref": "Virginia Tech Dendrology fact sheet, Acer circinatum (ID 186)"
     }
   },
@@ -57,7 +57,7 @@
   },
   "ACLE": {
     "leaf": {
-      "text": "A small opposite leaf, 2 to 3 1/2 inches long, with 3 lobes and a smooth edge. The underside is yellow-green and velvety, not whitened.",
+      "text": "A small opposite leaf, 2 to 3 1/2 inches long, with 3 lobes, sometimes 5 with 2 small lobes at the base, and a smooth edge. The underside is yellow-green and velvety, not whitened.",
       "ref": "FNA vol. 13, Acer leucoderme (FNA text read at nwwildflowers.com)"
     },
     "bark": {
@@ -169,7 +169,7 @@
   },
   "LITU": {
     "leaf": {
-      "text": "An alternate leaf, 4 to 8 inches long, with 4 lobes and a flat or notched top, shaped like a tulip. The edge is smooth.",
+      "text": "An alternate leaf, 4 to 8 inches long, with 4 to 6 lobes and a flat or notched top, shaped like a tulip. The edge is smooth.",
       "ref": "Virginia Tech Dendrology fact sheet, Liriodendron tulipifera (ID 54)"
     },
     "bark": {
@@ -247,7 +247,7 @@
       "ref": "FNA vol. 3, Quercus boyntonii"
     },
     "fruit": {
-      "text": "A light brown, ovoid acorn about 1/2 to 2/3 inch long, 1 or 2 on a short stalk. A gray, hairy cap covers 1/3 to 1/2 of the nut.",
+      "text": "An ovoid acorn about 1/2 to 2/3 inch long, green while it ripens and light brown when ripe, 1 or 2 on a short stalk. A scaly, hairy cap, gray or greenish, covers 1/3 to 1/2 of the nut.",
       "ref": "FNA vol. 3, Quercus boyntonii"
     }
   },
@@ -345,7 +345,7 @@
       "ref": "Virginia Tech Dendrology fact sheet, Quercus ilicifolia; FNA vol. 3, Quercus ilicifolia"
     },
     "fruit": {
-      "text": "Small striped acorn, 1/3 to 1/2 inch; a saucer-shaped cap with tight scales covers about a third of the nut.",
+      "text": "Small acorn, 1/3 to 1/2 inch, often striped; a cup-shaped to saucer-shaped cap with tight scales covers a third to a half of the nut.",
       "ref": "Virginia Tech Dendrology fact sheet, Quercus ilicifolia"
     }
   },
@@ -359,7 +359,7 @@
       "ref": "Virginia Tech Dendrology fact sheet, Quercus kelloggii"
     },
     "fruit": {
-      "text": "Large reddish brown acorn, about 1 inch or longer; a deep cap with long, loose scales covers half or more of the nut.",
+      "text": "Large brown acorn, about 1 inch or longer; a deep cap with thin, loose scales covers one third to two thirds of the nut.",
       "ref": "Virginia Tech Dendrology fact sheet, Quercus kelloggii; FNA vol. 3, Quercus kelloggii"
     }
   },

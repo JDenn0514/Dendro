@@ -79,7 +79,9 @@ escalation.**
 
 **Quality.** The photo is close up and sharp. The subject fills the frame. No ruler is in
 the shot. A hand or fingers that hold the leaf or fruit are correct, when the feature is
-still clear (owner ruling 2026-09-26). The photo shows the feature that a learner has to
+still clear (owner ruling 2026-09-26). A small file is not a reason to escalate: the VT
+Dendrology photos are about 250 px wide, and the owner accepted that size (2026-09-26).
+The photo shows the feature that a learner has to
 see (owner ruling 2026-09-26). Each channel has its own feature:
 
 - **Leaf:** the shape of the leaf, and how the leaves sit on the twig. The photo shows a
