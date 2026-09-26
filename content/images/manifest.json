@@ -7353,7 +7353,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T18:41:52Z",
-    "note": "Flower spike with long narrow strap blades sharp across the lower frame."
+    "note": "Flower spike with long narrow strap blades sharp across the lower frame.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the flower spike fills the frame; the strap leaves are only at the lower edge.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "214909efc99119984a1f6088d6953b69bc520f82c91ffb8a54d406fcf908edbd",
