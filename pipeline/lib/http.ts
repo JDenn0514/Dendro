@@ -34,6 +34,9 @@ export const RATE_PER_SECOND: Record<string, number> = {
   'www.treesandshrubsonline.org': 1,
   // The wildflower.org policy allows 1 request per second at most.
   'www.wildflower.org': 1,
+  // Virginia Tech Dendrology fact sheets and photos: 1 request per second at most
+  // (docs/decisions/2026-09-26-vt-dendrology-photo-permission.md).
+  'dendro.cnre.vt.edu': 1,
   // Kew POWO image files, for `photos add`. Kew asks for low rates.
   'd2seqvvyy3b8p2.cloudfront.net': 0.2,
 };
@@ -44,6 +47,7 @@ export const MAX_IN_FLIGHT: Record<string, number> = {
   'bioimages.vanderbilt.edu': 1,
   'www.treesandshrubsonline.org': 1,
   'www.wildflower.org': 1,
+  'dendro.cnre.vt.edu': 1,
   'd2seqvvyy3b8p2.cloudfront.net': 1,
 };
 
@@ -57,6 +61,9 @@ export const CACHE_DAYS: Record<string, number> = {
   'www.treesandshrubsonline.org': 30,
   // The policy asks an app to store the pages and not ask for them again.
   'www.wildflower.org': 3650,
+  // The site says its web addresses are stable. Store the pages and the photos, and do not
+  // ask for them again.
+  'dendro.cnre.vt.edu': 3650,
 };
 
 export const MS_PER_SECOND = 1000;

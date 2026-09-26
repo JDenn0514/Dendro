@@ -187,6 +187,15 @@ as a sample word at that step's size. The sample sizes are in px so they do
 not move with the setting. Picking a step sets the root font size and stores
 the choice with the other settings. The default step follows the phone.
 
+### 4.9 Photo sources (`#/sources`)
+
+Added 2026-09-26. A plain text screen under Settings, in the Settings type:
+the trail, a display heading, then one section per photo source with a tick,
+the full name, the short name that the credits print, a note on the terms, and
+a link to the site. The table is `app/logic/sources.js`. The source name on
+each photo credit links to its entry, `#/sources?at=<id>`, in a new tab, as
+the other two credit links do. Like Settings, it opens with no content.
+
 ## 5. Quality floor
 
 Every screen must pass these before it ships. Measure them; do not assume.

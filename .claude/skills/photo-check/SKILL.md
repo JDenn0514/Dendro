@@ -119,11 +119,20 @@ The allowlist is public domain, US government work, CC0 any version, CC BY any v
 and CC BY-SA any version. NC and ND variants are not allowed. When the license is missing,
 ambiguous, or not redistributable, escalate with `--case license`.
 
-One written permission takes the place of the allowlist for one host (owner ruling
-2026-09-25, `docs/decisions/2026-09-25-wildflower-permission.md`). A row whose `origin` is
-on `www.wildflower.org` may carry the license `used with permission, non-commercial`. That
-text is valid for wildflower.org rows, and for no other host. On a row from any other host,
-escalate it with `--case license`.
+Two written permissions take the place of the allowlist, each for one host:
+
+- `www.wildflower.org` (owner ruling 2026-09-25,
+  `docs/decisions/2026-09-25-wildflower-permission.md`). The source is
+  `Lady Bird Johnson Wildflower Center`.
+- `dendro.cnre.vt.edu` (owner ruling 2026-09-26,
+  `docs/decisions/2026-09-26-vt-dendrology-photo-permission.md`). The source is
+  `VT Dendrology`. The author is
+  `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson`, or the one photographer
+  that the image page names.
+
+A row whose `origin` is on one of these two hosts may carry the license
+`used with permission, non-commercial`. That text is valid for these two hosts only. On a
+row from any other host, escalate it with `--case license`.
 
 A Kew POWO row carries the holder in front of the label, such as `© RBG Kew, CC BY 3.0`.
 That is a CC BY license, and it is on the allowlist.
@@ -149,8 +158,9 @@ ruling 2026-09-26). A variety or subspecies of a different species is not a matc
 Eligible identity sources are iNaturalist at research grade, USDA PLANTS, US Forest
 Service and NRCS through a manual candidate, Wikimedia Commons with a species-level
 category, and university dendrology collections that name the species. Bioimages, Trees
-and Shrubs Online, the Lady Bird Johnson Wildflower Center (wildflower.org), and Kew Plants
-of the World Online are eligible too, because each page names the species.
+and Shrubs Online, the Lady Bird Johnson Wildflower Center (wildflower.org), Kew Plants
+of the World Online, and Virginia Tech Dendrology are eligible too, because each page names
+the species.
 
 **A Kew POWO row.** A POWO row is a manual candidate whose `origin` is on
 `powo.science.kew.org`. For a POWO row, the saved gallery takes the place of the source

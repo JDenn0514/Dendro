@@ -9,6 +9,7 @@ import * as progress from './screens/progress.js';
 import * as concept from './screens/concept.js';
 import * as species from './screens/species.js';
 import * as settings from './screens/settings.js';
+import * as sources from './screens/sources.js';
 import { injectSprite } from './ui/glyphs.js';
 import { applyTextSize } from './ui/textsize.js';
 
@@ -168,8 +169,8 @@ async function start() {
     const { parts, params } = parseRoute();
     const root = document.getElementById('app');
     root.textContent = '';
-    // Settings is the one screen that runs without content.
-    if (contentFailure && parts[0] !== 'settings') {
+    // Settings and the Sources screen under it run without content.
+    if (contentFailure && parts[0] !== 'settings' && parts[0] !== 'sources') {
       showError(contentFailure.title, contentFailure.lines);
       return;
     }
@@ -198,6 +199,7 @@ async function start() {
       else if (parts[0] === 'progress') leave = progress.render(root, ctx);
       else if (parts[0] === 'species') leave = species.render(root, { ...ctx, symbol: parts[1] });
       else if (parts[0] === 'settings') leave = settings.render(root, ctx);
+      else if (parts[0] === 'sources') leave = sources.render(root, ctx);
       else if (parts[0] === 'lessons') {
         leave = lessons.render(root, { ...ctx, channel: parts[1] ?? null });
       }
