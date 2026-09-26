@@ -64,11 +64,50 @@ export function normalizeName(name: string): string {
   return parts.join(' ');
 }
 
+interface ParsedName {
+  /** The genus and the first epithet, lower cased. */
+  species: string;
+  /** The first infraspecific epithet, or null. The rank does not count. */
+  infra: string | null;
+}
+
+/**
+ * The species and the infraspecific epithet of a name. The epithet is the token after the
+ * first rank marker that an epithet follows, so the author suffix "f." in "Michx. f. var.
+ * leucoderme" does not count. A bare lowercase third token counts too.
+ */
+function parseName(name: string): ParsedName {
+  const tokens = name
+    .replace(/\([^)]*\)/g, ' ')
+    .replace(/×/g, ' ')
+    .split(/\s+/)
+    .filter((token) => token.length > 0);
+  const species = tokens.length === 0 ? '' : normalizeName(tokens.slice(0, 2).join(' '));
+  let infra: string | null = null;
+  if (tokens.length > 2 && isEpithet(tokens[2])) infra = tokens[2];
+  for (let i = 2; infra === null && i < tokens.length - 1; i += 1) {
+    if (RANK_MARKERS.has(tokens[i].toLowerCase()) && isEpithet(tokens[i + 1])) {
+      infra = tokens[i + 1];
+    }
+  }
+  return { species, infra };
+}
+
+/**
+ * Owner ruling 2026-09-26. A name with no infraspecific epithet matches the species and
+ * every variety or subspecies of it. A name with one matches only a source that names the
+ * same species and the same epithet, at any rank. So the synonym "Acer saccharum ssp.
+ * leucoderme" of chalk maple never matches plain "Acer saccharum".
+ */
 export function identityMatches(sourceSpecies: string | null, names: string[]): boolean {
   if (sourceSpecies === null) return false;
-  const source = normalizeName(sourceSpecies);
-  if (source === '') return false;
-  return names.some((name) => normalizeName(name) === source);
+  const source = parseName(sourceSpecies);
+  if (source.species === '') return false;
+  return names.some((name) => {
+    const listed = parseName(name);
+    if (listed.species !== source.species) return false;
+    return listed.infra === null || listed.infra === source.infra;
+  });
 }
 
 /** The last row for a candidate id wins. Insertion order is first appearance. */
