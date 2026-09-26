@@ -174,6 +174,33 @@ export function setDifficulty(
   return { rows: next, matched, changed };
 }
 
+/**
+ * Pure. The ids of the approved candidates whose manifest row is hard and not retired.
+ * `photos fetch` has no image hash, so a row matches on the target, the channel of the
+ * approve, and the origin. `publishApproved` copies all three from the candidate.
+ */
+export function hardCandidateIds(
+  rows: ManifestRow[],
+  candidates: Candidate[],
+  verdicts: Verdict[],
+): Set<string> {
+  const hard = new Set(
+    rows
+      .filter((row) => row.difficulty === 'hard' && row.retired !== true)
+      .map((row) => `${row.target}|${row.channel}|${row.origin}`),
+  );
+  const byId = new Map(candidates.map((candidate) => [candidate.id, candidate]));
+  const ids = new Set<string>();
+  for (const verdict of approvedVerdicts(verdicts)) {
+    const candidate = byId.get(verdict.candidate_id);
+    if (candidate === undefined || verdict.channel === null) continue;
+    if (hard.has(`${candidate.target}|${verdict.channel}|${candidate.origin}`)) {
+      ids.add(candidate.id);
+    }
+  }
+  return ids;
+}
+
 /** Pure. The rows of one target the app shows: not retired and not hard. */
 export function shownRows(rows: ManifestRow[], target: string): ManifestRow[] {
   return rows.filter(

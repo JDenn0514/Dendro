@@ -274,8 +274,8 @@ through its exemplars.
   append-only check, writes `content/`, and commits. Two rows that share the hash both
   change. A hard photo does not count toward its channel in the build report of the run
   that approved it, so that run's report shows the gap when the run is built again.
-  Other runs do not see it. `photos fetch` still counts a hard photo toward the cap of 8
-  per channel. Run it only when the owner asks.
+  Other runs do not see it. `photos fetch` leaves a hard photo out of the cap of 8 per
+  channel, so that run takes new candidates for the gap. Run it only when the owner asks.
 - `node pipeline/cli.ts species retire <SYMBOL> --reason "<text>"` retires one species. The
   record stays in `content/species.json` with `retired: true` and the reason. Run it only
   when the owner asks.
