@@ -39,7 +39,8 @@ FOLD = 780
 JS = """
 (limits) => {
   const out = {
-    sw: document.documentElement.scrollWidth, over: [], small: [], dim: [], fold: []
+    sw: document.documentElement.scrollWidth, over: [], small: [], dim: [], fold: [],
+    overlap: []
   };
   const name = (node) => {
     const cls = typeof node.className === 'string' ? node.className.trim() : '';
@@ -78,6 +79,8 @@ JS = """
   }
 
   // ---------- tap targets ----------
+  // Every target the size check measures, for the overlap check below.
+  const measured = [];
   const controls = 'a[href], button, input, select, textarea, label, summary,'
     + ' [tabindex]:not([tabindex="-1"])';
   for (const node of document.querySelectorAll(controls)) {
@@ -92,12 +95,30 @@ JS = """
     }
     // WCAG 2.5.8 exempts a link that sits inside a run of text: the line of
     // type sets its size, and growing it to 44px would break the line. The
-    // credit's author link and the reveal title's answer link are both that
-    // case. Every anchor the app means as a control is laid out as a block,
-    // a flex box, or a grid, so `display: inline` is what tells them apart.
-    if (node.tagName === 'A' && getComputedStyle(node).display === 'inline') continue;
+    // reveal title's answer link is that case. The links in a credit line
+    // are not exempt: they sit in small print, 19px tall, so the sheet grows
+    // each one to 44px and this check holds it to that. Every other anchor
+    // the app means as a control is a block, a flex box, or a grid, so
+    // `display: inline` tells them apart.
+    if (node.tagName === 'A' && !node.closest('.cap')
+        && getComputedStyle(node).display === 'inline') continue;
+    measured.push({ node, box });
     if (box.width < limits.target || box.height < limits.target) {
       out.small.push(name(node) + ' ' + Math.round(box.width) + 'x' + Math.round(box.height));
+    }
+  }
+
+  // ---------- overlapping targets ----------
+  // Two targets whose boxes overlap send a tap to the wrong one. A control
+  // inside another, such as the radio inside its label, is one target.
+  for (let i = 0; i < measured.length; i += 1) {
+    for (let j = i + 1; j < measured.length; j += 1) {
+      const one = measured[i];
+      const two = measured[j];
+      if (one.node.contains(two.node) || two.node.contains(one.node)) continue;
+      const wide = Math.min(one.box.right, two.box.right) - Math.max(one.box.left, two.box.left);
+      const tall = Math.min(one.box.bottom, two.box.bottom) - Math.max(one.box.top, two.box.top);
+      if (wide > 0.5 && tall > 0.5) out.overlap.push(name(one.node) + ' and ' + name(two.node));
     }
   }
 
@@ -189,6 +210,7 @@ JS = """
   out.over = out.over.slice(0, 12);
   out.small = out.small.slice(0, 12);
   out.dim = out.dim.slice(0, 12);
+  out.overlap = out.overlap.slice(0, 12);
   return out;
 }
 """
@@ -232,7 +254,8 @@ def main():
                         print(f"FAIL {name:<16} {error}")
                         continue
                     bad = (got["sw"] > width or got["over"]
-                           or got["small"] or got["dim"] or got["fold"])
+                           or got["small"] or got["dim"] or got["fold"]
+                           or got["overlap"])
                     flag = "FAIL" if bad else "ok  "
                     print(f"{flag} {name:<16} scrollWidth={got['sw']}")
                     for line in got["over"]:
@@ -243,6 +266,8 @@ def main():
                         print("       contrast > " + line)
                     for line in got["fold"]:
                         print("       fold     > " + line)
+                    for line in got["overlap"]:
+                        print("       overlap  > " + line)
                     if bad:
                         findings += 1
         browser.close()

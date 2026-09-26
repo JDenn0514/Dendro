@@ -371,7 +371,10 @@ body{
 
 .band{display:flex; flex-wrap:wrap; gap:2px; row-gap:7px;
   margin:0 calc(var(--gut)*-1) 0 var(--col);}
-.band .grp{display:flex; gap:2px; margin-right:15px;}
+/* A genus with more species than fit one line wraps inside its own group,
+   so the group never runs past the band. */
+.band .grp{display:flex; flex-wrap:wrap; gap:2px; row-gap:7px; max-width:100%;
+  margin-right:15px;}
 .band .grp:last-child{margin-right:0;}
 /* the waterline: one rule per rung, cut to the share of that rung's cards at
    familiar or better, every rule measured against the same length, so the
@@ -575,7 +578,9 @@ dl.facts dd{margin:0; font-size:1rem; line-height:1.45;}
   min-height:44px; min-width:56px; padding:0 14px; box-sizing:border-box;
   font-family:var(--fr); font-weight:500; font-size:1rem; font-variation-settings:"opsz" 18;
   color:var(--moss); border:1.5px solid var(--moss); border-radius:2px; cursor:pointer;}
-.choice input{position:absolute; inset:0; margin:0; opacity:0; cursor:pointer;}
+/* The radio covers the label's border as well as its inside, so the target
+   is the whole 44 px box and not the 41 px inside the border. */
+.choice input{position:absolute; inset:-1.5px; margin:0; opacity:0; cursor:pointer;}
 .choice:has(input:checked){background:var(--moss); color:var(--paper);}
 .choice:has(input:focus-visible){outline:2px solid var(--ink); outline-offset:2px;}
 
@@ -797,5 +802,11 @@ button.leave:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
 /* The credit's author is a link. With no rule it prints in the browser's blue
    and breaks the italic bark of the caption around it. Bark on paper is
    7.5:1, and the underline stays, so the link still reads as a link. */
-.cap a{color:var(--bark);}
+/* A link in a credit line is a 44 px target. Its own line height makes the
+   height, so the line that holds the link is 44 px tall and the other lines
+   of the caption keep their spacing. Two links on two lines, or on two
+   stacked credit lines, never overlap, because each one owns its line. A
+   long name still wraps inside the column, 44 px to a line. */
+.cap a{color:var(--bark); display:inline-block; min-width:44px;
+  line-height:44px; max-width:100%; overflow-wrap:anywhere;}
 
