@@ -185,7 +185,7 @@ missing.
   Copy them off the source page. Do not write `unknown`.
 - `--license` must be on the allowlist. The one exception is
   `used with permission, non-commercial`, which `photos add` accepts only when `--origin` is
-  on `www.wildflower.org`.
+  on `www.wildflower.org` or `dendro.cnre.vt.edu`.
 - `--source` is the display name of the source. It goes on the manifest row as it is. For a
   manual row from one of these sites, use the value exactly as written here:
   - `Wikimedia Commons`
@@ -194,6 +194,7 @@ missing.
   - `Trees and Shrubs Online`
   - `Lady Bird Johnson Wildflower Center`
   - `Plants of the World Online (Kew)`
+  - `Virginia Tech Dendrology`
 
   For another site, write the name that the site gives itself, such as `US Forest Service`.
 - A wildflower.org row takes `--license "used with permission, non-commercial"`. The
@@ -201,6 +202,15 @@ missing.
   `Lady Bird Johnson Wildflower Center`. `--author` is the photographer as `First Last`. The
   page writes `Last, First`, so turn the two parts around: `Smith, Jane` becomes
   `Jane Smith`.
+- A Virginia Tech Dendrology row (`dendro.cnre.vt.edu`) also takes
+  `--license "used with permission, non-commercial"`. `--source` is
+  `Virginia Tech Dendrology`. `--author` is the photographer list of the fact-sheet footer,
+  word for word: `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson`. When the
+  image page names one photographer, `--author` is that name. The record is
+  `docs/decisions/2026-09-26-vt-dendrology-photo-permission.md`.
+  `pipeline/scripts/vt-rows.ts` makes these rows from the gap rows:
+  `node pipeline/scripts/vt-rows.ts --rows <scratchpad>/gap-rows.json --run <name> --out-dir <scratchpad>/vt`.
+  It writes `vt-rows.json` for `mkadds.cjs` and `vt-report.md`.
 - `--source-species` is the species the source page names. The identity check reads it.
 - `--local <path>` names an image file you already downloaded. Without it the command
   downloads `--file-url`.
