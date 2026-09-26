@@ -1074,6 +1074,37 @@ test('photos fetch leaves a hard photo out of the channel cap', async (t) => {
   );
 });
 
+test('photos fetch leaves an approve tagged hard out of the cap before the first build', async (t) => {
+  const { root, deps } = setup(t, photoRoutes());
+  seedInatTerms(root);
+  seedRun(root, { concepts: 'leaf/simple_lobed' }, (scope) => {
+    scope.concept_exemplars = { 'leaf/simple_lobed': ['QUGA'] };
+  });
+  const seeded = seedApprovedLeaf(root, 'leaf/simple_lobed');
+  // No manifest yet. The last row wins, so five approves now carry the hard tag.
+  appendJsonl(
+    path.join(runDir(root, 'demo'), 'verdicts.jsonl'),
+    seeded.slice(0, 5).map((row) => ({
+      candidate_id: row.id,
+      verdict: 'approve',
+      channel: 'leaf',
+      tags: ['hard'],
+      case: null,
+      note: 'seeded',
+      checked_by: 'owner',
+      checked_at: NOW,
+    })),
+  );
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const leaf = fetchedOf(root).filter((row) => row.target === 'leaf/simple_lobed');
+  assert.ok(
+    leaf.some((row) => row.channel_hint === 'leaf'),
+    'three untagged approves leave the leaf channel open',
+  );
+});
+
 test('photos fetch keeps the channel cap when no approved photo is hard', async (t) => {
   const { root, deps } = setup(t, photoRoutes());
   seedInatTerms(root);
