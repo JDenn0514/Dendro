@@ -107,6 +107,26 @@ test('export and import make a round trip', () => {
   assert.equal(second.readSettings().session_size, 15);
 });
 
+test('the export file holds the date it was made', () => {
+  const first = createStore(memoryStorage());
+  const blob = first.exportBlob('2026-03-10');
+  assert.equal(JSON.parse(blob.json).dendro_settings.last_export, '2026-03-10');
+  const second = createStore(memoryStorage());
+  assert.deepEqual(second.importBlob(blob.json), { ok: true, errors: [] });
+  assert.equal(second.readSettings().last_export, '2026-03-10');
+});
+
+test('checkImport reads a file and writes nothing', () => {
+  const storage = memoryStorage();
+  const store = createStore(storage);
+  assert.deepEqual(store.checkImport(goodBlob()), { ok: true, errors: [] });
+  assert.deepEqual(store.readCards(), {});
+  assert.equal(storage.getItem('dendro_cards'), null);
+  const bad = store.checkImport('{oops');
+  assert.equal(bad.ok, false);
+  assert.deepEqual(bad.errors, ['The file is not valid JSON.']);
+});
+
 test('a malformed import is rejected with a reason and changes nothing', () => {
   const store = createStore(memoryStorage());
   store.writeCard('species:QUGA:leaf', { interval: 4, tier: 'mc4', tier_passes: 0 });

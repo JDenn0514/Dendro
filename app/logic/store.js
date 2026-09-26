@@ -185,6 +185,45 @@ export function createStore(storage) {
     }
   }
 
+  // The import check, shared by `checkImport` and `importBlob`.
+  function parseImport(text) {
+    // A blocked write must not report success. Import is how a user recovers.
+    if (!available) {
+      return { ok: false, errors: ['This browser is not storing your progress.'] };
+    }
+    if (newerVersion) {
+      return {
+        ok: false,
+        errors: ['Your stored data comes from a newer version of this app, so the import stops and leaves that data alone.']
+      };
+    }
+    let payload;
+    try {
+      payload = JSON.parse(text);
+    } catch {
+      return { ok: false, errors: ['The file is not valid JSON.'] };
+    }
+    const errors = [];
+    if (!isPlainObject(payload)) {
+      return { ok: false, errors: ['The file holds no export object.'] };
+    }
+    if (payload.version !== STORE_VERSION) {
+      errors.push(`The file says version ${payload.version}. This app reads version ${STORE_VERSION}.`);
+    }
+    const sections = {};
+    for (const key of Object.values(KEYS)) {
+      if (payload[key] === undefined) {
+        errors.push(`The file has no ${key} section.`);
+        continue;
+      }
+      const error = sectionError(key, payload[key]);
+      if (error) errors.push(error);
+      else sections[key] = migrateSection(key, payload[key]);
+    }
+    if (errors.length) return { ok: false, errors };
+    return { ok: true, errors: [], sections };
+  }
+
   const api = {
     get available() { return available; },
 
@@ -256,48 +295,25 @@ export function createStore(storage) {
         exported_at: today,
         [KEYS.cards]: stamp(read(KEYS.cards)),
         [KEYS.log]: stamp(read(KEYS.log)),
-        [KEYS.settings]: stamp(api.readSettings()),
+        // The screen saves the date after it builds the file, so the file
+        // must set it here.
+        [KEYS.settings]: stamp({ ...api.readSettings(), last_export: today }),
         [KEYS.missing_edges]: stamp(read(KEYS.missing_edges))
       };
       return { filename: `dendro-progress-${today}.json`, json: JSON.stringify(payload, null, 2) };
     },
 
+    // Reads an export file and says whether it can be imported. Writes
+    // nothing, so the screen can ask before `importBlob` replaces anything.
+    checkImport(text) {
+      const { ok, errors } = parseImport(text);
+      return { ok, errors };
+    },
+
     importBlob(text) {
-      // A blocked write must not report success. Import is how a user recovers.
-      if (!available) {
-        return { ok: false, errors: ['This browser is not storing your progress.'] };
-      }
-      if (newerVersion) {
-        return {
-          ok: false,
-          errors: ['Your stored data comes from a newer version of this app, so the import stops and leaves that data alone.']
-        };
-      }
-      let payload;
-      try {
-        payload = JSON.parse(text);
-      } catch {
-        return { ok: false, errors: ['The file is not valid JSON.'] };
-      }
-      const errors = [];
-      if (!isPlainObject(payload)) {
-        return { ok: false, errors: ['The file holds no export object.'] };
-      }
-      if (payload.version !== STORE_VERSION) {
-        errors.push(`The file says version ${payload.version}. This app reads version ${STORE_VERSION}.`);
-      }
-      const sections = {};
-      for (const key of Object.values(KEYS)) {
-        if (payload[key] === undefined) {
-          errors.push(`The file has no ${key} section.`);
-          continue;
-        }
-        const error = sectionError(key, payload[key]);
-        if (error) errors.push(error);
-        else sections[key] = migrateSection(key, payload[key]);
-      }
-      if (errors.length) return { ok: false, errors };
-      for (const key of Object.values(KEYS)) write(key, sections[key]);
+      const parsed = parseImport(text);
+      if (!parsed.ok) return { ok: false, errors: parsed.errors };
+      for (const key of Object.values(KEYS)) write(key, parsed.sections[key]);
       return { ok: true, errors: [] };
     },
 
