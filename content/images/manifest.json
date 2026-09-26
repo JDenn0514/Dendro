@@ -4597,7 +4597,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:28:07Z",
-    "note": "Leafy shoots fill the frame and the lobed leaf outline reads on the sharp leaves."
+    "note": "Leafy shoots fill the frame and the lobed leaf outline reads on the sharp leaves.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: a soft photo; the leaves read as unlobed.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "eaf5f2de3bcc17adc1a7fbf022f49ec487fd798fdb22ddfbbd2a159a9e0be162",
