@@ -10,9 +10,14 @@ import { fileURLToPath } from 'node:url';
 import { captureConsole } from './helpers.ts';
 import { licenseAllowedAt } from '../lib/licenses.ts';
 import { vtRowsMain } from '../scripts/vt-rows.ts';
+import { VT_SITE } from '../scripts/sources.ts';
+import { SOURCE_NAMES } from '../lib/candidates.ts';
+import { POWO_SOURCE } from '../lib/powo.ts';
+import { sourceEntry } from '../../app/logic/sources.js';
 import {
   VT_AUTHORS,
   VT_LICENSE,
+  VT_SITE_NAME,
   VT_SOURCE,
   parseVtImages,
   vtOrganChannel,
@@ -30,9 +35,18 @@ const mkadds = createRequire(import.meta.url)(path.join(REPO_ROOT, 'pipeline', '
 };
 
 test('the credit values match the decision record', () => {
-  assert.equal(VT_SOURCE, 'Virginia Tech Dendrology');
+  assert.equal(VT_SOURCE, 'VT Dendrology');
+  // The site name in pipeline/sources/<SYMBOL>.json, which sources.ts writes.
+  assert.equal(VT_SITE_NAME, VT_SITE);
+  assert.equal(VT_SITE_NAME, 'Virginia Tech Dendrology');
   assert.equal(VT_LICENSE, 'used with permission, non-commercial');
   assert.equal(VT_AUTHORS, 'John Seiler, Edward Jensen, Alex Niemiera, and John Peterson');
+});
+
+test('every source name the pipeline writes has an entry on the Sources screen', () => {
+  const names = [...Object.values(SOURCE_NAMES).filter((name) => name !== ''), POWO_SOURCE, VT_SOURCE];
+  for (const name of names) assert.ok(sourceEntry(name), name);
+  assert.equal(sourceEntry(VT_SITE_NAME), null);
 });
 
 test('leaf, bark, and fruit map to their channels, and every other organ to none', () => {
@@ -137,7 +151,7 @@ test('vt-rows.ts writes one row per image of the channel, from the saved page', 
   assert.match(report, /Taken for fruit: fruit1\.jpg\./);
   const built = mkadds.buildCommand(rows[0], 'r1');
   assert.deepEqual(built.problems, []);
-  assert.match(built.line, /--source "Virginia Tech Dendrology"/);
+  assert.match(built.line, /--source "VT Dendrology"/);
   assert.match(built.line, /--license "used with permission, non-commercial"/);
 });
 

@@ -21,11 +21,12 @@ The permission covers the photos only. It does not cover the fact-sheet text.
 - Use: non-commercial only.
 - Host: `dendro.cnre.vt.edu` only.
 - Licence text on each row: `used with permission, non-commercial`. `licenseAllowedAt` in `pipeline/lib/licenses.ts` accepts this text only when the row's origin host is `www.wildflower.org` or `dendro.cnre.vt.edu`. Each host has its own entry in `LICENSE_PERMISSIONS` in the same file.
-- `--source`: `Virginia Tech Dendrology`.
+- `--source`: `VT Dendrology`, a short name for the photo credit (owner ruling 2026-09-26). The Sources screen of the app (`#/sources`) gives the full name, `Virginia Tech Dendrology, Department of Forest Resources and Environmental Conservation, Virginia Tech`, so the credit names the Department, as the statement asks. The table of full names is `app/logic/sources.js`. The credit links the short name to its entry on that screen.
 - `--author`: the photographer list from the fact-sheet footer, word for word: `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson`. The one exception is an image page that names one photographer. Then `--author` is that name.
 - Origin: the fact-sheet url plus `#image=<file name>`, for example `https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=240#image=fruit1.jpg`. The credit links to that page.
-- Credit line in the app: `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson; Virginia Tech Dendrology; used with permission, non-commercial.` The author holds commas, so the app puts semicolons between the three parts.
+- Credit line in the app: `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson; VT Dendrology; used with permission, non-commercial.` The author holds commas, so the app puts semicolons between the three parts. Only `VT Dendrology` credits take semicolons. Every other credit keeps commas (owner ruling 2026-09-26).
 - Only the leaf, bark, and fruit photos are used. Flower, twig, form, fall, and wood photos and the range maps are not used.
+- Photo size: the fact-sheet photos are about 250 x 330 px. The page links no larger file. The owner accepted this size on 2026-09-26, and no size rule applies.
 
 ## Rate rules
 
@@ -35,4 +36,4 @@ The permission covers the photos only. It does not cover the fact-sheet text.
 
 ## If Dendro becomes commercial
 
-Search `content/images/manifest.json` for `used with permission, non-commercial` with the source `Virginia Tech Dendrology`. Each row found rests on this permission. Retire those images, or get a commercial licence from the photographers first. The statement names Eric Wiseman as the contact.
+Search `content/images/manifest.json` for `used with permission, non-commercial` with the source `VT Dendrology`. Each row found rests on this permission. Retire those images, or get a commercial licence from the photographers first. The statement names Eric Wiseman as the contact.

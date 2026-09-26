@@ -7,7 +7,13 @@ import type { AddRow } from './powo.ts';
  * This module reads a saved fact sheet. pipeline/scripts/vt-rows.ts fetches and writes.
  */
 export const VT_HOST = 'dendro.cnre.vt.edu';
-export const VT_SOURCE = 'Virginia Tech Dendrology';
+/**
+ * The short source name on the photo credit (owner ruling 2026-09-26). The app's Sources
+ * screen gives the full name, from `app/logic/sources.js`.
+ */
+export const VT_SOURCE = 'VT Dendrology';
+/** The site name in `pipeline/sources/<SYMBOL>.json`, as pipeline/scripts/sources.ts writes it. */
+export const VT_SITE_NAME = 'Virginia Tech Dendrology';
 /** `licenseAllowedAt` accepts this text for dendro.cnre.vt.edu and www.wildflower.org only. */
 export const VT_LICENSE = 'used with permission, non-commercial';
 /** The photographer list of the fact-sheet footer, word for word. */

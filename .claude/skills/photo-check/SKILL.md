@@ -119,7 +119,7 @@ Two written permissions take the place of the allowlist, each for one host:
   `Lady Bird Johnson Wildflower Center`.
 - `dendro.cnre.vt.edu` (owner ruling 2026-09-26,
   `docs/decisions/2026-09-26-vt-dendrology-photo-permission.md`). The source is
-  `Virginia Tech Dendrology`. The author is
+  `VT Dendrology`. The author is
   `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson`, or the one photographer
   that the image page names.
 

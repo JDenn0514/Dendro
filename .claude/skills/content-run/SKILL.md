@@ -194,18 +194,21 @@ missing.
   - `Trees and Shrubs Online`
   - `Lady Bird Johnson Wildflower Center`
   - `Plants of the World Online (Kew)`
-  - `Virginia Tech Dendrology`
+  - `VT Dendrology`
 
   For another site, write the name that the site gives itself, such as `US Forest Service`.
+  A new `--source` value also needs an entry in `app/logic/sources.js`, with the full name,
+  the site, and the terms. Without the entry, `npm test` fails after the build.
 - A wildflower.org row takes `--license "used with permission, non-commercial"`. The
   permission and the policy need the credit to name the Center, so `--source` is
   `Lady Bird Johnson Wildflower Center`. `--author` is the photographer as `First Last`. The
   page writes `Last, First`, so turn the two parts around: `Smith, Jane` becomes
   `Jane Smith`.
 - A Virginia Tech Dendrology row (`dendro.cnre.vt.edu`) also takes
-  `--license "used with permission, non-commercial"`. `--source` is
-  `Virginia Tech Dendrology`. `--author` is the photographer list of the fact-sheet footer,
-  word for word: `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson`. When the
+  `--license "used with permission, non-commercial"`. `--source` is the short name
+  `VT Dendrology`. The app's Sources screen gives the full name. `--author` is the
+  photographer list of the fact-sheet footer, word for word:
+  `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson`. When the
   image page names one photographer, `--author` is that name. The record is
   `docs/decisions/2026-09-26-vt-dendrology-photo-permission.md`.
   `pipeline/scripts/vt-rows.ts` makes these rows from the gap rows:

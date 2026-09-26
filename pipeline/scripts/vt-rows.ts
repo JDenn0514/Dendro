@@ -8,7 +8,7 @@ import type { AddRow } from '../lib/powo.ts';
 import { parseFlags } from '../lib/run.ts';
 import {
   VT_AUTHORS,
-  VT_SOURCE,
+  VT_SITE_NAME,
   parseVtImages,
   vtPhotographers,
   vtRow,
@@ -100,7 +100,7 @@ async function oneRow(
 ): Promise<RowReport> {
   const lines: string[] = [];
   const found = findSources(path.join(ctx.root, 'pipeline', 'sources'), row);
-  const vt = found?.data.sources?.find((source) => source.site === VT_SOURCE);
+  const vt = found?.data.sources?.find((source) => source.site === VT_SITE_NAME);
   if (found === null || vt === undefined || typeof vt.url !== 'string' || vt.url === '') {
     lines.push('- No Virginia Tech fact sheet in the sources file.');
     return { row, lines };
