@@ -43,7 +43,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T02:40:41Z",
-    "note": "Sharp spring foliage with the three lobed simple leaf outline clear against the ground."
+    "note": "Sharp spring foliage with the three lobed simple leaf outline clear against the ground.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the leaves are divided into 3 leaflets, so the photo does not show a simple lobed leaf.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "717728f61643f8454f91d8d9fd3aa62bcd3a9e862f60bffb4b08d136d76b5c81",
