@@ -251,6 +251,10 @@ test('a variety of the accepted species matches the target', () => {
   assert.equal(identityMatches('Quercus sinuata var. breviloba', names), true);
   assert.equal(identityMatches('Quercus sinuata Walter var. breviloba (Torr.) C.H. Mull.', names), true);
   assert.equal(identityMatches('Quercus sinuata', names), true);
+  // iNaturalist writes a variety as a bare trinomial with no rank marker.
+  assert.equal(identityMatches('Quercus sinuata breviloba', names), true);
+  assert.equal(identityMatches('Acer tataricum ginnala', ['Acer tataricum ssp. ginnala']), true);
+  assert.equal(identityMatches('Acer tataricum tataricum', ['Acer tataricum ssp. ginnala']), false);
 });
 
 test('a species-level synonym still matches its varieties', () => {
