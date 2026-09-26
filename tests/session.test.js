@@ -8,7 +8,7 @@ import {
   dueCardIds, newCardCountToday, recommendUnit, buildSession,
   requeueCard, buildPlacementDeck, placementState, answerEffects,
   todayString, unitsForFocus, dueTomorrowCount, sessionPosition,
-  emptyResults, accumulateAnswer, newCardCapDone, sessionPlace
+  emptyResults, accumulateAnswer, newCardCapDone, sessionPlace, sessionTotal
 } from '../app/logic/session.js';
 
 const { content } = loadContent(loadFixture());
@@ -235,6 +235,15 @@ test('the session position stays inside the deck', () => {
   assert.deepEqual(sessionPosition(3, 5), { position: 3, total: 5, percent: 60 });
   assert.deepEqual(sessionPosition(9, 5), { position: 5, total: 5, percent: 100 });
   assert.deepEqual(sessionPosition(1, 0), { position: 0, total: 0, percent: 0 });
+});
+
+test('a card that comes back after a miss counts in the total', () => {
+  assert.equal(sessionTotal(8, 0), 8);
+  assert.equal(sessionTotal(8, 1), 9);
+  // An eight-card deck with one repeat asks nine questions, and the last
+  // one reads 9 of 9.
+  assert.deepEqual(sessionPosition(9, sessionTotal(8, 1)),
+    { position: 9, total: 9, percent: 100 });
 });
 
 test('a repeat answer writes nothing', () => {

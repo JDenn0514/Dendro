@@ -4,7 +4,7 @@ import { channelLabel } from '../logic/content.js';
 import {
   buildSession, buildPlacementDeck, answerEffects, requeueCard,
   dueTomorrowCount, sessionPosition, emptyResults, accumulateAnswer,
-  sessionPlace
+  sessionPlace, sessionTotal
 } from '../logic/session.js';
 import {
   buildQuestion, buildReveal, invAvailable, answerPhoto, revealCredits
@@ -176,7 +176,7 @@ export function render(root, ctx) {
   // ---------- the running head and the printed gauge ----------
 
   function head(question) {
-    const place = sessionPosition(shown, deck.length);
+    const place = sessionPosition(shown, sessionTotal(deck.length, requeuedOnce.size));
     const bar = el('div', 'head');
     const leave = el('button', 'leave', 'Leave');
     leave.type = 'button';

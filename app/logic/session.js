@@ -32,6 +32,13 @@ export function sessionPosition(shown, total) {
   return { position, total, percent: Math.round((position / total) * 100) };
 }
 
+// How many questions the session asks: each card in the deck once, and one
+// more for each card that came back after a miss. `requeueCard` moves the
+// card to the back and keeps the deck length, so the repeat is not in it.
+export function sessionTotal(deckLength, requeuedCount) {
+  return Math.max(0, deckLength) + Math.max(0, requeuedCount);
+}
+
 // The first words of the session header, for one card. A unit's name belongs
 // only to that unit's cards. A due card from anywhere else is a review.
 export function sessionPlace({ content, mode, unit_key: unitKey, card_id: cardId }) {
