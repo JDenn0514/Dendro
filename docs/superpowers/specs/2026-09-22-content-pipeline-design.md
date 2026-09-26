@@ -523,7 +523,7 @@ approved photo whose row is hard. A species with only hard rows stays live.
 Added 2026-09-26. `photos fetch` leaves a hard photo out of the cap of 8 approved images
 per channel. It has no image hash, so it matches a hard row that is not retired to an
 approved candidate on the target, the channel of the approve, and the origin. The build
-copies all three from the candidate into the row.
+copies the target and the origin from the candidate, and the channel from the approve.
 
 ---
 

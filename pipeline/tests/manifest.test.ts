@@ -16,7 +16,6 @@ import {
   shownRows,
 } from '../lib/manifest.ts';
 import type { ManifestRow } from '../lib/manifest.ts';
-import type { ManifestRow } from '../lib/manifest.ts';
 
 const ROW_FIELDS = [
   'hash', 'target', 'channel', 'source', 'author',
