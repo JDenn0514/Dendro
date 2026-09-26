@@ -286,7 +286,9 @@ through its exemplars.
   removes the object, writes `content/`, and commits. Two rows that share the hash both
   retire. Run it only when the owner asks.
 - `node pipeline/cli.ts images difficulty <hash> --set hard` holds one image back from
-  the app. `--clear` brings it back. The file stays in the bucket. It validates, runs the
+  the app. `--clear` brings it back. `build` already sets `difficulty: "hard"` on each new
+  row whose approve has the `hard` tag, so use this command only for a row already in the
+  manifest. `build` never changes the difficulty of a row already in the manifest. The file stays in the bucket. It validates, runs the
   append-only check, writes `content/`, and commits. Two rows that share the hash both
   change. A hard photo does not count toward its channel in the build report of the run
   that approved it, so that run's report shows the gap when the run is built again.

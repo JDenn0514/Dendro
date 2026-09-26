@@ -1278,6 +1278,74 @@ test('a build leaves a hard photo out of the counts and the gaps', async (t) => 
   assert.equal(manifestOf(root).find((one) => one.channel === 'leaf')?.difficulty, 'hard');
 });
 
+test('a build marks the row of an approve tagged hard, and leaves it out of the counts', async (t) => {
+  const { root, deps, storage, err } = setup(t);
+  seed(root, {
+    verdicts: [
+      verdict(LEAF.id, 'approve', { channel: 'leaf', tags: ['hard', 'summer'] }),
+      verdict(BARK.id, 'approve', { channel: 'bark' }),
+    ],
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  const leaf = manifestOf(root).find((one) => one.channel === 'leaf');
+  const bark = manifestOf(root).find((one) => one.channel === 'bark');
+  assert.equal(leaf?.difficulty, 'hard');
+  assert.deepEqual(leaf?.tags, ['hard', 'summer']);
+  assert.equal(bark !== undefined && 'difficulty' in bark, false);
+  // The file of a hard photo still goes to the bucket.
+  assert.equal(storage.puts.length, 2);
+
+  const data = buildOf(root);
+  assert.deepEqual(data.species[0].counts, { bark: 1 });
+  assert.deepEqual(data.gaps, [
+    { symbol: 'QUGA', channel: 'leaf', count: 0 },
+    { symbol: 'QUGA', channel: 'bark', count: 1 },
+  ]);
+});
+
+test('a rebuild with a hard tag leaves the difficulty of a row already in the manifest', async (t) => {
+  const { root, deps, err } = setup(t);
+  seed(root, {
+    verdicts: [
+      verdict(LEAF.id, 'approve', { channel: 'leaf' }),
+      verdict(BARK.id, 'approve', { channel: 'bark' }),
+    ],
+  });
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  // The last row wins, so the leaf approve now carries the hard tag.
+  const verdicts = readJsonl<Verdict>(path.join(runDir(root, 'demo'), 'verdicts.jsonl'));
+  verdicts.push(verdict(LEAF.id, 'approve', { channel: 'leaf', tags: ['hard'] }));
+  writeJsonl(path.join(runDir(root, 'demo'), 'verdicts.jsonl'), verdicts);
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  const rows = manifestOf(root);
+  assert.equal(rows.length, 2);
+  assert.equal(rows.some((one) => 'difficulty' in one), false);
+});
+
+test('a build whose every photo of a species is tagged hard fails on the validator', async (t) => {
+  const { root, deps, storage, err } = setup(t);
+  seed(root, {
+    verdicts: [
+      verdict(LEAF.id, 'approve', { channel: 'leaf', tags: ['hard'] }),
+      verdict(BARK.id, 'approve', { channel: 'bark', tags: ['hard'] }),
+    ],
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.ok(
+    err.includes('error species.json: QUGA has no manifest image and no confusion edge'),
+    err.join(' | '),
+  );
+  assert.deepEqual(storage.puts, []);
+  assert.equal(exists(root, 'content/images/manifest.json'), false);
+});
+
 test('species retire marks the record, retires its rows, and removes the objects', async (t) => {
   const { root, deps, exec, storage, out, err } = setup(t);
   seed(root, {

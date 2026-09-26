@@ -96,7 +96,7 @@ Then apply these rules in order:
 2. The photo is distant or cluttered, but the feature is still visible: approve, and add
    `hard` to `--tags`, such as `--tags hard` or `--tags hard,winter`. The `hard` tag goes
    onto the manifest row as it is. The app hides a photo only when its manifest row has
-   `difficulty: "hard"`. The `images difficulty` command sets that field after the build.
+   `difficulty: "hard"`. The build sets that field from the `hard` tag.
 3. Any other photo below the threshold above, such as a soft photo, or a hand or a ruler
    in the shot: escalate with `--case quality`.
 
