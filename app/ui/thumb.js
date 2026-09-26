@@ -6,9 +6,8 @@ import { labelFor } from '../logic/question.js';
 import { el } from './dom.js';
 import { plate, credit } from './plate.js';
 
-// `.wide` on both the column and the figure cuts the empty lower band off the
-// scan, so the caption sits under the print. Returns null when the unit holds
-// no photo.
+// `.wide` on both the column and the figure sets the wider column, so the
+// caption sits under the print. Returns null when the unit holds no photo.
 export function unitThumbColumn(content, unitKey, imageBase) {
   const found = unitThumb(content, unitKey);
   if (!found) return null;
@@ -16,9 +15,8 @@ export function unitThumbColumn(content, unitKey, imageBase) {
   const { label } = labelFor(content, found.kind, found.channel, found.key);
   const figure = plate(found.photo, {
     image_base: imageBase,
-    alt: `Pressed specimen, ${label}`,
-    shape: 'pl-thumb',
-    lift: true
+    alt: label,
+    shape: 'pl-thumb'
   });
   figure.classList.add('wide');
   column.append(figure);

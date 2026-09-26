@@ -63,10 +63,10 @@ Level names, level 0 to 4: new, seen, familiar, strong, expert.
    the moss waterline under a card band on the progress page.
 5. Motion answers a tap. The reveal is the one designed motion moment. All
    motion sits inside `prefers-reduced-motion: no-preference`.
-6. Photographs print into the paper. A bright-ground scan uses
-   `mix-blend-mode: multiply` so its white becomes paper. A photograph with its
-   own ground dissolves on all four sides through a mask and never blends.
-   Nothing ends on a straight edge.
+6. Photographs print plain on the paper. Each photo shows whole, at its own
+   aspect ratio, with no blend, mask, filter, or vignette. Where answers or
+   buttons sit under a photo, its frame has a fixed height, and cream paper
+   shows above and below a wide photo.
 
 Tells to avoid, from the design brief: all-caps eyebrow labels, monospace
 labels, middle-dot meta strings, arrows in link text, numbered markers on
@@ -100,9 +100,9 @@ The unit list, the channel buttons, and the level-0 counts move to Lessons.
 
 As specified before, styled as the mockup. Changes:
 
-- The photograph is framed to the specimen's own bounding box and prints
-  into the paper edge to edge. The caption reads "Pressed specimen,
-  undetermined." plus the author, and never names the tree.
+- The photograph shows whole in a frame of fixed height, edge to edge. A
+  question shows no caption, and the photo's alt text names no tree. The
+  reveal prints the credit for every photo the question showed.
 - Progress is one tick per card, filled for done, moss for the current one.
 - Leaving. The header's left slot is a Leave link, 44 px tall, present on the
   question and the reveal. Every answer is graded and stored the moment it is
@@ -206,10 +206,8 @@ Every screen must pass these before it ships. Measure them; do not assume.
 - The leaf glyphs are one inline SVG sprite with `<symbol>` elements (oak,
   maple, sycamore, needle, toothed, bark plates, fruit shapes) and `<use>`
   references. Level is a class on the `<svg>`.
-- Photo treatment is two classes: `.plate.print` for bright-ground scans
-  (multiply), `.plate.field` for photographs with their own ground (mask, no
-  blend). Which one a photo gets comes from a flag in the manifest or a
-  brightness check at build time; decide in the plan.
+- Photos have one treatment: plain. `.plate` sets the frame and the height
+  limit, and `object-fit: contain` keeps the whole photo in view.
 - Text size stores one key with the other settings and sets
   `document.documentElement.style.fontSize` on load.
 - Fold state stores a list of open unit keys.
@@ -239,3 +237,8 @@ Every screen must pass these before it ships. Measure them; do not assume.
   progress overview.
 - 2026-09-24. Chevron folding on the channel lessons page. Text size setting
   with five steps, rem-based scale.
+- 2026-09-25. Photos print plain, at the owner's request after a play-test.
+  The `print` and `field` classes and the corner probe are gone. Principle 6
+  and the notes in sections 4.2 and 6 now say so.
+- 2026-09-25. A question shows no caption. The reveal prints the credit for
+  every photo the question showed and every photo the reveal shows.

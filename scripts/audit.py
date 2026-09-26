@@ -31,11 +31,15 @@ from shots import (
 
 MIN_TARGET = 44
 MIN_CONTRAST = 4.5
+# A question must show its prompt and two answers inside this height, the
+# height of a small phone. The page is laid out at the script's own viewport,
+# 844 px, so the check is stricter than a 780 px phone.
+FOLD = 780
 
 JS = """
 (limits) => {
   const out = {
-    sw: document.documentElement.scrollWidth, over: [], small: [], dim: []
+    sw: document.documentElement.scrollWidth, over: [], small: [], dim: [], fold: []
   };
   const name = (node) => {
     const cls = typeof node.className === 'string' ? node.className.trim() : '';
@@ -44,13 +48,11 @@ JS = """
 
   // ---------- horizontal overflow ----------
   // A node an ancestor clips cannot push the page wide, because the pixels
-  // past the clip are never drawn. The `.pl-*` plate rules crop a scan in
-  // exactly that way: an image wider than its frame inside a `.plate`, which
-  // is `overflow: hidden`. So the box is trimmed to every clipping ancestor
-  // before it is judged. The walk stops at `#app`: the clip on `#app` is the
-  // one that would hide a real layout overflow, which is what this check is
-  // for, and `document.documentElement.scrollWidth` above is the other half
-  // of the same question.
+  // past the clip are never drawn. So the box is trimmed to every clipping
+  // ancestor before it is judged. The walk stops at `#app`: the clip on
+  // `#app` is the one that would hide a real layout overflow, which is what
+  // this check is for, and `document.documentElement.scrollWidth` above is
+  // the other half of the same question.
   const clipped = (node, box) => {
     let left = box.left;
     let right = box.right;
@@ -169,6 +171,21 @@ JS = """
     }
   }
 
+  // ---------- the fold ----------
+  // A question shows its prompt and at least two answers above the fold. A
+  // typed question has one answer control, so one is enough there.
+  const bottomOf = (node) => node.getBoundingClientRect().bottom + window.scrollY;
+  const prompt = document.querySelector('.prompt');
+  if (prompt) {
+    const answers = [...document.querySelectorAll('.key .pick, .invkey button, .typed input')];
+    const above = answers.filter((node) => bottomOf(node) <= limits.fold).length;
+    const wanted = Math.min(2, answers.length);
+    if (bottomOf(prompt) > limits.fold || above < wanted) {
+      out.fold.push('prompt ends at ' + Math.round(bottomOf(prompt)) + ', '
+        + above + ' of ' + answers.length + ' answers end above ' + limits.fold);
+    }
+  }
+
   out.over = out.over.slice(0, 12);
   out.small = out.small.slice(0, 12);
   out.dim = out.dim.slice(0, 12);
@@ -189,7 +206,8 @@ def check(browser, frag, action, must, width, root):
             page.wait_for_timeout(350)
             return page.evaluate(
                 JS,
-                {"width": width, "target": MIN_TARGET, "contrast": MIN_CONTRAST},
+                {"width": width, "target": MIN_TARGET, "contrast": MIN_CONTRAST,
+                 "fold": FOLD},
             )
         finally:
             page.close()
@@ -214,7 +232,7 @@ def main():
                         print(f"FAIL {name:<16} {error}")
                         continue
                     bad = (got["sw"] > width or got["over"]
-                           or got["small"] or got["dim"])
+                           or got["small"] or got["dim"] or got["fold"])
                     flag = "FAIL" if bad else "ok  "
                     print(f"{flag} {name:<16} scrollWidth={got['sw']}")
                     for line in got["over"]:
@@ -223,6 +241,8 @@ def main():
                         print("       target   > " + line)
                     for line in got["dim"]:
                         print("       contrast > " + line)
+                    for line in got["fold"]:
+                        print("       fold     > " + line)
                     if bad:
                         findings += 1
         browser.close()

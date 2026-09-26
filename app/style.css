@@ -96,81 +96,38 @@ body{
 .tick{width:38px; height:2px; background:var(--bark); margin:0 0 9px;}
 
 /* =======================================================================
-   PLATES — the bold move of the session card, and its fallback.
+   PLATES
 
-   A plate never ends on a straight line. There are two ways to reach that,
-   and the photograph makes the choice, not the screen.
+   A plate shows one photograph plain: the whole image, at its own aspect
+   ratio, on the paper. There is no blend, no mask, no filter, and no
+   vignette. The photo keeps its ratio inside its frame
+   (`object-fit: contain`), and the paper shows around it.
 
-   .plate.print   The scan has a bright studio ground (quru-leaf, quve-leaf).
-                  The image multiplies into the paper, so the white ground
-                  BECOMES paper and the specimen has no edge at all.
-
-   .plate.field   The photograph carries its own ground: dark (quru-bark) or
-                  in colour (acgl-leaf). Multiply would turn that ground into
-                  a dirty grey rectangle, so a field plate does not blend. It
-                  is held back in saturation, dissolved on four sides by a
-                  mask, and covered with a paper vignette, so it fades into
-                  the page instead of stopping.
-
-   Every screen in this file carries one of them. That is the ratio the
-   approved plate earned its look from, and it is held here: one photograph
-   or one full-width bed of specimens per screen, and fewer rows underneath.
+   Two kinds of frame. Where answers or buttons sit under the photo, the
+   frame has a fixed height, so nothing moves when the photo loads. Cream
+   paper shows above and below a wide photo there. Everywhere else, the
+   frame takes the photo's own shape, up to a height limit.
    ======================================================================= */
-.plate{margin:0; overflow:hidden; position:relative;}
+.plate{margin:0;}
 .bleed{margin-left:calc(var(--gut)*-1); margin-right:calc(var(--gut)*-1);}
+.plate img{display:block; width:100%; height:auto; max-height:55dvh; object-fit:contain;}
 
-.plate.print img{display:block; mix-blend-mode:multiply; filter:grayscale(1) contrast(1.06);}
-.plate.print.lift img{filter:grayscale(1) brightness(1.09) contrast(1.14);}
-
-.plate.field img{display:block; mix-blend-mode:normal;
-  filter:saturate(.62) contrast(.97) brightness(1.05);
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 13%,#000 58%,transparent 100%),
-                     linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
-  mask-image:linear-gradient(to bottom,transparent 0,#000 13%,#000 58%,transparent 100%),
-             linear-gradient(to right,transparent 0,#000 11%,#000 89%,transparent 100%);
-  -webkit-mask-composite:source-in; mask-composite:intersect;}
-.plate.field::after{content:""; position:absolute; inset:0; pointer-events:none;
-  background:radial-gradient(118% 92% at 50% 46%,rgba(241,236,223,0) 44%,var(--paper) 100%);}
-.plate.field.mono img{filter:grayscale(1) brightness(1.16) contrast(.95);}
-/* A wide field plate is cropped by its own frame, so the four fades cut into
-   the mask can fall outside the window and the print stops on a line after
-   all. .soft dissolves the frame itself, top and bottom, whatever the crop. */
-.plate.field.soft::after{
-  background:
-    linear-gradient(to bottom,var(--paper) 0,rgba(241,236,223,0) 24%,
-      rgba(241,236,223,0) 70%,var(--paper) 100%),
-    radial-gradient(120% 96% at 50% 46%,rgba(241,236,223,0) 38%,var(--paper) 100%);}
-
-/* session: the specimen entire, cut to its own bounding box so no lobe tip
-   is lost and the leaves touch both edges. Percentages, so it holds at 360. */
-.pl-hero{aspect-ratio:390/528;}
-.pl-hero img{width:108.7%; margin:-11.54% 0 0 -5.92%;}
-/* species and progress-shape: the same specimen, lower edge dissolved */
-.pl-leaf{aspect-ratio:390/452;}
-.pl-leaf img{width:108.7%; margin:-11.54% 0 0 -5.92%;
-  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 100%);
-  mask-image:linear-gradient(to bottom,#000 0,#000 74%,transparent 100%);}
-.pl-shape{aspect-ratio:390/430;}
-.pl-shape img{width:108.7%; margin:-11.54% 0 0 -5.92%;
-  -webkit-mask-image:linear-gradient(to bottom,#000 0,#000 72%,transparent 100%);
-  mask-image:linear-gradient(to bottom,#000 0,#000 72%,transparent 100%);}
-/* species and progress: the bark, a field plate */
-.pl-bark{aspect-ratio:390/342;}
-.pl-bark img{width:100%;}
+/* The fixed frames. The photo fills the frame's box and shows whole in it. */
+.pl-hero img, .reveal > .plate img, .pair figure img, .invkey .plate img,
+.pl-thumb img{height:100%; max-height:none;}
+/* session: the question photo. At 45dvh the prompt and two answers stay
+   inside a 780 px screen, and a phone on its side still shows the prompt. */
+.pl-hero{height:45dvh;}
+/* reveal: the one photo of a right answer, with Next under it */
+.reveal > .plate{height:50dvh;}
 /* home and lessons: a small print of one card inside the recommended unit */
-.pl-thumb{width:124px; aspect-ratio:600/900;}
-.pl-thumb img{width:100%; margin:0;}
-/* the specimen's own ground is paper once it multiplies, so the empty lower
-   band of the scan can be cut away and the caption sits under the print */
-.pl-thumb.wide{width:148px; aspect-ratio:600/745;}
+.pl-thumb{width:124px; height:186px;}
+.pl-thumb.wide{width:148px;}
 
-/* reveal: the pair, matched to one scale and one baseline so the sentence
-   about lobe depth can actually be checked */
+/* reveal: the pair, side by side at one height, so the two photos can be
+   compared */
 .pair{display:grid; grid-template-columns:1fr 1fr; gap:0 6px;}
-.pair figure{aspect-ratio:183/244;}
-.pair figure img{width:100.5%;}
-.pl-a img{margin:-7.65% 0 0 -1.64%;}
-.pl-b img{margin:-7.65% 0 0 0;}
+.pair figure{height:40dvh;}
 
 /* ---------- running head + printed gauge (session and reveal) ---------- */
 .head{padding-top:16px; display:flex; flex-wrap:wrap; align-items:baseline;
@@ -708,20 +665,6 @@ label.setbtn:has(input:focus-visible){outline:2px solid var(--moss); outline-off
    These rules add exactly those, in the same system.
    ======================================================================= */
 
-/* A plate with no crop class still fills its column. The `.pl-*` rules above
-   set their own width and a negative margin, which is what crops the scan, so
-   this rule must not reach them: `.plate img` and `.pl-hero img` weigh the
-   same and this one comes later, which would reset the width and leave the
-   negative margin behind, shifting every cropped plate up and left. */
-.plate:not([class*="pl-"]) img{width:100%;}
-
-/* A plate whose treatment has not been measured yet draws nothing. The
-   measurement needs the image loaded, so without this every bright scan
-   paints once as a field plate and snaps to a print a frame later, which on
-   the session hero is a visible flash. The figure keeps its box, so nothing
-   moves when the image appears. */
-.plate.measuring img{visibility:hidden;}
-
 /* The running foot sits at the bottom of a short page. `.footnav` carries the
    36px clearance in its own top margin, so the pusher adds none. */
 .footpush{flex:1 0 0; min-height:0;}
@@ -760,7 +703,8 @@ button.btn{width:100%; padding:0;}
 .typed input:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
 .typed .btn{flex:0 0 auto; width:auto; min-width:104px; margin:0; padding:0 18px;}
 
-/* the inverted format: pick the photo, four plates at one scale */
+/* the inverted format: pick the photo. Each cell is square, and each photo
+   shows whole inside its cell, so the grid stays even. */
 .invkey{display:grid; grid-template-columns:1fr 1fr; gap:9px; margin:12px 0 0;}
 /* The one button in the app that carries no class. It held the paper's type
    from the legacy element rule, which is gone, so it takes `font:inherit`
