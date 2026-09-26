@@ -1160,6 +1160,124 @@ test('images retire of the last live image retires the species too', async (t) =
   assert.equal(storage.objects.has(objectKey(HASH_C)), false);
 });
 
+test('images difficulty --set hard marks the row and keeps the object', async (t) => {
+  const { root, deps, exec, storage, out, err } = setup(t);
+  seed(root, {
+    manifest: [
+      row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' }),
+      row({ hash: HASH_D, target: 'QUGA', channel: 'bark' }),
+    ],
+  });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+  await storage.put(objectKey(HASH_C), new Uint8Array([1]), 'image/jpeg');
+
+  const code = await runCommand(['images', 'difficulty', HASH_C, '--set', 'hard'], deps);
+  assert.equal(code, 0, err.join(' | '));
+
+  const rows = manifestOf(root);
+  assert.equal(rows[0].difficulty, 'hard');
+  assert.equal(rows[1].difficulty, undefined);
+  assert.equal(storage.objects.has(objectKey(HASH_C)), true);
+  const commit = called(exec, 'git', 'commit');
+  assert.ok(commit !== undefined);
+  assert.ok(commit.args.includes(`content: mark image ${HASH_C} hard`));
+  assert.ok(out.join('\n').includes(`1 manifest row set to hard for ${HASH_C}`));
+});
+
+test('images difficulty --clear takes the field off, and a second clear changes nothing', async (t) => {
+  const { root, deps, exec, out, err } = setup(t);
+  seed(root, {
+    manifest: [
+      row({ hash: HASH_C, target: 'QUGA', channel: 'leaf', difficulty: 'hard' }),
+      row({ hash: HASH_D, target: 'QUGA', channel: 'bark' }),
+    ],
+  });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C, '--clear'], deps), 0, err.join(' | '));
+  assert.equal('difficulty' in manifestOf(root)[0], false);
+  assert.ok(out.join('\n').includes(`1 manifest row cleared for ${HASH_C}`));
+
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C, '--clear'], deps), 0);
+  assert.ok(out.join('\n').includes(`no manifest row changed for ${HASH_C}`));
+  const commits = exec.calls.filter((call) => call.command === 'git' && call.args[0] === 'commit');
+  assert.equal(commits.length, 1);
+});
+
+test('images difficulty needs one of --set or --clear, takes only hard, and needs a known hash', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, { manifest: [row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' })] });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C], deps), 1);
+  assert.equal(
+    await runCommand(['images', 'difficulty', HASH_C, '--set', 'hard', '--clear'], deps),
+    1,
+  );
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C, '--set', 'easy'], deps), 1);
+  assert.equal(await runCommand(['images', 'difficulty', HASH_A, '--set', 'hard'], deps), 1);
+
+  assert.deepEqual(err, [
+    'images difficulty needs one of --set hard or --clear',
+    'images difficulty needs one of --set hard or --clear',
+    'images difficulty --set takes hard, not easy',
+    `no manifest row carries hash ${HASH_A}`,
+  ]);
+  assert.equal(manifestOf(root)[0].difficulty, undefined);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('images difficulty will not hide the last photo of a species no edge names', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root, { manifest: [row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' })] });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+  await storage.put(objectKey(HASH_C), new Uint8Array([1]), 'image/jpeg');
+
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C, '--set', 'hard'], deps), 1);
+
+  assert.ok(
+    err.includes('error species.json: QUGA has no manifest image and no confusion edge'),
+    err.join(' | '),
+  );
+  assert.equal(manifestOf(root)[0].difficulty, undefined);
+  assert.equal(storage.objects.has(objectKey(HASH_C)), true);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('a build keeps the difficulty on a published row', async (t) => {
+  const { root, deps, err } = setup(t);
+  seed(root, {
+    manifest: [row({ hash: HASH_C, target: 'QUGA', channel: 'leaf', difficulty: 'hard' })],
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  const kept = manifestOf(root).find((one) => one.hash === HASH_C);
+  assert.equal(kept?.difficulty, 'hard');
+});
+
+test('a build leaves a hard photo out of the counts and the gaps', async (t) => {
+  const { root, deps, err } = setup(t);
+  seed(root);
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+  const rows = manifestOf(root).map((one) =>
+    one.channel === 'leaf' ? { ...one, difficulty: 'hard' as const } : one,
+  );
+  writeJson(root, 'content/images/manifest.json', rows);
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  const data = buildOf(root);
+  assert.deepEqual(data.species[0], {
+    symbol: 'QUGA', status: 'included', reason: null, counts: { bark: 1 },
+  });
+  assert.deepEqual(data.gaps, [
+    { symbol: 'QUGA', channel: 'leaf', count: 0 },
+    { symbol: 'QUGA', channel: 'bark', count: 1 },
+  ]);
+  assert.equal(manifestOf(root).find((one) => one.channel === 'leaf')?.difficulty, 'hard');
+});
+
 test('species retire marks the record, retires its rows, and removes the objects', async (t) => {
   const { root, deps, exec, storage, out, err } = setup(t);
   seed(root, {

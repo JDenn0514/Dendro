@@ -8,7 +8,8 @@ import type { Verdict } from '../lib/verdicts.ts';
 import { JPEG_QUALITY, MAX_SIDE, objectKey, reviewKey } from '../lib/images.ts';
 import type { Resize } from '../lib/images.ts';
 import { memoryStorage } from '../lib/storage.ts';
-import { publishApproved, retireRows } from '../lib/manifest.ts';
+import { publishApproved, retireRows, setDifficulty, shownRows } from '../lib/manifest.ts';
+import type { ManifestRow } from '../lib/manifest.ts';
 import type { ManifestRow } from '../lib/manifest.ts';
 
 const ROW_FIELDS = [
@@ -379,4 +380,53 @@ test('memoryStorage head follows put and remove, and puts records the content ty
   assert.deepEqual(storage.puts, [{ key: 'img/x.jpg', contentType: 'image/jpeg' }]);
   await storage.remove('img/x.jpg');
   assert.equal(await storage.head('img/x.jpg'), false);
+});
+
+function plainRow(hash: string, target: string): ManifestRow {
+  return {
+    hash,
+    target,
+    channel: 'leaf',
+    source: 'x',
+    author: 'x',
+    license: 'x',
+    origin: 'x',
+    tags: [],
+    checked_by: 'x',
+    checked_at: '2026-09-25',
+    note: '',
+  };
+}
+
+test('setDifficulty marks every row with the hash and leaves the input alone', () => {
+  const hash = 'e'.repeat(64);
+  const rows = [plainRow(hash, 'QUGA'), plainRow(hash, 'leaf/simple_lobed'), plainRow('f'.repeat(64), 'QUGA')];
+  const result = setDifficulty(rows, hash, 'hard');
+  assert.equal(result.matched, 2);
+  assert.equal(result.changed, 2);
+  assert.equal(result.rows[0].difficulty, 'hard');
+  assert.equal(result.rows[1].difficulty, 'hard');
+  assert.equal(result.rows[2].difficulty, undefined);
+  assert.equal(rows[0].difficulty, undefined);
+  assert.equal(setDifficulty(result.rows, hash, 'hard').changed, 0);
+});
+
+test('setDifficulty with null takes the field off', () => {
+  const hash = 'e'.repeat(64);
+  const marked = setDifficulty([plainRow(hash, 'QUGA')], hash, 'hard').rows;
+  const result = setDifficulty(marked, hash, null);
+  assert.equal(result.changed, 1);
+  assert.equal('difficulty' in result.rows[0], false);
+  assert.equal(setDifficulty([plainRow(hash, 'QUGA')], 'a'.repeat(64), null).matched, 0);
+});
+
+test('shownRows keeps the rows of one target the app shows', () => {
+  const rows = [
+    plainRow('a'.repeat(64), 'QUGA'),
+    { ...plainRow('b'.repeat(64), 'QUGA'), difficulty: 'hard' as const },
+    { ...plainRow('c'.repeat(64), 'QUGA'), retired: true },
+    plainRow('d'.repeat(64), 'QURU'),
+  ];
+  assert.deepEqual(shownRows(rows, 'QUGA').map((row) => row.hash), ['a'.repeat(64)]);
+  assert.deepEqual(shownRows(rows, 'QUAL'), []);
 });
