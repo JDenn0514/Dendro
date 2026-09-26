@@ -3217,7 +3217,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:43:08Z",
-    "note": "Leafy shoot seen from above, the broad lobed leaves are sharp and fill most of the frame."
+    "note": "Leafy shoot seen from above, the broad lobed leaves are sharp and fill most of the frame.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the sprout leaves have entire edges and read as unlobed.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "2c175c54a720326cac993804041aac262c0d8f7d0b3c8d00918b0338a2e2e67a",
