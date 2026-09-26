@@ -22,6 +22,7 @@ the last commit. Do not run `git commit` yourself.
 | Path | Written by |
 |---|---|
 | `pipeline/runs/<name>/run.json` | `run init`, then `species list` and `photos fetch` |
+| `pipeline/runs/<name>/look_for.json` | the `species-draft` skill |
 | `pipeline/runs/<name>/candidates.jsonl` | `photos fetch`, `photos add` |
 | `pipeline/runs/<name>/verdicts.jsonl` | `photos verdict`, `run finish` |
 | `pipeline/runs/<name>/build.json` | `build` |
@@ -57,7 +58,20 @@ looks like a rate limit. Tell the owner when a symbol fails twice.
 
 Run the `species-draft` skill. It writes one `content_src/species/<SYMBOL>.json` for each
 species in `run.json` that lacks one. A species with no authored file gets no record in
-`content/species.json`; the build reports it as `not_authored`.
+`content/species.json`; the build reports it as `not_authored`. The skill also writes the
+look-for lines into `pipeline/runs/<name>/look_for.json`.
+
+Then trim the species list, before step 4. `photos fetch` fetches every symbol in the
+`species` field of `run.json`, and that list holds varieties and species outside the
+bucket.
+
+1. Keep a symbol when `content_src/species/<SYMBOL>.json` exists and its `concepts.leaf`
+   equals the `bucket` field of `run.json`.
+2. Remove the symbols that the owner names as out of scope for the run.
+3. Write the result back to `species`, as an array of strings. Change no other field.
+   Every command reads `run.json` through a shape check and stops on a bad field.
+
+A new `species list` writes `species` again and removes the trim. Trim again after it.
 
 - [ ] **Step 4: Fetch the photo candidates (script, commits)**
 
@@ -80,7 +94,9 @@ The last line gives the appended rows per source, in fetch order, for example
 - [ ] **Step 5: Approve the photos (agent)**
 
 Run the `photo-check` skill. It judges each candidate that has no verdict and records each
-verdict with `node pipeline/cli.ts photos verdict …`. The stop rule applies. When that
+verdict with `node pipeline/cli.ts photos verdict …`. It stops on a target when each
+channel of that target has 6 approved photos, and the other candidates of that target stay
+unjudged. The stop rule applies. When that
 skill stops, the run stops with it.
 
 - [ ] **Step 6: Build (script, commits)**
