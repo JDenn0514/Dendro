@@ -8,7 +8,7 @@ import {
   dueCardIds, newCardCountToday, recommendUnit, buildSession,
   requeueCard, buildPlacementDeck, placementState, answerEffects,
   todayString, unitsForFocus, dueTomorrowCount, sessionPosition,
-  emptyResults, accumulateAnswer, newCardCapDone
+  emptyResults, accumulateAnswer, newCardCapDone, sessionPlace
 } from '../app/logic/session.js';
 
 const { content } = loadContent(loadFixture());
@@ -149,6 +149,27 @@ test('a chosen unit overrides the recommended unit', () => {
   });
   assert.equal(result.unit_key, 'simple_lobed_maples_co');
   assert.ok(!result.card_ids.includes('concept:leaf:simple_lobed'));
+});
+
+test('a deck that due cards fill carries no unit key', () => {
+  const states = { 'species:QUGA:leaf': reviewed('2026-03-01') };
+  const result = buildSession({
+    content, states, log: [], settings: { session_size: 1, new_per_day: 10 },
+    today: TODAY, focus: 'leaf', chosen_unit: 'simple_lobed_maples_co', rng: makeRng(43)
+  });
+  assert.deepEqual(result.card_ids, ['species:QUGA:leaf']);
+  assert.deepEqual(result.new_card_ids, []);
+  assert.equal(result.unit_key, null);
+});
+
+test('the header names the unit only for a card in that unit', () => {
+  const unitKey = 'simple_lobed_maples_co';
+  const place = (cardId, mode = 'review', key = unitKey) =>
+    sessionPlace({ content, mode, unit_key: key, card_id: cardId });
+  assert.equal(place('species:ACPL:leaf'), 'Maples');
+  assert.equal(place('species:QUGA:leaf'), 'Review');
+  assert.equal(place('species:ACPL:leaf', 'review', null), 'Review');
+  assert.equal(place('concept:leaf:simple_lobed', 'placement', null), 'Placement test');
 });
 
 test('an again card re-queues once at the back', () => {

@@ -2,6 +2,7 @@
 import { isDue, addDays, scheduleCard } from './scheduler.js';
 import { shuffle } from './question.js';
 import { gateStatus, cardLevel } from './progress.js';
+import { unitFor } from './content.js';
 
 // A right placement answer parks the card this many days out.
 const PLACEMENT_INTERVAL_DAYS = 21;
@@ -29,6 +30,15 @@ export function sessionPosition(shown, total) {
   if (total <= 0) return { position: 0, total, percent: 0 };
   const position = Math.min(Math.max(shown, 1), total);
   return { position, total, percent: Math.round((position / total) * 100) };
+}
+
+// The first words of the session header, for one card. A unit's name belongs
+// only to that unit's cards. A due card from anywhere else is a review.
+export function sessionPlace({ content, mode, unit_key: unitKey, card_id: cardId }) {
+  if (mode === 'placement') return 'Placement test';
+  const ids = unitKey ? content.unit_cards[unitKey] ?? [] : [];
+  if (!ids.includes(cardId)) return 'Review';
+  return unitFor(content, unitKey)?.name ?? 'Review';
 }
 
 export function dueCardIds({ content, states, focus, today }) {
@@ -97,7 +107,8 @@ export function buildSession({
 
   return {
     card_ids: shuffle([...picked, ...newIds], rng),
-    unit_key: unitKey,
+    // A unit the deck took no new card from is not what the session studies.
+    unit_key: newIds.length > 0 ? unitKey : null,
     due_card_ids: picked,
     new_card_ids: newIds
   };

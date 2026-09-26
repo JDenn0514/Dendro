@@ -1,9 +1,10 @@
 // The quiz loop, the reveal, and the summary. Computes nothing: every value
 // comes from a logic module.
-import { unitFor, channelLabel } from '../logic/content.js';
+import { channelLabel } from '../logic/content.js';
 import {
   buildSession, buildPlacementDeck, answerEffects, requeueCard,
-  dueTomorrowCount, sessionPosition, emptyResults, accumulateAnswer
+  dueTomorrowCount, sessionPosition, emptyResults, accumulateAnswer,
+  sessionPlace
 } from '../logic/session.js';
 import {
   buildQuestion, buildReveal, invAvailable, answerPhoto, revealCredits
@@ -62,13 +63,12 @@ export function render(root, ctx) {
         content, states: store.readCards(), log: store.readLog(),
         settings: userSettings, today, focus, chosen_unit: chosenUnit
       }));
-  const unit = built?.unit_key ? unitFor(content, built.unit_key) : null;
+  // The unit the deck took its new cards from, or null. The header reads it
+  // card by card, through `sessionPlace`.
+  const unitKey = resumed ? resumed.unit_key : (built.unit_key ?? null);
   const deck = resumed
     ? [...resumed.deck]
     : built.card_ids;
-  const where = resumed
-    ? resumed.where
-    : (mode === 'placement' ? 'Placement test' : (unit?.name ?? 'Review'));
 
   const lastHash = resumed ? { ...resumed.last_hash } : {};
   // The grid photos of the card on screen that failed to load. The reveal
@@ -182,6 +182,7 @@ export function render(root, ctx) {
     leave.type = 'button';
     leave.addEventListener('click', () => onLeave());
     bar.append(leave);
+    const where = sessionPlace({ content, mode, unit_key: unitKey, card_id: question.card_id });
     bar.append(el('span', 'where',
       `${where}, ${channelLabel(question.channel)} card `
       + `${place.position} of ${place.total}`));
@@ -641,7 +642,7 @@ export function render(root, ctx) {
   function suspend(view) {
     suspended = {
       token,
-      where,
+      unit_key: unitKey,
       deck: [...deck],
       index,
       answer_count: answerCount,
