@@ -4,7 +4,8 @@
 // Nothing crops, blends, masks, or tints the photo.
 import { el } from './dom.js';
 import { imageUrl } from '../logic/content.js';
-import { licenseUrl, creditParts } from '../logic/licenses.js';
+import { licenseUrl, creditMark } from '../logic/licenses.js';
+import { sourceHref } from '../logic/sources.js';
 
 // A plate that cannot load leaves no broken image and no caption for a
 // picture that is not there. The screens that want something else, and the
@@ -35,7 +36,7 @@ export function plate(photo, options) {
   return figure;
 }
 
-// A link that opens in a new tab, for the two links a credit carries.
+// A link that opens in a new tab, for the three links a credit carries.
 function outLink(text, href) {
   const anchor = el('a', null, text);
   anchor.href = href;
@@ -45,19 +46,25 @@ function outLink(text, href) {
 }
 
 // The credit line. The author links to the photo's origin page, so the credit
-// reaches the source. The license name links to its deed when the app knows
-// one, and prints as text when it does not. `creditParts` sets the text and
-// the separators.
+// reaches the source. The source name links to its entry on the Sources
+// screen, which gives the full name. It opens in a new tab, as the other two
+// links do, so a session in progress stays open. The license name links to its
+// deed when the app knows one, and prints as text when it does not.
+// `creditMark` sets the separator, so the text is the text of `creditParts`.
 export function credit(photo, lead = '') {
-  const [author, source, license, stop] = creditParts(photo);
+  const mark = creditMark(photo);
   const line = el('p', 'cap plate-cap');
   if (lead) line.append(document.createTextNode(`${lead} `));
-  if (photo.origin) line.append(outLink(author, photo.origin));
-  else line.append(document.createTextNode(author));
-  line.append(document.createTextNode(source));
-  const deed = licenseUrl(license);
-  if (deed) line.append(outLink(license, deed));
-  else line.append(document.createTextNode(license));
-  line.append(document.createTextNode(stop));
+  if (photo.origin) line.append(outLink(photo.author, photo.origin));
+  else line.append(document.createTextNode(photo.author));
+  line.append(document.createTextNode(`${mark} `));
+  const entry = sourceHref(photo.source);
+  if (entry) line.append(outLink(photo.source, entry));
+  else line.append(document.createTextNode(photo.source));
+  line.append(document.createTextNode(`${mark} `));
+  const deed = licenseUrl(photo.license);
+  if (deed) line.append(outLink(photo.license, deed));
+  else line.append(document.createTextNode(photo.license));
+  line.append(document.createTextNode('.'));
   return line;
 }

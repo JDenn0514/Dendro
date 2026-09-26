@@ -1,3 +1,5 @@
+import { sourceEntry } from './sources.js';
+
 // The deed page for each license name the manifest uses. The list is the
 // distinct values in content/images/manifest.json on 2026-09-25. A name
 // with no entry prints as plain text: public domain has no deed page, and a
@@ -23,12 +25,17 @@ export function licenseUrl(name) {
   return LICENSE_URLS[name];
 }
 
+// The mark between the parts of a credit line. Commas separate the parts. A
+// source whose entry in sources.js sets `semicolons`, VT Dendrology only, gets
+// semicolons, because its author is a list of names. Pure.
+export function creditMark(photo) {
+  return sourceEntry(photo.source)?.semicolons ? ';' : ',';
+}
+
 // The four text parts of a credit line: the author, the source between its
-// separators, the license, and the stop. Commas separate the parts. An author
-// can hold a comma: a list of names, as for the Virginia Tech photographers,
-// or a place, as in "Bruce Kirchoff from Greensboro, NC, USA". Then commas
-// hide where the author stops, so semicolons separate the parts. Pure.
+// marks, the license, and the stop. `credit` in app/ui/plate.js prints the
+// same text. Pure.
 export function creditParts(photo) {
-  const mark = String(photo.author).includes(',') ? ';' : ',';
+  const mark = creditMark(photo);
   return [photo.author, `${mark} ${photo.source}${mark} `, photo.license, '.'];
 }

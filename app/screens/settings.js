@@ -1,9 +1,10 @@
-// Session size, new cards per day, text size, export, import, reset, and the
-// missing diagnostics. The one screen that opens with no content.
+// Session size, new cards per day, text size, export, import, reset, the
+// missing diagnostics, and the link to the photo sources. It opens with no
+// content, as the Sources screen does.
 import { isCount } from '../logic/store.js';
 import { displayName } from '../logic/words.js';
 import { TEXT_SIZE_STEPS, applyTextSize } from '../ui/textsize.js';
-import { el } from '../ui/dom.js';
+import { el, link } from '../ui/dom.js';
 import { footNav, tick, trail } from '../ui/chrome.js';
 
 const SESSION_SIZES = [8, 12, 20, 30];
@@ -199,6 +200,18 @@ function cardsGroup(root, ctx, state) {
   root.append(group);
 }
 
+function sourcesGroup(root) {
+  const group = el('div', 'setgroup');
+  group.append(tick());
+  group.append(el('h2', 'sec-h', 'Photo sources'));
+  group.append(el('p', 'sub2',
+    'The full name of each source that the photo credits name, and its terms.'));
+  const links = el('div', 'links');
+  links.append(link('#/sources', 'foot', 'Photo sources'));
+  group.append(links);
+  root.append(group);
+}
+
 function diagnosticsGroup(root, ctx) {
   const { store, content } = ctx;
   const group = el('div', 'setgroup');
@@ -259,6 +272,7 @@ export function render(root, ctx, state = {}) {
   textSizeGroup(root, ctx);
   cardsGroup(root, ctx, state);
   diagnosticsGroup(root, ctx);
+  sourcesGroup(root);
 
   root.append(footNav(null));
 }
