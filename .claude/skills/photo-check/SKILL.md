@@ -43,7 +43,8 @@ exception is a Kew POWO row whose saved file is missing. That row gets no verdic
 
 **Stop at 6 good photos.** Count the approved photos of each target from
 `verdicts.jsonl`. Use the last row of each candidate `id`, take the `approve` rows, and
-group them by the candidate's `target` and the verdict's `channel`. A target is full when
+group them by the candidate's `target` and the verdict's `channel`. Do not count an
+approve that has the `hard` tag: the app does not show a hard photo. A target is full when
 each channel in the run's channel list has 6 approved photos for that target. A concept
 target has one channel only, its own prefix, so a `bark/plated` target is full at 6
 approved `bark` photos. Dispatch no more candidates of a full target. They stay unjudged.
@@ -94,7 +95,8 @@ Then apply these rules in order:
 1. The feature is not visible: reject.
 2. The photo is distant or cluttered, but the feature is still visible: approve, and add
    `hard` to `--tags`, such as `--tags hard` or `--tags hard,winter`. The `hard` tag goes
-   onto the manifest row as it is.
+   onto the manifest row as it is. The app hides a photo only when its manifest row has
+   `difficulty: "hard"`. The `images difficulty` command sets that field after the build.
 3. Any other photo below the threshold above, such as a soft photo, or a hand or a ruler
    in the shot: escalate with `--case quality`.
 
