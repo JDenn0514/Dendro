@@ -163,7 +163,7 @@ test('a group card below four options falls back to typed without changing the t
 
 test('a group option shows the genus common name over the genus', () => {
   assert.deepEqual(labelFor(content, 'group', 'leaf', 'Quercus'),
-    { label: 'oak', sublabel: 'Quercus' });
+    { label: 'Oak', sublabel: 'Quercus' });
   // The Acer records carry no genus_common, so the genus stands in both rows.
   assert.deepEqual(labelFor(content, 'group', 'leaf', 'Acer'),
     { label: 'Acer', sublabel: 'Acer' });
@@ -372,7 +372,7 @@ test('a group miss names both genera in one sentence each', () => {
   });
   const reveal = buildReveal({ question: q, chosen_key: 'Acer', content });
   assert.equal(reveal.diagnostic.kind, 'fallback');
-  assert.equal(reveal.diagnostic.text, 'The answer is oak. You picked Acer.');
+  assert.equal(reveal.diagnostic.text, 'The answer is Oak. You picked Acer.');
   assert.equal(reveal.missing_edge, null);
 });
 

@@ -1,6 +1,6 @@
 // Picks the format, samples a photo, builds options and distractors, builds the reveal.
 import { cardId } from './content.js';
-import { displayName } from './words.js';
+import { displayName, capitalize } from './words.js';
 
 // An inv question asks the learner to pick the photo. Below this many photo
 // options the card asks mc8 instead.
@@ -143,10 +143,12 @@ export function labelFor(content, kind, channel, key) {
   }
   if (kind === 'group') {
     // genus_common is optional. With no live member that carries one, the genus
-    // fills both rows.
+    // fills both rows. The content keeps the lowercase form, as it does for a
+    // species name, and a label starts with a capital the way `displayName`
+    // prints one.
     const member = Object.values(content.species)
       .find((s) => s.genus === key && !s.retired && s.genus_common);
-    return { label: member?.genus_common ?? key, sublabel: key };
+    return { label: member ? capitalize(member.genus_common) : key, sublabel: key };
   }
   const { symbol, variety } = varietyOf(content, key);
   return { label: variety?.name ?? key, sublabel: symbol ? content.species[symbol].scientific : '' };
