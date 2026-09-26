@@ -40,9 +40,9 @@ For `simple_lobed` in v0, draft 15 to 25 edges. Below 15 the distractor pool is 
 
 ## The rules
 
-**Both symbols are in this run's species list.** Write an edge only for two symbols that
-`run.json` names under `species`. A pair from another run is not yours to draft, and the
-owner reviews this run's edges against this run's references.
+**Both symbols are in the content set.** An edge pairs two species that are both in
+`content/species.json`. They do not have to be in the same run. A run drafts edges for each
+of its species against every species in the content set (owner ruling 2026-09-26).
 
 **Both `a` and `b` must be in `content/species.json`.** Check each symbol in that file
 before you write the edge. The validator rejects an edge whose `a` or `b` is missing, and
@@ -78,6 +78,5 @@ report. An edge that names a missing species fails that build.
 - It does not create or edit a species record.
 - It does not rename or remove an existing edge. Edges are appended.
 - It does not write an edge for a species that is not in `content/species.json`.
-- It does not write an edge for a symbol outside this run's species list.
 - It does not run the validator. `cli build` does that.
 - It does not commit.

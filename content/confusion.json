@@ -150,5 +150,741 @@
     "a_not_b": "Gambel oak has deep rounded lobes, with sinuses that cut more than halfway to the midrib.",
     "b_not_a": "Havard oak has a wavy margin with only 2 or 3 rounded teeth on each side, on a thick blade with a gray woolly underside.",
     "ref": "FNA vol. 3, Quercus gambelii (taxon 233501032) and Quercus havardii (taxon 233501042)"
+  },
+  {
+    "a": "QUCO2",
+    "b": "QUEL",
+    "channel": "fruit",
+    "a_not_b": "Scarlet oak has shiny cap scales that lie flat at the rim, and the acorn tip often has fine rings or cracks.",
+    "b_not_a": "Northern pin oak has hairy cap scales that are loose at the rim, and the acorn tip has no rings.",
+    "ref": "Virginia Tech Dendrology fact sheets 37, Quercus coccinea, and 999, Quercus ellipsoidalis"
+  },
+  {
+    "a": "QUCO2",
+    "b": "QUTE",
+    "channel": "leaf",
+    "a_not_b": "Scarlet oak has very deep sinuses and a shiny green upper surface.",
+    "b_not_a": "Nuttall oak has a dull dark green upper surface, and its 5 to 7 lobes differ in length.",
+    "ref": "Virginia Tech Dendrology fact sheets 37, Quercus coccinea, and 554, Quercus texana"
+  },
+  {
+    "a": "QUFA",
+    "b": "QUPA5",
+    "channel": "leaf",
+    "a_not_b": "Southern red oak often has one long hooked terminal lobe with two short side lobes, like a turkey foot.",
+    "b_not_a": "Cherrybark oak has 5 to 9 shallower lobes that stand at nearly right angles to the midrib.",
+    "ref": "Virginia Tech Dendrology fact sheets 68, Quercus falcata, and 336, Quercus pagoda"
+  },
+  {
+    "a": "QUFA",
+    "b": "QUPA5",
+    "channel": "bark",
+    "a_not_b": "Southern red oak has thick dark bark with broad scaly ridges and deep narrow furrows.",
+    "b_not_a": "Cherrybark oak has dark rough bark broken into small scales, and it can look like the bark of black cherry.",
+    "ref": "Virginia Tech Dendrology fact sheets 68, Quercus falcata, and 336, Quercus pagoda"
+  },
+  {
+    "a": "QUFA",
+    "b": "QULA2",
+    "channel": "leaf",
+    "a_not_b": "Southern red oak has a terminal lobe much longer than the side lobes, and the underside is fuzzy and tawny.",
+    "b_not_a": "Turkey oak has a short petiole, and the underside is smooth except for hair tufts in the vein angles.",
+    "ref": "FNA vol. 3, Quercus falcata (taxon 233501030) and Quercus laevis (taxon 233501054)"
+  },
+  {
+    "a": "QUGE",
+    "b": "QUIL",
+    "channel": "leaf",
+    "a_not_b": "Georgia oak has a hairless underside, except for tufts of hair in the vein angles.",
+    "b_not_a": "Bear oak has a thickly hairy underside that is much lighter than the upper surface.",
+    "ref": "Virginia Tech Dendrology fact sheets 1023, Quercus georgiana, and 69, Quercus ilicifolia; FNA vol. 3, Quercus georgiana (taxon 233501038)"
+  },
+  {
+    "a": "QUKE",
+    "b": "QUGA4",
+    "channel": "leaf",
+    "a_not_b": "California black oak has bristle tips on its lobes, and each lobe carries about 3 teeth.",
+    "b_not_a": "Oregon white oak has rounded lobes with no bristle tips, on a leathery blade.",
+    "ref": "Virginia Tech Dendrology fact sheets 242, Quercus kelloggii, and 240, Quercus garryana"
+  },
+  {
+    "a": "QUKE",
+    "b": "QUGA4",
+    "channel": "bark",
+    "a_not_b": "California black oak has dark brown to black bark in broad irregular plates.",
+    "b_not_a": "Oregon white oak has thin light gray to gray-brown bark, with shallow furrows between short broad ridges.",
+    "ref": "Virginia Tech Dendrology fact sheets 242, Quercus kelloggii, and 240, Quercus garryana"
+  },
+  {
+    "a": "QUGA4",
+    "b": "QULO",
+    "channel": "leaf",
+    "a_not_b": "Oregon white oak has 5 to 9 irregular lobes that often touch or overlap, and a shiny upper surface.",
+    "b_not_a": "Valley oak has 9 to 11 deep rounded lobes, and the upper surface is dull green and often hairy.",
+    "ref": "Virginia Tech Dendrology fact sheets 240, Quercus garryana, and 461, Quercus lobata"
+  },
+  {
+    "a": "QURO2",
+    "b": "QUGA4",
+    "channel": "leaf",
+    "a_not_b": "English oak has very small ear-like lobes at the leaf base and a very short petiole.",
+    "b_not_a": "Oregon white oak has lobes that often touch or overlap, on a thick leathery blade.",
+    "ref": "Virginia Tech Dendrology fact sheets 551, Quercus robur, and 240, Quercus garryana"
+  },
+  {
+    "a": "QULY",
+    "b": "QUAU",
+    "channel": "leaf",
+    "a_not_b": "Overcup oak has a long leaf, 6 to 10 inches, with irregular sinuses and a white hairy underside.",
+    "b_not_a": "Bastard white oak has a shorter leaf, 3 to 7 inches, with shallow rounded lobes and a wedge-shaped base.",
+    "ref": "Virginia Tech Dendrology fact sheets 71, Quercus lyrata, and 1021, Quercus austrina"
+  },
+  {
+    "a": "QULY",
+    "b": "QUAU",
+    "channel": "fruit",
+    "a_not_b": "Overcup oak has a warty cap that covers almost all of the round acorn.",
+    "b_not_a": "Bastard white oak has a bowl-shaped cap that covers only a third to half of the acorn.",
+    "ref": "Virginia Tech Dendrology fact sheets 71, Quercus lyrata, and 1021, Quercus austrina"
+  },
+  {
+    "a": "QUAU",
+    "b": "QUSI",
+    "channel": "fruit",
+    "a_not_b": "Bastard white oak has a bowl-shaped cap that covers a third to half of the acorn.",
+    "b_not_a": "Bastard oak has a shallow saucer-shaped cap that covers a quarter of the acorn or less.",
+    "ref": "Virginia Tech Dendrology fact sheets 1021, Quercus austrina, and 552, Quercus sinuata; FNA vol. 3, Quercus sinuata (taxon 233501084)"
+  },
+  {
+    "a": "QUSI",
+    "b": "QUBO2",
+    "channel": "fruit",
+    "a_not_b": "Bastard oak has a thin saucer-shaped cup that covers only an eighth to a quarter of the nut.",
+    "b_not_a": "Boynton sand post oak has a deeper cup with gray hairy scales, and it covers a third to half of the nut.",
+    "ref": "FNA vol. 3, Quercus sinuata (taxon 233501084) and Quercus boyntonii (taxon 233501013)"
+  },
+  {
+    "a": "QULA",
+    "b": "QUSI",
+    "channel": "leaf",
+    "a_not_b": "Lacey oak has a blue-green blade with a waxy bloom on both surfaces.",
+    "b_not_a": "Bastard oak has a green or dull green upper surface, and the underside is often silvery with tiny star-shaped hairs.",
+    "ref": "FNA vol. 3, Quercus laceyi (taxon 233501053) and Quercus sinuata (taxon 233501084)"
+  },
+  {
+    "a": "ACPE",
+    "b": "ACSP2",
+    "channel": "leaf",
+    "a_not_b": "Striped maple has a large leaf, 5 to 8 inches, with 3 lobes at the tip like a goose foot.",
+    "b_not_a": "Mountain maple has a smaller leaf, 3 to 4 inches, with coarse teeth, broad V-shaped sinuses, and a somewhat hairy underside.",
+    "ref": "Virginia Tech Dendrology fact sheets 4, Acer pensylvanicum, and 354, Acer spicatum"
+  },
+  {
+    "a": "ACPE",
+    "b": "ACSP2",
+    "channel": "bark",
+    "a_not_b": "Striped maple has smooth gray-green bark with white stripes along the trunk.",
+    "b_not_a": "Mountain maple has thin gray-brown bark with no stripes, and the bark splits into shallow furrows with age.",
+    "ref": "Virginia Tech Dendrology fact sheets 4, Acer pensylvanicum, and 354, Acer spicatum"
+  },
+  {
+    "a": "ACPS",
+    "b": "ACRU",
+    "channel": "leaf",
+    "a_not_b": "Sycamore maple has a larger leaf, 5 to 6 inches, with 5 coarsely toothed lobes and a heart-shaped base.",
+    "b_not_a": "Red maple has a smaller leaf, 2 to 4 inches, with 3 to 5 shallow lobes and a whitened underside.",
+    "ref": "Virginia Tech Dendrology fact sheets 162, Acer pseudoplatanus, and 1, Acer rubrum"
+  },
+  {
+    "a": "ACFL",
+    "b": "ACRU",
+    "channel": "leaf",
+    "a_not_b": "Southern sugar maple has 3 or 5 rounded lobes with no teeth, and the underside is often fuzzy.",
+    "b_not_a": "Red maple has a toothed margin on its 3 to 5 lobes, and the underside is whitened.",
+    "ref": "Virginia Tech Dendrology fact sheets 337, Acer floridanum, and 1, Acer rubrum"
+  },
+  {
+    "a": "ACCI",
+    "b": "ACPA2",
+    "channel": "leaf",
+    "a_not_b": "Vine maple has 7 to 9 shallow lobes that spread like a fan, on a nearly round blade.",
+    "b_not_a": "Japanese maple has 5 to 7 lobes cut deep toward the petiole, and the blade is often deep red.",
+    "ref": "Virginia Tech Dendrology fact sheets 186, Acer circinatum, and 272, Acer palmatum"
+  },
+  {
+    "a": "ACCA5",
+    "b": "ACGI",
+    "channel": "leaf",
+    "a_not_b": "Hedge maple has 3 to 5 rounded lobes with a smooth margin, and a cut petiole leaks milky sap.",
+    "b_not_a": "Amur maple has 3 toothed lobes, and the middle lobe is much longer than the two side lobes.",
+    "ref": "Virginia Tech Dendrology fact sheets 330, Acer campestre, and 331, Acer ginnala"
+  },
+  {
+    "a": "ACMA3",
+    "b": "PLRA",
+    "channel": "leaf",
+    "a_not_b": "Bigleaf maple sets its leaves in pairs, across from each other, and a cut petiole leaks milky sap.",
+    "b_not_a": "California sycamore sets its leaves one at a time along the twig, on a long hairy petiole with a swollen base.",
+    "ref": "Virginia Tech Dendrology fact sheets 187, Acer macrophyllum, and 473, Platanus racemosa"
+  },
+  {
+    "a": "LIST2",
+    "b": "ACRU",
+    "channel": "leaf",
+    "a_not_b": "Sweetgum sets its leaves one at a time along the twig, and each has 5 to 7 finely toothed lobes like a star.",
+    "b_not_a": "Red maple sets its leaves in pairs, with 3 to 5 lobes and a whitened underside.",
+    "ref": "Virginia Tech Dendrology fact sheets 53, Liquidambar styraciflua, and 1, Acer rubrum"
+  },
+  {
+    "a": "LIST2",
+    "b": "PLRA",
+    "channel": "fruit",
+    "a_not_b": "Sweetgum has a woody brown ball of capsules, 1 to 1 1/2 inches wide, with spiny points.",
+    "b_not_a": "California sycamore has balls of tufted seeds the size of a golf ball, with 3 to 7 on one long hanging stalk.",
+    "ref": "Virginia Tech Dendrology fact sheets 53, Liquidambar styraciflua, and 473, Platanus racemosa"
+  },
+  {
+    "a": "LITU",
+    "b": "SAAL5",
+    "channel": "leaf",
+    "a_not_b": "Tuliptree has 4 lobes and a notched or flat top, so the leaf looks like a tulip.",
+    "b_not_a": "Sassafras has a pointed or rounded tip, and one branch can carry unlobed, mitten-shaped, and 3-lobed leaves.",
+    "ref": "Virginia Tech Dendrology fact sheets 54, Liriodendron tulipifera, and 84, Sassafras albidum"
+  },
+  {
+    "a": "ACFL",
+    "b": "ACSA3",
+    "channel": "leaf",
+    "a_not_b": "Southern sugar maple has a small leaf, 1 1/2 to 3 1/2 inches across, and the underside is often fuzzy.",
+    "b_not_a": "Sugar maple has a larger leaf, 3 to 6 inches long, with 5 delicately rounded lobes.",
+    "ref": "Virginia Tech Dendrology fact sheets 337, Acer floridanum, and 2, Acer saccharum"
+  },
+  {
+    "a": "ACFL",
+    "b": "ACSA3",
+    "channel": "fruit",
+    "a_not_b": "Southern sugar maple has small samaras, about 3/4 inch long, with wings that spread at about 65 degrees.",
+    "b_not_a": "Sugar maple has samaras about 1 inch long, with the pair of wings in a horseshoe shape.",
+    "ref": "Virginia Tech Dendrology fact sheets 337, Acer floridanum, and 2, Acer saccharum"
+  },
+  {
+    "a": "ACFL",
+    "b": "ACNI5",
+    "channel": "leaf",
+    "a_not_b": "Southern sugar maple has a small leaf, 1 1/2 to 3 1/2 inches across, with 3 or 5 somewhat rounded lobes.",
+    "b_not_a": "Black maple has a larger leaf, 3 to 6 inches long, mostly 3-lobed, that often looks wilted, sometimes with large stipules at the base.",
+    "ref": "Virginia Tech Dendrology fact sheets 337, Acer floridanum, and 452, Acer nigrum"
+  },
+  {
+    "a": "ACFL",
+    "b": "ACNI5",
+    "channel": "bark",
+    "a_not_b": "Southern sugar maple has light gray bark with thick, irregular, curling ridges that become plates.",
+    "b_not_a": "Black maple has dark gray-brown to nearly black bark, furrowed with long, thick, irregular ridges.",
+    "ref": "Virginia Tech Dendrology fact sheets 337, Acer floridanum, and 452, Acer nigrum"
+  },
+  {
+    "a": "ACFL",
+    "b": "ACPL",
+    "channel": "leaf",
+    "a_not_b": "Southern sugar maple has a small leaf with 3 or 5 rounded lobes and no teeth on the margin.",
+    "b_not_a": "Norway maple has 5 to 7 lobes with long pointed teeth, and a cut petiole leaks milky sap.",
+    "ref": "Virginia Tech Dendrology fact sheets 337, Acer floridanum, and 6, Acer platanoides"
+  },
+  {
+    "a": "ACGR3",
+    "b": "ACFL",
+    "channel": "leaf",
+    "a_not_b": "Bigtooth maple has mostly 3 lobes that carry a few widely spaced, rounded teeth.",
+    "b_not_a": "Southern sugar maple has 3 or 5 rounded lobes with an entire margin, with no teeth.",
+    "ref": "Virginia Tech Dendrology fact sheets 587, Acer grandidentatum, and 337, Acer floridanum"
+  },
+  {
+    "a": "ACRU",
+    "b": "ACSA2",
+    "channel": "leaf",
+    "a_not_b": "Red maple has 3 to 5 lobes with relatively shallow sinuses, and the leaf is 2 to 4 inches long.",
+    "b_not_a": "Silver maple has 5 lobes cut by deep sinuses, with coarse teeth, and the underside is silvery white.",
+    "ref": "Virginia Tech Dendrology fact sheets 1, Acer rubrum, and 5, Acer saccharinum"
+  },
+  {
+    "a": "ACRU",
+    "b": "ACSA2",
+    "channel": "bark",
+    "a_not_b": "Red maple bark on older trees breaks into long, fine, scaly plates.",
+    "b_not_a": "Silver maple bark on older trees breaks into long thin strips that are loose at the ends, coarser than red maple.",
+    "ref": "Virginia Tech Dendrology fact sheets 1, Acer rubrum, and 5, Acer saccharinum"
+  },
+  {
+    "a": "ACRU",
+    "b": "ACPL",
+    "channel": "leaf",
+    "a_not_b": "Red maple has a small leaf, 2 to 4 inches long, with 3 to 5 serrated lobes and a whitened underside.",
+    "b_not_a": "Norway maple has 5 to 7 lobes with long pointed teeth, and a cut petiole leaks milky white sap.",
+    "ref": "Virginia Tech Dendrology fact sheets 1, Acer rubrum, and 6, Acer platanoides"
+  },
+  {
+    "a": "ACRU",
+    "b": "ACSA3",
+    "channel": "leaf",
+    "a_not_b": "Red maple has serrated lobes, and the underside is whitened.",
+    "b_not_a": "Sugar maple has 5 delicately rounded lobes with an entire margin, with no teeth.",
+    "ref": "Virginia Tech Dendrology fact sheets 1, Acer rubrum, and 2, Acer saccharum"
+  },
+  {
+    "a": "ACPS",
+    "b": "ACGL",
+    "channel": "leaf",
+    "a_not_b": "Sycamore maple has a large leaf, 5 to 6 inches long and broad, with 5 coarsely serrate lobes and a heart-shaped base.",
+    "b_not_a": "Rocky Mountain maple has 3 to 5 serrated lobes, and some leaves split into 3 leaflets.",
+    "ref": "Virginia Tech Dendrology fact sheets 162, Acer pseudoplatanus, and 161, Acer glabrum"
+  },
+  {
+    "a": "ACPS",
+    "b": "ACGL",
+    "channel": "bark",
+    "a_not_b": "Sycamore maple bark breaks into large scales that flake off and show orange beneath.",
+    "b_not_a": "Rocky Mountain maple bark is thin, tight, smooth, and gray.",
+    "ref": "Virginia Tech Dendrology fact sheets 162, Acer pseudoplatanus, and 161, Acer glabrum"
+  },
+  {
+    "a": "ACCI",
+    "b": "ACGL",
+    "channel": "leaf",
+    "a_not_b": "Vine maple has a circular leaf with 7 to 9 shallow lobes that spread like a fan.",
+    "b_not_a": "Rocky Mountain maple has 3 to 5 serrated lobes, and some leaves split into 3 leaflets.",
+    "ref": "Virginia Tech Dendrology fact sheets 186, Acer circinatum, and 161, Acer glabrum"
+  },
+  {
+    "a": "ACMA3",
+    "b": "ACSA3",
+    "channel": "leaf",
+    "a_not_b": "Bigleaf maple has a very large leaf, 6 to 12 inches across, with 5 deep lobes, and the end lobe narrows to a waist.",
+    "b_not_a": "Sugar maple has a leaf 3 to 6 inches long, with 5 delicately rounded lobes and an entire margin.",
+    "ref": "Virginia Tech Dendrology fact sheets 187, Acer macrophyllum, and 2, Acer saccharum"
+  },
+  {
+    "a": "ACMA3",
+    "b": "ACGL",
+    "channel": "leaf",
+    "a_not_b": "Bigleaf maple has a very large leaf, 6 to 12 inches across, with 5 deep lobes, and a cut petiole leaks milky sap.",
+    "b_not_a": "Rocky Mountain maple has 3 to 5 serrated lobes, and some leaves split into 3 leaflets.",
+    "ref": "Virginia Tech Dendrology fact sheets 187, Acer macrophyllum, and 161, Acer glabrum"
+  },
+  {
+    "a": "ACMA3",
+    "b": "ACNI5",
+    "channel": "leaf",
+    "a_not_b": "Bigleaf maple has a very large leaf, 6 to 12 inches across, with 5 deep lobes.",
+    "b_not_a": "Black maple has a leaf 3 to 6 inches long, mostly 3-lobed with an entire margin, that often looks wilted.",
+    "ref": "Virginia Tech Dendrology fact sheets 187, Acer macrophyllum, and 452, Acer nigrum"
+  },
+  {
+    "a": "ACCA5",
+    "b": "ACPL",
+    "channel": "leaf",
+    "a_not_b": "Hedge maple has a small leaf, 2 to 4 inches long, with 3 to 5 rounded lobes and an entire margin.",
+    "b_not_a": "Norway maple has 5 to 7 lobes with long pointed teeth.",
+    "ref": "Virginia Tech Dendrology fact sheets 330, Acer campestre, and 6, Acer platanoides"
+  },
+  {
+    "a": "ACPS",
+    "b": "ACPL",
+    "channel": "fruit",
+    "a_not_b": "Sycamore maple has a pair of samaras whose wings spread at about 45 degrees.",
+    "b_not_a": "Norway maple has samaras 1 1/2 to 2 inches long, with wings that spread wide apart and a flat seed cavity.",
+    "ref": "Virginia Tech Dendrology fact sheets 162, Acer pseudoplatanus, and 6, Acer platanoides"
+  },
+  {
+    "a": "PLOC",
+    "b": "PLRA",
+    "channel": "leaf",
+    "a_not_b": "American sycamore has shallow lobes that are mostly wider than long, and the sinuses reach less than halfway to the base.",
+    "b_not_a": "California sycamore has a thicker leaf with lobes mostly longer than wide, cut by deeper sinuses, and the underside stays woolly.",
+    "ref": "FNA vol. 3, Platanus occidentalis (taxon 200010589) and Platanus racemosa (taxon 233500963)"
+  },
+  {
+    "a": "PLOC",
+    "b": "PLRA",
+    "channel": "fruit",
+    "a_not_b": "American sycamore has a single ball of achenes on a stalk 3 to 6 inches long.",
+    "b_not_a": "California sycamore has 3 to 7 golf-ball-sized heads that hang on one long stalk.",
+    "ref": "Virginia Tech Dendrology fact sheets 36, Platanus occidentalis, and 473, Platanus racemosa"
+  },
+  {
+    "a": "PLOC",
+    "b": "PLRA",
+    "channel": "bark",
+    "a_not_b": "American sycamore has thin bark mottled brown, green, tan, and white, like camouflage.",
+    "b_not_a": "California sycamore bark peels from greenish gray to an almost pure white under layer; old trunks turn thick, furrowed, and dark brown.",
+    "ref": "Virginia Tech Dendrology fact sheets 36, Platanus occidentalis, and 473, Platanus racemosa"
+  },
+  {
+    "a": "PLWR2",
+    "b": "PLRA",
+    "channel": "leaf",
+    "a_not_b": "Arizona sycamore has very deep sinuses, and its lobes are much longer than wide, so the leaf looks like a star.",
+    "b_not_a": "California sycamore has sinuses that reach about 1/3 to 2/3 of the way to the base, and the underside stays woolly.",
+    "ref": "FNA vol. 3, Platanus wrightii (taxon 233500964) and Platanus racemosa (taxon 233500963); Virginia Tech Dendrology fact sheet 638, Platanus wrightii"
+  },
+  {
+    "a": "LIST2",
+    "b": "PLOC",
+    "channel": "fruit",
+    "a_not_b": "Sweetgum has a spiny, woody, brown gumball with small holes in the surface.",
+    "b_not_a": "American sycamore has a ball of tiny winged seeds on a stalk 3 to 6 inches long.",
+    "ref": "Virginia Tech Dendrology fact sheets 53, Liquidambar styraciflua, and 36, Platanus occidentalis"
+  },
+  {
+    "a": "QUEL",
+    "b": "QURU",
+    "channel": "leaf",
+    "a_not_b": "Northern pin oak has very deep sinuses on a somewhat shiny leaf, 3 to 6 inches long.",
+    "b_not_a": "Northern red oak has 7 to 11 lobes with sinuses that reach only 1/3 to 1/2 of the way, on a dull green leaf.",
+    "ref": "Virginia Tech Dendrology fact sheets 999, Quercus ellipsoidalis, and 38, Quercus rubra"
+  },
+  {
+    "a": "QUEL",
+    "b": "QURU",
+    "channel": "fruit",
+    "a_not_b": "Northern pin oak has an elliptical to round acorn, half covered by a cap with hairy scales that are loose at the edge.",
+    "b_not_a": "Northern red oak has a flat, thick cap like a beret that covers 1/4 of the acorn or less.",
+    "ref": "Virginia Tech Dendrology fact sheets 999, Quercus ellipsoidalis, and 38, Quercus rubra"
+  },
+  {
+    "a": "QUEL",
+    "b": "QUPA2",
+    "channel": "fruit",
+    "a_not_b": "Northern pin oak has a cap that covers half of the acorn, with hairy scales that are loose at the edge.",
+    "b_not_a": "Pin oak has a small striped acorn, about 1/2 inch long, in a thin saucer cap with tight red-brown scales.",
+    "ref": "Virginia Tech Dendrology fact sheets 999, Quercus ellipsoidalis, and 74, Quercus palustris"
+  },
+  {
+    "a": "QUEL",
+    "b": "QUVE",
+    "channel": "leaf",
+    "a_not_b": "Northern pin oak has a leaf 3 to 6 inches long with very deep sinuses, and the underside is hairless except for tufts in the vein angles.",
+    "b_not_a": "Black oak has a leaf up to 10 inches long, mostly with 5 lobes, and the underside has a scruffy fuzz.",
+    "ref": "Virginia Tech Dendrology fact sheets 999, Quercus ellipsoidalis, and 39, Quercus velutina"
+  },
+  {
+    "a": "QUCO2",
+    "b": "QUVE",
+    "channel": "fruit",
+    "a_not_b": "Scarlet oak has a cap with shiny scales that lie flat at the edge, and the acorn tip may show rings or fine cracks.",
+    "b_not_a": "Black oak has a cap with light brown, fuzzy scales that are loose, most of all at the edge.",
+    "ref": "Virginia Tech Dendrology fact sheets 37, Quercus coccinea, and 39, Quercus velutina"
+  },
+  {
+    "a": "QUCO2",
+    "b": "QUVE",
+    "channel": "leaf",
+    "a_not_b": "Scarlet oak has very deep sinuses on a shiny leaf, and the underside is hairless except for tufts in the vein angles.",
+    "b_not_a": "Black oak has a leaf with a scruffy fuzz on the underside, and shade leaves have very shallow sinuses.",
+    "ref": "Virginia Tech Dendrology fact sheets 37, Quercus coccinea, and 39, Quercus velutina"
+  },
+  {
+    "a": "QUCO2",
+    "b": "QUPA2",
+    "channel": "fruit",
+    "a_not_b": "Scarlet oak has an acorn up to 1 inch long, half covered by a cap with shiny scales, and the tip may show rings.",
+    "b_not_a": "Pin oak has a small striped acorn, about 1/2 inch long, in a thin saucer cap.",
+    "ref": "Virginia Tech Dendrology fact sheets 37, Quercus coccinea, and 74, Quercus palustris"
+  },
+  {
+    "a": "QUCO2",
+    "b": "QURU",
+    "channel": "leaf",
+    "a_not_b": "Scarlet oak has very deep sinuses on a shiny green leaf.",
+    "b_not_a": "Northern red oak has 7 to 11 lobes with sinuses that reach only 1/3 to 1/2 of the way, on a dull green leaf.",
+    "ref": "Virginia Tech Dendrology fact sheets 37, Quercus coccinea, and 38, Quercus rubra"
+  },
+  {
+    "a": "QUCO2",
+    "b": "QURU",
+    "channel": "fruit",
+    "a_not_b": "Scarlet oak has a cap that covers half of the acorn, with shiny scales, and the tip may show rings.",
+    "b_not_a": "Northern red oak has a flat, thick cap like a beret that covers 1/4 of the acorn or less.",
+    "ref": "Virginia Tech Dendrology fact sheets 37, Quercus coccinea, and 38, Quercus rubra"
+  },
+  {
+    "a": "QUTE",
+    "b": "QUPA2",
+    "channel": "leaf",
+    "a_not_b": "Nuttall oak has a dull dark green leaf, and its 5 to 7 lobes differ in length.",
+    "b_not_a": "Pin oak has a bright green leaf with sinuses nearly to the midrib, and the main lobes form a U shape.",
+    "ref": "Virginia Tech Dendrology fact sheets 554, Quercus texana, and 74, Quercus palustris"
+  },
+  {
+    "a": "QUTE",
+    "b": "QUPA2",
+    "channel": "fruit",
+    "a_not_b": "Nuttall oak has an oblong, striped, reddish brown acorn about 1 inch long, half covered by a scaly cap.",
+    "b_not_a": "Pin oak has a small round acorn, about 1/2 inch long, in a thin saucer cap.",
+    "ref": "Virginia Tech Dendrology fact sheets 554, Quercus texana, and 74, Quercus palustris"
+  },
+  {
+    "a": "QUTE",
+    "b": "QUSH",
+    "channel": "fruit",
+    "a_not_b": "Nuttall oak has a deep, goblet-shaped cap, pinched in at the base, that covers 1/3 to 1/2 of the acorn.",
+    "b_not_a": "Shumard oak has a shallow bowl-shaped cap that covers less than 1/3 of the acorn.",
+    "ref": "FNA vol. 3, Quercus texana (taxon 233501089) and Quercus shumardii (taxon 233501082); Virginia Tech Dendrology fact sheet 169, Quercus shumardii"
+  },
+  {
+    "a": "QUPA5",
+    "b": "QUSH",
+    "channel": "leaf",
+    "a_not_b": "Cherrybark oak has lobes set nearly at right angles to the midrib, and the underside may be scruffy-hairy.",
+    "b_not_a": "Shumard oak has sinuses that reach more than halfway to the midrib, on a shiny dark green leaf.",
+    "ref": "Virginia Tech Dendrology fact sheets 336, Quercus pagoda, and 169, Quercus shumardii"
+  },
+  {
+    "a": "QUPA5",
+    "b": "QUSH",
+    "channel": "bark",
+    "a_not_b": "Cherrybark oak has dark, scaly, rough bark that can look like black cherry bark.",
+    "b_not_a": "Shumard oak has dark, deep furrows, and the tops of the ridges are scaly and light gray to white.",
+    "ref": "Virginia Tech Dendrology fact sheets 336, Quercus pagoda, and 169, Quercus shumardii"
+  },
+  {
+    "a": "QUPA5",
+    "b": "QURU",
+    "channel": "leaf",
+    "a_not_b": "Cherrybark oak has lobes set nearly at right angles to the midrib, and the underside may be scruffy-hairy.",
+    "b_not_a": "Northern red oak has 7 to 11 lobes of very even shape, on a dull green leaf.",
+    "ref": "Virginia Tech Dendrology fact sheets 336, Quercus pagoda, and 38, Quercus rubra"
+  },
+  {
+    "a": "QUPA5",
+    "b": "QURU",
+    "channel": "bark",
+    "a_not_b": "Cherrybark oak has nearly black bark with narrow, flaky ridges, like black cherry bark.",
+    "b_not_a": "Northern red oak has wide, flat-topped ridges with shallow furrows, in a pattern like ski tracks.",
+    "ref": "Virginia Tech Dendrology fact sheets 336, Quercus pagoda, and 38, Quercus rubra; FNA vol. 3, Quercus pagoda (taxon 233501071)"
+  },
+  {
+    "a": "QUFA",
+    "b": "QUVE",
+    "channel": "leaf",
+    "a_not_b": "Southern red oak often has one very long, hooked end lobe with two shorter side lobes, like a turkey foot.",
+    "b_not_a": "Black oak has an ovate or obovate leaf, mostly with 5 lobes of more even length.",
+    "ref": "Virginia Tech Dendrology fact sheets 68, Quercus falcata, and 39, Quercus velutina"
+  },
+  {
+    "a": "QUFA",
+    "b": "QURU",
+    "channel": "leaf",
+    "a_not_b": "Southern red oak often has one very long, hooked end lobe, and the underside is fuzzy.",
+    "b_not_a": "Northern red oak has 7 to 11 lobes of very even shape, and the underside is pale.",
+    "ref": "Virginia Tech Dendrology fact sheets 68, Quercus falcata, and 38, Quercus rubra"
+  },
+  {
+    "a": "QULA2",
+    "b": "QUMA3",
+    "channel": "leaf",
+    "a_not_b": "Turkey oak has 3 to 7 bristle-tipped lobes, with sinuses that reach more than halfway to the midrib.",
+    "b_not_a": "Blackjack oak has a thick leaf with only 3 shallow lobes near the end, so the top is broad.",
+    "ref": "Virginia Tech Dendrology fact sheets 167, Quercus laevis, and 168, Quercus marilandica"
+  },
+  {
+    "a": "QUIL",
+    "b": "QUVE",
+    "channel": "leaf",
+    "a_not_b": "Bear oak has a small leaf, 2 to 5 inches long, with shallow sinuses, and the underside is much lighter and thickly hairy.",
+    "b_not_a": "Black oak has a leaf up to 10 inches long, and sun leaves have deep sinuses.",
+    "ref": "Virginia Tech Dendrology fact sheets 69, Quercus ilicifolia, and 39, Quercus velutina"
+  },
+  {
+    "a": "QUAC2",
+    "b": "QUSH",
+    "channel": "leaf",
+    "a_not_b": "Mapleleaf oak has a leaf that is wider than long, like a maple leaf, and the lobes often overlap.",
+    "b_not_a": "Shumard oak has a leaf that is longer than wide, broadly elliptic to obovate, with oblong lobes.",
+    "ref": "FNA vol. 3, Quercus acerifolia (taxon 233501004) and Quercus shumardii (taxon 233501082)"
+  },
+  {
+    "a": "QUGA4",
+    "b": "QUGA",
+    "channel": "leaf",
+    "a_not_b": "Oregon white oak has a shiny dark green leaf, and the lobes often touch or overlap.",
+    "b_not_a": "Gambel oak has a yellow-green leaf that is widest above the middle, with 5 to 9 rounded lobes.",
+    "ref": "Virginia Tech Dendrology fact sheets 240, Quercus garryana, and 315, Quercus gambelii"
+  },
+  {
+    "a": "QURO2",
+    "b": "QUAL",
+    "channel": "leaf",
+    "a_not_b": "English oak has very small ear-like lobes at the leaf base and a very short petiole.",
+    "b_not_a": "White oak has a wedge-shaped leaf base, with 7 to 10 rounded, finger-like lobes.",
+    "ref": "Virginia Tech Dendrology fact sheets 551, Quercus robur, and 35, Quercus alba"
+  },
+  {
+    "a": "QURO2",
+    "b": "QUAL",
+    "channel": "fruit",
+    "a_not_b": "English oak has a narrow acorn that hangs on a long, thin stalk.",
+    "b_not_a": "White oak has an acorn with almost no stalk, or a short one, in a warty bowl cap that covers 1/4 of the nut.",
+    "ref": "Virginia Tech Dendrology fact sheets 551, Quercus robur, and 35, Quercus alba; FNA vol. 3, Quercus alba (taxon 233501007) and Quercus robur (taxon 210001863)"
+  },
+  {
+    "a": "QULY",
+    "b": "QUAL",
+    "channel": "fruit",
+    "a_not_b": "Overcup oak has a round acorn almost fully covered by its warty cap.",
+    "b_not_a": "White oak has a warty bowl cap that covers only 1/4 of the acorn.",
+    "ref": "Virginia Tech Dendrology fact sheets 71, Quercus lyrata, and 35, Quercus alba"
+  },
+  {
+    "a": "QULY",
+    "b": "QUMA2",
+    "channel": "fruit",
+    "a_not_b": "Overcup oak has an acorn 1/2 to 1 inch long, almost fully covered by a cap with no fringe.",
+    "b_not_a": "Bur oak has a large acorn, about 1 1/2 inches long, half covered by a warty cap with a long fringe at the edge.",
+    "ref": "Virginia Tech Dendrology fact sheets 71, Quercus lyrata, and 72, Quercus macrocarpa"
+  },
+  {
+    "a": "QULY",
+    "b": "QUST",
+    "channel": "leaf",
+    "a_not_b": "Overcup oak has a leaf with 5 to 9 lobes and irregular sinuses, and the underside is white and hairy.",
+    "b_not_a": "Post oak has 5 lobes, and the two middle lobes are square, so the thick leaf looks like a cross.",
+    "ref": "Virginia Tech Dendrology fact sheets 71, Quercus lyrata, and 77, Quercus stellata"
+  },
+  {
+    "a": "QUAU",
+    "b": "QUAL",
+    "channel": "leaf",
+    "a_not_b": "Bastard white oak has 3 to 7 shallow, irregular lobes that reach only 1/4 to 1/2 of the way to the midrib, on a 1/4 inch petiole.",
+    "b_not_a": "White oak has 7 to 10 rounded, finger-like lobes.",
+    "ref": "Virginia Tech Dendrology fact sheets 1021, Quercus austrina, and 35, Quercus alba"
+  },
+  {
+    "a": "QUSI",
+    "b": "QUST",
+    "channel": "leaf",
+    "a_not_b": "Bastard oak has a small, very irregular leaf, about 3 inches long, with up to 7 shallow lobes or none.",
+    "b_not_a": "Post oak has a thick leaf, 6 to 10 inches long, with square middle lobes that make a cross shape.",
+    "ref": "Virginia Tech Dendrology fact sheets 552, Quercus sinuata, and 77, Quercus stellata"
+  },
+  {
+    "a": "QUBO2",
+    "b": "QUST",
+    "channel": "leaf",
+    "a_not_b": "Boynton sand post oak has an obovate leaf with 3 broad lobes near the tip, or 3 to 5 rounded, irregular lobes in the outer half.",
+    "b_not_a": "Post oak has its two outer lobes set at right angles to the midrib, so the leaf looks like a cross.",
+    "ref": "FNA vol. 3, Quercus boyntonii (taxon 233501013) and Quercus stellata (taxon 233501087)"
+  },
+  {
+    "a": "ACNI5",
+    "b": "ACSA3",
+    "channel": "leaf",
+    "a_not_b": "Black maple has mostly 3 lobes on a leaf that often looks wilted, sometimes with large stipules, and a hairy underside.",
+    "b_not_a": "Sugar maple has 5 delicately rounded lobes, green above and paler below.",
+    "ref": "Virginia Tech Dendrology fact sheets 452, Acer nigrum, and 2, Acer saccharum"
+  },
+  {
+    "a": "ACNI5",
+    "b": "ACPL",
+    "channel": "leaf",
+    "a_not_b": "Black maple has mostly 3 lobes with an entire margin, and the leaf often looks wilted.",
+    "b_not_a": "Norway maple has 5 to 7 lobes with long pointed teeth, and a cut petiole leaks milky white sap.",
+    "ref": "Virginia Tech Dendrology fact sheets 452, Acer nigrum, and 6, Acer platanoides"
+  },
+  {
+    "a": "PLOC",
+    "b": "PLWR2",
+    "channel": "leaf",
+    "a_not_b": "American sycamore has shallow lobes that are mostly wider than long, and the sinuses reach less than halfway to the base.",
+    "b_not_a": "Arizona sycamore has very deep sinuses, and its lobes are much longer than wide, so the leaf looks like a star.",
+    "ref": "FNA vol. 3, Platanus occidentalis (taxon 200010589) and Platanus wrightii (taxon 233500964); Virginia Tech Dendrology fact sheet 638, Platanus wrightii"
+  },
+  {
+    "a": "PLOC",
+    "b": "PLWR2",
+    "channel": "fruit",
+    "a_not_b": "American sycamore has a single ball of achenes on a stalk 3 to 6 inches long.",
+    "b_not_a": "Arizona sycamore has 2 to 4 fuzzy tan balls that hang from one slender stalk.",
+    "ref": "Virginia Tech Dendrology fact sheets 36, Platanus occidentalis, and 638, Platanus wrightii"
+  },
+  {
+    "a": "QUMA2",
+    "b": "QUST",
+    "channel": "leaf",
+    "a_not_b": "Bur oak has a large leaf with two middle sinuses that nearly reach the midrib, and the lobes near the tip look like a crown.",
+    "b_not_a": "Post oak has 5 lobes, and the two middle lobes are square, so the thick leaf looks like a cross.",
+    "ref": "Virginia Tech Dendrology fact sheets 72, Quercus macrocarpa, and 77, Quercus stellata"
+  },
+  {
+    "a": "QUPA2",
+    "b": "QUVE",
+    "channel": "leaf",
+    "a_not_b": "Pin oak has a bright green leaf with sinuses nearly to the midrib, and the main lobes form a U shape.",
+    "b_not_a": "Black oak has a larger leaf, up to 10 inches long, with a scruffy fuzz on the underside.",
+    "ref": "Virginia Tech Dendrology fact sheets 74, Quercus palustris, and 39, Quercus velutina"
+  },
+  {
+    "a": "QUPA2",
+    "b": "QUVE",
+    "channel": "bark",
+    "a_not_b": "Pin oak has tight, thin, gray-brown bark that stays smooth for many years.",
+    "b_not_a": "Black oak has thick, very rough, nearly black bark, deeply furrowed with horizontal breaks.",
+    "ref": "Virginia Tech Dendrology fact sheets 74, Quercus palustris, and 39, Quercus velutina"
+  },
+  {
+    "a": "QUSH",
+    "b": "QUVE",
+    "channel": "leaf",
+    "a_not_b": "Shumard oak has a shiny dark green leaf, and the underside is hairless except for tufts in the vein angles.",
+    "b_not_a": "Black oak has a leaf with a scruffy fuzz on the underside, and shade leaves have very shallow sinuses.",
+    "ref": "Virginia Tech Dendrology fact sheets 169, Quercus shumardii, and 39, Quercus velutina; FNA vol. 3, Quercus shumardii (taxon 233501082)"
+  },
+  {
+    "a": "ACLE",
+    "b": "ACSA3",
+    "channel": "leaf",
+    "a_not_b": "Chalk maple has a smaller leaf with 3 lobes, and the underside is yellow-green and velvety.",
+    "b_not_a": "Sugar maple has a leaf 3 to 6 inches long, with 5 delicately rounded lobes.",
+    "ref": "Flora of North America (nwwildflowers.com), Acer leucoderme; Lady Bird Johnson Wildflower Center, Acer leucoderme; Virginia Tech Dendrology fact sheet 2, Acer saccharum"
+  },
+  {
+    "a": "ACLE",
+    "b": "ACSA3",
+    "channel": "bark",
+    "a_not_b": "Chalk maple has pale gray to chalky white bark on the upper trunk; only the base of old trees turns ridged and blackish.",
+    "b_not_a": "Sugar maple has brown bark that turns darker, with furrows and long, thick, irregular ridges that curl outward.",
+    "ref": "NC State Extension Gardener Plant Toolbox, Acer leucoderme; Virginia Tech Dendrology fact sheet 2, Acer saccharum"
+  },
+  {
+    "a": "ACLE",
+    "b": "ACFL",
+    "channel": "bark",
+    "a_not_b": "Chalk maple has smooth, pale gray to chalky white bark on the upper trunk.",
+    "b_not_a": "Southern sugar maple has light gray bark with thick, irregular, curling ridges that become plates.",
+    "ref": "NC State Extension Gardener Plant Toolbox, Acer leucoderme; Lady Bird Johnson Wildflower Center, Acer leucoderme; Virginia Tech Dendrology fact sheet 337, Acer floridanum"
+  },
+  {
+    "a": "QUCE",
+    "b": "QURO2",
+    "channel": "leaf",
+    "a_not_b": "European turkey oak has 4 to 9 pairs of uneven lobes that end in a short point, with angular sinuses.",
+    "b_not_a": "English oak has rounded lobes, very small ear-like lobes at the leaf base, and a very short petiole.",
+    "ref": "Trees and Shrubs Online, Quercus cerris; Virginia Tech Dendrology fact sheet 551, Quercus robur"
+  },
+  {
+    "a": "QUCE",
+    "b": "QURO2",
+    "channel": "fruit",
+    "a_not_b": "European turkey oak has a cup covered in long, slender, curled scales, on a short stalk.",
+    "b_not_a": "English oak has a narrow acorn in a cap that covers about 1/3 of the nut, on a long stalk.",
+    "ref": "Trees and Shrubs Online, Quercus cerris; Virginia Tech Dendrology fact sheet 551, Quercus robur"
+  },
+  {
+    "a": "QUCE",
+    "b": "QUMA2",
+    "channel": "fruit",
+    "a_not_b": "European turkey oak has a cup covered all over in long, slender, curled scales, on an oblong, finely striped, reddish brown acorn.",
+    "b_not_a": "Bur oak has a warty cap that covers half of a large acorn, with a long fringe at the edge of the cap.",
+    "ref": "Trees and Shrubs Online, Quercus cerris; Virginia Tech Dendrology fact sheet 72, Quercus macrocarpa"
   }
 ]

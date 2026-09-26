@@ -64,6 +64,9 @@ each one.
    `document.querySelector('section#all-images')?.outerHTML ?? null`. When the result is
    null, the species has no image gallery. Tell the owner, and stop for this species.
 6. **Save it.** Write the HTML with the Write tool to `<scratch>/<SYMBOL>-<IPNI id>.html`.
+   In the desktop app, a hook can open a new `.html` file in the Browser pane, and that tab
+   loads the thumbnails from the Kew image server. To stop this, write the file as
+   `<SYMBOL>-<IPNI id>.html.txt`, then rename it to `.html` before the parser runs.
    Make the first line
    `<!-- Source: <images page URL>, captured <YYYY-MM-DD> in the built-in browser. -->`.
 7. **Make the rows.** Run from the repo root:
