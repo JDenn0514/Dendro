@@ -6,7 +6,7 @@ import {
   dueTomorrowCount, sessionPosition, emptyResults, accumulateAnswer
 } from '../logic/session.js';
 import {
-  buildQuestion, buildReveal, invAvailable, answerPhoto
+  buildQuestion, buildReveal, invAvailable, answerPhoto, revealCredits
 } from '../logic/question.js';
 import { gradeChoice, gradeTyped, resolveTyped } from '../logic/grader.js';
 import { deriveGrade } from '../logic/scheduler.js';
@@ -15,8 +15,9 @@ import { el, link, srOnly } from '../ui/dom.js';
 import { ramp } from '../ui/chrome.js';
 import { plate, credit } from '../ui/plate.js';
 
-// The caption on a question plate never names the tree.
-const UNDETERMINED = 'Pressed specimen, undetermined.';
+// A question names nothing. The alt text says what the photo is for, and the
+// credit waits for the reveal, where a name gives nothing away.
+const QUESTION_ALT = 'The photo to identify';
 
 // The session the reader stepped out of, to read about one tree. Tapping the
 // name on a reveal changes the route, and a route change tears this screen
@@ -70,6 +71,9 @@ export function render(root, ctx) {
     : (mode === 'placement' ? 'Placement test' : (unit?.name ?? 'Review'));
 
   const lastHash = resumed ? { ...resumed.last_hash } : {};
+  // The grid photos of the card on screen that failed to load. The reveal
+  // owes them no credit, because the reader never saw them.
+  let lostPhotos = new Set();
   const failedHashes = resumed ? { ...resumed.failed_hashes } : {};
   const requeuedOnce = new Set(resumed ? resumed.requeued : []);
   const answered = new Set(resumed ? resumed.answered : []);
@@ -246,8 +250,6 @@ export function render(root, ctx) {
         const figure = plate(option.photo, {
           image_base: imageBase,
           alt: 'Option photo',
-          shape: null,
-          soft: true,
           onError: () => {
             if (stale(generation)) return;
             pending -= 1;
@@ -258,6 +260,7 @@ export function render(root, ctx) {
               return;
             }
             button.remove();
+            lostPhotos.add(option.photo.hash);
             if (pending === 0 && !startedAt) startedAt = Date.now();
           }
         });
@@ -280,7 +283,7 @@ export function render(root, ctx) {
 
     const figure = plate(question.photo, {
       image_base: imageBase,
-      alt: UNDETERMINED,
+      alt: QUESTION_ALT,
       shape: 'pl-hero',
       bleed: true,
       onError: () => {
@@ -298,7 +301,6 @@ export function render(root, ctx) {
       if (!startedAt) startedAt = Date.now();
     });
     root.append(figure);
-    root.append(credit(question.photo, UNDETERMINED));
     lastHash[card.id] = question.photo.hash;
 
     root.append(el('p', 'prompt', question.prompt));
@@ -359,6 +361,7 @@ export function render(root, ctx) {
 
     const generation = (renderId += 1);
     shown = answerCount + 1;
+    lostPhotos = new Set();
     // `paintQuestion` sets `lastView` itself, because only it can see the
     // answer clock that Resume has to carry over.
     paintQuestion(question, card, generation);
@@ -439,8 +442,9 @@ export function render(root, ctx) {
       before: before ? cardLevel(before) : 0,
       after: effects.state ? cardLevel(effects.state) : (before ? cardLevel(before) : 0)
     };
-    lastView = () => paintReveal(question, reveal, typedText, correct, levels);
-    paintReveal(question, reveal, typedText, correct, levels);
+    const lost = [...lostPhotos];
+    lastView = () => paintReveal(question, reveal, typedText, correct, levels, lost);
+    paintReveal(question, reveal, typedText, correct, levels, lost);
   }
 
   // ---------- the reveal ----------
@@ -455,7 +459,7 @@ export function render(root, ctx) {
     return row;
   }
 
-  function paintReveal(question, reveal, typedText, correct, levels) {
+  function paintReveal(question, reveal, typedText, correct, levels, lost = []) {
     leaveShowing = false;
     renderId += 1;
     root.textContent = '';
@@ -471,7 +475,7 @@ export function render(root, ctx) {
       // one back press brings this reveal back rather than a fresh question.
       out.addEventListener('click', () => {
         suspend({
-          question, reveal, typed_text: typedText, correct, levels
+          question, reveal, typed_text: typedText, correct, levels, lost
         });
       });
       title.append(out);
@@ -483,6 +487,15 @@ export function render(root, ctx) {
       verdictWrap.append(el('p', 'sci-small', reveal.answer.sublabel));
     }
     panel.append(verdictWrap);
+
+    // One credit line for each photo the question showed and each photo the
+    // reveal shows. The block goes in after the level line, above Next.
+    const credits = el('div', 'credits');
+    for (const entry of revealCredits(question, reveal, lost)) {
+      const line = credit(entry.photo, `${entry.label}.`);
+      line.dataset.from = entry.from;
+      credits.append(line);
+    }
 
     if (!correct && reveal.chosen && reveal.chosen.photo && reveal.answer.photo) {
       const heads = el('div', 'pair-head');
@@ -500,10 +513,13 @@ export function render(root, ctx) {
       // A pair is a comparison. One plate of two is not a comparison, and the
       // default `onError` would put a line of prose into a two-column grid
       // beside a photograph. So either plate failing takes the pair and the
-      // two labels above it, and leaves one printed line in their place.
+      // two labels above it, and leaves one printed line in their place. The
+      // reader saw the question's photos, so their credits stay. A photo only
+      // the pair showed is gone, and its credit goes with it.
       const dropPair = () => {
         if (!pair.isConnected) return;
         heads.remove();
+        for (const line of credits.querySelectorAll('[data-from="reveal"]')) line.remove();
         pair.replaceWith(el('p', 'fact-line',
           'The two plates for this pair did not load.'));
       };
@@ -513,7 +529,7 @@ export function render(root, ctx) {
       });
       const b = plate(reveal.chosen.photo, {
         image_base: imageBase, alt: `${reveal.chosen.label}, your pick`,
-        shape: 'pl-b', lift: true, onError: dropPair
+        shape: 'pl-b', onError: dropPair
       });
       pair.append(a, b);
       panel.append(pair);
@@ -524,7 +540,6 @@ export function render(root, ctx) {
         shape: 'pl-leaf',
         bleed: true
       }));
-      panel.append(credit(reveal.answer.photo));
     }
 
     if (!correct && question.format === 'typed') {
@@ -536,6 +551,9 @@ export function render(root, ctx) {
     }
 
     panel.append(levelLine(levels));
+    // The app spec's reveal order: photos, the diagnostic sentence, the
+    // level, the credits, then Next.
+    if (credits.childElementCount > 0) panel.append(credits);
 
     const next = el('button', 'btn', 'Next');
     next.type = 'button';
@@ -728,7 +746,8 @@ export function render(root, ctx) {
   if (resumed && resumed.view) {
     const view = resumed.view;
     lastView = () => paintReveal(
-      view.question, view.reveal, view.typed_text, view.correct, view.levels
+      view.question, view.reveal, view.typed_text, view.correct, view.levels,
+      view.lost ?? []
     );
     lastView();
   } else {

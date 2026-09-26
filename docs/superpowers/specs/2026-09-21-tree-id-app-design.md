@@ -401,9 +401,11 @@ pipeline spec, section 7, gives the takedown command that writes them and delete
 object. A retired row stays in the manifest and enters no photo pool. When retirement
 empties one channel, the species loses that card and keeps the others.
 
-Attribution is displayed wherever the image is shown. The line reads
-`<author>, <source>, <license>.` with the author linked to the origin URL. When `origin`
-is absent, the author is plain text.
+Attribution is displayed on the reveal for every photo the question showed, and
+wherever else the image is shown. A question itself shows no caption, because a caption
+could name the tree. The line reads `<author>, <source>, <license>.` with the author
+linked to the origin URL, and the license linked to its deed when the app knows one.
+When `origin` is absent, the author is plain text. (Changed 2026-09-25.)
 
 `license` must come from the source page and must permit redistribution: public domain, a
 US government work, or a CC license. Anything else is not used.

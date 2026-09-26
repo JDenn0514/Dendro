@@ -6,7 +6,7 @@ import { loadContent } from '../app/logic/content.js';
 import {
   shuffle, speciesCardSymbols, varietyOf, invAvailable, formatFor,
   optionCountFor, pickPhoto, speciesDistractors,
-  labelFor, buildQuestion, answerPhoto, buildReveal
+  labelFor, buildQuestion, answerPhoto, buildReveal, revealCredits
 } from '../app/logic/question.js';
 
 const { content } = loadContent(loadFixture());
@@ -417,4 +417,50 @@ test('a variety miss with no named card shows the answer alone', () => {
   assert.equal(reveal.diagnostic, null);
   assert.equal(reveal.missing_edge, null);
   assert.equal(reveal.answer.label, 'var. gambelii');
+});
+
+test('a photo grid reveal credits every photo the question showed', () => {
+  const card = content.cards['species:QUGA:leaf'];
+  const q = buildQuestion({
+    card, content, state: { tier: 'inv' }, excluded_hashes: [], rng: makeRng(13)
+  });
+  const wrong = q.options.find((o) => o.key !== 'QUGA').key;
+  const reveal = buildReveal({ question: q, chosen_key: wrong, content });
+  const credits = revealCredits(q, reveal);
+  assert.deepEqual(credits.map((c) => c.photo.hash), q.options.map((o) => o.photo.hash));
+  assert.deepEqual(credits.map((c) => c.label), q.options.map((o) => o.label));
+  assert.ok(credits.every((c) => c.from === 'question'));
+});
+
+test('a wrong pick credits the question photo and the pair photo', () => {
+  const card = content.cards['species:QUGA:leaf'];
+  const q = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(21) });
+  const reveal = buildReveal({ question: q, chosen_key: 'QURU', content });
+  const credits = revealCredits(q, reveal);
+  assert.deepEqual(credits.map((c) => [c.photo.hash, c.label, c.from]), [
+    [q.photo.hash, 'Gambel oak', 'question'],
+    [reveal.chosen.photo.hash, 'Northern red oak', 'reveal']
+  ]);
+});
+
+test('a right answer credits its one photo once', () => {
+  const card = content.cards['species:QUGA:leaf'];
+  const q = buildQuestion({ card, content, state: null, excluded_hashes: [], rng: makeRng(21) });
+  const reveal = buildReveal({ question: q, chosen_key: 'QUGA', content });
+  const credits = revealCredits(q, reveal);
+  assert.equal(credits.length, 1);
+  assert.equal(credits[0].photo.hash, q.photo.hash);
+  assert.equal(credits[0].from, 'question');
+});
+
+test('a grid photo that failed to load gets no credit', () => {
+  const card = content.cards['species:QUGA:leaf'];
+  const q = buildQuestion({
+    card, content, state: { tier: 'inv' }, excluded_hashes: [], rng: makeRng(13)
+  });
+  const lost = q.options.find((o) => o.key !== 'QUGA').photo.hash;
+  const reveal = buildReveal({ question: q, chosen_key: 'QUGA', content });
+  const credits = revealCredits(q, reveal, [lost]);
+  assert.equal(credits.length, q.options.length - 1);
+  assert.ok(!credits.some((c) => c.photo.hash === lost));
 });

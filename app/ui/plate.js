@@ -4,6 +4,7 @@
 // Nothing crops, blends, masks, or tints the photo.
 import { el } from './dom.js';
 import { imageUrl } from '../logic/content.js';
+import { licenseUrl } from '../logic/licenses.js';
 
 // A plate that cannot load leaves no broken image and no caption for a
 // picture that is not there. The screens that want something else, and the
@@ -34,20 +35,27 @@ export function plate(photo, options) {
   return figure;
 }
 
+// A link that opens in a new tab, for the two links a credit carries.
+function outLink(text, href) {
+  const anchor = el('a', null, text);
+  anchor.href = href;
+  anchor.target = '_blank';
+  anchor.rel = 'noopener';
+  return anchor;
+}
+
 // The credit line. The author links to the photo's origin page, so the credit
-// reaches the source.
+// reaches the source. The license name links to its deed when the app knows
+// one, and prints as text when it does not.
 export function credit(photo, lead = '') {
   const line = el('p', 'cap plate-cap');
   if (lead) line.append(document.createTextNode(`${lead} `));
-  if (photo.origin) {
-    const anchor = el('a', null, photo.author);
-    anchor.href = photo.origin;
-    anchor.target = '_blank';
-    anchor.rel = 'noopener';
-    line.append(anchor);
-  } else {
-    line.append(document.createTextNode(photo.author));
-  }
-  line.append(document.createTextNode(`, ${photo.source}, ${photo.license}.`));
+  if (photo.origin) line.append(outLink(photo.author, photo.origin));
+  else line.append(document.createTextNode(photo.author));
+  line.append(document.createTextNode(`, ${photo.source}, `));
+  const deed = licenseUrl(photo.license);
+  if (deed) line.append(outLink(photo.license, deed));
+  else line.append(document.createTextNode(photo.license));
+  line.append(document.createTextNode('.'));
   return line;
 }
