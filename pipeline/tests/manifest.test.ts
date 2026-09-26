@@ -8,8 +8,13 @@ import type { Verdict } from '../lib/verdicts.ts';
 import { JPEG_QUALITY, MAX_SIDE, objectKey, reviewKey } from '../lib/images.ts';
 import type { Resize } from '../lib/images.ts';
 import { memoryStorage } from '../lib/storage.ts';
-import { publishApproved, retireRows, setDifficulty, shownRows } from '../lib/manifest.ts';
-import type { ManifestRow } from '../lib/manifest.ts';
+import {
+  hardCandidateIds,
+  publishApproved,
+  retireRows,
+  setDifficulty,
+  shownRows,
+} from '../lib/manifest.ts';
 import type { ManifestRow } from '../lib/manifest.ts';
 
 const ROW_FIELDS = [
@@ -429,4 +434,36 @@ test('shownRows keeps the rows of one target the app shows', () => {
   ];
   assert.deepEqual(shownRows(rows, 'QUGA').map((row) => row.hash), ['a'.repeat(64)]);
   assert.deepEqual(shownRows(rows, 'QUAL'), []);
+});
+
+test('hardCandidateIds matches a hard row on the target, the channel, and the origin', () => {
+  const hardRow = (origin: string, channel: string): ManifestRow => ({
+    ...plainRow('a'.repeat(64), 'QUGA'),
+    channel,
+    origin,
+    difficulty: 'hard',
+  });
+  const candidates = [
+    cand({ id: 'c1', origin: ORIGIN_1 }),
+    cand({ id: 'c2', origin: ORIGIN_2 }),
+    cand({ id: 'c3', origin: 'https://example.org/retired' }),
+    cand({ id: 'c4', origin: 'https://example.org/other-channel' }),
+    cand({ id: 'c5', origin: 'https://example.org/rejected' }),
+  ];
+  const rows = [
+    hardRow(ORIGIN_1, 'bark'),
+    plainRow('b'.repeat(64), 'QUGA'),
+    { ...hardRow('https://example.org/retired', 'bark'), retired: true },
+    hardRow('https://example.org/other-channel', 'leaf'),
+    hardRow('https://example.org/rejected', 'bark'),
+  ];
+  const verdicts = [
+    verd({ candidate_id: 'c1' }),
+    verd({ candidate_id: 'c2' }),
+    verd({ candidate_id: 'c3' }),
+    verd({ candidate_id: 'c4' }),
+    verd({ candidate_id: 'c5' }),
+    verd({ candidate_id: 'c5', verdict: 'reject' }),
+  ];
+  assert.deepEqual([...hardCandidateIds(rows, candidates, verdicts)], ['c1']);
 });

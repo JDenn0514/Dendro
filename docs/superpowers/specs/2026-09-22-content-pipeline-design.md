@@ -410,6 +410,7 @@ the page names, and the file it downloaded. Forest Service pages enter only this
 
 - At most 60 candidates per species per run, across sources.
 - Collection for a species and channel stops once that channel has 8 approved images.
+  An approved image whose manifest row is hard does not count (see "Marking an image hard").
 - A second candidate with the same `file_hash` is dropped, whatever its source.
 
 ---
@@ -518,6 +519,11 @@ field on every published row. `hard` is the only value.
 A hard row does not count as a photo in the build: the `no_photos` status counts only the
 rows the app shows, and the report's per-channel counts and gap list leave out an
 approved photo whose row is hard. A species with only hard rows stays live.
+
+Added 2026-09-26. `photos fetch` leaves a hard photo out of the cap of 8 approved images
+per channel. It has no image hash, so it matches a hard row that is not retired to an
+approved candidate on the target, the channel of the approve, and the origin. The build
+copies the target and the origin from the candidate, and the channel from the approve.
 
 ---
 

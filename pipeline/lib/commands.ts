@@ -52,6 +52,7 @@ import { appendJsonl, readJsonl } from './jsonl.ts';
 import { licenseAllowedAt } from './licenses.ts';
 import {
   DIFFICULTIES,
+  hardCandidateIds,
   publishApproved,
   retireRows,
   setDifficulty,
@@ -323,7 +324,13 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
 
   let existing = readJsonl<Candidate>(candidatesPath);
   const verdicts = readJsonl<Verdict>(path.join(dir, 'verdicts.jsonl'));
-  const counts = countByTargetChannel(verdicts, existing);
+  // A hard photo is held back from the app, so it does not fill its channel. `existing`
+  // keeps it, because the duplicate check must still see it.
+  const hard = hardCandidateIds(readManifest(deps.root), existing, verdicts);
+  const counts = countByTargetChannel(
+    verdicts,
+    existing.filter((one) => !hard.has(one.id)),
+  );
   const terms = loadInatTerms(path.join(deps.root, 'pipeline', 'data', 'inat_terms.json'));
   const passes = inatPasses(terms.flowering_value_id);
   const ids = readPlantsIds(plantsIdsPath(deps.root));
