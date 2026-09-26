@@ -1,0 +1,17 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "ball" },
+  "genus_common": "sweetgum",
+  "arrangement": "alternate",
+  "range": {
+    "text": "Eastern United States, Connecticut to Florida and Texas, also Mexico and Central America"
+  },
+  "elevation_ft": [0, 2600],
+  "height_ft": [50, 150],
+  "habitat": "Bottomlands, floodplains, swamps and old fields, and also upland woods",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Liquidambar styraciflua (ID 53)",
+    "FNA vol. 3, Liquidambar styraciflua (elevation)",
+    "Silvics of North America vol. 2, Liquidambar styraciflua (Wayback Machine copy)",
+    "Fire Effects Information System, Liquidambar styraciflua (height)"
+  ]
+}

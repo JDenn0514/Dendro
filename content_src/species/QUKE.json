@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "California and southwestern Oregon" },
+  "elevation_ft": [1000, 7900],
+  "height_ft": [40, 80],
+  "habitat": "Slopes and valleys of hills and mountains",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus kelloggii (height)",
+    "FNA vol. 3, Quercus kelloggii (elevation)"
+  ]
+}

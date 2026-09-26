@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Local sites in Alabama and eastern Texas" },
+  "elevation_ft": [0, 700],
+  "height_ft": [5, 20],
+  "habitat": "Deep sands and sandstone crevices in pine forests and along streams",
+  "ref": [
+    "FNA vol. 3, Quercus boyntonii (elevation)",
+    "Lady Bird Johnson Wildflower Center plant database, Quercus boyntonii (height)"
+  ]
+}

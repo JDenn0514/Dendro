@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Northeastern North America and the Appalachians" },
+  "elevation_ft": [0, 6200],
+  "height_ft": [10, 25],
+  "habitat": "The understory of deciduous, mixed and conifer forests, and boulder fields",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer spicatum (ID 354)",
+    "FNA vol. 13, Acer spicatum (FNA text read at nwwildflowers.com) (elevation)",
+    "NC State Extension Gardener Plant Toolbox, Acer spicatum (height)"
+  ]
+}

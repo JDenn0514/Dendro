@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Atlantic and Gulf Coastal Plain and the Mississippi Valley" },
+  "elevation_ft": [0, 1000],
+  "height_ft": [100, 130],
+  "habitat": "Loamy, well-drained first-bottom ridges, terraces and colluvial sites",
+  "ref": [
+    "Silvics of North America, Quercus falcata var. pagodifolia (cherrybark oak), research.fs.usda.gov/silvics/cherrybark-oak",
+    "Virginia Tech Dendrology fact sheet, Quercus pagoda (ID 336)",
+    "FNA vol. 3, Quercus pagoda (taxon 233501071)"
+  ]
+}

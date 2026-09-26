@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Europe and western Asia, naturalized in the Northeast and the Pacific Northwest" },
+  "elevation_ft": [0, 4300],
+  "height_ft": [60, 70],
+  "habitat": "Suburban woodlands, where it spreads from planted trees",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer pseudoplatanus (ID 162)",
+    "FNA vol. 13, Acer pseudoplatanus (FNA text read at nwwildflowers.com) (elevation)"
+  ]
+}

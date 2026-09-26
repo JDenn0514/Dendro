@@ -1,0 +1,12 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "range": { "text": "Texas and northeastern Mexico" },
+  "elevation_ft": [1100, 7200],
+  "height_ft": [15, 25],
+  "habitat": "Limestone hills, canyons, woodlands and streamsides",
+  "ref": [
+    "FNA vol. 3, Quercus laceyi",
+    "Lady Bird Johnson Wildflower Center plant database, Quercus laceyi (leaf and bark)"
+  ]
+}

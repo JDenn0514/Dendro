@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Pacific Coast, British Columbia to southern California" },
+  "elevation_ft": [0, 7900],
+  "height_ft": [40, 100],
+  "habitat": "Stream banks, moist canyons and rocky slopes, often in conifer forests",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer macrophyllum (ID 187)",
+    "FNA vol. 13, Acer macrophyllum (FNA text read at nwwildflowers.com) (elevation)"
+  ]
+}

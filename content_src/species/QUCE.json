@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "common_extra": ["Turkey oak"],
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Native to southern Europe and Asia Minor, planted in North America" },
+  "elevation_ft": [0, 7200],
+  "height_ft": [80, 130],
+  "habitat": "Mixed oak forests of plains and hills, on many soils that are not too dry",
+  "ref": [
+    "European Atlas of Forest Tree Species (2016), Quercus cerris in Europe",
+    "EUFORGEN species page, Quercus cerris (height)",
+    "Forestry 97(4):497, What we know about Turkey oak (Quercus cerris L.) (elevation)"
+  ]
+}

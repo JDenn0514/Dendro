@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Eastern United States, Maine to Missouri and Georgia" },
+  "elevation_ft": [0, 4900],
+  "height_ft": [60, 80],
+  "habitat": "Dry sandy and gravelly upland ridges and slopes",
+  "ref": [
+    "Silvics of North America, Quercus coccinea (height)",
+    "Virginia Tech Dendrology fact sheet, Quercus coccinea",
+    "FNA vol. 3, Quercus coccinea (elevation)"
+  ]
+}

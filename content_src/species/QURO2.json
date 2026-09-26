@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Introduced from Europe, planted and escaped" },
+  "elevation_ft": [0, 3300],
+  "height_ft": [75, 100],
+  "habitat": "Roadsides, pastures, forest margins and woodlands",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus robur (ID 551)",
+    "FNA vol. 3, Quercus robur (taxon 210001863)",
+    "The Morton Arboretum, English oak, Quercus robur (height)"
+  ]
+}

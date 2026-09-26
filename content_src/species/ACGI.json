@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Northeast Asia, naturalized in the northern United States and Canada" },
+  "elevation_ft": [0, 2300],
+  "height_ft": [15, 20],
+  "habitat": "Suburban woodlands, roadsides and disturbed ground, where it spreads from planted trees",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer ginnala (ID 331)",
+    "FNA vol. 13, Acer ginnala (FNA text read at nwwildflowers.com) (elevation)",
+    "NC State Extension Gardener Plant Toolbox, Acer ginnala (height)"
+  ]
+}

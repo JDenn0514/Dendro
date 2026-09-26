@@ -1,0 +1,17 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "common_extra": ["Hill's oak"],
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Western Great Lakes region" },
+  "elevation_ft": [500, 1600],
+  "height_ft": [40, 65],
+  "habitat": "Dry acid sandy plains and sandstone hills",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus ellipsoidalis",
+    "FNA vol. 3, Quercus ellipsoidalis (elevation)",
+    "Minnesota DNR tree page, Northern pin oak (height)",
+    "Fire Effects Information System, Quercus ellipsoidalis",
+    "USDA NRCS Plant Guide, Northern pin oak"
+  ]
+}

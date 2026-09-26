@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Southeastern United States, Long Island to eastern Texas" },
+  "elevation_ft": [0, 2600],
+  "height_ft": [70, 80],
+  "habitat": "Dry sandy or clay uplands, ridge tops and upper slopes",
+  "ref": [
+    "Silvics of North America, Quercus falcata (height)",
+    "Virginia Tech Dendrology fact sheet, Quercus falcata",
+    "FNA vol. 3, Quercus falcata (elevation)"
+  ]
+}

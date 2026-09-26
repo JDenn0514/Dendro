@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "papery", "fruit": "ball" },
+  "genus_common": "sycamore",
+  "arrangement": "alternate",
+  "range": { "text": "California and northern Baja California" },
+  "elevation_ft": [0, 4900],
+  "height_ft": [40, 100],
+  "habitat": "Streamsides and moist rocky canyons, where it is often abundant",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Platanus racemosa (ID 473) (height)",
+    "FNA vol. 3, Platanus racemosa (elevation)"
+  ]
+}

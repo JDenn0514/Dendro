@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Southeastern Piedmont and Coastal Plain, Virginia to eastern Texas and Oklahoma" },
+  "elevation_ft": [0, 2300],
+  "height_ft": [40, 60],
+  "habitat": "Bottomland forests, stream terraces, coves and mesic slopes, often over limestone",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer floridanum (ID 337)",
+    "FNA vol. 13, Acer floridanum (FNA text read at nwwildflowers.com) (elevation)",
+    "Silvics of North America vol. 2, Acer barbatum (Florida maple) (Wayback Machine copy) (height)"
+  ]
+}

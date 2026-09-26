@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Eastern North America, Newfoundland to Florida and eastern Texas" },
+  "elevation_ft": [0, 6200],
+  "height_ft": [60, 90],
+  "habitat": "Dry ridges to swamps and peat bogs, on a wider range of soils than any other maple",
+  "ref": [
+    "Silvics of North America vol. 2, Acer rubrum (Wayback Machine copy)",
+    "Virginia Tech Dendrology fact sheet, Acer rubrum (ID 1)",
+    "FNA vol. 13, Acer rubrum var. rubrum (FNA text read at nwwildflowers.com) (elevation)"
+  ]
+}
