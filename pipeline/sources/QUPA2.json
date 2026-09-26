@@ -1,0 +1,37 @@
+{
+  "symbol": "QUPA2",
+  "scientific_name": "Quercus palustris",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=74",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, 3 to 6 inches long, oval in outline with 5 to 9 bristle-tipped lobes and irregularly deep sinuses that extend nearly to the midrib. Major lobes form a U-shape. Bright green above and pale below with axillary tifts.",
+        "flower": "Species is monoecious; male flowers borne on slender, drooping yellow-green catkins; females reddish green borne on short spikes in new leaf axils, appearing in the spring with the leaves.",
+        "fruit": "Acorns are 1/2 inch long, striated, round (but flattened at the cap); thin and saucer-like cap, covered with red-brown appressed scales; matures after 2 years, dispersed fall to early winter.",
+        "twig": "Slender, red-brown in color and quite lustrous with multiple terminal buds that are small, pointed, and chestnut brown.",
+        "bark": "Gray-brown and very tight and thin; remains smooth for many years, eventually develops thin ridges and furrows.",
+        "form": "A medium sized tree that is very pyramidal; lower branches are pendulous and middle branches grow at right angles; branches are studded with numerous branchlets that do not prune readily, resulting in a spiny appearance.",
+        "looks_like": "scarlet oak - Nuttall oak - black oak - northern pin oak"
+      },
+      "text": "Leaf: Alternate, simple, 3 to 6 inches long, oval in outline with 5 to 9 bristle-tipped lobes and irregularly deep sinuses that extend nearly to the midrib. Major lobes form a U-shape. Bright green above and pale below with axillary tifts. Flower: Species is monoecious; male flowers borne on slender, drooping yellow-green catkins; females reddish green borne on short spikes in new leaf axils, appearing in the spring with the leaves. Fruit: Acorns are 1/2 inch long, striated, round (but flattened at the cap); thin and saucer-like cap, covered with red-brown appressed scales; matures after 2 years, dispersed fall to early winter. Twig: Slender, red-brown in color and quite lustrous with multiple terminal buds that are small, pointed, and chestnut brown. Bark: Gray-brown and very tight and thin; remains smooth for many years, eventually develops thin ridges and furrows. Form: A medium sized tree that is very pyramidal; lower branches are pendulous and middle branches grow at right angles; branches are studded with numerous branchlets that do not prune readily, resulting in a spiny appearance. Looks like: scarlet oak - Nuttall oak - black oak - northern pin oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=210001860",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 25 m.",
+        "bark": "grayish brown, fissures broad, shallow, inner bark pinkish.",
+        "twigs": "reddish brown, 1.5-3(-4) mm diam., soon becoming glabrous.",
+        "terminal_buds": "brown to reddish brown, ovoid, 3-5 mm, glabrous or with a few fine hairs at apex.",
+        "leaves": "petiole 20-60 mm, glabrous.",
+        "leaf_blade": "elliptic to oblong, 50-160 × 50-120 mm, base cuneate to broadly obtuse or truncate with basal pair of lobes often somewhat recurved, margins with 5-7 lobes and 10-30 awns, lobes acute or attenuate or distally expanded, apex acute to acuminate; surfaces abaxially glabrous except for conspicuous axillary tufts of tomentum, veins raised, adaxially planar, glabrous.",
+        "acorns": "biennial; cup thin, saucer-shaped, 3-6 mm high × 9.5-16 mm wide, covering 1/4 nut, outer surface glabrous or puberulent, inner surface glabrous or with a few hairs around scar, scale tips tightly appressed, acute to obtuse; nut globose or ovoid, 10-16 × 9-15 mm, often conspicuously striate, glabrous, scar diam. 5.5-9 mm. 2 n = 24."
+      },
+      "text": "Trees , deciduous, to 25 m. Bark grayish brown, fissures broad, shallow, inner bark pinkish. Twigs reddish brown, 1.5-3(-4) mm diam., soon becoming glabrous. Terminal buds brown to reddish brown, ovoid, 3-5 mm, glabrous or with a few fine hairs at apex. Leaves: petiole 20-60 mm, glabrous. Leaf blade elliptic to oblong, 50-160 × 50-120 mm, base cuneate to broadly obtuse or truncate with basal pair of lobes often somewhat recurved, margins with 5-7 lobes and 10-30 awns, lobes acute or attenuate or distally expanded, apex acute to acuminate; surfaces abaxially glabrous except for conspicuous axillary tufts of tomentum, veins raised, adaxially planar, glabrous. Acorns biennial; cup thin, saucer-shaped, 3-6 mm high × 9.5-16 mm wide, covering 1/4 nut, outer surface glabrous or puberulent, inner surface glabrous or with a few hairs around scar, scale tips tightly appressed, acute to obtuse; nut globose or ovoid, 10-16 × 9-15 mm, often conspicuously striate, glabrous, scar diam. 5.5-9 mm. 2 n = 24.",
+      "distribution": "Flowering spring. Bottoms and poorly drained upland clay soils; 0-350 m; Ont.; Ark., Conn., Del., D.C., Ill., Ind., Iowa, Kans., Ky., Md., Mass., Mich., Mo., N.J., N.Y., N.C., Ohio, Okla., Pa., R.I., Tenn., Va., W.Va., Wis."
+    }
+  ]
+}

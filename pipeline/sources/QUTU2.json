@@ -1,0 +1,38 @@
+{
+  "symbol": "QUTU2",
+  "scientific_name": "Quercus turbinella",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=629",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, evergreen, simple, elliptical, 1/2 to 1 1/2 inches long, spine-tipped lobes (holly- like), leathery and stiff, dull gray-green above (may have some whitish bloom) and smooth or finely fuzzy beneath.",
+        "flower": "Species is monoecious; males in drooping 1 inch long catkins, yellow-green; females very small spikes in leaf axils, appearing with the leaves.",
+        "fruit": "Narrowly oblong acorn, 1/2 to 1 inch long; shallow, warty cap covers 1/4 to 1/3 of nut; ripens in 1 season in early fall or even late summer.",
+        "twig": "Slender, reddish brown with some fine tan fuzz when young; buds clustered, globose.",
+        "bark": "Light gray and finely scaly.",
+        "form": "A large clump-forming dense shrub up to 15 feet, occasionally a small tree.",
+        "looks_like": "scrub oak - gray oak - canyon live oak - leather oak"
+      },
+      "text": "Leaf: Alternate, evergreen, simple, elliptical, 1/2 to 1 1/2 inches long, spine-tipped lobes (holly- like), leathery and stiff, dull gray-green above (may have some whitish bloom) and smooth or finely fuzzy beneath. Flower: Species is monoecious; males in drooping 1 inch long catkins, yellow-green; females very small spikes in leaf axils, appearing with the leaves. Fruit: Narrowly oblong acorn, 1/2 to 1 inch long; shallow, warty cap covers 1/4 to 1/3 of nut; ripens in 1 season in early fall or even late summer. Twig: Slender, reddish brown with some fine tan fuzz when young; buds clustered, globose. Bark: Light gray and finely scaly. Form: A large clump-forming dense shrub up to 15 feet, occasionally a small tree. Looks like: scrub oak - gray oak - canyon live oak - leather oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501092",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Shrubs or small trees , evergreen or subevergreen, to 4 m.",
+        "bark": "light gray or brown, scaly.",
+        "twigs": "brown to gray, 1-3 mm diam., usually tomentulose, sometimes glabrous, becoming glabrate.",
+        "buds": "brown, round to ovoid, 1-2 mm, minutely pubescent.",
+        "leaves": "petiole 1-4 mm.",
+        "leaf_blade": "elliptic or ovate, (1.5-)20-30 × (5-)10-15(-20) mm, thick, leathery, base cordate or rounded, margins planar or slightly crisped-undulate, coarsely 3-5-toothed or very shallowly lobed on each side, teeth spinose with spines 1-1.5 mm, secondary veins 4-8 on each side, apex acute or obtuse; surfaces abaxially yellow or reddish, usually glaucous, minutely stellate-puberulent, adaxially grayish, glaucous, or yellowish glandular, glabrous or sparsely and minutely stellate-pubescent.",
+        "acorns": "solitary or several, on axillary peduncle 10-40 mm; cup hemispheric or shallowly cup-shaped, 4-6 mm deep × 8-12 mm wide, covering 1/4-1/2 nut, scales tightly appressed, ovate, moderately tuberculate, grayish or yellowish puberulent; nut light brown, ovoid, to 20 × 11 mm, minutely puberulent or glabrate.",
+        "cotyledons": "distinct."
+      },
+      "text": "Shrubs or small trees , evergreen or subevergreen, to 4 m. Bark light gray or brown, scaly. Twigs brown to gray, 1-3 mm diam., usually tomentulose, sometimes glabrous, becoming glabrate. Buds brown, round to ovoid, 1-2 mm, minutely pubescent. Leaves: petiole 1-4 mm. Leaf blade elliptic or ovate, (1.5-)20-30 × (5-)10-15(-20) mm, thick, leathery, base cordate or rounded, margins planar or slightly crisped-undulate, coarsely 3-5-toothed or very shallowly lobed on each side, teeth spinose with spines 1-1.5 mm, secondary veins 4-8 on each side, apex acute or obtuse; surfaces abaxially yellow or reddish, usually glaucous, minutely stellate-puberulent, adaxially grayish, glaucous, or yellowish glandular, glabrous or sparsely and minutely stellate-pubescent. Acorns solitary or several, on axillary peduncle 10-40 mm; cup hemispheric or shallowly cup-shaped, 4-6 mm deep × 8-12 mm wide, covering 1/4-1/2 nut, scales tightly appressed, ovate, moderately tuberculate, grayish or yellowish puberulent; nut light brown, ovoid, to 20 × 11 mm, minutely puberulent or glabrate. Cotyledons distinct.",
+      "distribution": "Flowering spring. Dry desert slopes, often in juniper and pinyon woodlands; 800-2000 m; Ariz., Calif., Colo., N.Mex., Nev., Tex., Utah; Mexico (Baja California, Sonora, and probably n Chihuahua)."
+    }
+  ]
+}

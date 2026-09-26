@@ -1,0 +1,38 @@
+{
+  "symbol": "QUDO",
+  "scientific_name": "Quercus douglasii",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=314",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, and usually deciduous (although trees on moist sites may retain their leaves); 1 to 3 inches long; margins are usually wavy, but are sometimes shallowly and irregularly lobed; the upper side of the leaf is distinctly bluish-green, especially later in the growing season, while the lower surface is pale green.",
+        "flower": "Species is monoecious; males are borne in pendent yellow-green catkins (aments); females are small, often solitary, and occur in the axils of leaves on current year's twigs; appearing in spring.",
+        "fruit": "Acorns; oval to gently tapering; 3/4 to 1 1/2 inches long; shallow caps with warty scales; ripen in a single year.",
+        "twig": "Stout, brittle, and gray to reddish brown.",
+        "bark": "Mature bark is light gray and checkered.",
+        "form": "A small to medium sized deciduous tree; seldom more than 60 feet tall and 2 feet in diameter. Open grown canopies are typically rounded with many crooked branches.",
+        "looks_like": "canyon live oak - valley oak - Oregon white oak - tanoak"
+      },
+      "text": "Leaf: Alternate, simple, and usually deciduous (although trees on moist sites may retain their leaves); 1 to 3 inches long; margins are usually wavy, but are sometimes shallowly and irregularly lobed; the upper side of the leaf is distinctly bluish-green, especially later in the growing season, while the lower surface is pale green. Flower: Species is monoecious; males are borne in pendent yellow-green catkins (aments); females are small, often solitary, and occur in the axils of leaves on current year's twigs; appearing in spring. Fruit: Acorns; oval to gently tapering; 3/4 to 1 1/2 inches long; shallow caps with warty scales; ripen in a single year. Twig: Stout, brittle, and gray to reddish brown. Bark: Mature bark is light gray and checkered. Form: A small to medium sized deciduous tree; seldom more than 60 feet tall and 2 feet in diameter. Open grown canopies are typically rounded with many crooked branches. Looks like: canyon live oak - valley oak - Oregon white oak - tanoak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501022",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, with single trunks, sometimes with few to several trunks.",
+        "bark": "gray, scaly.",
+        "twigs": "reddish or yellowish, ca. 2 mm, densely or sparsely puberulent, occasionally glabrate with age.",
+        "buds": "reddish brown, rarely yellowish, broadly ovoid to rarely subglobose, (2-)3-5 mm; scales glabrous except for ciliate margins, sometimes sparsely or densely pubescent.",
+        "leaves": "petiole blue-green, 2-6 mm.",
+        "leaf_blade": "obovate or elliptic, oblong or oblanceolate, (20-)40-60(-80) × (15-)20-30(-40) mm, base rounded-attenuate or rounded, rarely cuneate, margins shallowly lobed or irregularly toothed, sometimes entire, lobes mucronate or rounded, secondary veins 6-10 on each side, apex rounded, rarely moderately acute; surfaces abaxially light green or blue-green, waxy, with scattered to crowded, semi-erect, (2-)4-6(-8)-rayed stellate hairs usually 0.2-0.6 mm diam. or larger, adaxially blue-green, glaucous or grayish, vestiture similar to abaxial surface.",
+        "acorns": "subsessile, solitary; cup hemispheric or cup-shaped, rarely deeper, 5-10 mm deep × 10-15 mm wide, enclosing only base of nut, scales thin and not tuberculate to strongly and irregularly tuberculate, particularly toward base of cup; nut thin-walled, fusiform or subcylindric, 20-30 × 10-16 mm.",
+        "cotyledons": "distinct. 2 n = 24."
+      },
+      "text": "Trees , deciduous, with single trunks, sometimes with few to several trunks. Bark gray, scaly. Twigs reddish or yellowish, ca. 2 mm, densely or sparsely puberulent, occasionally glabrate with age. Buds reddish brown, rarely yellowish, broadly ovoid to rarely subglobose, (2-)3-5 mm; scales glabrous except for ciliate margins, sometimes sparsely or densely pubescent. Leaves: petiole blue-green, 2-6 mm. Leaf blade obovate or elliptic, oblong or oblanceolate, (20-)40-60(-80) × (15-)20-30(-40) mm, base rounded-attenuate or rounded, rarely cuneate, margins shallowly lobed or irregularly toothed, sometimes entire, lobes mucronate or rounded, secondary veins 6-10 on each side, apex rounded, rarely moderately acute; surfaces abaxially light green or blue-green, waxy, with scattered to crowded, semi-erect, (2-)4-6(-8)-rayed stellate hairs usually 0.2-0.6 mm diam. or larger, adaxially blue-green, glaucous or grayish, vestiture similar to abaxial surface. Acorns subsessile, solitary; cup hemispheric or cup-shaped, rarely deeper, 5-10 mm deep × 10-15 mm wide, enclosing only base of nut, scales thin and not tuberculate to strongly and irregularly tuberculate, particularly toward base of cup; nut thin-walled, fusiform or subcylindric, 20-30 × 10-16 mm. Cotyledons distinct. 2 n = 24.",
+      "distribution": "Flowering late winter-spring. Oak woodlands, margins of chaparral and grasslands; 0-1200 m; Calif."
+    }
+  ]
+}

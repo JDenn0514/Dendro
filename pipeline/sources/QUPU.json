@@ -1,0 +1,23 @@
+{
+  "symbol": "QUPU",
+  "scientific_name": "Quercus pungens",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501077",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Shrubs or moderate-sized trees , evergreen or subevergreen.",
+        "bark": "light brown, papery.",
+        "twigs": "gray, 1-2 mm diam., short velvety-tomentose, glabrate with age.",
+        "buds": "dark red-brown, ca. 2 mm, sparsely pubescent.",
+        "leaves": "petiole to 10 mm.",
+        "leaf_blade": "elliptic to oblong, 10-40(-90) × 10-20(-40) mm, rather thick, leathery, stiff, base rounded or minutely cordate, very rarely cuneate, margins regularly undulate-crisped, not revolute, coarsely toothed or incised with acute teeth or spinose lobes, secondary veins 5-8(-14) on each side, usually branched before passing into teeth, apex acute or obtuse, rarely rounded, spine-tipped; surfaces abaxially canescent, usually densely stellate-pubescent, and mixed with stiff, harsh, stellate hairs, often sandpapery to touch, rarely glabrate, adaxially yellowish green, glossy, usually rough and sandpapery because of minute, persistent hair bases, rarely glabrate.",
+        "acorns": "subsessile or on peduncle to 3 mm; cup shallowly to deeply cup-shaped or turbinate, to 8 mm deep × l3 mm wide, covering ca. 1/4 nut, margin thin, scales reddish brown, moderately tuberculate or keeled, densely gray-tomentose; nut light brown, broadly ovoid to subcylindric, to 10 × 10 mm, apex rounded to subacute, glabrous.",
+        "cotyledons": "distinct."
+      },
+      "text": "Shrubs or moderate-sized trees , evergreen or subevergreen. Bark light brown, papery. Twigs gray, 1-2 mm diam., short velvety-tomentose, glabrate with age. Buds dark red-brown, ca. 2 mm, sparsely pubescent. Leaves: petiole to 10 mm. Leaf blade elliptic to oblong, 10-40(-90) × 10-20(-40) mm, rather thick, leathery, stiff, base rounded or minutely cordate, very rarely cuneate, margins regularly undulate-crisped, not revolute, coarsely toothed or incised with acute teeth or spinose lobes, secondary veins 5-8(-14) on each side, usually branched before passing into teeth, apex acute or obtuse, rarely rounded, spine-tipped; surfaces abaxially canescent, usually densely stellate-pubescent, and mixed with stiff, harsh, stellate hairs, often sandpapery to touch, rarely glabrate, adaxially yellowish green, glossy, usually rough and sandpapery because of minute, persistent hair bases, rarely glabrate. Acorns subsessile or on peduncle to 3 mm; cup shallowly to deeply cup-shaped or turbinate, to 8 mm deep × l3 mm wide, covering ca. 1/4 nut, margin thin, scales reddish brown, moderately tuberculate or keeled, densely gray-tomentose; nut light brown, broadly ovoid to subcylindric, to 10 × 10 mm, apex rounded to subacute, glabrous. Cotyledons distinct.",
+      "distribution": "Flowering spring. On dry limestone or igneous slopes, usually in oak, pinyon, and juniper woodlands, chaparral, and sometimes descending into desert vegetation; 800-2000 m; Ariz., N.Mex., Tex.; Mexico (Chihuahua and Coahuila)."
+    }
+  ]
+}

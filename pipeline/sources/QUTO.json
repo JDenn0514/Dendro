@@ -1,0 +1,36 @@
+{
+  "symbol": "QUTO",
+  "scientific_name": "Quercus tomentella",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=555",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, evergreen, simple, oblong, 1 1/2 to 3 inches long, entire, wavy or toothed margin, often revolute, leathery, parallel veins that are raised beneath, shiny green above, dull and very fuzzy beneath.",
+        "flower": "Species is monoecious; males in long drooping catkins, yellow-green; females very small spikes in leaf axils, appearing with the leaves.",
+        "fruit": "Oblong acorn, 1 inch long; thin cap with hairy scales covers 1/4 of nut; ripens in 2 seasons in early fall.",
+        "twig": "Slender, greenish brown, fuzzy; terminal buds clustered, fuzzy, sharp pointed.",
+        "bark": "Gray-brown, thin, splits into shallow fissures that with time develop into flat, fine scaly patches.",
+        "form": "An evergreen, small tree up to 40 feet tall with a spreading rounded crown.",
+        "looks_like": "tanoak - coast live oak - interior live oak - scrub oak"
+      },
+      "text": "Leaf: Alternate, evergreen, simple, oblong, 1 1/2 to 3 inches long, entire, wavy or toothed margin, often revolute, leathery, parallel veins that are raised beneath, shiny green above, dull and very fuzzy beneath. Flower: Species is monoecious; males in long drooping catkins, yellow-green; females very small spikes in leaf axils, appearing with the leaves. Fruit: Oblong acorn, 1 inch long; thin cap with hairy scales covers 1/4 of nut; ripens in 2 seasons in early fall. Twig: Slender, greenish brown, fuzzy; terminal buds clustered, fuzzy, sharp pointed. Bark: Gray-brown, thin, splits into shallow fissures that with time develop into flat, fine scaly patches. Form: An evergreen, small tree up to 40 feet tall with a spreading rounded crown. Looks like: tanoak - coast live oak - interior live oak - scrub oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501090",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , to 20 m.",
+        "twigs": "branching at 45° angles, reddish brown, 3-4 mm diam., somewhat rigid, densely tomentose, persistent into 2d year.",
+        "terminal_buds": "conic, 7-10 mm, scales brown with ciliate margins.",
+        "leaves": "petiole 3-10 mm, rusty-villous, flattened adaxially.",
+        "leaf_blade": "wavy or distinctly concave, oblong-lanceolate or elliptic, acuminate, (30-)70-10(-120) × 25-40 mm, leathery and brittle, base obtuse to cordate, secondary veins 8-10(-12) pairs, branching at 45-50° angles, strongly pinnate, raised abaxially, often sunken adaxially, margins often strongly revolute, with slightly thickened cell walls, entire or crenate to dentate with mucronate teeth, apex rounded or acute, mucronate; surfaces abaxially densely tomentose with whitish nonglandular hairs, midrib pilose, adaxially glossy dark green, sparsely pubescent.",
+        "acorns": "solitary or rarely paired; cup shallowly cup-shaped, 4-8 mm deep × 15-30 mm wide, scales laterally connate, appressed, deeply imbedded in tomentum, with only thin, brown, elongated apices visible, tuberculate, densely whitish brown tomentose throughout; nut ovoid, 20-30 × 15-20 mm, apex rounded."
+      },
+      "text": "Trees , to 20 m. Twigs branching at 45° angles, reddish brown, 3-4 mm diam., somewhat rigid, densely tomentose, persistent into 2d year. Terminal buds conic, 7-10 mm, scales brown with ciliate margins. Leaves: petiole 3-10 mm, rusty-villous, flattened adaxially. Leaf blade wavy or distinctly concave, oblong-lanceolate or elliptic, acuminate, (30-)70-10(-120) × 25-40 mm, leathery and brittle, base obtuse to cordate, secondary veins 8-10(-12) pairs, branching at 45-50° angles, strongly pinnate, raised abaxially, often sunken adaxially, margins often strongly revolute, with slightly thickened cell walls, entire or crenate to dentate with mucronate teeth, apex rounded or acute, mucronate; surfaces abaxially densely tomentose with whitish nonglandular hairs, midrib pilose, adaxially glossy dark green, sparsely pubescent. Acorns solitary or rarely paired; cup shallowly cup-shaped, 4-8 mm deep × 15-30 mm wide, scales laterally connate, appressed, deeply imbedded in tomentum, with only thin, brown, elongated apices visible, tuberculate, densely whitish brown tomentose throughout; nut ovoid, 20-30 × 15-20 mm, apex rounded.",
+      "distribution": "Flowering in spring, occasionally in fall. Lower portions of steep canyons and occasionally ridge tops; 100-650 m; Calif.; Mexico (Baja California and on Guadalupe Island)."
+    }
+  ]
+}

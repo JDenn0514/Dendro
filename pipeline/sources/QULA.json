@@ -1,0 +1,23 @@
+{
+  "symbol": "QULA",
+  "scientific_name": "Quercus laceyi",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501053",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 5-8(-10) m.",
+        "bark": "light colored, papery or scaly.",
+        "twigs": "gray, 1.5-2 mm diam., pubescent with erect stellate hairs, these soon shed, at maturity reddish and pruinose to tan and glabrous.",
+        "buds": "brown, ovoid to ovoid-lanceoloid, 1.5-3 × 1-2 mm, apex acute, glabrous.",
+        "leaves": "petiole (3-)5-9(-12) mm.",
+        "leaf_blade": "blue-green, glaucous, obovate or elliptic, (20-)40-90(-210) × (20-)30-60(-110) mm, thin, base cuneate and decurrent on petiole to rounded or rarely somewhat cordate, margins thin, flat, entire to shallowly lobed or (rarely in shade forms) deeply lobed, lobes if present oblong, squarish, often retuse, secondary veins 6-9 on each side, each terminating in tooth or arching near margins, apex broadly rounded, retuse; surfaces abaxially whitish, with erect stellate hairs, hairs shed as leaves expand, becoming glabrous, glaucous, adaxially glabrous, glaucous.",
+        "acorns": "annual, solitary or paired, subsessile or on short peduncle to 10(-20) mm in leaf axil; cup saucer-shaped or shallowly cup-shaped, 4-7 mm deep × 10-12(-18) mm wide, enclosing 1/3 nut or less, scales moderately tuberculate, finely tomentose; nut oblong or barrel-shaped, often flattened at both ends, (11-)13-15(-20) × 9-11(-14) mm.",
+        "cotyledons": "distinct."
+      },
+      "text": "Trees , deciduous, to 5-8(-10) m. Bark light colored, papery or scaly. Twigs gray, 1.5-2 mm diam., pubescent with erect stellate hairs, these soon shed, at maturity reddish and pruinose to tan and glabrous. Buds brown, ovoid to ovoid-lanceoloid, 1.5-3 × 1-2 mm, apex acute, glabrous. Leaves: petiole (3-)5-9(-12) mm. Leaf blade blue-green, glaucous, obovate or elliptic, (20-)40-90(-210) × (20-)30-60(-110) mm, thin, base cuneate and decurrent on petiole to rounded or rarely somewhat cordate, margins thin, flat, entire to shallowly lobed or (rarely in shade forms) deeply lobed, lobes if present oblong, squarish, often retuse, secondary veins 6-9 on each side, each terminating in tooth or arching near margins, apex broadly rounded, retuse; surfaces abaxially whitish, with erect stellate hairs, hairs shed as leaves expand, becoming glabrous, glaucous, adaxially glabrous, glaucous. Acorns annual, solitary or paired, subsessile or on short peduncle to 10(-20) mm in leaf axil; cup saucer-shaped or shallowly cup-shaped, 4-7 mm deep × 10-12(-18) mm wide, enclosing 1/3 nut or less, scales moderately tuberculate, finely tomentose; nut oblong or barrel-shaped, often flattened at both ends, (11-)13-15(-20) × 9-11(-14) mm. Cotyledons distinct.",
+      "distribution": "Flowering in spring. Limestone hills, woodlands and riparian forests, canyons and streamsides; 350-2200 m; Tex.; Mexico (Coahuila and Nuevo León)."
+    }
+  ]
+}

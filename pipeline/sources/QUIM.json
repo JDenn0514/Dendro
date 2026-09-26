@@ -1,0 +1,37 @@
+{
+  "symbol": "QUIM",
+  "scientific_name": "Quercus imbricaria",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=70",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, 3 to 7 inches long, broadly lanceolate, unlobed with a single, terminal bristle-tip, somewhat leathery, shiny dark green above and paler and fuzzy below.",
+        "flower": "Species is monoecious; male flowers borne on hanging slender catkins; females borne on short spikes, appearing with the leaves in spring.",
+        "fruit": "Acorns are 5/8 inch long, 1/3 to 1/2 covered by a thin, bowl-shaped cap with appressed light brown scales, matures in the fall after two years.",
+        "twig": "Slender, olive-green to orange-brown, quite lustrous with conical, pointed, red-brown buds.",
+        "bark": "Gray-brown, tight and quite hard, with broad, irregular ridges and very shallow furrows.",
+        "form": "A medium sized tree to 70 feet with pyramidal to oval and later rounded crown. Lateral lower branches often droop.",
+        "looks_like": "willow oak - laurel oak - Darlington oak - bluejack oak"
+      },
+      "text": "Leaf: Alternate, simple, 3 to 7 inches long, broadly lanceolate, unlobed with a single, terminal bristle-tip, somewhat leathery, shiny dark green above and paler and fuzzy below. Flower: Species is monoecious; male flowers borne on hanging slender catkins; females borne on short spikes, appearing with the leaves in spring. Fruit: Acorns are 5/8 inch long, 1/3 to 1/2 covered by a thin, bowl-shaped cap with appressed light brown scales, matures in the fall after two years. Twig: Slender, olive-green to orange-brown, quite lustrous with conical, pointed, red-brown buds. Bark: Gray-brown, tight and quite hard, with broad, irregular ridges and very shallow furrows. Form: A medium sized tree to 70 feet with pyramidal to oval and later rounded crown. Lateral lower branches often droop. Looks like: willow oak - laurel oak - Darlington oak - bluejack oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501047",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 20 m.",
+        "bark": "grayish brown, fissures and ridges shallow, inner bark pinkish.",
+        "twigs": "greenish brown to brown, 1.5-3(-4) mm diam., glabrous or sparsely pubescent.",
+        "terminal_buds": "brown to reddish brown, ovoid, 3-6 mm, distinctly 5-angled in cross section, scales minutely ciliate on margins.",
+        "leaves": "petiole 10-20 mm, glabrous.",
+        "leaf_blade": "ovate or elliptic to obovate, usually widest near middle, 80-200 × 15-75 mm, base obtuse to cuneate, occasionally rounded, margins entire with 1 apical awn, apex acute to obtuse; surfaces abaxially uniformly pubescent, adaxially lustrous, glabrous.",
+        "acorns": "biennial; cup deeply saucer-shaped to cup-shaped, 5-9 mm high × 10-18 mm wide, covering 1/3-1/2 nut, outer surface puberulent, inner surface light brown to reddish brown and glabrous or with a few hairs around nut scar, scale tips tightly appressed, acute; nut ovoid to subglobose, 9-18 × 10-18 mm, often striate, having 1 or more indistinct rings of minute pits at apex, glabrate, scar diam. 5-9 mm. 2 n = 24."
+      },
+      "text": "Trees , deciduous, to 20 m. Bark grayish brown, fissures and ridges shallow, inner bark pinkish. Twigs greenish brown to brown, 1.5-3(-4) mm diam., glabrous or sparsely pubescent. Terminal buds brown to reddish brown, ovoid, 3-6 mm, distinctly 5-angled in cross section, scales minutely ciliate on margins. Leaves: petiole 10-20 mm, glabrous. Leaf blade ovate or elliptic to obovate, usually widest near middle, 80-200 × 15-75 mm, base obtuse to cuneate, occasionally rounded, margins entire with 1 apical awn, apex acute to obtuse; surfaces abaxially uniformly pubescent, adaxially lustrous, glabrous. Acorns biennial; cup deeply saucer-shaped to cup-shaped, 5-9 mm high × 10-18 mm wide, covering 1/3-1/2 nut, outer surface puberulent, inner surface light brown to reddish brown and glabrous or with a few hairs around nut scar, scale tips tightly appressed, acute; nut ovoid to subglobose, 9-18 × 10-18 mm, often striate, having 1 or more indistinct rings of minute pits at apex, glabrate, scar diam. 5-9 mm. 2 n = 24.",
+      "distribution": "Flowering spring. Moderately dry to mesic slopes and uplands, occasionally in ravines and bottoms; 100-700 m; Ark., Del., D.C., Ill., Ind., Iowa, Kans., Ky., La., Md., Mich., Mo., N.J., N.C., Ohio, Pa., Tenn., Tex., Va., W.Va."
+    }
+  ]
+}

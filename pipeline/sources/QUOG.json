@@ -1,0 +1,38 @@
+{
+  "symbol": "QUOG",
+  "scientific_name": "Quercus oglethorpensis",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=992",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, 3 to 7 inches long, elliptical to oblanceolate, unlobed or somewhat sinuate, shiny dark green above and pale fuzzy below.",
+        "flower": "Species is monoecious; male flowers borne on hanging slender catkins; females borne on short spikes, appearing with the leaves in spring.",
+        "fruit": "Acorns are 5/8 inch long, 1/3 to 1/2 covered by a thin, bowl-shaped cap with appressed light brown scales, matures in the fall after two years.",
+        "twig": "Slender, olive-green to orange-brown, quite lustrous with conical, pointed, red-brown buds.",
+        "bark": "Gray-brown, tight and quite hard, with broad, irregular ridges and very shallow furrows.",
+        "form": "A medium sized tree to 70 feet with pyramidal to oval and later rounded crown. Lateral lower branches often droop.",
+        "looks_like": "willow oak - water oak - bluejack oak - Darlington oak"
+      },
+      "text": "Leaf: Alternate, simple, 3 to 7 inches long, elliptical to oblanceolate, unlobed or somewhat sinuate, shiny dark green above and pale fuzzy below. Flower: Species is monoecious; male flowers borne on hanging slender catkins; females borne on short spikes, appearing with the leaves in spring. Fruit: Acorns are 5/8 inch long, 1/3 to 1/2 covered by a thin, bowl-shaped cap with appressed light brown scales, matures in the fall after two years. Twig: Slender, olive-green to orange-brown, quite lustrous with conical, pointed, red-brown buds. Bark: Gray-brown, tight and quite hard, with broad, irregular ridges and very shallow furrows. Form: A medium sized tree to 70 feet with pyramidal to oval and later rounded crown. Lateral lower branches often droop. Looks like: willow oak - water oak - bluejack oak - Darlington oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501069",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 18(-25) m.",
+        "bark": "light gray or whitish, scaly.",
+        "twigs": "brownish red, ca. 1 mm diam., sparsely pubescent, glabrate with age.",
+        "buds": "reddish brown, globose, to 2-2.5 mm, sparsely pubescent or glabrous.",
+        "leaves": "petiole 2-7 mm.",
+        "leaf_blade": "narrowly elliptic or oblanceolate, ± planar, not strongly convexly cupped, 50-150 × 20-45 mm, base cuneate to cordate, margins entire or on vigorous shoots sometimes sinuate near apex, secondary veins 3-5 on each side, apex rounded, obtuse or broadly acute; surfaces abaxially yellowish green, covered with persistent velvety branched hairs, adaxially dark green, dull or glossy, sparsely stellate, often somewhat sandpapery with harsh hairs.",
+        "acorns": "1-2, subsessile or on peduncle to 7 mm; cup turbinate, somewhat constricted proximally, 8 mm deep × 10 mm wide, enclosing 1/3 nut or more, scales closely appressed, finely tan-pubescent; nut gray brown, ovoid, 9-11 × (5-)7-9 mm, finely puberulent.",
+        "cotyledons": "distinct."
+      },
+      "text": "Trees , deciduous, to 18(-25) m. Bark light gray or whitish, scaly. Twigs brownish red, ca. 1 mm diam., sparsely pubescent, glabrate with age. Buds reddish brown, globose, to 2-2.5 mm, sparsely pubescent or glabrous. Leaves: petiole 2-7 mm. Leaf blade narrowly elliptic or oblanceolate, ± planar, not strongly convexly cupped, 50-150 × 20-45 mm, base cuneate to cordate, margins entire or on vigorous shoots sometimes sinuate near apex, secondary veins 3-5 on each side, apex rounded, obtuse or broadly acute; surfaces abaxially yellowish green, covered with persistent velvety branched hairs, adaxially dark green, dull or glossy, sparsely stellate, often somewhat sandpapery with harsh hairs. Acorns 1-2, subsessile or on peduncle to 7 mm; cup turbinate, somewhat constricted proximally, 8 mm deep × 10 mm wide, enclosing 1/3 nut or more, scales closely appressed, finely tan-pubescent; nut gray brown, ovoid, 9-11 × (5-)7-9 mm, finely puberulent. Cotyledons distinct.",
+      "distribution": "Flowering spring. Alluvial flatwoods and streamsides in rich woods, low pastures, and edge of bottomland forests; of conservation concern; 0-200 m; Ga., La., Miss., S.C."
+    }
+  ]
+}

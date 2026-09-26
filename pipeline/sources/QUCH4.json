@@ -1,0 +1,23 @@
+{
+  "symbol": "QUCH4",
+  "scientific_name": "Quercus chihuahuensis",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501017",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Shrubs or trees , deciduous, to 10 m.",
+        "bark": "gray, furrowed, checkered, or scaly.",
+        "twigs": "gray, 2-3(-4) mm diam., densely tomentose.",
+        "buds": "reddish brown, broadly ovoid, distally rounded, 2-2.5 mm, densely yellowish pubescent; scales gray-puberulent; stipules persistent, 1-4, subulate, pubescent, at base of terminal buds.",
+        "leaves": "petiole 3-5(-8) mm.",
+        "leaf_blade": "elliptic or oblong to ovate or obovate, (25-)40-50(-85) × (18-)20-30(-50) mm, base rounded or shallowly cordate, margins entire or toothed to sublobate, secondary veins 8 to 10 on each side, somewhat branching, apex broadly rounded to acute; surfaces abaxially yellowish or grayish, densely stellate with velvety hairs, adaxially green, sparsely soft-pubescent with prominent, spreading, stellate hairs, felty to touch, secondary veins somewhat prominent on both surfaces, even under dense tomentum.",
+        "acorns": "1-3 on tomentose peduncle 15-35(-60) mm; cup hemispheric, 7-10 mm deep × 10-15 mm wide, enclosing 1/2 nut, scales proximally thickened, distally appressed, densely gray-puberulent, tips reddish, ultimately glabrate; nut ovoid, 14-18 × 10-12 mm, puberulent, eventually glabrate.",
+        "cotyledons": "connate."
+      },
+      "text": "Shrubs or trees , deciduous, to 10 m. Bark gray, furrowed, checkered, or scaly. Twigs gray, 2-3(-4) mm diam., densely tomentose. Buds reddish brown, broadly ovoid, distally rounded, 2-2.5 mm, densely yellowish pubescent; scales gray-puberulent; stipules persistent, 1-4, subulate, pubescent, at base of terminal buds. Leaves: petiole 3-5(-8) mm. Leaf blade elliptic or oblong to ovate or obovate, (25-)40-50(-85) × (18-)20-30(-50) mm, base rounded or shallowly cordate, margins entire or toothed to sublobate, secondary veins 8 to 10 on each side, somewhat branching, apex broadly rounded to acute; surfaces abaxially yellowish or grayish, densely stellate with velvety hairs, adaxially green, sparsely soft-pubescent with prominent, spreading, stellate hairs, felty to touch, secondary veins somewhat prominent on both surfaces, even under dense tomentum. Acorns 1-3 on tomentose peduncle 15-35(-60) mm; cup hemispheric, 7-10 mm deep × 10-15 mm wide, enclosing 1/2 nut, scales proximally thickened, distally appressed, densely gray-puberulent, tips reddish, ultimately glabrate; nut ovoid, 14-18 × 10-12 mm, puberulent, eventually glabrate. Cotyledons connate.",
+      "distribution": "Flowering spring. Oak and pinyon-juniper woodlands, grassy hills, sometimes extending into dry thorn scrub and bursera woodland (Mexico); 400-2000 m; Tex.; Mexico (Chihuahua, Sonora, Zacatecas, and San Luis Potosí)."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "symbol": "QUST",
+  "scientific_name": "Quercus stellata",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=77",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, oblong, 6 to 10 inches long, with 5 lobes, the two middle lobes are distinctly square, resulting in an overall cruciform appearance, thickened texture; green above with scattered stellate pubescence, pubescent and paler below.",
+        "flower": "Species is monoecious; male flowers are yellow-green, borne in naked, hanging catkins, 2 to 4 inches long; female flowers are reddish and appear as single, short spikes from leaf axils, appearing with the leaves.",
+        "fruit": "Acorns are 1/2 to 2/3 inches long and ovoid; cap is bowl-shaped and warty/scaly, covering 1/3 to 1/2 of the nut; Individual scales are more apparent than white oak; maturing in one year and ripening in the fall.",
+        "twig": "Gray or tawny-tomentose and dotted with numerous lenticels; multiple terminal buds are short, blunt, orange-brown, somewhat pubescent, short, thread-like stipules may be present.",
+        "bark": "Ashy gray and initially quite scaly, later becoming more blocky and ridged, very similar to white oak.",
+        "form": "A small to Medium sized tree up to 65 feet tall with a crown that has gnarled and twisted branches.",
+        "looks_like": "sand post oak - overcup oak - bur oak - white oak"
+      },
+      "text": "Leaf: Alternate, simple, oblong, 6 to 10 inches long, with 5 lobes, the two middle lobes are distinctly square, resulting in an overall cruciform appearance, thickened texture; green above with scattered stellate pubescence, pubescent and paler below. Flower: Species is monoecious; male flowers are yellow-green, borne in naked, hanging catkins, 2 to 4 inches long; female flowers are reddish and appear as single, short spikes from leaf axils, appearing with the leaves. Fruit: Acorns are 1/2 to 2/3 inches long and ovoid; cap is bowl-shaped and warty/scaly, covering 1/3 to 1/2 of the nut; Individual scales are more apparent than white oak; maturing in one year and ripening in the fall. Twig: Gray or tawny-tomentose and dotted with numerous lenticels; multiple terminal buds are short, blunt, orange-brown, somewhat pubescent, short, thread-like stipules may be present. Bark: Ashy gray and initially quite scaly, later becoming more blocky and ridged, very similar to white oak. Form: A small to Medium sized tree up to 65 feet tall with a crown that has gnarled and twisted branches. Looks like: sand post oak - overcup oak - bur oak - white oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501087",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 20(-30) m.",
+        "bark": "light gray, scaly.",
+        "twigs": "yellowish or grayish, (2-)3-5 mm diam., densely stellate-pubescent.",
+        "buds": "reddish brown, ovoid, to 4 mm, apex obtuse or acute, sparsely pubescent.",
+        "leaves": "petiole 3-15(-30) mm.",
+        "leaf_blade": "obovate to narrowly obovate, elliptic or obtriangular, 40-150(-200) × 20-100(-120) mm, rather stiff and hard, base rounded-attenuate to cordate, sometimes cuneate, margins shallowly to deeply lobed, lobes rounded or spatulate, usually distal 2 lobes divergent at right angles to midrib in cruciform pattern, secondary veins 3-5 on each side, apex broadly rounded; surfaces abaxially yellowish green, with crowded yellowish glandular hairs and scattered minute, 6-8-rayed, appressed or semi-appressed stellate hairs, not velvety to touch, adaxially dark or yellowish green, dull or glossy, sparsely stellate, often somewhat sandpapery with harsh hairs.",
+        "acorns": "1-3, subsessile or on peduncle to 6(-40) mm; cup deeply saucer-shaped, proximally rounded or constricted, 7-12(-18) mm deep × (7-)10-15(-25) mm wide, enclosing 1/4-2/3 nut, scales tightly appressed, finely grayish pubescent; nut light brown, ovoid or globose, 10-20 × 8-12(-20) mm, glabrous or finely puberulent.",
+        "cotyledons": "distinct."
+      },
+      "text": "Trees , deciduous, to 20(-30) m. Bark light gray, scaly. Twigs yellowish or grayish, (2-)3-5 mm diam., densely stellate-pubescent. Buds reddish brown, ovoid, to 4 mm, apex obtuse or acute, sparsely pubescent. Leaves: petiole 3-15(-30) mm. Leaf blade obovate to narrowly obovate, elliptic or obtriangular, 40-150(-200) × 20-100(-120) mm, rather stiff and hard, base rounded-attenuate to cordate, sometimes cuneate, margins shallowly to deeply lobed, lobes rounded or spatulate, usually distal 2 lobes divergent at right angles to midrib in cruciform pattern, secondary veins 3-5 on each side, apex broadly rounded; surfaces abaxially yellowish green, with crowded yellowish glandular hairs and scattered minute, 6-8-rayed, appressed or semi-appressed stellate hairs, not velvety to touch, adaxially dark or yellowish green, dull or glossy, sparsely stellate, often somewhat sandpapery with harsh hairs. Acorns 1-3, subsessile or on peduncle to 6(-40) mm; cup deeply saucer-shaped, proximally rounded or constricted, 7-12(-18) mm deep × (7-)10-15(-25) mm wide, enclosing 1/4-2/3 nut, scales tightly appressed, finely grayish pubescent; nut light brown, ovoid or globose, 10-20 × 8-12(-20) mm, glabrous or finely puberulent. Cotyledons distinct.",
+      "distribution": "Flowering spring. Usually on xeric sites, dry gravelly and sandy ridges and uplands, dry clays, prairies and limestone hills, woodlands and deciduous forests; 0-750 m; Ala., Ark., Conn., Del., Fla., Ga., Ill., Ind., Iowa, Kans., Ky., La., Md., Mass., Miss., Mo., N.J., N.Y., N.C., Ohio, Okla., Pa., R.I., S.C., Tenn., Tex., Va., W.Va."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "symbol": "QUMA2",
+  "scientific_name": "Quercus macrocarpa",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=72",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, 6 to 12 inches long, roughly obovate in shape, with many lobes. The two middle sinuses nearly reach the midrib dividing leaf nearly in half. The lobes near the tip resemble a crown, green above and paler, fuzzy below.",
+        "flower": "Species is monoecious; male flowers are yellow-green, borne in long, drooping slender catkins, 2 to 4 inches long; female flowers are green tinged in red and appear as single, short spikes, both appear shortly after the leaves.",
+        "fruit": "Acorns are quite large (1 1/2 inches long) and 1/2 enclosed in a warty cap that has a long-fringed margin, maturing in one growing season in late summer and fall.",
+        "twig": "Quite stout, yellow-brown, often with corky ridges; multiple terminal buds are small, round, and may be somewhat pubescent often surrounded by thread-like stipules; laterals are similar, but smaller.",
+        "bark": "Ashy gray to brown in color and quite scaly, but noticeably ridged vertically on large trees.",
+        "form": "A large tree that often reaches over 100 feet tall with a long clear bole. In the open it becomes a very wide, spreading tree.",
+        "looks_like": "white oak - overcup oak - post oak - sand post oak"
+      },
+      "text": "Leaf: Alternate, simple, 6 to 12 inches long, roughly obovate in shape, with many lobes. The two middle sinuses nearly reach the midrib dividing leaf nearly in half. The lobes near the tip resemble a crown, green above and paler, fuzzy below. Flower: Species is monoecious; male flowers are yellow-green, borne in long, drooping slender catkins, 2 to 4 inches long; female flowers are green tinged in red and appear as single, short spikes, both appear shortly after the leaves. Fruit: Acorns are quite large (1 1/2 inches long) and 1/2 enclosed in a warty cap that has a long-fringed margin, maturing in one growing season in late summer and fall. Twig: Quite stout, yellow-brown, often with corky ridges; multiple terminal buds are small, round, and may be somewhat pubescent often surrounded by thread-like stipules; laterals are similar, but smaller. Bark: Ashy gray to brown in color and quite scaly, but noticeably ridged vertically on large trees. Form: A large tree that often reaches over 100 feet tall with a long clear bole. In the open it becomes a very wide, spreading tree. Looks like: white oak - overcup oak - post oak - sand post oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501058",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 30(-50) m.",
+        "bark": "dark gray, scaly or flat-ridged.",
+        "twigs": "grayish or reddish, 2-4 mm diam., often forming extensive flat, radiating, corky wings, finely pubescent.",
+        "buds": "2-5(-6) mm, glabrous.",
+        "leaves": "petiole (6-)15-25(-30) mm.",
+        "leaf_blade": "obovate to narrowly elliptic or narrowly obovate, often fiddle-shaped, (50-)70-150(-310) × (40-)50-130(-160) mm, base rounded to cuneate, margins moderately to deeply lobed, toothed, deepest sinuses near midleaf (at least in proximal 2/3), sinuses reaching nearly to midrib, longer lobes grading into shallow lobes or merely simple teeth distally, shallower, compound lobes proximally, secondary veins arched, divergent, 4-5(-10) on each side, apex broadly rounded or ovate; surfaces abaxially light green or whitish, with minute appressed-stellate hairs forming dense, rarely sparse, tomentum, erect felty hairs absent, adaxially dark green or dull gray, sparsely puberulent to glabrate.",
+        "acorns": "1-3 on stout peduncle (0-)6-20(-25) mm; cup hemispheric or turbinate, (8-)15-50 mm deep × (10-)20-60 mm wide, enclosing 1/2-7/8 nut or more, scales closely appressed, laterally connate, broadly triangular, keeled, tuberculate, finely grayish tomentose, those near margins often with soft awns to 5-10 mm or more, forming fringe around nut; nut light brown or grayish, ovoid-ellipsoid or oblong, (15-)25-50 × (10-)20-40 mm, finely puberulent or floccose.",
+        "cotyledons": "distinct. 2 n = 24."
+      },
+      "text": "Trees , deciduous, to 30(-50) m. Bark dark gray, scaly or flat-ridged. Twigs grayish or reddish, 2-4 mm diam., often forming extensive flat, radiating, corky wings, finely pubescent. Buds 2-5(-6) mm, glabrous. Leaves: petiole (6-)15-25(-30) mm. Leaf blade obovate to narrowly elliptic or narrowly obovate, often fiddle-shaped, (50-)70-150(-310) × (40-)50-130(-160) mm, base rounded to cuneate, margins moderately to deeply lobed, toothed, deepest sinuses near midleaf (at least in proximal 2/3), sinuses reaching nearly to midrib, longer lobes grading into shallow lobes or merely simple teeth distally, shallower, compound lobes proximally, secondary veins arched, divergent, 4-5(-10) on each side, apex broadly rounded or ovate; surfaces abaxially light green or whitish, with minute appressed-stellate hairs forming dense, rarely sparse, tomentum, erect felty hairs absent, adaxially dark green or dull gray, sparsely puberulent to glabrate. Acorns 1-3 on stout peduncle (0-)6-20(-25) mm; cup hemispheric or turbinate, (8-)15-50 mm deep × (10-)20-60 mm wide, enclosing 1/2-7/8 nut or more, scales closely appressed, laterally connate, broadly triangular, keeled, tuberculate, finely grayish tomentose, those near margins often with soft awns to 5-10 mm or more, forming fringe around nut; nut light brown or grayish, ovoid-ellipsoid or oblong, (15-)25-50 × (10-)20-40 mm, finely puberulent or floccose. Cotyledons distinct. 2 n = 24.",
+      "distribution": "Flowering in spring. Bottomlands, riparian slopes, poorly drained areas, prairies, usually on limestone or calcareous clays (in nw part of range on dry slopes and ridges, prairies); 0-1000 m; Man., N.B., Sask., Ont., Que.; Ala., Ark., Conn., Ill., Ind., Iowa, Kans., Ky., La., Maine, Md., Mass., Mich., Minn., Mo., Mont., Nebr., N.J., N.Y., N.Dak., Ohio, Okla., Pa., S.Dak., Tenn., Tex., Vt., Va., W.Va., Wis., Wyo."
+    }
+  ]
+}

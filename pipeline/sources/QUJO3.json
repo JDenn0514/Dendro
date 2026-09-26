@@ -1,0 +1,23 @@
+{
+  "symbol": "QUJO3",
+  "scientific_name": "Quercus john-tuckeri",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501051",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Shrubs , subevergreen or evergreen, 1-3(-5) m.",
+        "bark": "light gray or brown, scaly.",
+        "twigs": "yellowish or dingy gray, 1-1.5(-2) mm diam., densely tomentulose.",
+        "buds": "brown, ovoid or globose, 1.5-2(-3) mm, glabrous except for ciliate margins of scales; proximal scales often yellowish puberulent.",
+        "leaves": "petiole 1-4 mm.",
+        "leaf_blade": "unicolored, elliptic or obovate, (10-)15-30(-40) × (8-)10-15(-20) mm, thick and leathery, often brittle, base truncate or rounded-attenuate, rarely subcordate, margins irregularly spinose-toothed, occasionally shallowly lobate, secondary veins (3-)4-7, often some veins branching near margin and passing into more than 1 tooth, apex acute or rounded; surfaces abaxially waxy grayish, light green, or yellowish, sparse to moderately dense (8-)10-12-rayed, (loosely) appressed-stellate hairs, often 0.2-0.5 mm diam., and sparse to crowded, yellowish, glandular hairs, adaxially dull grayish, with stellate hairs, similar to abaxial surface.",
+        "acorns": "solitary or paired, subsessile; cup cup-shaped or obconic to hemispheric, 5-7 mm deep × 10-15 mm wide, thin, scales whitish or yellowish, moderately or scarcely tuberculate, puberulent; nut fusiform, ovoid, or conic, 20-30 mm, apex acute.",
+        "cotyledons": "distinct."
+      },
+      "text": "Shrubs , subevergreen or evergreen, 1-3(-5) m. Bark light gray or brown, scaly. Twigs yellowish or dingy gray, 1-1.5(-2) mm diam., densely tomentulose. Buds brown, ovoid or globose, 1.5-2(-3) mm, glabrous except for ciliate margins of scales; proximal scales often yellowish puberulent. Leaves: petiole 1-4 mm. Leaf blade unicolored, elliptic or obovate, (10-)15-30(-40) × (8-)10-15(-20) mm, thick and leathery, often brittle, base truncate or rounded-attenuate, rarely subcordate, margins irregularly spinose-toothed, occasionally shallowly lobate, secondary veins (3-)4-7, often some veins branching near margin and passing into more than 1 tooth, apex acute or rounded; surfaces abaxially waxy grayish, light green, or yellowish, sparse to moderately dense (8-)10-12-rayed, (loosely) appressed-stellate hairs, often 0.2-0.5 mm diam., and sparse to crowded, yellowish, glandular hairs, adaxially dull grayish, with stellate hairs, similar to abaxial surface. Acorns solitary or paired, subsessile; cup cup-shaped or obconic to hemispheric, 5-7 mm deep × 10-15 mm wide, thin, scales whitish or yellowish, moderately or scarcely tuberculate, puberulent; nut fusiform, ovoid, or conic, 20-30 mm, apex acute. Cotyledons distinct.",
+      "distribution": "Dry slopes, chaparral, pinyon and juniper woodlands, margins of oak woodlands and sagebrush; 900-2000 m; Calif."
+    }
+  ]
+}

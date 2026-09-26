@@ -1,0 +1,36 @@
+{
+  "symbol": "QUCH2",
+  "scientific_name": "Quercus chrysolepis",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=239",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, persistent; variable shape, oblong to elliptical, thick and leathery, small (1 to 3 1/2 inches long), margins may be entire or spinose (holly-like) on the same branch, initially fuzzy but becoming smooth and green above and smooth and bluish-white below.",
+        "flower": "Species is monoecious; inconspicuous; male flowers borne in aments (catkins); female flowers borne solitary or in short spikes, appearing with the leaves.",
+        "fruit": "An elongated acorn with a shallow, scaly cap, 1/2 to 1 1/2 inches long, requires 2 seasons to mature.",
+        "twig": "Slender, rigid or flexible, fuzzy when young but becoming smooth and reddish to grayish brown with age.",
+        "bark": "Thin (about 1 inch) and mostly smooth; may develop small, tight scales with age; gray-brown.",
+        "form": "Grows both as a tree (to 80 feet tall and 2 feet in diameter) and as a dense shrub up to 15 feet tall.",
+        "looks_like": "tanoak - interior live oak - huckleberry oak - Arizona white oak"
+      },
+      "text": "Leaf: Alternate, simple, persistent; variable shape, oblong to elliptical, thick and leathery, small (1 to 3 1/2 inches long), margins may be entire or spinose (holly-like) on the same branch, initially fuzzy but becoming smooth and green above and smooth and bluish-white below. Flower: Species is monoecious; inconspicuous; male flowers borne in aments (catkins); female flowers borne solitary or in short spikes, appearing with the leaves. Fruit: An elongated acorn with a shallow, scaly cap, 1/2 to 1 1/2 inches long, requires 2 seasons to mature. Twig: Slender, rigid or flexible, fuzzy when young but becoming smooth and reddish to grayish brown with age. Bark: Thin (about 1 inch) and mostly smooth; may develop small, tight scales with age; gray-brown. Form: Grows both as a tree (to 80 feet tall and 2 feet in diameter) and as a dense shrub up to 15 feet tall. Looks like: tanoak - interior live oak - huckleberry oak - Arizona white oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501018",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees or shrubs , trees small to medium-sized, to 25 m, shrubs of variable size.",
+        "twigs": "branching at 60° angles or less, golden brown, 1-2 mm diam., flexible, densely pubescent 1st year, moderately so 2d year.",
+        "terminal_buds": "conic, 2-8 mm, scales brown with ciliate margins.",
+        "leaves": "petiole 3-14 mm, rusty-pubescent, adaxially flattened.",
+        "leaf_blade": "oblong, acuminate, usually flat to slightly concave, 20-70 × 10-35 mm, thick, leathery, base obtuse to rounded, secondary veins 12 or more pairs, branching at ca. 50° angles, slightly raised abaxially, margins often slightly revolute with moderately thickened cell walls, entire to spinulose-dentate (especially on juvenile growth), regularly toothed, teeth terminating with mucronate to spinescent tip, apex acute or obtuse, mucronate to spinescent; surfaces abaxially glabrate to pubescent with bluish white wax layer, often obscured by golden glandular and multiradiate hairs, adaxially yellowish green, scurfy with multiradiate hairs, later in season slightly pubescent.",
+        "acorns": "solitary or paired, rarely in 3s or 4s; cup saucer-shaped, 4-10 mm deep × 15-40 mm wide, rims often corky and thickened, scales appressed, deeply embedded in tomentum, often appearing swollen and keeled, tuberculate; nut ovoid, 15-30 × 10-20 mm, apex blunt, glabrous; nut scar 4-10 mm diam."
+      },
+      "text": "Trees or shrubs , trees small to medium-sized, to 25 m, shrubs of variable size. Twigs branching at 60° angles or less, golden brown, 1-2 mm diam., flexible, densely pubescent 1st year, moderately so 2d year. Terminal buds conic, 2-8 mm, scales brown with ciliate margins. Leaves: petiole 3-14 mm, rusty-pubescent, adaxially flattened. Leaf blade oblong, acuminate, usually flat to slightly concave, 20-70 × 10-35 mm, thick, leathery, base obtuse to rounded, secondary veins 12 or more pairs, branching at ca. 50° angles, slightly raised abaxially, margins often slightly revolute with moderately thickened cell walls, entire to spinulose-dentate (especially on juvenile growth), regularly toothed, teeth terminating with mucronate to spinescent tip, apex acute or obtuse, mucronate to spinescent; surfaces abaxially glabrate to pubescent with bluish white wax layer, often obscured by golden glandular and multiradiate hairs, adaxially yellowish green, scurfy with multiradiate hairs, later in season slightly pubescent. Acorns solitary or paired, rarely in 3s or 4s; cup saucer-shaped, 4-10 mm deep × 15-40 mm wide, rims often corky and thickened, scales appressed, deeply embedded in tomentum, often appearing swollen and keeled, tuberculate; nut ovoid, 15-30 × 10-20 mm, apex blunt, glabrous; nut scar 4-10 mm diam.",
+      "distribution": "Flowering usually in spring, occasionally in fall. Mountain ridges, canyons, and moist slopes; 200-2600 m; Ariz, Calif., Nev., N.Mex., Oreg.; Mexico (Baja California and Chihuahua)."
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "symbol": "QUDU4",
+  "scientific_name": "Quercus durata",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=1093",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, evergreen, simple, elliptical, 1/2 to 1 1/2 inches long, spine-tipped lobes (holly-like), leathery and stiff, cupped and very rarely planar, somewhat revolute, yellow-green to gray-green and pubescent on the upper surface, yellow to golden fuzzy on the lower surface.",
+        "flower": "Species is monoecious; males in drooping 1 inch long catkins, yellow-green; females very small spikes in leaf axils, appearing with the leaves.",
+        "fruit": "Acorn, 1/2 to 1 inch long; round and somewhat pubescent nut; warty cap covers 1/3 to 1/2 of nut; appearing singularly or in pairs; ripens in fall.",
+        "twig": "Slender, densely to sparsely pubescent, often with yellow hairs; buds red-brown, globose.",
+        "bark": "Light gray and finely scaly.",
+        "form": "A large clump-forming dense shrub up to 10 feet.",
+        "looks_like": "scrub oak - shrub live oak - canyon live oak"
+      },
+      "text": "Leaf: Alternate, evergreen, simple, elliptical, 1/2 to 1 1/2 inches long, spine-tipped lobes (holly-like), leathery and stiff, cupped and very rarely planar, somewhat revolute, yellow-green to gray-green and pubescent on the upper surface, yellow to golden fuzzy on the lower surface. Flower: Species is monoecious; males in drooping 1 inch long catkins, yellow-green; females very small spikes in leaf axils, appearing with the leaves. Fruit: Acorn, 1/2 to 1 inch long; round and somewhat pubescent nut; warty cap covers 1/3 to 1/2 of nut; appearing singularly or in pairs; ripens in fall. Twig: Slender, densely to sparsely pubescent, often with yellow hairs; buds red-brown, globose. Bark: Light gray and finely scaly. Form: A large clump-forming dense shrub up to 10 feet. Looks like: scrub oak - shrub live oak - canyon live oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501024",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Shrubs , evergreen, 1-2(-3) m.",
+        "bark": "scaly.",
+        "twigs": "gray or yellowish, 1-3 mm diam., densely or sparsely tomentulose, often with prominent, yellowish, spreading hairs.",
+        "buds": "brown or reddish brown, ovoid or globose, 1-2 mm, glabrous or puberulent.",
+        "leaves": "petiole 1-5 mm.",
+        "leaf_blade": "cupped or convex, rarely somewhat planar, (10-)15-40 × 7-15(-20) mm, base cuneate, rounded-attenuate, or truncate, margins entire or irregularly toothed, sometimes spinose, usually unevenly revolute, secondary veins 4-6 on each side, apex rounded or subacute; surfaces abaxially densely to sparsely covered with erect, stipitate, (1-)2-4(-6)-rayed hairs 1-4 mm, felty to touch, secondary veins prominent, adaxially grayish or yellowish, with dense or scattered, semi-erect or appressed hairs, secondary veins obscure or somewhat impressed.",
+        "acorns": "solitary or paired, subsessile; cup reddish, hemispheric, deeply cup-shaped or turbinate, 4-6 mm deep × 12-18 mm wide, enclosing to 1/2 nut or more, scales reddish or yellowish, weakly to strongly tuberculate, often somewhat glandular; nut globose, ovoid or cylindric, 15-25 × 10-25 mm, apex rounded or obtuse, persistently minute-puberulent.",
+        "cotyledons": "distinct."
+      },
+      "text": "Shrubs , evergreen, 1-2(-3) m. Bark scaly. Twigs gray or yellowish, 1-3 mm diam., densely or sparsely tomentulose, often with prominent, yellowish, spreading hairs. Buds brown or reddish brown, ovoid or globose, 1-2 mm, glabrous or puberulent. Leaves: petiole 1-5 mm. Leaf blade cupped or convex, rarely somewhat planar, (10-)15-40 × 7-15(-20) mm, base cuneate, rounded-attenuate, or truncate, margins entire or irregularly toothed, sometimes spinose, usually unevenly revolute, secondary veins 4-6 on each side, apex rounded or subacute; surfaces abaxially densely to sparsely covered with erect, stipitate, (1-)2-4(-6)-rayed hairs 1-4 mm, felty to touch, secondary veins prominent, adaxially grayish or yellowish, with dense or scattered, semi-erect or appressed hairs, secondary veins obscure or somewhat impressed. Acorns solitary or paired, subsessile; cup reddish, hemispheric, deeply cup-shaped or turbinate, 4-6 mm deep × 12-18 mm wide, enclosing to 1/2 nut or more, scales reddish or yellowish, weakly to strongly tuberculate, often somewhat glandular; nut globose, ovoid or cylindric, 15-25 × 10-25 mm, apex rounded or obtuse, persistently minute-puberulent. Cotyledons distinct.",
+      "distribution": "Varieties 2 (2 in the flora): Calif."
+    }
+  ]
+}

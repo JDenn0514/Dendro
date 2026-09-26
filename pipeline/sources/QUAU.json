@@ -1,0 +1,38 @@
+{
+  "symbol": "QUAU",
+  "scientific_name": "Quercus austrina",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=1021",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, obovate to elliptical in shape, 3 to 7 inches long; 3 to 7 rounded shallow irregular lobes that reach 1/4 to 1/2 way to the midrib, apex is rounded and the base is wedge-shaped, green to gray-green above and paler below with small stellate hairs that are restricted to the vein axils as the leaf ages; petioles 1/4 inch long.",
+        "flower": "Species is monoecious; male flowers are yellow-green, borne in naked, slender catkins, 2 to 4 inches long; female flowers are reddish green and appear as very small single spikes; appearing with the leaves in mid-spring.",
+        "fruit": "Ovoid to oblong acorn, cap is warty and bowl-shaped, covers 1/3-1/2 of the fruit; cap always detaches at maturity; matures in one growing season in the early fall.",
+        "twig": "Red-brown to somewhat gray, lenticels may become corky, hairless and often shiny; multiple terminal buds are red-brown, conical, slightly pubescent.",
+        "bark": "Whitish or ashy gray, scaly, old trees become ridged and furrowed.",
+        "form": "A small to medium-size tree to 60 feet with an oval crown.",
+        "looks_like": "overcup oak - white oak"
+      },
+      "text": "Leaf: Alternate, simple, obovate to elliptical in shape, 3 to 7 inches long; 3 to 7 rounded shallow irregular lobes that reach 1/4 to 1/2 way to the midrib, apex is rounded and the base is wedge-shaped, green to gray-green above and paler below with small stellate hairs that are restricted to the vein axils as the leaf ages; petioles 1/4 inch long. Flower: Species is monoecious; male flowers are yellow-green, borne in naked, slender catkins, 2 to 4 inches long; female flowers are reddish green and appear as very small single spikes; appearing with the leaves in mid-spring. Fruit: Ovoid to oblong acorn, cap is warty and bowl-shaped, covers 1/3-1/2 of the fruit; cap always detaches at maturity; matures in one growing season in the early fall. Twig: Red-brown to somewhat gray, lenticels may become corky, hairless and often shiny; multiple terminal buds are red-brown, conical, slightly pubescent. Bark: Whitish or ashy gray, scaly, old trees become ridged and furrowed. Form: A small to medium-size tree to 60 feet with an oval crown. Looks like: overcup oak - white oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501010",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 20(-25) m.",
+        "bark": "pale gray, scaly, eventually divided into broad ridges.",
+        "twigs": "dark brown to somewhat reddish, 2-2.5 mm diam., often with prominent, corky, white lenticels.",
+        "buds": "dark reddish brown, ovoid, distally acute, 3-5 × 2-2.5 mm, puberulent.",
+        "leaves": "petiole 3-5 mm.",
+        "leaf_blade": "green or grayish green, narrowly obovate or elliptic, (40-)70-100(-200) × (13-)30-50(-115) mm, base cuneate or attenuate, margins sinuately and irregularly shallowly lobed, lobes rounded, sometimes obtuse, secondary veins 4-6(-8) on each side, apex narrowly or broadly rounded; surfaces abaxially loosely covered with semi-erect stellate hairs to 0.5 mm diam., glabrous at maturity, often with a few hairs remaining along veins near midrib, adaxially glabrous, glossy.",
+        "acorns": "subsessile or on stout axillary peduncle to 15 mm; cup hemispheric or deeply goblet- or cup-shaped, 9-10 mm deep × 10-13 mm wide, enclosing 1/3-1/2 nut, scales loosely appressed, gray, narrowly ovate, sometimes thickened near base, not tuberculate, canescent; nut ovoid or elliptic, 17 × 12 mm.",
+        "cotyledons": "distinct."
+      },
+      "text": "Trees , deciduous, to 20(-25) m. Bark pale gray, scaly, eventually divided into broad ridges. Twigs dark brown to somewhat reddish, 2-2.5 mm diam., often with prominent, corky, white lenticels. Buds dark reddish brown, ovoid, distally acute, 3-5 × 2-2.5 mm, puberulent. Leaves: petiole 3-5 mm. Leaf blade green or grayish green, narrowly obovate or elliptic, (40-)70-100(-200) × (13-)30-50(-115) mm, base cuneate or attenuate, margins sinuately and irregularly shallowly lobed, lobes rounded, sometimes obtuse, secondary veins 4-6(-8) on each side, apex narrowly or broadly rounded; surfaces abaxially loosely covered with semi-erect stellate hairs to 0.5 mm diam., glabrous at maturity, often with a few hairs remaining along veins near midrib, adaxially glabrous, glossy. Acorns subsessile or on stout axillary peduncle to 15 mm; cup hemispheric or deeply goblet- or cup-shaped, 9-10 mm deep × 10-13 mm wide, enclosing 1/3-1/2 nut, scales loosely appressed, gray, narrowly ovate, sometimes thickened near base, not tuberculate, canescent; nut ovoid or elliptic, 17 × 12 mm. Cotyledons distinct.",
+      "distribution": "Flowering spring. River bottoms, wet forests, flatwoods; 0-200 m; Ala., Fla., Ga., Miss., N.C., S.C."
+    }
+  ]
+}

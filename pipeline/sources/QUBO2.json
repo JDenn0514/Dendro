@@ -1,0 +1,23 @@
+{
+  "symbol": "QUBO2",
+  "scientific_name": "Quercus boyntonii",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501013",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Shrubs, rarely small trees , deciduous or subevergreen, shrubs low, under 2 m, often trailing, rhizomatous, trees to 6 m.",
+        "bark": "brown, scaly.",
+        "twigs": "light brown, 1.5-3 mm diam., densely tomentulose.",
+        "buds": "reddish brown, ovoid, 2-3(-4) mm, apex acute or rounded, sparsely pubescent.",
+        "leaves": "petiole (4-)5-10(-15) mm.",
+        "leaf_blade": "obovate or oblanceolate, (39-)50-100(-125) × 20-60(-91) mm, base cuneate, margins minutely revolute, broadly 3-lobed distally or with 3-5 rounded, irregular lobes in distal 1/2, secondary veins curved, 6-8 on each side, apex broadly ovate or triangular-lobed; surfaces abaxially grayish or silvery, densely tomentulose-glandular with minute, appressed-stellate hairs, adaxially dark green, glossy, glabrous or with minute, scattered, simple hairs.",
+        "acorns": "1-2, on peduncle 2-10(-35) mm; cup deeply or shallowly cup-shaped, 5-10 mm deep × 10-13 mm wide, including 1/3-1/2 nut, scales closely appressed, gray, tomentulose; nut light brown, ovoid, 10-17 × 7-13 mm, apex rounded, glabrous.",
+        "cotyledons": "distinct."
+      },
+      "text": "Shrubs, rarely small trees , deciduous or subevergreen, shrubs low, under 2 m, often trailing, rhizomatous, trees to 6 m. Bark brown, scaly. Twigs light brown, 1.5-3 mm diam., densely tomentulose. Buds reddish brown, ovoid, 2-3(-4) mm, apex acute or rounded, sparsely pubescent. Leaves: petiole (4-)5-10(-15) mm. Leaf blade obovate or oblanceolate, (39-)50-100(-125) × 20-60(-91) mm, base cuneate, margins minutely revolute, broadly 3-lobed distally or with 3-5 rounded, irregular lobes in distal 1/2, secondary veins curved, 6-8 on each side, apex broadly ovate or triangular-lobed; surfaces abaxially grayish or silvery, densely tomentulose-glandular with minute, appressed-stellate hairs, adaxially dark green, glossy, glabrous or with minute, scattered, simple hairs. Acorns 1-2, on peduncle 2-10(-35) mm; cup deeply or shallowly cup-shaped, 5-10 mm deep × 10-13 mm wide, including 1/3-1/2 nut, scales closely appressed, gray, tomentulose; nut light brown, ovoid, 10-17 × 7-13 mm, apex rounded, glabrous. Cotyledons distinct.",
+      "distribution": "Flowering spring. Deep sands and crevices in pine forests, along streams; of conservation concern; 0-200 m; Ala., Tex."
+    }
+  ]
+}

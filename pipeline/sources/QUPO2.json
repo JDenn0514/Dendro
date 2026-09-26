@@ -1,0 +1,23 @@
+{
+  "symbol": "QUPO2",
+  "scientific_name": "Quercus polymorpha",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501074",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , subevergreen, to 20 m.",
+        "bark": "gray to brown, scaly.",
+        "twigs": "reddish brown, 2-3 mm diam., tomentose, soon glabrate.",
+        "buds": "reddish brown, ovoid, 3-10 mm, apex acute, pubescent or glabrate.",
+        "leaves": "petiole (6-)15-25 mm.",
+        "leaf_blade": "elliptic or ovate or lance-ovate, sometimes obovate, 50-100(-150) × 30-60(-80) mm, base rounded or cordate, margins entire or obscurely or prominently serrate-toothed in distal 1/3 blade, revolute, secondary veins moderately curved, 10-12(-14) on each side, apex rounded, acuminate or retuse, sometimes with prominent drip-tip; surfaces abaxially light green, sometimes rather glaucous, veinlets raised, forming raised reticulum, floccose or tomentose with erect, golden hairs, soon glabrate, adaxially dark or light green, glossy, floccose or tomentose when immature, soon glabrate, secondary and tertiary veins impressed.",
+        "acorns": "1-2 on peduncle 5-30 mm; cup hemispheric or funnel-shaped, 10-13 mm deep × 12-20 mm wide, including ca. 1/2 nut, scales appressed, thickened basally, gray-canescent; nut light brown, ovoid-ellipsoid or barrel-shaped, 14-20(-25) × 8-13 mm, glabrous.",
+        "cotyledons": "distinct."
+      },
+      "text": "Trees , subevergreen, to 20 m. Bark gray to brown, scaly. Twigs reddish brown, 2-3 mm diam., tomentose, soon glabrate. Buds reddish brown, ovoid, 3-10 mm, apex acute, pubescent or glabrate. Leaves: petiole (6-)15-25 mm. Leaf blade elliptic or ovate or lance-ovate, sometimes obovate, 50-100(-150) × 30-60(-80) mm, base rounded or cordate, margins entire or obscurely or prominently serrate-toothed in distal 1/3 blade, revolute, secondary veins moderately curved, 10-12(-14) on each side, apex rounded, acuminate or retuse, sometimes with prominent drip-tip; surfaces abaxially light green, sometimes rather glaucous, veinlets raised, forming raised reticulum, floccose or tomentose with erect, golden hairs, soon glabrate, adaxially dark or light green, glossy, floccose or tomentose when immature, soon glabrate, secondary and tertiary veins impressed. Acorns 1-2 on peduncle 5-30 mm; cup hemispheric or funnel-shaped, 10-13 mm deep × 12-20 mm wide, including ca. 1/2 nut, scales appressed, thickened basally, gray-canescent; nut light brown, ovoid-ellipsoid or barrel-shaped, 14-20(-25) × 8-13 mm, glabrous. Cotyledons distinct.",
+      "distribution": "Flowering in spring. Riparian forest gallery, margins of thorn scrub, dry tropical forest, lower margins of oak-pine woodland, and cloud forest; 400-2100 m; Tex.; Mexico (Chiapas, Hidalgo, Nuevo León, Oaxaca, Tamaulipas, San Luis Potosí, and Veracruz); Central America (Guatemala)."
+    }
+  ]
+}

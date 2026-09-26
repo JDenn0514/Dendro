@@ -1,0 +1,37 @@
+{
+  "symbol": "QUPH",
+  "scientific_name": "Quercus phellos",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=75",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, 2 to 5 inches long, linear or lanceolate in shape (willow-like) with an entire margin and a bristle tip.",
+        "flower": "Species is monoecious; males borne on slender yellow-green catkins; females borne on very short axilliary spikes, both appear very early with the leaves.",
+        "fruit": "Acorns are very small, 1/4 to 1/2 inch across, nearly round and yellow-green, turning tan when older, caps are thin, saucer-like and cover only 1/4 of acorn with thin, tomentose, appressed scales.",
+        "twig": "Slender, hairless, olive-brown in color when young; multiple terminal buds are very small, reddish brown and sharp-pointed.",
+        "bark": "On young stems, smooth, gray and tight; later becoming darker and forming irregular rough ridges and furrows.",
+        "form": "A medium sized tree up to 80 feet tall that forms a dense oblong crown when open grown; lower branches do not readily self-prune.",
+        "looks_like": "water oak - laurel oak - shingle oak - Darlington oak"
+      },
+      "text": "Leaf: Alternate, simple, 2 to 5 inches long, linear or lanceolate in shape (willow-like) with an entire margin and a bristle tip. Flower: Species is monoecious; males borne on slender yellow-green catkins; females borne on very short axilliary spikes, both appear very early with the leaves. Fruit: Acorns are very small, 1/4 to 1/2 inch across, nearly round and yellow-green, turning tan when older, caps are thin, saucer-like and cover only 1/4 of acorn with thin, tomentose, appressed scales. Twig: Slender, hairless, olive-brown in color when young; multiple terminal buds are very small, reddish brown and sharp-pointed. Bark: On young stems, smooth, gray and tight; later becoming darker and forming irregular rough ridges and furrows. Form: A medium sized tree up to 80 feet tall that forms a dense oblong crown when open grown; lower branches do not readily self-prune. Looks like: water oak - laurel oak - shingle oak - Darlington oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501073",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 30 m.",
+        "bark": "dark gray and smooth, becoming darker and irregularly fissured with age, inner bark light orange.",
+        "twigs": "reddish brown, 1-2 mm diam., glabrous.",
+        "terminal_buds": "chestnut brown, ovoid, 2-4 mm, apex acute, glabrous.",
+        "leaves": "petiole 2-4(-6) mm, glabrous, rarely sparsely hairy.",
+        "leaf_blade": "linear to narrowly elliptic, usually widest near middle, 50-120 × 10-25 mm, base acute, margins entire with 1 apical awn, apex acute; surfaces abaxially pale green, glabrous, rarely softly pubescent, adaxially light green, glabrous.",
+        "acorns": "biennial; cup shallowly saucer-shaped, 3-6.5 mm high × 7.5-11 mm wide, covering 1/4-1/3 nut, outer surface puberulent, inner surface light brown, pubescent, scale tips tightly appressed, acute; nut ovoid to hemispheric, 8-12 × 6.5-10 mm, often striate, glabrate, scar diam. 4.5-6 mm."
+      },
+      "text": "Trees , deciduous, to 30 m. Bark dark gray and smooth, becoming darker and irregularly fissured with age, inner bark light orange. Twigs reddish brown, 1-2 mm diam., glabrous. Terminal buds chestnut brown, ovoid, 2-4 mm, apex acute, glabrous. Leaves: petiole 2-4(-6) mm, glabrous, rarely sparsely hairy. Leaf blade linear to narrowly elliptic, usually widest near middle, 50-120 × 10-25 mm, base acute, margins entire with 1 apical awn, apex acute; surfaces abaxially pale green, glabrous, rarely softly pubescent, adaxially light green, glabrous. Acorns biennial; cup shallowly saucer-shaped, 3-6.5 mm high × 7.5-11 mm wide, covering 1/4-1/3 nut, outer surface puberulent, inner surface light brown, pubescent, scale tips tightly appressed, acute; nut ovoid to hemispheric, 8-12 × 6.5-10 mm, often striate, glabrate, scar diam. 4.5-6 mm.",
+      "distribution": "Flowering spring. Of bottomland flood plains, also on stream banks, dunes, and terraces, and, occasionally, on poorly drained uplands; 0-400 m; Ala., Ark., Del., D.C., Fla., Ga., Ill., Ky., La., Md., Miss., Mo., N.J., N.Y., N.C., Okla., Pa., S.C., Tenn., Tex., Va."
+    }
+  ]
+}

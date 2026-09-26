@@ -1,0 +1,35 @@
+{
+  "symbol": "PLOC",
+  "scientific_name": "Platanus occidentalis",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=36",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, palmately veined, 4 to 8 inches wide, ovate in shape, with three to five lobes, margins coarsely toothed, petiole bases encircle and enclose the buds, veins may be pubescent below.",
+        "flower": "Species is monoecious; imperfect, both male and females are very small and appear in dense round clusters, typically a single cluster to a stalk, appearing with the leaves.",
+        "fruit": "A spherical multiple of achenes borne on a 3 to 6 inch stalk. Each seed is tiny, winged, and 1/2 inch long; maturing in November, disseminating in late winter.",
+        "twig": "Obviously zigzag, quite stout and orange-brown in color; leaf scar surrounds the bud and the stipule scar surrounds the twig; terminal bud is absent; lateral buds are reddish, resinous, with a single, cap-like scale.",
+        "bark": "Thin, mottled brown, green, tan and white; older stems are gray-brown and scaly. The most striking feature of this tree, often referred to as \"camouflage\" bark that readily exfoliates.",
+        "form": "A very massive tree with heavy, spreading branches with obviously zigzag twigs reaching up to and over 100 feet tall. In winter, the persistent fruits resemble Christmas tree ornaments.",
+        "looks_like": "London plane tree - California sycamore - Arizona sycamore"
+      },
+      "text": "Leaf: Alternate, simple, palmately veined, 4 to 8 inches wide, ovate in shape, with three to five lobes, margins coarsely toothed, petiole bases encircle and enclose the buds, veins may be pubescent below. Flower: Species is monoecious; imperfect, both male and females are very small and appear in dense round clusters, typically a single cluster to a stalk, appearing with the leaves. Fruit: A spherical multiple of achenes borne on a 3 to 6 inch stalk. Each seed is tiny, winged, and 1/2 inch long; maturing in November, disseminating in late winter. Twig: Obviously zigzag, quite stout and orange-brown in color; leaf scar surrounds the bud and the stipule scar surrounds the twig; terminal bud is absent; lateral buds are reddish, resinous, with a single, cap-like scale. Bark: Thin, mottled brown, green, tan and white; older stems are gray-brown and scaly. The most striking feature of this tree, often referred to as \"camouflage\" bark that readily exfoliates. Form: A very massive tree with heavy, spreading branches with obviously zigzag twigs reaching up to and over 100 feet tall. In winter, the persistent fruits resemble Christmas tree ornaments. Looks like: London plane tree - California sycamore - Arizona sycamore"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=200010589",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , to 50+ m, becoming massive; trunks straight and unbranched to great heights or low-branching or multitrunked, to 4+ m diam.",
+        "leaves": "stipules entire to coarsely serrate.",
+        "leaf_blade": "light green, usually shallowly 3-5(-7)-lobed, occasionally unlobed, 6-20+ × 6-25+ cm (to 30 × 40 cm on sucker shoots), not especially thick; lobes of blade mostly wider than long, basal lobes usually smaller, often strongly reflexed, sinuses broad and gently concave, depth of distal sinuses mostly less than 1/2 distance from sinus to base of blade, terminal leaf lobe 1/2-2/3 length of blade; margins entire to coarsely serrate, teeth sometimes short-awned, apex usually acuminate; surfaces glabrate, abaxially often persistently tomentose along veins.",
+        "pistillate_inflorescences": "heads 1(-2); fruiting heads 25-30 mm diam.; peduncle to 15 cm.",
+        "achenes": "7-10 mm, basal hairs nearly as long. 2 n = 42."
+      },
+      "text": "Trees , to 50+ m, becoming massive; trunks straight and unbranched to great heights or low-branching or multitrunked, to 4+ m diam. Leaves: stipules entire to coarsely serrate. Leaf blade light green, usually shallowly 3-5(-7)-lobed, occasionally unlobed, 6-20+ × 6-25+ cm (to 30 × 40 cm on sucker shoots), not especially thick; lobes of blade mostly wider than long, basal lobes usually smaller, often strongly reflexed, sinuses broad and gently concave, depth of distal sinuses mostly less than 1/2 distance from sinus to base of blade, terminal leaf lobe 1/2-2/3 length of blade; margins entire to coarsely serrate, teeth sometimes short-awned, apex usually acuminate; surfaces glabrate, abaxially often persistently tomentose along veins. Pistillate inflorescences: heads 1(-2); fruiting heads 25-30 mm diam.; peduncle to 15 cm. Achenes 7-10 mm, basal hairs nearly as long. 2 n = 42.",
+      "distribution": "Flowering spring; fruiting late fall. Often abundant on alluvial soils near streams and lakes and in moist ravines, sometimes on uplands, sometimes on limestone soils, cultivated in parks and gardens and as a street tree; 0-950 m; Ont.; Ala., Ark., Conn., Del., D.C., Fla., Ga., Ill., Ind., Iowa, Kans., Ky., La., Maine, Md., Mass., Mich., Miss., Mo., Nebr., N.H., N.J., N.Y., N.C., Ohio, Okla., Pa., R.I., S.C., Tenn., Tex., Vt., Va., W.Va., Wis.; Mexico (Coahuila, Nuevo León, San Luis Potosí, and Tamaulipas)."
+    }
+  ]
+}

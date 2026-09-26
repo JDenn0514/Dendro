@@ -1,0 +1,38 @@
+{
+  "symbol": "QUVI",
+  "scientific_name": "Quercus virginiana",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=78",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, evergreen, leathery, 2 to 5 inches long, oblong or elliptical in shape with an entire or spiny and revolute margin. The upper surface is lustrous, the lower is pale and pubescent. Generally, not bristle-tipped.",
+        "flower": "Species is monecious; male flowers borne on catkins, pistillate flowers borne on spikes, appearing in spring.",
+        "fruit": "Acorns in clusters of 3 to 5, dark nut, 3/4 inch long and covered 1/3 by the cap; cap is bowl-shaped, turbinate, and warty; maturing in early fall of the first year.",
+        "twig": "Slender, gray and pubescent, with small, blunt, multiple terminal buds.",
+        "bark": "Rapidly developing red-brown furrows with small surface scales; later becoming black and very blocky.",
+        "form": "A medium sized tree that can grow to massive proportions. Open-grown trees develop a huge rounded crown. The largest crowns may be 150 feet across.",
+        "looks_like": "Texas live oak - running oak - water oak - American holly"
+      },
+      "text": "Leaf: Alternate, simple, evergreen, leathery, 2 to 5 inches long, oblong or elliptical in shape with an entire or spiny and revolute margin. The upper surface is lustrous, the lower is pale and pubescent. Generally, not bristle-tipped. Flower: Species is monecious; male flowers borne on catkins, pistillate flowers borne on spikes, appearing in spring. Fruit: Acorns in clusters of 3 to 5, dark nut, 3/4 inch long and covered 1/3 by the cap; cap is bowl-shaped, turbinate, and warty; maturing in early fall of the first year. Twig: Slender, gray and pubescent, with small, blunt, multiple terminal buds. Bark: Rapidly developing red-brown furrows with small surface scales; later becoming black and very blocky. Form: A medium sized tree that can grow to massive proportions. Open-grown trees develop a huge rounded crown. The largest crowns may be 150 feet across. Looks like: Texas live oak - running oak - water oak - American holly"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501097",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees, sometimes shrubs , subevergreen, trees to 35 m, shrubs sometimes rhizomatous.",
+        "bark": "dark brown or black, scaly.",
+        "twigs": "yellowish to light gray, 1-3 mm diam., minutely puberulent or stellate-pubescent, glabrate in 2d year.",
+        "buds": "reddish or dark brown, subglobose or ovate, 1-2 mm; scale margins glabrous or puberulent.",
+        "leaves": "petiole 1-10(-20) mm.",
+        "leaf_blade": "obovate to oblanceolate, sometimes orbiculate or lance-ovate, ± planar, (10-)35-90(-150) × (15-)20-40(-85) mm, base cuneate to rounded, rarely truncate or cordate, margins minutely revolute or flat, entire or irregularly 1-3-toothed on each side, teeth mucronate, secondary veins obscure, 6-9(-12) on each side, apex obtuse-rounded or acute; surfaces abaxially whitish or glaucous, densely covered with minute, appressed, fused-stellate hairs, light green and glabrate in shade leaves, adaxially dark or light green, glossy, glabrous or with minute, scattered, stellate hairs.",
+        "acorns": "1-3, on peduncle (3-)10-20 mm; cup hemispheric or deeply goblet-shaped, 8-15 mm deep × 8-15 mm wide, base often constricted; scales whitish or grayish, proximally thickened, keeled, tomentulose, tips reddish, acute-attenuate, glabrous or puberulent; nut dark brown, barrel-shaped, ovoid, or obcylindric, 15-20(-25) × 8-15 mm, apex rounded or blunt, glabrous.",
+        "cotyledons": "connate."
+      },
+      "text": "Trees, sometimes shrubs , subevergreen, trees to 35 m, shrubs sometimes rhizomatous. Bark dark brown or black, scaly. Twigs yellowish to light gray, 1-3 mm diam., minutely puberulent or stellate-pubescent, glabrate in 2d year. Buds reddish or dark brown, subglobose or ovate, 1-2 mm; scale margins glabrous or puberulent. Leaves: petiole 1-10(-20) mm. Leaf blade obovate to oblanceolate, sometimes orbiculate or lance-ovate, ± planar, (10-)35-90(-150) × (15-)20-40(-85) mm, base cuneate to rounded, rarely truncate or cordate, margins minutely revolute or flat, entire or irregularly 1-3-toothed on each side, teeth mucronate, secondary veins obscure, 6-9(-12) on each side, apex obtuse-rounded or acute; surfaces abaxially whitish or glaucous, densely covered with minute, appressed, fused-stellate hairs, light green and glabrate in shade leaves, adaxially dark or light green, glossy, glabrous or with minute, scattered, stellate hairs. Acorns 1-3, on peduncle (3-)10-20 mm; cup hemispheric or deeply goblet-shaped, 8-15 mm deep × 8-15 mm wide, base often constricted; scales whitish or grayish, proximally thickened, keeled, tomentulose, tips reddish, acute-attenuate, glabrous or puberulent; nut dark brown, barrel-shaped, ovoid, or obcylindric, 15-20(-25) × 8-15 mm, apex rounded or blunt, glabrous. Cotyledons connate.",
+      "distribution": "Flowering late winter-early spring. Coastal plain, open evergreen woodlands, scrublands, and hummocks on loam, clay, and rarely on sand on immediate coast; 0-200 m; Ala., Fla., Ga., La., Miss., N.C., S.C., Tex., Va."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "symbol": "QUAC2",
+  "scientific_name": "Quercus acerifolia",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501004",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees or shrubs , deciduous, to 15 m.",
+        "bark": "dark gray to almost black, sometimes becoming rough and furrowed.",
+        "twigs": "grayish brown to reddish brown, 1.5-3(-3.5) mm diam., glabrous or sparsely pubescent.",
+        "terminal_buds": "gray to grayish brown, ovoid or broadly ellipsoid, 3.5-5.5 mm, glabrous.",
+        "leaves": "petiole 20-45 mm, glabrous.",
+        "leaf_blade": "oblate to broadly elliptic, 70-140 × (60-)100-150(-180) mm, base cordate-truncate to obtuse, margins with 5-7(-9) lobes and 11-48 awns, lobes ovate-oblong or markedly distally expanded, the middle or apical pairs often overlapping, apex acute; surfaces abaxially glabrous or with prominent axillary tufts of tomentum, occasionally with scattered pubescence, adaxially glabrous, secondary veins raised on both surfaces.",
+        "acorns": "biennial; cup saucer- to cup-shaped, 4-7 mm high × 10-20 mm wide, covering 1/4-1/3 nut, outer surface glabrous or puberulent, inner surface light brown to red-brown, glabrous or with ring of pubescence around scar, scales often with pale margins, tips tightly appressed, obtuse or acute; nut ovoid to oblong, 10.5-20 × 9-15 mm, glabrous or pubescent, scar diam. 5-9 mm."
+      },
+      "text": "Trees or shrubs , deciduous, to 15 m. Bark dark gray to almost black, sometimes becoming rough and furrowed. Twigs grayish brown to reddish brown, 1.5-3(-3.5) mm diam., glabrous or sparsely pubescent. Terminal buds gray to grayish brown, ovoid or broadly ellipsoid, 3.5-5.5 mm, glabrous. Leaves: petiole 20-45 mm, glabrous. Leaf blade oblate to broadly elliptic, 70-140 × (60-)100-150(-180) mm, base cordate-truncate to obtuse, margins with 5-7(-9) lobes and 11-48 awns, lobes ovate-oblong or markedly distally expanded, the middle or apical pairs often overlapping, apex acute; surfaces abaxially glabrous or with prominent axillary tufts of tomentum, occasionally with scattered pubescence, adaxially glabrous, secondary veins raised on both surfaces. Acorns biennial; cup saucer- to cup-shaped, 4-7 mm high × 10-20 mm wide, covering 1/4-1/3 nut, outer surface glabrous or puberulent, inner surface light brown to red-brown, glabrous or with ring of pubescence around scar, scales often with pale margins, tips tightly appressed, obtuse or acute; nut ovoid to oblong, 10.5-20 × 9-15 mm, glabrous or pubescent, scar diam. 5-9 mm.",
+      "distribution": "Flowering spring. Dry glades, slopes, and ridge tops; of conservation concern; 500-800 m; Ark."
+    }
+  ]
+}

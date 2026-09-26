@@ -1,0 +1,22 @@
+{
+  "symbol": "QUMY",
+  "scientific_name": "Quercus myrtifolia",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501066",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees or shrubs , evergreen, to 12 m.",
+        "bark": "gray and smooth distally, dark and shallowly furrowed near base.",
+        "twigs": "dark red-brown, 1-2.5(-3) mm diam., persistently pubescent, rarely almost glabrous.",
+        "terminal_buds": "reddish to purplish brown, ovoid, 2-5.5 mm, glabrous or with tuft of tawny hairs at apex.",
+        "leaves": "petiole 1-5 mm, glabrous, occasionally sparsely pubescent.",
+        "leaf_blade": "elliptic to narrowly or broadly obovate, occasionally spatulate, 15-50(-70) × 10-25(-35) mm, base cuneate to rounded, margins entire, somewhat revolute, with 1-4 awns, apex obtuse or rounded; surfaces abaxially glabrous except for axillary tufts of tomentum, occasionally yellow-scurfy, adaxial surface planar, glabrous.",
+        "acorns": "biennial; cup saucer-shaped to shallowly goblet-shaped, 4-7 mm high × 8.5-14.5 mm wide, covering 1/4-1/3 nut, outer surface puberulent, inner surface half to fully pubescent, scale tips tightly appressed, acute; nut broadly ovoid to globose, 9.5-14 × 8-13 mm, glabrate, scar diam. 5-8 mm."
+      },
+      "text": "Trees or shrubs , evergreen, to 12 m. Bark gray and smooth distally, dark and shallowly furrowed near base. Twigs dark red-brown, 1-2.5(-3) mm diam., persistently pubescent, rarely almost glabrous. Terminal buds reddish to purplish brown, ovoid, 2-5.5 mm, glabrous or with tuft of tawny hairs at apex. Leaves: petiole 1-5 mm, glabrous, occasionally sparsely pubescent. Leaf blade elliptic to narrowly or broadly obovate, occasionally spatulate, 15-50(-70) × 10-25(-35) mm, base cuneate to rounded, margins entire, somewhat revolute, with 1-4 awns, apex obtuse or rounded; surfaces abaxially glabrous except for axillary tufts of tomentum, occasionally yellow-scurfy, adaxial surface planar, glabrous. Acorns biennial; cup saucer-shaped to shallowly goblet-shaped, 4-7 mm high × 8.5-14.5 mm wide, covering 1/4-1/3 nut, outer surface puberulent, inner surface half to fully pubescent, scale tips tightly appressed, acute; nut broadly ovoid to globose, 9.5-14 × 8-13 mm, glabrate, scar diam. 5-8 mm.",
+      "distribution": "Flowering spring. Dunes, hammocks, sandhills, dry sandy ridges, and oak scrub; 0-100 m; Ala., Fla., Ga., Miss., S.C."
+    }
+  ]
+}

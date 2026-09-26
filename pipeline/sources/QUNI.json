@@ -1,0 +1,37 @@
+{
+  "symbol": "QUNI",
+  "scientific_name": "Quercus nigra",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=73",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, 2 to 4 inches long and extremely variable in shape (from spatulate to lanceolate), may be 0 to 5 lobed, margins may be entire or bristle-tipped, both surfaces are glabrous, but axillary tufts may be present below.",
+        "flower": "Species is monoecious; male flowers borne on catkins; female flowers borne on spikes, appearing with the leaves.",
+        "fruit": "Acorns are 1/2 inch long, very dark in color, and 1/3 covered by a flattened cap with appressed scales, maturing in fall of the second year.",
+        "twig": "Slender, red-brown; buds short, sharp-pointed, angular, red-brown, multiple at the tip.",
+        "bark": "Dark and quite tight, smooth when young and later with irregular rough patches; much later developing wide, scaly ridges.",
+        "form": "A medium sized tree with a slender bole and rounded crown with ascending branches.",
+        "looks_like": "willow oak - laurel oak - shingle oak - Darlington oak"
+      },
+      "text": "Leaf: Alternate, simple, 2 to 4 inches long and extremely variable in shape (from spatulate to lanceolate), may be 0 to 5 lobed, margins may be entire or bristle-tipped, both surfaces are glabrous, but axillary tufts may be present below. Flower: Species is monoecious; male flowers borne on catkins; female flowers borne on spikes, appearing with the leaves. Fruit: Acorns are 1/2 inch long, very dark in color, and 1/3 covered by a flattened cap with appressed scales, maturing in fall of the second year. Twig: Slender, red-brown; buds short, sharp-pointed, angular, red-brown, multiple at the tip. Bark: Dark and quite tight, smooth when young and later with irregular rough patches; much later developing wide, scaly ridges. Form: A medium sized tree with a slender bole and rounded crown with ascending branches. Looks like: willow oak - laurel oak - shingle oak - Darlington oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501067",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous or tardily deciduous, to 30 m.",
+        "bark": "grayish black, fissures irregular, shallow, inner bark pinkish.",
+        "twigs": "dark red-brown, 1.5-2.5 mm diam., glabrous.",
+        "terminal_buds": "reddish brown, ovoid, 3-6.5 mm, puberulent throughout, occasionally densely pubescent on apical 2/3.",
+        "leaves": "petiole 2-9 mm, glabrous.",
+        "leaf_blade": "distinctly obtrullate, rarely elliptic or merely obovate, widest near apex, 30-120(-160) × 15-60(-70) mm, base attenuate or cuneate, rarely rounded, margins entire with 1 apical awn or with 2-3 shallow lobes and 2-5 awns (leaves on juvenile or 2d-flush growth may be deeply lobed with more awns), apex obtuse to blunt or rounded; surfaces abaxially glabrous except for minute or conspicuous axillary tufts of tomentum, veins rarely raised, adaxially glabrous with secondary veins somewhat impressed.",
+        "acorns": "biennial; cup saucer-shaped, 2.5-5.5 mm high × 10-18 mm wide, covering 1/4 nut or less, outer surface puberulent, inner surface sparsely to uniformly pubescent, scale tips tightly appressed, acute; nut broadly ovoid, 9.5-14 × 9.5-14.5 mm, often faintly striate, glabrate, scar diam. 6-11.5 mm."
+      },
+      "text": "Trees , deciduous or tardily deciduous, to 30 m. Bark grayish black, fissures irregular, shallow, inner bark pinkish. Twigs dark red-brown, 1.5-2.5 mm diam., glabrous. Terminal buds reddish brown, ovoid, 3-6.5 mm, puberulent throughout, occasionally densely pubescent on apical 2/3. Leaves: petiole 2-9 mm, glabrous. Leaf blade distinctly obtrullate, rarely elliptic or merely obovate, widest near apex, 30-120(-160) × 15-60(-70) mm, base attenuate or cuneate, rarely rounded, margins entire with 1 apical awn or with 2-3 shallow lobes and 2-5 awns (leaves on juvenile or 2d-flush growth may be deeply lobed with more awns), apex obtuse to blunt or rounded; surfaces abaxially glabrous except for minute or conspicuous axillary tufts of tomentum, veins rarely raised, adaxially glabrous with secondary veins somewhat impressed. Acorns biennial; cup saucer-shaped, 2.5-5.5 mm high × 10-18 mm wide, covering 1/4 nut or less, outer surface puberulent, inner surface sparsely to uniformly pubescent, scale tips tightly appressed, acute; nut broadly ovoid, 9.5-14 × 9.5-14.5 mm, often faintly striate, glabrate, scar diam. 6-11.5 mm.",
+      "distribution": "Flowering spring. Mesic alluvial and lowland sites, also barrens, dunes, hammocks, and low ridges to steep slopes; 0-450 m; Ala., Ark., Del., Fla., Ga., Ky., La., Md., Miss., Mo., N.J., N.C., Okla., S.C., Tenn., Tex., Va."
+    }
+  ]
+}

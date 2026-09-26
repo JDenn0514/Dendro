@@ -1,0 +1,35 @@
+{
+  "symbol": "PLRA",
+  "scientific_name": "Platanus racemosa",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=473",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, deciduous, 5 to 10 inches long, palmately lobed (usually 3-5 lobes) with lobes about half as long as the leaf; hairy when young; petioles are long, swollen at their base, and hairy.",
+        "flower": "Species is monoecious but imperfect, male and female flowers are tiny and borne in dense, round heads (like fuzzy marbles on a string).",
+        "fruit": "Golf ball sized heads of tufted achenes; 3 to 7 hang on a long pendulous stalk designed to fracture at maturity; seeds are wind dispersed.",
+        "twig": "Slender and covered with numerous fine hairs when young; becoming smooth and reddish brown with age. Terminal buds absent; lateral buds conical.",
+        "bark": "The most striking feature of this tree. Young greenish-gray bark exfoliates leaving almost pure white inner bark; older bark is thicker (1 to 3 inches), furrowed, and dark brown.",
+        "form": "A medium to tall tree (40 to 100 feet tall) that sometimes reaches 11 feet in diameter. Crown is open and rounded.",
+        "looks_like": "Arizona sycamore - American sycamore - London plane tree"
+      },
+      "text": "Leaf: Alternate, simple, deciduous, 5 to 10 inches long, palmately lobed (usually 3-5 lobes) with lobes about half as long as the leaf; hairy when young; petioles are long, swollen at their base, and hairy. Flower: Species is monoecious but imperfect, male and female flowers are tiny and borne in dense, round heads (like fuzzy marbles on a string). Fruit: Golf ball sized heads of tufted achenes; 3 to 7 hang on a long pendulous stalk designed to fracture at maturity; seeds are wind dispersed. Twig: Slender and covered with numerous fine hairs when young; becoming smooth and reddish brown with age. Terminal buds absent; lateral buds conical. Bark: The most striking feature of this tree. Young greenish-gray bark exfoliates leaving almost pure white inner bark; older bark is thicker (1 to 3 inches), furrowed, and dark brown. Form: A medium to tall tree (40 to 100 feet tall) that sometimes reaches 11 feet in diameter. Crown is open and rounded. Looks like: Arizona sycamore - American sycamore - London plane tree"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233500963",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , to 15(-25) m, rather massive; trunks sometimes straight and erect, more commonly irregular, reclining, or prostrate with branches irregular and sometimes near ground, to 2+m diam.",
+        "leaves": "stipules entire to somewhat dentate.",
+        "leaf_blade": "dark green, 3-5-lobed, 10-25 × 10-25 cm, rather thick; lobes of blade mostly longer than wide, basal lobes usually somewhat smaller and spreading, not reflexed, sinuses broad and deeply concave, depth of distal sinuses about 1/3-2/3 distance from sinus to base of blade, terminal leaf lobe ca. 1/3-2/3 length of blade; margins entire to remotely serrulate, apex acute to acuminate, sometimes rounded; surfaces abaxially persistently tomentose, adaxially glabrescent.",
+        "pistillate_inflorescences": "heads (1-)2-7; fruiting heads 20-25(-30) mm diam., lateral ones sessile; fruiting rachis to 25 cm.",
+        "achenes": "7-10 mm, basal hairs about 2/3 length of achenes. 2 n = 42."
+      },
+      "text": "Trees , to 15(-25) m, rather massive; trunks sometimes straight and erect, more commonly irregular, reclining, or prostrate with branches irregular and sometimes near ground, to 2+m diam. Leaves: stipules entire to somewhat dentate. Leaf blade dark green, 3-5-lobed, 10-25 × 10-25 cm, rather thick; lobes of blade mostly longer than wide, basal lobes usually somewhat smaller and spreading, not reflexed, sinuses broad and deeply concave, depth of distal sinuses about 1/3-2/3 distance from sinus to base of blade, terminal leaf lobe ca. 1/3-2/3 length of blade; margins entire to remotely serrulate, apex acute to acuminate, sometimes rounded; surfaces abaxially persistently tomentose, adaxially glabrescent. Pistillate inflorescences: heads (1-)2-7; fruiting heads 20-25(-30) mm diam., lateral ones sessile; fruiting rachis to 25 cm. Achenes 7-10 mm, basal hairs about 2/3 length of achenes. 2 n = 42.",
+      "distribution": "Flowering spring; fruiting late fall. Streamsides and moist, rocky canyons, often abundant; 0-1500 m; Calif.; Mexico (Baja California)."
+    }
+  ]
+}

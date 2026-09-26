@@ -1,0 +1,37 @@
+{
+  "symbol": "QUTE",
+  "scientific_name": "Quercus texana",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=554",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, 4 to 7 inches long, 5 to 7 bristle-tipped lobes of irregular length, deep sinuses, dull dark green above, paler below with axillary tufts.",
+        "flower": "Species is monoecious; males in long drooping catkins, yellow-green; females very small spikes in leaf axils, appearing with the leaves.",
+        "fruit": "Striped, oblong reddish brown acorn, 1 inch long; scaly cap covers about 1/2 of nut; matures in 2 seasons in the fall.",
+        "twig": "Slender to moderate, glabrous, reddish brown; clustered terminal buds are slightly angled, reddish brown with a small amount of fuzz on pointed tips.",
+        "bark": "Gray-brown, initially quite thin and smooth, later developing narrow scaly ridges and shallow fissures.",
+        "form": "A medium to large tree up to 100 feet tall. It has a tendency to retain dead limbs and has a narrower crown than many other bottomland oaks.",
+        "looks_like": "pin oak - Shumard oak - scarlet oak"
+      },
+      "text": "Leaf: Alternate, simple, 4 to 7 inches long, 5 to 7 bristle-tipped lobes of irregular length, deep sinuses, dull dark green above, paler below with axillary tufts. Flower: Species is monoecious; males in long drooping catkins, yellow-green; females very small spikes in leaf axils, appearing with the leaves. Fruit: Striped, oblong reddish brown acorn, 1 inch long; scaly cap covers about 1/2 of nut; matures in 2 seasons in the fall. Twig: Slender to moderate, glabrous, reddish brown; clustered terminal buds are slightly angled, reddish brown with a small amount of fuzz on pointed tips. Bark: Gray-brown, initially quite thin and smooth, later developing narrow scaly ridges and shallow fissures. Form: A medium to large tree up to 100 feet tall. It has a tendency to retain dead limbs and has a narrower crown than many other bottomland oaks. Looks like: pin oak - Shumard oak - scarlet oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501089",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 25 m.",
+        "bark": "dark brown with flat ridges divided by shallow fissures.",
+        "twigs": "red-brown to gray, 1.5-3(-3.5) mm diam., glabrous.",
+        "terminal_buds": "gray to gray-brown, ovoid, 3-7 mm, glabrous or with scales somewhat ciliate at apex.",
+        "leaves": "petiole 20-50 mm, glabrous.",
+        "leaf_blade": "ovate to elliptic or obovate, 75-200 × 55-130 mm, base cuneate to almost truncate, often inequilateral, margins with 6-11 lobes and 9-24 awns, lobes oblong to distally expanded, rarely falcate, apex acute; surfaces abaxially glabrous except for conspicuous axillary tufts of tomentum, veins raised, adaxially planar, glabrous.",
+        "acorns": "biennial; cup thin (scale bases visible on inner surface), deeply goblet-shaped with pronounced constriction at base, 10-16 mm high × 15-22 mm wide, covering 1/3-1/2 nut, outer surface glabrous to sparsely puberulent, inner surface sparsely to uniformly pubescent, scale tips appressed, acute; nut broadly ovoid to broadly ellipsoid, 15-26 × 13-18 mm, glabrous or sparsely puberulent, scar diam. 8-13 mm, scar often orangish."
+      },
+      "text": "Trees , deciduous, to 25 m. Bark dark brown with flat ridges divided by shallow fissures. Twigs red-brown to gray, 1.5-3(-3.5) mm diam., glabrous. Terminal buds gray to gray-brown, ovoid, 3-7 mm, glabrous or with scales somewhat ciliate at apex. Leaves: petiole 20-50 mm, glabrous. Leaf blade ovate to elliptic or obovate, 75-200 × 55-130 mm, base cuneate to almost truncate, often inequilateral, margins with 6-11 lobes and 9-24 awns, lobes oblong to distally expanded, rarely falcate, apex acute; surfaces abaxially glabrous except for conspicuous axillary tufts of tomentum, veins raised, adaxially planar, glabrous. Acorns biennial; cup thin (scale bases visible on inner surface), deeply goblet-shaped with pronounced constriction at base, 10-16 mm high × 15-22 mm wide, covering 1/3-1/2 nut, outer surface glabrous to sparsely puberulent, inner surface sparsely to uniformly pubescent, scale tips appressed, acute; nut broadly ovoid to broadly ellipsoid, 15-26 × 13-18 mm, glabrous or sparsely puberulent, scar diam. 8-13 mm, scar often orangish.",
+      "distribution": "Flowering spring. Flood plains and bottomlands; 0-200 m; Ala., Ark., Ill., Ky., La., Miss., Mo., Tenn., Tex."
+    }
+  ]
+}

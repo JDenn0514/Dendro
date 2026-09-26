@@ -1,0 +1,23 @@
+{
+  "symbol": "QUSI2",
+  "scientific_name": "Quercus similis",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501083",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 25 m, with single straight trunk.",
+        "bark": "brown, scaly.",
+        "twigs": "grayish, 2-3 mm diam., persistently tomentulose.",
+        "buds": "brown, ovoid, 2-3 mm, apex acute or rounded, proximally pubescent.",
+        "leaves": "petiole 3-10 mm.",
+        "leaf_blade": "obovate or narrowly obovate, (50-)75-120(-150) × 50-65(-80) mm, base rounded-attenuate or acute, margins flat, shallowly 2-3-lobed on each side, lobes usually simple, oblong or rounded, rarely spatulate, not cruciform, secondary veins 3-5 on each side, apex broadly ovate or acute; surfaces abaxially grayish, sparsely glandular and sparsely appressed-stellate, adaxially dark green, glossy, sparsely stellate.",
+        "acorns": "1-3, subsessile; cup 6-7 mm deep × 10-13 mm wide, scales closely appressed, grayish, finely tomentulose; nut light brown or dark reddish brown, ovoid or oblong, 12-16 × 8-12 mm, puberulent or glabrate.",
+        "cotyledons": "distinct."
+      },
+      "text": "Trees , deciduous, to 25 m, with single straight trunk. Bark brown, scaly. Twigs grayish, 2-3 mm diam., persistently tomentulose. Buds brown, ovoid, 2-3 mm, apex acute or rounded, proximally pubescent. Leaves: petiole 3-10 mm. Leaf blade obovate or narrowly obovate, (50-)75-120(-150) × 50-65(-80) mm, base rounded-attenuate or acute, margins flat, shallowly 2-3-lobed on each side, lobes usually simple, oblong or rounded, rarely spatulate, not cruciform, secondary veins 3-5 on each side, apex broadly ovate or acute; surfaces abaxially grayish, sparsely glandular and sparsely appressed-stellate, adaxially dark green, glossy, sparsely stellate. Acorns 1-3, subsessile; cup 6-7 mm deep × 10-13 mm wide, scales closely appressed, grayish, finely tomentulose; nut light brown or dark reddish brown, ovoid or oblong, 12-16 × 8-12 mm, puberulent or glabrate. Cotyledons distinct.",
+      "distribution": "Flowering spring. Forests in wet stream bottoms, flatwoods, river valleys; 0-300 m; Ala., Ark., Ga., La., Miss., S.C., Tex."
+    }
+  ]
+}

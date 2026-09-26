@@ -1,0 +1,38 @@
+{
+  "symbol": "QUBI",
+  "scientific_name": "Quercus bicolor",
+  "sources": [
+    {
+      "site": "Virginia Tech Dendrology",
+      "url": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=313",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "leaf": "Alternate, simple, obovate, 3 to 7 inches long, margin with large irregular blunt teeth, 2 to 4 1/2 inches wide, dark green and shiny above, very pale below.",
+        "flower": "Species is monoecious; male flowers are yellow-green long catkins (2 to 4 inches long); females are green to red, very small in leaf axils; appearing in mid-spring with the leaves.",
+        "fruit": "Acorn, 1 inch long, tan, borne singly or double on a long stalk (2 inches), bowl-shaped cap covers about 1/3 of nut.",
+        "twig": "Moderately stout, light brown, terminal buds short, blunt and light brown, thread-like stipules often present around terminal bud.",
+        "bark": "Gray and scaly, later developing irregular fissures and ridges.",
+        "form": "Medium size tree reaching heights of 80 feet, irregular crown, often with lower limbs remaining.",
+        "looks_like": "swamp chestnut oak - chestnut oak - chinkapin oak - bur oak"
+      },
+      "text": "Leaf: Alternate, simple, obovate, 3 to 7 inches long, margin with large irregular blunt teeth, 2 to 4 1/2 inches wide, dark green and shiny above, very pale below. Flower: Species is monoecious; male flowers are yellow-green long catkins (2 to 4 inches long); females are green to red, very small in leaf axils; appearing in mid-spring with the leaves. Fruit: Acorn, 1 inch long, tan, borne singly or double on a long stalk (2 inches), bowl-shaped cap covers about 1/3 of nut. Twig: Moderately stout, light brown, terminal buds short, blunt and light brown, thread-like stipules often present around terminal bud. Bark: Gray and scaly, later developing irregular fissures and ridges. Form: Medium size tree reaching heights of 80 feet, irregular crown, often with lower limbs remaining. Looks like: swamp chestnut oak - chestnut oak - chinkapin oak - bur oak"
+    },
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501012",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Trees , deciduous, to 30 m.",
+        "bark": "dark gray, scaly or flat-ridged.",
+        "twigs": "light brown or tan, 2-3(-4) mm diam., glabrous.",
+        "buds": "light or dark brown, globose to ovoid, 2-3 mm, glabrous.",
+        "leaves": "petiole (4-)10-25(-30) mm.",
+        "leaf_blade": "obovate to narrowly elliptic or narrowly obovate, (79-)120-180(-215) × (40-)70-110(-160) mm, base narrowly cuneate to acute, margins regularly toothed, or entire with teeth in distal 1/2 only, or moderately to deeply lobed, or sometimes lobed proximally and toothed distally, secondary veins arched, divergent, (3-)5-7 on each side, apex broadly rounded or ovate; surfaces abaxially light green or whitish, with minute, flat, appressed-stellate hairs and erect, 1-4-rayed hairs, velvety to touch, adaxially dark green, glossy, glabrous.",
+        "acorns": "1-3(-5) mm, on thin axillary peduncle (20-)40-70 mm; cup hemispheric or turbinate, 10-15 mm deep × 15-25 mm wide, enclosing 1/2-3/4 nut, scales closely appressed, finely grayish tomentose, those near rim of cup often with short, stout, irregularly recurved and sometimes branched, spinose awns emerging from tubercle; nut light brown, ovoid-ellipsoid or oblong, (12-)15-21(-25) × 9-18 mm, glabrous.",
+        "cotyledons": "distinct. 2 n = 24."
+      },
+      "text": "Trees , deciduous, to 30 m. Bark dark gray, scaly or flat-ridged. Twigs light brown or tan, 2-3(-4) mm diam., glabrous. Buds light or dark brown, globose to ovoid, 2-3 mm, glabrous. Leaves: petiole (4-)10-25(-30) mm. Leaf blade obovate to narrowly elliptic or narrowly obovate, (79-)120-180(-215) × (40-)70-110(-160) mm, base narrowly cuneate to acute, margins regularly toothed, or entire with teeth in distal 1/2 only, or moderately to deeply lobed, or sometimes lobed proximally and toothed distally, secondary veins arched, divergent, (3-)5-7 on each side, apex broadly rounded or ovate; surfaces abaxially light green or whitish, with minute, flat, appressed-stellate hairs and erect, 1-4-rayed hairs, velvety to touch, adaxially dark green, glossy, glabrous. Acorns 1-3(-5) mm, on thin axillary peduncle (20-)40-70 mm; cup hemispheric or turbinate, 10-15 mm deep × 15-25 mm wide, enclosing 1/2-3/4 nut, scales closely appressed, finely grayish tomentose, those near rim of cup often with short, stout, irregularly recurved and sometimes branched, spinose awns emerging from tubercle; nut light brown, ovoid-ellipsoid or oblong, (12-)15-21(-25) × 9-18 mm, glabrous. Cotyledons distinct. 2 n = 24.",
+      "distribution": "Flowering in spring. Low swamp forests, moist slopes, poorly drained uplands; 0-1000 m; Ont., Que.; Ala., Conn., Del., Ill., Ind., Iowa, Ky., Maine, Md., Mass., Mich., Minn., Mo., N.H., N.J., N.Y., N.C., Ohio, Pa., R.I., Tenn., Vt., Va., W.Va., Wis."
+    }
+  ]
+}

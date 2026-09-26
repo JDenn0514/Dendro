@@ -1,0 +1,23 @@
+{
+  "symbol": "QUMO",
+  "scientific_name": "Quercus mohriana",
+  "sources": [
+    {
+      "site": "Flora of North America (efloras)",
+      "url": "http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=233501063",
+      "fetched_at": "2026-09-26",
+      "sections": {
+        "habit": "Shrubs or trees , evergreen or deciduous, shrubs erect, rhizomatous, trees small, 0.5-3 m.",
+        "bark": "pale, rough and deeply furrowed.",
+        "twigs": "yellowish or whitish, 1-2 mm diam., felty-tomentose.",
+        "buds": "dark red-brown, round-ovoid, 2 mm, glabrous, occasionally puberulent on outer scales, not subtended by persistent, hairy, subulate stipules.",
+        "leaves": "petiole 2-5 mm.",
+        "leaf_blade": "usually strongly bicolored, oblong or elliptic, (15-)30-50(-80) × (10-)20-30(-35) mm, leathery, base rounded, rarely cuneate or cordulate, margins entire or toothed or denticulate, undulate or flat, secondary veins 8-9 on each side, apex rounded or acute; surfaces abaxially densely gray- or white-tomentose with semi-erect curly, stellate hairs, secondary veins rather prominently raised, adaxially dark or dull green, lustrous or somewhat glaucous, with minute, scattered, semi-erect or appressed-stellate, (4-)6 or many rayed hairs, not felty to touch, secondary veins slightly raised or prominent within depressions.",
+        "acorns": "solitary or paired, subsessile or peduncle sometimes 10-15 mm, tomentose like twigs; cup shallowly to very deeply cup-shaped, 5-12 mm deep × 8-18 mm wide, enclosing 1/2 nut, base rounded or flat, margin thin, scales triangular-ovate to oblong, proximal scales coarsely tuberculate and canescent-tomentose, distal ones usually elongate and narrowed, tips appressed, reddish, thin, nearly glabrous; nut light brown, ellipsoid to ovoid, 8-15 × 5-12 mm.",
+        "cotyledons": "connate."
+      },
+      "text": "Shrubs or trees , evergreen or deciduous, shrubs erect, rhizomatous, trees small, 0.5-3 m. Bark pale, rough and deeply furrowed. Twigs yellowish or whitish, 1-2 mm diam., felty-tomentose. Buds dark red-brown, round-ovoid, 2 mm, glabrous, occasionally puberulent on outer scales, not subtended by persistent, hairy, subulate stipules. Leaves: petiole 2-5 mm. Leaf blade usually strongly bicolored, oblong or elliptic, (15-)30-50(-80) × (10-)20-30(-35) mm, leathery, base rounded, rarely cuneate or cordulate, margins entire or toothed or denticulate, undulate or flat, secondary veins 8-9 on each side, apex rounded or acute; surfaces abaxially densely gray- or white-tomentose with semi-erect curly, stellate hairs, secondary veins rather prominently raised, adaxially dark or dull green, lustrous or somewhat glaucous, with minute, scattered, semi-erect or appressed-stellate, (4-)6 or many rayed hairs, not felty to touch, secondary veins slightly raised or prominent within depressions. Acorns solitary or paired, subsessile or peduncle sometimes 10-15 mm, tomentose like twigs; cup shallowly to very deeply cup-shaped, 5-12 mm deep × 8-18 mm wide, enclosing 1/2 nut, base rounded or flat, margin thin, scales triangular-ovate to oblong, proximal scales coarsely tuberculate and canescent-tomentose, distal ones usually elongate and narrowed, tips appressed, reddish, thin, nearly glabrous; nut light brown, ellipsoid to ovoid, 8-15 × 5-12 mm. Cotyledons connate.",
+      "distribution": "Flowering spring. Limestone hills and slopes, calcareous substrates; 600-2500 m; N.Mex., Okla., Tex.; Mexico (Coahuila)."
+    }
+  ]
+}
