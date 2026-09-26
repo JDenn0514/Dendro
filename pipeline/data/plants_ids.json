@@ -243,6 +243,10 @@
     "id": 70572,
     "scientific": "Platanus wrightii"
   },
+  "POAL7": {
+    "id": 67378,
+    "scientific": "Populus alba"
+  },
   "QUAC2": {
     "id": 70161,
     "scientific": "Quercus acerifolia"
@@ -1214,5 +1218,13 @@
   "QUWIW": {
     "id": 70534,
     "scientific": "Quercus wislizeni var. wislizeni"
+  },
+  "SAAL5": {
+    "id": 71455,
+    "scientific": "Sassafras albidum"
+  },
+  "SASSA": {
+    "id": 71454,
+    "scientific": "Sassafras Nees"
   }
 }
