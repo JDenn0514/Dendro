@@ -77,9 +77,10 @@ one prints the error and exits 1.
 **When no channel is clear, reject the image. An unclear channel is a reject, not an
 escalation.**
 
-**Quality.** The photo is close up and sharp. The subject fills the frame. No hand and no
-ruler are in the shot. The photo shows the feature that a learner has to see (owner ruling
-2026-09-26). Each channel has its own feature:
+**Quality.** The photo is close up and sharp. The subject fills the frame. No ruler is in
+the shot. A hand or fingers that hold the leaf or fruit are correct, when the feature is
+still clear (owner ruling 2026-09-26). The photo shows the feature that a learner has to
+see (owner ruling 2026-09-26). Each channel has its own feature:
 
 - **Leaf:** the shape of the leaf, and how the leaves sit on the twig. The photo shows a
   piece of twig with at least two leaves, or two needle bundles, attached. They are close
@@ -97,8 +98,14 @@ Then apply these rules in order:
    `hard` to `--tags`, such as `--tags hard` or `--tags hard,winter`. The `hard` tag goes
    onto the manifest row as it is. The app hides a photo only when its manifest row has
    `difficulty: "hard"`. The build sets that field from the `hard` tag.
-3. Any other photo below the threshold above, such as a soft photo, or a hand or a ruler
-   in the shot: escalate with `--case quality`.
+3. Any other photo below the threshold above, such as a soft photo, or a ruler in the
+   shot: escalate with `--case quality`.
+
+**Duplicates.** When two candidates of one target show the same image (the same photo on
+two sources, or one a crop or a resize of the other), approve only one. Keep the row from
+the source that comes first in the fetch order: Bioimages, wildflower.org, Trees and
+Shrubs Online, Wikimedia Commons, iNaturalist, USDA PLANTS. Reject the other, and name the
+kept candidate id in the note (owner ruling 2026-09-26).
 
 The photo shows natural colour, so the tree looks the way it does in real life. A
 black-and-white or greyscale image is a reject, not an escalation (owner ruling
@@ -125,7 +132,12 @@ That is a CC BY license, and it is on the allowlist.
 comparing the row's `source_species` to the PLANTS scientific name and its PLANTS
 synonyms, after normalization.
 
-- `true`: the names agree. Do nothing for identity.
+- `true`: the names agree. When the caption or the page plainly names a different
+  species, escalate with `--case mismatch` all the same.
+
+A name that adds a variety or a subspecies to the target's own species is a match. For
+example, *Quercus sinuata* var. *breviloba* matches the target *Quercus sinuata* (owner
+ruling 2026-09-26). A variety or subspecies of a different species is not a match.
 - `false`: the names differ. Open the source page at `origin` and read the species it
   names. When the names still differ, escalate with `--case mismatch`.
 - `null`: the row carries no name to compare, which is the normal state of a manual
