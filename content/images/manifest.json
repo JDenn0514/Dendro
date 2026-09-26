@@ -7158,7 +7158,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T18:36:37Z",
-    "note": "Yucca in flower with a clear rosette of long narrow strap blades at the base."
+    "note": "Yucca in flower with a clear rosette of long narrow strap blades at the base.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the flower spike is the subject; the strap leaves are small at the base.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "01a3197663dd9977907217dfd7a74b4c332507d98b9fd5307ac7d1c53f6ba630",
