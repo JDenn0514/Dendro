@@ -121,8 +121,21 @@ function cardsGroup(root, ctx, state) {
   fileField.id = 'import_file';
   fileField.accept = 'application/json';
   fileField.className = 'sr';
+  // An import replaces every level and date on this phone, so it asks first,
+  // the way Reset does. The file is checked before the question: a file that
+  // cannot be imported is rejected with no question at all.
+  const importConfirm = el('div', 'setbtn warn');
+  const importYes = el('button', 'sbn', 'Yes, replace my progress');
+  importYes.type = 'button';
+  importConfirm.append(importYes,
+    el('span', 'sbd', 'the file replaces every level and date here'));
+  importConfirm.hidden = true;
+  let pendingText = null;
+
   fileField.addEventListener('change', async () => {
     const chosen = fileField.files?.[0];
+    importConfirm.hidden = true;
+    pendingText = null;
     if (!chosen) return;
     // A file the browser cannot read rejects here. Say so, or the note would
     // keep the line it printed before.
@@ -133,7 +146,22 @@ function cardsGroup(root, ctx, state) {
       importNote.textContent = 'the file could not be read';
       return;
     }
-    const result = store.importBlob(text);
+    // The same file picked again must fire `change` again.
+    fileField.value = '';
+    const checked = store.checkImport(text);
+    if (!checked.ok) {
+      importNote.textContent = `rejected: ${checked.errors.join(' ')}`;
+      return;
+    }
+    pendingText = text;
+    importNote.textContent = `${chosen.name} is ready to import`;
+    importConfirm.hidden = false;
+  });
+  importYes.addEventListener('click', () => {
+    if (pendingText === null) return;
+    const result = store.importBlob(pendingText);
+    pendingText = null;
+    importConfirm.hidden = true;
     importNote.textContent = result.ok
       ? 'imported, reload to see it'
       : `rejected: ${result.errors.join(' ')}`;
@@ -141,7 +169,7 @@ function cardsGroup(root, ctx, state) {
     if (result.ok) exportNote.textContent = noteText();
   });
   importRow.append(fileField);
-  group.append(importRow);
+  group.append(importRow, importConfirm);
 
   const resetRow = el('div', 'setbtn warn');
   const resetButton = el('button', 'sbn', 'Reset');

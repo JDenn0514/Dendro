@@ -28,9 +28,20 @@ export function cardId(kind, channel, key) {
   return `${kind}:${key}:${channel}`;
 }
 
+// The one difficulty a manifest row can carry. A row with no field is a
+// normal photo.
+export const DIFFICULTIES = ['hard'];
+
+// A row a card may show. A retired row is gone for good. A hard row is held
+// back for now: its file stays in the bucket, and a later content task picks
+// which photos carry the tag.
+export function inPlay(row) {
+  return !row.retired && row.difficulty !== 'hard';
+}
+
 function speciesImages(raw, symbol, channel) {
   return raw.manifest.filter(
-    (m) => m.target === symbol && m.channel === channel && !m.retired
+    (m) => m.target === symbol && m.channel === channel && inPlay(m)
   );
 }
 
@@ -57,7 +68,7 @@ export function photoPool(raw, kind, channel, key) {
   }
   if (kind === 'concept') {
     pool.push(...raw.manifest.filter(
-      (m) => m.target === `${channel}/${key}` && m.channel === channel && !m.retired
+      (m) => m.target === `${channel}/${key}` && m.channel === channel && inPlay(m)
     ));
   }
   return pool;
@@ -180,7 +191,7 @@ export function validateContent(raw) {
     if (!record.common || record.common.length === 0) {
       fail('species.json', `${symbol} has no common name`);
     }
-    const hasImage = raw.manifest.some((m) => m.target === symbol && !m.retired);
+    const hasImage = raw.manifest.some((m) => m.target === symbol && inPlay(m));
     if (!hasImage && !namedByEdge.has(symbol) && !record.retired) {
       fail('species.json', `${symbol} has no manifest image and no confusion edge`);
     }
@@ -191,7 +202,7 @@ export function validateContent(raw) {
     }
     for (const channel of channels) {
       const onChannel = raw.manifest.some(
-        (m) => m.target === symbol && m.channel === channel && !m.retired
+        (m) => m.target === symbol && m.channel === channel && inPlay(m)
       );
       if (onChannel && !record.concepts?.[channel]) {
         fail('species.json', `${symbol} has a ${channel} image but no ${channel} concept`);
@@ -207,6 +218,10 @@ export function validateContent(raw) {
     }
     if (image.file !== undefined) {
       fail('images/manifest.json', `the ${where} row carries a file field; a row names its image by hash`);
+    }
+    if (image.difficulty !== undefined && !DIFFICULTIES.includes(image.difficulty)) {
+      fail('images/manifest.json',
+        `the ${where} row has difficulty ${String(image.difficulty)}; the only value is hard`);
     }
     // Both screens print author, source, and license as the photo credit. A
     // row without them renders the word undefined on a public page. A retired

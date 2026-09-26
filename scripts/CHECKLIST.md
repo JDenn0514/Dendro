@@ -25,23 +25,8 @@ cd scripts && python shots.py ../out/shots
 - [ ] No all-caps label, no monospace, no middle-dot string, no arrow in a
       link, no grey drop shadow.
 - [ ] `audit.py` printed no contrast line for this screen.
-- [ ] Every photograph appeared in its own treatment. None paints once with
-      its own ground and then snaps to a bright print.
-
-## The live site, once
-
-**Not checkable from this network.** `img.learndendro.com` answers 403 here,
-so the bright studio scans cannot be fetched and the line below has to be run
-by someone who can reach the bucket.
-
-- [ ] Open the deployed site, without `?content=dev`, and find a screen with a
-      bright studio scan on it. `#/session?focus=leaf` is the surest. Run
-      `document.querySelector('.plate').className` in the console. It reads
-      `print` on a bright scan, which means the CDN sends
-      `Access-Control-Allow-Origin: *` and the corner probe can read the
-      pixels. If every plate reads `field`, the header is not set. That is a
-      setting on the bucket, outside this repo. Record it and move on: the app
-      is correct either way, and every plate is legible as a field plate.
+- [ ] Every photo shows whole, at its own shape, on the paper, with no fade,
+      no blend, and no tint.
 
 ## Home
 
@@ -85,7 +70,9 @@ by someone who can reach the bucket.
 ## Session
 
 - [ ] The photograph is the one bold move. Nothing else competes with it.
-- [ ] The caption never names the tree.
+- [ ] A question shows no caption. The photo's alt text names no tree.
+- [ ] Turn the phone on its side (844 by 390). The photo shows whole, and the
+      prompt and the answers are one scroll away.
 - [ ] The answer labels are exactly one width.
 - [ ] The gauge has one tick per card, and the current tick is taller.
 - [ ] Set the session size to 30 in Settings, start a review, and look at the
@@ -96,21 +83,26 @@ by someone who can reach the bucket.
 ## Reveal
 
 - [ ] The correct name is the largest thing on the screen.
-- [ ] The two prints are at one scale and share a baseline, so the sentence
-      about the difference can be checked.
+- [ ] The two photos of a pair sit side by side in frames of one height, each
+      one whole.
+- [ ] Nothing under a photo moves when the photo loads.
+- [ ] The reveal prints one credit line for each photo the question showed,
+      and one for a pair photo the question did not show.
 - [ ] The level squares match the level sentence beside them.
 
 ## Species
 
 - [ ] A missing plate reads as a fact, not an error.
 - [ ] The two display numerals line up on their baseline.
-- [ ] The bark plate fades on all four sides and ends on no straight edge.
+- [ ] The bark photo shows whole, with no fade.
 
 ## Settings
 
 - [ ] Each text size sample is printed at its own size, and the samples do not
       move when the setting changes.
 - [ ] Reset needs two taps.
+- [ ] Import asks before it replaces anything. A bad file is rejected with no
+      question.
 - [ ] The screen still opens with the content broken. Park
       `content/units.json` in `out/`, load `#/settings`, and put the file
       back. An unknown value in `?content=` breaks nothing: the app sends it

@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  STORE_VERSION, KEYS, LOG_CAP, defaultSettings, memoryStorage, createStore, isCount
+  STORE_VERSION, KEYS, LOG_CAP, defaultSettings, memoryStorage, createStore, isCount,
+  firstAnswerDay
 } from '../app/logic/store.js';
 
 function row(card, at) {
@@ -105,6 +106,26 @@ test('export and import make a round trip', () => {
   assert.equal(second.readCards()['species:QUGA:leaf'].interval, 4);
   assert.equal(second.readLog().length, 1);
   assert.equal(second.readSettings().session_size, 15);
+});
+
+test('the export file holds the date it was made', () => {
+  const first = createStore(memoryStorage());
+  const blob = first.exportBlob('2026-03-10');
+  assert.equal(JSON.parse(blob.json).dendro_settings.last_export, '2026-03-10');
+  const second = createStore(memoryStorage());
+  assert.deepEqual(second.importBlob(blob.json), { ok: true, errors: [] });
+  assert.equal(second.readSettings().last_export, '2026-03-10');
+});
+
+test('checkImport reads a file and writes nothing', () => {
+  const storage = memoryStorage();
+  const store = createStore(storage);
+  assert.deepEqual(store.checkImport(goodBlob()), { ok: true, errors: [] });
+  assert.deepEqual(store.readCards(), {});
+  assert.equal(storage.getItem('dendro_cards'), null);
+  const bad = store.checkImport('{oops');
+  assert.equal(bad.ok, false);
+  assert.deepEqual(bad.errors, ['The file is not valid JSON.']);
 });
 
 test('a malformed import is rejected with a reason and changes nothing', () => {
@@ -259,10 +280,22 @@ test('corrupt stored JSON is copied aside once and not overwritten', () => {
 
 test('the export prompt fires once a month', () => {
   const store = createStore(memoryStorage());
-  assert.equal(store.shouldPromptExport('2026-03-10'), true);
+  // A fresh store has answered nothing, so there is nothing to export yet.
+  assert.equal(store.shouldPromptExport('2026-03-10'), false);
   store.markExported('2026-03-10');
   assert.equal(store.shouldPromptExport('2026-03-20'), false);
   assert.equal(store.shouldPromptExport('2026-04-12'), true);
+});
+
+test('with no export yet, the prompt waits a month from the first answer', () => {
+  const store = createStore(memoryStorage());
+  store.appendLog(row('species:QUGA:leaf', '2026-03-10T09:00:00Z'));
+  store.appendLog(row('species:QURU:leaf', '2026-03-12T09:00:00Z'));
+  assert.equal(firstAnswerDay(store.readLog()), '2026-03-10');
+  assert.equal(store.shouldPromptExport('2026-03-10'), false);
+  assert.equal(store.shouldPromptExport('2026-04-08'), false);
+  assert.equal(store.shouldPromptExport('2026-04-09'), true);
+  assert.equal(firstAnswerDay([]), null);
 });
 
 test('a write that fails turns available off and leaves reads working', () => {
