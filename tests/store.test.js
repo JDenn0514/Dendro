@@ -1,7 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  STORE_VERSION, KEYS, LOG_CAP, defaultSettings, memoryStorage, createStore, isCount
+  STORE_VERSION, KEYS, LOG_CAP, defaultSettings, memoryStorage, createStore, isCount,
+  firstAnswerDay
 } from '../app/logic/store.js';
 
 function row(card, at) {
@@ -279,10 +280,22 @@ test('corrupt stored JSON is copied aside once and not overwritten', () => {
 
 test('the export prompt fires once a month', () => {
   const store = createStore(memoryStorage());
-  assert.equal(store.shouldPromptExport('2026-03-10'), true);
+  // A fresh store has answered nothing, so there is nothing to export yet.
+  assert.equal(store.shouldPromptExport('2026-03-10'), false);
   store.markExported('2026-03-10');
   assert.equal(store.shouldPromptExport('2026-03-20'), false);
   assert.equal(store.shouldPromptExport('2026-04-12'), true);
+});
+
+test('with no export yet, the prompt waits a month from the first answer', () => {
+  const store = createStore(memoryStorage());
+  store.appendLog(row('species:QUGA:leaf', '2026-03-10T09:00:00Z'));
+  store.appendLog(row('species:QURU:leaf', '2026-03-12T09:00:00Z'));
+  assert.equal(firstAnswerDay(store.readLog()), '2026-03-10');
+  assert.equal(store.shouldPromptExport('2026-03-10'), false);
+  assert.equal(store.shouldPromptExport('2026-04-08'), false);
+  assert.equal(store.shouldPromptExport('2026-04-09'), true);
+  assert.equal(firstAnswerDay([]), null);
 });
 
 test('a write that fails turns available off and leaves reads working', () => {

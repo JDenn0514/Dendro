@@ -607,9 +607,11 @@ export function render(root, ctx) {
         'This browser blocks local storage, so nothing was saved. Open Settings '
         + 'and export before you close the tab.'));
     } else if (store.shouldPromptExport(today)) {
-      root.append(el('p', 'note',
-        'It has been a month since your last export. Open Settings and export '
-        + 'your progress.'));
+      root.append(el('p', 'note', store.readSettings().last_export
+        ? 'It has been a month since your last export. Open Settings and export '
+          + 'your progress.'
+        : 'Your first answer is a month old, and you have not exported yet. '
+          + 'Open Settings and export your progress.'));
     }
 
     const row = el('div', 'btnrow');

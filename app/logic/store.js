@@ -106,6 +106,18 @@ export function memoryStorage(initial = {}) {
   };
 }
 
+// The day of the oldest answer in the log, or null. A row carries its local
+// day; an older row carries only `at`, whose date is the fallback.
+export function firstAnswerDay(rows) {
+  let first = null;
+  for (const row of rows) {
+    const day = row?.day ?? (typeof row?.at === 'string' ? row.at.slice(0, 10) : null);
+    if (typeof day !== 'string') continue;
+    if (first === null || day < first) first = day;
+  }
+  return first;
+}
+
 export function createStore(storage) {
   let available = true;
   let newerVersion = false;
@@ -335,8 +347,11 @@ export function createStore(storage) {
 
     shouldPromptExport(today) {
       const last = api.readSettings().last_export;
-      if (!last) return true;
-      return daysBetween(last, today) >= EXPORT_PROMPT_DAYS;
+      if (last) return daysBetween(last, today) >= EXPORT_PROMPT_DAYS;
+      // No export yet. The prompt waits until the first answer is a month
+      // old, so a new user does not see it after the first session.
+      const first = firstAnswerDay(api.readLog());
+      return first !== null && daysBetween(first, today) >= EXPORT_PROMPT_DAYS;
     },
 
     markExported(today) { api.writeSettings({ last_export: today }); }
