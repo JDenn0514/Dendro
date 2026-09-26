@@ -105,6 +105,10 @@ is a content change, not a code change.
 A retired manifest row is in no pool, and a retired species contributes nothing to a
 group pool or a concept pool.
 
+Added 2026-09-25: a manifest row with `difficulty: "hard"` is in no pool either. Its
+file stays in object storage. `hard` is the only allowed value. The validator reads a
+hard row as no image when it checks that a live species has one.
+
 A variety card exists only when the species has two or more varieties with approved
 photos on that channel. Otherwise the variety is a note on the species screen and has no
 card.

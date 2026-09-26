@@ -4,7 +4,7 @@ import { loadFixture } from './helpers/fixture.js';
 import {
   CDN_BASE, imageUrl, deriveChannels, cardId, photoPool, deriveCards,
   unitMembers, unitCards, validateContent, loadContent,
-  channelLabel, conceptFor, unitFor, varietyCardChannels
+  channelLabel, conceptFor, unitFor, varietyCardChannels, inPlay, DIFFICULTIES
 } from '../app/logic/content.js';
 
 test('the channel list derives from concepts.json', () => {
@@ -53,6 +53,34 @@ test('a retired row and a retired species stay out of every pool', () => {
   assert.equal(photoPool(raw, 'species', 'leaf', 'LIST2').length, 0);
   assert.equal(photoPool(raw, 'group', 'leaf', 'Liquidambar').length, 0);
   assert.equal(photoPool(raw, 'concept', 'leaf', 'simple_lobed').length, 7);
+});
+
+test('a hard row stays in the manifest and out of every pool', () => {
+  const raw = loadFixture();
+  const hard = raw.manifest.find((m) => m.target === 'QUGA' && m.channel === 'leaf' && !m.retired);
+  hard.difficulty = 'hard';
+  assert.deepEqual(DIFFICULTIES, ['hard']);
+  assert.equal(inPlay(hard), false);
+  assert.equal(inPlay({ retired: true }), false);
+  assert.equal(inPlay({}), true);
+  assert.equal(photoPool(raw, 'species', 'leaf', 'QUGA').length, 1);
+  assert.equal(photoPool(raw, 'group', 'leaf', 'Quercus').length, 3);
+  assert.equal(photoPool(raw, 'concept', 'leaf', 'simple_lobed').length, 6);
+  const result = loadContent(raw);
+  assert.equal(result.ok, true);
+  assert.ok(result.content.manifest.includes(hard));
+});
+
+test('a difficulty other than hard fails validation', () => {
+  const easy = badContent();
+  easy.manifest[0].difficulty = 'easy';
+  assert.match(messages(easy), /the QUGA leaf row has difficulty easy; the only value is hard/);
+});
+
+test('a species whose only photo is hard counts as having no photo', () => {
+  const onlyHard = badContent();
+  onlyHard.manifest[0].difficulty = 'hard';
+  assert.match(messages(onlyHard), /QUGA has no manifest image and no confusion edge/);
 });
 
 test('a variety of a retired species has an empty pool', () => {
