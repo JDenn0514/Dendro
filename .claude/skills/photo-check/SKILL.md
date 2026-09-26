@@ -7,16 +7,21 @@ description: Use when approving the photo candidates of a Dendro content run, on
 
 You judge the photo candidates of one run. One candidate gets one verdict. The one
 exception is a Kew POWO row whose saved file is missing. That row gets no verdict (see
-**A Kew POWO row** below).
+**A Kew POWO row** below). The candidates of a full target get no verdict either (see
+**Stop at 6 good photos** below).
 
 ## The loop
 
 1. Read `pipeline/runs/<name>/candidates.jsonl`.
 2. Read `pipeline/runs/<name>/verdicts.jsonl` when it exists.
 3. Take every candidate whose `id` has no row in `verdicts.jsonl`. Those are the unjudged
-   candidates.
+   candidates. Keep them in file order. The fetch writes each target's candidates in the
+   order of source quality. Skip every candidate of a full target (see **Stop at 6 good
+   photos** below).
 4. Dispatch subagents in batches of 10. Each subagent gets one candidate row. It reads the
-   image file at the row's `local` path and the row itself. A Kew POWO row is a row whose
+   image file at the row's `local` path and the row itself. Also give it the entry of the
+   row's `target` in `pipeline/runs/<name>/look_for.json`, when there is one (see **The
+   look-for check** below). A Kew POWO row is a row whose
    `origin` is on `powo.science.kew.org`. For a POWO row, also give the subagent the two
    paths that the `powo-harvest` skill gave you for that species: the saved gallery and
    the rows file. First check that both files exist. When one is missing, do not dispatch
@@ -33,7 +38,17 @@ exception is a Kew POWO row whose saved file is missing. That row gets no verdic
    The six flags above are the whole surface. The command writes the row. It sets
    `checked_by` to `photo_check_agent`, which is `CHECK_AGENT` in the CLI, and `checked_at`
    to today's date. You never set those two.
-7. After each batch, apply the stop rule below.
+7. After each batch, apply the stop rule below. Then count the approved photos again, and
+   skip the targets that are now full.
+
+**Stop at 6 good photos.** Count the approved photos of each target from
+`verdicts.jsonl`. Use the last row of each candidate `id`, take the `approve` rows, and
+group them by the candidate's `target` and the verdict's `channel`. A target is full when
+each channel in the run's channel list has 6 approved photos for that target. A concept
+target has one channel only, its own prefix, so a `bark/plated` target is full at 6
+approved `bark` photos. Dispatch no more candidates of a full target. They stay unjudged.
+`cli build`, the stop rule, `cli report`, and `cli run finish` accept unjudged rows. A
+batch can take a target past 6. Keep those verdicts.
 
 ## The verdict
 
@@ -61,8 +76,27 @@ one prints the error and exits 1.
 **When no channel is clear, reject the image. An unclear channel is a reject, not an
 escalation.**
 
-**Quality.** The photo is sharp. The subject fills the frame. No hand and no ruler are in
-the shot. Below that threshold, escalate with `--case quality`.
+**Quality.** The photo is close up and sharp. The subject fills the frame. No hand and no
+ruler are in the shot. The photo shows the feature that a learner has to see (owner ruling
+2026-09-26). Each channel has its own feature:
+
+- **Leaf:** the shape of the leaf, and how the leaves sit on the twig. The photo shows a
+  piece of twig with at least two leaves, or two needle bundles, attached. They are close
+  enough to see their shape. On a conifer with needles in bundles, you can count the
+  needles in one bundle. A photo of one detached leaf that shows the shape clearly is an
+  approve with the `hard` tag.
+- **Bark:** a mature trunk. The grooves, plates, ridges, or peeling, and the texture, are
+  clear and fill the frame.
+- **Fruit:** the fruit, close up. On the tree or off the tree are both correct.
+
+Then apply these rules in order:
+
+1. The feature is not visible: reject.
+2. The photo is distant or cluttered, but the feature is still visible: approve, and add
+   `hard` to `--tags`, such as `--tags hard` or `--tags hard,winter`. The `hard` tag goes
+   onto the manifest row as it is.
+3. Any other photo below the threshold above, such as a soft photo, or a hand or a ruler
+   in the shot: escalate with `--case quality`.
 
 The photo shows natural colour, so the tree looks the way it does in real life. A
 black-and-white or greyscale image is a reject, not an escalation (owner ruling
@@ -134,15 +168,34 @@ the evidence for the check is not on disk. The row gets no verdict:
 **You never set or change the species from what you see in the photo.** Identity comes from
 the source page. Your own recognition of the plant is not evidence.
 
+## The look-for check
+
+The `species-draft` skill writes `pipeline/runs/<name>/look_for.json`. The file holds one
+entry per species symbol, and one line per channel in that entry:
+`{ "QUMA2": { "leaf": { "text": "...", "ref": "..." } } }`. The `text` names the traits a
+person can see in a photo of that channel.
+
+The subagent reads the line of the channel it sets, and judges whether the photo shows
+those traits:
+
+- The photo shows the traits: say so in the note.
+- A trait that the line names cannot be seen: apply the **Quality** rule for the channel.
+- The photo clearly shows a trait that contradicts the line, such as opposite leaves where
+  the line says alternate: escalate with `--case mismatch`. Name the trait in the note.
+  Do not set or change the species. The owner decides.
+- `look_for.json` is absent, or it has no line for the species and the channel: judge on
+  the **Quality** rule alone, and say so in the note.
+
 ## The three escalation cases
 
 Escalate in these three cases and no others:
 
 1. `mismatch`: the species on the source page and the species on the row differ, or the
-   page names none.
+   page names none, or the photo clearly shows a trait that contradicts the look-for line.
 2. `license`: the license is missing, ambiguous, or not redistributable.
-3. `quality`: the channel or the quality falls below the threshold, or the colour is
-   toned or filtered so the tree does not look real.
+3. `quality`: the quality falls below the threshold, but the feature is visible and the
+   photo is not only distant or cluttered, or the colour is toned or filtered so the tree
+   does not look real.
 
 Everything else is an approve or a reject. The one exception is a Kew POWO row whose saved
 file is missing. That row gets no verdict, as **A Kew POWO row** says.
@@ -179,6 +232,7 @@ license text does not match the allowlist.
 
 - It does not identify a species from the image.
 - It does not re-judge a candidate that already has a verdict row.
+- It does not judge the candidates of a full target. They stay unjudged.
 - It does not write `verdicts.jsonl`. `cli photos verdict` writes it.
 - It does not write `decisions.json`. The owner writes that.
 - It does not upload, resize, or delete any image. `cli build` does that.

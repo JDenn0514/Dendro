@@ -14,6 +14,9 @@ species record. A script fetches the rest from USDA PLANTS and iNaturalist.
 2. For each symbol, check whether `content_src/species/<SYMBOL>.json` exists.
 3. Draft one file for each symbol that has no file. Leave the existing files alone.
 
+4. For each file you draft, write one entry in `pipeline/runs/<name>/look_for.json` (see
+   **The look-for lines** below).
+
 `<SYMBOL>` is the USDA PLANTS symbol, in upper case, such as `QUGA`.
 
 ## The file shape
@@ -61,6 +64,36 @@ below does not name fails the build, so check a name before you write it.
   `opposite`. The species screen prints it as a fact.
 - `planted_states`: states where the species is planted but not native.
 - `variety_notes`: an object keyed by variety symbol, with one note each.
+
+## The look-for lines
+
+The `photo-check` skill reads these lines. It judges whether a photo shows the traits they
+name. The file holds one entry per species symbol:
+
+```json
+{
+  "QUMA2": {
+    "leaf": { "text": "...", "ref": "..." },
+    "bark": { "text": "...", "ref": "..." },
+    "fruit": { "text": "...", "ref": "..." }
+  }
+}
+```
+
+- Write one line for each channel in the run's channel list, `channels` in `run.json`.
+- `text` is one or two short sentences. It names traits that a person can see in a photo:
+  the shape, the lobes, the arrangement, the needles per bundle, the bark pattern, the
+  fruit shape and size. Do not name a trait that needs a lens or a lab.
+- `ref` names the reference you read for the line, with the same detail as a string in the
+  species file's `ref`.
+- When `pipeline/sources/<SYMBOL>.json` exists, write the lines from its text first. That
+  folder does not always exist. Otherwise, use the references in **The reference order**
+  below.
+- When the file exists, add your entries to it. Keep the entries that are already in it.
+- Do not put the lines in `content_src/species/<SYMBOL>.json`. The build fails an unknown
+  field there.
+
+The rule **`ref` names what you actually read** holds for these lines too.
 
 ## The reference order
 
