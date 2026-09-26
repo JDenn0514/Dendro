@@ -4552,7 +4552,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:26:34Z",
-    "note": "Leafy shoots fill the frame, sharp, and the broad lobed leaf outline reads."
+    "note": "Leafy shoots fill the frame, sharp, and the broad lobed leaf outline reads.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the leaves have wavy edges only and read as unlobed.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "963e2b31be128ed6a03ce3ac60a72b86c94f6f9253384e302d84d9f78b9df132",
@@ -4567,7 +4570,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:27:22Z",
-    "note": "Sharp foliage that fills the frame, the broad lobed leaf outline reads well."
+    "note": "Sharp foliage that fills the frame, the broad lobed leaf outline reads well.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the leaves have wavy edges only and read as unlobed.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "c7a13d34b2f2e0d1a3de028a971578e43e404e4630667d564502dda42d1e8ab4",
