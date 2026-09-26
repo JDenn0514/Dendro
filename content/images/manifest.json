@@ -1693,7 +1693,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T03:24:00Z",
-    "note": "Close photo of dead leaves held on the twig in winter, the lobed simple outline reads on several of them."
+    "note": "Close photo of dead leaves held on the twig in winter, the lobed simple outline reads on several of them.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: dead, curled leaves hide the lobes.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "1d1a1c19efa7e1f54cd6cd28faa889f7337f0bb428d721b13d54477eb7fcbb26",
