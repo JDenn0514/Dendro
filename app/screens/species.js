@@ -11,8 +11,8 @@ import { footNav, tick, trail, ramp, levelWord } from '../ui/chrome.js';
 import { plate, credit } from '../ui/plate.js';
 import { glyph, glyphIdFor, FALLBACK_GLYPH } from '../ui/glyphs.js';
 
-// The crop each channel's plate gets. A plate with its own ground dissolves
-// on four sides; a bright scan multiplies into the paper.
+// The class each channel's plate gets. The sheet gives every plate the same
+// plain look; the class is a hook for the space around it.
 const PLATE_SHAPES = { leaf: 'pl-leaf', bark: 'pl-bark', fruit: 'pl-bark' };
 
 function dueText(state, today) {
@@ -86,9 +86,7 @@ function plateSection(content, symbol, channel, imageBase, record) {
     image_base: imageBase,
     alt: `${displayName(record)}, ${channelLabel(channel)}`,
     shape: PLATE_SHAPES[channel] ?? 'pl-bark',
-    bleed: true,
-    soft: true,
-    mono: channel === 'bark'
+    bleed: true
   }));
   section.append(credit(photo));
   return section;
@@ -133,8 +131,7 @@ export function render(root, ctx) {
       image_base: imageBase,
       alt: `${displayName(record)}, ${channelLabel(heroChannel)}`,
       shape: PLATE_SHAPES[heroChannel] ?? 'pl-leaf',
-      bleed: true,
-      soft: true
+      bleed: true
     });
     // The sheet holds the hero plate clear of the title.
     figure.classList.add('sp-hero');

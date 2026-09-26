@@ -1,6 +1,6 @@
 // Picks the format, samples a photo, builds options and distractors, builds the reveal.
 import { cardId } from './content.js';
-import { displayName } from './words.js';
+import { displayName, capitalize } from './words.js';
 
 // An inv question asks the learner to pick the photo. Below this many photo
 // options the card asks mc8 instead.
@@ -143,10 +143,12 @@ export function labelFor(content, kind, channel, key) {
   }
   if (kind === 'group') {
     // genus_common is optional. With no live member that carries one, the genus
-    // fills both rows.
+    // fills both rows. The content keeps the lowercase form, as it does for a
+    // species name, and a label starts with a capital the way `displayName`
+    // prints one.
     const member = Object.values(content.species)
       .find((s) => s.genus === key && !s.retired && s.genus_common);
-    return { label: member?.genus_common ?? key, sublabel: key };
+    return { label: member ? capitalize(member.genus_common) : key, sublabel: key };
   }
   const { symbol, variety } = varietyOf(content, key);
   return { label: variety?.name ?? key, sublabel: symbol ? content.species[symbol].scientific : '' };
@@ -253,6 +255,37 @@ export function answerPhoto(question) {
     return question.options.find((o) => o.key === question.answer_key)?.photo ?? null;
   }
   return question.photo ?? null;
+}
+
+// Every photo the reveal owes a credit for. The photos the question showed
+// come first, in the order the reader saw them. A photo that only the reveal
+// shows comes after: the pair's second photo on a wrong pick. A photo is its
+// hash, so a photo both show is listed once. `from` tells the two apart: a
+// question photo keeps its credit even when a reveal plate fails, because
+// the reader already saw it. `lost` holds the hashes of grid photos that
+// failed to load: the reader never saw them, so they get no credit.
+export function revealCredits(question, reveal, lost = []) {
+  const out = [];
+  const seen = new Set();
+  const add = (photo, label, from) => {
+    if (!photo || seen.has(photo.hash)) return;
+    seen.add(photo.hash);
+    out.push({ photo, label, from });
+  };
+  if (question.format === 'inv') {
+    for (const option of question.options) {
+      if (option.photo && lost.includes(option.photo.hash)) continue;
+      add(option.photo, option.label, 'question');
+    }
+  } else {
+    add(question.photo, reveal.answer.label, 'question');
+  }
+  add(reveal.answer.photo, reveal.answer.label, 'reveal');
+  // The screen draws the pair only when both photos exist.
+  if (reveal.chosen && reveal.answer.photo) {
+    add(reveal.chosen.photo, reveal.chosen.label, 'reveal');
+  }
+  return out;
 }
 
 // Ruling R1a. Only a species card pairs by symbol. Two sibling varieties share

@@ -50,7 +50,15 @@ import {
 } from './json_fields.ts';
 import { appendJsonl, readJsonl } from './jsonl.ts';
 import { licenseAllowedAt } from './licenses.ts';
-import { publishApproved, retireRows, type ManifestRow } from './manifest.ts';
+import {
+  DIFFICULTIES,
+  publishApproved,
+  retireRows,
+  setDifficulty,
+  shownRows,
+  type Difficulty,
+  type ManifestRow,
+} from './manifest.ts';
 import {
   CHECKLIST_URL,
   DISTRIBUTION_URL,
@@ -188,6 +196,8 @@ const USAGE = `usage: node pipeline/cli.ts <command> [flags]
   run pr <name>
   run finish <name>
   images retire <hash> --reason "<text>"
+  images difficulty <hash> --set hard
+  images difficulty <hash> --clear
   data sections
   data inat-terms
   ids check [--base <ref>]
@@ -744,6 +754,7 @@ const COMMANDS: Record<string, Handler> = {
   'run pr': runPr,
   'run finish': runFinish,
   'images retire': imagesRetire,
+  'images difficulty': imagesDifficulty,
   'species retire': speciesRetire,
   'ids check': idsCheck,
 };
@@ -1151,6 +1162,43 @@ async function imagesRetire(rest: string[], deps: CliDeps): Promise<number> {
   return 0;
 }
 
+async function imagesDifficulty(rest: string[], deps: CliDeps): Promise<number> {
+  const hash = positional(rest, 'images difficulty <hash> --set hard | --clear');
+  const flags = parseFlags(rest.slice(1));
+  const set = flagValue(flags, 'set');
+  const clear = flags.clear === 'true';
+  const allowed = DIFFICULTIES.join('|');
+  // Exactly one of the two flags: neither, or both, is a usage error.
+  if ((set === null) === !clear) {
+    console.error(`images difficulty needs one of --set ${allowed} or --clear`);
+    return 1;
+  }
+  if (set !== null && !(DIFFICULTIES as readonly string[]).includes(set)) {
+    console.error(`images difficulty --set takes ${allowed}, not ${set}`);
+    return 1;
+  }
+  const difficulty = set === null ? null : (set as Difficulty);
+
+  const before = readManifest(deps.root);
+  const result = setDifficulty(before, hash, difficulty);
+  if (result.matched === 0) {
+    console.error(`no manifest row carries hash ${hash}`);
+    return 1;
+  }
+  if (result.changed === 0) {
+    console.log(`no manifest row changed for ${hash}`);
+    return 0;
+  }
+  const subject = difficulty === null
+    ? `clear difficulty on image ${hash}`
+    : `mark image ${hash} ${difficulty}`;
+  if (!(await commitContent(deps, readSpecies(deps.root), result.rows, subject))) return 1;
+  const rows = `${result.changed} manifest row${result.changed === 1 ? '' : 's'}`;
+  const done = difficulty === null ? 'cleared' : `set to ${difficulty}`;
+  console.log(`${rows} ${done} for ${hash}`);
+  return 0;
+}
+
 async function speciesRetire(rest: string[], deps: CliDeps): Promise<number> {
   const symbol = positional(rest, 'species retire <SYMBOL> --reason "<text>"');
   const flags = parseFlags(rest.slice(1));
@@ -1227,6 +1275,16 @@ async function buildContent(
     rows: readManifest(deps.root),
   });
   const manifest = published.rows;
+  // An approved photo whose row is hard is held back from the app. The report's counts
+  // and gaps leave it out, so the next run sees the channel as thin.
+  const hardHashes = new Set(
+    manifest.filter((one) => one.difficulty === 'hard').map((one) => one.hash),
+  );
+  const heldBack = new Set(
+    Object.entries(published.hashes)
+      .filter(([, hash]) => hardHashes.has(hash))
+      .map(([id]) => id),
+  );
 
   const concepts = readContentList<RawContent['concepts'][number]>(deps.root, 'concepts.json');
   const conceptKeys = new Set(concepts.map((one) => `${one.channel}/${one.key}`));
@@ -1276,9 +1334,8 @@ async function buildContent(
     });
 
     const fetchedErrors = validateFetched(fetched, symbol);
-    const live = manifest.filter(
-      (one) => one.target === symbol && one.retired !== true,
-    ).length;
+    // The rows the app shows. A retired row and a hard row do not count.
+    const live = shownRows(manifest, symbol).length;
     statuses[symbol] = statusOf(fetchedErrors, live, taxon === null);
     if (fetchedErrors.length > 0) {
       console.log(`${symbol}: dropped, ${statuses[symbol].reason ?? ''}`);
@@ -1329,6 +1386,7 @@ async function buildContent(
     raw,
     loaded: loaded.content,
     warnings: result.warnings,
+    heldBack,
   });
   writeJson(path.join(dir, 'build.json'), data);
   // A cap that photos fetch recorded reaches the reader again here.
@@ -1431,9 +1489,14 @@ function reportData(input: {
   raw: RawContent;
   loaded: LoadedContent;
   warnings: ValidationMessage[];
+  /** Approved candidates whose row is hard. They do not count toward a channel. */
+  heldBack: Set<string>;
 }): BuildReport {
   const { name, scope, statuses, candidates, verdicts, raw, loaded, warnings } = input;
-  const counts = countByTargetChannel(verdicts, candidates);
+  const counts = countByTargetChannel(
+    verdicts,
+    candidates.filter((one) => !input.heldBack.has(one.id)),
+  );
   const rows: ReportSpeciesRow[] = [];
   // A concept run's targets are its qualified concept keys and it fills no status.
   const targets = scope.concepts.length > 0 ? scope.concepts : scope.species;
@@ -1541,9 +1604,35 @@ async function writeReport(name: string, deps: CliDeps): Promise<boolean> {
 }
 
 /**
- * Both retire commands end the same way: validate, check the ids, remove the objects no
- * live row carries any more, write the two files, commit.
+ * Every command that edits content/ by hand ends the same way: validate, check the ids,
+ * run `beforeWrite`, write the two files, commit. A retire removes its objects in
+ * `beforeWrite`. A difficulty change removes nothing: the file stays in the bucket.
  */
+async function commitContent(
+  deps: CliDeps,
+  species: Record<string, SpeciesRecord>,
+  manifest: ManifestRow[],
+  subject: string,
+  beforeWrite: () => Promise<void> = async () => {},
+): Promise<boolean> {
+  // An edit runs on a checkout that has main. A checkout without it writes nothing.
+  if (!baseResolved(deps, DEFAULT_BASE)) return false;
+  const raw = rawOf(deps.root, species, manifest);
+  if (validated(deps, raw) === null) return false;
+  const previous = readPublished(gitShowOf(deps, DEFAULT_BASE));
+  const idErrors = appendOnlyErrors(previous, contentSetOf(raw));
+  if (idErrors.length > 0) {
+    for (const message of idErrors) console.error(message);
+    return false;
+  }
+  await beforeWrite();
+  writeJson(contentFile(deps.root, 'species.json'), raw.species);
+  writeJson(contentFile(deps.root, MANIFEST_NAME), raw.manifest);
+  gitCommitAll(deps.exec, `content: ${subject}`);
+  return true;
+}
+
+/** Both retire commands: the shared commit path, plus the objects no live row carries. */
 async function commitRetire(
   deps: CliDeps,
   species: Record<string, SpeciesRecord>,
@@ -1551,22 +1640,9 @@ async function commitRetire(
   after: ManifestRow[],
   subject: string,
 ): Promise<boolean> {
-  // A retire runs on a checkout that has main. A checkout without it writes nothing.
-  if (!baseResolved(deps, DEFAULT_BASE)) return false;
-  const raw = rawOf(deps.root, species, after);
-  if (validated(deps, raw) === null) return false;
-  // A retire runs on a checkout that has main, so it needs no --base.
-  const previous = readPublished(gitShowOf(deps, DEFAULT_BASE));
-  const idErrors = appendOnlyErrors(previous, contentSetOf(raw));
-  if (idErrors.length > 0) {
-    for (const message of idErrors) console.error(message);
-    return false;
-  }
-  for (const key of deadObjectKeys(before, after)) await deps.storage.remove(key);
-  writeJson(contentFile(deps.root, 'species.json'), raw.species);
-  writeJson(contentFile(deps.root, MANIFEST_NAME), raw.manifest);
-  gitCommitAll(deps.exec, `content: ${subject}`);
-  return true;
+  return commitContent(deps, species, after, subject, async () => {
+    for (const key of deadObjectKeys(before, after)) await deps.storage.remove(key);
+  });
 }
 
 /** The species symbol and every variety key it owns. A row targets one of them. */

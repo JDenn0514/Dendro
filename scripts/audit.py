@@ -31,11 +31,16 @@ from shots import (
 
 MIN_TARGET = 44
 MIN_CONTRAST = 4.5
+# A question must show its prompt and two answers inside this height, the
+# height of a small phone. The page is laid out at the script's own viewport,
+# 844 px, so the check is stricter than a 780 px phone.
+FOLD = 780
 
 JS = """
 (limits) => {
   const out = {
-    sw: document.documentElement.scrollWidth, over: [], small: [], dim: []
+    sw: document.documentElement.scrollWidth, over: [], small: [], dim: [], fold: [],
+    overlap: []
   };
   const name = (node) => {
     const cls = typeof node.className === 'string' ? node.className.trim() : '';
@@ -44,13 +49,11 @@ JS = """
 
   // ---------- horizontal overflow ----------
   // A node an ancestor clips cannot push the page wide, because the pixels
-  // past the clip are never drawn. The `.pl-*` plate rules crop a scan in
-  // exactly that way: an image wider than its frame inside a `.plate`, which
-  // is `overflow: hidden`. So the box is trimmed to every clipping ancestor
-  // before it is judged. The walk stops at `#app`: the clip on `#app` is the
-  // one that would hide a real layout overflow, which is what this check is
-  // for, and `document.documentElement.scrollWidth` above is the other half
-  // of the same question.
+  // past the clip are never drawn. So the box is trimmed to every clipping
+  // ancestor before it is judged. The walk stops at `#app`: the clip on
+  // `#app` is the one that would hide a real layout overflow, which is what
+  // this check is for, and `document.documentElement.scrollWidth` above is
+  // the other half of the same question.
   const clipped = (node, box) => {
     let left = box.left;
     let right = box.right;
@@ -76,6 +79,8 @@ JS = """
   }
 
   // ---------- tap targets ----------
+  // Every target the size check measures, for the overlap check below.
+  const measured = [];
   const controls = 'a[href], button, input, select, textarea, label, summary,'
     + ' [tabindex]:not([tabindex="-1"])';
   for (const node of document.querySelectorAll(controls)) {
@@ -90,12 +95,30 @@ JS = """
     }
     // WCAG 2.5.8 exempts a link that sits inside a run of text: the line of
     // type sets its size, and growing it to 44px would break the line. The
-    // credit's author link and the reveal title's answer link are both that
-    // case. Every anchor the app means as a control is laid out as a block,
-    // a flex box, or a grid, so `display: inline` is what tells them apart.
-    if (node.tagName === 'A' && getComputedStyle(node).display === 'inline') continue;
+    // reveal title's answer link is that case. The links in a credit line
+    // are not exempt: they sit in small print, 19px tall, so the sheet grows
+    // each one to 44px and this check holds it to that. Every other anchor
+    // the app means as a control is a block, a flex box, or a grid, so
+    // `display: inline` tells them apart.
+    if (node.tagName === 'A' && !node.closest('.cap')
+        && getComputedStyle(node).display === 'inline') continue;
+    measured.push({ node, box });
     if (box.width < limits.target || box.height < limits.target) {
       out.small.push(name(node) + ' ' + Math.round(box.width) + 'x' + Math.round(box.height));
+    }
+  }
+
+  // ---------- overlapping targets ----------
+  // Two targets whose boxes overlap send a tap to the wrong one. A control
+  // inside another, such as the radio inside its label, is one target.
+  for (let i = 0; i < measured.length; i += 1) {
+    for (let j = i + 1; j < measured.length; j += 1) {
+      const one = measured[i];
+      const two = measured[j];
+      if (one.node.contains(two.node) || two.node.contains(one.node)) continue;
+      const wide = Math.min(one.box.right, two.box.right) - Math.max(one.box.left, two.box.left);
+      const tall = Math.min(one.box.bottom, two.box.bottom) - Math.max(one.box.top, two.box.top);
+      if (wide > 0.5 && tall > 0.5) out.overlap.push(name(one.node) + ' and ' + name(two.node));
     }
   }
 
@@ -169,9 +192,25 @@ JS = """
     }
   }
 
+  // ---------- the fold ----------
+  // A question shows its prompt and at least two answers above the fold. A
+  // typed question has one answer control, so one is enough there.
+  const bottomOf = (node) => node.getBoundingClientRect().bottom + window.scrollY;
+  const prompt = document.querySelector('.prompt');
+  if (prompt) {
+    const answers = [...document.querySelectorAll('.key .pick, .invkey button, .typed input')];
+    const above = answers.filter((node) => bottomOf(node) <= limits.fold).length;
+    const wanted = Math.min(2, answers.length);
+    if (bottomOf(prompt) > limits.fold || above < wanted) {
+      out.fold.push('prompt ends at ' + Math.round(bottomOf(prompt)) + ', '
+        + above + ' of ' + answers.length + ' answers end above ' + limits.fold);
+    }
+  }
+
   out.over = out.over.slice(0, 12);
   out.small = out.small.slice(0, 12);
   out.dim = out.dim.slice(0, 12);
+  out.overlap = out.overlap.slice(0, 12);
   return out;
 }
 """
@@ -189,7 +228,8 @@ def check(browser, frag, action, must, width, root):
             page.wait_for_timeout(350)
             return page.evaluate(
                 JS,
-                {"width": width, "target": MIN_TARGET, "contrast": MIN_CONTRAST},
+                {"width": width, "target": MIN_TARGET, "contrast": MIN_CONTRAST,
+                 "fold": FOLD},
             )
         finally:
             page.close()
@@ -214,7 +254,8 @@ def main():
                         print(f"FAIL {name:<16} {error}")
                         continue
                     bad = (got["sw"] > width or got["over"]
-                           or got["small"] or got["dim"])
+                           or got["small"] or got["dim"] or got["fold"]
+                           or got["overlap"])
                     flag = "FAIL" if bad else "ok  "
                     print(f"{flag} {name:<16} scrollWidth={got['sw']}")
                     for line in got["over"]:
@@ -223,6 +264,10 @@ def main():
                         print("       target   > " + line)
                     for line in got["dim"]:
                         print("       contrast > " + line)
+                    for line in got["fold"]:
+                        print("       fold     > " + line)
+                    for line in got["overlap"]:
+                        print("       overlap  > " + line)
                     if bad:
                         findings += 1
         browser.close()
