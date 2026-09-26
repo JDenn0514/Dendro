@@ -43,7 +43,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T02:40:41Z",
-    "note": "Sharp spring foliage with the three lobed simple leaf outline clear against the ground."
+    "note": "Sharp spring foliage with the three lobed simple leaf outline clear against the ground.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the leaves are divided into 3 leaflets, so the photo does not show a simple lobed leaf.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "717728f61643f8454f91d8d9fd3aa62bcd3a9e862f60bffb4b08d136d76b5c81",
@@ -1690,7 +1693,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T03:24:00Z",
-    "note": "Close photo of dead leaves held on the twig in winter, the lobed simple outline reads on several of them."
+    "note": "Close photo of dead leaves held on the twig in winter, the lobed simple outline reads on several of them.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: dead, curled leaves hide the lobes.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "1d1a1c19efa7e1f54cd6cd28faa889f7337f0bb428d721b13d54477eb7fcbb26",
@@ -3211,7 +3217,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T04:43:08Z",
-    "note": "Leafy shoot seen from above, the broad lobed leaves are sharp and fill most of the frame."
+    "note": "Leafy shoot seen from above, the broad lobed leaves are sharp and fill most of the frame.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the sprout leaves have entire edges and read as unlobed.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "2c175c54a720326cac993804041aac262c0d8f7d0b3c8d00918b0338a2e2e67a",
@@ -4546,7 +4555,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:26:34Z",
-    "note": "Leafy shoots fill the frame, sharp, and the broad lobed leaf outline reads."
+    "note": "Leafy shoots fill the frame, sharp, and the broad lobed leaf outline reads.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the leaves have wavy edges only and read as unlobed.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "963e2b31be128ed6a03ce3ac60a72b86c94f6f9253384e302d84d9f78b9df132",
@@ -4561,7 +4573,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:27:22Z",
-    "note": "Sharp foliage that fills the frame, the broad lobed leaf outline reads well."
+    "note": "Sharp foliage that fills the frame, the broad lobed leaf outline reads well.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the leaves have wavy edges only and read as unlobed.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "c7a13d34b2f2e0d1a3de028a971578e43e404e4630667d564502dda42d1e8ab4",
@@ -4591,7 +4606,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T05:28:07Z",
-    "note": "Leafy shoots fill the frame and the lobed leaf outline reads on the sharp leaves."
+    "note": "Leafy shoots fill the frame and the lobed leaf outline reads on the sharp leaves.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: a soft photo; the leaves read as unlobed.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "eaf5f2de3bcc17adc1a7fbf022f49ec487fd798fdb22ddfbbd2a159a9e0be162",
@@ -7140,7 +7158,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T18:36:37Z",
-    "note": "Yucca in flower with a clear rosette of long narrow strap blades at the base."
+    "note": "Yucca in flower with a clear rosette of long narrow strap blades at the base.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the flower spike is the subject; the strap leaves are small at the base.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "01a3197663dd9977907217dfd7a74b4c332507d98b9fd5307ac7d1c53f6ba630",
@@ -7332,7 +7353,10 @@
     ],
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-24T18:41:52Z",
-    "note": "Flower spike with long narrow strap blades sharp across the lower frame."
+    "note": "Flower spike with long narrow strap blades sharp across the lower frame.",
+    "retired": true,
+    "retired_reason": "clarity check 2026-09-25: the flower spike fills the frame; the strap leaves are only at the lower edge.",
+    "retired_at": "2026-09-26"
   },
   {
     "hash": "214909efc99119984a1f6088d6953b69bc520f82c91ffb8a54d406fcf908edbd",

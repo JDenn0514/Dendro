@@ -18,15 +18,33 @@ export const HOST_GROUP: Record<string, string> = {
   'plants.sc.egov.usda.gov': 'plantsservices.sc.egov.usda.gov',
 };
 
+/**
+ * A rate below 1 works: the limiter waits `MS_PER_SECOND / rate` between two requests of one
+ * group, so 0.5 is a 2000 ms gap and 0.2 is a 5000 ms gap.
+ */
 export const RATE_PER_SECOND: Record<string, number> = {
   'plantsservices.sc.egov.usda.gov': 1,
   'www.efloras.org': 1,
   'api.inaturalist.org': 1,
   'commons.wikimedia.org': 2,
+  // The Bioimages catalogue.
+  'raw.githubusercontent.com': 1,
+  // Bioimages files, from the gq folder on the site.
+  'bioimages.vanderbilt.edu': 1,
+  'www.treesandshrubsonline.org': 1,
+  // The wildflower.org policy allows 1 request per second at most.
+  'www.wildflower.org': 1,
+  // Kew POWO image files, for `photos add`. Kew asks for low rates.
+  'd2seqvvyy3b8p2.cloudfront.net': 0.2,
 };
 
 export const MAX_IN_FLIGHT: Record<string, number> = {
   'commons.wikimedia.org': 3,
+  'raw.githubusercontent.com': 1,
+  'bioimages.vanderbilt.edu': 1,
+  'www.treesandshrubsonline.org': 1,
+  'www.wildflower.org': 1,
+  'd2seqvvyy3b8p2.cloudfront.net': 1,
 };
 
 export const CACHE_DAYS: Record<string, number> = {
@@ -34,6 +52,11 @@ export const CACHE_DAYS: Record<string, number> = {
   'www.efloras.org': 30,
   'api.inaturalist.org': 7,
   'commons.wikimedia.org': 7,
+  // The 12 MB catalogue last changed on 2024-04-24.
+  'raw.githubusercontent.com': 30,
+  'www.treesandshrubsonline.org': 30,
+  // The policy asks an app to store the pages and not ask for them again.
+  'www.wildflower.org': 3650,
 };
 
 export const MS_PER_SECOND = 1000;
