@@ -402,8 +402,8 @@ object. A retired row stays in the manifest and enters no photo pool. When retir
 empties one channel, the species loses that card and keeps the others.
 
 Attribution is displayed on the reveal for every photo the question showed, and
-wherever else the image is shown. A question itself shows no caption, because a caption
-could name the tree. The line reads `<author>, <source>, <license>.` with the author
+wherever else the image is shown. On the reveal, the credits follow the Next button. A
+question itself shows no caption, because a caption could name the tree. The line reads `<author>, <source>, <license>.` with the author
 linked to the origin URL, and the license linked to its deed when the app knows one.
 When `origin` is absent, the author is plain text. (Changed 2026-09-25.)
 
@@ -702,14 +702,14 @@ The guess box is a checkbox beside the answer control, off by default, reset per
 
 After every answer:
 
-- **Right**: the photo, both names, one line of range text, elevation, and height, the
-  attribution, and a Next button.
+- **Right**: the photo, both names, one line of range text, elevation, and height, a
+  Next button, and the attribution under it.
 - **Wrong**: the photo shown, beside a photo of the species picked, same channel. Below
   them the diagnostic sentence from the confusion graph for this pair and channel, in
   the direction that matches the miss. If no edge exists, show both species' level-1
   category and genus instead, and append the pair, channel, and count to the
-  `dendro_missing_edges` list in localStorage. Then the same names, range line,
-  attribution, and Next.
+  `dendro_missing_edges` list in localStorage. Then the same names, range line, Next,
+  and the attribution under it.
 
 For an `inv` question, a wrong answer shows the photo picked and the correct photo side
 by side, with the same diagnostic logic.

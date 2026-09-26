@@ -808,5 +808,5 @@ button.leave:focus-visible{outline:2px solid var(--moss); outline-offset:2px;}
    stacked credit lines, never overlap, because each one owns its line. A
    long name still wraps inside the column, 44 px to a line. */
 .cap a{color:var(--bark); display:inline-block; min-width:44px;
-  line-height:44px; max-width:100%; overflow-wrap:anywhere;}
+  text-align:center; line-height:44px; max-width:100%; overflow-wrap:anywhere;}
 

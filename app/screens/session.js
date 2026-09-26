@@ -217,6 +217,9 @@ export function render(root, ctx) {
 
   function paintQuestion(question, card, generation, resumeElapsed = 0) {
     leaveShowing = false;
+    // Each paint loads the grid photos again, so each paint starts a clean
+    // list. A photo that failed once and loads on a Resume gets its credit.
+    lostPhotos = new Set();
     root.textContent = '';
     head(question);
 
@@ -361,7 +364,6 @@ export function render(root, ctx) {
 
     const generation = (renderId += 1);
     shown = answerCount + 1;
-    lostPhotos = new Set();
     // `paintQuestion` sets `lastView` itself, because only it can see the
     // answer clock that Resume has to carry over.
     paintQuestion(question, card, generation);
@@ -489,7 +491,7 @@ export function render(root, ctx) {
     panel.append(verdictWrap);
 
     // One credit line for each photo the question showed and each photo the
-    // reveal shows. The block goes in after the level line, above Next.
+    // reveal shows. The block goes in after Next, at the foot of the reveal.
     const credits = el('div', 'credits');
     for (const entry of revealCredits(question, reveal, lost)) {
       const line = credit(entry.photo, `${entry.label}.`);
@@ -551,14 +553,14 @@ export function render(root, ctx) {
     }
 
     panel.append(levelLine(levels));
-    // The app spec's reveal order: photos, the diagnostic sentence, the
-    // level, the credits, then Next.
-    if (credits.childElementCount > 0) panel.append(credits);
 
     const next = el('button', 'btn', 'Next');
     next.type = 'button';
     next.addEventListener('click', () => { index += 1; showCard(); });
     panel.append(next);
+    // The app spec's reveal order: photos, the diagnostic sentence, the
+    // level, Next, then the credits.
+    if (credits.childElementCount > 0) panel.append(credits);
     root.append(panel);
   }
 

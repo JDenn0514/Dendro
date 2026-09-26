@@ -16,8 +16,8 @@ function dropPlate(figure) {
   figure.replaceWith(note);
 }
 
-// `options`: `image_base`, `alt`, `shape` (a `pl-*` class, or null for a
-// plate that fills its column), `bleed` (run to both edges of the phone),
+// `options`: `image_base`, `alt`, `shape` (a `pl-*` class, or left out for
+// a plate that fills its column), `bleed` (run to both edges of the phone),
 // and `onError`.
 export function plate(photo, options) {
   const classes = ['plate', options.shape];
