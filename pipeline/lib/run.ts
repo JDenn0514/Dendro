@@ -30,7 +30,7 @@ export type Exec = (command: string, args: string[]) => { code: number; out: str
 const CO_AUTHOR = 'Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>';
 
 /** The flags that take no value. Every other flag needs one. */
-export const BOOLEAN_FLAGS: string[] = ['refresh', 'manifest'];
+export const BOOLEAN_FLAGS: string[] = ['refresh', 'manifest', 'clear'];
 
 const LIST_FIELDS: string[] = [
   'concepts',

@@ -50,9 +50,12 @@ ROUTES = [
     ("reveal", "#/session?focus=leaf&unit=leaf_types", "wrong", ".reveal .pair"),
 ]
 
-# How far a walk down the deck may go, and how many fresh pages the reveal may
-# try. Every loop in this file is bounded by it, so no walk runs on for ever.
+# How many fresh pages the reveal may try, and how many cards it answers on
+# each page. Every loop in this file is bounded, so no walk runs on for ever.
 MAX_TRIES = 6
+
+# How far `advance_to` may walk down the deck: the default session size.
+MAX_WALK = 20
 
 # What each answer format prints. The session routes walk the deck until one
 # of these is on screen.
@@ -85,10 +88,11 @@ RNG_JS = """
 # The seed reads the same content the app reads and derives the same card ids.
 #
 # The tier a card holds is what picks its answer format, so the seed also
-# decides which formats the deck can deal. A card can be asked as a grid of
-# photos only when it has four photo options, so every card that has them goes
-# to the inv tier and the rest cycle over new, mc4, mc8, and typed. That keeps
-# a spread of levels on every rung and puts all three answer formats in reach.
+# decides which formats the deck can deal. The cards take new, mc4, mc8,
+# typed, and inv in turn, in card id order. A card can be asked as a grid of
+# photos only when it has four photo options. A card whose turn is inv and
+# that has fewer takes mc8. That keeps a spread of levels on every rung and
+# puts every answer format in reach of every session route.
 SEED_JS = """
 async () => {
   const dir = new URLSearchParams(location.search).get('content') === 'dev'
@@ -132,12 +136,10 @@ async () => {
   let slot = 0;
   for (const id of Object.keys(result.content.cards).sort()) {
     const card = result.content.cards[id];
-    if (question.invAvailable(result.content, card)) {
-      cards[id] = state(inverted);
-      continue;
-    }
-    const seed = table[slot % table.length];
+    const cycle = [...table, inverted];
+    let seed = cycle[slot % cycle.length];
     slot += 1;
+    if (seed === inverted && !question.invAvailable(result.content, card)) seed = table[2];
     if (seed) cards[id] = state(seed);
   }
   localStorage.setItem('dendro_cards', JSON.stringify({ version: 1, cards }));
@@ -239,7 +241,7 @@ def advance_to(page, want):
     runs out or the walk reaches its bound.
     """
     selector = FORMAT_SELECTORS[want]
-    for _ in range(MAX_TRIES):
+    for _ in range(MAX_WALK):
         if page.query_selector(selector) is not None:
             return True
         if answer(page, 0) == "":

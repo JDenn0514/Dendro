@@ -432,10 +432,12 @@ function seedCandidate(root: string, target: string, index: number): Candidate {
 }
 
 /** Fills one target's leaf channel to the cap, with a candidate row per approved verdict. */
-function seedApprovedLeaf(root: string, target: string): void {
+function seedApprovedLeaf(root: string, target: string): Candidate[] {
+  const rows: Candidate[] = [];
   const verdicts: Verdict[] = [];
   for (let index = 0; index < CHANNEL_TARGET; index += 1) {
     const row = seedCandidate(root, target, index);
+    rows.push(row);
     verdicts.push({
       candidate_id: row.id,
       verdict: 'approve',
@@ -448,6 +450,28 @@ function seedApprovedLeaf(root: string, target: string): void {
     });
   }
   appendJsonl(path.join(runDir(root, 'demo'), 'verdicts.jsonl'), verdicts);
+  return rows;
+}
+
+/** One leaf manifest row per candidate, as a build writes it. The first `hard` rows are hard. */
+function seedLeafManifest(root: string, rows: Candidate[], hard: number): void {
+  const manifest = rows.map((row, index) => ({
+    hash: `hash${index}`,
+    target: row.target,
+    channel: 'leaf',
+    source: row.source,
+    author: row.author,
+    license: row.license,
+    origin: row.origin,
+    tags: [],
+    checked_by: 'owner',
+    checked_at: NOW,
+    note: 'seeded',
+    ...(index < hard ? { difficulty: 'hard' } : {}),
+  }));
+  const file = path.join(root, 'content', 'images', 'manifest.json');
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, `${JSON.stringify(manifest, null, 2)}\n`, 'utf8');
 }
 
 /** The `photos add` arguments of one manual row, without `--local`. */
@@ -1029,6 +1053,43 @@ test('photos fetch counts the channel cap per target', async (t) => {
   assert.ok(
     bark.some((row) => row.channel_hint === 'leaf'),
     'the other target still takes a leaf photo',
+  );
+});
+
+test('photos fetch leaves a hard photo out of the channel cap', async (t) => {
+  const { root, deps } = setup(t, photoRoutes());
+  seedInatTerms(root);
+  seedRun(root, { concepts: 'leaf/simple_lobed' }, (scope) => {
+    scope.concept_exemplars = { 'leaf/simple_lobed': ['QUGA'] };
+  });
+  const seeded = seedApprovedLeaf(root, 'leaf/simple_lobed');
+  seedLeafManifest(root, seeded, 5);
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const leaf = fetchedOf(root).filter((row) => row.target === 'leaf/simple_lobed');
+  assert.ok(
+    leaf.some((row) => row.channel_hint === 'leaf'),
+    'three shown photos leave the leaf channel open',
+  );
+});
+
+test('photos fetch keeps the channel cap when no approved photo is hard', async (t) => {
+  const { root, deps } = setup(t, photoRoutes());
+  seedInatTerms(root);
+  seedRun(root, { concepts: 'leaf/simple_lobed' }, (scope) => {
+    scope.concept_exemplars = { 'leaf/simple_lobed': ['QUGA'] };
+  });
+  const seeded = seedApprovedLeaf(root, 'leaf/simple_lobed');
+  seedLeafManifest(root, seeded, 0);
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const leaf = fetchedOf(root).filter((row) => row.target === 'leaf/simple_lobed');
+  assert.ok(leaf.length > 0, 'the other hints still arrive');
+  assert.ok(
+    leaf.every((row) => row.channel_hint !== 'leaf'),
+    'eight shown photos keep the leaf channel full',
   );
 });
 

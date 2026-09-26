@@ -8,7 +8,7 @@ import {
   dueCardIds, newCardCountToday, recommendUnit, buildSession,
   requeueCard, buildPlacementDeck, placementState, answerEffects,
   todayString, unitsForFocus, dueTomorrowCount, sessionPosition,
-  emptyResults, accumulateAnswer, newCardCapDone
+  emptyResults, accumulateAnswer, newCardCapDone, sessionPlace, sessionTotal
 } from '../app/logic/session.js';
 
 const { content } = loadContent(loadFixture());
@@ -151,6 +151,27 @@ test('a chosen unit overrides the recommended unit', () => {
   assert.ok(!result.card_ids.includes('concept:leaf:simple_lobed'));
 });
 
+test('a deck that due cards fill carries no unit key', () => {
+  const states = { 'species:QUGA:leaf': reviewed('2026-03-01') };
+  const result = buildSession({
+    content, states, log: [], settings: { session_size: 1, new_per_day: 10 },
+    today: TODAY, focus: 'leaf', chosen_unit: 'simple_lobed_maples_co', rng: makeRng(43)
+  });
+  assert.deepEqual(result.card_ids, ['species:QUGA:leaf']);
+  assert.deepEqual(result.new_card_ids, []);
+  assert.equal(result.unit_key, null);
+});
+
+test('the header names the unit only for a card in that unit', () => {
+  const unitKey = 'simple_lobed_maples_co';
+  const place = (cardId, mode = 'review', key = unitKey) =>
+    sessionPlace({ content, mode, unit_key: key, card_id: cardId });
+  assert.equal(place('species:ACPL:leaf'), 'Maples');
+  assert.equal(place('species:QUGA:leaf'), 'Review');
+  assert.equal(place('species:ACPL:leaf', 'review', null), 'Review');
+  assert.equal(place('concept:leaf:simple_lobed', 'placement', null), 'Placement test');
+});
+
 test('an again card re-queues once at the back', () => {
   const deck = ['a', 'b', 'c'];
   assert.deepEqual(requeueCard(deck, 0, 'a'), ['b', 'c', 'a']);
@@ -214,6 +235,15 @@ test('the session position stays inside the deck', () => {
   assert.deepEqual(sessionPosition(3, 5), { position: 3, total: 5, percent: 60 });
   assert.deepEqual(sessionPosition(9, 5), { position: 5, total: 5, percent: 100 });
   assert.deepEqual(sessionPosition(1, 0), { position: 0, total: 0, percent: 0 });
+});
+
+test('a card that comes back after a miss counts in the total', () => {
+  assert.equal(sessionTotal(8, 0), 8);
+  assert.equal(sessionTotal(8, 1), 9);
+  // An eight-card deck with one repeat asks nine questions, and the last
+  // one reads 9 of 9.
+  assert.deepEqual(sessionPosition(9, sessionTotal(8, 1)),
+    { position: 9, total: 9, percent: 100 });
 });
 
 test('a repeat answer writes nothing', () => {

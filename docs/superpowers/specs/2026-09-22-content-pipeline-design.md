@@ -410,6 +410,7 @@ the page names, and the file it downloaded. Forest Service pages enter only this
 
 - At most 60 candidates per species per run, across sources.
 - Collection for a species and channel stops once that channel has 8 approved images.
+  An approved image whose manifest row is hard does not count (see "Marking an image hard").
 - A second candidate with the same `file_hash` is dropped, whatever its source.
 
 ---
@@ -504,6 +505,25 @@ under section 4.
 
 Two manifest rows can share a hash, because duplicate bytes collapse into one object. The
 command retires both rows. A takedown removes the photo everywhere it was used.
+
+### Marking an image hard
+
+Added 2026-09-25. `cli images difficulty <hash> --set hard` sets `difficulty: "hard"` on
+every manifest row that carries the hash. `--clear` takes the field off. The app shows no
+photo that carries the tag, for now. The command does not touch the bucket, so a clear
+brings the photo back at once. It validates, runs the append-only check, and commits, the
+same as a retire. The validator reads a hard row as no image, so the command stops when
+the tag would leave a live species with no photo and no confusion edge. A build keeps the
+field on every published row. `hard` is the only value.
+
+A hard row does not count as a photo in the build: the `no_photos` status counts only the
+rows the app shows, and the report's per-channel counts and gap list leave out an
+approved photo whose row is hard. A species with only hard rows stays live.
+
+Added 2026-09-26. `photos fetch` leaves a hard photo out of the cap of 8 approved images
+per channel. It has no image hash, so it matches a hard row that is not retired to an
+approved candidate on the target, the channel of the approve, and the origin. The build
+copies the target and the origin from the candidate, and the channel from the approve.
 
 ---
 
@@ -650,6 +670,10 @@ bucket.
   `main` holds no content.
 - `retire`: `cli images retire` deletes the object, keeps the manifest row, and writes
   the reason and the date; two rows that share a hash both retire.
+- `difficulty`: `cli images difficulty` sets and clears the tag on every row with the
+  hash, keeps the object, takes only `hard`, and refuses to hide the last photo of a
+  species no edge names; a build keeps the field and leaves a hard photo out of the
+  counts and the gaps.
 - `verdicts`: the stop rule fires above a quarter at 20 or more judged, and not below;
   an owner decision becomes a verdict row with `checked_by: owner`.
 - `report`: rendered from a fixture run and compared to a stored file.
