@@ -22,3 +22,13 @@ export function licenseUrl(name) {
   if (typeof name !== 'string' || !Object.hasOwn(LICENSE_URLS, name)) return null;
   return LICENSE_URLS[name];
 }
+
+// The four text parts of a credit line: the author, the source between its
+// separators, the license, and the stop. Commas separate the parts. An author
+// can hold a comma: a list of names, as for the Virginia Tech photographers,
+// or a place, as in "Bruce Kirchoff from Greensboro, NC, USA". Then commas
+// hide where the author stops, so semicolons separate the parts. Pure.
+export function creditParts(photo) {
+  const mark = String(photo.author).includes(',') ? ';' : ',';
+  return [photo.author, `${mark} ${photo.source}${mark} `, photo.license, '.'];
+}
