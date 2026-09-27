@@ -15,7 +15,9 @@ import type { Exec } from './lib/run.ts';
 import type { Storage } from './lib/storage.ts';
 
 const nodeExec: Exec = (command, args) => {
-  const result = spawnSync(command, args, { encoding: 'utf8' });
+  // spawnSync stops reading at 1 MB by default. `git show` of the manifest passed that
+  // size on 2026-09-27 (1.23 MB), and a cut-off read looks like a missing file.
+  const result = spawnSync(command, args, { encoding: 'utf8', maxBuffer: 256 * 1024 * 1024 });
   const out = `${result.stdout ?? ''}${result.stderr ?? ''}`.trim();
   if (result.error !== undefined) {
     return { code: 1, out: `${out} ${result.error.message}`.trim() };
