@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "High ridge tops of western Arkansas" },
+  "elevation_ft": [1600, 2600],
+  "height_ft": [15, 50],
+  "habitat": "Dry glades, slopes and rocky ridge tops on sandstone or novaculite",
+  "ref": [
+    "FNA vol. 3, Quercus acerifolia (elevation, maximum height)",
+    "International Oak Society, In Search of an Endangered Species: Quercus acerifolia (typical height)",
+    "Encyclopedia of Arkansas, Maple-Leaf Oak"
+  ]
+}

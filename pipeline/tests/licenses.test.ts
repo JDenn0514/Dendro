@@ -15,6 +15,7 @@ import {
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const PERMISSION = 'used with permission, non-commercial';
 const WILDFLOWER_ORIGIN = 'https://www.wildflower.org/gallery/result.php?id_image=66070';
+const VT_ORIGIN = 'https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=240#image=fruit1.jpg';
 
 test('normalizeLicenseUrl gives every license url one trailing slash', () => {
   // Commons sends the url without the slash. iNat's table carries it.
@@ -68,7 +69,7 @@ test('a label from licenseLabelFromUrl still goes through licenseAllowed', () =>
   assert.equal(licenseAllowed(label('https://creativecommons.org/licenses/by-nd/4.0/')), false);
 });
 
-test('LICENSE_PERMISSIONS holds the one wildflower.org permission', () => {
+test('LICENSE_PERMISSIONS holds the wildflower.org and the Virginia Tech permissions', () => {
   assert.deepEqual(LICENSE_PERMISSIONS, [
     {
       label: PERMISSION,
@@ -76,6 +77,13 @@ test('LICENSE_PERMISSIONS holds the one wildflower.org permission', () => {
       granted: '2026-09-25',
       scope: 'non-commercial',
       record: 'docs/decisions/2026-09-25-wildflower-permission.md',
+    },
+    {
+      label: PERMISSION,
+      hosts: ['dendro.cnre.vt.edu'],
+      granted: '2026-09-26',
+      scope: 'non-commercial',
+      record: 'docs/decisions/2026-09-26-vt-dendrology-photo-permission.md',
     },
   ]);
 });
@@ -92,6 +100,19 @@ test('licenseAllowedAt admits what the allowlist admits, on any host', () => {
     true,
   );
   assert.equal(licenseAllowedAt('CC BY-NC 4.0', WILDFLOWER_ORIGIN), false);
+});
+
+test('licenseAllowedAt admits the permission label for dendro.cnre.vt.edu only', () => {
+  assert.equal(licenseAllowedAt(PERMISSION, VT_ORIGIN), true);
+  assert.equal(licenseAllowedAt(PERMISSION, 'http://dendro.cnre.vt.edu/dendrology/images/Quercus%20garryana/fruit1.jpg'), true);
+  const others = [
+    'https://cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=240',
+    'https://www.dendro.cnre.vt.edu/dendrology/',
+    'https://dendro.cnre.vt.edu.example.com/dendrology/',
+    'https://vt.edu/',
+  ];
+  for (const origin of others) assert.equal(licenseAllowedAt(PERMISSION, origin), false, origin);
+  assert.equal(licenseAllowedAt('Used with permission, non-commercial', VT_ORIGIN), false);
 });
 
 test('licenseAllowedAt admits the permission label for www.wildflower.org only', () => {

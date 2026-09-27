@@ -1,0 +1,50 @@
+[
+  {
+    "for_species": "Acer tataricum",
+    "channel_hint": "flower",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-tataricum/#image=acer-tataricum-1.jpg",
+    "file_url": "https://www.treesandshrubsonline.org/site/assets/files/4104/acer-tataricum-1.jpg",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "Trees and Shrubs Online",
+    "source_species": "Acer tataricum",
+    "note": "The TSO caption names Acer tataricum, not subsp. ginnala, and the leaves are broad and ovate, not 3-lobed with a long middle lobe. Flowers are the main subject."
+  },
+  {
+    "for_species": "Acer tataricum",
+    "channel_hint": "fruit",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-tataricum/#image=acer-tataricum-2.jpg",
+    "file_url": "https://www.treesandshrubsonline.org/site/assets/files/4104/acer-tataricum-2.jpg",
+    "author": "James Garnett",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "Trees and Shrubs Online",
+    "source_species": "Acer tataricum",
+    "note": "The TSO caption names Acer tataricum, not subsp. ginnala. The red samaras are clear, but the leaves are unlobed and ovate, which contradicts the leaf look-for line."
+  },
+  {
+    "for_species": "Acer tataricum",
+    "channel_hint": null,
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-tataricum/#image=acer-tataricum-6.jpg",
+    "file_url": "https://www.treesandshrubsonline.org/site/assets/files/4104/acer-tataricum-6.jpg",
+    "author": "James Garnett",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "Trees and Shrubs Online",
+    "source_species": "Acer tataricum",
+    "note": "The TSO caption names Acer tataricum, not subsp. ginnala. The autumn leaf is broad and only shallowly lobed, not 3-lobed with a much longer middle lobe."
+  },
+  {
+    "for_species": "Acer tataricum",
+    "channel_hint": "bark",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-tataricum/#image=acer-tataricum-4.jpg",
+    "file_url": "https://www.treesandshrubsonline.org/site/assets/files/4104/acer-tataricum-4.jpg",
+    "author": "James Garnett",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "source": "Trees and Shrubs Online",
+    "source_species": "Acer tataricum",
+    "note": "The TSO caption says the trunk of a tree like Acer tataricum, and does not name subsp. ginnala. The smooth gray lichen-spotted bark is clear."
+  }
+]

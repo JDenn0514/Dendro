@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "tuliptree",
+  "arrangement": "alternate",
+  "range": { "text": "Eastern United States, southern New England to Louisiana and Florida" },
+  "elevation_ft": [0, 4900],
+  "height_ft": [100, 150],
+  "habitat": "Rich woods, coves, moist lower slopes and stream bottoms",
+  "ref": [
+    "Silvics of North America vol. 2, Liriodendron tulipifera (Wayback Machine copy)",
+    "Virginia Tech Dendrology fact sheet, Liriodendron tulipifera (ID 54)",
+    "FNA vol. 3, Liriodendron tulipifera (elevation, top height)"
+  ]
+}

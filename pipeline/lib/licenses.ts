@@ -50,9 +50,9 @@ export interface LicensePermission {
 }
 
 /**
- * Written permissions that take the place of a licence on the allowlist. Owner ruling
- * 2026-09-25: wildflower.org is the one exception. A search of the manifest for a label finds
- * every image that rests on that permission.
+ * Written permissions that take the place of a licence on the allowlist. Owner rulings:
+ * wildflower.org on 2026-09-25, Virginia Tech Dendrology on 2026-09-26. The two share one
+ * label, so a search of the manifest for the label finds every image that rests on either.
  */
 export const LICENSE_PERMISSIONS: LicensePermission[] = [
   {
@@ -61,6 +61,13 @@ export const LICENSE_PERMISSIONS: LicensePermission[] = [
     granted: '2026-09-25',
     scope: 'non-commercial',
     record: 'docs/decisions/2026-09-25-wildflower-permission.md',
+  },
+  {
+    label: 'used with permission, non-commercial',
+    hosts: ['dendro.cnre.vt.edu'],
+    granted: '2026-09-26',
+    scope: 'non-commercial',
+    record: 'docs/decisions/2026-09-26-vt-dendrology-photo-permission.md',
   },
 ];
 

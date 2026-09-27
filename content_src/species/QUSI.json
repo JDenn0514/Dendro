@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Southeastern Coastal Plain west to Texas and Oklahoma" },
+  "elevation_ft": [0, 2000],
+  "height_ft": [5, 50],
+  "habitat": "Low wet areas, riparian and limestone bluffs, and dry limestone woodlands and scrub",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus sinuata (ID 552)",
+    "FNA vol. 3, Quercus sinuata (taxon 233501084)",
+    "FNA vol. 3, Quercus sinuata var. sinuata and var. breviloba (taxa 233501085, 233501086; elevation and height)"
+  ]
+}

@@ -22,6 +22,7 @@ the last commit. Do not run `git commit` yourself.
 | Path | Written by |
 |---|---|
 | `pipeline/runs/<name>/run.json` | `run init`, then `species list` and `photos fetch` |
+| `pipeline/runs/<name>/look_for.json` | the `species-draft` skill |
 | `pipeline/runs/<name>/candidates.jsonl` | `photos fetch`, `photos add` |
 | `pipeline/runs/<name>/verdicts.jsonl` | `photos verdict`, `run finish` |
 | `pipeline/runs/<name>/build.json` | `build` |
@@ -57,7 +58,20 @@ looks like a rate limit. Tell the owner when a symbol fails twice.
 
 Run the `species-draft` skill. It writes one `content_src/species/<SYMBOL>.json` for each
 species in `run.json` that lacks one. A species with no authored file gets no record in
-`content/species.json`; the build reports it as `not_authored`.
+`content/species.json`; the build reports it as `not_authored`. The skill also writes the
+look-for lines into `pipeline/runs/<name>/look_for.json`.
+
+Then trim the species list, before step 4. `photos fetch` fetches every symbol in the
+`species` field of `run.json`, and that list holds varieties and species outside the
+bucket.
+
+1. Keep a symbol when `content_src/species/<SYMBOL>.json` exists and its `concepts.leaf`
+   equals the `bucket` field of `run.json`.
+2. Remove the symbols that the owner names as out of scope for the run.
+3. Write the result back to `species`, as an array of strings. Change no other field.
+   Every command reads `run.json` through a shape check and stops on a bad field.
+
+A new `species list` writes `species` again and removes the trim. Trim again after it.
 
 - [ ] **Step 4: Fetch the photo candidates (script, commits)**
 
@@ -80,7 +94,9 @@ The last line gives the appended rows per source, in fetch order, for example
 - [ ] **Step 5: Approve the photos (agent)**
 
 Run the `photo-check` skill. It judges each candidate that has no verdict and records each
-verdict with `node pipeline/cli.ts photos verdict …`. The stop rule applies. When that
+verdict with `node pipeline/cli.ts photos verdict …`. It stops on a target when each
+channel of that target has 6 approved photos, and the other candidates of that target stay
+unjudged. The stop rule applies. When that
 skill stops, the run stops with it.
 
 - [ ] **Step 6: Build (script, commits)**
@@ -169,7 +185,7 @@ missing.
   Copy them off the source page. Do not write `unknown`.
 - `--license` must be on the allowlist. The one exception is
   `used with permission, non-commercial`, which `photos add` accepts only when `--origin` is
-  on `www.wildflower.org`.
+  on `www.wildflower.org` or `dendro.cnre.vt.edu`.
 - `--source` is the display name of the source. It goes on the manifest row as it is. For a
   manual row from one of these sites, use the value exactly as written here:
   - `Wikimedia Commons`
@@ -178,13 +194,26 @@ missing.
   - `Trees and Shrubs Online`
   - `Lady Bird Johnson Wildflower Center`
   - `Plants of the World Online (Kew)`
+  - `VT Dendrology`
 
   For another site, write the name that the site gives itself, such as `US Forest Service`.
+  A new `--source` value also needs an entry in `app/logic/sources.js`, with the full name,
+  the site, and the terms. Without the entry, `npm test` fails after the build.
 - A wildflower.org row takes `--license "used with permission, non-commercial"`. The
   permission and the policy need the credit to name the Center, so `--source` is
   `Lady Bird Johnson Wildflower Center`. `--author` is the photographer as `First Last`. The
   page writes `Last, First`, so turn the two parts around: `Smith, Jane` becomes
   `Jane Smith`.
+- A Virginia Tech Dendrology row (`dendro.cnre.vt.edu`) also takes
+  `--license "used with permission, non-commercial"`. `--source` is the short name
+  `VT Dendrology`. The app's Sources screen gives the full name. `--author` is the
+  photographer list of the fact-sheet footer, word for word:
+  `John Seiler, Edward Jensen, Alex Niemiera, and John Peterson`. When the
+  image page names one photographer, `--author` is that name. The record is
+  `docs/decisions/2026-09-26-vt-dendrology-photo-permission.md`.
+  `pipeline/scripts/vt-rows.ts` makes these rows from the gap rows:
+  `node pipeline/scripts/vt-rows.ts --rows <scratchpad>/gap-rows.json --run <name> --out-dir <scratchpad>/vt`.
+  It writes `vt-rows.json` for `mkadds.cjs` and `vt-report.md`.
 - `--source-species` is the species the source page names. The identity check reads it.
 - `--local <path>` names an image file you already downloaded. Without it the command
   downloads `--file-url`.
@@ -270,7 +299,9 @@ through its exemplars.
   removes the object, writes `content/`, and commits. Two rows that share the hash both
   retire. Run it only when the owner asks.
 - `node pipeline/cli.ts images difficulty <hash> --set hard` holds one image back from
-  the app. `--clear` brings it back. The file stays in the bucket. It validates, runs the
+  the app. `--clear` brings it back. `build` already sets `difficulty: "hard"` on each new
+  row whose approve has the `hard` tag, so use this command only for a row already in the
+  manifest. `build` never changes the difficulty of a row already in the manifest. The file stays in the bucket. It validates, runs the
   append-only check, writes `content/`, and commits. Two rows that share the hash both
   change. A hard photo does not count toward its channel in the build report of the run
   that approved it, so that run's report shows the gap when the run is built again.

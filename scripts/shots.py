@@ -44,6 +44,7 @@ ROUTES = [
     ("progress-shape", "#/progress/leaf/simple_lobed", None, ".strip"),
     ("species", "#/species/QURU", None, ".sp-title"),
     ("settings", "#/settings", None, ".tsteps .tstep"),
+    ("sources", "#/sources?at=vt-dendrology", None, ".setgroup .foot"),
     ("session", "#/session?focus=leaf&unit=leaf_types", "pick", ".key .pick"),
     ("session-typed", "#/session?focus=all", "typed", ".typed input"),
     ("session-inv", "#/session?focus=leaf", "inv", ".invkey button"),

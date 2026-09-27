@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "smooth", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Northeastern United States, Maine to North Carolina" },
+  "elevation_ft": [0, 4900],
+  "height_ft": [3, 30],
+  "habitat": "Dry sandy soils and open rocky outcrops, where it often forms dense thickets",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus ilicifolia",
+    "FNA vol. 3, Quercus ilicifolia (elevation)",
+    "Fire Effects Information System, Quercus ilicifolia (height)"
+  ]
+}

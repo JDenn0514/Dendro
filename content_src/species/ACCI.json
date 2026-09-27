@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "smooth", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Pacific Northwest, British Columbia to northern California" },
+  "elevation_ft": [0, 6600],
+  "height_ft": [20, 40],
+  "habitat": "Forest understories, clearings, avalanche tracks and roadsides, often under Douglas-fir",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer circinatum (ID 186)",
+    "FNA vol. 13, Acer circinatum (FNA text read at nwwildflowers.com) (elevation)",
+    "Fire Effects Information System, Acer circinatum"
+  ]
+}

@@ -205,6 +205,46 @@ test('the row shape matches the app manifest, with the source display name', asy
   assert.equal(row.note, 'Bark fills the frame.');
 });
 
+test('an approve tagged hard gives a hard row, still uploaded, and keeps the tags', async () => {
+  const h = harness({ [CACHE_1]: 'alpha', [CACHE_2]: 'beta' });
+  const result = await publishApproved({
+    deps: h.deps,
+    candidates: [cand({}), cand({ id: 'c2', origin: ORIGIN_2, local: CACHE_2 })],
+    verdicts: [verd({ tags: ['hard', 'winter'] }), verd({ candidate_id: 'c2' })],
+    rows: [],
+  });
+  assert.equal(result.uploaded.length, 2);
+  const [hard, plain] = result.rows;
+  assert.deepEqual(Object.keys(hard), [...ROW_FIELDS, 'difficulty']);
+  assert.equal(hard.difficulty, 'hard');
+  assert.deepEqual(hard.tags, ['hard', 'winter']);
+  assert.equal('difficulty' in plain, false);
+});
+
+test('an approve tagged hard leaves the difficulty of a row already in the manifest', async () => {
+  const h = harness({ [CACHE_1]: 'alpha' });
+  const existing: ManifestRow = {
+    hash: resizedHash('alpha'),
+    target: 'QUGA',
+    channel: 'bark',
+    source: SOURCE_NAMES.commons,
+    author: 'A Photographer',
+    license: 'CC BY 4.0',
+    origin: ORIGIN_1,
+    tags: ['winter'],
+    checked_by: 'photo_check_agent',
+    checked_at: '2026-09-22',
+    note: '',
+  };
+  const result = await publishApproved({
+    deps: h.deps,
+    candidates: [cand({})],
+    verdicts: [verd({ tags: ['hard'] })],
+    rows: [existing],
+  });
+  assert.deepEqual(result.rows, [existing]);
+});
+
 test('a rejected candidate and an escalated candidate upload nothing and get no row', async () => {
   const h = harness({ [CACHE_1]: 'alpha', [CACHE_2]: 'beta' });
   const result = await publishApproved({
@@ -464,6 +504,22 @@ test('hardCandidateIds matches a hard row on the target, the channel, and the or
     verd({ candidate_id: 'c4' }),
     verd({ candidate_id: 'c5' }),
     verd({ candidate_id: 'c5', verdict: 'reject' }),
+  ];
+  assert.deepEqual([...hardCandidateIds(rows, candidates, verdicts)], ['c1']);
+});
+
+test('hardCandidateIds reads the hard tag of an approve that has no row yet', () => {
+  const candidates = [
+    cand({ id: 'c1', origin: ORIGIN_1 }),
+    cand({ id: 'c2', origin: ORIGIN_2 }),
+    cand({ id: 'c3', origin: 'https://example.org/untagged' }),
+  ];
+  // c2 has a row with no difficulty: the owner cleared it, so the tag does not count.
+  const rows = [{ ...plainRow('a'.repeat(64), 'QUGA'), channel: 'bark', origin: ORIGIN_2 }];
+  const verdicts = [
+    verd({ candidate_id: 'c1', tags: ['hard'] }),
+    verd({ candidate_id: 'c2', tags: ['hard'] }),
+    verd({ candidate_id: 'c3' }),
   ];
   assert.deepEqual([...hardCandidateIds(rows, candidates, verdicts)], ['c1']);
 });

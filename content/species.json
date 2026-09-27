@@ -1,4 +1,187 @@
 {
+  "ACCA5": {
+    "scientific": "Acer campestre",
+    "common": [
+      "hedge maple"
+    ],
+    "inat_taxon_id": 56193,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Europe and western Asia, naturalized in the eastern United States",
+      "states": [
+        "CA",
+        "IN",
+        "KY",
+        "MA",
+        "NJ",
+        "NY",
+        "OH",
+        "PA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      700
+    ],
+    "height_ft": [
+      25,
+      35
+    ],
+    "habitat": "Suburban and urban woodlands, where it spreads from planted trees",
+    "native_status": "introduced",
+    "varieties": []
+  },
+  "ACCI": {
+    "scientific": "Acer circinatum",
+    "common": [
+      "vine maple"
+    ],
+    "inat_taxon_id": 48258,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "smooth",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Pacific Northwest, British Columbia to northern California",
+      "states": [
+        "AK",
+        "CA",
+        "OR",
+        "WA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      6600
+    ],
+    "height_ft": [
+      20,
+      40
+    ],
+    "habitat": "Forest understories, clearings, avalanche tracks and roadsides, often under Douglas-fir",
+    "native_status": "native",
+    "varieties": []
+  },
+  "ACFL": {
+    "scientific": "Acer floridanum",
+    "common": [
+      "southern sugar maple"
+    ],
+    "inat_taxon_id": 48079,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Southeastern Piedmont and Coastal Plain, Virginia to eastern Texas and Oklahoma",
+      "states": [
+        "AL",
+        "AR",
+        "FL",
+        "GA",
+        "IL",
+        "KY",
+        "LA",
+        "MO",
+        "MS",
+        "NC",
+        "OK",
+        "SC",
+        "TN",
+        "TX",
+        "VA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2300
+    ],
+    "height_ft": [
+      40,
+      60
+    ],
+    "habitat": "Bottomland forests, stream terraces, coves and mesic slopes, often over limestone",
+    "native_status": "native",
+    "varieties": []
+  },
+  "ACGI": {
+    "scientific": "Acer ginnala",
+    "common": [
+      "Amur maple"
+    ],
+    "inat_taxon_id": 123638,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Northeast Asia, naturalized in the northern United States and Canada",
+      "states": [
+        "CT",
+        "IA",
+        "IL",
+        "KY",
+        "MA",
+        "ME",
+        "MI",
+        "MN",
+        "ND",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "PA",
+        "VT",
+        "WI"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2300
+    ],
+    "height_ft": [
+      15,
+      20
+    ],
+    "habitat": "Suburban woodlands, roadsides and disturbed ground, where it spreads from planted trees",
+    "native_status": "introduced",
+    "varieties": []
+  },
   "ACGL": {
     "scientific": "Acer glabrum",
     "common": [
@@ -127,6 +310,91 @@
       }
     ]
   },
+  "ACLE": {
+    "scientific": "Acer leucoderme",
+    "common": [
+      "chalk maple"
+    ],
+    "inat_taxon_id": 157919,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "smooth",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Southeastern United States, North Carolina to northwest Florida and eastern Texas",
+      "states": [
+        "AL",
+        "AR",
+        "DC",
+        "FL",
+        "GA",
+        "LA",
+        "MS",
+        "NC",
+        "OK",
+        "SC",
+        "TN",
+        "TX"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      200,
+      1100
+    ],
+    "height_ft": [
+      25,
+      75
+    ],
+    "habitat": "Rocky slopes and bluffs over mafic or limy rock, and sandy bluffs and bottomlands in the south",
+    "native_status": "native",
+    "varieties": []
+  },
+  "ACMA3": {
+    "scientific": "Acer macrophyllum",
+    "common": [
+      "bigleaf maple"
+    ],
+    "inat_taxon_id": 48227,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Pacific Coast, British Columbia to southern California",
+      "states": [
+        "CA",
+        "OR",
+        "WA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      7900
+    ],
+    "height_ft": [
+      40,
+      100
+    ],
+    "habitat": "Stream banks, moist canyons and rocky slopes, often in conifer forests",
+    "native_status": "native",
+    "varieties": []
+  },
   "ACNI5": {
     "scientific": "Acer nigrum",
     "common": [
@@ -187,6 +455,104 @@
       110
     ],
     "habitat": "Moist soils of river bottoms in mixed hardwood forests",
+    "native_status": "native",
+    "varieties": []
+  },
+  "ACPA2": {
+    "scientific": "Acer palmatum",
+    "common": [
+      "Japanese maple"
+    ],
+    "inat_taxon_id": 63512,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "smooth",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Japan and Korea, naturalized in the eastern United States",
+      "states": [
+        "CT",
+        "DC",
+        "DE",
+        "NJ",
+        "NY",
+        "OH",
+        "PA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2300
+    ],
+    "height_ft": [
+      10,
+      25
+    ],
+    "habitat": "Urban and suburban woodlands near planted trees",
+    "native_status": "introduced",
+    "varieties": []
+  },
+  "ACPE": {
+    "scientific": "Acer pensylvanicum",
+    "common": [
+      "striped maple"
+    ],
+    "inat_taxon_id": 48095,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "smooth",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Northeastern North America and the Appalachians south to Georgia",
+      "states": [
+        "CT",
+        "GA",
+        "KY",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      5600
+    ],
+    "height_ft": [
+      15,
+      35
+    ],
+    "habitat": "Cool moist forest understories in deep valleys and on shaded north-facing slopes",
     "native_status": "native",
     "varieties": []
   },
@@ -256,6 +622,138 @@
     "habitat": "Street plantings, parks and yards, and mixed forest in its European range",
     "native_status": "introduced",
     "varieties": []
+  },
+  "ACPS": {
+    "scientific": "Acer pseudoplatanus",
+    "common": [
+      "sycamore maple"
+    ],
+    "inat_taxon_id": 119791,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Europe and western Asia, naturalized in the Northeast and the Pacific Northwest",
+      "states": [
+        "CT",
+        "DC",
+        "DE",
+        "IL",
+        "KY",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "NC",
+        "NJ",
+        "NY",
+        "PA",
+        "RI"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      4300
+    ],
+    "height_ft": [
+      60,
+      70
+    ],
+    "habitat": "Suburban woodlands, where it spreads from planted trees",
+    "native_status": "introduced",
+    "varieties": []
+  },
+  "ACRU": {
+    "scientific": "Acer rubrum",
+    "common": [
+      "red maple"
+    ],
+    "inat_taxon_id": 48098,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Eastern North America, Newfoundland to Florida and eastern Texas",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "OR",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      6200
+    ],
+    "height_ft": [
+      60,
+      90
+    ],
+    "habitat": "Dry ridges to swamps and peat bogs, on a wider range of soils than any other maple",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "ACRUD",
+        "name": "var. drummondii"
+      },
+      {
+        "key": "ACRUR",
+        "name": "var. rubrum"
+      },
+      {
+        "key": "ACRUT",
+        "name": "var. trilobum"
+      }
+    ]
   },
   "ACSA2": {
     "scientific": "Acer saccharinum",
@@ -410,6 +908,190 @@
       }
     ]
   },
+  "ACSP2": {
+    "scientific": "Acer spicatum",
+    "common": [
+      "mountain maple"
+    ],
+    "inat_taxon_id": 116361,
+    "inat_name": null,
+    "genus": "Acer",
+    "genus_common": "maple",
+    "section": null,
+    "family": "Aceraceae",
+    "arrangement": "opposite",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Northeastern North America and the Appalachians",
+      "states": [
+        "AL",
+        "CT",
+        "GA",
+        "IA",
+        "KY",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "PA",
+        "RI",
+        "TN",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      6200
+    ],
+    "height_ft": [
+      10,
+      25
+    ],
+    "habitat": "The understory of deciduous, mixed and conifer forests, and boulder fields",
+    "native_status": "native",
+    "varieties": []
+  },
+  "LIST2": {
+    "scientific": "Liquidambar styraciflua",
+    "common": [
+      "sweetgum"
+    ],
+    "inat_taxon_id": 49658,
+    "inat_name": null,
+    "genus": "Liquidambar",
+    "genus_common": "sweetgum",
+    "section": null,
+    "family": "Hamamelidaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "ball"
+    },
+    "range": {
+      "text": "Eastern United States, Connecticut to Florida and Texas, also Mexico and Central America",
+      "states": [
+        "AL",
+        "AR",
+        "CA",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "MO",
+        "MS",
+        "NC",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2600
+    ],
+    "height_ft": [
+      50,
+      150
+    ],
+    "habitat": "Bottomlands, floodplains, swamps and old fields, and also upland woods",
+    "native_status": "native",
+    "varieties": []
+  },
+  "LITU": {
+    "scientific": "Liriodendron tulipifera",
+    "common": [
+      "tuliptree"
+    ],
+    "inat_taxon_id": 53582,
+    "inat_name": null,
+    "genus": "Liriodendron",
+    "genus_common": "tuliptree",
+    "section": null,
+    "family": "Magnoliaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "samara"
+    },
+    "range": {
+      "text": "Eastern United States, southern New England to Louisiana and Florida",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "MI",
+        "MO",
+        "MS",
+        "NC",
+        "NJ",
+        "NY",
+        "OH",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "VT",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      4900
+    ],
+    "height_ft": [
+      100,
+      150
+    ],
+    "habitat": "Rich woods, coves, moist lower slopes and stream bottoms",
+    "native_status": "native",
+    "varieties": []
+  },
   "PLOC": {
     "scientific": "Platanus occidentalis",
     "common": [
@@ -483,6 +1165,42 @@
     "native_status": "native",
     "varieties": []
   },
+  "PLRA": {
+    "scientific": "Platanus racemosa",
+    "common": [
+      "California sycamore"
+    ],
+    "inat_taxon_id": 58231,
+    "inat_name": null,
+    "genus": "Platanus",
+    "genus_common": "sycamore",
+    "section": null,
+    "family": "Platanaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "papery",
+      "fruit": "ball"
+    },
+    "range": {
+      "text": "California and northern Baja California",
+      "states": [
+        "CA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      4900
+    ],
+    "height_ft": [
+      40,
+      100
+    ],
+    "habitat": "Streamsides and moist rocky canyons, where it is often abundant",
+    "native_status": "native",
+    "varieties": []
+  },
   "PLWR2": {
     "scientific": "Platanus wrightii",
     "common": [
@@ -519,6 +1237,42 @@
       80
     ],
     "habitat": "Riparian forests in montane canyons and along desert streams",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUAC2": {
+    "scientific": "Quercus acerifolia",
+    "common": [
+      "mapleleaf oak"
+    ],
+    "inat_taxon_id": 167633,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "High ridge tops of western Arkansas",
+      "states": [
+        "AR"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      1600,
+      2600
+    ],
+    "height_ft": [
+      15,
+      50
+    ],
+    "habitat": "Dry glades, slopes and rocky ridge tops on sandstone or novaculite",
     "native_status": "native",
     "varieties": []
   },
@@ -593,6 +1347,84 @@
     "native_status": "native",
     "varieties": []
   },
+  "QUAU": {
+    "scientific": "Quercus austrina",
+    "common": [
+      "bastard white oak"
+    ],
+    "inat_taxon_id": 167638,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Southeastern Coastal Plain, North Carolina to Mississippi",
+      "states": [
+        "AL",
+        "FL",
+        "GA",
+        "MS",
+        "NC",
+        "SC"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      700
+    ],
+    "height_ft": [
+      40,
+      60
+    ],
+    "habitat": "River bottoms, wet forests and flatwoods",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUBO2": {
+    "scientific": "Quercus boyntonii",
+    "common": [
+      "Boynton sand post oak"
+    ],
+    "inat_taxon_id": 167639,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Local sites in Alabama and eastern Texas",
+      "states": [
+        "AL",
+        "TX"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      700
+    ],
+    "height_ft": [
+      5,
+      20
+    ],
+    "habitat": "Deep sands and sandstone crevices in pine forests and along streams",
+    "native_status": "native",
+    "varieties": []
+  },
   "QUBU2": {
     "scientific": "Quercus buckleyi",
     "common": [
@@ -630,6 +1462,221 @@
       70
     ],
     "habitat": "Dry limestone ridges and slopes, and creek bottoms",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUCE": {
+    "scientific": "Quercus cerris",
+    "common": [
+      "European turkey oak",
+      "Turkey oak"
+    ],
+    "inat_taxon_id": 135408,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": null,
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Native to southern Europe and Asia Minor, planted in North America",
+      "states": [
+        "MA",
+        "NY"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      7200
+    ],
+    "height_ft": [
+      80,
+      130
+    ],
+    "habitat": "Mixed oak forests of plains and hills, on many soils that are not too dry",
+    "native_status": "introduced",
+    "varieties": []
+  },
+  "QUCO2": {
+    "scientific": "Quercus coccinea",
+    "common": [
+      "scarlet oak"
+    ],
+    "inat_taxon_id": 54784,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Eastern United States, Maine to Missouri and Georgia",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "GA",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MO",
+        "MS",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      4900
+    ],
+    "height_ft": [
+      60,
+      80
+    ],
+    "habitat": "Dry sandy and gravelly upland ridges and slopes",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QUCOC",
+        "name": "var. coccinea"
+      },
+      {
+        "key": "QUCOT",
+        "name": "var. tuberculata"
+      }
+    ]
+  },
+  "QUEL": {
+    "scientific": "Quercus ellipsoidalis",
+    "common": [
+      "northern pin oak",
+      "Hill's oak"
+    ],
+    "inat_taxon_id": 144029,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Western Great Lakes region",
+      "states": [
+        "IA",
+        "IL",
+        "IN",
+        "MI",
+        "MN",
+        "MO",
+        "ND",
+        "OH",
+        "WI"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      500,
+      1600
+    ],
+    "height_ft": [
+      40,
+      65
+    ],
+    "habitat": "Dry acid sandy plains and sandstone hills",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUFA": {
+    "scientific": "Quercus falcata",
+    "common": [
+      "southern red oak"
+    ],
+    "inat_taxon_id": 61324,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Southeastern United States, Long Island to eastern Texas",
+      "states": [
+        "AL",
+        "AR",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MD",
+        "MO",
+        "MS",
+        "NC",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2600
+    ],
+    "height_ft": [
+      70,
+      80
+    ],
+    "habitat": "Dry sandy or clay uplands, ridge tops and upper slopes",
     "native_status": "native",
     "varieties": []
   },
@@ -689,6 +1736,96 @@
       }
     ]
   },
+  "QUGA4": {
+    "scientific": "Quercus garryana",
+    "common": [
+      "Oregon white oak"
+    ],
+    "inat_taxon_id": 68632,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Pacific coast from Vancouver Island to southern California",
+      "states": [
+        "CA",
+        "OR",
+        "WA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      7500
+    ],
+    "height_ft": [
+      50,
+      90
+    ],
+    "habitat": "Dry, exposed sites such as inland valleys, foothills, south slopes and rocky ridges",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QUGAF",
+        "name": "var. fruticosa"
+      },
+      {
+        "key": "QUGAG2",
+        "name": "var. garryana"
+      },
+      {
+        "key": "QUGAS",
+        "name": "var. semota"
+      }
+    ]
+  },
+  "QUGE": {
+    "scientific": "Quercus georgiana",
+    "common": [
+      "Georgia oak"
+    ],
+    "inat_taxon_id": 167648,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Granite outcrops of Alabama, Georgia and South Carolina",
+      "states": [
+        "AL",
+        "GA",
+        "NC",
+        "SC"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      200,
+      1600
+    ],
+    "height_ft": [
+      25,
+      50
+    ],
+    "habitat": "Granite outcrops and dry slopes and knolls",
+    "native_status": "native",
+    "varieties": []
+  },
   "QUHA3": {
     "scientific": "Quercus havardii",
     "common": [
@@ -740,6 +1877,261 @@
         "name": "var. tuckeri"
       }
     ]
+  },
+  "QUIL": {
+    "scientific": "Quercus ilicifolia",
+    "common": [
+      "bear oak"
+    ],
+    "inat_taxon_id": 130737,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "smooth",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Northeastern United States, Maine to North Carolina",
+      "states": [
+        "CT",
+        "DE",
+        "KY",
+        "MA",
+        "MD",
+        "ME",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "PA",
+        "RI",
+        "VA",
+        "VT",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      4900
+    ],
+    "height_ft": [
+      3,
+      30
+    ],
+    "habitat": "Dry sandy soils and open rocky outcrops, where it often forms dense thickets",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUKE": {
+    "scientific": "Quercus kelloggii",
+    "common": [
+      "California black oak"
+    ],
+    "inat_taxon_id": 49919,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "California and southwestern Oregon",
+      "states": [
+        "CA",
+        "OR"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      1000,
+      7900
+    ],
+    "height_ft": [
+      40,
+      80
+    ],
+    "habitat": "Slopes and valleys of hills and mountains",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QULA": {
+    "scientific": "Quercus laceyi",
+    "common": [
+      "Lacey oak"
+    ],
+    "inat_taxon_id": 167656,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Texas and northeastern Mexico",
+      "states": [
+        "TX"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      1100,
+      7200
+    ],
+    "height_ft": [
+      15,
+      25
+    ],
+    "habitat": "Limestone hills, canyons, woodlands and streamsides",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QULA2": {
+    "scientific": "Quercus laevis",
+    "common": [
+      "turkey oak"
+    ],
+    "inat_taxon_id": 128752,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Southeastern Coastal Plain, Virginia to Florida and Louisiana",
+      "states": [
+        "AL",
+        "FL",
+        "GA",
+        "LA",
+        "MS",
+        "NC",
+        "SC",
+        "VA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      500
+    ],
+    "height_ft": [
+      20,
+      30
+    ],
+    "habitat": "Dry sandy soils of barrens, sandhills and well-drained ridges",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QULO": {
+    "scientific": "Quercus lobata",
+    "common": [
+      "valley oak"
+    ],
+    "inat_taxon_id": 49011,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Valleys and foothills of California",
+      "states": [
+        "CA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      5600
+    ],
+    "height_ft": [
+      30,
+      75
+    ],
+    "habitat": "Deep rich soils of valley floors and floodplains, in savannas, oak woodlands and along streams",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QULY": {
+    "scientific": "Quercus lyrata",
+    "common": [
+      "overcup oak"
+    ],
+    "inat_taxon_id": 82754,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Coastal Plain and Mississippi Valley, Delaware to eastern Texas",
+      "states": [
+        "AL",
+        "AR",
+        "DE",
+        "FL",
+        "GA",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MD",
+        "MO",
+        "MS",
+        "NC",
+        "NJ",
+        "OK",
+        "SC",
+        "TN",
+        "TX",
+        "VA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      700
+    ],
+    "height_ft": [
+      60,
+      90
+    ],
+    "habitat": "Wet, poorly drained bottomlands and swamps that flood from time to time",
+    "native_status": "native",
+    "varieties": []
   },
   "QUMA2": {
     "scientific": "Quercus macrocarpa",
@@ -958,6 +2350,101 @@
     "native_status": "native",
     "varieties": []
   },
+  "QUPA5": {
+    "scientific": "Quercus pagoda",
+    "common": [
+      "cherrybark oak"
+    ],
+    "inat_taxon_id": 121690,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Atlantic and Gulf Coastal Plain and the Mississippi Valley",
+      "states": [
+        "AL",
+        "AR",
+        "FL",
+        "GA",
+        "IL",
+        "IN",
+        "KY",
+        "LA",
+        "MD",
+        "MO",
+        "MS",
+        "NC",
+        "NJ",
+        "OK",
+        "SC",
+        "TN",
+        "TX",
+        "VA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      1000
+    ],
+    "height_ft": [
+      100,
+      130
+    ],
+    "habitat": "Loamy, well-drained first-bottom ridges, terraces and colluvial sites",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QURO2": {
+    "scientific": "Quercus robur",
+    "common": [
+      "English oak"
+    ],
+    "inat_taxon_id": 56133,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Introduced from Europe, planted and escaped",
+      "states": [
+        "MA",
+        "ME",
+        "NH",
+        "NY",
+        "OH",
+        "PA",
+        "RI"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      3300
+    ],
+    "height_ft": [
+      75,
+      100
+    ],
+    "habitat": "Roadsides, pastures, forest margins and woodlands",
+    "native_status": "introduced",
+    "varieties": []
+  },
   "QURU": {
     "scientific": "Quercus rubra",
     "common": [
@@ -1110,6 +2597,59 @@
       }
     ]
   },
+  "QUSI": {
+    "scientific": "Quercus sinuata",
+    "common": [
+      "bastard oak"
+    ],
+    "inat_taxon_id": 167668,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Southeastern Coastal Plain west to Texas and Oklahoma",
+      "states": [
+        "AL",
+        "AR",
+        "FL",
+        "GA",
+        "LA",
+        "MS",
+        "OK",
+        "SC",
+        "TX"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2000
+    ],
+    "height_ft": [
+      5,
+      50
+    ],
+    "habitat": "Low wet areas, riparian and limestone bluffs, and dry limestone woodlands and scrub",
+    "native_status": "native",
+    "varieties": [
+      {
+        "key": "QUSIB",
+        "name": "var. breviloba"
+      },
+      {
+        "key": "QUSIS",
+        "name": "var. sinuata"
+      }
+    ]
+  },
   "QUST": {
     "scientific": "Quercus stellata",
     "common": [
@@ -1171,6 +2711,51 @@
       65
     ],
     "habitat": "Dry gravelly and sandy ridges, uplands, prairies and limestone hills",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUTE": {
+    "scientific": "Quercus texana",
+    "common": [
+      "Nuttall oak"
+    ],
+    "inat_taxon_id": 167670,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Gulf Coastal Plain and Mississippi Valley bottomlands",
+      "states": [
+        "AL",
+        "AR",
+        "IL",
+        "KY",
+        "LA",
+        "MO",
+        "MS",
+        "OK",
+        "TN",
+        "TX"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      700
+    ],
+    "height_ft": [
+      100,
+      120
+    ],
+    "habitat": "Heavy, poorly drained alluvial clay soils of first bottoms and flood plains",
     "native_status": "native",
     "varieties": []
   },
@@ -1242,6 +2827,75 @@
       80
     ],
     "habitat": "Dry slopes and uplands, sometimes sandy lowlands",
+    "native_status": "native",
+    "varieties": []
+  },
+  "SAAL5": {
+    "scientific": "Sassafras albidum",
+    "common": [
+      "sassafras"
+    ],
+    "inat_taxon_id": 54795,
+    "inat_name": null,
+    "genus": "Sassafras",
+    "genus_common": "sassafras",
+    "section": null,
+    "family": "Lauraceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "berry"
+    },
+    "range": {
+      "text": "Eastern United States, Maine to Florida and eastern Texas",
+      "states": [
+        "AL",
+        "AR",
+        "CT",
+        "DC",
+        "DE",
+        "FL",
+        "GA",
+        "IA",
+        "IL",
+        "IN",
+        "KS",
+        "KY",
+        "LA",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MO",
+        "MS",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "OK",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "TX",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      4900
+    ],
+    "height_ft": [
+      30,
+      60
+    ],
+    "habitat": "Forests, woodland edges, fencerows and old fields, often in thickets from root sprouts",
     "native_status": "native",
     "varieties": []
   }

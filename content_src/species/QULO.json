@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Valleys and foothills of California" },
+  "elevation_ft": [0, 5600],
+  "height_ft": [30, 75],
+  "habitat": "Deep rich soils of valley floors and floodplains, in savannas, oak woodlands and along streams",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus lobata",
+    "FNA vol. 3, Quercus lobata (elevation)",
+    "Fire Effects Information System, Quercus lobata (height)"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Coastal Plain and Mississippi Valley, Delaware to eastern Texas" },
+  "elevation_ft": [0, 700],
+  "height_ft": [60, 90],
+  "habitat": "Wet, poorly drained bottomlands and swamps that flood from time to time",
+  "ref": [
+    "Silvics of North America, Quercus lyrata (height)",
+    "Virginia Tech Dendrology fact sheet, Quercus lyrata",
+    "FNA vol. 3, Quercus lyrata (elevation)"
+  ]
+}

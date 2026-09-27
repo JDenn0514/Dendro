@@ -204,6 +204,67 @@ test('Quercus gambelii (Nuttall) var. gambelii matches Quercus gambelii', () => 
   );
 });
 
+// Owner ruling 2026-09-26: an infraspecific synonym of the target matches only a source
+// that names the same infraspecific epithet. It never matches the bare species.
+const ACLE_NAMES = [
+  'Acer leucoderme Small',
+  'Acer nigrum Michx. f. var. leucoderme (Small) Fosberg',
+  'Acer saccharum Marshall ssp. leucoderme (Small) Desmarais',
+  'Acer saccharum Marshall var. leucoderme (Small) Rehder',
+  'Saccharodendron leucoderme (Small) Nieuwl.',
+];
+
+test('ACLE: the bare species of an infraspecific synonym does not match', () => {
+  assert.equal(identityMatches('Acer saccharum', ACLE_NAMES), false);
+  assert.equal(identityMatches('Acer saccharum Marshall', ACLE_NAMES), false);
+  assert.equal(identityMatches('Acer nigrum', ACLE_NAMES), false);
+  assert.equal(identityMatches('Acer nigrum Michx. f.', ACLE_NAMES), false);
+});
+
+test('ACLE: the accepted name and the same infraspecific epithet match', () => {
+  assert.equal(identityMatches('Acer leucoderme', ACLE_NAMES), true);
+  assert.equal(identityMatches('Acer leucoderme Small', ACLE_NAMES), true);
+  assert.equal(identityMatches('Acer saccharum subsp. leucoderme', ACLE_NAMES), true);
+  assert.equal(identityMatches('Acer saccharum var. leucoderme', ACLE_NAMES), true);
+  assert.equal(identityMatches('Acer nigrum var. leucoderme', ACLE_NAMES), true);
+  assert.equal(identityMatches('Acer nigrum f. leucoderme', ACLE_NAMES), true);
+  assert.equal(identityMatches('Saccharodendron leucoderme', ACLE_NAMES), true);
+});
+
+test('ACLE: a different infraspecific epithet does not match', () => {
+  assert.equal(identityMatches('Acer saccharum subsp. floridanum', ACLE_NAMES), false);
+  assert.equal(identityMatches('Acer saccharum var. saccharum', ACLE_NAMES), false);
+});
+
+test('ACGI: plain Acer tataricum does not match Amur maple', () => {
+  const names = ['Acer ginnala Maxim.', 'Acer tataricum L. ssp. ginnala (Maxim.) Wesmael'];
+  assert.equal(identityMatches('Acer tataricum', names), false);
+  assert.equal(identityMatches('Acer tataricum L.', names), false);
+  assert.equal(identityMatches('Acer tataricum subsp. tataricum', names), false);
+  assert.equal(identityMatches('Acer tataricum subsp. ginnala', names), true);
+  assert.equal(identityMatches('Acer tataricum ssp. ginnala', names), true);
+  assert.equal(identityMatches('Acer ginnala', names), true);
+});
+
+test('a variety of the accepted species matches the target', () => {
+  const names = ['Quercus sinuata Walter'];
+  assert.equal(identityMatches('Quercus sinuata var. breviloba', names), true);
+  assert.equal(identityMatches('Quercus sinuata Walter var. breviloba (Torr.) C.H. Mull.', names), true);
+  assert.equal(identityMatches('Quercus sinuata', names), true);
+  // iNaturalist writes a variety as a bare trinomial with no rank marker.
+  assert.equal(identityMatches('Quercus sinuata breviloba', names), true);
+  assert.equal(identityMatches('Acer tataricum ginnala', ['Acer tataricum ssp. ginnala']), true);
+  assert.equal(identityMatches('Acer tataricum tataricum', ['Acer tataricum ssp. ginnala']), false);
+});
+
+test('a species-level synonym still matches its varieties', () => {
+  const names = ['Quercus texana Buckley', 'Quercus nuttallii Palmer', 'Quercus shumardii Buckley var. texana (Buckley) Ashe'];
+  assert.equal(identityMatches('Quercus nuttallii', names), true);
+  assert.equal(identityMatches('Quercus nuttallii var. cachensis', names), true);
+  assert.equal(identityMatches('Quercus shumardii', names), false);
+  assert.equal(identityMatches('Quercus shumardii var. texana', names), true);
+});
+
 test('normalizeName folds case, collapses spacing, and drops the hybrid sign', () => {
   assert.equal(normalizeName('QUERCUS GAMBELII'), 'quercus gambelii');
   assert.equal(normalizeName('Quercus  gambelii'), 'quercus gambelii');

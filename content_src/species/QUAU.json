@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Southeastern Coastal Plain, North Carolina to Mississippi" },
+  "elevation_ft": [0, 700],
+  "height_ft": [40, 60],
+  "habitat": "River bottoms, wet forests and flatwoods",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus austrina",
+    "FNA vol. 3, Quercus austrina (elevation)",
+    "UF/IFAS EDIS fact sheet ST542, Quercus austrina: Bluff Oak (height)"
+  ]
+}

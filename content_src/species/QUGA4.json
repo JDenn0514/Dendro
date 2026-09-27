@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Pacific coast from Vancouver Island to southern California" },
+  "elevation_ft": [0, 7500],
+  "height_ft": [50, 90],
+  "habitat": "Dry, exposed sites such as inland valleys, foothills, south slopes and rocky ridges",
+  "ref": [
+    "Silvics of North America, Quercus garryana",
+    "Virginia Tech Dendrology fact sheet, Quercus garryana",
+    "FNA vol. 3, Quercus garryana"
+  ]
+}

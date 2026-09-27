@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Southeastern Coastal Plain, Virginia to Florida and Louisiana" },
+  "elevation_ft": [0, 500],
+  "height_ft": [20, 30],
+  "habitat": "Dry sandy soils of barrens, sandhills and well-drained ridges",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus laevis (height)",
+    "FNA vol. 3, Quercus laevis (elevation)"
+  ]
+}

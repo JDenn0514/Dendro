@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "smooth", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Northeastern North America and the Appalachians south to Georgia" },
+  "elevation_ft": [0, 5600],
+  "height_ft": [15, 35],
+  "habitat": "Cool moist forest understories in deep valleys and on shaded north-facing slopes",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer pensylvanicum (ID 4)",
+    "FNA vol. 13, Acer pensylvanicum (FNA text read at nwwildflowers.com) (elevation)",
+    "Fire Effects Information System, Acer pensylvanicum",
+    "NC State Extension Gardener Plant Toolbox, Acer pensylvanicum (height)"
+  ]
+}

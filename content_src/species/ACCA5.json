@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Europe and western Asia, naturalized in the eastern United States" },
+  "elevation_ft": [0, 700],
+  "height_ft": [25, 35],
+  "habitat": "Suburban and urban woodlands, where it spreads from planted trees",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer campestre (ID 330)",
+    "FNA vol. 13, Acer campestre (FNA text read at nwwildflowers.com) (elevation)",
+    "NC State Extension Gardener Plant Toolbox, Acer campestre (height)"
+  ]
+}

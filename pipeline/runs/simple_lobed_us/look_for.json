@@ -1,0 +1,478 @@
+{
+  "ACCA5": {
+    "leaf": {
+      "text": "A small opposite leaf, 2 to 4 inches long, with 3 to 5 rounded lobes and a smooth, wavy edge.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer campestre (ID 330)"
+    },
+    "bark": {
+      "text": "Gray-brown bark with shallow ridges and furrows. Young stems and twigs often have corky ridges.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer campestre (ID 330)"
+    },
+    "fruit": {
+      "text": "Paired samaras, each 1 to 1 1/2 inches long, with the wings spread in a straight line.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer campestre (ID 330)"
+    }
+  },
+  "ACCI": {
+    "leaf": {
+      "text": "A round opposite leaf, 2 to 4 inches across, with 7 to 9 short lobes like a fan.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer circinatum (ID 186)"
+    },
+    "bark": {
+      "text": "Thin, smooth, greenish bark on slender, often crooked stems, often covered with moss.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer circinatum (ID 186)"
+    },
+    "fruit": {
+      "text": "Paired samaras, 1 to 2 inches long, bright red when young and tan when dry, with the wings spread wide, up to a straight line.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer circinatum (ID 186)"
+    }
+  },
+  "ACFL": {
+    "leaf": {
+      "text": "A small round opposite leaf, 1 1/2 to 3 1/2 inches, with 3 or 5 blunt lobes and a smooth edge. The underside is pale and bluish, which tells it from sugar maple.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer floridanum (ID 337); FNA vol. 13, Acer floridanum (FNA text read at nwwildflowers.com)"
+    },
+    "bark": {
+      "text": "Light gray bark with thick, irregular, curling ridges that break into plates.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer floridanum (ID 337)"
+    },
+    "fruit": {
+      "text": "Small paired samaras, about 3/4 inch long, with the wings spread at a moderate angle.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer floridanum (ID 337)"
+    }
+  },
+  "ACGI": {
+    "leaf": {
+      "text": "A small, shiny opposite leaf, 2 to 4 inches long, with 3 lobes. The middle lobe is much longer than the 2 side lobes, and the edge is toothed.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer ginnala (ID 331)"
+    },
+    "bark": {
+      "text": "Gray-brown bark, smooth on young stems, with darker lines or shallow furrows on old stems.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer ginnala (ID 331)"
+    },
+    "fruit": {
+      "text": "Paired samaras, 3/4 to 1 inch long, with the wings almost parallel.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer ginnala (ID 331)"
+    }
+  },
+  "ACLE": {
+    "leaf": {
+      "text": "A small opposite leaf, 2 to 3 1/2 inches long, with 3 lobes, sometimes 5 with 2 small lobes at the base, and a smooth edge. The underside is yellow-green and velvety, not whitened.",
+      "ref": "FNA vol. 13, Acer leucoderme (FNA text read at nwwildflowers.com)"
+    },
+    "bark": {
+      "text": "Thin, smooth, pale gray to chalk-white bark on the upper trunk. The base of an old trunk becomes dark and ridged.",
+      "ref": "NC State Extension Gardener Plant Toolbox, Acer leucoderme"
+    },
+    "fruit": {
+      "text": "Small paired brown samaras, less than 1 inch long, with the wings spread at a moderate angle.",
+      "ref": "NC State Extension Gardener Plant Toolbox, Acer leucoderme"
+    }
+  },
+  "ACMA3": {
+    "leaf": {
+      "text": "A very large opposite leaf, 6 to 12 inches across, with 5 deep lobes. The end lobe is narrow at its base like a waist.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer macrophyllum (ID 187)"
+    },
+    "bark": {
+      "text": "Dark gray-brown bark with interlacing ridges and furrows on a mature trunk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer macrophyllum (ID 187)"
+    },
+    "fruit": {
+      "text": "Large paired samaras, 1 1/2 to 2 inches long, with the wings at an acute angle. The seed end is hairy.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer macrophyllum (ID 187)"
+    }
+  },
+  "ACPA2": {
+    "leaf": {
+      "text": "A small round opposite leaf, 2 to 5 inches long, with 5 to 7 deep, narrow, toothed lobes that spread like fingers. Many planted forms are red.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer palmatum (ID 272)"
+    },
+    "bark": {
+      "text": "Smooth light gray bark on a low, often many-stemmed trunk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer palmatum (ID 272)"
+    },
+    "fruit": {
+      "text": "Small paired samaras, 3/4 to 1 inch long, with the wings spread wide, often red-brown.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer palmatum (ID 272)"
+    }
+  },
+  "ACPE": {
+    "leaf": {
+      "text": "A large opposite leaf, 5 to 8 inches long, with 3 shallow lobes in the shape of a goose foot, and fine teeth.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer pensylvanicum (ID 4)"
+    },
+    "bark": {
+      "text": "Smooth green bark with long white vertical stripes. Old trunks turn reddish brown.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer pensylvanicum (ID 4)"
+    },
+    "fruit": {
+      "text": "Paired samaras, 3/4 to 1 inch long, with the wings spread wide, in long hanging clusters.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer pensylvanicum (ID 4)"
+    }
+  },
+  "ACPS": {
+    "leaf": {
+      "text": "A large opposite leaf, 5 to 6 inches long, with 5 lobes, coarse teeth and a heart-shaped base. The underside is much paler than the top.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer pseudoplatanus (ID 162)"
+    },
+    "bark": {
+      "text": "Gray-brown to red-brown bark that breaks into large scales. The scales flake off and show orange patches.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer pseudoplatanus (ID 162)"
+    },
+    "fruit": {
+      "text": "Paired samaras, each about 1 1/2 inches long, with the wings at about 45 degrees, in hanging clusters.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer pseudoplatanus (ID 162)"
+    }
+  },
+  "ACRU": {
+    "leaf": {
+      "text": "An opposite leaf, 2 to 4 inches long, with 3 to 5 lobes, shallow sinuses and a toothed edge. The underside is pale or whitened.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer rubrum (ID 1)"
+    },
+    "bark": {
+      "text": "Smooth light gray bark on young trees. On a mature trunk the bark is darker and breaks into long, fine, scaly plates.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer rubrum (ID 1)"
+    },
+    "fruit": {
+      "text": "Small paired samaras, 1/2 to 3/4 inch long, with the wings slightly spread, often red, on long thin stalks.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer rubrum (ID 1)"
+    }
+  },
+  "ACSP2": {
+    "leaf": {
+      "text": "An opposite leaf, 3 to 4 inches long, with 3 short lobes, sometimes 5, broad V-shaped sinuses and coarse teeth.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer spicatum (ID 354)"
+    },
+    "bark": {
+      "text": "Thin gray-brown bark, smooth on young stems, with shallow furrows on older stems.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer spicatum (ID 354)"
+    },
+    "fruit": {
+      "text": "Small paired samaras, about 1/2 inch long, with the wings spread less than a right angle, in hanging clusters.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer spicatum (ID 354)"
+    }
+  },
+  "LIST2": {
+    "leaf": {
+      "text": "An alternate, star-shaped leaf, 4 to 6 inches across, with 5 to 7 pointed lobes and fine teeth. Alternate leaves tell it from the maples.",
+      "ref": "Virginia Tech Dendrology fact sheet, Liquidambar styraciflua (ID 53)"
+    },
+    "bark": {
+      "text": "Gray-brown bark with irregular furrows and rough, rounded ridges.",
+      "ref": "Virginia Tech Dendrology fact sheet, Liquidambar styraciflua (ID 53)"
+    },
+    "fruit": {
+      "text": "A hard, spiny brown ball, 1 to 1 1/2 inches across, on a long stalk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Liquidambar styraciflua (ID 53); FNA vol. 3, Liquidambar styraciflua"
+    }
+  },
+  "LITU": {
+    "leaf": {
+      "text": "An alternate leaf, 4 to 8 inches long, with 4 to 6 lobes and a flat or notched top, shaped like a tulip. The edge is smooth.",
+      "ref": "Virginia Tech Dendrology fact sheet, Liriodendron tulipifera (ID 54)"
+    },
+    "bark": {
+      "text": "Gray bark with flat-topped ridges and pale furrows in a diamond pattern on a mature trunk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Liriodendron tulipifera (ID 54)"
+    },
+    "fruit": {
+      "text": "An upright, cone-like cluster of winged samaras, about 2 inches long. The base of the cluster stays on the twig like a small wooden flower.",
+      "ref": "Virginia Tech Dendrology fact sheet, Liriodendron tulipifera (ID 54)"
+    }
+  },
+  "PLRA": {
+    "leaf": {
+      "text": "A large alternate leaf, 5 to 10 inches long, with 3 to 5 deep lobes about half the leaf length. The underside stays woolly.",
+      "ref": "Virginia Tech Dendrology fact sheet, Platanus racemosa (ID 473); FNA vol. 3, Platanus racemosa"
+    },
+    "bark": {
+      "text": "Bark that flakes off in patches and shows a white to cream inner layer. The base of an old trunk is dark brown and furrowed.",
+      "ref": "Virginia Tech Dendrology fact sheet, Platanus racemosa (ID 473)"
+    },
+    "fruit": {
+      "text": "Round fuzzy fruit balls, about 1 inch across, in a string of 2 to 7 on one long stalk. The string of several balls tells it from American sycamore.",
+      "ref": "Virginia Tech Dendrology fact sheet, Platanus racemosa (ID 473); FNA vol. 3, Platanus racemosa"
+    }
+  },
+  "SAAL5": {
+    "leaf": {
+      "text": "An alternate leaf, 3 to 6 inches long, with a smooth edge. One tree carries 3 shapes: unlobed, 2-lobed like a mitten, and 3-lobed.",
+      "ref": "Virginia Tech Dendrology fact sheet, Sassafras albidum (ID 84)"
+    },
+    "bark": {
+      "text": "Brown bark with coarse ridges and furrows, or broad flat ridges, on older stems.",
+      "ref": "Virginia Tech Dendrology fact sheet, Sassafras albidum (ID 84); Fire Effects Information System, Sassafras albidum"
+    },
+    "fruit": {
+      "text": "A dark blue, shiny, egg-shaped fruit, about 1/3 inch long, set in a red cup on a red stalk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Sassafras albidum (ID 84)"
+    }
+  },
+  "QUAC2": {
+    "leaf": {
+      "text": "A broad leaf, often as wide as or wider than long, with 5 to 7 bristle-tipped lobes, like a maple leaf. The middle or top pairs of lobes often overlap.",
+      "ref": "FNA vol. 3, Quercus acerifolia; Encyclopedia of Arkansas, Maple-Leaf Oak"
+    },
+    "bark": {
+      "text": "Dark gray to almost black. On older trunks it can become rough and furrowed.",
+      "ref": "FNA vol. 3, Quercus acerifolia"
+    },
+    "fruit": {
+      "text": "An ovoid to oblong acorn about 1/2 to 3/4 inch long. A saucer- or cup-shaped cap covers 1/4 to 1/3 of the nut.",
+      "ref": "FNA vol. 3, Quercus acerifolia"
+    }
+  },
+  "QUAU": {
+    "leaf": {
+      "text": "Obovate to elliptical, 3 to 7 inches long, with 3 to 7 rounded, shallow, irregular lobes that reach 1/4 to 1/2 of the way to the midrib. The tip is rounded and the base is wedge-shaped.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus austrina; FNA vol. 3, Quercus austrina"
+    },
+    "bark": {
+      "text": "Whitish or ash-gray and scaly. On old trunks it divides into broad ridges and furrows.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus austrina; FNA vol. 3, Quercus austrina"
+    },
+    "fruit": {
+      "text": "An ovoid to oblong acorn about 3/4 inch long. A bowl-shaped cap with gray scales covers 1/3 to 1/2 of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus austrina; FNA vol. 3, Quercus austrina"
+    }
+  },
+  "QUBO2": {
+    "leaf": {
+      "text": "Obovate, 2 to 4 inches long, broadly 3-lobed at the tip or with 3 to 5 rounded, irregular lobes in the outer half. Glossy dark green above and gray or silvery below.",
+      "ref": "FNA vol. 3, Quercus boyntonii; Lady Bird Johnson Wildflower Center plant database, Quercus boyntonii"
+    },
+    "bark": {
+      "text": "Brown and scaly.",
+      "ref": "FNA vol. 3, Quercus boyntonii"
+    },
+    "fruit": {
+      "text": "An ovoid acorn about 1/2 to 2/3 inch long, green while it ripens and light brown when ripe, 1 or 2 on a short stalk. A scaly, hairy cap, gray or greenish, covers 1/3 to 1/2 of the nut.",
+      "ref": "FNA vol. 3, Quercus boyntonii"
+    }
+  },
+  "QUCO2": {
+    "leaf": {
+      "text": "Oval, 3 to 7 inches long, with 5 to 9 bristle-tipped lobes and very deep, C-shaped sinuses that reach more than halfway to the midrib. Glossy green above and hairless below except small tufts where the veins meet.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus coccinea; FNA vol. 3, Quercus coccinea"
+    },
+    "bark": {
+      "text": "Dark gray to dark brown, with irregular broad scaly ridges and narrow furrows, clearest near the base of the trunk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus coccinea; FNA vol. 3, Quercus coccinea"
+    },
+    "fruit": {
+      "text": "An acorn 1/2 to 1 inch long with a glossy, bowl-shaped cap that covers about half of the nut. The tip of the nut often shows rings of fine pits or cracks.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus coccinea; FNA vol. 3, Quercus coccinea"
+    }
+  },
+  "QUEL": {
+    "leaf": {
+      "text": "Elliptic, 3 to 6 inches long, with 5 to 7 bristle-tipped lobes that widen toward their tips. The rounded sinuses reach more than halfway to the midrib.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus ellipsoidalis; FNA vol. 3, Quercus ellipsoidalis"
+    },
+    "bark": {
+      "text": "Dark gray-brown and shallowly fissured, with irregular ridges and narrow furrows near the base. Stubs of dead branches often stay on the lower trunk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus ellipsoidalis; FNA vol. 3, Quercus ellipsoidalis"
+    },
+    "fruit": {
+      "text": "An elliptic to nearly round acorn 1/2 to 1 inch long. A deep, hairy cap that narrows to a stalk-like base covers 1/3 to 1/2 of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus ellipsoidalis; USDA NRCS Plant Guide, Northern pin oak"
+    }
+  },
+  "QUFA": {
+    "leaf": {
+      "text": "5 to 9 inches long, with bristle-tipped lobes: 3 lobes with shallow sinuses, or 5 to 7 lobes with deeper sinuses. The end lobe is often long and curved, like a turkey foot, and the base is rounded or U-shaped.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus falcata; FNA vol. 3, Quercus falcata"
+    },
+    "bark": {
+      "text": "Dark brown to black, with broad scaly ridges separated by deep, narrow furrows.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus falcata; FNA vol. 3, Quercus falcata"
+    },
+    "fruit": {
+      "text": "A small, nearly round acorn about 1/2 inch long, orange-brown and finely hairy. A thin, flat cap covers about 1/3 of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus falcata; FNA vol. 3, Quercus falcata"
+    }
+  },
+  "QUCE": {
+    "leaf": {
+      "text": "Narrow oblong leaves, normally 3 1/2 to 5 inches long, with 7 to 9 pairs of triangular lobes that vary from shallow to deep. Long twisted threads surround the buds at the twig tip.",
+      "ref": "European Atlas of Forest Tree Species (2016), Quercus cerris in Europe"
+    },
+    "bark": {
+      "text": "Gray and deeply furrowed, with orange or reddish-brown color in the cracks.",
+      "ref": "European Atlas of Forest Tree Species (2016), Quercus cerris in Europe"
+    },
+    "fruit": {
+      "text": "A large acorn with no stalk, about 3/4 to 1 1/2 inches long. The cup is densely covered with long bristles.",
+      "ref": "European Atlas of Forest Tree Species (2016), Quercus cerris in Europe"
+    }
+  },
+  "QUGA4": {
+    "leaf": {
+      "text": "Leathery, shiny dark green leaf, 3 to 6 inches, with 5 to 9 rounded lobes; the sinuses reach past halfway to the midrib, and the lobes often touch or overlap. The underside is paler and often felty.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus garryana; FNA vol. 3, Quercus garryana"
+    },
+    "bark": {
+      "text": "Thin, light gray to almost white bark, with shallow irregular furrows between short, broad, scaly ridges.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus garryana; FNA vol. 3, Quercus garryana"
+    },
+    "fruit": {
+      "text": "Light brown acorn about 1 inch long; a shallow, bowl-shaped scaly cap covers about a third of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus garryana"
+    }
+  },
+  "QUGE": {
+    "leaf": {
+      "text": "Small leaf, 2 to 5 inches, with 3 to 7 irregular bristle-tipped lobes and a wedge-shaped base. Shiny dark green above, with tufts of hair in the vein angles below.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus georgiana; FNA vol. 3, Quercus georgiana"
+    },
+    "bark": {
+      "text": "Gray-brown bark, smooth on young stems, ridged and furrowed on older trunks.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus georgiana"
+    },
+    "fruit": {
+      "text": "Small round acorn, 1/3 to 1/2 inch, often striped; a thin saucer-shaped cap with tight scales covers about a third of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus georgiana; FNA vol. 3, Quercus georgiana"
+    }
+  },
+  "QUIL": {
+    "leaf": {
+      "text": "Small obovate leaf, 2 to 5 inches, with 3 to 7 bristle-tipped lobes cut by shallow sinuses. Glossy dark green above and gray-white woolly below; the plant is often a shrub in a thicket.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus ilicifolia; FNA vol. 3, Quercus ilicifolia"
+    },
+    "bark": {
+      "text": "Smooth gray-brown bark with a few raised lenticels on the thin stems; the oldest stems become shallowly fissured and scaly.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus ilicifolia; FNA vol. 3, Quercus ilicifolia"
+    },
+    "fruit": {
+      "text": "Small acorn, 1/3 to 1/2 inch, often striped; a cup-shaped to saucer-shaped cap with tight scales covers a third to a half of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus ilicifolia"
+    }
+  },
+  "QUKE": {
+    "leaf": {
+      "text": "Large leaf, 3 to 6 inches, usually with 7 lobes; each lobe ends in about 3 bristle-tipped teeth. Shiny yellow-green above; the sinuses are often deep.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus kelloggii; FNA vol. 3, Quercus kelloggii"
+    },
+    "bark": {
+      "text": "Mature trunks are dark brown to black, with broad, irregular ridges broken into plates. Young bark is smooth and dark gray.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus kelloggii"
+    },
+    "fruit": {
+      "text": "Large brown acorn, about 1 inch or longer; a deep cap with thin, loose scales covers one third to two thirds of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus kelloggii; FNA vol. 3, Quercus kelloggii"
+    }
+  },
+  "QULA": {
+    "leaf": {
+      "text": "Thin, blue-green leaf with a whitish bloom, 1 1/2 to 3 1/2 inches, entire or with a few shallow, square-ended lobes; the tip is broadly rounded. The blue-gray color is the best clue.",
+      "ref": "FNA vol. 3, Quercus laceyi; Lady Bird Johnson Wildflower Center plant database, Quercus laceyi"
+    },
+    "bark": {
+      "text": "Light gray bark with shallow furrows and scaly ridges.",
+      "ref": "Lady Bird Johnson Wildflower Center plant database, Quercus laceyi; FNA vol. 3, Quercus laceyi"
+    },
+    "fruit": {
+      "text": "Oblong, barrel-shaped acorn about 1/2 inch, blunt at both ends; a shallow saucer cap covers a third of the nut or less.",
+      "ref": "FNA vol. 3, Quercus laceyi"
+    }
+  },
+  "QULA2": {
+    "leaf": {
+      "text": "Leaf 4 to 8 inches with 3 to 7 (mostly 3 or 5) narrow bristle-tipped lobes that often curve; the sinuses reach past halfway to the midrib, and the blade base tapers onto the stalk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus laevis; FNA vol. 3, Quercus laevis"
+    },
+    "bark": {
+      "text": "Thick, very rough bark with deep furrows and scaly ridges, gray-brown to almost black.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus laevis"
+    },
+    "fruit": {
+      "text": "Acorn about 1 inch long; a thin cap with loose, fuzzy, reddish brown scales and a rim rolled inward covers about a third of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus laevis; FNA vol. 3, Quercus laevis"
+    }
+  },
+  "QULO": {
+    "leaf": {
+      "text": "Leaf 2 to 4 inches with 9 to 11 deep, rounded lobes; the sinuses reach past halfway to the midrib. Dull green and often hairy above, paler below.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus lobata; FNA vol. 3, Quercus lobata"
+    },
+    "bark": {
+      "text": "Gray bark on old trunks breaks into small blocks, deeply checkered, with flat ridges between the fissures.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus lobata; FNA vol. 3, Quercus lobata"
+    },
+    "fruit": {
+      "text": "Long, narrow acorn, 1 to 2 inches, shaped like a cone or a bullet; the cap has warty knobs, most of all near its base.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus lobata; FNA vol. 3, Quercus lobata"
+    }
+  },
+  "QULY": {
+    "leaf": {
+      "text": "Large leaf, 6 to 10 inches, with 5 to 9 lobes cut by uneven sinuses, some almost to the midrib; the base is narrow and the upper lobes are wide. The underside is white and hairy.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus lyrata; FNA vol. 3, Quercus lyrata"
+    },
+    "bark": {
+      "text": "Light gray-brown scaly bark over thick, irregular plates, like white oak.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus lyrata; FNA vol. 3, Quercus lyrata"
+    },
+    "fruit": {
+      "text": "Round acorn, 1/2 to 1 inch, almost fully enclosed by a warty cap with no fringe; often only the tip of the nut shows.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus lyrata; FNA vol. 3, Quercus lyrata"
+    }
+  },
+  "QUPA5": {
+    "leaf": {
+      "text": "A large leaf with 5 to 11 oblong, bristle-tipped lobes that stand out almost at right angles to the midrib; the lobes are shallower than on southern red oak. The underside is pale and hairy.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus pagoda (ID 336); FNA vol. 3, Quercus pagoda (taxon 233501071)"
+    },
+    "bark": {
+      "text": "On a mature trunk, nearly black bark that breaks into small scaly plates and narrow flaky ridges, like the bark of black cherry.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus pagoda (ID 336); FNA vol. 3, Quercus pagoda (taxon 233501071)"
+    },
+    "fruit": {
+      "text": "A small round acorn, about 1/2 inch long, orange-brown. A shallow saucer cap of tight scales covers 1/3 to 1/2 of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus pagoda (ID 336); FNA vol. 3, Quercus pagoda (taxon 233501071)"
+    }
+  },
+  "QURO2": {
+    "leaf": {
+      "text": "An obovate leaf with 3 to 7 pairs of rounded lobes, sinuses that reach about halfway to the midrib, and two small ear-like lobes at the base. The leaf stalk is very short.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus robur (ID 551); FNA vol. 3, Quercus robur (taxon 210001863)"
+    },
+    "bark": {
+      "text": "On a mature trunk, gray-brown to gray-black bark with deep furrows between long ridges.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus robur (ID 551); The Morton Arboretum, English oak, Quercus robur"
+    },
+    "fruit": {
+      "text": "A long narrow acorn, 3/4 to 1 inch, with a cap that covers about 1/3 of the nut. One to three acorns hang on a long thin stalk, about 1 1/2 to 2 1/2 inches long.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus robur (ID 551); FNA vol. 3, Quercus robur (taxon 210001863)"
+    }
+  },
+  "QUSI": {
+    "leaf": {
+      "text": "A narrow obovate leaf, about 3 inches long, with 0 to 7 shallow, irregular lobes or wavy teeth, often only near the rounded tip. The underside is pale or silvery.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus sinuata (ID 552); FNA vol. 3, Quercus sinuata (taxon 233501084)"
+    },
+    "bark": {
+      "text": "Whitish or ash-gray bark in thin scales and flakes that peel away from the trunk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus sinuata (ID 552); FNA vol. 3, Quercus sinuata (taxon 233501084)"
+    },
+    "fruit": {
+      "text": "A small acorn, about 1/2 inch long, in a very shallow, flat saucer cap that covers 1/4 of the nut or less.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus sinuata (ID 552); FNA vol. 3, Quercus sinuata (taxon 233501084)"
+    }
+  },
+  "QUTE": {
+    "leaf": {
+      "text": "A leaf 4 to 7 inches long with 6 to 11 bristle-tipped lobes of uneven length and deep sinuses. The underside has tufts of hair where the veins meet the midrib.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus texana (ID 554); FNA vol. 3, Quercus texana (taxon 233501089)"
+    },
+    "bark": {
+      "text": "On a mature trunk, gray-brown to dark brown bark with flat or narrow scaly ridges between shallow fissures.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus texana (ID 554); FNA vol. 3, Quercus texana (taxon 233501089)"
+    },
+    "fruit": {
+      "text": "A large oblong acorn, about 1 inch long, reddish brown and often striped. A deep cup, narrowed at the base, covers 1/3 to 1/2 of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus texana (ID 554); FNA vol. 3, Quercus texana (taxon 233501089)"
+    }
+  }
+}

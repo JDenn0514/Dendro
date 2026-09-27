@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "smooth", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": {
+    "text": "Southeastern United States, North Carolina to northwest Florida and eastern Texas"
+  },
+  "elevation_ft": [200, 1100],
+  "height_ft": [25, 75],
+  "habitat": "Rocky slopes and bluffs over mafic or limy rock, and sandy bluffs and bottomlands in the south",
+  "ref": [
+    "FNA vol. 13, Acer leucoderme (FNA text read at nwwildflowers.com) (elevation, top height)",
+    "NC State Extension Gardener Plant Toolbox, Acer leucoderme (low height, bark)"
+  ]
+}

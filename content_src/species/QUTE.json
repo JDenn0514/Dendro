@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Gulf Coastal Plain and Mississippi Valley bottomlands" },
+  "elevation_ft": [0, 700],
+  "height_ft": [100, 120],
+  "habitat": "Heavy, poorly drained alluvial clay soils of first bottoms and flood plains",
+  "ref": [
+    "Silvics of North America, Quercus nuttallii (Nuttall oak), research.fs.usda.gov/silvics/nuttall-oak",
+    "Virginia Tech Dendrology fact sheet, Quercus texana (ID 554)",
+    "FNA vol. 3, Quercus texana (taxon 233501089)"
+  ]
+}

@@ -28,6 +28,9 @@ export interface ManifestRow {
 export const DIFFICULTIES = ['hard'] as const;
 export type Difficulty = (typeof DIFFICULTIES)[number];
 
+/** The verdict tag that makes the build give a new row `difficulty: "hard"`. */
+export const HARD_TAG = 'hard';
+
 export interface PublishDeps {
   storage: Storage;
   resize: Resize;
@@ -112,10 +115,11 @@ export async function publishApproved(input: {
     const present = rows.some(
       (row) => row.hash === hash && row.target === candidate.target && row.channel === channel,
     );
+    // A row already in the manifest keeps its difficulty. The owner may have cleared it.
     if (present) continue;
 
     // Field order is the app manifest's order. A person reads the JSON diff.
-    rows.push({
+    const row: ManifestRow = {
       hash,
       target: candidate.target,
       channel,
@@ -127,7 +131,10 @@ export async function publishApproved(input: {
       checked_by: verdict.checked_by,
       checked_at: verdict.checked_at,
       note: verdict.note,
-    });
+    };
+    // photo-check tags a distant or cluttered photo `hard`. The app holds it back.
+    if (verdict.tags.includes(HARD_TAG)) row.difficulty = 'hard';
+    rows.push(row);
   }
 
   return { rows, uploaded, skipped, hashes };
@@ -178,25 +185,30 @@ export function setDifficulty(
  * Pure. The ids of the approved candidates whose manifest row is hard and not retired.
  * `photos fetch` has no image hash, so a row matches on the target, the channel of the
  * approve, and the origin. `publishApproved` copies all three from the candidate.
+ * An approve with no row yet is hard when it has the `hard` tag, because the build gives
+ * its row `difficulty: "hard"`. A row that is there wins over the tag.
  */
 export function hardCandidateIds(
   rows: ManifestRow[],
   candidates: Candidate[],
   verdicts: Verdict[],
 ): Set<string> {
+  const keyOf = (target: string, channel: string, origin: string): string =>
+    `${target}|${channel}|${origin}`;
   const hard = new Set(
     rows
       .filter((row) => row.difficulty === 'hard' && row.retired !== true)
-      .map((row) => `${row.target}|${row.channel}|${row.origin}`),
+      .map((row) => keyOf(row.target, row.channel, row.origin)),
   );
+  const present = new Set(rows.map((row) => keyOf(row.target, row.channel, row.origin)));
   const byId = new Map(candidates.map((candidate) => [candidate.id, candidate]));
   const ids = new Set<string>();
   for (const verdict of approvedVerdicts(verdicts)) {
     const candidate = byId.get(verdict.candidate_id);
     if (candidate === undefined || verdict.channel === null) continue;
-    if (hard.has(`${candidate.target}|${verdict.channel}|${candidate.origin}`)) {
-      ids.add(candidate.id);
-    }
+    const key = keyOf(candidate.target, verdict.channel, candidate.origin);
+    const tagged = !present.has(key) && verdict.tags.includes(HARD_TAG);
+    if (hard.has(key) || tagged) ids.add(candidate.id);
   }
   return ids;
 }

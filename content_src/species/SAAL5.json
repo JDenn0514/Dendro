@@ -1,0 +1,16 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "berry" },
+  "genus_common": "sassafras",
+  "arrangement": "alternate",
+  "range": { "text": "Eastern United States, Maine to Florida and eastern Texas" },
+  "elevation_ft": [0, 4900],
+  "height_ft": [30, 60],
+  "habitat": "Forests, woodland edges, fencerows and old fields, often in thickets from root sprouts",
+  "ref": [
+    "Silvics of North America vol. 2, Sassafras albidum (Wayback Machine copy)",
+    "Virginia Tech Dendrology fact sheet, Sassafras albidum (ID 84)",
+    "FNA vol. 3, Sassafras albidum (elevation)",
+    "Fire Effects Information System, Sassafras albidum",
+    "NC State Extension Gardener Plant Toolbox, Sassafras albidum (height)"
+  ]
+}

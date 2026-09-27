@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "smooth", "fruit": "samara" },
+  "genus_common": "maple",
+  "arrangement": "opposite",
+  "range": { "text": "Japan and Korea, naturalized in the eastern United States" },
+  "elevation_ft": [0, 2300],
+  "height_ft": [10, 25],
+  "habitat": "Urban and suburban woodlands near planted trees",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Acer palmatum (ID 272)",
+    "FNA vol. 13, Acer palmatum (FNA text read at nwwildflowers.com) (elevation)"
+  ]
+}

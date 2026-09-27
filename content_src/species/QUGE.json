@@ -1,0 +1,14 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Granite outcrops of Alabama, Georgia and South Carolina" },
+  "elevation_ft": [200, 1600],
+  "height_ft": [25, 50],
+  "habitat": "Granite outcrops and dry slopes and knolls",
+  "ref": [
+    "Virginia Tech Dendrology fact sheet, Quercus georgiana",
+    "FNA vol. 3, Quercus georgiana (elevation)",
+    "North Carolina Extension Gardener Plant Toolbox, Quercus georgiana (height)"
+  ]
+}
