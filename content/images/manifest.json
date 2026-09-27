@@ -29159,5 +29159,600 @@
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-26T21:02:30Z",
     "note": "A close, sharp view of a fruit cluster: dark blue egg-shaped fruits in red cups on red stalks. Likely the same cluster as 9050a297 from another angle, but a separate photo, not a crop; Commons category Sassafras albidum (fruit), CC BY 4.0."
+  },
+  {
+    "hash": "c273a17c59a1d7c9fa9ab52e3dcfe870bd1c0bc981ef94c568fc76fef9d3440f",
+    "target": "ACLE",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Tom Christian",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-nigrum/#image=acer-nigrum.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "ed8633c3d52147a6b8c6e14705d4ba1b89d45b809a6865b064035f21a15a8120",
+    "target": "PLRA",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Amy Huie, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/10547261#photo=14688282",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "46d59f080b5199c315af7e96331a14dc439d485c5bcda5d978da871b98b7deab",
+    "target": "QUBO2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) sblumen, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/348832483#photo=636250699",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "Owner 2026-09-27: the source names the target, and the owner trusts the source over the look-for line."
+  },
+  {
+    "hash": "b3771a00d11dffa7f46af603fe7f120d39e2b2733a0d0dbdf33a5ce7fbdc2fbd",
+    "target": "QUCE",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Hladac",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:(ms)_Quercus_cerris_8.jpg",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": ""
+  },
+  {
+    "hash": "290a73b2c13c64d7582bc6b306109a483a6f37ed4add05de023bb33515aed221",
+    "target": "QUCE",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Hladac",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:(ms)_Quercus_cerris_9.jpg",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": ""
+  },
+  {
+    "hash": "fbba9979ea44efcac5a6501c4aa0561d8521972e9f54a28fd9dc40c5069cd6ec",
+    "target": "QUEL",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Guy Sternberg",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-ellipsoidalis/#image=quercus-ellipsoidalis-11.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "6704795aeca972873a65c4d8b15ce730075b3680dc7b32c9d80b9f085648056b",
+    "target": "QUFA",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Photo by David J. Stang",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_falcata_10zz.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "879b4a430eec26f01a1833ba3d24cc7d3a4e46cb6d96e3af8976dcde54682085",
+    "target": "QUGA4",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Chris Light",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Autumn_color_950.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "60f6733e682e926b1baba31a7c9e139d9c3044a62e6d1618e094e87f21195140",
+    "target": "QULA2",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Sally and Andy Wasowski",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=24057",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": ""
+  },
+  {
+    "hash": "2e0c4992b3b1ff842dc7f11f40cbaadc08bca704ddcd21c61def0182d2e1b2e3",
+    "target": "QULY",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Txadams66",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Overcup_Oak.jpg",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": ""
+  },
+  {
+    "hash": "065fbb76c6821be927d56bbf69170dcad1c494730c1bf428893df35dbd5b8939",
+    "target": "QULY",
+    "channel": "fruit",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Stephanie Brundage",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=201344",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "2ea046fdbb87af5dd4410f94d225b7fd6a00f42146c6cd4ee92afd896ce81069",
+    "target": "QULY",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Stephanie Brundage",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=201345",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "0ae9422072750f85542538713c1fb868f57e0c328af52d64df590b53baffa730",
+    "target": "ACCA5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Martiño Cabana Otero, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/182444787#photo=318124047",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "Owner 2026-09-27: the source names the target, and the owner trusts the source over the look-for line."
+  },
+  {
+    "hash": "7c37fe798b53cba531b941807f64d2474b6233000fa9b2930f4012a9e09e3dbd",
+    "target": "ACCA5",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Michel Langeveld",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_campestre_104526983.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "61bc99224edf63753f2f8f0ed0816d1118749c6572d4d12e7252ce15b7cf152c",
+    "target": "ACCA5",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Bobo-X, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/215716154#photo=381419621",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": ""
+  },
+  {
+    "hash": "56b8b2f12e2a5d0b56339af83c20459dc2d58da00244cd8f9a75622a2fd36edf",
+    "target": "ACCA5",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Marija Gajić",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_campestre_111.JPG",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": ""
+  },
+  {
+    "hash": "904418ed1595ff881ec5207630ad736bb40e41c3cf71a01c7a5b4de8eb84e7e6",
+    "target": "ACGI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Bex Goreham, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/187051055#photo=327028782",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "f950bd21a6f7eda4f3c6419f1585883478ad2c4fe8324780a3cbbf644ff2b571",
+    "target": "QUCO2",
+    "channel": "bark",
+    "source": "VT Dendrology",
+    "author": "John Seiler, Edward Jensen, Alex Niemiera, and John Peterson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=37#image=bark1.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "2cebde3b0c2260ffc62d02f97876e3acf2fb10340660d012e753a42623b32fd6",
+    "target": "QUPA5",
+    "channel": "fruit",
+    "source": "VT Dendrology",
+    "author": "John Seiler, Edward Jensen, Alex Niemiera, and John Peterson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=336#image=fruit1.jpg",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": ""
+  },
+  {
+    "hash": "ab999600242091d605c80502a664c3b96c4ca67c5d8bee3174a0ed4e942b505a",
+    "target": "ACPA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-10_15_51_57_Japanese_Maple_bark_along_Pingree_Avenue_in_Ewing_Township,_Mercer_County,_New_Jersey.jpg",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "Owner 2026-09-27: the source names the target, and the owner trusts the source over the look-for line."
+  },
+  {
+    "hash": "c5ef7c28ec07d6074ee624d031d1e125168f00f5d3be925123abaa7bfe1f8e01",
+    "target": "ACPA2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Famartin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2021-03-11_13_19_04_Japanese_Maple_bark_along_Autumn_Hill_Court_in_the_Franklin_Farm_section_of_Oak_Hill,_Fairfax_County,_Virginia.jpg",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "Owner 2026-09-27: the source names the target, and the owner trusts the source over the look-for line."
+  },
+  {
+    "hash": "345d7bec5a9de07a910c02105c68d8e9668e4aff6a996693d3fa2949daee1d6f",
+    "target": "QUEL",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/311607527#photo=562528469",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "Owner 2026-09-27: the source names the target, and the owner trusts the source over the look-for line."
+  },
+  {
+    "hash": "ddecaf6b5a9487044e6654be3f9f73ed807aa4bd17251883875826d4df9c5577",
+    "target": "QUGA4",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jonas Katona, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/218802818#photo=387221643",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "57a9e9973d75201a8c4e86a46f17dbdf63088623bd57ca06d79efd0d7c8b2273",
+    "target": "QUSI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Jo Roberts, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/91324357#photo=151037620",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "Owner 2026-09-27: the source names the target, and the owner trusts the source over the look-for line."
+  },
+  {
+    "hash": "dd3bedbe46ee6adbecff04aeff4edee1ca9b3cf908b0f82cf19cc0a8918d7e53",
+    "target": "QUSI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Jo Roberts, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/91324357#photo=151037660",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": ""
+  },
+  {
+    "hash": "b0c2e7d1dd1d3b0eb546843f97b3956c4738528d8451f46ddad376485b81a340",
+    "target": "QUSI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Jo Roberts, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/92690096#photo=153509544",
+    "tags": [],
+    "checked_by": "owner",
+    "checked_at": "2026-09-27",
+    "note": "Owner 2026-09-27: the source names the target, and the owner trusts the source over the look-for line."
+  },
+  {
+    "hash": "dde46b61fd7cbf13560cf39a1f6f0e65f40b5f24be52d4d1b984032959572707",
+    "target": "ACSA3",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-saccharum/#image=acer-saccharum-5.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:47Z",
+    "note": "Close, sharp view of a mature trunk with scaly plates and furrows that fill the frame; the TSO caption names Acer saccharum. No look_for entry for ACSA3, so judged on the channel rules alone."
+  },
+  {
+    "hash": "48c0da1e8d7cd04038c6503f6eedc32a829f97ffdd50c8c723db51e52a041010",
+    "target": "ACSA3",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Owen Johnson",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-saccharum/#image=acer-saccharum-1.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:47Z",
+    "note": "Old trunk and limbs with rugged ridged bark, but taken from a distance with branches, canopy, and grass in the frame; the TSO caption names Sugar Maple. No look_for entry for ACSA3, so judged on the channel rules alone.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "49933821eba32086b667a5709567e455ec1bb2e7a8825e70a2b9a23d66ad69fb",
+    "target": "QUSH",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Roderick Cameron",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-shumardii/#image=quercus-shumardii-10.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:47Z",
+    "note": "Mature trunk seen from below, with pale scaly ridges and dark furrows clear and sharp over most of the frame; the TSO caption names Quercus shumardii. No look_for entry for QUSH, so judged on the channel rules alone."
+  },
+  {
+    "hash": "0f8e075ee2f8d4108eb62af18f90b85c55ea6dd38dc56a4b6c95aff6b86a862c",
+    "target": "QUSH",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Maricela Rodríguez",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-shumardii/#image=quercus-shumardii-3.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:48Z",
+    "note": "Several deeply lobed, bristle-tipped leaves attached to a twig, underside view, close and sharp; the TSO caption names Quercus shumardii. No look_for entry for QUSH, so judged on the channel rules alone."
+  },
+  {
+    "hash": "32c89d6b121f60c3f2db62174da0d98e34a61ef9cba20b82b121039b42b17244",
+    "target": "QUSH",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Charles Snyers",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-shumardii/#image=quercus-shumardii-11.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:48Z",
+    "note": "One lobed, bristle-tipped leaf held up alone, underside view, shape clear but no twig arrangement; the TSO caption names Quercus shumardii. No look_for entry for QUSH, so judged on the channel rules alone.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "dccdf1482367b613eb0fc68d81b760586b03cf5569d71e9a26e90bb3924e809c",
+    "target": "QUSH",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Philippe de Spoelberch",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-shumardii/#image=quercus-shumardii-15.jpg",
+    "tags": [
+      "hard",
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:48Z",
+    "note": "Red autumn foliage in a dense, cluttered mass; the lobed leaf shape is visible in the centre but no single twig stands out; the TSO caption names Quercus shumardii. No look_for entry for QUSH, so judged on the channel rules alone.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "5b6c8c3e97a0f9fafc310b0499bc40f65719985553c345d4ab5ef0e48f5e7641",
+    "target": "QUST",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-stellata/#image=quercus-stellata-6.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:49Z",
+    "note": "Forked mature trunk with blocky, scaly grey bark, sharp and filling most of the frame; the TSO caption names Quercus stellata. No look_for entry for QUST, so judged on the channel rules alone."
+  },
+  {
+    "hash": "70104ef82143e1414c2e26a1993eeb623ca3d4f8405681a797c94a2648519476",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-stellata/#image=quercus-stellata-5.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:49Z",
+    "note": "Many cross-shaped lobed leaves attached along twigs, close and sharp; the TSO caption names Quercus stellata. No look_for entry for QUST, so judged on the channel rules alone."
+  },
+  {
+    "hash": "3cc470033327081ef16f72e1a1141306460a03fc2a6900849eaf68e9d461d0a1",
+    "target": "QUST",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-stellata/#image=quercus-stellata-1.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:49Z",
+    "note": "Reddish new-growth leaves with cross-shaped lobes attached to a coppice shoot, close and sharp; the red is the natural flush colour. The TSO caption names Quercus stellata; no look_for entry for QUST, so judged on the channel rules alone."
+  },
+  {
+    "hash": "79c9066e48f547f9e2959ad936381fe058fcdf55f22f854826e352f4a069570d",
+    "target": "QURU",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-rubra/#image=quercus-rubra-14.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:50Z",
+    "note": "Lower trunk of a large tree with long interlacing ridges and furrows, sharp and filling most of the frame; a small garden label is on the trunk, not a ruler. The TSO caption names Quercus rubra; no look_for entry for QURU, so judged on the channel rules alone."
+  },
+  {
+    "hash": "41305dfccdb4fce1ef46aa64111a0896a509b5607da55dde1e37ee62fa474be1",
+    "target": "QURU",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Roderick Cameron",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-rubra/#image=quercus-rubra-17.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:50Z",
+    "note": "Trunk seen from the base upward, with smooth pale ski-track ridges between dark furrows, sharp in the lower half; the TSO caption names Quercus rubra. No look_for entry for QURU, so judged on the channel rules alone."
+  },
+  {
+    "hash": "f8a6a8ddd18bbbf9fbebdf776ccffef83fee7ebc7fd9ab03e2d37ca29ef95cfa",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Francisco Garin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-rubra/#image=quercus-rubra-18.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:50Z",
+    "note": "Several lobed leaves with shallow sinuses and bristle tips attached to a twig, close and sharp; the TSO caption names Quercus rubra. No look_for entry for QURU, so judged on the channel rules alone."
+  },
+  {
+    "hash": "ad09a932a18a34507ad434c1cb478ae3661876442e6bd9a6c71ed84a23da77b2",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Francisco Garin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-rubra/#image=quercus-rubra-20.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:51Z",
+    "note": "Underside of one lobed, bristle-tipped leaf fills the frame; the twig and a second leaf are only at the edge, so the arrangement is not clear. The TSO caption names Quercus rubra; no look_for entry for QURU, so judged on the channel rules alone.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "c35c9d24cc1d454897842fb7d35c72d291481e318896a214eb4c4ef4235748ff",
+    "target": "QURU",
+    "channel": "fruit",
+    "source": "Trees and Shrubs Online",
+    "author": "Maricela Rodríguez",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-rubra/#image=quercus-rubra.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:51Z",
+    "note": "Three green acorns with shallow scaly caps on the twig, close and sharp; the TSO caption names Quercus rubra. No look_for entry for QURU, so judged on the channel rules alone."
+  },
+  {
+    "hash": "9c497734f6a7e32b9d0b816375360bb1dc797d7eca1f837b8a5fdf74a83dace2",
+    "target": "QURU",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Francisco Garin",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-rubra/#image=quercus-rubra-19.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:51Z",
+    "note": "Orange and yellow new-growth leaves with bristle-tipped lobes on a twig, sharp, among green mature leaves; the colour is strong but reads as natural flush. The TSO caption names Quercus rubra; no look_for entry for QURU, so judged on the channel rules alone."
+  },
+  {
+    "hash": "095f01e47d2d1184971705797abadb1afd75e6b4fee70091810ab4b26e18a838",
+    "target": "ACSA2",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/acer/acer-saccharinum/#image=acer-saccharinum-4.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-27T18:53:51Z",
+    "note": "Mature forked trunk with shaggy flaking bark, but the shot looks up into the canopy so the bark fills only part of the frame; the TSO caption names Acer saccharinum. No look_for entry for ACSA2, so judged on the channel rules alone.",
+    "difficulty": "hard"
   }
 ]

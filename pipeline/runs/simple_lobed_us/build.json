@@ -11,8 +11,8 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 13,
-        "bark": 7,
+        "leaf": 15,
+        "bark": 8,
         "fruit": 4
       }
     },
@@ -70,7 +70,7 @@
       "reason": null,
       "counts": {
         "leaf": 19,
-        "bark": 7,
+        "bark": 9,
         "fruit": 6
       }
     },
@@ -170,7 +170,7 @@
       "reason": null,
       "counts": {
         "fruit": 9,
-        "leaf": 20,
+        "leaf": 21,
         "bark": 1
       }
     },
@@ -179,7 +179,7 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "fruit": 7,
+        "fruit": 9,
         "leaf": 12,
         "bark": 5
       }
@@ -199,7 +199,7 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 20,
+        "leaf": 21,
         "bark": 3,
         "fruit": 5
       }
@@ -269,7 +269,7 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 11,
+        "leaf": 12,
         "bark": 5,
         "fruit": 6
       }
@@ -290,7 +290,7 @@
       "reason": null,
       "counts": {
         "fruit": 5,
-        "leaf": 10,
+        "leaf": 11,
         "bark": 4
       }
     },
@@ -301,7 +301,7 @@
       "counts": {
         "leaf": 10,
         "bark": 5,
-        "fruit": 3
+        "fruit": 4
       }
     },
     {
@@ -321,7 +321,7 @@
       "counts": {
         "leaf": 21,
         "bark": 7,
-        "fruit": 4
+        "fruit": 7
       }
     },
     {
@@ -1247,11 +1247,6 @@
       "count": 3
     },
     {
-      "symbol": "QUPA5",
-      "channel": "fruit",
-      "count": 3
-    },
-    {
       "symbol": "QUTE",
       "channel": "fruit",
       "count": 3
@@ -1279,14 +1274,13 @@
       "bioimages": 198,
       "commons": 489,
       "inat": 766,
-      "manual": 373,
+      "manual": 389,
       "tso": 392,
       "wildflower": 184
     },
     "verdicts_by_kind": {
-      "approve": 1362,
-      "escalate": 118,
-      "reject": 882
+      "approve": 1404,
+      "reject": 974
     },
     "fetch_failures": 0,
     "stop_rule_fired": false
