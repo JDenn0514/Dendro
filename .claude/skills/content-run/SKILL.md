@@ -13,9 +13,15 @@ run resumes with the same command. Every command takes `--refresh`, which bypass
 disk cache for that command.
 
 **The CLI commits. You do not.** The CLI commits at the end of `species list`,
-`photos fetch`, `build`, `report`, `run pr`, and `run finish`. Each commit runs
-`git add -A`, so the commit also carries the verdict rows and any file you edited since
-the last commit. Do not run `git commit` yourself.
+`photos fetch`, `build`, `report`, `run pr`, and `run finish`. Each commit stages only the
+run's paths: `pipeline/runs/<name>/`, `content/`, `content_src/`, and `pipeline/data/`. So
+the commit also carries the verdict rows and the files you edited under those paths since
+the last commit. A file outside those paths stays out. Do not run `git commit` yourself.
+
+**Every run command that writes checks the branch.** Each command that writes a run file or
+commits stops with an error unless HEAD is `content/<name>`, and it writes nothing then.
+`run init` is the exception: it checks out that branch. A command that commits also checks
+again just before its commit. Do not switch the branch of a checkout that a run uses.
 
 ## The run's files
 
@@ -24,7 +30,8 @@ the last commit. Do not run `git commit` yourself.
 | `pipeline/runs/<name>/run.json` | `run init`, then `species list` and `photos fetch` |
 | `pipeline/runs/<name>/look_for.json` | the `species-draft` skill |
 | `pipeline/runs/<name>/candidates.jsonl` | `photos fetch`, `photos add` |
-| `pipeline/runs/<name>/verdicts.jsonl` | `photos verdict`, `run finish` |
+| `pipeline/runs/<name>/staged/<target>.jsonl` | `photos stage` (git-ignored) |
+| `pipeline/runs/<name>/verdicts.jsonl` | `photos apply`, `photos verdict`, `run finish` |
 | `pipeline/runs/<name>/build.json` | `build` |
 | `pipeline/runs/<name>/decisions.json` | the owner, by hand |
 | `pipeline/runs/<name>/report.md` | `report` |
@@ -93,11 +100,11 @@ The last line gives the appended rows per source, in fetch order, for example
 
 - [ ] **Step 5: Approve the photos (agent)**
 
-Run the `photo-check` skill. It judges each candidate that has no verdict and records each
-verdict with `node pipeline/cli.ts photos verdict …`. It stops on a target when each
-channel of that target has 6 approved photos, and the other candidates of that target stay
-unjudged. The stop rule applies. When that
-skill stops, the run stops with it.
+Run the `photo-check` skill. It judges each candidate that has no verdict, stages each
+verdict with `node pipeline/cli.ts photos stage …`, and applies each batch with
+`node pipeline/cli.ts photos apply <name>`. It stops on a target when each channel of that
+target has 6 approved photos, and the other candidates of that target stay unjudged. The
+stop rule applies. When that skill stops, the run stops with it.
 
 - [ ] **Step 6: Build (script, commits)**
 
@@ -109,6 +116,14 @@ This merges the species records, resizes and uploads the approved images, writes
 manifest rows, runs the validator and the append-only check, and writes
 `pipeline/runs/<name>/build.json`. It prints one line per flagged unit, then
 `content built: <n> species, <m> manifest rows, <k> images uploaded`.
+
+A new species with no photo and no confusion edge does not stop the build. The build holds
+it back: it writes no record for it, prints `<SYMBOL>: held back: no photo and no confusion
+edge`, and lists it in `build.json` and in the report with status `no_photos` and that
+reason. Step 7 can find photos for it, and step 8 can give it an edge. The next build then
+writes it. A species that `main` already publishes is never held back: with no photo and no
+edge it still fails the build. So draft every species file in step 3, before the photos.
+Do not leave a species file out to get past the build.
 
 The build writes nothing to `content/` until the validator and the append-only check both
 pass. On an error it prints each message and exits 1. Read the messages and fix the cause:
@@ -226,7 +241,8 @@ Then run steps 5 and 6 again.
 - [ ] **Step 8: Draft the confusion edges (agent)**
 
 Run the `edges-draft` skill. It appends edges to `content/confusion.json` for the species
-in this run.
+in this run. It does not pair a held-back species: a learner never sees a species that has
+no photo.
 
 Then build again, so the validator reads the new edges before the report:
 
@@ -236,6 +252,9 @@ node pipeline/cli.ts build <name>
 
 An edge whose `a` or `b` is not in `content/species.json` fails the build. Fix the edge
 and build again.
+
+A held-back species has no record in `content/species.json` yet, but its authored file
+exists. An edge that names it brings it into the next build.
 
 - [ ] **Step 9: Report and open the pull request (script, commits)**
 
@@ -310,6 +329,9 @@ through its exemplars.
 - `node pipeline/cli.ts species retire <SYMBOL> --reason "<text>"` retires one species. The
   record stays in `content/species.json` with `retired: true` and the reason. Run it only
   when the owner asks.
+- `images retire`, `images difficulty`, and `species retire` commit only on a `content/`
+  branch, and they commit only `content/species.json` and `content/images/manifest.json`.
+  On `main` or on a detached HEAD they stop and write nothing.
 - `node pipeline/cli.ts ids check --base <ref>` reports whether the content set keeps every
   published ID. `build` runs the same check.
 - `node pipeline/cli.ts data sections` builds the oak section table. Run it once.
@@ -319,8 +341,8 @@ through its exemplars.
 ## What this skill does not do
 
 - It does not commit. The CLI commits.
-- It does not append to `candidates.jsonl` or `verdicts.jsonl`. `photos add` and
-  `photos verdict` do that.
+- It does not append to `candidates.jsonl` or `verdicts.jsonl`. `photos add`,
+  `photos apply`, and `photos verdict` do that.
 - It does not write `decisions.json` for the owner at step 10.
 - It does not restart a run that the stop rule stopped. The owner changes the source list
   or the threshold first.

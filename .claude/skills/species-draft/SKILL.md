@@ -13,6 +13,9 @@ species record. A script fetches the rest from USDA PLANTS and iNaturalist.
 1. Read the run's species list from `pipeline/runs/<name>/run.json`, field `species`.
 2. For each symbol, check whether `content_src/species/<SYMBOL>.json` exists.
 3. Draft one file for each symbol that has no file. Leave the existing files alone.
+   Draft a file for every symbol, also for a species that may get no photo. The build
+   holds back a new species that has no photo and no confusion edge, and the report lists
+   it. The build does not fail on it.
 
 4. For each file you draft, write one entry in `pipeline/runs/<name>/look_for.json` (see
    **The look-for lines** below).
