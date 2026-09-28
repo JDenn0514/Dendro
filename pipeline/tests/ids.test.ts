@@ -1,8 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { collectIds, appendOnlyErrors, readPublished } from '../lib/ids.ts';
+import { collectIds, appendOnlyErrors, gitShowOf, readPublished } from '../lib/ids.ts';
 import type { ContentSet } from '../lib/ids.ts';
+import type { Exec } from '../lib/run.ts';
 
 // The keys are the real content's: flat unit keys, channel-qualified concepts,
 // and a concept target on a manifest row.
@@ -221,4 +222,52 @@ test('readPublished names the file and the field when a row lacks one', () => {
     () => readPublished(gitShow),
     { message: 'content/concepts.json holds a row with no channel' },
   );
+});
+
+/** An exec that gives one answer to every call and records the arguments. */
+function execAnswering(code: number, out: string): Exec & { calls: string[][] } {
+  const calls: string[][] = [];
+  const exec = (_command: string, args: string[]): { code: number; out: string } => {
+    calls.push(args);
+    return { code, out };
+  };
+  return Object.assign(exec, { calls });
+}
+
+test('gitShowOf gives the file text and asks git for <base>:<file>', () => {
+  const exec = execAnswering(0, '{"QUGA":{}}');
+  assert.equal(gitShowOf(exec, 'origin/main')('content/species.json'), '{"QUGA":{}}');
+  assert.deepEqual(exec.calls, [['show', 'origin/main:content/species.json']]);
+});
+
+test('gitShowOf gives null when git says the ref does not hold the path', () => {
+  const missing = execAnswering(128, "fatal: path 'content/species.json' does not exist in 'main'");
+  assert.equal(gitShowOf(missing, 'main')('content/species.json'), null);
+  const onDisk = execAnswering(
+    128,
+    "fatal: path 'content/species.json' exists on disk, but not in 'main'",
+  );
+  assert.equal(gitShowOf(onDisk, 'main')('content/species.json'), null);
+});
+
+test('gitShowOf throws on a bad ref, a missing git, and a cut-off read', () => {
+  const cases: [number, string][] = [
+    [128, "fatal: invalid object name 'mian'."],
+    [1, 'spawnSync git ENOENT'],
+    [1, 'spawnSync git ENOBUFS'],
+  ];
+  for (const [code, out] of cases) {
+    assert.throws(
+      () => gitShowOf(execAnswering(code, out), 'mian')('content/species.json'),
+      (error: Error) => error.message.includes(out) && error.message.includes('mian:content/species.json'),
+      out,
+    );
+  }
+});
+
+test('readPublished through gitShowOf is a first run only when every file is missing', () => {
+  const missing = execAnswering(128, "fatal: path 'x' does not exist in 'main'");
+  assert.equal(readPublished(gitShowOf(missing, 'main')), null);
+  const badRef = execAnswering(128, "fatal: invalid object name 'main'.");
+  assert.throws(() => readPublished(gitShowOf(badRef, 'main')), /invalid object name/);
 });
