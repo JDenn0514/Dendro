@@ -29754,5 +29754,1782 @@
     "checked_at": "2026-09-27T18:53:51Z",
     "note": "Mature forked trunk with shaggy flaking bark, but the shot looks up into the canopy so the bark fills only part of the frame; the TSO caption names Acer saccharinum. No look_for entry for ACSA2, so judged on the channel rules alone.",
     "difficulty": "hard"
+  },
+  {
+    "hash": "cd9ea1a2d8bccdae3a044e1b0d59ad8613eebebd5f9851cb1948ec0f657cb769",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-x-hispanica/#image=platanus-x-hispanica-2.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:30:12Z",
+    "note": "The photo shows a whole old tree with no leaves. The trunk and limbs show light brown bark that flakes off in patches with cream and olive below, but the bark is distant and does not fill the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "27d7e2818435521c73e07de410b7275f2798414021a82f396339da8cd01da8d4",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Paul W. Meyer",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-x-hispanica/#image=platanus-x-hispanica-12.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:30:13Z",
+    "note": "A street of planetrees. The near trunk shows brown bark that flakes off in patches with cream and olive below, but it fills only a narrow strip of the frame among posters and street clutter.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "4bf2723d76b625ce864f0b8418c9ae776fd66141a022824891c8b9ffd7d45c1c",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Owen Johnson",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-x-hispanica/#image=platanus-x-hispanica-10.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:30:14Z",
+    "note": "A whole old trunk from a distance, with a bench and stones in the frame. The big limbs show flaking bark with pale olive and cream patches.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "4e0e6bd569b2eccfa12099b301c64e84e63395fffe9dbf79cd8ea573f3d62442",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Owen Johnson",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-x-hispanica/#image=platanus-x-hispanica-18.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:30:14Z",
+    "note": "A full mature trunk in a park, with brown bark that flakes off in patches over paler grey-olive bark. The bark does not fill the frame, but the flaking patches are clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "d813c0f359d662e26583fbb4f024cc22662203242e6fe48815dca3c386fbe8d7",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Trees and Shrubs Online",
+    "author": "Owen Johnson",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-x-hispanica/#image=platanus-x-hispanica-9.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:30:14Z",
+    "note": "A whole mature trunk from the base. The upper trunk shows light brown bark with small pale patches where it flakes, but the bark does not fill the frame and moss covers the lower trunk.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "ba72861bce7d82372fd141f13055761bb7d47ac19925d5c90fc344115a074dc5",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/platanus/platanus-x-hispanica/#image=platanus-x-hispanica-14.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:25Z",
+    "note": "An avenue view. The top of the frame shows many leaves on twigs with 3 to 5 lobes and coarse teeth, but the leaves are backlit and the frame is cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "25686e5c9939d47080ad9806bcac64df0be5a6f03701b93ac1b962ee9af3350e",
+    "target": "QUBI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/187359735#photo=327636302",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:29Z",
+    "note": "A close, sharp photo of one acorn on a thin stalk, with a scaly bowl-shaped cup. The acorn is green-yellow and not yet ripe, but the cup and stalk are clear."
+  },
+  {
+    "hash": "084002fe36f3d581f40fc4c0f7c295026cb81d4adb8939fe0887aedcdeb71f09",
+    "target": "QUBI",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/ac1469.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:29Z",
+    "note": "The trunk fills the frame and shows gray scaly bark with irregular fissures and flat ridges, as the look-for line says."
+  },
+  {
+    "hash": "29600e4131fa709edf77342d0983ae65430e7dca44165773db353f10675df2dc",
+    "target": "QUBI",
+    "channel": "fruit",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Stephanie Brundage",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=201200",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:30Z",
+    "note": "Two small green acorns hang among the leaves on a branch. The acorns are visible but small in a cluttered frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "233271a0cfb3a3017974682f124be681f6ebe6d8a688aada8bf99d9b7e97baeb",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "John Anderson",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-bicolor/#image=quercus-bicolor-5.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:30Z",
+    "note": "A twig holds many leaves, each widest above the middle with shallow rounded lobes on each side. The upper side is dark green and shiny."
+  },
+  {
+    "hash": "cd5298426b8648a6bd1427da6b2fe9f1ae9554cff744dbde5907fb10d66f0b2d",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Meghan Cassidy",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_Gravesii.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:32Z",
+    "note": "A low shrub on rock has many twigs with lobed leaves that have pointed bristle tips. The view is distant and cluttered, but the leaf shape is visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "58ad10fc441c2ce88e22b0e0a75563638a9bb9c73a2aaa353fee05d3b2e961f5",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/285238234#photo=512689166",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:33Z",
+    "note": "Several mature leaves on a twig, close and sharp. Each leaf has 3 to 5 pointed lobes with bristle tips."
+  },
+  {
+    "hash": "f4fa7a166deb7aa56009046c1ecaff4476208eaa384646ccd81e86e7002191fd",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Wynn Anderson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=161518",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:33Z",
+    "note": "Leaves with pointed, bristle-tipped lobes sit on twigs next to two young acorns. The leaves overlap and the frame crops some of them, but the shape is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "4084aa1bf1f08eae0ab676d8ad8c779b5e54c99dca0f61f9a22bf6e373f062d5",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/285238234#photo=512689265",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:35Z",
+    "note": "The photo looks up into the crown. Many twigs carry lobed leaves with pointed bristle tips, but the view is distant and cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "e977b0b2a4633c33e5bfdafa4c8b22fdba7803aae592ba5907803cce5e43dc16",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Wynn Anderson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=158992",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:36Z",
+    "note": "Many shiny leaves sit on twigs and fill the frame. They have 3 to 5 pointed lobes with bristle tips."
+  },
+  {
+    "hash": "c2c2cd32b7509d9688cc0f8a6ca8d00b1d70f70cfb0508d28f7d978591f3efae",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Laura Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/193908396#photo=340709113",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:37Z",
+    "note": "Several lobed leaves attached to a twig, close and sharp, in autumn colour. The leaves have 3 to 5 rounded lobes, and the middle lobes are square."
+  },
+  {
+    "hash": "36c91d673645509a93544aab78bca60a369561e466676278f0cd901e59880cd3",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Laura Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/193908396#photo=340709191",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:38Z",
+    "note": "A branch with many lobed leaves on twigs, with rounded lobes and square middle lobes. The view is far, and holly and litter fill the background.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "fea23c2e0f4cfb0f04e92a93c074ccb90ff26017199face4dbadbc5828ac0274",
+    "target": "QUMA13",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Laura Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/193908396#photo=340709212",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:39Z",
+    "note": "An ovoid acorn on the twig, sharp, in a bowl-shaped scaly cup that covers about a third of the nut. The nut is darker brown than the look-for line says, but the shape and cup match."
+  },
+  {
+    "hash": "45ec0bfc7f7beaf7d2535e88be33b6c4bf0c446aea9e2027235e1928ce358f7e",
+    "target": "QUMA13",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Laura Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/193908396#photo=340709230",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:39Z",
+    "note": "A hand holds a twig with one acorn, close and sharp. The acorn is ovoid, and a scaly bowl cup covers about a third of it."
+  },
+  {
+    "hash": "340730a79ee70cb8d946cb7ff03dcbb82d2799d6b8c60253356b7a1f6ffe0a06",
+    "target": "QUMA13",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Laura Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/193908396#photo=340709260",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:40Z",
+    "note": "One acorn on a twig, very close and sharp. The cup has thin scales and covers about a third of the ovoid nut. It is a different photo from 43ca5e2b, possibly of the same acorn."
+  },
+  {
+    "hash": "aa81791cd3756ac0d45065230eb83b494ba482692eec1049f7aeef5d2c6cc095",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Reid Hardin, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/324023437#photo=586385730",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:40Z",
+    "note": "Green lobed leaves attached to a twig, close and sharp. The leaves have rounded lobes, and the square middle lobes make a cross shape."
+  },
+  {
+    "hash": "0b572a022b83e3e9eec08127def2f9132effdd63ccb67b65acb337a08e4acbd8",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Brand R, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/35182554#photo=55450098",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:41Z",
+    "note": "A cluster of thick lobed leaves at a twig tip, close and sharp, with square middle lobes in a cross shape. A light brown acorn also hangs in the frame."
+  },
+  {
+    "hash": "9c900d81208b9bd9e4903343ce6c94bc0146ec2a7fd77c6dc6911aa29753792e",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Leila Dasher, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/182069375#photo=317378545",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:43Z",
+    "note": "A hand holds a twig with many attached obovate leaves, each with 2 to 3 shallow rounded lobes on each side. The upper sides are dark green and glossy."
+  },
+  {
+    "hash": "e6f075a64a1ecae1246fc84aad1ac0e99ffc87826c7b897fea91a014c5708b73",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Leila Dasher, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/182069375#photo=317378555",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:44Z",
+    "note": "Several attached obovate leaves on a twig, close, with 2 to 3 shallow rounded lobes on each side and a glossy dark green upper side. It is a different photo from 0b7e7df7."
+  },
+  {
+    "hash": "b0b73a49601fb5b7d3bac0678163ff2bfd756b96f5091bbcf175353101ad03d5",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Leila Dasher, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/182069375#photo=317378559",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:33:45Z",
+    "note": "A hand holds one leaf and shows its underside. The leaf is obovate with shallow rounded lobes and a paler grayish underside, but the photo shows mainly one leaf.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "255483bb6e2475114014b011d8032919cf77f58c49902a7dc55af9db6700cad0",
+    "target": "QUBI",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/ac1470.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:21Z",
+    "note": "The photo shows a mature gray trunk close up. Scaly bark with irregular fissures and flat ridges fills the frame."
+  },
+  {
+    "hash": "cc1b3da7f552d6d4e58843ef9077c572af525f311c7ac9e5074359b0e3dd7893",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Stephanie Brundage",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=201201",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:22Z",
+    "note": "The photo shows several obovate leaves on twigs with shallow rounded lobes and a dark green shiny upper side. One acorn also shows."
+  },
+  {
+    "hash": "f5e097c9ad6eb21e6081779d3892a2aba87a746be89836f60d7d2a30aeeeb49a",
+    "target": "QUBI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/187359735#photo=327638166",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:23Z",
+    "note": "The photo shows one acorn close up on a stalk from the twig. The bowl-shaped cup covers about a third of the nut; the nut is still green, not tan."
+  },
+  {
+    "hash": "1edca56c79c79d25ede7099865b99a2d046c54043865bb029080300f42184c1b",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/ac1472.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:23Z",
+    "note": "The photo shows many obovate leaves on a twig, widest above the middle, with shallow rounded lobes. The upper side is dark green."
+  },
+  {
+    "hash": "726f70cd5667458406d7174484caea1ab6193b412efdb957a318a075478f33b4",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Stephanie Brundage",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=201202",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:24Z",
+    "note": "The photo shows leaves with shallow rounded lobes on twigs, and two acorns. The frame is cluttered, but the leaf shape is still visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "24abc46757caa7848cb037bdd1abd4c45cb6c1d7329a74b31d16edbbbf387f54",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/187359735#photo=327638227",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:25Z",
+    "note": "The photo shows obovate leaves on twigs, widest above the middle, with shallow rounded lobes. The acorn is too small to use for fruit, so the channel is leaf."
+  },
+  {
+    "hash": "bef62e36317f9e579404838dad591cc7054cfa6ff35a422d6ff3846b3c90d77b",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Awinch1001",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gravesii_Berkeley2.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:28Z",
+    "note": "A close twig tip shows many leaves attached. Each leaf has shallow pointed lobes with bristle tips, and the upper side is slightly shiny."
+  },
+  {
+    "hash": "e353ccfd4e994047c0e1c74039ccaedf59d9c19bffc8185af82561b31c04eb30",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/285238234#photo=512689188",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:28Z",
+    "note": "A hand holds a twig with several attached leaves, seen close and sharp. The leaves have 3 to 5 pointed lobes with bristle tips."
+  },
+  {
+    "hash": "504c18f299bd1264a2bebf7e6d80cca6195b6f8a120a17f01b8eed63d72bc13a",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Awinch1001",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_gravesii_leaves_UC_Berkeley_Botanical_garden.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:30Z",
+    "note": "Branches carry many shiny leaves with pointed, bristle-tipped lobes. The view is cluttered, but the leaf shape is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "c9166c2e04286c4f8e18be114d5ddb6d6e533e189fb03e42e9c6ea099dadb79d",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/285238234#photo=512689243",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:31Z",
+    "note": "A shrubby tree on rock carries many leaves with 3 to 5 pointed, bristle-tipped lobes. The view is cluttered, but the leaf shape is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "a05dbd39cbab215edb99b626026d5dc5ba4a059a0007f1b71306e34ac7ad0e7c",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Brand R, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/35182554#photo=55657754",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:34Z",
+    "note": "A hand holds a lobed leaf on its twig, with more leaves around it. The leaf has a cross shape and a pale, soft underside, as the look-for line says."
+  },
+  {
+    "hash": "68aacd3bf14eab59034797c6e8bd85d7899c42fffa030f90d5efa101597d4e0f",
+    "target": "QUMA13",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Brand R, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/35182554#photo=55657773",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:35Z",
+    "note": "Two acorns sit on the twig among lobed leaves, close and sharp. Bowl-shaped cups with thin scales cover about a third of each nut; the nuts are still green."
+  },
+  {
+    "hash": "a59555bfdd7670d30814e9a86277c29c32417956eb2fdbe51ae50afcb475f95a",
+    "target": "QUSI2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Leila Dasher, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/182069375#photo=317378512",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:37:40Z",
+    "note": "A mature trunk with gray-brown scaly bark fills the frame, sharp and close, as the look-for line says."
+  },
+  {
+    "hash": "20b2d21c6053df53fc114a899433baa63577575174047013eb22e3a22c82fb7f",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/ac1473.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:11Z",
+    "note": "A shoot holds many obovate leaves with shallow, rounded lobes. One leaf shows the pale underside."
+  },
+  {
+    "hash": "7bc7281baa199707f367268b39725edaf97569396d5f4c6b6a266c311ad1fe94",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Béatrice Chassé",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-bicolor/#image=quercus-bicolor-2.jpg",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:11Z",
+    "note": "A twig holds several obovate leaves with shallow, rounded lobes, in autumn colour against the sky. The leaf shape is clear."
+  },
+  {
+    "hash": "4294bdc070e1446c543ac804674d73eef5b823bf942c8eb9f1a072eabe07152b",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/ac1477.htm",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:12Z",
+    "note": "Two detached obovate leaves show shallow, rounded lobes, a dark shiny upper side and a pale gray underside. The leaves are not on a twig.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "0e11258fa63dcdd5953c067ab6869ef2bc116ba2f41d7e43b806a24944a86a27",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Stephanie Brundage",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=201301",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:13Z",
+    "note": "Many leaves with shallow, rounded lobes sit on branches in a cluttered canopy view. Some leaves have damage, but the shape is visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "81f8e4585a1e5a05ae4e1258e1f72e1af3bbea6322b3328cf6ccacde83dfc24a",
+    "target": "QUMA13",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Brand R, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/35182554#photo=55657891",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:14Z",
+    "note": "A trunk with gray to gray-brown scaly bark and some vertical ridges. Vines and twigs cross the trunk, but the bark is still clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "a356a3f40ccf3e89dd706988df37c758f8e801efd1241ad9c95ba8408bb49ced",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Scott Allen Davis, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/67179874#photo=108476430",
+    "tags": [
+      "hard",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:15Z",
+    "note": "The whole shrub from a distance, with brown dead leaves. The lobed leaf shape is visible but small.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "549bdc7936abf264469d91a656b8dadc49e2caf510d0a0e166e6647e5f8277dd",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Scott Allen Davis, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/67179874#photo=108476455",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:16Z",
+    "note": "Many brown dead leaves on a twig, close and sharp. The leaves have 3 to 5 rounded lobes, and the middle lobes make a cross shape."
+  },
+  {
+    "hash": "0e389e27f5fd1018be06ae8f72d916a02462eace549758511e63efc25234ca42",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/99047585#photo=165035492",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:17Z",
+    "note": "Many thick, shiny green leaves with rounded lobes on low stems. Ferns and pine needles clutter the frame, but the leaf shape is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "fcb072e5870cf69d31db44dd0a002989c216a5bbeda6347f4e37bcde988f5804",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Allison Bell",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=169215",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:17Z",
+    "note": "Several leaves sit on the twig, close and sharp. Each leaf has 3 to 5 pointed lobes with bristle tips and a shiny upper side."
+  },
+  {
+    "hash": "8ca303a71abc3e567b52e6206c4d26bf22a324a1166d070477abe4a23211d339",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/37795905#photo=59990584",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:17Z",
+    "note": "A cluster of mature lobed leaves sits on a twig, close and sharp. The lobes are pointed and end in bristle tips."
+  },
+  {
+    "hash": "8830924cf6218b0f88e315d581d0a6ed5a2d1674bfde163e562551acfb58442f",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Bruce Leander",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=194751",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:18Z",
+    "note": "Two detached leaves lie on a white background and show the lobed shape clearly. The photo shows no twig.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "197de79891d0346a8b3e6bab474e930009e946f335971724333949e7528987b5",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Maricela Rodríguez",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-7.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:18Z",
+    "note": "The crown from below against the sky. The leaves are far away, but the pointed bristle-tipped lobes are still visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "b61b39ecb9aabeed092b44ba01dc2bb21291952dd1e05f4885dbd326eb18c363",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Richard Jacob, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/19677961#photo=30307311",
+    "tags": [
+      "autumn"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:18Z",
+    "note": "Autumn leaves sit on the twig, close and sharp. The lobes are pointed and end in bristle tips."
+  },
+  {
+    "hash": "af5016ae161041f3b74e9bf7eee0a72bdfa524730899f194ec289f0f55aa92a9",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Allen Coombes",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-11.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:19Z",
+    "note": "The upper branches of a tree against the sky. The leaves are far away and cluttered, but their pointed lobes are visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "32236863dc41f29cb4a47a31b22a651e20b488c3db43e4c26dc46caea320fab5",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Annika Lindqvist, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/187858667#photo=328626953",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:20Z",
+    "note": "A hand holds a twig with several shiny leaves, close and sharp. The leaves have 3 to 5 pointed lobes with bristle tips, and small acorns are on the twig."
+  },
+  {
+    "hash": "036b0766d9c212db65421071100946469a44a457b2fd269ddcec0d543dc0d3ec",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis_(23816142929).jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:20Z",
+    "note": "A twig with many attached leaves on a black background. The obovate leaves show shallow lobes, 2 to 3 on each side, with no cross shape."
+  },
+  {
+    "hash": "6a451bb0acc87a768668dc0ada88e23ecfa96f94b833412b1c52000168c0d3c2",
+    "target": "QUSI2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Leila Dasher, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/182069375#photo=317378497",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:20Z",
+    "note": "A trunk stands in dense brush, and the shot is distant. The scaly bark is still visible on the trunk.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "1c86f1f263f744ca60b6dee184120892815ecccadd2c45deff2815dd4cbe6c31",
+    "target": "QUSI2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis_(23842950740).jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:21Z",
+    "note": "A close, sharp view of a mature trunk that fills the frame. The bark is scaly with small plates, gray more than brown."
+  },
+  {
+    "hash": "aa492c47504c987bf0610db67addc49395d3987fb7c5cf79b85d885b39533a8d",
+    "target": "QUSI2",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis_(23865217400).jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:21Z",
+    "note": "A close, sharp view of a mature trunk that fills the frame, with scaly gray plates. It is a different photo from 712f5a33483173b621a4c0458d191083cca71ba8."
+  },
+  {
+    "hash": "a7e864a72110d7b0b8b067da292f785a9c05a66841ffb1274f8471a0f1144e90",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Brandon Corder, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/130788406#photo=222475525",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:22Z",
+    "note": "A view up into the canopy against the sky, distant and cluttered. The lobed leaves on the hanging spray are still visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "7f857265aa793b6eb81f5096b30d77681db8f89a22f3460a537cf3d2985d9aec",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) John Michael, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/63682308#photo=102280032",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:22Z",
+    "note": "A hand holds one detached, dry brown leaf. The shape is obovate, with shallow rounded lobes and no cross shape.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "af68271c3eaa1df33a0a3c328dfb25ffe67dacf190988a440aadef23b79edb66",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis_(24089584822).jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:40:23Z",
+    "note": "A twig with many attached leaves on a black background. The obovate leaves have 2 to 3 shallow, rounded lobes on each side."
+  },
+  {
+    "hash": "f90eef45f7e25f2eaba663264d3754e211cb95446e8a6ed91a9cac76858fcb46",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "John Grimshaw",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-bicolor/#image=quercus-bicolor.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:56Z",
+    "note": "The pale gray undersides of many lobed obovate leaves on a twig, close and sharp. The lobes are rounded and a little deeper than usual, but in the typical range."
+  },
+  {
+    "hash": "27d09cecf262dd20beb17a6c264fa3468ee6b007ac14ad40dd3df12e1287b7a8",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/187359735#photo=327638308",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:56Z",
+    "note": "Shiny dark green obovate leaves with shallow rounded lobes on a twig, close and sharp."
+  },
+  {
+    "hash": "3482c774e9c9806a0b0d032c39135eef8e02d18851505088e2218fbc81754c99",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/187359735#photo=327638316",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:58Z",
+    "note": "Two loose obovate leaves with shallow rounded lobes on black. One shows the dark green upper side and one shows the pale underside.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "dd1870a5cf4524928413fc88a5103acd393a45925f4f2f6c63668e8dff3ee6ba",
+    "target": "QUBI",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2143.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:58Z",
+    "note": "Gray scaly bark with irregular fissures and flat ridges on a mature trunk. The bark fills the frame and is sharp."
+  },
+  {
+    "hash": "39f20da8b5153221a9913e35652debedb4eca6655b731cf1e12fa9ec605e9af0",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) saltyhiker, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/164073076#photo=283844700",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:58Z",
+    "note": "A close, sharp cluster of thick lobed leaves at the tip of a twig. The leaves have 3 to 5 rounded lobes, and some middle lobes are square."
+  },
+  {
+    "hash": "04e111948b6a71751607afc82a431637490a0b182579584fadf6cf486d54816d",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) saltyhiker, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/164073076#photo=283844723",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:59Z",
+    "note": "Many rounded, lobed leaves sit on a twig, close and sharp. The square middle lobes make a cross shape on some leaves."
+  },
+  {
+    "hash": "c02fc055af4c39cbae60927652e79765c13cfa0b194e217a299de469039c969e",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) meflowers900, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/194686586#photo=342284780",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:59Z",
+    "note": "One brown autumn leaf hangs from a twig and shows a clear rounded lobed shape. Only one leaf is in clear view.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "a4cf6ba969c5fd1f22fef4b592b71fe6b99fdd6892a32f296656488996b4e50e",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) meflowers900, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/194686586#photo=342284804",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:59Z",
+    "note": "Green and brown autumn leaves with rounded square lobes hang among Spanish moss. The moss clutters the photo, but the leaf shape is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "d327229f661c291fec53d1e37d84936568d6d74bc9078760df576da38d929889",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Linda Jo Conn, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/277448310#photo=498180088",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:42:59Z",
+    "note": "A hand holds a shoot tip with thick, shiny leaves that have rounded lobes. The square middle lobes make a cross shape."
+  },
+  {
+    "hash": "e9d4d73cdc5c8fbcedc6dd6b04c9f49a46647988521211b67e4a593b1fe65e51",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Linda Jo Conn, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/277448310#photo=498179345",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:00Z",
+    "note": "Many thick, shiny leaves with rounded lobes fill the frame on twigs. The branches overlap and make the view busy, but the lobe shape is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "9143642b4b0bc5c43c5a0936b220018ad036c0fe0aa22501b986ccdeab59a29b",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Linda Jo Conn, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/277448310#photo=498180436",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:00Z",
+    "note": "A hand holds one shiny leaf close up with rounded lobes. Only one leaf shows, so the photo does not show how leaves sit on the twig.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "6fc347ce8f36f420a9ec325d63ee11511b37a600d796ea5d386f9fc765741255",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Linda Jo Conn, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/277448310#photo=498180829",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:00Z",
+    "note": "A hand holds one leaf with its pale, soft underside up, and the rounded lobes are clear. Only one leaf shows.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "c3b6c6d1465d77d13b2cde98a2afcb645d5676295c929d3c80d85e872f83a5cf",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Linda Jo Conn, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/277448310#photo=498181758",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:01Z",
+    "note": "Shiny lobed oak leaves in a thicket among heart-shaped vine leaves of another plant. The scene is cluttered, but the oak lobes are visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "db075ed6188710f7aeb13c5931b5bcf63d8002ea6a7cc19c5a0d9e9858747cda",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/329635586#photo=597563677",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:01Z",
+    "note": "A hand holds a twig tip with a cluster of thick autumn leaves that have rounded, square lobes. The leaves are close and sharp, and some make a cross shape."
+  },
+  {
+    "hash": "aba35f15d9930dba0c960d8617316a69c5fa42f2835d781d8075af9337ff89c7",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Roderick Cameron",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-19.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:01Z",
+    "note": "A hanging branch shows many shiny leaves on the twigs, each with 3 to 5 pointed lobes and bristle tips. Some acorns also show."
+  },
+  {
+    "hash": "9ad809bc7829bce7ba89addf8da3638dab6e0bccf4d820ae72d6fe29901ac9a8",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Annika Lindqvist, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/187858667#photo=328626965",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:02Z",
+    "note": "A twig holds several leaves close and sharp, with pointed lobes that end in bristle tips. Old acorn cups sit on the twig."
+  },
+  {
+    "hash": "62e539abfc71810ad6693cb58f5fbbbf3b39f08bfb3a83b91e483c64701ab7c2",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Roderick Cameron",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-22.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:02Z",
+    "note": "A hand holds a shoot with many mature leaves, each with 3 to 5 pointed lobes and bristle tips."
+  },
+  {
+    "hash": "9ed34dd4193e9d0ceb54dff89391a07c70991650c047378bdc1fb0fdfcd8fdb8",
+    "target": "QUGR2",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Annika Lindqvist, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/187858667#photo=328626970",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:02Z",
+    "note": "A hand holds a twig with small ovoid acorns close up. The scaly cups cover about a third to half of the nut."
+  },
+  {
+    "hash": "66f37a64c6a380499711c9159d14294679ae404ae829248d0a310f3f57d67aa6",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Allen Coombes",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-10.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:03Z",
+    "note": "Several lobed leaves sit on one twig tip, close and sharp. The lobes are pointed with small bristle tips."
+  },
+  {
+    "hash": "850ebcd402d723ca3e45a0d4de55d0d23ecacdcb6e1fd854204f3f20edfea82b",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284981030#photo=512211107",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:03Z",
+    "note": "A twig shows lobed leaves with bristle tips, with brown autumn edges and a cluttered background. The shape is still visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "f14d259576637b83b3c5d9220fcc70f302cd3b5b5c28f29201180c3f7b55f1aa",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284981030#photo=512211136",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:04Z",
+    "note": "Branch tips against the sky show small lobed leaves with bristle tips, some brown with autumn colour. The photo is distant, but the leaf shape shows.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "a8aa181f6ddc1a40a1791f61e7575c7f827d42517255f25cf3ac665c76f4a420",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Béatrice Chassé",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-1.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:04Z",
+    "note": "Two or three large leaves attach to a twig, very close and sharp. The lobes are shallow and pointed, with bristle tips, and the upper side is shiny."
+  },
+  {
+    "hash": "2bb5b88e668c54f91e4d1c6bc1ed93c5b74f2aa881a65db3bbfb289c8ccba41f",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/63056374#photo=101136945",
+    "tags": [
+      "hard",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:04Z",
+    "note": "A twig with several dead brown leaves attached. The leaves are obovate with 2 to 3 rounded lobes on each side, but the dead colour hides the green upper side.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "3730826667f86c9da5a8e9e162d475c476864e005225599a3e5ea772ea3eeff1",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis_(24101349911).jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:05Z",
+    "note": "A cut twig with many green leaves on a black ground. The leaves are obovate with shallow rounded lobes, as the look-for line says."
+  },
+  {
+    "hash": "ca517cf3d1e55a63318388a4b5e48031066b14f69ace8f13b21c07731b653914",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Sam Kieschnick, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/199941445#photo=352667033",
+    "tags": [
+      "hard",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:05Z",
+    "note": "A hand holds a twig with four dead lobed leaves and empty acorn cups in front of the bark. The leaf shape shows, but the cups and bark clutter the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "dd9a7a2c53cf9e73046f2b89c9c8a5ac06973b90ffd2d8e11ca8d477b3c92c9e",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis_(24109787896).jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:05Z",
+    "note": "A branch in the canopy with many green lobed leaves on the twigs. The leaves are small in the frame and a little soft, but their lobed shape shows.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "0b944498934d0b2c383dabfcb0b7b4cf843f9819bdc028bd9e614703990512a4",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Sam Kieschnick, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/199941445#photo=352667011",
+    "tags": [
+      "hard",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:06Z",
+    "note": "A hand holds one detached dead leaf against the bark. The leaf is obovate with 2 to 3 rounded lobes on each side, and its shape is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "ba935876d3c42a584811f0f3345d59d9dc08acb99c5ae5b8f945a90fb8a2eeba",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis_(24148286505).jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:06Z",
+    "note": "Dense canopy foliage with many green lobed leaves on twigs. The view is cluttered and a little soft, but the lobed leaf shape shows.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "8c98c5087c80c1aaa01769cd1f1c89324d33b8dd354ad467e28a8f34d63986ad",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/165405640#photo=286314504",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:07Z",
+    "note": "Dense glossy green foliage with many obovate leaves that have shallow rounded lobes. The frame is cluttered, but the leaf shape and glossy upper side show.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "20c3419afa131d3bac7ec966c83b0b9bcd201ff2f7a4723c6496de3dd24e9040",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/3669685#photo=4249787",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:43:07Z",
+    "note": "A twig close up with several dark green glossy leaves attached. The leaves are obovate with 2 to 3 shallow rounded lobes on each side, as the look-for line says."
+  },
+  {
+    "hash": "d47af244bdcef14674ccc026e0be38014e7fb091189077336a15d33494c03d1f",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Nicola van Berkel, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/139964262#photo=239499191",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:13Z",
+    "note": "Twigs carry many obovate leaves with 2 to 3 rounded lobes on each side, glossy dark green above and grayish below."
+  },
+  {
+    "hash": "19d40822030a15565ed535021aff1bc483e9ae3c66d2983b62b200a53c6e2ca2",
+    "target": "QUSI2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis-Acorn_UNC_83962_composite_(23571225814).jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:13Z",
+    "note": "Six light brown ovoid acorns lie on a black background, three with shallow cups of flat gray scales. The acorns are close and sharp."
+  },
+  {
+    "hash": "ee0f30ac0c1daf4cef5bdcffb2e502ec8b1c214ba59cbf64781d60189f19a24e",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Nicola van Berkel, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/139964262#photo=239499170",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:14Z",
+    "note": "A close cluster of mature leaves shows obovate blades with shallow rounded lobes and a glossy green upper side. The lobes do not make a cross shape."
+  },
+  {
+    "hash": "4423296b4d1184610ddd50776e3f3b0e5f4314a7d66a2ffb88141245f789dc3c",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Nicola van Berkel, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/139964262#photo=239499163",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:14Z",
+    "note": "A whole low shrub from a distance. The lobed leaves on the twigs are small but still visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "79f0be43996e704f827ae0cc86014f8c432d14b1790ce22bd3d07cd73c40deff",
+    "target": "QUBI",
+    "channel": "bark",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2144.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:16Z",
+    "note": "The trunk fills the frame and shows gray scaly bark with irregular fissures and flat ridges, as the look-for line says."
+  },
+  {
+    "hash": "58436940f30d3a4f1fcb0bb972a4c60fc0eb14e2b0c300941cb9bfddb9dd1ba7",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Stephanie Brundage",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=201305",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:17Z",
+    "note": "Crown foliage from a distance. Obovate leaves with shallow rounded lobes are visible but small and cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "ee04fa38d50d967340af66d849a2e77b9ab5f4884fcfc0dbc7106a501c95cb8c",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2146.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:18Z",
+    "note": "A twig holds several dark green shiny obovate leaves with shallow rounded lobes, widest above the middle."
+  },
+  {
+    "hash": "8c7ab6025d18c47fa88cb681b369ee4848b6e647f7f3e83cc2190d37dcef6a84",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2147.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:19Z",
+    "note": "A twig carries six obovate leaves, each with shallow, rounded lobes. The upper side is dark green and shiny."
+  },
+  {
+    "hash": "f29830b26da034314915d15e409dbad14660c8c20219148117f6d9953ea82adc",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Douglas Goldman, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/187359735#photo=327638383",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:20Z",
+    "note": "Twigs carry many obovate leaves with shallow, rounded lobes, widest above the middle."
+  },
+  {
+    "hash": "ef9014b720077a19032108f280e6ae6ee78f321d610591dedea8b444450adb8e",
+    "target": "QUBI",
+    "channel": "bark",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "Stephanie Brundage",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=201361",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:21Z",
+    "note": "A mature gray trunk shows flat ridges and irregular fissures. The trunk fills only the middle of the frame, with park and ground around it.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "fcc9e6fff53c927f2f3e9547d34cabf5505101f6083c24012e8e948812d8c979",
+    "target": "QUBI",
+    "channel": "leaf",
+    "source": "Bioimages",
+    "author": "Bruce K. Kirchoff",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/kirchoff/em2152.htm",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:22Z",
+    "note": "One detached obovate leaf shows shallow, rounded lobes and a shiny dark green upper side. No twig is attached.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "553cbdef76210eb5b9cbffd31f683de46d4ed7a51e26f3a01d113f54ec420735",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/208641155#photo=369172493",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:22Z",
+    "note": "A close view from below of a twig with several attached leaves. The leaves show rounded lobes and a pale, soft underside."
+  },
+  {
+    "hash": "8ce6f1d8b75745a79dd5a8e5c738bbeff8cf92754dd57c6ed44db864597d27f8",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/240656129#photo=428782144",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:23Z",
+    "note": "A hanging shoot with many lobed leaves attached, with a cluttered background. The rounded lobes are visible but the view is not close.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "3305a1354525f9dd835c6f3bdd9559f029018d9fa0582ef1325c7448024a90c9",
+    "target": "QUMA13",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/240656129#photo=428782290",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:24Z",
+    "note": "A close, sharp view of an acorn on the twig. A bowl-shaped cup with thin scales covers about half of the nut, which is still green."
+  },
+  {
+    "hash": "e2efee94f841833599fcbe508fd307780d04ac83dd0ac8046b8e4b249992425a",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/240656129#photo=428782376",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:24Z",
+    "note": "A close view of a lobed leaf underside, attached to the twig with other leaves. The underside is pale and soft with fine hairs."
+  },
+  {
+    "hash": "e0e57a0a0db4aa131c09a83c959f55ab07ade2ba9e1400723c4cec4ac6ac9671",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/285238244#photo=512691672",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:25Z",
+    "note": "The crown from below with many lobed leaves with bristle tips on the twigs. The leaves are small in the frame and cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "d1b48d631124aeeb6f24f1c1da3b5889198e2466dae26e2b045943bf59bc38ae",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Vincent Weber, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/144148180#photo=247348693",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:26Z",
+    "note": "A twig holds many mature leaves close up. The leaves have 3 to 5 pointed lobes with bristle tips and a shiny surface."
+  },
+  {
+    "hash": "2598f6af8b30419f2c3cf6e2de5733fbbacc3f330cf1ec514a728ecf3772a4ca",
+    "target": "QUGR2",
+    "channel": "fruit",
+    "source": "Trees and Shrubs Online",
+    "author": "Béatrice Chassé",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-4.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:26Z",
+    "note": "A green ovoid acorn sits on the twig close up and sharp. A scaly cup covers about a third of the nut."
+  },
+  {
+    "hash": "98df6d57262f777d33e28c69212c5e8d14c2bea98a5e7b715e62170e0b3e253e",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) waldo_jeffers, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/145443538#photo=249821917",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:27Z",
+    "note": "Many lobed leaves with bristle tips sit on the twigs. The frame is cluttered with branches.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "7296287e6c8d70a44a198da0fed4cd98ee2489bca199839dcbea6e2a0199ca59",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Cody Stricker, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/159249763#photo=275133677",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:27Z",
+    "note": "A hand holds a twig with three mature leaves close up. Each leaf has pointed lobes with bristle tips."
+  },
+  {
+    "hash": "c98b02d781e593e93ace88eeb31f40b7d3307a4b16225d69c9bca54737fadde4",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/329635586#photo=597563679",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:28Z",
+    "note": "A hand holds one lobed leaf close, and the pale, soft underside shows. Only one leaf is in view.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "c949e54944c4089e0243baeaf0aab8ec36e350bab3da958476f2567f8feff387",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/321132720#photo=580724309",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:28Z",
+    "note": "A twig holds many attached leaves with 3 to 5 rounded lobes. The square middle lobes make a cross shape."
+  },
+  {
+    "hash": "f2280dc78a67f45db2e013e39fb529e0445542df1224012a1ce4fa47753bac28",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/321132720#photo=580724311",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:28Z",
+    "note": "A close view of a lobed leaf on a twig, with more leaves attached. The square middle lobes make a clear cross shape."
+  },
+  {
+    "hash": "3f2c0815fd25e538776558f8f59de9128bb7fb7f305896d3699617031e7b10f3",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/321132720#photo=580724308",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:29Z",
+    "note": "A close view of the pale, soft underside of one lobed leaf. The frame cuts off part of the leaf, and only one leaf shows clearly.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "881adb97f0a1419b990c59d66d98cd226895e63af2740a51722112a9b12cfc14",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Niznik, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/324392695#photo=587065915",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:29Z",
+    "note": "A flash photo shows many attached leaves with rounded lobes in a cluttered mass. The leaves have many spots, but their shape shows.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "8699584f10cb9291530aaff6597faa441dbafd88dd46d2858cb8599fe5527b4c",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/78164305#photo=127882937",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:30Z",
+    "note": "A group of shiny, thick leaves with rounded lobes sits at the tip of a twig. The leaves are light green but fully grown."
+  },
+  {
+    "hash": "f56839fd47cd8ac3e73357631cdf44f5f81780e68318f6517dc6dbf61879a1bc",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Jeff Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/208641155#photo=369172439",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:30Z",
+    "note": "A close view of a twig with many attached leaves. Each leaf has rounded lobes, and the square middle lobes make a cross shape."
+  },
+  {
+    "hash": "7e3249aa7f700bb58e0c7312784e870faffadb913923d95e637e5bb3afef0df3",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Béatrice Chassé",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-2.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:31Z",
+    "note": "Mature leaves on a twig with pointed lobes that end in bristle tips. The upper side is shiny."
+  },
+  {
+    "hash": "7c173185d5cdab90ae933a42832b273621831af845bc556d7ec0907487680207",
+    "target": "QUGR2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/285238244#photo=512691688",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:31Z",
+    "note": "A leaning trunk shows dark bark with rough furrows and blocky ridges. The scene is cluttered with brush, but the bark is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "56caf11216444c0dab492e6f60d7848355b4bc619400e123e01ddfa358e9ea83",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Béatrice Chassé",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-3.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:32Z",
+    "note": "Large lobed leaves attach to a twig at the lower left. The lobes are pointed and end in bristle tips."
+  },
+  {
+    "hash": "9c5d1323e7a0171a71857e51e0b4e1291b77dc91d4e3befe66ebc7c7b2286310",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/285238244#photo=512691589",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:32Z",
+    "note": "A close, sharp leaf on a twig has pointed lobes with bristle tips and a shiny upper side. Other leaves show at the lower left."
+  },
+  {
+    "hash": "0d3dc724fa4499f7e766a2d3717b735b9b365d7ec8c05a53d21bf2de3f1c044a",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/285238244#photo=512691586",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:32Z",
+    "note": "A hand holds a twig with several lobed leaves. The lobes are pointed with bristle tips and the upper side is shiny."
+  },
+  {
+    "hash": "9de6dcf8d1c9c71273b92abfb3076c38012357210b2357e83555988234880d43",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Béatrice Chassé",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/quercus/quercus-gravesii/#image=quercus-gravesii-5.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T22:46:33Z",
+    "note": "Several lobed leaves attach to a twig at the lower right. The lobes are pointed and end in bristle tips."
   }
 ]

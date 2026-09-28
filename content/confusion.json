@@ -886,5 +886,133 @@
     "a_not_b": "European turkey oak has a cup covered all over in long, slender, curled scales, on an oblong, finely striped, reddish brown acorn.",
     "b_not_a": "Bur oak has a warty cap that covers half of a large acorn, with a long fringe at the edge of the cap.",
     "ref": "Trees and Shrubs Online, Quercus cerris; Virginia Tech Dendrology fact sheet 72, Quercus macrocarpa"
+  },
+  {
+    "a": "PLHI",
+    "b": "PLOC",
+    "channel": "fruit",
+    "a_not_b": "London planetree usually hangs its fruit balls in pairs on one stalk.",
+    "b_not_a": "American sycamore usually hangs one fruit ball, rarely two, on a stalk up to 6 inches long.",
+    "ref": "Virginia Tech Dendrology fact sheet 307, Platanus × hispanica; FNA vol. 3, Platanus occidentalis (taxon 200010589)"
+  },
+  {
+    "a": "PLHI",
+    "b": "PLOC",
+    "channel": "bark",
+    "a_not_b": "London planetree bark flakes off into cream, olive and yellow patches on a light brown trunk.",
+    "b_not_a": "American sycamore bark is mottled brown, green, tan and white, and older trunks turn gray-brown and scaly.",
+    "ref": "Virginia Tech Dendrology fact sheets 307, Platanus × hispanica, and 36, Platanus occidentalis"
+  },
+  {
+    "a": "PLHI",
+    "b": "PLRA",
+    "channel": "fruit",
+    "a_not_b": "London planetree usually has two fruit balls on one stalk.",
+    "b_not_a": "California sycamore has a string of 3 to 7 fruit balls on one long hanging stalk.",
+    "ref": "Virginia Tech Dendrology fact sheets 307, Platanus × hispanica, and 473, Platanus racemosa"
+  },
+  {
+    "a": "QUMA13",
+    "b": "QUST",
+    "channel": "leaf",
+    "a_not_b": "Sand post oak has a smaller leaf, 1 1/2 to 3 inches long, that is glossy and smooth to the touch on the upper side.",
+    "b_not_a": "Post oak has a stiff, hard leaf that can reach 6 inches long or more, and the upper side is often rough like sandpaper.",
+    "ref": "FNA vol. 3, Quercus margaretta (taxon 233501059) and Quercus stellata (taxon 233501087)"
+  },
+  {
+    "a": "QUMA13",
+    "b": "QUBO2",
+    "channel": "leaf",
+    "a_not_b": "Sand post oak has lobes along most of the leaf, and the underside is light green and velvety.",
+    "b_not_a": "Boynton sand post oak has its 3 to 5 lobes only near the tip, on a wedge-shaped base, and the underside is grayish or silvery.",
+    "ref": "FNA vol. 3, Quercus margaretta (taxon 233501059) and Quercus boyntonii (taxon 233501013)"
+  },
+  {
+    "a": "QUSI2",
+    "b": "QUST",
+    "channel": "leaf",
+    "a_not_b": "Swamp post oak has 2 or 3 shallow, oblong or rounded lobes on each side and no cross shape.",
+    "b_not_a": "Post oak has two middle lobes that stand out at right angles, so the leaf looks like a cross.",
+    "ref": "FNA vol. 3, Quercus similis (taxon 233501083) and Quercus stellata (taxon 233501087)"
+  },
+  {
+    "a": "QUSI2",
+    "b": "QUMA13",
+    "channel": "leaf",
+    "a_not_b": "Swamp post oak has a larger leaf, 3 to 5 inches long, with shallow lobes and a grayish underside.",
+    "b_not_a": "Sand post oak has a smaller leaf, 1 1/2 to 3 inches long, with deeper lobes that can make a cross shape, and a velvety underside.",
+    "ref": "FNA vol. 3, Quercus similis (taxon 233501083) and Quercus margaretta (taxon 233501059)"
+  },
+  {
+    "a": "QUBI",
+    "b": "QUMA2",
+    "channel": "leaf",
+    "a_not_b": "Swamp white oak has shallow, rounded lobes or large blunt teeth, with no deep sinus.",
+    "b_not_a": "Bur oak has two middle sinuses that almost reach the midrib and cut the leaf nearly in half.",
+    "ref": "Virginia Tech Dendrology fact sheets 313, Quercus bicolor, and 72, Quercus macrocarpa"
+  },
+  {
+    "a": "QUBI",
+    "b": "QUMA2",
+    "channel": "fruit",
+    "a_not_b": "Swamp white oak has an acorn about 1 inch long on a thin stalk 2 inches long or more.",
+    "b_not_a": "Bur oak has a larger acorn, about 1 1/2 inches long, in a cup with a long fringe on its edge.",
+    "ref": "Virginia Tech Dendrology fact sheets 313, Quercus bicolor, and 72, Quercus macrocarpa"
+  },
+  {
+    "a": "QUBI",
+    "b": "QUAL",
+    "channel": "leaf",
+    "a_not_b": "Swamp white oak has shallow, rounded lobes or blunt teeth, and a velvety, pale underside.",
+    "b_not_a": "White oak has 7 to 10 rounded, finger-like lobes, and the sinuses often cut deep toward the midrib.",
+    "ref": "Virginia Tech Dendrology fact sheets 313, Quercus bicolor, and 35, Quercus alba; FNA vol. 3, Quercus bicolor (taxon 233501012)"
+  },
+  {
+    "a": "QUBI",
+    "b": "QUAL",
+    "channel": "fruit",
+    "a_not_b": "Swamp white oak acorns hang on a long thin stalk, and the cup covers about a third of the nut or more.",
+    "b_not_a": "White oak acorns sit on the twig with a short stalk or none, and the warty cup covers only about a quarter of the nut.",
+    "ref": "Virginia Tech Dendrology fact sheets 313, Quercus bicolor, and 35, Quercus alba; FNA vol. 3, Quercus bicolor (taxon 233501012) and Quercus alba (taxon 233501007)"
+  },
+  {
+    "a": "QUBI",
+    "b": "QULY",
+    "channel": "leaf",
+    "a_not_b": "Swamp white oak has shallow, rounded lobes or blunt teeth along an evenly obovate leaf.",
+    "b_not_a": "Overcup oak has 5 to 9 irregular lobes, and some sinuses reach nearly to the midrib.",
+    "ref": "Virginia Tech Dendrology fact sheets 313, Quercus bicolor, and 71, Quercus lyrata; FNA vol. 3, Quercus lyrata (taxon 233501057)"
+  },
+  {
+    "a": "QUBI",
+    "b": "QULY",
+    "channel": "fruit",
+    "a_not_b": "Swamp white oak has a bowl-shaped cup that covers about a third of the nut, on a long thin stalk.",
+    "b_not_a": "Overcup oak has a warty cup that covers almost the whole round nut.",
+    "ref": "Virginia Tech Dendrology fact sheets 313, Quercus bicolor, and 71, Quercus lyrata"
+  },
+  {
+    "a": "QUGR2",
+    "b": "QUBU2",
+    "channel": "leaf",
+    "a_not_b": "Chisos red oak has an ovate to elliptic leaf with only 3 to 5 pointed lobes.",
+    "b_not_a": "Texas red oak has a round to broad leaf with 7 to 9 lobes and more bristle tips.",
+    "ref": "FNA vol. 3, Quercus gravesii (taxon 233501040) and Quercus buckleyi (taxon 233501014)"
+  },
+  {
+    "a": "QUGR2",
+    "b": "QUSH",
+    "channel": "leaf",
+    "a_not_b": "Chisos red oak has a smaller leaf, 2 to 5 1/2 inches long, with 3 to 5 lobes.",
+    "b_not_a": "Shumard oak has a larger leaf, 4 to 8 inches long, with 5 to 9 lobes and deep sinuses.",
+    "ref": "FNA vol. 3, Quercus gravesii (taxon 233501040) and Quercus shumardii (taxon 233501082); Virginia Tech Dendrology fact sheet 169, Quercus shumardii"
+  },
+  {
+    "a": "QUGR2",
+    "b": "QUGA",
+    "channel": "leaf",
+    "a_not_b": "Chisos red oak has 3 to 5 pointed lobes that end in bristle tips.",
+    "b_not_a": "Gambel oak has 5 to 9 rounded lobes.",
+    "ref": "FNA vol. 3, Quercus gravesii (taxon 233501040); Virginia Tech Dendrology fact sheet 315, Quercus gambelii"
   }
 ]

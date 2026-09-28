@@ -1,0 +1,974 @@
+{
+  "run": "simple_lobed_us_add",
+  "channels": [
+    "leaf",
+    "bark",
+    "fruit"
+  ],
+  "species": [
+    {
+      "symbol": "PLHI",
+      "status": "no_photos",
+      "reason": "no iNat taxon",
+      "counts": {}
+    },
+    {
+      "symbol": "QUGR2",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 20,
+        "fruit": 2
+      }
+    },
+    {
+      "symbol": "QUMA13",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 15,
+        "fruit": 5
+      }
+    },
+    {
+      "symbol": "QUSI2",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 8,
+        "bark": 3,
+        "fruit": 1
+      }
+    },
+    {
+      "symbol": "QUBI",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "fruit": 2,
+        "bark": 4,
+        "leaf": 11
+      }
+    },
+    {
+      "symbol": "ACBU4",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "ACCI5",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "ACDI12",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "ACER",
+      "status": "dropped",
+      "reason": "not a species",
+      "counts": {}
+    },
+    {
+      "symbol": "ACFR",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "ACGR14",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "ACJA2",
+      "status": "dropped",
+      "reason": "out of range",
+      "counts": {}
+    },
+    {
+      "symbol": "ACLE2",
+      "status": "dropped",
+      "reason": "out of range",
+      "counts": {}
+    },
+    {
+      "symbol": "ACOP3",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "ACOPO",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "ACTAT2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "LICH6",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "LIOR2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "LIQUI",
+      "status": "dropped",
+      "reason": "not a species",
+      "counts": {}
+    },
+    {
+      "symbol": "LIRIO",
+      "status": "dropped",
+      "reason": "not a species",
+      "counts": {}
+    },
+    {
+      "symbol": "PLATA",
+      "status": "dropped",
+      "reason": "not a species",
+      "counts": {}
+    },
+    {
+      "symbol": "PLOR6",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUAC3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUAL2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUAL3",
+      "status": "dropped",
+      "reason": "out of range",
+      "counts": {}
+    },
+    {
+      "symbol": "QUAS3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUAT",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBE",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBE2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBE3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBE4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBE8",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBE9",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBI2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBL",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBR",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBR2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBU",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBU3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUBY",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUCA",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUCA2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUCA3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUCH5",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUCO3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUCO4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUCO5",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUCR",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUDE",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUDE2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUDE4",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUDI",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUDI2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUEG",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUEP",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUERC",
+      "status": "dropped",
+      "reason": "not a species",
+      "counts": {}
+    },
+    {
+      "symbol": "QUEX",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUFA2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUFE",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUFE2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUFI",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUFO",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUFR",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUGA2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUGA3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUGAF",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUGI",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUGL2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUGR4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUGU",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUHA",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUHA2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUHA4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUHE",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUHI",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUHO",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUHU",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUIN2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUIN3",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUIN4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUIN5",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUIN6",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUIN7",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUJA",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUJO",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUJO4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QULE",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QULU",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMA",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMA4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMA5",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUME",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUME2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMI2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMO2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMO3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMO5",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMU2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUMU3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUNE",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUNE2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUNE3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUOR",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUOV",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPA",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPA3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPA4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPAP2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPAT",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPE2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPO",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPS",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUPU80",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QURE",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QURI",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QURO",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QURO4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QURU2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QURU3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSA",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSA2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSA3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSC",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSC2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSE2",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSM",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUST2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUST3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUST4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSU2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSU3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSU4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUSU6",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUTH",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUTO3",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUTO4",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUTR",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUVA",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUVA2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUVA3",
+      "status": "dropped",
+      "reason": "not a tree",
+      "counts": {}
+    },
+    {
+      "symbol": "QUVE2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUWA",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUWA2",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "QUWI",
+      "status": "dropped",
+      "reason": "hybrid",
+      "counts": {}
+    },
+    {
+      "symbol": "SASSA",
+      "status": "dropped",
+      "reason": "not a species",
+      "counts": {}
+    }
+  ],
+  "gaps": [
+    {
+      "symbol": "PLHI",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "PLHI",
+      "channel": "fruit",
+      "count": 0
+    },
+    {
+      "symbol": "PLHI",
+      "channel": "leaf",
+      "count": 0
+    },
+    {
+      "symbol": "QUGR2",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "QUMA13",
+      "channel": "bark",
+      "count": 0
+    },
+    {
+      "symbol": "QUSI2",
+      "channel": "fruit",
+      "count": 1
+    },
+    {
+      "symbol": "QUBI",
+      "channel": "fruit",
+      "count": 2
+    },
+    {
+      "symbol": "QUGR2",
+      "channel": "fruit",
+      "count": 2
+    },
+    {
+      "symbol": "QUSI2",
+      "channel": "bark",
+      "count": 3
+    }
+  ],
+  "units": [
+    {
+      "key": "leaf_types",
+      "cards": 8,
+      "warning": null
+    },
+    {
+      "key": "bark_types",
+      "cards": 6,
+      "warning": null
+    },
+    {
+      "key": "fruit_types",
+      "cards": 8,
+      "warning": null
+    }
+  ],
+  "counts": {
+    "candidates_by_source": {
+      "bioimages": 14,
+      "commons": 33,
+      "inat": 118,
+      "tso": 75,
+      "wildflower": 20
+    },
+    "verdicts_by_kind": {
+      "approve": 123,
+      "escalate": 26,
+      "reject": 111
+    },
+    "fetch_failures": 0,
+    "stop_rule_fired": false
+  }
+}
