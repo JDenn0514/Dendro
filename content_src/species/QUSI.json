@@ -1,5 +1,5 @@
 {
-  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "concepts": { "leaf": "simple_entire", "bark": "plated", "fruit": "acorn" },
   "genus_common": "oak",
   "arrangement": "alternate",
   "range": { "text": "Southeastern Coastal Plain west to Texas and Oklahoma" },

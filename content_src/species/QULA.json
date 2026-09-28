@@ -1,5 +1,5 @@
 {
-  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "concepts": { "leaf": "simple_entire", "bark": "plated", "fruit": "acorn" },
   "genus_common": "oak",
   "range": { "text": "Texas and northeastern Mexico" },
   "elevation_ft": [1100, 7200],

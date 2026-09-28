@@ -1977,7 +1977,7 @@
     "section": "Quercus",
     "family": "Fagaceae",
     "concepts": {
-      "leaf": "simple_lobed",
+      "leaf": "simple_entire",
       "bark": "plated",
       "fruit": "acorn"
     },
@@ -2610,7 +2610,7 @@
     "family": "Fagaceae",
     "arrangement": "alternate",
     "concepts": {
-      "leaf": "simple_lobed",
+      "leaf": "simple_entire",
       "bark": "plated",
       "fruit": "acorn"
     },
