@@ -125,6 +125,22 @@ import {
   type Verdict,
   type VerdictKind,
 } from './verdicts.ts';
+import {
+  conflictText,
+  countsText,
+  parseStagedLines,
+  planApply,
+  sameVerdict,
+  stagedDir,
+  stagedErrors,
+  stagedPath,
+  stamp,
+  stopText,
+  targetChannels,
+  targetCounts,
+  verdictText,
+  type StagedVerdict,
+} from './verdict_apply.ts';
 import { wildflowerRows } from './wildflower.ts';
 
 export interface ValidationMessage {
@@ -194,6 +210,8 @@ const USAGE = `usage: node pipeline/cli.ts <command> [flags]
   photos fetch <name>
   photos add <name> --target <t> --origin <url> --file-url <url> --source <s> --author <a> --license <l> [--license-url <u>] [--source-species <s>] [--channel-hint <c>] [--local <path>]
   photos verdict <name> --candidate <id> --verdict <${VERDICT_KINDS.join('|')}> [--channel <c>] [--tags a,b] [--case <case>] --note "<text>"
+  photos stage <name> --candidate <id> --verdict <${VERDICT_KINDS.join('|')}> [--channel <c>] [--tags a,b] [--case <case>] --note "<text>"
+  photos apply <name> [--file <path>] [--replace]
   photos audit <name> [--threshold <n>]
   photos audit --manifest [--threshold <n>]
   build <name> [--base <ref>]
@@ -580,6 +598,172 @@ async function photosVerdict(rest: string[], deps: CliDeps): Promise<number> {
   return 0;
 }
 
+/**
+ * Checks one verdict and appends it to the staged file of its target. A judge runs it once
+ * per verdict, so no agent rewrites a whole file. `photos apply` writes verdicts.jsonl.
+ */
+async function photosStage(rest: string[], deps: CliDeps): Promise<number> {
+  const name = positional(
+    rest,
+    'photos stage <name> --candidate <id> --verdict <kind> --note "<text>"',
+  );
+  requireRunBranch(deps.exec, name);
+  const scope = readRun(deps.root, name);
+  const flags = parseFlags(rest.slice(1));
+  for (const key of VERDICT_REQUIRED) {
+    const value = flags[key];
+    if (value === undefined || value.trim() === '') {
+      console.error(`photos stage needs --${key}`);
+      return 1;
+    }
+  }
+  const dir = runDir(deps.root, name);
+  const candidates = readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'));
+  // The two casts hold because `stagedErrors` rejects a kind or a case outside the lists.
+  const row: StagedVerdict = {
+    candidate_id: flags.candidate,
+    verdict: flags.verdict as VerdictKind,
+    channel: flags.channel ?? null,
+    tags: csvList(flags.tags),
+    case: (flags.case ?? null) as EscalationCase | null,
+    note: flags.note,
+  };
+  const errors = stagedErrors([row], candidates, scope.channels, 'photos stage');
+  if (errors.length > 0) {
+    for (const message of errors) console.error(message);
+    return 1;
+  }
+  // `stagedErrors` passed, so the candidate is there.
+  const candidate = candidates.find((one) => one.id === row.candidate_id) as Candidate;
+  const file = stagedPath(dir, candidate.target);
+  const label = relative(deps.root, file);
+  const rows = readStaged(file, label);
+  const prior = rows.find((one) => one.candidate_id === row.candidate_id);
+  if (prior !== undefined && !sameVerdict(prior, row)) {
+    console.error(`refused: ${row.candidate_id} is already staged as ${verdictText(prior)} in ${label}`);
+    return 1;
+  }
+  if (prior === undefined) {
+    appendJsonl(file, [row]);
+    rows.push(row);
+    console.log(`${row.verdict} staged for candidate ${row.candidate_id} in ${label}`);
+  } else {
+    console.log(`${row.candidate_id} is already staged`);
+  }
+  // The counts read the applied rows, then the staged rows, so a staged row wins.
+  const verdicts = [
+    ...readJsonl<Verdict>(path.join(dir, 'verdicts.jsonl')),
+    ...rows.map((one) => stamp(one, CHECK_AGENT, '')),
+  ];
+  const counts = targetCountsText(deps, scope, candidate.target, candidates, verdicts);
+  console.log(`${candidate.target}: ${counts}`);
+  return 0;
+}
+
+/**
+ * Applies staged verdicts in one process. Every row is checked first, and one bad row or
+ * one conflict writes nothing. The same files applied twice give the same verdicts.jsonl.
+ */
+async function photosApply(rest: string[], deps: CliDeps): Promise<number> {
+  const name = positional(rest, 'photos apply <name> [--file <path>] [--replace]');
+  requireRunBranch(deps.exec, name);
+  const scope = readRun(deps.root, name);
+  const flags = parseFlags(rest.slice(1));
+  const dir = runDir(deps.root, name);
+  const files = applyFiles(deps.root, dir, flagValue(flags, 'file'));
+  if (files.length === 0) {
+    console.log(`no staged verdicts in ${relative(deps.root, stagedDir(dir))}`);
+    return 0;
+  }
+
+  const candidates = readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'));
+  const verdictsPath = path.join(dir, 'verdicts.jsonl');
+  const recorded = readJsonl<Verdict>(verdictsPath);
+  const input: StagedVerdict[] = [];
+  const errors: string[] = [];
+  for (const file of files) {
+    const label = relative(deps.root, file);
+    if (!fs.existsSync(file)) {
+      errors.push(`${label}: the file does not exist`);
+      continue;
+    }
+    const parsed = parseStagedLines(fs.readFileSync(file, 'utf8'), label);
+    errors.push(...parsed.errors, ...stagedErrors(parsed.rows, candidates, scope.channels, label));
+    input.push(...parsed.rows);
+  }
+  const plan = planApply(recorded, input, flags.replace === 'true');
+  errors.push(...plan.errors);
+  if (errors.length > 0) {
+    for (const message of errors) console.error(message);
+    console.error('nothing applied');
+    return 1;
+  }
+  if (plan.conflicts.length > 0) {
+    for (const conflict of plan.conflicts) console.error(conflictText(conflict));
+    const count = plan.conflicts.length;
+    console.error(`nothing applied: ${count} conflict${count === 1 ? '' : 's'}`);
+    return 1;
+  }
+
+  const at = isoNow(deps);
+  const appended = plan.append.map((one) => stamp(one, CHECK_AGENT, at));
+  appendJsonl(verdictsPath, appended);
+  const all = [...recorded, ...appended];
+
+  const targetOf = new Map(candidates.map((one) => [one.id, one.target]));
+  const tally = new Map<string, { applied: number; unchanged: number }>();
+  const bump = (id: string, field: 'applied' | 'unchanged'): void => {
+    const target = targetOf.get(id) as string;
+    const counts = tally.get(target) ?? { applied: 0, unchanged: 0 };
+    counts[field] += 1;
+    tally.set(target, counts);
+  };
+  for (const one of plan.append) bump(one.candidate_id, 'applied');
+  for (const id of plan.unchanged) bump(id, 'unchanged');
+  for (const target of [...tally.keys()].sort()) {
+    const counts = tally.get(target) as { applied: number; unchanged: number };
+    const text = targetCountsText(deps, scope, target, candidates, all);
+    console.log(`${target}: ${counts.applied} applied, ${counts.unchanged} unchanged; ${text}`);
+  }
+  console.log(
+    `total: ${plan.append.length} applied, ${plan.unchanged.length} unchanged; ${stopText(all)}`,
+  );
+  return 0;
+}
+
+/** `--file`, or every staged file of the run in name order. */
+function applyFiles(root: string, dir: string, file: string | null): string[] {
+  if (file !== null) return [path.resolve(root, file)];
+  const staged = stagedDir(dir);
+  if (!fs.existsSync(staged)) return [];
+  return fs
+    .readdirSync(staged)
+    .filter((one) => one.endsWith('.jsonl'))
+    .sort()
+    .map((one) => path.join(staged, one));
+}
+
+/** The rows of a staged file. A bad line throws with every message, because the judge must fix it. */
+function readStaged(file: string, label: string): StagedVerdict[] {
+  if (!fs.existsSync(file)) return [];
+  const parsed = parseStagedLines(fs.readFileSync(file, 'utf8'), label);
+  if (parsed.errors.length > 0) throw new Error(parsed.errors.join('\n'));
+  return parsed.rows;
+}
+
+/** `approved leaf 6, bark 4; hard 1` for one target. A hard photo is held back from the app. */
+function targetCountsText(
+  deps: CliDeps,
+  scope: RunScope,
+  target: string,
+  candidates: Candidate[],
+  verdicts: Verdict[],
+): string {
+  const hard = hardCandidateIds(readManifest(deps.root), candidates, verdicts);
+  const counts = targetCounts(target, verdicts, candidates, hard);
+  return countsText(counts, targetChannels(target, scope.channels, scope.concepts));
+}
+
 interface AuditTally {
   measured: number;
   skipped: number;
@@ -763,6 +947,8 @@ const COMMANDS: Record<string, Handler> = {
   'photos fetch': photosFetch,
   'photos add': photosAdd,
   'photos verdict': photosVerdict,
+  'photos stage': photosStage,
+  'photos apply': photosApply,
   'photos audit': photosAudit,
   'data sections': dataSections,
   'data inat-terms': dataInatTerms,
