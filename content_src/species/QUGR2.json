@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "furrowed", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Mountains of Trans-Pecos Texas and northern Mexico" },
+  "elevation_ft": [3900, 7500],
+  "height_ft": [null, 43],
+  "habitat": "Dry wooded hillsides and moist canyons in the mountains",
+  "ref": [
+    "FNA vol. 3, Quercus gravesii (efloras.org, taxon 233501040) (height, to 13 m)",
+    "Trees and Shrubs Online, Quercus gravesii (elevation, 1200-2300 m; habitat)"
+  ]
+}

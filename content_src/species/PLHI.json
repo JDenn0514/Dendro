@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "papery", "fruit": "ball" },
+  "common_extra": ["London plane"],
+  "genus_common": "sycamore",
+  "arrangement": "alternate",
+  "range": { "text": "Planted in cities; a hybrid with no wild range" },
+  "height_ft": [75, 100],
+  "habitat": "Planted in parks and large lawns on moist, well-drained soils in full sun; it tolerates city conditions",
+  "ref": [
+    "Missouri Botanical Garden Plant Finder, Platanus × acerifolia (kempercode a892) (height, habitat)",
+    "Virginia Tech Dendrology fact sheet, Platanus × hispanica (ID 307)"
+  ]
+}

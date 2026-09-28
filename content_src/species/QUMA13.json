@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "common_extra": ["dwarf post oak"],
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Southeastern Coastal Plain, Virginia to Texas and Missouri" },
+  "elevation_ft": [0, 2000],
+  "height_ft": [30, 40],
+  "habitat": "Deep sands and gravels in sandhills, pine barrens, open scrub and dense woods",
+  "ref": [
+    "NC State Extension Plant Toolbox, Quercus margaretta (height)",
+    "Virginia Tech Dendrology fact sheet, Quercus margaretta (ID 427)",
+    "FNA vol. 3, Quercus margaretta (efloras.org, taxon 233501059) (elevation, 0-600 m; habitat)"
+  ]
+}

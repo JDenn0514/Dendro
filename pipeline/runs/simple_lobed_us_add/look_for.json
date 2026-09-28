@@ -1,0 +1,72 @@
+{
+  "PLHI": {
+    "leaf": {
+      "text": "A large alternate leaf, 5 to 9 inches long and about as wide, with 3 to 5 lobes and coarse teeth. The veins spread from the leaf base like fingers.",
+      "ref": "Virginia Tech Dendrology fact sheet, Platanus × hispanica (ID 307)"
+    },
+    "bark": {
+      "text": "Light brown bark that flakes off in patches and shows cream, olive and yellow patches below.",
+      "ref": "Virginia Tech Dendrology fact sheet, Platanus × hispanica (ID 307)"
+    },
+    "fruit": {
+      "text": "Round brown fruit balls, 1 to 1 1/2 inches across, usually two on one long thin stalk.",
+      "ref": "Virginia Tech Dendrology fact sheet, Platanus × hispanica (ID 307)"
+    }
+  },
+  "QUGR2": {
+    "leaf": {
+      "text": "An ovate to elliptic leaf, 2 to 5 1/2 inches long, with 3 to 5 pointed lobes that end in bristle tips. The upper side is shiny.",
+      "ref": "FNA vol. 3, Quercus gravesii (efloras.org, taxon 233501040)"
+    },
+    "bark": {
+      "text": "Black bark with rough furrows between flat ridges.",
+      "ref": "FNA vol. 3, Quercus gravesii (efloras.org, taxon 233501040); Trees and Shrubs Online, Quercus gravesii"
+    },
+    "fruit": {
+      "text": "A small ovoid acorn, about 1/2 inch long, in a deep cup that covers a third to half of the nut.",
+      "ref": "FNA vol. 3, Quercus gravesii (efloras.org, taxon 233501040)"
+    }
+  },
+  "QUMA13": {
+    "leaf": {
+      "text": "A thick, shiny leaf with 3 to 5 rounded lobes. The middle lobes are often square and can make a cross shape. The underside is pale and soft.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus margaretta (ID 427); FNA vol. 3, Quercus margaretta (efloras.org, taxon 233501059)"
+    },
+    "bark": {
+      "text": "Light gray to gray-brown scaly bark. Old bark has vertical ridges and is darker.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus margaretta (ID 427); FNA vol. 3, Quercus margaretta (efloras.org, taxon 233501059)"
+    },
+    "fruit": {
+      "text": "A light brown ovoid acorn, 1/2 to 1 inch long, in a bowl-shaped cup with thin scales that covers a third to half of the nut or more.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus margaretta (ID 427); FNA vol. 3, Quercus margaretta (efloras.org, taxon 233501059)"
+    }
+  },
+  "QUSI2": {
+    "leaf": {
+      "text": "An obovate leaf, 3 to 5 inches long, with 2 to 3 shallow, rounded or oblong lobes on each side. The lobes do not make a cross shape. The upper side is dark green and glossy, and the underside is grayish.",
+      "ref": "FNA vol. 3, Quercus similis (efloras.org, taxon 233501083)"
+    },
+    "bark": {
+      "text": "Brown scaly bark.",
+      "ref": "FNA vol. 3, Quercus similis (efloras.org, taxon 233501083)"
+    },
+    "fruit": {
+      "text": "A light brown to dark reddish brown acorn, about 1/2 inch long, ovoid or oblong, in a shallow cup with flat gray scales. One to three acorns sit on the twig with almost no stalk.",
+      "ref": "FNA vol. 3, Quercus similis (efloras.org, taxon 233501083)"
+    }
+  },
+  "QUBI": {
+    "leaf": {
+      "text": "An obovate leaf, 3 to 7 inches long and widest above the middle, with 6 to 8 shallow, rounded lobes on each side. The upper side is dark green and shiny, and the underside is pale gray.",
+      "ref": "Trees and Shrubs Online, Quercus bicolor; Virginia Tech Dendrology fact sheet, Quercus bicolor (ID 313)"
+    },
+    "bark": {
+      "text": "Gray scaly bark. Old bark has irregular fissures and flat ridges.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus bicolor (ID 313); FNA vol. 3, Quercus bicolor (efloras.org, taxon 233501012)"
+    },
+    "fruit": {
+      "text": "A tan acorn, about 1 inch long, one or two on a long thin stalk of 2 inches or more. The bowl-shaped cup covers about a third of the nut.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus bicolor (ID 313); FNA vol. 3, Quercus bicolor (efloras.org, taxon 233501012)"
+    }
+  }
+}

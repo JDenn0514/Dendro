@@ -1,0 +1,13 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Southern Coastal Plain, South Carolina to east Texas" },
+  "elevation_ft": [0, 1000],
+  "height_ft": [null, 82],
+  "habitat": "Forests in wet stream bottoms, flatwoods and river valleys",
+  "ref": [
+    "FNA vol. 3, Quercus similis (efloras.org, taxon 233501083) (height, to 25 m; elevation, 0-300 m; habitat)",
+    "Lady Bird Johnson Wildflower Center plant database, Quercus similis (height, up to about 80 feet)"
+  ]
+}

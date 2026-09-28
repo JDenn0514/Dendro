@@ -1,0 +1,15 @@
+{
+  "concepts": { "leaf": "simple_lobed", "bark": "plated", "fruit": "acorn" },
+  "genus_common": "oak",
+  "arrangement": "alternate",
+  "range": { "text": "Northeastern and north-central United States and southeastern Canada" },
+  "elevation_ft": [0, 3300],
+  "height_ft": [60, 75],
+  "habitat": "Lowlands, stream edges and swamps that flood at times, on poorly drained soils",
+  "ref": [
+    "Silvics of North America vol. 2, Quercus bicolor (Wayback Machine copy) (height, habitat)",
+    "Virginia Tech Dendrology fact sheet, Quercus bicolor (ID 313)",
+    "FNA vol. 3, Quercus bicolor (efloras.org, taxon 233501012) (elevation, 0-1000 m)",
+    "Trees and Shrubs Online, Quercus bicolor (leaf lobes)"
+  ]
+}
