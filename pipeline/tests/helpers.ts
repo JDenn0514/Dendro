@@ -7,15 +7,35 @@ export interface ExecCall {
   args: string[];
 }
 
-/** Records every call. `queue` holds the results the next calls return, in order. */
-export function fakeExec(): Exec & { calls: ExecCall[]; queue: { code: number; out: string }[] } {
+export type FakeExec = Exec & {
+  calls: ExecCall[];
+  queue: { code: number; out: string }[];
+  /** What `git symbolic-ref` answers. Null is a detached HEAD. */
+  branch: string | null;
+};
+
+/**
+ * Records every call. `queue` holds the results the next calls return, in order. A
+ * `git symbolic-ref` call reads `branch` and takes nothing from the queue, so the run
+ * guard does not shift the answers a test queued.
+ */
+export function fakeExec(branch: string | null = 'content/demo'): FakeExec {
   const calls: ExecCall[] = [];
   const queue: { code: number; out: string }[] = [];
   const exec = (command: string, args: string[]): { code: number; out: string } => {
     calls.push({ command, args });
+    if (command === 'git' && args[0] === 'symbolic-ref') {
+      return fake.branch === null ? { code: 1, out: '' } : { code: 0, out: fake.branch };
+    }
     return queue.shift() ?? { code: 0, out: '' };
   };
-  return Object.assign(exec, { calls, queue });
+  const fake: FakeExec = Object.assign(exec, { calls, queue, branch });
+  return fake;
+}
+
+/** Every call except the branch reads of the run guard. A test of what a command changes reads these. */
+export function changes(exec: { calls: ExecCall[] }): ExecCall[] {
+  return exec.calls.filter((call) => !(call.command === 'git' && call.args[0] === 'symbolic-ref'));
 }
 
 /**

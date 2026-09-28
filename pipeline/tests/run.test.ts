@@ -7,22 +7,30 @@ import { fileURLToPath } from 'node:url';
 
 import { CHANNELS } from '../lib/candidates.ts';
 import {
+  BOOLEAN_FLAGS,
+  CONTENT_PATHS,
   csvList,
+  currentBranch,
   gitCheckoutBranch,
   gitCheckoutExisting,
   gitCommitAll,
+  gitCommitPaths,
   newScope,
   openPullRequest,
   parseFlags,
   readConceptKeys,
   readRun,
+  requireContentBranch,
+  requireRunBranch,
+  runBranch,
   runDir,
+  runPaths,
   validateScope,
   writeRun,
   type Exec,
   type RunScope,
 } from '../lib/run.ts';
-import { fakeExec } from './helpers.ts';
+import { changes, fakeExec } from './helpers.ts';
 
 const CREATED_AT = '2026-09-22T15:04:00Z';
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -295,4 +303,111 @@ test('readConceptKeys qualifies every key in the real concepts file', () => {
     assert.ok(CHANNELS.includes(key.split('/')[0]), `${key} names a known channel`);
   }
   assert.deepEqual(keys, [...keys].sort());
+});
+
+/** An exec that gives one answer to every call. */
+function answering(code: number, out: string): Exec {
+  return () => ({ code, out });
+}
+
+test('parseFlags takes --replace as a flag with no value', () => {
+  assert.ok(BOOLEAN_FLAGS.includes('replace'));
+  assert.deepEqual(parseFlags(['--replace']), { replace: 'true' });
+});
+
+test('runBranch and runPaths name the branch and the paths of a run', () => {
+  assert.equal(runBranch('simple_lobed_us'), 'content/simple_lobed_us');
+  assert.deepEqual(runPaths('simple_lobed_us'), [
+    'pipeline/runs/simple_lobed_us',
+    'content',
+    'content_src',
+    'pipeline/data',
+  ]);
+  assert.deepEqual(CONTENT_PATHS, ['content/species.json', 'content/images/manifest.json']);
+});
+
+test('currentBranch reads the branch, gives null on a detached HEAD, and throws outside a repo', () => {
+  const exec = fakeExec('content/demo');
+  assert.equal(currentBranch(exec), 'content/demo');
+  assert.deepEqual(exec.calls, [
+    { command: 'git', args: ['symbolic-ref', '--short', '-q', 'HEAD'] },
+  ]);
+  assert.equal(currentBranch(fakeExec(null)), null);
+  assert.throws(
+    () => currentBranch(answering(128, 'fatal: not a git repository')),
+    /not a git repository/,
+  );
+});
+
+test('requireRunBranch passes on content/<name> and names both branches otherwise', () => {
+  assert.doesNotThrow(() => requireRunBranch(fakeExec('content/demo'), 'demo'));
+  assert.throws(
+    () => requireRunBranch(fakeExec('main'), 'demo'),
+    /run demo needs branch content\/demo, and HEAD is on main/,
+  );
+  assert.throws(
+    () => requireRunBranch(fakeExec('content/other'), 'demo'),
+    /HEAD is on content\/other/,
+  );
+  assert.throws(() => requireRunBranch(fakeExec(null), 'demo'), /HEAD is detached/);
+});
+
+test('requireContentBranch passes on any content/ branch and stops on main', () => {
+  assert.equal(requireContentBranch(fakeExec('content/fixes')), 'content/fixes');
+  assert.throws(
+    () => requireContentBranch(fakeExec('main')),
+    /only on a content\/ branch, and HEAD is on main/,
+  );
+  assert.throws(() => requireContentBranch(fakeExec(null)), /HEAD is detached/);
+});
+
+test('gitCommitPaths stages and commits the named paths only', () => {
+  const exec = fakeExec();
+  gitCommitPaths(exec, 'content(demo): report', ['pipeline/runs/demo', 'content']);
+  assert.deepEqual(exec.calls, [
+    { command: 'git', args: ['add', '-A', '--', 'pipeline/runs/demo', 'content'] },
+    {
+      command: 'git',
+      args: [
+        'commit',
+        '-m',
+        'content(demo): report',
+        '-m',
+        'Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>',
+        '--',
+        'pipeline/runs/demo',
+        'content',
+      ],
+    },
+  ]);
+});
+
+test('gitCommitPaths accepts each of the three clean-tree answers', () => {
+  const answers = [
+    'nothing to commit, working tree clean',
+    'no changes added to commit (use "git add" and/or "git commit -a")',
+    'nothing added to commit but untracked files present',
+  ];
+  for (const answer of answers) {
+    const exec = fakeExec();
+    exec.queue.push({ code: 0, out: '' });
+    exec.queue.push({ code: 1, out: answer });
+    assert.doesNotThrow(() => gitCommitPaths(exec, 'content(demo): nothing', ['content']), answer);
+  }
+});
+
+test('gitCommitPaths throws on no paths and on a failed commit', () => {
+  assert.throws(() => gitCommitPaths(fakeExec(), 'm', []), /at least one path/);
+  const exec = fakeExec();
+  exec.queue.push({ code: 0, out: '' });
+  exec.queue.push({ code: 128, out: 'fatal: unable to write new index file' });
+  assert.throws(() => gitCommitPaths(exec, 'm', ['content']), /unable to write new index file/);
+});
+
+test('fakeExec answers symbolic-ref from its branch field, and changes() leaves that call out', () => {
+  const exec = fakeExec();
+  exec.branch = 'main';
+  assert.deepEqual(exec('git', ['symbolic-ref', '--short', '-q', 'HEAD']), { code: 0, out: 'main' });
+  exec('git', ['status']);
+  assert.deepEqual(changes(exec), [{ command: 'git', args: ['status'] }]);
 });
