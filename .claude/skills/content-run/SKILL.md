@@ -120,8 +120,7 @@ manifest rows, runs the validator and the append-only check, and writes
 A new species with no photo and no confusion edge does not stop the build. The build holds
 it back: it writes no record for it, prints `<SYMBOL>: held back: no photo and no confusion
 edge`, and lists it in `build.json` and in the report with status `no_photos` and that
-reason. Step 7 can find photos for it, and step 8 can give it an edge. The next build then
-writes it. A species that `main` already publishes is never held back: with no photo and no
+reason. Step 7 can find photos for it. The next build then writes it. A species that `main` already publishes is never held back: with no photo and no
 edge it still fails the build. So draft every species file in step 3, before the photos.
 Do not leave a species file out to get past the build.
 
@@ -183,8 +182,9 @@ credit or a licence can come back in other words, and `photos add` needs both wo
 word. Read the credit and the licence off the page in the browser, or from the output of a
 script.
 
-Give the scripts paths in the scratchpad only, never in the repo. The CLI commits with
-`git add -A`, so a file inside the repo reaches a commit.
+Give the scripts paths in the scratchpad only, never in the repo. The CLI commits every
+file under `pipeline/runs/<name>/`, `content/`, `content_src/`, and `pipeline/data/`, so a
+file there reaches a commit.
 
 A manual candidate:
 
@@ -254,7 +254,8 @@ An edge whose `a` or `b` is not in `content/species.json` fails the build. Fix t
 and build again.
 
 A held-back species has no record in `content/species.json` yet, but its authored file
-exists. An edge that names it brings it into the next build.
+exists. `edges-draft` writes no edge for it. When the owner writes an edge that names it,
+that edge brings it into the next build.
 
 - [ ] **Step 9: Report and open the pull request (script, commits)**
 

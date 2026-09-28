@@ -27,7 +27,7 @@ exception is a Kew POWO row whose saved file is missing. That row gets no verdic
    the rows file. First check that both files exist. When one is missing, do not dispatch
    the row. Follow **A Kew POWO row** below.
 5. **Each subagent returns its verdict as its result.** It does not touch `verdicts.jsonl`,
-   and it never writes a staged file by hand.
+   and it never adds a row to a staged file by hand. `photos stage` adds each row.
 6. Stage each returned verdict with one command:
 
    ```bash
@@ -39,7 +39,12 @@ exception is a Kew POWO row whose saved file is missing. That row gets no verdic
    target per channel, without the `hard` photos, for example
    `QUAL: approved leaf 3, bark 1, fruit 0; hard 1`. A judge that works on one target can
    run it for its own verdicts. A second stage of the same verdict changes nothing. A stage
-   of a different verdict for the same candidate is refused.
+   of a different verdict for the same candidate is refused. To change a staged verdict,
+   remove its line from `staged/<target>.jsonl`, then stage again.
+
+   The judge that staged a row may remove or change a line in its own
+   `staged/<target>.jsonl` with the Edit tool. It edits only that file by hand. It never
+   edits `verdicts.jsonl` or the staged file of another judge.
 7. After each batch, apply every staged verdict in one command:
 
    ```bash
@@ -55,6 +60,17 @@ exception is a Kew POWO row whose saved file is missing. That row gets no verdic
    one line per target with the approved counts per channel, then a `total:` line with the
    stop-rule numbers. Use those lines for the stop rule below, and skip the targets that are
    now full.
+
+   When `photos apply` exits 1, it applied nothing. Do these steps:
+
+   1. Read each error line and each `conflict:` line. An error names the file and the line.
+   2. Fix the staged rows that they name. Remove a row, or change it to the right verdict.
+      A conflict with an owner decision needs a staged row that matches the owner, or no row.
+   3. Run `photos apply <name>` again.
+
+   After a fix with `photos verdict`, remove the staged row of that candidate. If the row
+   stays, the next apply reports a conflict, and an apply with `--replace` records the old
+   verdict again.
 
 **Stop at 6 good photos.** Count the approved photos of each target from
 `verdicts.jsonl`. Use the last row of each candidate `id`, take the `approve` rows, and

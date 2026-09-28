@@ -11,8 +11,9 @@ const REQUIRED = ['html', 'page-url', 'target', 'out'];
 
 /**
  * Reads one saved POWO gallery and writes its add rows as a JSON array, the input of
- * pipeline/scripts/mkadds.cjs. Put --out outside the repo, because the CLI commits with
- * `git add -A`. Returns the exit code.
+ * pipeline/scripts/mkadds.cjs. Put --out outside the repo, because the CLI commits every
+ * file under pipeline/runs/<name>/, content/, content_src/, and pipeline/data/. Returns the
+ * exit code.
  */
 export function powoRowsMain(argv: string[]): number {
   let flags: Record<string, string>;

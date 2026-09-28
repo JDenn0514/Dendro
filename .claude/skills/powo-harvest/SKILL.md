@@ -31,8 +31,9 @@ each one.
   option that refuses non-essential cookies. When the banner has no such option, leave it
   open. The gallery is in the page behind it.
 - Keep photographs only. The parser skips herbarium sheets (owner ruling 2026-09-25).
-- Put every file in the session scratchpad, never in the repo. The CLI commits with
-  `git add -A`, so a file inside the repo reaches a commit.
+- Put every file in the session scratchpad, never in the repo. The CLI commits every file
+  under `pipeline/runs/<name>/`, `content/`, `content_src/`, and `pipeline/data/`, so a file
+  there reaches a commit.
 
 ## Inputs
 

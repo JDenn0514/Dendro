@@ -14,8 +14,9 @@
 //   channel_hint    a channel, or null
 // This script reads no other field. A row carries its own source_species.
 //
-// Put --out outside the repo, for example in the session scratchpad. The CLI commits with
-// `git add -A`, so a file inside the repo reaches a commit.
+// Put --out outside the repo, for example in the session scratchpad. The CLI commits every
+// file under pipeline/runs/<name>/, content/, content_src/, and pipeline/data/, so a file
+// there reaches a commit.
 const fs = require('fs');
 const path = require('path');
 

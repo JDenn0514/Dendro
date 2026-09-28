@@ -158,8 +158,8 @@ async function oneRow(
  * Reads gap rows and writes the Virginia Tech Dendrology add rows for them, the input of
  * pipeline/scripts/mkadds.cjs, into `<out-dir>/vt-rows.json`, and a report into
  * `<out-dir>/vt-report.md`. It reads the saved fact sheet first and fetches one only when the
- * saved copy is missing. Put --out-dir outside the repo, because the CLI commits with
- * `git add -A`. `--root` names the checkout that holds pipeline/sources, pipeline/runs, and
+ * saved copy is missing. Put --out-dir outside the repo, because the CLI commits every file
+ * under pipeline/runs/<name>/, content/, content_src/, and pipeline/data/. `--root` names the checkout that holds pipeline/sources, pipeline/runs, and
  * pipeline/cache. Returns the exit code.
  */
 export async function vtRowsMain(argv: string[], fetchImpl: typeof fetch = fetch): Promise<number> {
