@@ -270,8 +270,9 @@ const NOTHING_TO_COMMIT = /nothing to commit|no changes added to commit|nothing 
 export function currentBranch(exec: Exec): string | null {
   const result = exec('git', ['symbolic-ref', '--short', '-q', 'HEAD']);
   if (result.code === 0) return result.out.trim();
-  // `-q` makes git exit 1 with no message on a detached HEAD.
-  if (result.code === 1) return null;
+  // `-q` makes git exit 1 with no message on a detached HEAD. The real exec also gives
+  // code 1 when git does not start, but with a message. That case throws.
+  if (result.code === 1 && result.out.trim() === '') return null;
   throw new Error(`git symbolic-ref failed with code ${result.code}: ${result.out}`);
 }
 
@@ -311,7 +312,7 @@ export function gitCommitPaths(exec: Exec, message: string, paths: string[]): vo
   const result = exec('git', ['commit', '-m', message, '-m', CO_AUTHOR, '--', ...paths]);
   if (result.code === 0) return;
   // A step that changed nothing under its paths is not a failure.
-  if (NOTHING_TO_COMMIT.test(result.out)) return;
+  if (result.code === 1 && NOTHING_TO_COMMIT.test(result.out)) return;
   throw new Error(`git commit failed with code ${result.code}: ${result.out}`);
 }
 

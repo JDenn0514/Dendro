@@ -339,6 +339,12 @@ test('currentBranch reads the branch, gives null on a detached HEAD, and throws 
   );
 });
 
+test('currentBranch gives null only for exit 1 with no output, and throws when git does not start', () => {
+  assert.equal(currentBranch(answering(1, ' \n')), null);
+  // The real exec returns code 1 with a message when the spawn fails.
+  assert.throws(() => currentBranch(answering(1, 'spawnSync git ENOENT')), /spawnSync git ENOENT/);
+});
+
 test('requireRunBranch passes on content/<name> and names both branches otherwise', () => {
   assert.doesNotThrow(() => requireRunBranch(fakeExec('content/demo'), 'demo'));
   assert.throws(
@@ -402,6 +408,13 @@ test('gitCommitPaths throws on no paths and on a failed commit', () => {
   exec.queue.push({ code: 0, out: '' });
   exec.queue.push({ code: 128, out: 'fatal: unable to write new index file' });
   assert.throws(() => gitCommitPaths(exec, 'm', ['content']), /unable to write new index file/);
+});
+
+test('gitCommitPaths accepts the clean-tree text only on exit 1', () => {
+  const exec = fakeExec();
+  exec.queue.push({ code: 0, out: '' });
+  exec.queue.push({ code: 128, out: 'fatal: nothing to commit' });
+  assert.throws(() => gitCommitPaths(exec, 'm', ['content']), /failed with code 128/);
 });
 
 test('fakeExec answers symbolic-ref from its branch field, and changes() leaves that call out', () => {
