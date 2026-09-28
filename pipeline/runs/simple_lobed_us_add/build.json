@@ -8,16 +8,20 @@
   "species": [
     {
       "symbol": "PLHI",
-      "status": "no_photos",
+      "status": "included",
       "reason": "no iNat taxon",
-      "counts": {}
+      "counts": {
+        "leaf": 4,
+        "bark": 12,
+        "fruit": 9
+      }
     },
     {
       "symbol": "QUGR2",
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 20,
+        "leaf": 31,
         "fruit": 2
       }
     },
@@ -26,8 +30,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 15,
-        "fruit": 5
+        "leaf": 22,
+        "fruit": 5,
+        "bark": 1
       }
     },
     {
@@ -35,9 +40,9 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 8,
-        "bark": 3,
-        "fruit": 1
+        "leaf": 11,
+        "bark": 4,
+        "fruit": 2
       }
     },
     {
@@ -45,7 +50,7 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "fruit": 2,
+        "fruit": 4,
         "bark": 4,
         "leaf": 11
       }
@@ -893,21 +898,6 @@
   ],
   "gaps": [
     {
-      "symbol": "PLHI",
-      "channel": "bark",
-      "count": 0
-    },
-    {
-      "symbol": "PLHI",
-      "channel": "fruit",
-      "count": 0
-    },
-    {
-      "symbol": "PLHI",
-      "channel": "leaf",
-      "count": 0
-    },
-    {
       "symbol": "QUGR2",
       "channel": "bark",
       "count": 0
@@ -915,17 +905,7 @@
     {
       "symbol": "QUMA13",
       "channel": "bark",
-      "count": 0
-    },
-    {
-      "symbol": "QUSI2",
-      "channel": "fruit",
       "count": 1
-    },
-    {
-      "symbol": "QUBI",
-      "channel": "fruit",
-      "count": 2
     },
     {
       "symbol": "QUGR2",
@@ -934,8 +914,8 @@
     },
     {
       "symbol": "QUSI2",
-      "channel": "bark",
-      "count": 3
+      "channel": "fruit",
+      "count": 2
     }
   ],
   "units": [
@@ -960,13 +940,14 @@
       "bioimages": 14,
       "commons": 33,
       "inat": 118,
+      "manual": 127,
       "tso": 75,
       "wildflower": 20
     },
     "verdicts_by_kind": {
-      "approve": 123,
-      "escalate": 26,
-      "reject": 111
+      "approve": 209,
+      "escalate": 36,
+      "reject": 142
     },
     "fetch_failures": 0,
     "stop_rule_fired": false

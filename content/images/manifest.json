@@ -31531,5 +31531,1256 @@
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-28T22:46:33Z",
     "note": "Several lobed leaves attach to a twig at the lower right. The lobes are pointed and end in bristle tips."
+  },
+  {
+    "hash": "c44fbe0526972e870f4f1d12a789dccd7a3fde36422013a1a1d18bfd82ec0e31",
+    "target": "QUBI",
+    "channel": "fruit",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/2019_0567.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:15Z",
+    "note": "One acorn hangs on a long thin stalk, close and sharp. The scaly bowl-shaped cup covers about a third of the nut, which is still yellow-green."
+  },
+  {
+    "hash": "e94951830814ac951a06ac71643eac824046870e8578bd0079126dc3f49d8007",
+    "target": "QUBI",
+    "channel": "fruit",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/2019_0570.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:15Z",
+    "note": "Two brown acorns hang together on a long thin stalk, close and sharp. The bowl-shaped cups cover about a third of each nut."
+  },
+  {
+    "hash": "afec0d8d7bdd7c963061ad2d73c3ef610b9092ec112aec3f2fbd59fa7a9daaec",
+    "target": "QUBI",
+    "channel": "fruit",
+    "source": "VT Dendrology",
+    "author": "John Seiler, Edward Jensen, Alex Niemiera, and John Peterson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=313#image=fruit1.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:16Z",
+    "note": "One green acorn hangs on a long thin stalk, with a bowl-shaped cup. The acorn is small in the frame and the leaves take most of the space.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "957f25c45ae33aad2882ec75c85f5f5da385373ec20ec94b29c3b8035ce2bac1",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "VT Dendrology",
+    "author": "John Seiler, Edward Jensen, Alex Niemiera, and John Peterson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=307#image=leaf1.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:16Z",
+    "note": "Lobed leaves on a twig with coarse teeth and veins that spread from the base. The VT licence is valid for this origin."
+  },
+  {
+    "hash": "e1f8600eb43a049735ca00d5a3fa07b561c82b8f09a5e5acd6a5f77631c8dea6",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "VT Dendrology",
+    "author": "John Seiler, Edward Jensen, Alex Niemiera, and John Peterson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=307#image=bark1.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:16Z",
+    "note": "The trunk bark fills the frame and flakes off in brown patches that show cream and olive patches below."
+  },
+  {
+    "hash": "d271ddfe70305770c22c84ee94fa5c7acf6bc4c24fb8aa7db0d78852cfa2c6f0",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "VT Dendrology",
+    "author": "John Seiler, Edward Jensen, Alex Niemiera, and John Peterson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=307#image=fruit1.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:16Z",
+    "note": "One round spiky fruit ball close up on a long thin stalk."
+  },
+  {
+    "hash": "f5fa2eb11f7147c06c71385704fa3ea9019d00760d6f282037a8e166b3449648",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/68776207#photo=111448285",
+    "tags": [
+      "hard",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:17Z",
+    "note": "A whole hollow trunk in winter. The pale bark with cream patches is visible but not close.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "a5b8ea47293c0e97ce5283dc2e6c3b5126fc54577f3ef7c2ed971437f39292a5",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) James Heal, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/371749481#photo=679234298",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:17Z",
+    "note": "One round spiky fruit ball close up on a long stalk among lobed leaves."
+  },
+  {
+    "hash": "d4d749853d9433b2129e101ed4709483d6ae584b3dc5744eac2dd9337d32f034",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) James Heal, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/371749481#photo=679234296",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:18Z",
+    "note": "A hand holds one large lobed leaf with coarse teeth and veins that spread from the base. Only one leaf shows clearly.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "764b620bdfab1cbd7e161c2b3d78d71b30cd614223da42d265863a6d3619f789",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Karim Haddad, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/28195282#photo=43935021",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:19Z",
+    "note": "A large leaf close up on its twig, with more leaves attached above it. The leaf has 5 lobes, coarse teeth and veins that spread from the base."
+  },
+  {
+    "hash": "4f7ca07def957ef9003abc79871895a6785fee177af15fe3728d6f795fd4667b",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Karim Haddad, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/28195282#photo=43935030",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:19Z",
+    "note": "A hand holds a green, bristly fruit ball on a long thin stalk, close and sharp. The ball is not yet brown."
+  },
+  {
+    "hash": "5f4beec1dfc4d29421b231b413ad183698720569f9f4c53b22ff8705bdf6ec9c",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Karim Haddad, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/28195282#photo=43935032",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:19Z",
+    "note": "The whole tree from below. The trunk shows patchy bark with cream and brown patches, but it is distant.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "faa3f6d42788b6919cd6ee7799d798a1a73591289c56b91bce224837c72cc7f1",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Josep Gesti, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/67534892#photo=109133873",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:20Z",
+    "note": "Two round brown fruit balls hang close together on a thin stalk, close up and sharp, as the look-for line says."
+  },
+  {
+    "hash": "1e1e31cbe581fc10da028f20f1897cea61a756154eb463328fe7e98fc65dd9f5",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/322084247#photo=582583403",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:20Z",
+    "note": "Green fruit balls hang in pairs on long thin stalks among lobed leaves. The fruit are small in a cluttered frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "6c8a32b889de684ae1538e890c4de51dcf853af9bf4bd5927d9c1dfdeae84f1e",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Taken by Fanghong",
+    "license": "CC BY 2.5",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_acerifolia_leaves_(2).jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:21Z",
+    "note": "The trunk on the right shows bark that flakes off in patches, with cream and yellow patches below. Leaves and wires clutter the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "29b35645d9c7ae799d1fdc823416beee0119edf7bb44bfced0646264fce53218",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Ellywa at Dutch Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Plataan_stam.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:22Z",
+    "note": "A close trunk fills the frame with brown bark that flakes off in patches, with cream, olive and yellow patches below."
+  },
+  {
+    "hash": "fb82b623ddff82ad95bc535fbf8b84807ac7d158a7d17bdf0966e604dd9992db",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Tom Weaver, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/41606309#photo=66003121",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:23Z",
+    "note": "The photo looks up a mature trunk with flaking bark and olive and cream patches, but the angle is steep and the image is small.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "42889ad117684e5d6ef17f0cc2c6118159b9f45901e96a85aad64348053d6623",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/245217292#photo=437544983",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:23Z",
+    "note": "A dense crown with many 3 to 5 lobed leaves with coarse teeth on twigs. It is cluttered and no single leaf stands out.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "45c38b6019cf827a5328e4f25611791b46ceed3bd671a87fa86990eb18a0ad64",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/245217292#photo=437545143",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:23Z",
+    "note": "Upper trunks and limbs with bark that flakes off in cream, tan and olive patches. The trunks are distant and the leaves fill much of the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "bb6caebd23e950199d4ae713ae1ee0700af7070624dc6a7c7965f1a8e3a893af",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Jon Mortin, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/319845478#photo=578213086",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:24Z",
+    "note": "A mature trunk and limbs with bark that flakes off in patches and shows cream and olive below. Leaves and sky take up part of the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "47dffeb6b72d0d71f9729c2b00312f4f8eeb7bc62439ed44038174db69625662",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Andrea Mologni, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/136149634#photo=232323410",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:24Z",
+    "note": "A hand holds one large leaf on the twig with 3 lobes, coarse teeth and veins that spread from the base. Only one leaf is clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "c4feb700d7c74ee9bb3c54a5727aeacebd57d33a5880ebb989eca984be1142d4",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/247449206#photo=441954334",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:25Z",
+    "note": "One fallen brown leaf lies on grass with clear lobes, coarse teeth and palmate veins. It is detached and in autumn colour.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "a93895a7dd98e677584972420d601e56025bb24fbb240944ebb60b3a00cdaaa4",
+    "target": "QUMA13",
+    "channel": "bark",
+    "source": "VT Dendrology",
+    "author": "John Seiler, Edward Jensen, Alex Niemiera, and John Peterson",
+    "license": "used with permission, non-commercial",
+    "origin": "https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=427#image=bark1.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:25Z",
+    "note": "A mature trunk with light gray to gray-brown scaly plates and vertical ridges that fill the frame, as the look-for line says."
+  },
+  {
+    "hash": "7f052d1b81b9adceb6326e918a85bdefdf5e0d51eab8b7b4d9347ae5e480b731",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) saltyhiker, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/184341852#photo=321765189",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:25Z",
+    "note": "A twig carries several thick, shiny leaves with rounded lobes, close and sharp. Some leaves have insect damage."
+  },
+  {
+    "hash": "196e8588afae907adef220df5bb6aa48f94151c3a0837b599c611ee1ed4ad966",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) harrier, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/123648311#photo=209486114",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:26Z",
+    "note": "Many lobed leaves with square middle lobes sit on low stems among grass. Grass and overlapping leaves clutter the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "b42a58cf0c72a00e64aa979a50b2022e1929d852c6cb872e0ab81d112f0ae6b8",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) harrier, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/123648311#photo=209486021",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:26Z",
+    "note": "A hand turns one leaf to show the pale underside, and other lobed leaves stay on the twig. The rounded lobes and pale underside agree with the look-for line."
+  },
+  {
+    "hash": "30fcf217bb6e8b17cd54645a2d03656e27155da67641b97684c9309c9ee4db4f",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384237777",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:26Z",
+    "note": "A hand holds a bunch of lobed leaves with the pale, soft underside. The middle leaf shows square middle lobes in a cross shape."
+  },
+  {
+    "hash": "2dc338ab383df7efcbf8c44cf509124d89fc6bc6030a55a7c45bf38db96fa536",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384237806",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:27Z",
+    "note": "Several lobed leaves spread from a twig tip, close and sharp, with the upper side up. The rounded and square lobes are clear."
+  },
+  {
+    "hash": "ef8916c58647ab4b0706f3babd73aeb3ae6a858e9642af158454fb65245e3c01",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384237846",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:27Z",
+    "note": "A hand holds a forked twig with lobed leaves that show the pale underside. The edge of the frame cuts off many leaves.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "e764052f271d017266fd4a49f401d5113bee2a9ecdad5102452026e08ec3b658",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/247449206#photo=441954348",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:28Z",
+    "note": "A hand holds one round brown fruit ball on a thin stalk, close and sharp. The ball fills the frame."
+  },
+  {
+    "hash": "adce4e8ed55d8cc1c77cb836481ae3bdc2cd3e26f77a8988cd7dce20252c110b",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/247449206#photo=441954362",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:28Z",
+    "note": "The mature trunk fills the frame with bark that flakes off in patches. Cream, olive and pink patches show below."
+  },
+  {
+    "hash": "009464be814bf9ffa469fd0236acf8ea8b9ce5a13cae0b4dba6f41285669e8bb",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Andrea Mologni, some rights reserved (CC BY-SA)",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.inaturalist.org/observations/265094938#photo=476105045",
+    "tags": [
+      "hard",
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:29Z",
+    "note": "The trunk stands far away in a winter wood with many branches in front. The patchy pale bark is still visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "a8fe7247410dc576d29256f85216c3d4ac05743feb238355e0dc6fecab96ab4a",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/4541515#photo=5500286",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:29Z",
+    "note": "Round fruit balls hang on long thin stalks among dry leaves. The photo is cluttered and the balls are small.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "960c30b73e3228135cf49f380ef5e94fc30a51fab3b700e312c99454eedf3400",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/56733092#photo=90430521",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:30Z",
+    "note": "A twig carries several large alternate leaves with 3 to 5 lobes and coarse teeth, and the veins spread from the base."
+  },
+  {
+    "hash": "aae90d2d8303fb5762c1c7723b36484da543bff80f89b9d247355029aa2a9429",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/330249668#photo=598809869",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:30Z",
+    "note": "One round fruit ball lies on the pavement and starts to break apart into seeds with tufts of hair. The ball is close and clear."
+  },
+  {
+    "hash": "dc384604761400cf20e5af9f9fd961f0c6a56e87fa17fb7fa1764fb6fc0cafff",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Tessa Kathleen, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/58860664#photo=94032617",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:31Z",
+    "note": "Two round fruit balls hang one below the other on one long thin stalk, close and sharp, as the look-for line says."
+  },
+  {
+    "hash": "cde671ba4373cc77dbb220b1716c5bedb36b8bed9239dd18411d8d1e7b2610c6",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Will McFarland, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/201745918#photo=356180633",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:31Z",
+    "note": "A twig tip holds a cluster of glossy, dark green, obovate leaves with 2 to 3 shallow, rounded lobes on each side, close and sharp."
+  },
+  {
+    "hash": "985e0e180768ee720b097e1fc10f23067a7d4756015cb575fac4ee2e7f0a43d3",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Will McFarland, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/201745918#photo=356180651",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:31Z",
+    "note": "Many glossy, obovate leaves with shallow, rounded lobes sit on the twigs. The view is wide and cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "10887a4cdccb959f6c1ae7afb01c67120e99b4462126a21ecbd5b559cc240f00",
+    "target": "QUSI2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Will McFarland, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/201745918#photo=356180664",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:32Z",
+    "note": "Two mature trunks show scaly bark with gray lichen patches. The trunks are at some distance and do not fill the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "cf8ce5d898267f6ebec5b053e48a30f2fde8708ba11cc7cf3e1357550f9b3824",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Will McFarland, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/201745918#photo=356180702",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:32Z",
+    "note": "Several glossy, dark green, obovate leaves with shallow, rounded lobes sit on the twigs, close and sharp."
+  },
+  {
+    "hash": "c4b35e903945bf166739f2f61f91da2fe477778e0787ed173f3240167fd8337c",
+    "target": "QUSI2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Laura Clark, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/8608013#photo=11512304",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:33Z",
+    "note": "Two lobed, obovate leaves hang from a twig, close and sharp, with rounded lobes that do not make a cross. The upper side looks dull and spotted, possibly late season."
+  },
+  {
+    "hash": "1fa8df6e6f79fb1e805b31ec02d27066ab2e13267048f845b851bbc48f5b388c",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Michelle W. （鍾偉瑋）, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/383207048#photo=701351632",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:34Z",
+    "note": "Twigs carry many shiny leaves with 3 to 5 pointed lobes and bristle tips. The view is cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "34849dc2a1e37ba75e38a0a1a75f6655addc1f0579a1bf4575472dc945601868",
+    "target": "QUGR2",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Eric Knight, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/4273728#photo=5118652",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:34Z",
+    "note": "One green acorn in a scaly cup sits on the twig near the center. It is small in a leafy frame but clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "224ba0a73415abcf7a36a316caea00fbf4df1afed2dc2e3b133b85aa9066bf4d",
+    "target": "QUGR2",
+    "channel": "fruit",
+    "source": "iNaturalist",
+    "author": "(c) Eric Knight, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/4273728#photo=5118654",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:35Z",
+    "note": "A hand holds two small ovoid acorns in cups that cover about a third of the nut. The acorns fill only a small part of the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "fd4ed92f116eb9ec99429403d4e3cafcf36a54396accebaa0920a1708db7c27c",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Eric Knight, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/4273728#photo=5118655",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:35Z",
+    "note": "A hand holds a twig with many attached leaves that have shallow pointed lobes with bristle tips. The view is cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "0f0d1c42e7d64bb9c85d3e327098fe46a586a9deec5bc3b5d9c89e383b425bad",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Eric Knight, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/4273728#photo=5118657",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:35Z",
+    "note": "A hand holds a leafy twig with many attached leaves that have pointed, bristle-tipped lobes. The background is cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "fdfb293b5f99f4ae4fa484ccbaaeedc1a8d17f9439d58b35ab4bca7e9fa0b821",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Cody Stricker, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/159249763#photo=275133745",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:36Z",
+    "note": "Two leaves on a twig show pointed lobes with bristle tips, close and sharp. The underside faces the camera."
+  },
+  {
+    "hash": "e7094ced80acfc63cbf25b002b2a0fe6860a729fa6e5ca695898adb92cfc4253",
+    "target": "QUGR2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "(c) Cody Stricker, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/159249763#photo=275133833",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:36Z",
+    "note": "The lower trunk shows dark, rough bark with furrows and ridges. Branches and leaves clutter the frame.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "a4e8e3b4cfc5352e9d2ffd3525171996cc210fea4e57b5d7e4c65ae17f84143c",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Cody Stricker, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/159249763#photo=275133918",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:07:36Z",
+    "note": "Three leaves on a twig show 3 to 5 pointed lobes with bristle tips, close and clear. A hand holds the twig."
+  },
+  {
+    "hash": "b227aa13986fe9e9bb768ba6cfcf2d6be8f891f3b461d73b74bc029f37d07a37",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742028#photo=511764471",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:25Z",
+    "note": "A close, sharp shot of a shiny leaf on the twig with pointed lobes that end in bristle tips. Other lobed leaves are attached nearby."
+  },
+  {
+    "hash": "84029741b6c7c87d96b963cbdd2e53372a1e0232d97c5f81d2115e5bf2aed3e4",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742028#photo=511764480",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:26Z",
+    "note": "A hand holds one lobed leaf, and its shape and bristle-tipped lobes are clear. It is the same leaf as 72b8626c in a different photo, not a crop.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "bb3c037e2c0d472a41998d023753ec2c2ae420398d985d11b322c7f40a60780f",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742028#photo=511764587",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:26Z",
+    "note": "A distant, cluttered view of branches with many shiny leaves with pointed lobes. The lobed leaf shape is still visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "e635fb827cfaf3bc7a82e600ffdcf60ca40ba2745d9fac46e23c8c7cc683faf4",
+    "target": "QUSI2",
+    "channel": "bark",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/3672199#photo=4253086",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:27Z",
+    "note": "A close, sharp view of a mature trunk fills the frame. The bark shows scaly, fissured plates, gray with lichen."
+  },
+  {
+    "hash": "31ffd5eabc7f0085608dc22174608bdcd1a5c4de71b56bd1d2a5e8a47844e4a1",
+    "target": "QUSI2",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Bruce Kirchoff from Greensboro, NC, USA",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Quercus_similis-Acorn_UNC_83962_o_(24080149152).jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:28Z",
+    "note": "Six light brown ovoid acorns on a black background, some in shallow cups with gray scales, close and sharp."
+  },
+  {
+    "hash": "24cbce36de87747fd8bbff050bfc252ee5c2e3a7c931e102ede87be193fd7437",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384237982",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:28Z",
+    "note": "A hand holds a close cluster of mature lobed leaves on the twig. The leaves are thick and shiny with 3 to 5 rounded lobes, and the square middle lobes make a cross shape."
+  },
+  {
+    "hash": "6eff7ce03ad75f1114509d104061208211ee7a33e3d2352dc4814c15eb2247e6",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384238021",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:28Z",
+    "note": "A night photo of a branch with many lobed leaves and their pale undersides. The view is wide, but the lobe shape is visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "8a74902d3fa085ead0189438d97bdcb1c00e4fb36c878478d7e462303ad6daa1",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384238052",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:28Z",
+    "note": "A hand holds leafy twigs with many shiny lobed leaves. The frame is cluttered, but the rounded lobes are clear.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "84091b21bfaf157cdffa2366a5f2c267156d8991e3a27c9b0c0d70a0e39288d3",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384238139",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:29Z",
+    "note": "A twig with many lobed leaves attached, most turned to show the pale soft underside. The rounded lobes and the cross-shaped middle lobes are clear."
+  },
+  {
+    "hash": "4c6cff52ee7d8037801fe753a2fd4830bed0ec4bdc798d2d13387cf2b0f24828",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384238231",
+    "tags": [
+      "hard",
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:29Z",
+    "note": "A close view of the pale, soft underside of lobed leaves on a hairy twig. The frame cuts off parts of the leaves.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "063dd90da7f606db74fc6ed7d32ef9928ab0dfe7e24a823d01070abf373b04f2",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384238262",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:29Z",
+    "note": "A hand holds a twig with several attached lobed leaves, shiny on top and pale below. Insects ate parts of some leaves, but the rounded lobes are clear."
+  },
+  {
+    "hash": "c6d4b727631cb300c4548102a9ba63f1834624d651f74479c4df41194ebd5129",
+    "target": "QUMA13",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/217212298#photo=384238311",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:30Z",
+    "note": "Lobed leaves at a twig tip with square middle lobes. The leaves overlap, and insects damaged the front leaf.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "53cbf991f8a96eb638a51eaf6e38ea8ec0844eeeb586350d0a69d6d6e5452a8a",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Liné1",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_x_acerifolia_trunc_01_by_Line1.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:30Z",
+    "note": "A mature trunk close up. Light brown bark flakes off in patches and shows cream patches below."
+  },
+  {
+    "hash": "3eea4074bc1050ae4b3c50a015ab29e1a2139b151082334ac09a723ac50936c7",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "böhringer friedrich",
+    "license": "CC BY-SA 2.5",
+    "origin": "https://commons.wikimedia.org/wiki/File:AhornblättrigePlatane1.JPG",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:31Z",
+    "note": "A close view of bark in low warm sunlight. Patches flake off and show cream, olive and brown layers below."
+  },
+  {
+    "hash": "bf5c8fca5e6578272982175d00398c596c44c97326ed76b260c8f4a84db55ed6",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Opuntia",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_x_hispanica_Picasso.JPG",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:31Z",
+    "note": "A close view of patchy bark that fills the frame. The patches are olive, yellow, cream and brown, as the look-for line says."
+  },
+  {
+    "hash": "b2fd47b896234d85951e8a49673d7ca7e10a3648e685608f3fd33b18699b1d2c",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "HTO",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_x_hispanica,_Bystrc.JPG",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:31Z",
+    "note": "A trunk fork in warm low light. Smooth patches of olive and cream bark are clear across the frame."
+  },
+  {
+    "hash": "c8c2d4b226daf738358666ac446775a7360f406d723f91db2bc0c694e91d01a4",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "MONGO",
+    "license": "Public domain",
+    "origin": "https://commons.wikimedia.org/wiki/File:London_Planetree_bark_detail.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:31Z",
+    "note": "A mature trunk that fills the frame. The bark flakes off in patches and shows cream and olive patches below."
+  },
+  {
+    "hash": "fc3066d859fa5af49beed079c3d9690cffab2d7481b8541d41ed88798a8203de",
+    "target": "PLHI",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Daniel Fuchs",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Daniel_Fuchs.CC-BY-SA.Platanus_x_hispanica.5.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:32Z",
+    "note": "A twig with several attached leaves in front of a trunk. The leaves have 3 to 5 lobes, coarse teeth and veins that spread from the base."
+  },
+  {
+    "hash": "bf771b599c1b7a38d2bff4494cf47ed6012b35e82feaeee45cd96c9e184e6933",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Warburg",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_bark_2.JPG",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:32Z",
+    "note": "A mature trunk close up. Brown bark peels off in plates and shows cream, yellow and olive patches below."
+  },
+  {
+    "hash": "96880de3d24f025c4b2276a20b6c285728027ff674ed4abe5dcce64beb335fdd",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Derek Harper",
+    "license": "CC BY-SA 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:London_Plane,_Torquay_-_geograph.org.uk_-_379326.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:33Z",
+    "note": "A mature trunk that fills the frame. The bark flakes in small patches and shows paler cream and olive patches, partly in shadow."
+  },
+  {
+    "hash": "c90887edc540dcb9a0465f92def13b455ac403a9e1cd174cb6c7cde8c0854978",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "Ian Alexander",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Plane_tree_bark_pattern.jpg",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:33Z",
+    "note": "A close view of a trunk. Layered bark flakes off and shows cream, olive and yellow patches below."
+  },
+  {
+    "hash": "0b0849aad252726856413a903b909211aec59f29607bd6e99d625004194e4567",
+    "target": "PLHI",
+    "channel": "bark",
+    "source": "Wikimedia Commons",
+    "author": "AnRo0002",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:20140224Platane_Saarbruecken.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:33Z",
+    "note": "A close, sharp trunk with brown bark that flakes off in patches over cream, olive and yellow bark."
+  },
+  {
+    "hash": "e5ee9fa708894db812d967942d52ea10ebf783d125f315ca93d8983e386bc323",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "No machine-readable author provided. Bogdan assumed (based on copyright claims).",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Platanus_x_hispanica_leaves_fruit_bgiu.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:34Z",
+    "note": "One round brown fruit ball hangs on a long thin stalk among lobed leaves, sharp and clear."
+  },
+  {
+    "hash": "38f0575ef78a681503a3b382800c63f9f5aee04ae30d859a1b31e03cd5b81633",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Ellywa at Dutch Wikipedia",
+    "license": "CC BY-SA 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Plataan_bladeren.jpg",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:34Z",
+    "note": "A small, distant view up into the crown with several round fruit balls on thin stalks, some in pairs.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "917224ba85fe8594bb7a18047dd887c974cd7ddec77117e5a48c443ce14ae7d6",
+    "target": "PLHI",
+    "channel": "fruit",
+    "source": "Wikimedia Commons",
+    "author": "Lamiot",
+    "license": "CC BY 3.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:2008_453.jpg",
+    "tags": [
+      "winter"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:34Z",
+    "note": "Round brown fruit balls hang on long stalks from bare twigs in winter. Two balls are sharp."
+  },
+  {
+    "hash": "5e5d7d25f7777cb45b7d36611d0d104f2a29547e46553f7c6fdff4e4b8f0087a",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Clifton Ladd, C.W.B., some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/323774741#photo=585908143",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:36Z",
+    "note": "Many shiny leaves on the twigs, with 3 to 5 pointed lobes that end in bristle tips."
+  },
+  {
+    "hash": "4eb8f3df20ace5f6cb260ea90050b0770e8646bfb26fe4c2c15a7d6abbc40179",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742032#photo=511764648",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:37Z",
+    "note": "A cluster of leaves on the twig tip, sharp and close. Each leaf has pointed lobes with bristle tips and a shiny upper side."
+  },
+  {
+    "hash": "dc2c81d171cf7f1779d800d004b144f3b8afeef0ce1f0d041a7a6a718520756d",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742032#photo=511764650",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:37Z",
+    "note": "Several attached leaves fill the frame, with a finger at the edge. The leaves show pointed bristle-tipped lobes and a shiny upper side."
+  },
+  {
+    "hash": "d6585706d6f316ab2726fcc3f6fb70e5ff124d4759744b2215ab9629afe6aee3",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742032#photo=511764695",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:38Z",
+    "note": "Two or more leaves attach to a twig at the left. The main leaf shows pointed lobes with bristle tips and a shiny surface."
+  },
+  {
+    "hash": "2225b84de6606f58855bdea836fff2272b2b81fe375c86a2803b13aaebbdbc58",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742032#photo=511764723",
+    "tags": [
+      "close_up",
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:38Z",
+    "note": "One leaf fills the frame and shows pointed lobes with bristle tips. The twig and the leaf attachment are not visible.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "b33c2082047e02db8792fdac323954e6dbf1696b89889dad9e43796ed1c18608",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742032#photo=511764741",
+    "tags": [
+      "close_up"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:38Z",
+    "note": "A lobed leaf with bristle-tipped lobes and a shiny surface shows its petiole to the twig. Other leaves are next to it."
+  },
+  {
+    "hash": "b566fcdaeb85b50d33cb68afcd4c6a5fcff57de39f708e7e692156ebb97e8995",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Kaden Slone, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/258261946#photo=463330926",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:39Z",
+    "note": "Autumn leaves on a twig in backlight, most brown. One green leaf shows clear pointed lobes with bristle tips, but the scene is cluttered.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "1ae5a294f2d5b84fdfefb424a51789b1cd1dc60fb50fab42aa875731cbac2f78",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Kaden Slone, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/258261946#photo=463330938",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:39Z",
+    "note": "A cluttered canopy of lobed leaves with bristle tips, many in autumn brown. The leaf shape is visible but the frame is busy.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "e72d0dd5e1e31ec5cd4cae365d9c94ec06f715c0a3fc0e0b11e7fd8d2bdc3b3d",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/9552306#photo=13033981",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:40Z",
+    "note": "A twig holds several leaves with 3 to 5 pointed lobes and bristle tips, close and sharp. Most leaves are autumn brown."
+  },
+  {
+    "hash": "68949afef1596cc4e8ed4b0bb156fb4167125babc6b614d897a1b4e317091c76",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Favian Flores Medina, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/168872202#photo=292715102",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:40Z",
+    "note": "A twig holds many leaves with 3 to 5 pointed lobes that end in bristle tips, close and sharp."
+  },
+  {
+    "hash": "2df3f12937c222ade77b35067973e5461ce89321942a61e2d52f1356c72b81d9",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/37795724#photo=59990315",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:41Z",
+    "note": "Twigs hold many leaves with pointed lobes and bristle tips. Overlapping leaves and autumn colour make the frame busy.",
+    "difficulty": "hard"
+  },
+  {
+    "hash": "f57c86dab103fc9889bf3b7025c2af27a551b19f0993e0fdcddbc82caff58e41",
+    "target": "QUGR2",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "(c) Joseph Aubert, some rights reserved (CC BY)",
+    "license": "CC BY 4.0",
+    "origin": "https://www.inaturalist.org/observations/284742028#photo=511764469",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-09-28T23:10:42Z",
+    "note": "A twig holds many shiny leaves with 3 to 5 pointed lobes that end in bristle tips, close and sharp."
   }
 ]
