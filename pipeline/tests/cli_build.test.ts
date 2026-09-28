@@ -276,9 +276,14 @@ function fakeExec(): FakeExec {
       return fake.branch === null ? { code: 1, out: '' } : { code: 0, out: fake.branch };
     }
     if (command === 'git' && args[0] === 'show') {
+      const forced = codes.get('show');
+      if (forced !== undefined) return forced;
       const text = shows.get(args[1]);
       if (text === undefined) {
-        return { code: GIT_BAD_REVISION, out: `fatal: path ${args[1]} does not exist` };
+        const colon = args[1].indexOf(':');
+        const ref = args[1].slice(0, colon);
+        const file = args[1].slice(colon + 1);
+        return { code: GIT_BAD_REVISION, out: `fatal: path '${file}' does not exist in '${ref}'` };
       }
       return { code: 0, out: text };
     }
@@ -1539,6 +1544,29 @@ test('build --base reads the published content from that ref', async (t) => {
     shown(exec).some((arg) => arg.startsWith('main:')),
     false,
   );
+});
+
+test('build stops when git show fails for a reason other than a missing path', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root);
+  exec.codes.set('show', { code: 1, out: 'spawnSync git ENOBUFS' });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.match(err.join('\n'), /git show main:content\/species\.json failed with code 1: spawnSync git ENOBUFS/);
+  assert.equal(exists(root, 'content/species.json'), false);
+  assert.deepEqual(storage.puts, []);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('ids check exits 1 when git show names a bad ref', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root);
+  exec.codes.set('show', { code: 128, out: "fatal: invalid object name 'main'." });
+
+  assert.equal(await runCommand(['ids', 'check'], deps), 1);
+
+  assert.match(err.join('\n'), /invalid object name 'main'/);
 });
 
 test('deferredStorage queues, answers head, drops a removed put, and flushes in order', async (t) => {

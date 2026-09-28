@@ -16,7 +16,7 @@ import {
 import { categoryUrl, commonsCandidates, parseCategoryListing } from './commons.ts';
 import { SECTION_PAGES, buildSectionTable, loadSectionTable, nextPageUrl, sectionFor } from './fna.ts';
 import type { Http, TextResult } from './http.ts';
-import { appendOnlyErrors, readPublished, type ContentSet } from './ids.ts';
+import { appendOnlyErrors, gitShowOf, readPublished, type ContentSet } from './ids.ts';
 import {
   JPEG_QUALITY,
   MAX_SIDE,
@@ -1253,7 +1253,7 @@ async function idsCheck(rest: string[], deps: CliDeps): Promise<number> {
   const base = baseRef(parseFlags(rest));
   if (!baseResolved(deps, base)) return 1;
   const raw = rawOf(deps.root, readSpecies(deps.root), readManifest(deps.root));
-  const errors = appendOnlyErrors(readPublished(gitShowOf(deps, base)), contentSetOf(raw));
+  const errors = appendOnlyErrors(readPublished(gitShowOf(deps.exec, base)), contentSetOf(raw));
   for (const message of errors) console.error(message);
   if (errors.length > 0) return 1;
   console.log('content ids are append-only');
@@ -1372,7 +1372,7 @@ async function buildContent(
     return null;
   }
 
-  const previous = readPublished(gitShowOf(deps, base));
+  const previous = readPublished(gitShowOf(deps.exec, base));
   carryPublished(species, previous);
   carryRetired(species, previous);
   markRetiredSpecies(species, manifest, at);
@@ -1642,7 +1642,7 @@ async function commitContent(
   if (!baseResolved(deps, DEFAULT_BASE)) return false;
   const raw = rawOf(deps.root, species, manifest);
   if (validated(deps, raw) === null) return false;
-  const previous = readPublished(gitShowOf(deps, DEFAULT_BASE));
+  const previous = readPublished(gitShowOf(deps.exec, DEFAULT_BASE));
   const idErrors = appendOnlyErrors(previous, contentSetOf(raw));
   if (idErrors.length > 0) {
     for (const message of idErrors) console.error(message);
@@ -1757,23 +1757,16 @@ function pushBranch(deps: CliDeps, name: string): boolean {
 }
 
 /**
- * `readPublished` reads four absent files as a first run, and `git show` answers every path
- * of a ref it cannot resolve with an error. A failed fetch or a renamed branch would then
- * pass the append-only check on no content at all. Every command that reads a base resolves
- * it here first. Prints the line and returns false when the ref is not a commit.
+ * `readPublished` reads four absent files as a first run. `gitShowOf` gives null only when
+ * git says the ref does not hold a path, and it throws on a bad ref. A ref that does not
+ * resolve still gets its own line here, before any read. Prints the line and returns false
+ * when the ref is not a commit.
  */
 function baseResolved(deps: CliDeps, base: string): boolean {
   const result = deps.exec('git', ['rev-parse', '--verify', '--quiet', `${base}^{commit}`]);
   if (result.code === 0) return true;
   console.error(`base ${base} does not resolve to a commit`);
   return false;
-}
-
-function gitShowOf(deps: CliDeps, base: string): (file: string) => string | null {
-  return (file) => {
-    const result = deps.exec('git', ['show', `${base}:${file}`]);
-    return result.code === 0 ? result.out : null;
-  };
 }
 
 /**
