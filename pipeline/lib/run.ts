@@ -238,15 +238,6 @@ export function gitCheckoutExisting(exec: Exec, name: string): void {
   mustRun(exec, 'git', ['checkout', `content/${name}`]);
 }
 
-export function gitCommitAll(exec: Exec, message: string): void {
-  mustRun(exec, 'git', ['add', '-A']);
-  const result = exec('git', ['commit', '-m', message, '-m', CO_AUTHOR]);
-  if (result.code === 0) return;
-  // git exits non-zero on a clean tree. A step that changed nothing is not a failure.
-  if (result.out.includes('nothing to commit')) return;
-  throw new Error(`git commit failed with code ${result.code}: ${result.out}`);
-}
-
 /** The branch that every command of run <name> writes on. `run init` creates it. */
 export function runBranch(name: string): string {
   return `content/${name}`;

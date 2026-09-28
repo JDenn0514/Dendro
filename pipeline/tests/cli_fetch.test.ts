@@ -69,7 +69,7 @@ import {
   wildflowerImageUrl,
 } from '../lib/wildflower.ts';
 import { greyJpeg, redJpeg } from './fixtures/images.ts';
-import { captureConsole, fakeExec } from './helpers.ts';
+import { captureConsole, changes, fakeExec } from './helpers.ts';
 
 const NOW = '2026-09-22T15:04:00Z';
 const CDN_BASE = 'https://images.dendro.test/';
@@ -665,8 +665,12 @@ test('species list enumerates the checklist and commits the result', async (t) =
   assert.deepEqual(scope.species, ['QUGA']);
   assert.deepEqual(scope.dropped, [{ symbol: 'QUPA4', reason: 'hybrid' }]);
   assert.equal(scope.fetch_failures, 0);
-  assert.deepEqual(exec.calls[0], { command: 'git', args: ['add', '-A'] });
-  assert.equal(exec.calls[1].args[2], 'content(demo): species list');
+  const calls = changes(exec);
+  assert.deepEqual(calls[0], {
+    command: 'git',
+    args: ['add', '-A', '--', 'pipeline/runs/demo', 'pipeline/data'],
+  });
+  assert.equal(calls[1].args[2], 'content(demo): species list');
   assert.deepEqual(out, ['1 species kept, 1 dropped']);
 });
 
@@ -680,7 +684,45 @@ test('species list stops on an unknown symbol in include', async (t) => {
 
   assert.equal(await runCommand(['species', 'list', 'demo'], deps), 1);
   assert.deepEqual(err, ['unknown PLANTS symbol in include: QUZZ']);
-  assert.deepEqual(exec.calls, []);
+  assert.deepEqual(changes(exec), []);
+});
+
+test('species list on the wrong branch stops before it reads or writes', async (t) => {
+  const { root, deps, exec, http, err } = setup(t, checklistRoutes());
+  seedRun(root, { bucket: 'simple_lobed', states: 'CO', genera: 'Quercus', channels: 'leaf' }, () => {});
+  exec.branch = 'main';
+
+  assert.equal(await runCommand(['species', 'list', 'demo'], deps), 1);
+
+  assert.equal(err.length, 1);
+  assert.match(err[0], /run demo needs branch content\/demo, and HEAD is on main/);
+  assert.deepEqual(readRun(root, 'demo').species, []);
+  assert.deepEqual(changes(exec), []);
+  assert.deepEqual(http.urls, []);
+});
+
+test('photos verdict on a detached HEAD writes no row', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, () => {});
+  const target = seedCandidate(root, 'QUGA', 0);
+  exec.branch = null;
+
+  const argv = ['photos', 'verdict', 'demo', '--candidate', target.id, '--verdict', 'reject', '--note', 'blurred'];
+  assert.equal(await runCommand(argv, deps), 1);
+
+  assert.match(err.join('\n'), /HEAD is detached/);
+  assert.equal(fs.existsSync(path.join(runDir(root, 'demo'), 'verdicts.jsonl')), false);
+});
+
+test('photos add on main adds no candidate', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf' }, () => {});
+  exec.branch = 'main';
+
+  assert.equal(await runCommand(['photos', 'add', 'demo', '--target', 'QUGA'], deps), 1);
+
+  assert.match(err.join('\n'), /HEAD is on main/);
+  assert.equal(fs.existsSync(path.join(runDir(root, 'demo'), 'candidates.jsonl')), false);
 });
 
 test('species list writes plants_ids.json with the id and the scientific name', async (t) => {
@@ -754,7 +796,7 @@ test('photos fetch appends candidates with their bytes and commits', async (t) =
   }
   assert.equal(readRun(root, 'demo').fetch_failures, 0);
   assert.deepEqual(out, [appendedLine(expected.length, 0), sourceLineOf(rows)]);
-  assert.equal(exec.calls[1].args[2], 'content(demo): photo candidates');
+  assert.equal(changes(exec)[1].args[2], 'content(demo): photo candidates');
 });
 
 test('photos fetch merges the three iNat passes into one row per photo', async (t) => {
@@ -1138,7 +1180,7 @@ test("photos fetch keeps each target's rows when a later target throws", async (
   const rows = candidatesOf(root);
   assert.equal(rows.length, expectedRows('QUGA').length, 'the first target is on disk');
   assert.ok(rows.every((row) => row.target === 'QUGA'));
-  assert.deepEqual(exec.calls, [], 'a run that threw commits nothing');
+  assert.deepEqual(changes(exec), [], 'a run that threw commits nothing');
 });
 
 test('photos fetch reports the Commons page cap and records it', async (t) => {

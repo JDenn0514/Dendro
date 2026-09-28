@@ -13,7 +13,6 @@ import {
   currentBranch,
   gitCheckoutBranch,
   gitCheckoutExisting,
-  gitCommitAll,
   gitCommitPaths,
   newScope,
   openPullRequest,
@@ -243,28 +242,6 @@ test('gitCheckoutExisting checks out the branch a resumed run already has', () =
   assert.deepEqual(exec.calls, [
     { command: 'git', args: ['checkout', 'content/simple_lobed_co'] },
   ]);
-});
-
-test('gitCommitAll stages everything and commits with the co-author trailer', () => {
-  const exec = fakeExec();
-  gitCommitAll(exec, 'content(simple_lobed_co): species list');
-  assert.equal(exec.calls.length, 2);
-  assert.deepEqual(exec.calls[0], { command: 'git', args: ['add', '-A'] });
-  const commit = exec.calls[1];
-  assert.equal(commit.command, 'git');
-  assert.equal(commit.args[0], 'commit');
-  assert.equal(commit.args[1], '-m');
-  assert.equal(commit.args[2], 'content(simple_lobed_co): species list');
-  assert.equal(commit.args[3], '-m');
-  assert.equal(commit.args[4], 'Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>');
-});
-
-test('gitCommitAll accepts a clean tree', () => {
-  const exec = fakeExec();
-  exec.queue.push({ code: 0, out: '' });
-  exec.queue.push({ code: 1, out: 'nothing to commit, working tree clean' });
-  assert.doesNotThrow(() => gitCommitAll(exec, 'content(run): nothing changed'));
-  assert.equal(exec.calls.length, 2);
 });
 
 test('gitCheckoutBranch throws with the command output', () => {

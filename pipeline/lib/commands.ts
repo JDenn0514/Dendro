@@ -82,18 +82,22 @@ import {
   type ReportUnitRow,
 } from './report.ts';
 import {
+  CONTENT_PATHS,
   csvList,
   errorMessage,
   gitCheckoutBranch,
   gitCheckoutExisting,
-  gitCommitAll,
+  gitCommitPaths,
   newScope,
   openPullRequest,
   parseFlags,
   readConceptKeys,
   readJsonFile,
   readRun,
+  requireContentBranch,
+  requireRunBranch,
   runDir,
+  runPaths,
   writeRun,
   type Exec,
   type RunScope,
@@ -205,6 +209,8 @@ const USAGE = `usage: node pipeline/cli.ts <command> [flags]
 
 A flag name is kebab-case. A csv value splits on commas and each part is trimmed.
 --base names the ref the append-only check reads, and defaults to main.
+A run command that writes needs HEAD on content/<name>. run init checks it out.
+images retire, images difficulty, and species retire need a content/ branch.
 --refresh works on every command and bypasses the cache for that command.`;
 
 /** A first word that takes a second word. Every other command is one word. */
@@ -261,6 +267,7 @@ async function runInit(rest: string[], deps: CliDeps): Promise<number> {
 
 async function speciesList(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'species list <name>');
+  requireRunBranch(deps.exec, name);
   const scope = readRun(deps.root, name);
   const now = isoNow(deps);
 
@@ -309,7 +316,7 @@ async function speciesList(rest: string[], deps: CliDeps): Promise<number> {
   scope.fetch_failures = deps.http.failures.length;
   writeRun(deps.root, scope);
   writePlantsIds(plantsIdsPath(deps.root), profiles);
-  gitCommitAll(deps.exec, `content(${name}): species list`);
+  commitRun(deps, name, `content(${name}): species list`);
   printFailures(deps);
   console.log(`${enumerated.kept.length} species kept, ${scope.dropped.length} dropped`);
   return 0;
@@ -317,6 +324,7 @@ async function speciesList(rest: string[], deps: CliDeps): Promise<number> {
 
 async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'photos fetch <name>');
+  requireRunBranch(deps.exec, name);
   const scope = readRun(deps.root, name);
   const now = isoNow(deps);
   const dir = runDir(deps.root, name);
@@ -442,7 +450,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
   scope.fetch_failures = deps.http.failures.length;
   scope.mono_dropped = monoDropped;
   writeRun(deps.root, scope);
-  gitCommitAll(deps.exec, `content(${name}): photo candidates`);
+  commitRun(deps, name, `content(${name}): photo candidates`);
   printFailures(deps);
   console.log(
     `${appended} candidates appended to ${relative(deps.root, candidatesPath)}, ${scope.fetch_failures} download failures, ${scope.mono_dropped} monochrome dropped`,
@@ -453,6 +461,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
 
 async function photosAdd(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'photos add <name> --target <t> --origin <url>');
+  requireRunBranch(deps.exec, name);
   readRun(deps.root, name);
   const flags = parseFlags(rest.slice(1));
   for (const key of ADD_REQUIRED) {
@@ -537,6 +546,7 @@ async function photosVerdict(rest: string[], deps: CliDeps): Promise<number> {
     rest,
     'photos verdict <name> --candidate <id> --verdict <kind> --note "<text>"',
   );
+  requireRunBranch(deps.exec, name);
   const scope = readRun(deps.root, name);
   const flags = parseFlags(rest.slice(1));
   for (const key of VERDICT_REQUIRED) {
@@ -1080,27 +1090,30 @@ const CONCEPT_STATUS: SpeciesStatus = { status: 'included', reason: null };
 
 async function build(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'build <name> [--base <ref>]');
+  requireRunBranch(deps.exec, name);
   const data = await buildContent(name, deps, baseRef(parseFlags(rest.slice(1))));
   if (data === null) return 1;
-  gitCommitAll(deps.exec, `content: build ${name}`);
+  commitRun(deps, name, `content: build ${name}`);
   return 0;
 }
 
 async function report(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'report <name>');
+  requireRunBranch(deps.exec, name);
   if (!(await writeReport(name, deps))) return 1;
-  gitCommitAll(deps.exec, `content(${name}): report`);
+  commitRun(deps, name, `content(${name}): report`);
   return 0;
 }
 
 async function runPr(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'run pr <name>');
+  requireRunBranch(deps.exec, name);
   const body = path.join(runDir(deps.root, name), 'report.md');
   if (!fs.existsSync(body)) {
     console.error(`run ${name} has no report.md; run report first`);
     return 1;
   }
-  gitCommitAll(deps.exec, `content(${name}): pull request`);
+  commitRun(deps, name, `content(${name}): pull request`);
   if (!pushBranch(deps, name)) return 1;
   openPullRequest(deps.exec, name, body);
   console.log(`draft pull request opened for content/${name}`);
@@ -1109,6 +1122,7 @@ async function runPr(rest: string[], deps: CliDeps): Promise<number> {
 
 async function runFinish(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'run finish <name>');
+  requireRunBranch(deps.exec, name);
   const dir = runDir(deps.root, name);
   const file = path.join(dir, 'decisions.json');
   if (!fs.existsSync(file)) {
@@ -1136,9 +1150,9 @@ async function runFinish(rest: string[], deps: CliDeps): Promise<number> {
 
   const data = await buildContent(name, deps, DEFAULT_BASE);
   if (data === null) return 1;
-  gitCommitAll(deps.exec, `content: build ${name}`);
+  commitRun(deps, name, `content: build ${name}`);
   if (!(await writeReport(name, deps))) return 1;
-  gitCommitAll(deps.exec, `content(${name}): report`);
+  commitRun(deps, name, `content(${name}): report`);
   return pushBranch(deps, name) ? 0 : 1;
 }
 
@@ -1614,6 +1628,7 @@ async function writeReport(name: string, deps: CliDeps): Promise<boolean> {
  * Every command that edits content/ by hand ends the same way: validate, check the ids,
  * run `beforeWrite`, write the two files, commit. A retire removes its objects in
  * `beforeWrite`. A difficulty change removes nothing: the file stays in the bucket.
+ * It commits only on a content/ branch, and only the two files.
  */
 async function commitContent(
   deps: CliDeps,
@@ -1622,6 +1637,7 @@ async function commitContent(
   subject: string,
   beforeWrite: () => Promise<void> = async () => {},
 ): Promise<boolean> {
+  requireContentBranch(deps.exec);
   // An edit runs on a checkout that has main. A checkout without it writes nothing.
   if (!baseResolved(deps, DEFAULT_BASE)) return false;
   const raw = rawOf(deps.root, species, manifest);
@@ -1635,7 +1651,7 @@ async function commitContent(
   await beforeWrite();
   writeJson(contentFile(deps.root, 'species.json'), raw.species);
   writeJson(contentFile(deps.root, MANIFEST_NAME), raw.manifest);
-  gitCommitAll(deps.exec, `content: ${subject}`);
+  gitCommitPaths(deps.exec, `content: ${subject}`, CONTENT_PATHS);
   return true;
 }
 
@@ -1720,6 +1736,17 @@ function validated(deps: CliDeps, raw: RawContent): ValidationResult | null {
   for (const one of result.warnings) console.log(`warning ${one.file}: ${one.message}`);
   for (const one of result.errors) console.error(`error ${one.file}: ${one.message}`);
   return result.errors.length === 0 ? result : null;
+}
+
+/**
+ * Commits the paths a run writes, only on the run's branch. `photos fetch` can run for an
+ * hour, so the branch is read again here. A path that is not on disk is left out, because
+ * git fails on a pathspec that matches nothing.
+ */
+function commitRun(deps: CliDeps, name: string, message: string): void {
+  requireRunBranch(deps.exec, name);
+  const paths = runPaths(name).filter((one) => fs.existsSync(path.join(deps.root, ...one.split('/'))));
+  gitCommitPaths(deps.exec, message, paths);
 }
 
 function pushBranch(deps: CliDeps, name: string): boolean {
