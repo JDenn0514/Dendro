@@ -77,6 +77,7 @@ Write the form that matches what the references give:
 | No number | Leave the field out | Nothing; the row is hidden |
 
 - The low number must not exceed the high number.
+- A height is greater than zero. An elevation can be below zero, below sea level.
 - Height takes no single number. Write `[null, high]` for a maximum.
 - Elevation takes no `null`. Write one number, or leave the field out.
 - When a reference gives metres, convert to feet and round to the nearest 100 ft. For
@@ -95,9 +96,12 @@ leaf, a sucker shoot, or a rare form.
   to `simple_entire`, with the lobed leaf as a variant.
 - *Quercus nigra* has lobes only on young leaves. It goes to `simple_entire`.
 
-Record the other leaf forms of the species as variants. Write them in the `leaf` look-for
-line, such as "Some leaves have 2 or 3 shallow lobes." The species file has no field for
-them, so do not add one. Name the variants to the owner in your report.
+Record the other leaf forms of the species as variants, in your report to the owner only.
+
+- Do not write a variant in the `leaf` look-for line. The `photo-check` skill approves a
+  photo that shows the look-for traits, so a variant there lets in a photo of the wrong
+  bucket. The line names the typical mature leaf only.
+- The species file has no field for variants. Do not add one.
 
 ## The look-for lines
 
