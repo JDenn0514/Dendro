@@ -71,3 +71,26 @@ test('every row ends with a newline, so a later append never joins two rows', (t
   appendJsonl(ragged, [{ id: 'b' }]);
   assert.deepEqual(readJsonl(ragged), [{ id: 'a' }, { id: 'b' }]);
 });
+
+test('appendJsonl reads no whole file to find the last newline', (t) => {
+  const file = path.join(tempDir(t), 'rows.jsonl');
+  writeJsonl(file, [{ id: 'a' }]);
+  const read = t.mock.method(fs, 'readFileSync');
+  appendJsonl(file, [{ id: 'b' }]);
+  assert.equal(read.mock.callCount(), 0);
+  read.mock.restore();
+  assert.deepEqual(readJsonl(file), [{ id: 'a' }, { id: 'b' }]);
+});
+
+test('appendJsonl adds the missing newline of a file with no last newline, and of an empty file none', (t) => {
+  const dir = tempDir(t);
+  const joined = path.join(dir, 'joined.jsonl');
+  fs.writeFileSync(joined, '{"id":"a"}', 'utf8');
+  appendJsonl(joined, [{ id: 'b' }]);
+  assert.equal(fs.readFileSync(joined, 'utf8'), '{"id":"a"}\n{"id":"b"}\n');
+
+  const empty = path.join(dir, 'empty.jsonl');
+  fs.writeFileSync(empty, '', 'utf8');
+  appendJsonl(empty, [{ id: 'c' }]);
+  assert.equal(fs.readFileSync(empty, 'utf8'), '{"id":"c"}\n');
+});
