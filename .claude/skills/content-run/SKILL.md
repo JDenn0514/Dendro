@@ -120,8 +120,9 @@ manifest rows, runs the validator and the append-only check, and writes
 A new species with no photo and no confusion edge does not stop the build. The build holds
 it back: it writes no record for it, prints `<SYMBOL>: held back: no photo and no confusion
 edge`, and lists it in `build.json` and in the report with status `no_photos` and that
-reason. Step 7 can find photos for it. The next build then writes it. A species that `main` already publishes is never held back: with no photo and no
-edge it still fails the build. So draft every species file in step 3, before the photos.
+reason. Step 7 can find photos for it. The next build then writes it. A species that
+`main` already publishes is never held back: with no photo and no edge it still fails the
+build. So draft every species file in step 3, before the photos.
 Do not leave a species file out to get past the build.
 
 The build writes nothing to `content/` until the validator and the append-only check both
