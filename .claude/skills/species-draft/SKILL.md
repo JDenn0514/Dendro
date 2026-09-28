@@ -92,9 +92,18 @@ read. See **Never invent a number you did not read** below.
 The `leaf` bucket follows the typical mature leaf. Do not choose the bucket from a young
 leaf, a sucker shoot, or a rare form.
 
-- *Quercus arkansana* has leaves that are "entire, or with 2 to 3 shallow lobes". It goes
-  to `simple_entire`, with the lobed leaf as a variant.
 - *Quercus nigra* has lobes only on young leaves. It goes to `simple_entire`.
+
+Some references give two forms and do not say which one is typical, for example "entire to
+shallowly lobed". Then the photos decide:
+
+1. Draft the file in the bucket of the run.
+2. Name the species to the owner as a tie-break case.
+3. After the photo check, count the approved leaf photos by the form they show.
+4. The owner sets the bucket from the counts.
+
+- *Quercus laceyi* is "entire to shallowly lobed" in FNA. Most of its approved photos show
+  lobed leaves, so it stays in `simple_lobed`.
 
 Record the other leaf forms of the species as variants, in your report to the owner only.
 
