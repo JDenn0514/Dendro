@@ -220,6 +220,9 @@ test('height and elevation accept each form a reference can give', () => {
     { height_ft: [null, 40] },
     { elevation_ft: [0, 2000] },
     { elevation_ft: 6600 },
+    // Death Valley and the Salton Trough lie below sea level.
+    { elevation_ft: [-200, 1000] },
+    { elevation_ft: -200 },
   ];
   for (const fields of cases) {
     const value = authored(fields as Partial<AuthoredSpecies>);
@@ -245,6 +248,10 @@ test('height and elevation reject every other form', () => {
     ['height_ft', [30]],
     ['height_ft', [10, 20, 30]],
     ['height_ft', null],
+    ['height_ft', [null, 0]],
+    ['height_ft', [null, -5]],
+    ['height_ft', [0, 40]],
+    ['height_ft', [-5, 40]],
     ['elevation_ft', [9000, 5000]],
     ['elevation_ft', [5000, null]],
     ['elevation_ft', [null, 9000]],

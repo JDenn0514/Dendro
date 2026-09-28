@@ -129,6 +129,17 @@ function checkRange(
   }
 }
 
+function checkHeight(errors: string[], symbol: string, value: unknown): void {
+  const before = errors.length;
+  checkRange(errors, symbol, 'height_ft', value, true);
+  if (errors.length > before) return;
+  // A tree has a height above zero. An elevation can be below sea level.
+  const numbers = (value as unknown[]).filter(isNumber);
+  if (numbers.some((number) => number <= 0)) {
+    errors.push(`${symbol}: height_ft must hold numbers greater than zero`);
+  }
+}
+
 function checkElevation(errors: string[], symbol: string, value: unknown): void {
   // One number is one known elevation, for a species with few known sites.
   if (isNumber(value)) return;
@@ -197,7 +208,7 @@ export function validateAuthored(
     checkElevation(errors, symbol, authored.elevation_ft);
   }
   if (authored.height_ft !== undefined) {
-    checkRange(errors, symbol, 'height_ft', authored.height_ft, true);
+    checkHeight(errors, symbol, authored.height_ft);
   }
 
   if (authored.habitat !== undefined && !nonEmptyString(authored.habitat)) {
