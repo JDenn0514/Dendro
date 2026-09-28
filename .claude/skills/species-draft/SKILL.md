@@ -45,17 +45,16 @@ species record. A script fetches the rest from USDA PLANTS and iNaturalist.
   The value is the `key` of a row in `content/concepts.json` whose `channel` equals that
   channel. Read that file and copy the key. A concept row has `key`, `channel`, `name`,
   `accept`, and `description`, and nothing else; there is no level field and no nesting.
-  Every key in the file is a valid value.
+  Every key in the file is a valid value. See **The leaf bucket** below.
 - `range`: an object with a non-empty `range.text`, one short phrase that names the range.
   The states come from the PLANTS distribution, not from you.
-- `elevation_ft`: two numbers, low then high. The first must not exceed the second.
-- `height_ft`: two numbers, low then high. The first must not exceed the second.
 - `habitat`: one non-empty sentence.
 - `ref`: a non-empty list of non-empty strings. Each string names one reference you read.
 
 **Optional fields.** Leave a field out when you have nothing for it. A field the list
 below does not name fails the build, so check a name before you write it.
 
+- `height_ft` and `elevation_ft`: see **Height and elevation** below.
 - `common_extra`: extra common names. The build appends them after the PLANTS common name.
 - `audubon_name`: the name the Audubon guide uses.
 - `genus_common`: the common word for the genus, lower case and singular, such as `oak` or
@@ -64,6 +63,41 @@ below does not name fails the build, so check a name before you write it.
   `opposite`. The species screen prints it as a fact.
 - `planted_states`: states where the species is planted but not native.
 - `variety_notes`: an object keyed by variety symbol, with one note each.
+
+## Height and elevation
+
+Write the form that matches what the references give:
+
+| The references give | Write | The species screen shows |
+|---|---|---|
+| A low and a high height | `"height_ft": [30, 40]` | 30–40 feet tall |
+| Only a maximum height | `"height_ft": [null, 40]` | Up to 40 feet tall |
+| A low and a high elevation | `"elevation_ft": [0, 2000]` | 0–2,000 feet elevation |
+| One elevation | `"elevation_ft": 6600` | About 6,600 feet elevation |
+| No number | Leave the field out | Nothing; the row is hidden |
+
+- The low number must not exceed the high number.
+- Height takes no single number. Write `[null, high]` for a maximum.
+- Elevation takes no `null`. Write one number, or leave the field out.
+- When a reference gives metres, convert to feet and round to the nearest 100 ft. For
+  example, 2,300 m is 7,546 ft, so write 7500.
+
+Use a partial form or leave a field out only when no reference in **The reference order**
+gives the number. Tell the owner which species and which field, and which references you
+read. See **Never invent a number you did not read** below.
+
+## The leaf bucket
+
+The `leaf` bucket follows the typical mature leaf. Do not choose the bucket from a young
+leaf, a sucker shoot, or a rare form.
+
+- *Quercus arkansana* has leaves that are "entire, or with 2 to 3 shallow lobes". It goes
+  to `simple_entire`, with the lobed leaf as a variant.
+- *Quercus nigra* has lobes only on young leaves. It goes to `simple_entire`.
+
+Record the other leaf forms of the species as variants. Write them in the `leaf` look-for
+line, such as "Some leaves have 2 or 3 shallow lobes." The species file has no field for
+them, so do not add one. Name the variants to the owner in your report.
 
 ## The look-for lines
 
@@ -104,6 +138,17 @@ Read in this order of preference and stop when you have the fields:
 3. The Flora of North America treatment.
 4. Sibley.
 
+When these four do not give a field, read these further references:
+
+- wildflower.org (Lady Bird Johnson Wildflower Center).
+- NC State Extension Plant Toolbox (plants.ces.ncsu.edu).
+- Trees and Shrubs Online.
+- NatureServe Explorer.
+- USFS Fire Effects Information System (FEIS).
+- Jepson eFlora, for a California species.
+- Missouri Botanical Garden Plant Finder, for a planted tree.
+- Go Botany, for a New England species.
+
 ## The two rules that matter most
 
 **`ref` names what you actually read.** Write the reference you opened, with enough detail
@@ -112,9 +157,9 @@ reference you did not read. The owner checks each claim against the named page. 
 `ref` wastes their time and hides an error.
 
 **Never invent a number you did not read.** `elevation_ft` and `height_ft` come from a
-reference. When no reference gives a number, say so to the owner and leave the file
-undrafted. A guessed number reads exactly like a checked one, and the owner cannot tell
-them apart.
+reference. When no reference gives a number, leave out the field or the low value, as
+**Height and elevation** shows, and tell the owner. A guessed number reads exactly like a
+checked one, and the owner cannot tell them apart.
 
 The same rule holds for `habitat` and `range.text`. Write what the source says, in your own
 short words.
