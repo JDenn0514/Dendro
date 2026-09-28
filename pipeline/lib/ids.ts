@@ -1,3 +1,5 @@
+import type { Exec } from './run.ts';
+
 export interface ContentSet {
   species: Record<string, Record<string, unknown>>;
   concepts: { key: string; channel: string }[];
@@ -56,6 +58,24 @@ export function appendOnlyErrors(previous: ContentSet | null, next: ContentSet):
     errors.push(`${id} is in the published ${file} and is gone from the new content`);
   }
   return errors;
+}
+
+/** Git's two answers for a path that the ref does not hold. Git exits 128 on both. */
+const NOT_IN_REF = /fatal: path '[^']*' (does not exist in|exists on disk, but not in) '/;
+const GIT_FATAL = 128;
+
+/**
+ * Reads one file of a ref. Null means git said the ref does not hold the path. Every other
+ * failure throws: a bad ref, a missing git, or a cut-off read would otherwise look like a
+ * first run to `readPublished`, and the append-only check would pass on no content.
+ */
+export function gitShowOf(exec: Exec, base: string): (file: string) => string | null {
+  return (file) => {
+    const result = exec('git', ['show', `${base}:${file}`]);
+    if (result.code === 0) return result.out;
+    if (result.code === GIT_FATAL && NOT_IN_REF.test(result.out)) return null;
+    throw new Error(`git show ${base}:${file} failed with code ${result.code}: ${result.out}`);
+  };
 }
 
 export function readPublished(gitShow: (path: string) => string | null): ContentSet | null {

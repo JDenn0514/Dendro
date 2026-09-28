@@ -1,6 +1,6 @@
 ---
 name: photo-check
-description: Use when approving the photo candidates of a Dendro content run, one verdict per candidate, through `cli photos verdict`.
+description: Use when approving the photo candidates of a Dendro content run, one verdict per candidate, through `cli photos stage` and `cli photos apply`.
 ---
 
 # Photo check
@@ -26,20 +26,51 @@ exception is a Kew POWO row whose saved file is missing. That row gets no verdic
    paths that the `powo-harvest` skill gave you for that species: the saved gallery and
    the rows file. First check that both files exist. When one is missing, do not dispatch
    the row. Follow **A Kew POWO row** below.
-5. **Each subagent returns its verdict as its result. It writes no file.** It does not
-   touch `verdicts.jsonl`.
-6. For each returned verdict, run one command. Run them in sequence, one after the other,
-   because each command appends to the same file:
+5. **Each subagent returns its verdict as its result.** It does not touch `verdicts.jsonl`,
+   and it never adds a row to a staged file by hand. `photos stage` adds each row.
+6. Stage each returned verdict with one command:
 
    ```bash
-   node pipeline/cli.ts photos verdict <name> --candidate <id> --verdict <kind> [--channel <c>] [--tags a,b] [--case <case>] --note "<text>"
+   node pipeline/cli.ts photos stage <name> --candidate <id> --verdict <kind> [--channel <c>] [--tags a,b] [--case <case>] --note "<text>"
    ```
 
-   The six flags above are the whole surface. The command writes the row. It sets
-   `checked_by` to `photo_check_agent`, which is `CHECK_AGENT` in the CLI, and `checked_at`
-   to today's date. You never set those two.
-7. After each batch, apply the stop rule below. Then count the approved photos again, and
-   skip the targets that are now full.
+   The six flags above are the whole surface. The command checks the row and appends it to
+   `pipeline/runs/<name>/staged/<target>.jsonl`. It prints the approved counts of that
+   target per channel, without the `hard` photos, for example
+   `QUAL: approved leaf 3, bark 1, fruit 0; hard 1`. A judge that works on one target can
+   run it for its own verdicts. A second stage of the same verdict changes nothing. A stage
+   of a different verdict for the same candidate is refused. To change a staged verdict,
+   remove its line from `staged/<target>.jsonl`, then stage again.
+
+   The judge that staged a row may remove or change a line in its own
+   `staged/<target>.jsonl` with the Edit tool. It edits only that file by hand. It never
+   edits `verdicts.jsonl` or the staged file of another judge.
+7. After each batch, apply every staged verdict in one command:
+
+   ```bash
+   node pipeline/cli.ts photos apply <name>
+   ```
+
+   It checks every staged row first. When one row is bad, it writes nothing and exits 1.
+   A candidate that already has a different verdict is a conflict: the command names it,
+   writes nothing, and exits 1. Add `--replace` only when the new verdict must win.
+   `--replace` never changes an owner decision. A second apply of the same rows changes
+   nothing. The command sets `checked_by` to `photo_check_agent`, which is `CHECK_AGENT` in
+   the CLI, and `checked_at` to the time of the apply. You never set those two. It prints
+   one line per target with the approved counts per channel, then a `total:` line with the
+   stop-rule numbers. Use those lines for the stop rule below, and skip the targets that are
+   now full.
+
+   When `photos apply` exits 1, it applied nothing. Do these steps:
+
+   1. Read each error line and each `conflict:` line. An error names the file and the line.
+   2. Fix the staged rows that they name. Remove a row, or change it to the right verdict.
+      A conflict with an owner decision needs a staged row that matches the owner, or no row.
+   3. Run `photos apply <name>` again.
+
+   After a fix with `photos verdict`, remove the staged row of that candidate. If the row
+   stays, the next apply reports a conflict, and an apply with `--replace` records the old
+   verdict again.
 
 **Stop at 6 good photos.** Count the approved photos of each target from
 `verdicts.jsonl`. Use the last row of each candidate `id`, take the `approve` rows, and
@@ -188,7 +219,7 @@ the evidence for the check is not on disk. The row gets no verdict:
 1. Do not load the Kew page again.
 2. Do not dispatch the row. When a subagent finds that a file is missing or cannot be
    read, it returns only a `note` that names the file, and no verdict.
-3. Run no `photos verdict` command for the row. The row stays unjudged, so the next pass
+3. Run no `photos stage` command for the row. The row stays unjudged, so the next pass
    of this skill takes it again. It does not count toward the stop rule.
 4. Tell the owner the candidate id and the path of the missing file.
 
@@ -260,7 +291,7 @@ license text does not match the allowlist.
 - It does not identify a species from the image.
 - It does not re-judge a candidate that already has a verdict row.
 - It does not judge the candidates of a full target. They stay unjudged.
-- It does not write `verdicts.jsonl`. `cli photos verdict` writes it.
+- It does not write `verdicts.jsonl`. `cli photos apply` writes it.
 - It does not write `decisions.json`. The owner writes that.
 - It does not upload, resize, or delete any image. `cli build` does that.
 - It does not commit.

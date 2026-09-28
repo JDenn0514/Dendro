@@ -17,6 +17,7 @@ import type { BytesResult, Http, HttpFailure, TextResult } from '../lib/http.ts'
 import { JPEG_QUALITY, MAX_SIDE, objectKey, reviewKey, type Resize } from '../lib/images.ts';
 import { taxaUrl } from '../lib/inat.ts';
 import { readJsonl, writeJsonl } from '../lib/jsonl.ts';
+import { HELD_BACK } from '../lib/hold_back.ts';
 import type { ManifestRow } from '../lib/manifest.ts';
 import { DISTRIBUTION_URL, profileUrl, subordinateTaxaUrl } from '../lib/plants.ts';
 import { newScope, runDir, writeRun, type Exec } from '../lib/run.ts';
@@ -211,6 +212,8 @@ type FakeExec = Exec & {
   /** Keyed by the first argument, so a test makes one subcommand fail. */
   codes: Map<string, { code: number; out: string }>;
   shows: Map<string, string>;
+  /** What `git symbolic-ref` answers. Null is a detached HEAD. */
+  branch: string | null;
 };
 
 type BuildReport = Omit<ReportData, 'escalations'>;
@@ -270,16 +273,30 @@ function fakeExec(): FakeExec {
   const shows = new Map<string, string>();
   const exec = (command: string, args: string[]): { code: number; out: string } => {
     calls.push({ command, args });
+    if (command === 'git' && args[0] === 'symbolic-ref') {
+      return fake.branch === null ? { code: 1, out: '' } : { code: 0, out: fake.branch };
+    }
     if (command === 'git' && args[0] === 'show') {
+      const forced = codes.get('show');
+      if (forced !== undefined) return forced;
       const text = shows.get(args[1]);
       if (text === undefined) {
-        return { code: GIT_BAD_REVISION, out: `fatal: path ${args[1]} does not exist` };
+        const colon = args[1].indexOf(':');
+        const ref = args[1].slice(0, colon);
+        const file = args[1].slice(colon + 1);
+        return { code: GIT_BAD_REVISION, out: `fatal: path '${file}' does not exist in '${ref}'` };
       }
       return { code: 0, out: text };
     }
     return codes.get(args[0]) ?? { code: 0, out: '' };
   };
-  return Object.assign(exec, { calls, codes, shows });
+  const fake: FakeExec = Object.assign(exec, {
+    calls,
+    codes,
+    shows,
+    branch: 'content/demo' as string | null,
+  });
+  return fake;
 }
 
 /** Seeds what `git show <base>:content/...` returns, so the append-only check has a past. */
@@ -543,6 +560,48 @@ test('build writes species.json and the manifest, uploads the resized bytes, and
   const text = readText(root, 'content/species.json');
   assert.ok(text.endsWith('}\n'));
   assert.ok(text.includes('\n  "QUGA"'));
+});
+
+test('build commits the run paths and no other path', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root);
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  const paths = ['pipeline/runs/demo', 'content', 'content_src', 'pipeline/data'];
+  assert.deepEqual(called(exec, 'git', 'add')?.args, ['add', '-A', '--', ...paths]);
+  assert.deepEqual(called(exec, 'git', 'commit')?.args.slice(-5), ['--', ...paths]);
+});
+
+test('build on main writes nothing, uploads nothing, and commits nothing', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root);
+  exec.branch = 'main';
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.match(err.join('\n'), /run demo needs branch content\/demo, and HEAD is on main/);
+  assert.equal(exists(root, 'content/species.json'), false);
+  assert.equal(exists(root, 'pipeline/runs/demo/build.json'), false);
+  assert.deepEqual(storage.puts, []);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('build stops before its commit when another session switches the branch during the upload', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root);
+  const put = storage.put;
+  storage.put = async (key, bytes, contentType) => {
+    exec.branch = 'main';
+    await put(key, bytes, contentType);
+  };
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.ok(storage.puts.length > 0);
+  assert.match(err.join('\n'), /run demo needs branch content\/demo, and HEAD is on main/);
+  assert.equal(called(exec, 'git', 'add'), undefined);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
 });
 
 test('a validator error writes no content file and uploads nothing', async (t) => {
@@ -1076,14 +1135,15 @@ test('run finish rejects a decision on a candidate the run does not hold', async
   assert.equal(called(exec, 'git', 'push'), undefined);
 });
 
-test('run finish with no decisions.json returns 0 and runs no git command', async (t) => {
+test('run finish with no decisions.json returns 0 and changes nothing in git', async (t) => {
   const { root, deps, exec, out } = setup(t);
   seed(root);
 
   assert.equal(await runCommand(['run', 'finish', 'demo'], deps), 0);
 
   assert.deepEqual(out, ['no decisions to apply']);
-  assert.deepEqual(exec.calls, []);
+  // The branch read is the only git call.
+  assert.deepEqual(exec.calls.map((call) => call.args[0]), ['symbolic-ref']);
 });
 
 test('images retire retires the row, removes the object, and keeps the other row', async (t) => {
@@ -1244,6 +1304,88 @@ test('images difficulty will not hide the last photo of a species no edge names'
   assert.equal(called(exec, 'git', 'commit'), undefined);
 });
 
+test('images difficulty on a content/ branch commits only the two content files', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    manifest: [
+      row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' }),
+      row({ hash: HASH_D, target: 'QUGA', channel: 'leaf' }),
+    ],
+  });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+  exec.branch = 'content/fixes';
+
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C, '--set', 'hard'], deps), 0, err.join(' | '));
+
+  const paths = ['content/species.json', 'content/images/manifest.json'];
+  assert.deepEqual(called(exec, 'git', 'add')?.args, ['add', '-A', '--', ...paths]);
+  assert.deepEqual(called(exec, 'git', 'commit')?.args.slice(-3), ['--', ...paths]);
+});
+
+test('images difficulty on main writes nothing and commits nothing', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    manifest: [
+      row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' }),
+      row({ hash: HASH_D, target: 'QUGA', channel: 'leaf' }),
+    ],
+  });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+  exec.branch = 'main';
+
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C, '--set', 'hard'], deps), 1);
+
+  assert.match(err.join('\n'), /only on a content\/ branch, and HEAD is on main/);
+  assert.equal(manifestOf(root)[0].difficulty, undefined);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('images retire stops before its commit when the branch changes while it removes objects', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root, {
+    manifest: [
+      row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' }),
+      row({ hash: HASH_D, target: 'QUGA', channel: 'bark' }),
+    ],
+  });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+  await storage.put(objectKey(HASH_C), new Uint8Array([1]), 'image/jpeg');
+  const remove = storage.remove;
+  storage.remove = async (key) => {
+    exec.branch = 'main';
+    await remove(key);
+  };
+
+  const code = await runCommand(['images', 'retire', HASH_C, '--reason', 'Takedown email.'], deps);
+  assert.equal(code, 1);
+
+  assert.equal(storage.objects.has(objectKey(HASH_C)), false);
+  assert.match(err.join('\n'), /only on a content\/ branch, and HEAD is on main/);
+  assert.equal(called(exec, 'git', 'add'), undefined);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('images difficulty stops before its commit when the branch changes after the first check', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    manifest: [
+      row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' }),
+      row({ hash: HASH_D, target: 'QUGA', channel: 'leaf' }),
+    ],
+  });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+  deps.validate = (raw) => {
+    exec.branch = 'main';
+    return validateContent(raw);
+  };
+
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C, '--set', 'hard'], deps), 1);
+
+  assert.match(err.join('\n'), /only on a content\/ branch, and HEAD is on main/);
+  assert.equal(called(exec, 'git', 'add'), undefined);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
 test('a build keeps the difficulty on a published row', async (t) => {
   const { root, deps, err } = setup(t);
   seed(root, {
@@ -1327,6 +1469,8 @@ test('a rebuild with a hard tag leaves the difficulty of a row already in the ma
   assert.equal(rows.some((one) => 'difficulty' in one), false);
 });
 
+// Hard rows still name the species, so the hold-back rule leaves it in and the validator
+// fails it. See the open question in docs/superpowers/plans/2026-09-28-run-safety.md.
 test('a build whose every photo of a species is tagged hard fails on the validator', async (t) => {
   const { root, deps, storage, err } = setup(t);
   seed(root, {
@@ -1344,6 +1488,69 @@ test('a build whose every photo of a species is tagged hard fails on the validat
   );
   assert.deepEqual(storage.puts, []);
   assert.equal(exists(root, 'content/images/manifest.json'), false);
+});
+
+test('a new species with no photo and no edge is held back and listed as no_photos', async (t) => {
+  const { root, deps, out, err } = setup(t);
+  // The level-3 unit names the genus Quercus. With no species that fails the validator, so
+  // this test keeps the three level-1 units only.
+  seed(root, {
+    units: LEVEL_ONE_UNITS,
+    verdicts: [verdict(MYSTERY.id, 'escalate', { case: 'mismatch', note: 'Another oak.' })],
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.deepEqual(speciesOf(root), {});
+  const row = buildOf(root).species.find((one) => one.symbol === 'QUGA');
+  assert.deepEqual(row, { symbol: 'QUGA', status: 'no_photos', reason: HELD_BACK, counts: {} });
+  assert.ok(out.includes(`QUGA: ${HELD_BACK}`), out.join(' | '));
+
+  assert.equal(await runCommand(['report', 'demo'], deps), 0, err.join(' | '));
+  assert.ok(readText(root, 'pipeline/runs/demo/report.md').includes(`| QUGA | no_photos | ${HELD_BACK} |`));
+});
+
+test('a published species with no photo and no edge still fails the build', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    verdicts: [verdict(MYSTERY.id, 'escalate', { case: 'mismatch', note: 'Another oak.' })],
+  });
+  fakeGitShow(exec, 'main', { species: { QUGA: record() } });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.ok(
+    err.includes('error species.json: QUGA has no manifest image and no confusion edge'),
+    err.join(' | '),
+  );
+  assert.equal(exists(root, 'content/species.json'), false);
+});
+
+test('a confusion edge brings a new species with no photo into the build', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    verdicts: [verdict(MYSTERY.id, 'escalate', { case: 'mismatch', note: 'Another oak.' })],
+    confusion: [
+      {
+        a: 'QUAL',
+        b: 'QUGA',
+        channel: 'leaf',
+        a_not_b: 'White oak has rounded lobes.',
+        b_not_a: 'Gambel oak has deeper sinuses.',
+        ref: 'FNA vol. 3',
+      },
+    ],
+  });
+  fakeGitShow(exec, 'main', {
+    species: { QUAL: record({ scientific: 'Quercus alba', common: ['white oak'] }) },
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.deepEqual(Object.keys(speciesOf(root)), ['QUAL', 'QUGA']);
+  const row = buildOf(root).species.find((one) => one.symbol === 'QUGA');
+  assert.equal(row?.status, 'no_photos');
+  assert.equal(row?.reason, null);
 });
 
 test('species retire marks the record, retires its rows, and removes the objects', async (t) => {
@@ -1466,6 +1673,29 @@ test('build --base reads the published content from that ref', async (t) => {
     shown(exec).some((arg) => arg.startsWith('main:')),
     false,
   );
+});
+
+test('build stops when git show fails for a reason other than a missing path', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root);
+  exec.codes.set('show', { code: 1, out: 'spawnSync git ENOBUFS' });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.match(err.join('\n'), /git show main:content\/species\.json failed with code 1: spawnSync git ENOBUFS/);
+  assert.equal(exists(root, 'content/species.json'), false);
+  assert.deepEqual(storage.puts, []);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('ids check exits 1 when git show names a bad ref', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root);
+  exec.codes.set('show', { code: 128, out: "fatal: invalid object name 'main'." });
+
+  assert.equal(await runCommand(['ids', 'check'], deps), 1);
+
+  assert.match(err.join('\n'), /invalid object name 'main'/);
 });
 
 test('deferredStorage queues, answers head, drops a removed put, and flushes in order', async (t) => {

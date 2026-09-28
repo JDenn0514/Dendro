@@ -15,8 +15,9 @@ import {
 } from './candidates.ts';
 import { categoryUrl, commonsCandidates, parseCategoryListing } from './commons.ts';
 import { SECTION_PAGES, buildSectionTable, loadSectionTable, nextPageUrl, sectionFor } from './fna.ts';
+import { HELD_BACK, isHeldBack } from './hold_back.ts';
 import type { Http, TextResult } from './http.ts';
-import { appendOnlyErrors, readPublished, type ContentSet } from './ids.ts';
+import { appendOnlyErrors, gitShowOf, readPublished, type ContentSet } from './ids.ts';
 import {
   JPEG_QUALITY,
   MAX_SIDE,
@@ -82,18 +83,22 @@ import {
   type ReportUnitRow,
 } from './report.ts';
 import {
+  CONTENT_PATHS,
   csvList,
   errorMessage,
   gitCheckoutBranch,
   gitCheckoutExisting,
-  gitCommitAll,
+  gitCommitPaths,
   newScope,
   openPullRequest,
   parseFlags,
   readConceptKeys,
   readJsonFile,
   readRun,
+  requireContentBranch,
+  requireRunBranch,
   runDir,
+  runPaths,
   writeRun,
   type Exec,
   type RunScope,
@@ -121,6 +126,22 @@ import {
   type Verdict,
   type VerdictKind,
 } from './verdicts.ts';
+import {
+  conflictText,
+  countsText,
+  parseStagedLines,
+  planApply,
+  sameVerdict,
+  stagedDir,
+  stagedErrors,
+  stagedPath,
+  stamp,
+  stopText,
+  targetChannels,
+  targetCounts,
+  verdictText,
+  type StagedVerdict,
+} from './verdict_apply.ts';
 import { wildflowerRows } from './wildflower.ts';
 
 export interface ValidationMessage {
@@ -190,6 +211,8 @@ const USAGE = `usage: node pipeline/cli.ts <command> [flags]
   photos fetch <name>
   photos add <name> --target <t> --origin <url> --file-url <url> --source <s> --author <a> --license <l> [--license-url <u>] [--source-species <s>] [--channel-hint <c>] [--local <path>]
   photos verdict <name> --candidate <id> --verdict <${VERDICT_KINDS.join('|')}> [--channel <c>] [--tags a,b] [--case <case>] --note "<text>"
+  photos stage <name> --candidate <id> --verdict <${VERDICT_KINDS.join('|')}> [--channel <c>] [--tags a,b] [--case <case>] --note "<text>"
+  photos apply <name> [--file <path>] [--replace]
   photos audit <name> [--threshold <n>]
   photos audit --manifest [--threshold <n>]
   build <name> [--base <ref>]
@@ -205,6 +228,8 @@ const USAGE = `usage: node pipeline/cli.ts <command> [flags]
 
 A flag name is kebab-case. A csv value splits on commas and each part is trimmed.
 --base names the ref the append-only check reads, and defaults to main.
+A run command that writes needs HEAD on content/<name>. run init checks it out.
+images retire, images difficulty, and species retire need a content/ branch.
 --refresh works on every command and bypasses the cache for that command.`;
 
 /** A first word that takes a second word. Every other command is one word. */
@@ -261,6 +286,7 @@ async function runInit(rest: string[], deps: CliDeps): Promise<number> {
 
 async function speciesList(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'species list <name>');
+  requireRunBranch(deps.exec, name);
   const scope = readRun(deps.root, name);
   const now = isoNow(deps);
 
@@ -309,7 +335,7 @@ async function speciesList(rest: string[], deps: CliDeps): Promise<number> {
   scope.fetch_failures = deps.http.failures.length;
   writeRun(deps.root, scope);
   writePlantsIds(plantsIdsPath(deps.root), profiles);
-  gitCommitAll(deps.exec, `content(${name}): species list`);
+  commitRun(deps, name, `content(${name}): species list`);
   printFailures(deps);
   console.log(`${enumerated.kept.length} species kept, ${scope.dropped.length} dropped`);
   return 0;
@@ -317,6 +343,7 @@ async function speciesList(rest: string[], deps: CliDeps): Promise<number> {
 
 async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'photos fetch <name>');
+  requireRunBranch(deps.exec, name);
   const scope = readRun(deps.root, name);
   const now = isoNow(deps);
   const dir = runDir(deps.root, name);
@@ -442,7 +469,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
   scope.fetch_failures = deps.http.failures.length;
   scope.mono_dropped = monoDropped;
   writeRun(deps.root, scope);
-  gitCommitAll(deps.exec, `content(${name}): photo candidates`);
+  commitRun(deps, name, `content(${name}): photo candidates`);
   printFailures(deps);
   console.log(
     `${appended} candidates appended to ${relative(deps.root, candidatesPath)}, ${scope.fetch_failures} download failures, ${scope.mono_dropped} monochrome dropped`,
@@ -453,6 +480,7 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
 
 async function photosAdd(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'photos add <name> --target <t> --origin <url>');
+  requireRunBranch(deps.exec, name);
   readRun(deps.root, name);
   const flags = parseFlags(rest.slice(1));
   for (const key of ADD_REQUIRED) {
@@ -537,6 +565,7 @@ async function photosVerdict(rest: string[], deps: CliDeps): Promise<number> {
     rest,
     'photos verdict <name> --candidate <id> --verdict <kind> --note "<text>"',
   );
+  requireRunBranch(deps.exec, name);
   const scope = readRun(deps.root, name);
   const flags = parseFlags(rest.slice(1));
   for (const key of VERDICT_REQUIRED) {
@@ -568,6 +597,178 @@ async function photosVerdict(rest: string[], deps: CliDeps): Promise<number> {
   appendJsonl(path.join(dir, 'verdicts.jsonl'), [row]);
   console.log(`${row.verdict} recorded for candidate ${row.candidate_id}`);
   return 0;
+}
+
+/**
+ * Checks one verdict and appends it to the staged file of its target. A judge runs it once
+ * per verdict, so no agent rewrites a whole file. `photos apply` writes verdicts.jsonl.
+ */
+async function photosStage(rest: string[], deps: CliDeps): Promise<number> {
+  const name = positional(
+    rest,
+    'photos stage <name> --candidate <id> --verdict <kind> --note "<text>"',
+  );
+  requireRunBranch(deps.exec, name);
+  const scope = readRun(deps.root, name);
+  const flags = parseFlags(rest.slice(1));
+  for (const key of VERDICT_REQUIRED) {
+    const value = flags[key];
+    if (value === undefined || value.trim() === '') {
+      console.error(`photos stage needs --${key}`);
+      return 1;
+    }
+  }
+  const dir = runDir(deps.root, name);
+  const candidates = readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'));
+  // The two casts hold because `stagedErrors` rejects a kind or a case outside the lists.
+  const row: StagedVerdict = {
+    candidate_id: flags.candidate,
+    verdict: flags.verdict as VerdictKind,
+    channel: flags.channel ?? null,
+    tags: csvList(flags.tags),
+    case: (flags.case ?? null) as EscalationCase | null,
+    note: flags.note,
+  };
+  const errors = stagedErrors([row], candidates, scope.channels, 'photos stage');
+  if (errors.length > 0) {
+    for (const message of errors) console.error(message);
+    return 1;
+  }
+  // `stagedErrors` passed, so the candidate is there.
+  const candidate = candidates.find((one) => one.id === row.candidate_id) as Candidate;
+  const file = stagedPath(dir, candidate.target);
+  const label = relative(deps.root, file);
+  const rows = readStaged(file, label);
+  const prior = rows.find((one) => one.candidate_id === row.candidate_id);
+  if (prior !== undefined && !sameVerdict(prior, row)) {
+    console.error(
+      `refused: ${row.candidate_id} is already staged as ${verdictText(prior)} in ${label}. To change it, remove its row from that file, then stage again.`,
+    );
+    return 1;
+  }
+  if (prior === undefined) {
+    appendJsonl(file, [row]);
+    rows.push(row);
+    console.log(`${row.verdict} staged for candidate ${row.candidate_id} in ${label}`);
+  } else {
+    console.log(`${row.candidate_id} is already staged`);
+  }
+  // The counts read the applied rows, then the staged rows, so a staged row wins.
+  const verdicts = [
+    ...readJsonl<Verdict>(path.join(dir, 'verdicts.jsonl')),
+    ...rows.map((one) => stamp(one, CHECK_AGENT, '')),
+  ];
+  const hard = hardCandidateIds(readManifest(deps.root), candidates, verdicts);
+  const counts = targetCountsText(scope, candidate.target, candidates, verdicts, hard);
+  console.log(`${candidate.target}: ${counts}`);
+  return 0;
+}
+
+/**
+ * Applies staged verdicts in one process. Every row is checked first, and one bad row or
+ * one conflict writes nothing. The same files applied twice give the same verdicts.jsonl.
+ */
+async function photosApply(rest: string[], deps: CliDeps): Promise<number> {
+  const name = positional(rest, 'photos apply <name> [--file <path>] [--replace]');
+  requireRunBranch(deps.exec, name);
+  const scope = readRun(deps.root, name);
+  const flags = parseFlags(rest.slice(1));
+  const dir = runDir(deps.root, name);
+  const files = applyFiles(deps.root, dir, flagValue(flags, 'file'));
+  if (files.length === 0) {
+    console.log(`no staged verdicts in ${relative(deps.root, stagedDir(dir))}`);
+    return 0;
+  }
+
+  const candidates = readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'));
+  const verdictsPath = path.join(dir, 'verdicts.jsonl');
+  const recorded = readJsonl<Verdict>(verdictsPath);
+  const input: StagedVerdict[] = [];
+  const errors: string[] = [];
+  for (const file of files) {
+    const label = relative(deps.root, file);
+    if (!fs.existsSync(file)) {
+      errors.push(`${label}: the file does not exist`);
+      continue;
+    }
+    const parsed = parseStagedLines(fs.readFileSync(file, 'utf8'), label);
+    errors.push(...parsed.errors, ...stagedErrors(parsed.rows, candidates, scope.channels, label));
+    input.push(...parsed.rows);
+  }
+  const plan = planApply(recorded, input, flags.replace === 'true');
+  errors.push(...plan.errors);
+  if (errors.length > 0) {
+    for (const message of errors) console.error(message);
+    console.error('nothing applied');
+    return 1;
+  }
+  if (plan.conflicts.length > 0) {
+    for (const conflict of plan.conflicts) console.error(conflictText(conflict));
+    const count = plan.conflicts.length;
+    console.error(`nothing applied: ${count} conflict${count === 1 ? '' : 's'}`);
+    return 1;
+  }
+
+  const at = isoNow(deps);
+  const appended = plan.append.map((one) => stamp(one, CHECK_AGENT, at));
+  appendJsonl(verdictsPath, appended);
+  const all = [...recorded, ...appended];
+
+  const targetOf = new Map(candidates.map((one) => [one.id, one.target]));
+  const tally = new Map<string, { applied: number; unchanged: number }>();
+  const bump = (id: string, field: 'applied' | 'unchanged'): void => {
+    const target = targetOf.get(id) as string;
+    const counts = tally.get(target) ?? { applied: 0, unchanged: 0 };
+    counts[field] += 1;
+    tally.set(target, counts);
+  };
+  for (const one of plan.append) bump(one.candidate_id, 'applied');
+  for (const id of plan.unchanged) bump(id, 'unchanged');
+  const hard = hardCandidateIds(readManifest(deps.root), candidates, all);
+  for (const target of [...tally.keys()].sort()) {
+    const counts = tally.get(target) as { applied: number; unchanged: number };
+    const text = targetCountsText(scope, target, candidates, all, hard);
+    console.log(`${target}: ${counts.applied} applied, ${counts.unchanged} unchanged; ${text}`);
+  }
+  console.log(
+    `total: ${plan.append.length} applied, ${plan.unchanged.length} unchanged; ${stopText(all)}`,
+  );
+  return 0;
+}
+
+/** `--file`, or every staged file of the run in name order. */
+function applyFiles(root: string, dir: string, file: string | null): string[] {
+  if (file !== null) return [path.resolve(root, file)];
+  const staged = stagedDir(dir);
+  if (!fs.existsSync(staged)) return [];
+  return fs
+    .readdirSync(staged)
+    .filter((one) => one.endsWith('.jsonl'))
+    .sort()
+    .map((one) => path.join(staged, one));
+}
+
+/** The rows of a staged file. A bad line throws with every message, because the judge must fix it. */
+function readStaged(file: string, label: string): StagedVerdict[] {
+  if (!fs.existsSync(file)) return [];
+  const parsed = parseStagedLines(fs.readFileSync(file, 'utf8'), label);
+  if (parsed.errors.length > 0) throw new Error(parsed.errors.join('\n'));
+  return parsed.rows;
+}
+
+/**
+ * `approved leaf 6, bark 4; hard 1` for one target. A hard photo is held back from the app.
+ * `hard` is the set from `hardCandidateIds`. The caller reads the manifest once for all targets.
+ */
+function targetCountsText(
+  scope: RunScope,
+  target: string,
+  candidates: Candidate[],
+  verdicts: Verdict[],
+  hard: Set<string>,
+): string {
+  const counts = targetCounts(target, verdicts, candidates, hard);
+  return countsText(counts, targetChannels(target, scope.channels, scope.concepts));
 }
 
 interface AuditTally {
@@ -753,6 +954,8 @@ const COMMANDS: Record<string, Handler> = {
   'photos fetch': photosFetch,
   'photos add': photosAdd,
   'photos verdict': photosVerdict,
+  'photos stage': photosStage,
+  'photos apply': photosApply,
   'photos audit': photosAudit,
   'data sections': dataSections,
   'data inat-terms': dataInatTerms,
@@ -1080,27 +1283,30 @@ const CONCEPT_STATUS: SpeciesStatus = { status: 'included', reason: null };
 
 async function build(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'build <name> [--base <ref>]');
+  requireRunBranch(deps.exec, name);
   const data = await buildContent(name, deps, baseRef(parseFlags(rest.slice(1))));
   if (data === null) return 1;
-  gitCommitAll(deps.exec, `content: build ${name}`);
+  commitRun(deps, name, `content: build ${name}`);
   return 0;
 }
 
 async function report(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'report <name>');
+  requireRunBranch(deps.exec, name);
   if (!(await writeReport(name, deps))) return 1;
-  gitCommitAll(deps.exec, `content(${name}): report`);
+  commitRun(deps, name, `content(${name}): report`);
   return 0;
 }
 
 async function runPr(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'run pr <name>');
+  requireRunBranch(deps.exec, name);
   const body = path.join(runDir(deps.root, name), 'report.md');
   if (!fs.existsSync(body)) {
     console.error(`run ${name} has no report.md; run report first`);
     return 1;
   }
-  gitCommitAll(deps.exec, `content(${name}): pull request`);
+  commitRun(deps, name, `content(${name}): pull request`);
   if (!pushBranch(deps, name)) return 1;
   openPullRequest(deps.exec, name, body);
   console.log(`draft pull request opened for content/${name}`);
@@ -1109,6 +1315,7 @@ async function runPr(rest: string[], deps: CliDeps): Promise<number> {
 
 async function runFinish(rest: string[], deps: CliDeps): Promise<number> {
   const name = positional(rest, 'run finish <name>');
+  requireRunBranch(deps.exec, name);
   const dir = runDir(deps.root, name);
   const file = path.join(dir, 'decisions.json');
   if (!fs.existsSync(file)) {
@@ -1136,9 +1343,9 @@ async function runFinish(rest: string[], deps: CliDeps): Promise<number> {
 
   const data = await buildContent(name, deps, DEFAULT_BASE);
   if (data === null) return 1;
-  gitCommitAll(deps.exec, `content: build ${name}`);
+  commitRun(deps, name, `content: build ${name}`);
   if (!(await writeReport(name, deps))) return 1;
-  gitCommitAll(deps.exec, `content(${name}): report`);
+  commitRun(deps, name, `content(${name}): report`);
   return pushBranch(deps, name) ? 0 : 1;
 }
 
@@ -1239,7 +1446,7 @@ async function idsCheck(rest: string[], deps: CliDeps): Promise<number> {
   const base = baseRef(parseFlags(rest));
   if (!baseResolved(deps, base)) return 1;
   const raw = rawOf(deps.root, readSpecies(deps.root), readManifest(deps.root));
-  const errors = appendOnlyErrors(readPublished(gitShowOf(deps, base)), contentSetOf(raw));
+  const errors = appendOnlyErrors(readPublished(gitShowOf(deps.exec, base)), contentSetOf(raw));
   for (const message of errors) console.error(message);
   if (errors.length > 0) return 1;
   console.log('content ids are append-only');
@@ -1287,7 +1494,7 @@ async function buildContent(
   const hardHashes = new Set(
     manifest.filter((one) => one.difficulty === 'hard').map((one) => one.hash),
   );
-  const heldBack = new Set(
+  const hardIds = new Set(
     Object.entries(published.hashes)
       .filter(([, hash]) => hardHashes.has(hash))
       .map(([id]) => id),
@@ -1300,6 +1507,11 @@ async function buildContent(
   const statuses: Record<string, SpeciesStatus> = {};
   const authoredErrors: string[] = [];
   let sections: Record<string, string> | null = null;
+
+  // The hold-back rule needs the published species and every file that can name one.
+  const previous = readPublished(gitShowOf(deps.exec, base));
+  const confusion = readJsonOr<RawContent['confusion']>(contentFile(deps.root, 'confusion.json'), []);
+  const units = readContentList<Record<string, unknown>>(deps.root, 'units.json');
 
   for (const symbol of scope.species) {
     const authored = readAuthored(authoredDir, symbol);
@@ -1348,9 +1560,23 @@ async function buildContent(
       console.log(`${symbol}: dropped, ${statuses[symbol].reason ?? ''}`);
       continue;
     }
-    // A species with no photo is still written. The app validator owns the rule that a
-    // live species needs a live image or a confusion edge.
-    species[symbol] = mergeSpecies(fetched, authored);
+    const merged = mergeSpecies(fetched, authored);
+    // The app validator fails a live species with no live image and no confusion edge. A
+    // new species that nothing names waits outside species.json for a photo or an edge.
+    const heldBack = isHeldBack({
+      symbol,
+      targets: ownTargets(symbol, merged),
+      published: previous !== null && previous.species[symbol] !== undefined,
+      manifest,
+      confusion,
+      units,
+    });
+    if (heldBack) {
+      statuses[symbol] = { status: 'no_photos', reason: HELD_BACK };
+      console.log(`${symbol}: ${HELD_BACK}`);
+      continue;
+    }
+    species[symbol] = merged;
   }
 
   if (authoredErrors.length > 0) {
@@ -1358,7 +1584,6 @@ async function buildContent(
     return null;
   }
 
-  const previous = readPublished(gitShowOf(deps, base));
   carryPublished(species, previous);
   carryRetired(species, previous);
   markRetiredSpecies(species, manifest, at);
@@ -1393,7 +1618,7 @@ async function buildContent(
     raw,
     loaded: loaded.content,
     warnings: result.warnings,
-    heldBack,
+    hardIds,
   });
   writeJson(path.join(dir, 'build.json'), data);
   // A cap that photos fetch recorded reaches the reader again here.
@@ -1497,12 +1722,12 @@ function reportData(input: {
   loaded: LoadedContent;
   warnings: ValidationMessage[];
   /** Approved candidates whose row is hard. They do not count toward a channel. */
-  heldBack: Set<string>;
+  hardIds: Set<string>;
 }): BuildReport {
   const { name, scope, statuses, candidates, verdicts, raw, loaded, warnings } = input;
   const counts = countByTargetChannel(
     verdicts,
-    candidates.filter((one) => !input.heldBack.has(one.id)),
+    candidates.filter((one) => !input.hardIds.has(one.id)),
   );
   const rows: ReportSpeciesRow[] = [];
   // A concept run's targets are its qualified concept keys and it fills no status.
@@ -1614,6 +1839,8 @@ async function writeReport(name: string, deps: CliDeps): Promise<boolean> {
  * Every command that edits content/ by hand ends the same way: validate, check the ids,
  * run `beforeWrite`, write the two files, commit. A retire removes its objects in
  * `beforeWrite`. A difficulty change removes nothing: the file stays in the bucket.
+ * It commits only on a content/ branch, and only the two files. It reads the branch at
+ * the start and again before the commit.
  */
 async function commitContent(
   deps: CliDeps,
@@ -1622,11 +1849,12 @@ async function commitContent(
   subject: string,
   beforeWrite: () => Promise<void> = async () => {},
 ): Promise<boolean> {
+  requireContentBranch(deps.exec);
   // An edit runs on a checkout that has main. A checkout without it writes nothing.
   if (!baseResolved(deps, DEFAULT_BASE)) return false;
   const raw = rawOf(deps.root, species, manifest);
   if (validated(deps, raw) === null) return false;
-  const previous = readPublished(gitShowOf(deps, DEFAULT_BASE));
+  const previous = readPublished(gitShowOf(deps.exec, DEFAULT_BASE));
   const idErrors = appendOnlyErrors(previous, contentSetOf(raw));
   if (idErrors.length > 0) {
     for (const message of idErrors) console.error(message);
@@ -1635,7 +1863,10 @@ async function commitContent(
   await beforeWrite();
   writeJson(contentFile(deps.root, 'species.json'), raw.species);
   writeJson(contentFile(deps.root, MANIFEST_NAME), raw.manifest);
-  gitCommitAll(deps.exec, `content: ${subject}`);
+  // A retire removes objects over the network first. Another session can switch the
+  // branch in that time, so the branch is read again before the commit.
+  requireContentBranch(deps.exec);
+  gitCommitPaths(deps.exec, `content: ${subject}`, CONTENT_PATHS);
   return true;
 }
 
@@ -1722,6 +1953,17 @@ function validated(deps: CliDeps, raw: RawContent): ValidationResult | null {
   return result.errors.length === 0 ? result : null;
 }
 
+/**
+ * Commits the paths a run writes, only on the run's branch. `photos fetch` can run for an
+ * hour, so the branch is read again here. A path that is not on disk is left out, because
+ * git fails on a pathspec that matches nothing.
+ */
+function commitRun(deps: CliDeps, name: string, message: string): void {
+  requireRunBranch(deps.exec, name);
+  const paths = runPaths(name).filter((one) => fs.existsSync(path.join(deps.root, ...one.split('/'))));
+  gitCommitPaths(deps.exec, message, paths);
+}
+
 function pushBranch(deps: CliDeps, name: string): boolean {
   const result = deps.exec('git', ['push', '-u', 'origin', `content/${name}`]);
   if (result.code === 0) return true;
@@ -1730,23 +1972,16 @@ function pushBranch(deps: CliDeps, name: string): boolean {
 }
 
 /**
- * `readPublished` reads four absent files as a first run, and `git show` answers every path
- * of a ref it cannot resolve with an error. A failed fetch or a renamed branch would then
- * pass the append-only check on no content at all. Every command that reads a base resolves
- * it here first. Prints the line and returns false when the ref is not a commit.
+ * `readPublished` reads four absent files as a first run. `gitShowOf` gives null only when
+ * git says the ref does not hold a path, and it throws on a bad ref. A ref that does not
+ * resolve still gets its own line here, before any read. Prints the line and returns false
+ * when the ref is not a commit.
  */
 function baseResolved(deps: CliDeps, base: string): boolean {
   const result = deps.exec('git', ['rev-parse', '--verify', '--quiet', `${base}^{commit}`]);
   if (result.code === 0) return true;
   console.error(`base ${base} does not resolve to a commit`);
   return false;
-}
-
-function gitShowOf(deps: CliDeps, base: string): (file: string) => string | null {
-  return (file) => {
-    const result = deps.exec('git', ['show', `${base}:${file}`]);
-    return result.code === 0 ? result.out : null;
-  };
 }
 
 /**

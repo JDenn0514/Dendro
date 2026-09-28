@@ -18,14 +18,24 @@ export function readJsonl<T>(filePath: string): T[] {
 export function appendJsonl(filePath: string, rows: unknown[]): void {
   if (rows.length === 0) return;
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  let text = '';
   // A file another tool wrote can lack the last newline. Add one so no two rows join.
-  if (fs.existsSync(filePath)) {
-    const current = fs.readFileSync(filePath, 'utf8');
-    if (current !== '' && !current.endsWith('\n')) text += '\n';
-  }
-  text += serialize(rows);
+  const text = (lacksLastNewline(filePath) ? '\n' : '') + serialize(rows);
   fs.appendFileSync(filePath, text, 'utf8');
+}
+
+/** Reads the last byte only. A verdicts file of a big run holds thousands of rows. */
+function lacksLastNewline(filePath: string): boolean {
+  if (!fs.existsSync(filePath)) return false;
+  const size = fs.statSync(filePath).size;
+  if (size === 0) return false;
+  const fd = fs.openSync(filePath, 'r');
+  try {
+    const last = Buffer.alloc(1);
+    fs.readSync(fd, last, 0, 1, size - 1);
+    return last[0] !== 0x0a;
+  } finally {
+    fs.closeSync(fd);
+  }
 }
 
 /** Writes rows and replaces whatever the file held. */

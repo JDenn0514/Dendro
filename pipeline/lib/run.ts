@@ -30,7 +30,7 @@ export type Exec = (command: string, args: string[]) => { code: number; out: str
 const CO_AUTHOR = 'Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>';
 
 /** The flags that take no value. Every other flag needs one. */
-export const BOOLEAN_FLAGS: string[] = ['refresh', 'manifest', 'clear'];
+export const BOOLEAN_FLAGS: string[] = ['refresh', 'manifest', 'clear', 'replace'];
 
 const LIST_FIELDS: string[] = [
   'concepts',
@@ -238,12 +238,72 @@ export function gitCheckoutExisting(exec: Exec, name: string): void {
   mustRun(exec, 'git', ['checkout', `content/${name}`]);
 }
 
-export function gitCommitAll(exec: Exec, message: string): void {
-  mustRun(exec, 'git', ['add', '-A']);
-  const result = exec('git', ['commit', '-m', message, '-m', CO_AUTHOR]);
+/** The branch that every command of run <name> writes on. `run init` creates it. */
+export function runBranch(name: string): string {
+  return `content/${name}`;
+}
+
+/**
+ * The paths a run commit stages. `git add -A -- <paths>` stages new, changed, and deleted
+ * files under these paths only, so no file outside them reaches a run commit.
+ */
+export function runPaths(name: string): string[] {
+  return [`pipeline/runs/${name}`, 'content', 'content_src', 'pipeline/data'];
+}
+
+/** The two files that `images retire`, `images difficulty`, and `species retire` write. */
+export const CONTENT_PATHS: string[] = ['content/species.json', 'content/images/manifest.json'];
+
+/** Git's words for a commit with nothing staged under its paths. Git exits 1 on each. */
+const NOTHING_TO_COMMIT = /nothing to commit|no changes added to commit|nothing added to commit/;
+
+/** The branch that HEAD names, or null on a detached HEAD. */
+export function currentBranch(exec: Exec): string | null {
+  const result = exec('git', ['symbolic-ref', '--short', '-q', 'HEAD']);
+  if (result.code === 0) return result.out.trim();
+  // `-q` makes git exit 1 with no message on a detached HEAD. The real exec also gives
+  // code 1 when git does not start, but with a message. That case throws.
+  if (result.code === 1 && result.out.trim() === '') return null;
+  throw new Error(`git symbolic-ref failed with code ${result.code}: ${result.out}`);
+}
+
+function headText(branch: string | null): string {
+  return branch === null ? 'detached' : `on ${branch}`;
+}
+
+/**
+ * Another session can switch a shared checkout. A run command that then writes or commits
+ * puts run files on the wrong branch, so each one calls this first.
+ */
+export function requireRunBranch(exec: Exec, name: string): void {
+  const branch = currentBranch(exec);
+  const wanted = runBranch(name);
+  if (branch === wanted) return;
+  throw new Error(
+    `run ${name} needs branch ${wanted}, and HEAD is ${headText(branch)}. The command stopped. Check out ${wanted}, and check that no other session uses this checkout.`,
+  );
+}
+
+/** The images and species commands edit content/ outside a run. They never commit on main. */
+export function requireContentBranch(exec: Exec): string {
+  const branch = currentBranch(exec);
+  if (branch !== null && branch.startsWith('content/')) return branch;
+  throw new Error(
+    `this command commits content/ only on a content/ branch, and HEAD is ${headText(branch)}. The command stopped. Check out or create a content/<name> branch first.`,
+  );
+}
+
+/**
+ * Stages and commits the named paths only. The pathspec on the commit also keeps out a file
+ * that another session staged.
+ */
+export function gitCommitPaths(exec: Exec, message: string, paths: string[]): void {
+  if (paths.length === 0) throw new Error('gitCommitPaths needs at least one path.');
+  mustRun(exec, 'git', ['add', '-A', '--', ...paths]);
+  const result = exec('git', ['commit', '-m', message, '-m', CO_AUTHOR, '--', ...paths]);
   if (result.code === 0) return;
-  // git exits non-zero on a clean tree. A step that changed nothing is not a failure.
-  if (result.out.includes('nothing to commit')) return;
+  // A step that changed nothing under its paths is not a failure.
+  if (result.code === 1 && NOTHING_TO_COMMIT.test(result.out)) return;
   throw new Error(`git commit failed with code ${result.code}: ${result.out}`);
 }
 

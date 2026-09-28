@@ -18,7 +18,8 @@
  * `bark/shaggy`), sci = one exemplar species, and channel = the key's prefix.
  *
  * Put --out-dir outside the repo, for example in the session scratchpad. The CLI
- * commits with `git add -A`, so a file inside the repo reaches a commit.
+ * commits every file under pipeline/runs/<name>/, content/, content_src/, and
+ * pipeline/data/, so a file there reaches a commit.
  *
  * Only Node built-ins. Network calls go through the system `curl`.
  */
