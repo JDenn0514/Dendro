@@ -118,7 +118,10 @@ test('photos stage of the same verdict again adds nothing, and of another verdic
   assert.ok(out.includes(`${QUGA_1.id} is already staged`));
 
   assert.equal(await runCommand(stageArgs(QUGA_1.id, 'reject'), deps), 1);
-  assert.match(err.join('\n'), /refused: .* is already staged as approve leaf/);
+  assert.match(
+    err.join('\n'),
+    /refused: .* is already staged as approve leaf in pipeline\/runs\/demo\/staged\/QUGA\.jsonl\. To change it, remove its row from that file, then stage again\./,
+  );
   assert.equal(readJsonl(stagedPath(runDir(root, 'demo'), 'QUGA')).length, 1);
 });
 
@@ -215,8 +218,26 @@ test('--replace does not change an owner decision', async (t) => {
 
   assert.equal(await runCommand(['photos', 'apply', 'demo', '--replace'], deps), 1);
 
-  assert.match(err.join('\n'), /is an owner decision\. --replace does not change it\./);
+  assert.match(
+    err.join('\n'),
+    /is an owner decision\. --replace does not change it\. Remove the staged row or change it to match\./,
+  );
   assert.equal(verdictsOf(root).length, 1);
+});
+
+test('photos apply reads the manifest once for all its targets', async (t) => {
+  const { root, deps, err } = setup(t);
+  fs.mkdirSync(path.join(root, 'content', 'images'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'content', 'images', 'manifest.json'), '[]\n', 'utf8');
+  stageFile(root, 'QUGA', [staged(QUGA_1.id, 'reject')]);
+  stageFile(root, 'QUAL', [staged(QUAL_1.id, 'reject')]);
+  const read = t.mock.method(fs, 'readFileSync');
+
+  assert.equal(await runCommand(['photos', 'apply', 'demo'], deps), 0, err.join(' | '));
+
+  const manifestReads = read.mock.calls.filter((call) => String(call.arguments[0]).endsWith('manifest.json'));
+  read.mock.restore();
+  assert.equal(manifestReads.length, 1);
 });
 
 test('one bad row stops the whole apply, and the message names the file and the line', async (t) => {

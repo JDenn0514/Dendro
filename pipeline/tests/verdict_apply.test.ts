@@ -184,5 +184,8 @@ test('conflictText names both verdicts and the way out', () => {
     `conflict: ${A.id} is recorded as reject and staged as approve leaf [hard]. Run again with --replace to record the staged verdict.`,
   );
   const owner = { ...agent, owner: true };
-  assert.match(conflictText(owner), /is an owner decision\. --replace does not change it\.$/);
+  assert.match(
+    conflictText(owner),
+    /is an owner decision\. --replace does not change it\. Remove the staged row or change it to match\.$/,
+  );
 });

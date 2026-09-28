@@ -224,7 +224,7 @@ export function verdictText(row: StagedVerdict): string {
 
 export function conflictText(conflict: Conflict): string {
   const fix = conflict.owner
-    ? 'The recorded row is an owner decision. --replace does not change it.'
+    ? 'The recorded row is an owner decision. --replace does not change it. Remove the staged row or change it to match.'
     : 'Run again with --replace to record the staged verdict.';
   return `conflict: ${conflict.candidate_id} is recorded as ${verdictText(conflict.recorded)} and staged as ${verdictText(conflict.staged)}. ${fix}`;
 }

@@ -587,6 +587,23 @@ test('build on main writes nothing, uploads nothing, and commits nothing', async
   assert.equal(called(exec, 'git', 'commit'), undefined);
 });
 
+test('build stops before its commit when another session switches the branch during the upload', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root);
+  const put = storage.put;
+  storage.put = async (key, bytes, contentType) => {
+    exec.branch = 'main';
+    await put(key, bytes, contentType);
+  };
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.ok(storage.puts.length > 0);
+  assert.match(err.join('\n'), /run demo needs branch content\/demo, and HEAD is on main/);
+  assert.equal(called(exec, 'git', 'add'), undefined);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
 test('a validator error writes no content file and uploads nothing', async (t) => {
   const { root, deps, storage, err } = setup(t);
   seed(root);
@@ -1320,6 +1337,52 @@ test('images difficulty on main writes nothing and commits nothing', async (t) =
 
   assert.match(err.join('\n'), /only on a content\/ branch, and HEAD is on main/);
   assert.equal(manifestOf(root)[0].difficulty, undefined);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('images retire stops before its commit when the branch changes while it removes objects', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  seed(root, {
+    manifest: [
+      row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' }),
+      row({ hash: HASH_D, target: 'QUGA', channel: 'bark' }),
+    ],
+  });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+  await storage.put(objectKey(HASH_C), new Uint8Array([1]), 'image/jpeg');
+  const remove = storage.remove;
+  storage.remove = async (key) => {
+    exec.branch = 'main';
+    await remove(key);
+  };
+
+  const code = await runCommand(['images', 'retire', HASH_C, '--reason', 'Takedown email.'], deps);
+  assert.equal(code, 1);
+
+  assert.equal(storage.objects.has(objectKey(HASH_C)), false);
+  assert.match(err.join('\n'), /only on a content\/ branch, and HEAD is on main/);
+  assert.equal(called(exec, 'git', 'add'), undefined);
+  assert.equal(called(exec, 'git', 'commit'), undefined);
+});
+
+test('images difficulty stops before its commit when the branch changes after the first check', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    manifest: [
+      row({ hash: HASH_C, target: 'QUGA', channel: 'leaf' }),
+      row({ hash: HASH_D, target: 'QUGA', channel: 'leaf' }),
+    ],
+  });
+  writeJson(root, 'content/species.json', { QUGA: record() });
+  deps.validate = (raw) => {
+    exec.branch = 'main';
+    return validateContent(raw);
+  };
+
+  assert.equal(await runCommand(['images', 'difficulty', HASH_C, '--set', 'hard'], deps), 1);
+
+  assert.match(err.join('\n'), /only on a content\/ branch, and HEAD is on main/);
+  assert.equal(called(exec, 'git', 'add'), undefined);
   assert.equal(called(exec, 'git', 'commit'), undefined);
 });
 

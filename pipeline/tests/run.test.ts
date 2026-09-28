@@ -401,3 +401,11 @@ test('fakeExec answers symbolic-ref from its branch field, and changes() leaves 
   exec('git', ['status']);
   assert.deepEqual(changes(exec), [{ command: 'git', args: ['status'] }]);
 });
+
+test('a symbolic-ref call takes nothing from the fakeExec queue', () => {
+  const exec = fakeExec();
+  exec.queue.push({ code: 128, out: 'queued' });
+  assert.deepEqual(exec('git', ['symbolic-ref', '--short', '-q', 'HEAD']), { code: 0, out: 'content/demo' });
+  assert.deepEqual(exec('git', ['status']), { code: 128, out: 'queued' });
+  assert.deepEqual(exec.queue, []);
+});

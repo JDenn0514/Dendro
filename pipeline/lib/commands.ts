@@ -641,7 +641,9 @@ async function photosStage(rest: string[], deps: CliDeps): Promise<number> {
   const rows = readStaged(file, label);
   const prior = rows.find((one) => one.candidate_id === row.candidate_id);
   if (prior !== undefined && !sameVerdict(prior, row)) {
-    console.error(`refused: ${row.candidate_id} is already staged as ${verdictText(prior)} in ${label}`);
+    console.error(
+      `refused: ${row.candidate_id} is already staged as ${verdictText(prior)} in ${label}. To change it, remove its row from that file, then stage again.`,
+    );
     return 1;
   }
   if (prior === undefined) {
@@ -656,7 +658,8 @@ async function photosStage(rest: string[], deps: CliDeps): Promise<number> {
     ...readJsonl<Verdict>(path.join(dir, 'verdicts.jsonl')),
     ...rows.map((one) => stamp(one, CHECK_AGENT, '')),
   ];
-  const counts = targetCountsText(deps, scope, candidate.target, candidates, verdicts);
+  const hard = hardCandidateIds(readManifest(deps.root), candidates, verdicts);
+  const counts = targetCountsText(scope, candidate.target, candidates, verdicts, hard);
   console.log(`${candidate.target}: ${counts}`);
   return 0;
 }
@@ -721,9 +724,10 @@ async function photosApply(rest: string[], deps: CliDeps): Promise<number> {
   };
   for (const one of plan.append) bump(one.candidate_id, 'applied');
   for (const id of plan.unchanged) bump(id, 'unchanged');
+  const hard = hardCandidateIds(readManifest(deps.root), candidates, all);
   for (const target of [...tally.keys()].sort()) {
     const counts = tally.get(target) as { applied: number; unchanged: number };
-    const text = targetCountsText(deps, scope, target, candidates, all);
+    const text = targetCountsText(scope, target, candidates, all, hard);
     console.log(`${target}: ${counts.applied} applied, ${counts.unchanged} unchanged; ${text}`);
   }
   console.log(
@@ -752,15 +756,17 @@ function readStaged(file: string, label: string): StagedVerdict[] {
   return parsed.rows;
 }
 
-/** `approved leaf 6, bark 4; hard 1` for one target. A hard photo is held back from the app. */
+/**
+ * `approved leaf 6, bark 4; hard 1` for one target. A hard photo is held back from the app.
+ * `hard` is the set from `hardCandidateIds`. The caller reads the manifest once for all targets.
+ */
 function targetCountsText(
-  deps: CliDeps,
   scope: RunScope,
   target: string,
   candidates: Candidate[],
   verdicts: Verdict[],
+  hard: Set<string>,
 ): string {
-  const hard = hardCandidateIds(readManifest(deps.root), candidates, verdicts);
   const counts = targetCounts(target, verdicts, candidates, hard);
   return countsText(counts, targetChannels(target, scope.channels, scope.concepts));
 }
@@ -1488,7 +1494,7 @@ async function buildContent(
   const hardHashes = new Set(
     manifest.filter((one) => one.difficulty === 'hard').map((one) => one.hash),
   );
-  const heldBack = new Set(
+  const hardIds = new Set(
     Object.entries(published.hashes)
       .filter(([, hash]) => hardHashes.has(hash))
       .map(([id]) => id),
@@ -1557,17 +1563,15 @@ async function buildContent(
     const merged = mergeSpecies(fetched, authored);
     // The app validator fails a live species with no live image and no confusion edge. A
     // new species that nothing names waits outside species.json for a photo or an edge.
-    // The name heldBack is taken above by the ids of the hard photos, so the call stays inline.
-    if (
-      isHeldBack({
-        symbol,
-        targets: ownTargets(symbol, merged),
-        published: previous !== null && previous.species[symbol] !== undefined,
-        manifest,
-        confusion,
-        units,
-      })
-    ) {
+    const heldBack = isHeldBack({
+      symbol,
+      targets: ownTargets(symbol, merged),
+      published: previous !== null && previous.species[symbol] !== undefined,
+      manifest,
+      confusion,
+      units,
+    });
+    if (heldBack) {
       statuses[symbol] = { status: 'no_photos', reason: HELD_BACK };
       console.log(`${symbol}: ${HELD_BACK}`);
       continue;
@@ -1614,7 +1618,7 @@ async function buildContent(
     raw,
     loaded: loaded.content,
     warnings: result.warnings,
-    heldBack,
+    hardIds,
   });
   writeJson(path.join(dir, 'build.json'), data);
   // A cap that photos fetch recorded reaches the reader again here.
@@ -1718,12 +1722,12 @@ function reportData(input: {
   loaded: LoadedContent;
   warnings: ValidationMessage[];
   /** Approved candidates whose row is hard. They do not count toward a channel. */
-  heldBack: Set<string>;
+  hardIds: Set<string>;
 }): BuildReport {
   const { name, scope, statuses, candidates, verdicts, raw, loaded, warnings } = input;
   const counts = countByTargetChannel(
     verdicts,
-    candidates.filter((one) => !input.heldBack.has(one.id)),
+    candidates.filter((one) => !input.hardIds.has(one.id)),
   );
   const rows: ReportSpeciesRow[] = [];
   // A concept run's targets are its qualified concept keys and it fills no status.
@@ -1835,7 +1839,8 @@ async function writeReport(name: string, deps: CliDeps): Promise<boolean> {
  * Every command that edits content/ by hand ends the same way: validate, check the ids,
  * run `beforeWrite`, write the two files, commit. A retire removes its objects in
  * `beforeWrite`. A difficulty change removes nothing: the file stays in the bucket.
- * It commits only on a content/ branch, and only the two files.
+ * It commits only on a content/ branch, and only the two files. It reads the branch at
+ * the start and again before the commit.
  */
 async function commitContent(
   deps: CliDeps,
@@ -1858,6 +1863,9 @@ async function commitContent(
   await beforeWrite();
   writeJson(contentFile(deps.root, 'species.json'), raw.species);
   writeJson(contentFile(deps.root, MANIFEST_NAME), raw.manifest);
+  // A retire removes objects over the network first. Another session can switch the
+  // branch in that time, so the branch is read again before the commit.
+  requireContentBranch(deps.exec);
   gitCommitPaths(deps.exec, `content: ${subject}`, CONTENT_PATHS);
   return true;
 }
