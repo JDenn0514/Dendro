@@ -17,6 +17,7 @@ import type { BytesResult, Http, HttpFailure, TextResult } from '../lib/http.ts'
 import { JPEG_QUALITY, MAX_SIDE, objectKey, reviewKey, type Resize } from '../lib/images.ts';
 import { taxaUrl } from '../lib/inat.ts';
 import { readJsonl, writeJsonl } from '../lib/jsonl.ts';
+import { HELD_BACK } from '../lib/hold_back.ts';
 import type { ManifestRow } from '../lib/manifest.ts';
 import { DISTRIBUTION_URL, profileUrl, subordinateTaxaUrl } from '../lib/plants.ts';
 import { newScope, runDir, writeRun, type Exec } from '../lib/run.ts';
@@ -1405,6 +1406,8 @@ test('a rebuild with a hard tag leaves the difficulty of a row already in the ma
   assert.equal(rows.some((one) => 'difficulty' in one), false);
 });
 
+// Hard rows still name the species, so the hold-back rule leaves it in and the validator
+// fails it. See the open question in docs/superpowers/plans/2026-09-28-run-safety.md.
 test('a build whose every photo of a species is tagged hard fails on the validator', async (t) => {
   const { root, deps, storage, err } = setup(t);
   seed(root, {
@@ -1422,6 +1425,69 @@ test('a build whose every photo of a species is tagged hard fails on the validat
   );
   assert.deepEqual(storage.puts, []);
   assert.equal(exists(root, 'content/images/manifest.json'), false);
+});
+
+test('a new species with no photo and no edge is held back and listed as no_photos', async (t) => {
+  const { root, deps, out, err } = setup(t);
+  // The level-3 unit names the genus Quercus. With no species that fails the validator, so
+  // this test keeps the three level-1 units only.
+  seed(root, {
+    units: LEVEL_ONE_UNITS,
+    verdicts: [verdict(MYSTERY.id, 'escalate', { case: 'mismatch', note: 'Another oak.' })],
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.deepEqual(speciesOf(root), {});
+  const row = buildOf(root).species.find((one) => one.symbol === 'QUGA');
+  assert.deepEqual(row, { symbol: 'QUGA', status: 'no_photos', reason: HELD_BACK, counts: {} });
+  assert.ok(out.includes(`QUGA: ${HELD_BACK}`), out.join(' | '));
+
+  assert.equal(await runCommand(['report', 'demo'], deps), 0, err.join(' | '));
+  assert.ok(readText(root, 'pipeline/runs/demo/report.md').includes(`| QUGA | no_photos | ${HELD_BACK} |`));
+});
+
+test('a published species with no photo and no edge still fails the build', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    verdicts: [verdict(MYSTERY.id, 'escalate', { case: 'mismatch', note: 'Another oak.' })],
+  });
+  fakeGitShow(exec, 'main', { species: { QUGA: record() } });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 1);
+
+  assert.ok(
+    err.includes('error species.json: QUGA has no manifest image and no confusion edge'),
+    err.join(' | '),
+  );
+  assert.equal(exists(root, 'content/species.json'), false);
+});
+
+test('a confusion edge brings a new species with no photo into the build', async (t) => {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, {
+    verdicts: [verdict(MYSTERY.id, 'escalate', { case: 'mismatch', note: 'Another oak.' })],
+    confusion: [
+      {
+        a: 'QUAL',
+        b: 'QUGA',
+        channel: 'leaf',
+        a_not_b: 'White oak has rounded lobes.',
+        b_not_a: 'Gambel oak has deeper sinuses.',
+        ref: 'FNA vol. 3',
+      },
+    ],
+  });
+  fakeGitShow(exec, 'main', {
+    species: { QUAL: record({ scientific: 'Quercus alba', common: ['white oak'] }) },
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.deepEqual(Object.keys(speciesOf(root)), ['QUAL', 'QUGA']);
+  const row = buildOf(root).species.find((one) => one.symbol === 'QUGA');
+  assert.equal(row?.status, 'no_photos');
+  assert.equal(row?.reason, null);
 });
 
 test('species retire marks the record, retires its rows, and removes the objects', async (t) => {

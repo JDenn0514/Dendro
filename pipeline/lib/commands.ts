@@ -15,6 +15,7 @@ import {
 } from './candidates.ts';
 import { categoryUrl, commonsCandidates, parseCategoryListing } from './commons.ts';
 import { SECTION_PAGES, buildSectionTable, loadSectionTable, nextPageUrl, sectionFor } from './fna.ts';
+import { HELD_BACK, isHeldBack } from './hold_back.ts';
 import type { Http, TextResult } from './http.ts';
 import { appendOnlyErrors, gitShowOf, readPublished, type ContentSet } from './ids.ts';
 import {
@@ -1501,6 +1502,11 @@ async function buildContent(
   const authoredErrors: string[] = [];
   let sections: Record<string, string> | null = null;
 
+  // The hold-back rule needs the published species and every file that can name one.
+  const previous = readPublished(gitShowOf(deps.exec, base));
+  const confusion = readJsonOr<RawContent['confusion']>(contentFile(deps.root, 'confusion.json'), []);
+  const units = readContentList<Record<string, unknown>>(deps.root, 'units.json');
+
   for (const symbol of scope.species) {
     const authored = readAuthored(authoredDir, symbol);
     if (authored === null) {
@@ -1548,9 +1554,25 @@ async function buildContent(
       console.log(`${symbol}: dropped, ${statuses[symbol].reason ?? ''}`);
       continue;
     }
-    // A species with no photo is still written. The app validator owns the rule that a
-    // live species needs a live image or a confusion edge.
-    species[symbol] = mergeSpecies(fetched, authored);
+    const merged = mergeSpecies(fetched, authored);
+    // The app validator fails a live species with no live image and no confusion edge. A
+    // new species that nothing names waits outside species.json for a photo or an edge.
+    // The name heldBack is taken above by the ids of the hard photos, so the call stays inline.
+    if (
+      isHeldBack({
+        symbol,
+        targets: ownTargets(symbol, merged),
+        published: previous !== null && previous.species[symbol] !== undefined,
+        manifest,
+        confusion,
+        units,
+      })
+    ) {
+      statuses[symbol] = { status: 'no_photos', reason: HELD_BACK };
+      console.log(`${symbol}: ${HELD_BACK}`);
+      continue;
+    }
+    species[symbol] = merged;
   }
 
   if (authoredErrors.length > 0) {
@@ -1558,7 +1580,6 @@ async function buildContent(
     return null;
   }
 
-  const previous = readPublished(gitShowOf(deps.exec, base));
   carryPublished(species, previous);
   carryRetired(species, previous);
   markRetiredSpecies(species, manifest, at);
