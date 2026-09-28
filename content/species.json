@@ -2610,7 +2610,7 @@
     "family": "Fagaceae",
     "arrangement": "alternate",
     "concepts": {
-      "leaf": "simple_entire",
+      "leaf": "simple_lobed",
       "bark": "plated",
       "fruit": "acorn"
     },
