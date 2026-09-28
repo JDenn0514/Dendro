@@ -353,6 +353,29 @@ test('a right answer carries the facts and the attribution and no diagnostic', (
   assert.equal(reveal.answer.photo.author, 'USDA NRCS');
 });
 
+test('the facts carry a partial height and elevation, and null for an omitted one', () => {
+  const raw = loadFixture();
+  raw.species.QUGA.height_ft = [null, 30];
+  raw.species.QUGA.elevation_ft = 6600;
+  const partial = loadContent(raw).content;
+  const card = partial.cards['species:QUGA:leaf'];
+  const q = buildQuestion({ card, content: partial, state: null, excluded_hashes: [], rng: makeRng(24) });
+  const facts = buildReveal({ question: q, chosen_key: 'QUGA', content: partial }).answer.facts;
+  assert.deepEqual(facts.height_ft, [null, 30]);
+  assert.equal(facts.elevation_ft, 6600);
+
+  const bareRaw = loadFixture();
+  delete bareRaw.species.QUGA.height_ft;
+  delete bareRaw.species.QUGA.elevation_ft;
+  const bare = loadContent(bareRaw).content;
+  const bareQ = buildQuestion({
+    card: bare.cards['species:QUGA:leaf'], content: bare, state: null, excluded_hashes: [], rng: makeRng(24)
+  });
+  const bareFacts = buildReveal({ question: bareQ, chosen_key: 'QUGA', content: bare }).answer.facts;
+  assert.equal(bareFacts.height_ft, null);
+  assert.equal(bareFacts.elevation_ft, null);
+});
+
 test('a concept miss uses the descriptions and records no missing edge', () => {
   const card = content.cards['concept:bark:plated'];
   const q = buildQuestion({

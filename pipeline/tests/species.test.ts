@@ -214,6 +214,84 @@ test('each malformed field fails', () => {
   }
 });
 
+test('height and elevation accept each form a reference can give', () => {
+  const cases: Record<string, unknown>[] = [
+    { height_ft: [30, 40] },
+    { height_ft: [null, 40] },
+    { elevation_ft: [0, 2000] },
+    { elevation_ft: 6600 },
+    // Death Valley and the Salton Trough lie below sea level.
+    { elevation_ft: [-200, 1000] },
+    { elevation_ft: -200 },
+  ];
+  for (const fields of cases) {
+    const value = authored(fields as Partial<AuthoredSpecies>);
+    assert.deepEqual(validateAuthored(value, 'QUGA', KEYS), [], JSON.stringify(fields));
+  }
+});
+
+test('a file with no height or no elevation passes, because no reference gave one', () => {
+  for (const field of ['height_ft', 'elevation_ft']) {
+    const short = authored() as unknown as Record<string, unknown>;
+    delete short[field];
+    assert.deepEqual(validateAuthored(short, 'QUGA', KEYS), [], field);
+  }
+});
+
+test('height and elevation reject every other form', () => {
+  const cases: [string, unknown][] = [
+    ['height_ft', [40, 30]],
+    ['height_ft', [30, null]],
+    ['height_ft', [null, null]],
+    ['height_ft', 40],
+    ['height_ft', ['30', 40]],
+    ['height_ft', [30]],
+    ['height_ft', [10, 20, 30]],
+    ['height_ft', null],
+    ['height_ft', [null, 0]],
+    ['height_ft', [null, -5]],
+    ['height_ft', [0, 40]],
+    ['height_ft', [-5, 40]],
+    ['elevation_ft', [9000, 5000]],
+    ['elevation_ft', [5000, null]],
+    ['elevation_ft', [null, 9000]],
+    ['elevation_ft', '6600'],
+    ['elevation_ft', [5000]],
+    ['elevation_ft', [1, 2, 3]],
+    ['elevation_ft', null],
+  ];
+  for (const [field, bad] of cases) {
+    const value = { ...authored(), [field]: bad };
+    const errors = validateAuthored(value, 'QUGA', KEYS);
+    assert.equal(errors.length, 1, `${field} ${JSON.stringify(bad)}: ${errors.join(' | ')}`);
+    assert.ok(errors[0].includes(field), errors[0]);
+    assert.match(errors[0], /QUGA/);
+  }
+});
+
+test('mergeSpecies copies the partial forms and leaves out a field the file omits', () => {
+  const fetched = buildFetched({
+    profile: profile(),
+    subordinate: [],
+    states: ['CO'],
+    section: 'Quercus',
+    inat: null,
+  });
+  const partial = mergeSpecies(
+    fetched,
+    authored({ height_ft: [null, 40], elevation_ft: 6600 } as unknown as Partial<AuthoredSpecies>),
+  );
+  assert.deepEqual(partial.height_ft, [null, 40]);
+  assert.equal(partial.elevation_ft, 6600);
+
+  const file = authored() as unknown as Record<string, unknown>;
+  delete file.height_ft;
+  delete file.elevation_ft;
+  const bare = mergeSpecies(fetched, file as unknown as AuthoredSpecies);
+  assert.equal('height_ft' in bare, false);
+  assert.equal('elevation_ft' in bare, false);
+});
+
 test('an optional field of the wrong type fails with one error naming the field', () => {
   const cases: [Record<string, unknown>, string][] = [
     [{ common_extra: 'Rocky Mountain oak' }, 'common_extra'],

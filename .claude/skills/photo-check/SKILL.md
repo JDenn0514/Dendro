@@ -88,7 +88,8 @@ see (owner ruling 2026-09-26). Each channel has its own feature:
   piece of twig with at least two leaves, or two needle bundles, attached. They are close
   enough to see their shape. On a conifer with needles in bundles, you can count the
   needles in one bundle. A photo of one detached leaf that shows the shape clearly is an
-  approve with the `hard` tag.
+  approve with the `hard` tag. The leaf is the typical mature leaf of the species'
+  bucket. A young leaf, a sucker shoot, or another leaf form of the species is a reject.
 - **Bark:** a mature trunk. The grooves, plates, ridges, or peeling, and the texture, are
   clear and fill the frame.
 - **Fruit:** the fruit, close up. On the tree or off the tree are both correct.

@@ -36,6 +36,37 @@ export function displayName(record) {
   return typeof name === 'string' ? capitalize(name) : '';
 }
 
+function isNumber(value) {
+  return typeof value === 'number' && Number.isFinite(value);
+}
+
+function feet(value) {
+  return value.toLocaleString('en-US');
+}
+
+// The species screen shows height and elevation as a figure over a label.
+// Each returns null for an omitted or malformed value, and the screen then
+// hides that row.
+//
+// Height is [low, high], or [null, high] when only the maximum is known.
+export function heightSpan(value) {
+  if (!Array.isArray(value) || value.length !== 2) return null;
+  const [low, high] = value;
+  if (!isNumber(high)) return null;
+  if (low === null) return { figure: `Up to ${feet(high)}`, label: 'feet tall' };
+  if (!isNumber(low) || low > high) return null;
+  return { figure: `${feet(low)}–${feet(high)}`, label: 'feet tall' };
+}
+
+// Elevation is [low, high], or one number for one known elevation.
+export function elevationSpan(value) {
+  if (isNumber(value)) return { figure: `About ${feet(value)}`, label: 'feet elevation' };
+  if (!Array.isArray(value) || value.length !== 2) return null;
+  const [low, high] = value;
+  if (!isNumber(low) || !isNumber(high) || low > high) return null;
+  return { figure: `${feet(low)}–${feet(high)}`, label: 'feet elevation' };
+}
+
 export function plural(word, count = 2) {
   if (count === 1) return word;
   if (/(s|x|z|ch|sh)$/u.test(word)) return `${word}es`;

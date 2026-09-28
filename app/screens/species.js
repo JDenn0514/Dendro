@@ -5,7 +5,9 @@ import {
 } from '../logic/content.js';
 import { cardLevel, speciesLevel } from '../logic/progress.js';
 import { daysBetween } from '../logic/scheduler.js';
-import { numberWord, capitalize, displayName } from '../logic/words.js';
+import {
+  numberWord, capitalize, displayName, heightSpan, elevationSpan
+} from '../logic/words.js';
 import { el } from '../ui/dom.js';
 import { footNav, tick, trail, ramp, levelWord } from '../ui/chrome.js';
 import { plate, credit } from '../ui/plate.js';
@@ -139,20 +141,15 @@ export function render(root, ctx) {
     root.append(credit(photo, `${capitalize(channelLabel(heroChannel))}.`));
   }
 
-  if (record.height_ft || record.elevation_ft) {
+  // An omitted or malformed value drops its cell, and no cells drop the row.
+  const cells = [heightSpan(record.height_ft), elevationSpan(record.elevation_ft)]
+    .filter(Boolean);
+  if (cells.length) {
     const spans = el('div', 'spans');
-    if (record.height_ft) {
+    for (const { figure, label } of cells) {
       const cell = el('div');
-      cell.append(el('b', null, `${record.height_ft[0]}–${record.height_ft[1]}`));
-      cell.append(el('span', null, 'feet tall'));
-      spans.append(cell);
-    }
-    if (record.elevation_ft) {
-      const cell = el('div');
-      cell.append(el('b', null,
-        `${record.elevation_ft[0].toLocaleString('en-US')}–`
-        + `${record.elevation_ft[1].toLocaleString('en-US')}`));
-      cell.append(el('span', null, 'feet elevation'));
+      cell.append(el('b', null, figure));
+      cell.append(el('span', null, label));
       spans.append(cell);
     }
     root.append(spans);

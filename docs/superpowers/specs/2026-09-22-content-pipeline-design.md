@@ -309,9 +309,15 @@ One file per species, `content_src/species/<SYMBOL>.json`:
 }
 ```
 
-Required: `concepts` with at least one channel, `range.text`, `elevation_ft`,
-`height_ft`, `habitat`, `ref`. Optional: `common_extra`, `audubon_name`,
-`planted_states`, `variety_notes`. The build appends `common_extra` after the PLANTS
+Required: `concepts` with at least one channel, `range.text`, `habitat`, `ref`.
+Optional: `elevation_ft`, `height_ft`, `common_extra`, `audubon_name`,
+`planted_states`, `variety_notes`.
+
+`height_ft` is `[low, high]`, or `[null, high]` when the references give only a
+maximum. `elevation_ft` is `[low, high]`, or one number when the references give one
+known elevation. A file omits either field only when no reference gives a number. The
+species screen shows "30–40 feet tall", "Up to 40 feet tall", a range of feet elevation,
+or "About 6,600 feet elevation", and hides an omitted field. The build appends `common_extra` after the PLANTS
 common name to form `common`. The build fails when a required field is missing.
 
 The `species-draft` skill drafts one file per species that lacks one. It reads, in order
