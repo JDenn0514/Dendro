@@ -1,6 +1,33 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { numberWord, capitalize, plural, displayName } from '../app/logic/words.js';
+import {
+  numberWord, capitalize, plural, displayName, heightSpan, elevationSpan
+} from '../app/logic/words.js';
+
+test('a height range prints as today', () => {
+  assert.deepEqual(heightSpan([30, 40]), { figure: '30–40', label: 'feet tall' });
+});
+
+test('a height with only a maximum prints as up to that figure', () => {
+  assert.deepEqual(heightSpan([null, 40]), { figure: 'Up to 40', label: 'feet tall' });
+});
+
+test('an elevation range prints with thousands separators', () => {
+  assert.deepEqual(elevationSpan([0, 2000]), { figure: '0–2,000', label: 'feet elevation' });
+});
+
+test('a single elevation prints as about that figure', () => {
+  assert.deepEqual(elevationSpan(6600), { figure: 'About 6,600', label: 'feet elevation' });
+});
+
+test('an omitted or malformed height or elevation prints nothing', () => {
+  for (const value of [undefined, null, 40, [30, null], [null, null], [40, 30], ['30', 40], [30]]) {
+    assert.equal(heightSpan(value), null, JSON.stringify(value));
+  }
+  for (const value of [undefined, null, '6600', [null, 9000], [5000, null], [9000, 5000], [5000]]) {
+    assert.equal(elevationSpan(value), null, JSON.stringify(value));
+  }
+});
 
 test('a count under one hundred prints as words', () => {
   assert.equal(numberWord(0), 'zero');

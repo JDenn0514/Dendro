@@ -11,8 +11,10 @@ export interface AuthoredSpecies {
   audubon_name?: string;
   range: { text: string };
   planted_states?: string[];
-  elevation_ft: [number, number];
-  height_ft: [number, number];
+  /** A range, or one number when a reference gives one known elevation. */
+  elevation_ft?: [number, number] | number;
+  /** A range, or a null low when a reference gives only the maximum. */
+  height_ft?: [number | null, number];
   habitat: string;
   variety_notes?: Record<string, string>;
   ref: string[];
@@ -40,13 +42,14 @@ export interface SpeciesRecord {
 export const REQUIRED_AUTHORED: string[] = [
   'concepts',
   'range',
-  'elevation_ft',
-  'height_ft',
   'habitat',
   'ref',
 ];
 
+// A file leaves out height or elevation only when no reference gives a number.
 const OPTIONAL_AUTHORED: string[] = [
+  'elevation_ft',
+  'height_ft',
   'common_extra',
   'audubon_name',
   'planted_states',
@@ -93,19 +96,47 @@ function nonEmptyString(value: unknown): boolean {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
-function checkRange(errors: string[], symbol: string, field: string, value: unknown): void {
+function isNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value);
+}
+
+/**
+ * A range is `[low, high]`. `nullLow` also accepts `[null, high]`, for a height
+ * where the references give only the maximum.
+ */
+function checkRange(
+  errors: string[],
+  symbol: string,
+  field: string,
+  value: unknown,
+  nullLow: boolean,
+): void {
+  const shape = nullLow
+    ? 'an array of two numbers, or null and a number'
+    : 'an array of two numbers';
   if (!Array.isArray(value) || value.length !== 2) {
-    errors.push(`${symbol}: ${field} must be an array of two numbers`);
+    errors.push(`${symbol}: ${field} must be ${shape}`);
     return;
   }
   const [low, high] = value;
-  if (typeof low !== 'number' || typeof high !== 'number') {
-    errors.push(`${symbol}: ${field} must be an array of two numbers`);
+  const lowOk = isNumber(low) || (nullLow && low === null);
+  if (!lowOk || !isNumber(high)) {
+    errors.push(`${symbol}: ${field} must be ${shape}`);
     return;
   }
-  if (low > high) {
+  if (isNumber(low) && low > high) {
     errors.push(`${symbol}: ${field} has a first number greater than its second`);
   }
+}
+
+function checkElevation(errors: string[], symbol: string, value: unknown): void {
+  // One number is one known elevation, for a species with few known sites.
+  if (isNumber(value)) return;
+  if (!Array.isArray(value)) {
+    errors.push(`${symbol}: elevation_ft must be a number or an array of two numbers`);
+    return;
+  }
+  checkRange(errors, symbol, 'elevation_ft', value, false);
 }
 
 /**
@@ -163,10 +194,10 @@ export function validateAuthored(
   }
 
   if (authored.elevation_ft !== undefined) {
-    checkRange(errors, symbol, 'elevation_ft', authored.elevation_ft);
+    checkElevation(errors, symbol, authored.elevation_ft);
   }
   if (authored.height_ft !== undefined) {
-    checkRange(errors, symbol, 'height_ft', authored.height_ft);
+    checkRange(errors, symbol, 'height_ft', authored.height_ft, true);
   }
 
   if (authored.habitat !== undefined && !nonEmptyString(authored.habitat)) {
@@ -293,8 +324,9 @@ export function mergeSpecies(fetched: FetchedSpecies, authored: AuthoredSpecies)
   record.concepts = authored.concepts;
   record.range = { text: authored.range.text, states: fetched.range.states };
   record.planted_states = authored.planted_states ?? [];
-  record.elevation_ft = authored.elevation_ft;
-  record.height_ft = authored.height_ft;
+  // An omitted field stays out of the record. The species screen then hides its row.
+  if (authored.elevation_ft !== undefined) record.elevation_ft = authored.elevation_ft;
+  if (authored.height_ft !== undefined) record.height_ft = authored.height_ft;
   record.habitat = authored.habitat;
   record.native_status = fetched.native_status ?? NATIVE_STATUS_UNKNOWN;
   record.varieties = varieties;
