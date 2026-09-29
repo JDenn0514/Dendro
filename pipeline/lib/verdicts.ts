@@ -93,6 +93,11 @@ function parseName(name: string): ParsedName {
   return { species, infra };
 }
 
+/** The infraspecific epithet of a name, or null for a name at the rank of species. */
+export function infraEpithet(name: string): string | null {
+  return parseName(name).infra;
+}
+
 /**
  * Owner ruling 2026-09-26. A name with no infraspecific epithet matches the species and
  * every variety or subspecies of it. A name with one matches only a source that names the

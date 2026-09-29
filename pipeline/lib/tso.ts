@@ -1,6 +1,7 @@
 import { channelHint, makeCandidate, type Candidate } from './candidates.ts';
 import { htmlText, openTags } from './html.ts';
 import type { Http } from './http.ts';
+import { infraEpithet } from './verdicts.ts';
 
 export const TSO_BASE = 'https://www.treesandshrubsonline.org';
 export const TSO_SITEMAP_URL = `${TSO_BASE}/sitemap.xml`;
@@ -27,7 +28,11 @@ export interface TsoPage {
   sectionIds: string[];
 }
 
-/** The article path of a name: `/articles/<genus>/<genus>-<epithet>/`, lower case, `×` as `x`. */
+/**
+ * The article path of a name: `/articles/<genus>/<genus>-<epithet>/`, lower case, `×` as `x`.
+ * A hybrid formula such as `Platanus occidentalis × orientalis` has no path, because the path
+ * of its first parent is another taxon.
+ */
 export function tsoPath(name: string): string | null {
   const words = name
     .normalize('NFC')
@@ -38,8 +43,10 @@ export function tsoPath(name: string): string | null {
     .split(' ');
   const genus = words[0] ?? '';
   let epithet = words[1] ?? '';
-  if (epithet === 'x') epithet = words[2] === undefined ? '' : `x-${words[2]}`;
+  const hybrid = epithet === 'x';
+  if (hybrid) epithet = words[2] === undefined ? '' : `x-${words[2]}`;
   if (!/^[a-z]+$/.test(genus) || !/^[a-z][a-z-]*$/.test(epithet)) return null;
+  if (words.slice(hybrid ? 3 : 2).includes('x')) return null;
   return `/articles/${genus}/${genus}-${epithet}/`;
 }
 
@@ -170,6 +177,9 @@ export async function tsoRows(
   const rows: Candidate[] = [];
   const tried = new Set<string>();
   for (const name of names) {
+    // TSO files a variety under its species. So a synonym such as `Quercus stellata var.
+    // margaretta` gives the path of the parent species, which is another taxon.
+    if (infraEpithet(name) !== null) continue;
     const path = tsoPath(name);
     // A path that the sitemap does not list costs no request and records no failure.
     if (path === null || tried.has(path) || !listed.has(path)) continue;

@@ -19,7 +19,8 @@ import {
 
 const NOW = '2026-09-25T12:00:00Z';
 const QUGA_URL = 'https://www.treesandshrubsonline.org/articles/quercus/quercus-gambelii/';
-const PLHI_URL = 'https://www.treesandshrubsonline.org/articles/platanus/platanus-x-hispanica/';
+const PLHI_PATH = '/articles/platanus/platanus-x-hispanica/';
+const PLHI_URL = `https://www.treesandshrubsonline.org${PLHI_PATH}`;
 
 function fixture(name: string): string {
   return fs.readFileSync(new URL(`./fixtures/tso/${name}`, import.meta.url), 'utf8');
@@ -65,6 +66,13 @@ test('tsoPath builds the article path of a name', () => {
   assert.equal(tsoPath('Quercus utahensis (A. DC.) Rydb.'), '/articles/quercus/quercus-utahensis/');
   assert.equal(tsoPath('Quercus'), null);
   assert.equal(tsoPath(''), null);
+});
+
+test('tsoPath gives no path for a hybrid formula', () => {
+  // A formula names two parents, and the path of the first parent is another taxon.
+  assert.equal(tsoPath('Platanus occidentalis × P. orientalis'), null);
+  assert.equal(tsoPath('Platanus occidentalis × orientalis'), null);
+  assert.equal(tsoPath('Platanus ×hispanica Mill. ex Münchh.'), PLHI_PATH);
 });
 
 test('parseSitemapPaths lists the paths on the TSO host', () => {
@@ -195,6 +203,27 @@ test('tsoRows asks for one path once when two names give it', async () => {
 test('tsoRows gives no rows when the heading names another species', async () => {
   const http = fakeHttp(new Map([[TSO_SITEMAP_URL, SITEMAP], [QUGA_URL, PLHI_PAGE]]));
   assert.deepEqual(await tsoRows(http, ['Quercus gambelii'], 'QUGA', NOW), []);
+});
+
+test('tsoRows skips a synonym below the rank of species', async () => {
+  // Run simple_lobed_us_add: the synonym "Quercus stellata var. margaretta" of QUMA13 gave
+  // the Quercus stellata article, which is the parent species and not the target.
+  const http = fakeHttp(new Map([[TSO_SITEMAP_URL, SITEMAP], [QUGA_URL, QUGA_PAGE]]));
+  const names = [
+    'Quercus gunnisonii (Torr.) Rydb.',
+    'Quercus gambelii Nutt. var. gunnisonii (Torr.) Wenz.',
+    'Quercus gambelii subsp. gunnisonii',
+    'Quercus gambelii f. gunnisonii',
+    'Quercus gambelii gunnisonii',
+  ];
+  assert.deepEqual(await tsoRows(http, names, 'QUGU', NOW), []);
+  assert.deepEqual(http.urls, [TSO_SITEMAP_URL], 'the parent article costs no request');
+});
+
+test('tsoRows keeps the accepted name of a hybrid, with its author', async () => {
+  const http = fakeHttp(new Map([[TSO_SITEMAP_URL, SITEMAP], [PLHI_URL, PLHI_PAGE]]));
+  const rows = await tsoRows(http, ['Platanus ×hispanica Mill. ex Münchh.'], 'PLHI', NOW);
+  assert.equal(rows.length, 2);
 });
 
 test('tsoRows gives no rows when the sitemap fetch fails', async () => {
