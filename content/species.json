@@ -1092,6 +1092,44 @@
     "native_status": "native",
     "varieties": []
   },
+  "PLHI": {
+    "scientific": "Platanus ×hispanica",
+    "common": [
+      "London planetree",
+      "London plane"
+    ],
+    "inat_taxon_id": null,
+    "inat_name": null,
+    "genus": "Platanus",
+    "genus_common": "sycamore",
+    "section": null,
+    "family": "Platanaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "papery",
+      "fruit": "ball"
+    },
+    "range": {
+      "text": "Planted in cities; a hybrid with no wild range",
+      "states": [
+        "CA",
+        "CT",
+        "MA",
+        "NJ",
+        "NY",
+        "PA"
+      ]
+    },
+    "planted_states": [],
+    "height_ft": [
+      75,
+      100
+    ],
+    "habitat": "Planted in parks and large lawns on moist, well-drained soils in full sun; it tolerates city conditions",
+    "native_status": "introduced",
+    "varieties": []
+  },
   "PLOC": {
     "scientific": "Platanus occidentalis",
     "common": [
@@ -1385,6 +1423,69 @@
       60
     ],
     "habitat": "River bottoms, wet forests and flatwoods",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUBI": {
+    "scientific": "Quercus bicolor",
+    "common": [
+      "swamp white oak"
+    ],
+    "inat_taxon_id": 54780,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Northeastern and north-central United States and southeastern Canada",
+      "states": [
+        "AL",
+        "CT",
+        "DC",
+        "DE",
+        "IA",
+        "IL",
+        "IN",
+        "KY",
+        "MA",
+        "MD",
+        "ME",
+        "MI",
+        "MN",
+        "MO",
+        "MS",
+        "NC",
+        "NH",
+        "NJ",
+        "NY",
+        "OH",
+        "PA",
+        "RI",
+        "SC",
+        "TN",
+        "VA",
+        "VT",
+        "WI",
+        "WV"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      3300
+    ],
+    "height_ft": [
+      60,
+      75
+    ],
+    "habitat": "Lowlands, stream edges and swamps that flood at times, on poorly drained soils",
     "native_status": "native",
     "varieties": []
   },
@@ -1826,6 +1927,42 @@
     "native_status": "native",
     "varieties": []
   },
+  "QUGR2": {
+    "scientific": "Quercus gravesii",
+    "common": [
+      "Chisos red oak"
+    ],
+    "inat_taxon_id": 167650,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Lobatae",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "furrowed",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Mountains of Trans-Pecos Texas and northern Mexico",
+      "states": [
+        "TX"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      3900,
+      7500
+    ],
+    "height_ft": [
+      null,
+      45
+    ],
+    "habitat": "Dry wooded hillsides and moist canyons in the mountains",
+    "native_status": "native",
+    "varieties": []
+  },
   "QUHA3": {
     "scientific": "Quercus havardii",
     "common": [
@@ -2130,6 +2267,55 @@
       90
     ],
     "habitat": "Wet, poorly drained bottomlands and swamps that flood from time to time",
+    "native_status": "native",
+    "varieties": []
+  },
+  "QUMA13": {
+    "scientific": "Quercus margaretta",
+    "common": [
+      "sand post oak",
+      "dwarf post oak"
+    ],
+    "inat_taxon_id": 371998,
+    "inat_name": "Quercus margaretiae",
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": null,
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Southeastern Coastal Plain, Virginia to Texas and Missouri",
+      "states": [
+        "AL",
+        "AR",
+        "FL",
+        "GA",
+        "LA",
+        "MO",
+        "MS",
+        "NC",
+        "OK",
+        "SC",
+        "TN",
+        "TX",
+        "VA"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      2000
+    ],
+    "height_ft": [
+      30,
+      40
+    ],
+    "habitat": "Deep sands and gravels in sandhills, pine barrens, open scrub and dense woods",
     "native_status": "native",
     "varieties": []
   },
@@ -2649,6 +2835,48 @@
         "name": "var. sinuata"
       }
     ]
+  },
+  "QUSI2": {
+    "scientific": "Quercus similis",
+    "common": [
+      "bottomland post oak"
+    ],
+    "inat_taxon_id": 167667,
+    "inat_name": null,
+    "genus": "Quercus",
+    "genus_common": "oak",
+    "section": "Quercus",
+    "family": "Fagaceae",
+    "arrangement": "alternate",
+    "concepts": {
+      "leaf": "simple_lobed",
+      "bark": "plated",
+      "fruit": "acorn"
+    },
+    "range": {
+      "text": "Southern Coastal Plain, South Carolina to east Texas",
+      "states": [
+        "AL",
+        "AR",
+        "GA",
+        "LA",
+        "MS",
+        "SC",
+        "TX"
+      ]
+    },
+    "planted_states": [],
+    "elevation_ft": [
+      0,
+      1000
+    ],
+    "height_ft": [
+      null,
+      80
+    ],
+    "habitat": "Forests in wet stream bottoms, flatwoods and river valleys",
+    "native_status": "native",
+    "varieties": []
   },
   "QUST": {
     "scientific": "Quercus stellata",

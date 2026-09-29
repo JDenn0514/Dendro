@@ -1,0 +1,654 @@
+{
+  "name": "simple_lobed_us_add",
+  "bucket": "simple_lobed",
+  "concepts": [],
+  "concept_exemplars": {},
+  "states": [
+    "AL",
+    "AK",
+    "AZ",
+    "AR",
+    "CA",
+    "CO",
+    "CT",
+    "DE",
+    "DC",
+    "FL",
+    "GA",
+    "HI",
+    "ID",
+    "IL",
+    "IN",
+    "IA",
+    "KS",
+    "KY",
+    "LA",
+    "ME",
+    "MD",
+    "MA",
+    "MI",
+    "MN",
+    "MS",
+    "MO",
+    "MT",
+    "NE",
+    "NV",
+    "NH",
+    "NJ",
+    "NM",
+    "NY",
+    "NC",
+    "ND",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VT",
+    "VA",
+    "WA",
+    "WV",
+    "WI",
+    "WY"
+  ],
+  "genera": [
+    "Acer",
+    "Quercus",
+    "Platanus",
+    "Liquidambar",
+    "Liriodendron",
+    "Sassafras"
+  ],
+  "include": [
+    "PLHI",
+    "QUGR2",
+    "QUMA13",
+    "QUSI2",
+    "QUBI"
+  ],
+  "channels": [
+    "leaf",
+    "bark",
+    "fruit"
+  ],
+  "created_at": "2026-09-28T19:40:59Z",
+  "species": [
+    "PLHI",
+    "QUGR2",
+    "QUMA13",
+    "QUSI2",
+    "QUBI"
+  ],
+  "dropped": [
+    {
+      "symbol": "ACBU4",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACCI5",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACDI12",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACER",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "ACFR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "ACGR14",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACJA2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACLE2",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "ACOP3",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACOPO",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "ACTAT2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "LICH6",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "LIOR2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "LIQUI",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "LIRIO",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "PLATA",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "PLOR6",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUAC3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUAL2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUAL3",
+      "reason": "out of range"
+    },
+    {
+      "symbol": "QUAS3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUAT",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE8",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBE9",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBI2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBL",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBR2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUBU",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBU3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUBY",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCA3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCH5",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUCO3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCO4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCO5",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUCR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDE4",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUDI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUDI2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUEG",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUEP",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUERC",
+      "reason": "not a species"
+    },
+    {
+      "symbol": "QUEX",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUFR",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUGA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUGA3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUGAF",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUGI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUGL2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUGR4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUGU",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHA4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHI",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUHO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUHU",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUIN2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUIN3",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUIN4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUIN5",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUIN6",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUIN7",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUJA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUJO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUJO4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QULE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QULU",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMA4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMA5",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUME",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUME2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMI2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUMO2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMO3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMO5",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUMU2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUMU3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUNE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUNE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUNE3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUOR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUOV",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPA3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPA4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPAP2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUPAT",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUPE2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUPO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPS",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUPU80",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QURE",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURO",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURO4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURU2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QURU3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSA2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUSA3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSC",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSC2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSE2",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUSM",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUST2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUST3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUST4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSU2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSU3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSU4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUSU6",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUTH",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUTO3",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUTO4",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUTR",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUVA",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUVA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUVA3",
+      "reason": "not a tree"
+    },
+    {
+      "symbol": "QUVE2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUWA",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUWA2",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "QUWI",
+      "reason": "hybrid"
+    },
+    {
+      "symbol": "SASSA",
+      "reason": "not a species"
+    }
+  ],
+  "fetch_failures": 0,
+  "mono_dropped": 15,
+  "capped": [
+    "QUBI: inat any listing capped at 4 pages"
+  ]
+}
