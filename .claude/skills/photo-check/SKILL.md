@@ -106,47 +106,90 @@ one prints the error and exits 1.
 **Channel.** Set the channel from the fixed list: `leaf`, `bark`, `fruit`, `flower`,
 `twig`. The row's `channel_hint` and `tags_hint` are suggestions only. Use your eyes.
 **When no channel is clear, reject the image. An unclear channel is a reject, not an
-escalation.**
+escalation.** When the only clear channel is one that the run does not take, reject the
+image too. The run's channel list is `channels` in `run.json`. For example, a photo of
+flowers only is a reject in a run whose list is `leaf`, `bark`, and `fruit`.
 
-**Quality.** The photo is close up and sharp. The subject fills the frame. No ruler is in
-the shot. A hand or fingers that hold the leaf or fruit are correct, when the feature is
-still clear (owner ruling 2026-09-26). A small file is not a reason to escalate: the VT
-Dendrology photos are about 250 px wide, and the owner accepted that size (2026-09-26).
-The photo shows the feature that a learner has to
-see (owner ruling 2026-09-26). Each channel has its own feature:
+**Quality.** Answer each check below with yes or no, in order: the reject checks, then the
+hard checks (owner rulings 2026-09-26 and 2026-09-29). Each check is about the feature of
+the channel that you set:
 
-- **Leaf:** the shape of the leaf, and how the leaves sit on the twig. The photo shows a
-  piece of twig with at least two leaves, or two needle bundles, attached. They are close
-  enough to see their shape. On a conifer with needles in bundles, you can count the
-  needles in one bundle. A photo of one detached leaf that shows the shape clearly is an
-  approve with the `hard` tag. The leaf is the typical mature leaf of the species'
-  bucket. A young leaf, a sucker shoot, or another leaf form of the species is a reject.
-- **Bark:** a mature trunk. The grooves, plates, ridges, or peeling, and the texture, are
-  clear and fill the frame.
-- **Fruit:** the fruit, close up. On the tree or off the tree are both correct.
+- **Leaf:** the shape and the margin of the leaf. On a conifer with needles in bundles, the
+  feature is the number of needles in one bundle.
+- **Bark:** the ridges, plates, grooves, or peeling, and the texture.
+- **Fruit:** the fruit. On the tree or off the tree are both correct.
 
-Then apply these rules in order:
+You decide the botanical facts, such as the stage of a leaf, from the photo and the source
+page. The owner is a learner and cannot judge them.
 
-1. The feature is not visible: reject.
-2. The photo is distant or cluttered, but the feature is still visible: approve, and add
-   `hard` to `--tags`, such as `--tags hard` or `--tags hard,winter`. The `hard` tag goes
-   onto the manifest row as it is. The app hides a photo only when its manifest row has
-   `difficulty: "hard"`. The build sets that field from the `hard` tag.
-3. Any other photo below the threshold above, such as a soft photo, or a ruler in the
-   shot: escalate with `--case quality`.
+**Reject** when any of these is yes:
+
+1. You cannot make out the feature. You cannot trace the outline of one leaf or one fruit,
+   or see one bark ridge or plate, without a guess.
+2. Leaf: the photo shows a crown, a whole tree, or a sapling, and the leaves blend into a
+   mass.
+3. Bark: the camera looks up into the crown, or the photo is too dark to read the texture.
+4. Blur smears the edges or the ridges.
+5. The subject is a dead or brown leaf.
+6. A plant name label that you can read is in the frame. It gives the answer away.
+7. Buds, flowers, or catkins take the place of the feature. Exception: the sweetgum
+   flower-head ball counts as fruit, with the `hard` tag.
+8. The leaf is a sucker shoot, or another leaf form that is not the typical leaf of the
+   species' bucket.
+9. The image is black-and-white or greyscale (owner ruling 2026-09-24). The fetch drops
+   these, so one that reaches you came through `photos add`.
+
+**Escalate** with `--case quality` when no reject check is yes and the image is sepia,
+toned, tinted, or heavily filtered (owner ruling 2026-09-25). The owner judges whether the
+filter is light enough to keep.
+
+**Not a fault.** These never lower a verdict and never cause an escalation:
+
+- A ruler, a tape, a pen, or a scale bar in the frame.
+- A hand or fingers that hold the leaf or the fruit.
+- A small file that is sharp. The VT Dendrology photos are about 250 px wide.
+- Your doubt about the species from the photo. Trust the source (see **Identity**).
+
+**Hard:** approve and add `hard` to `--tags` when no reject check is yes and any of these
+is yes:
+
+1. Crowded leaves: no leaf shows its whole outline clear of overlap or shade.
+2. The feature is small in the frame, because the camera is farther away, but you can still
+   trace it. As a guide, not a fixed limit: the feature is less than about a sixth of the
+   short side of the frame.
+3. The photo is soft, but you can trace the edges.
+4. The leaf is tilted, so its outline is foreshortened, or the angle hides its typical
+   shape.
+5. The frame edge cuts off part of the leaf, and most of the leaf shows.
+6. The form is young: a young leaf, a green or unripe fruit, or young stem bark. A young
+   form is never good.
+7. The fruit is not in its typical form: loose parts, caps off, or dry remains. Exception:
+   when the source or the look-for line says that the fruit looks like that in winter, dry
+   winter fruit on the tree is good.
+8. The leaves show autumn colour: red, orange, or yellow.
+9. Bark from a distance: the whole trunk shows, and you can read the texture only in part.
+10. Backlight or deep shade hides the edges.
+
+Write the tag as `--tags hard` or `--tags hard,winter`. The `hard` tag goes onto the
+manifest row as it is. The app hides a photo only when its manifest row has
+`difficulty: "hard"`. The build sets that field from the `hard` tag.
+
+**Good:** approve with no `hard` tag when every reject check and every hard check is no. A
+good photo looks like this:
+
+- **Leaf:** one or two leaves, attached or detached, show the full outline and are the
+  largest sharp thing in the frame. The best leaf photo is one leaf, not dead, that shows
+  its full shape. A photo of the underside only is good. Many leaves are good when one full
+  outline is large and clear.
+- **Bark:** the texture fills the frame, the ridge or plate pattern shows, the photo is
+  sharp, and the colour is true.
+- **Fruit:** the fruit is large in the frame, in its mature form.
 
 **Duplicates.** When two candidates of one target show the same image (the same photo on
 two sources, or one a crop or a resize of the other), approve only one. Keep the row from
 the source that comes first in the fetch order: Bioimages, wildflower.org, Trees and
 Shrubs Online, Wikimedia Commons, iNaturalist, USDA PLANTS. Reject the other, and name the
 kept candidate id in the note (owner ruling 2026-09-26).
-
-The photo shows natural colour, so the tree looks the way it does in real life. A
-black-and-white or greyscale image is a reject, not an escalation (owner ruling
-2026-09-24). The fetch drops these before you see them, so one that reaches you came
-through `photos add`. A sepia, toned, tinted, or heavily filtered image is an escalation
-with `--case quality` (owner ruling 2026-09-25). The owner judges whether the filter is
-light enough to keep.
 
 **License.** The license text on the row is in the allowlist and matches the source page.
 The allowlist is public domain, US government work, CC0 any version, CC BY any version,
@@ -237,23 +280,23 @@ The subagent reads the line of the channel it sets, and judges whether the photo
 those traits:
 
 - The photo shows the traits: say so in the note.
-- A trait that the line names cannot be seen: apply the **Quality** rule for the channel.
+- A trait that the line names cannot be seen: apply the **Quality** checks for the channel.
 - The photo clearly shows a trait that contradicts the line, such as opposite leaves where
-  the line says alternate: escalate with `--case mismatch`. Name the trait in the note.
-  Do not set or change the species. The owner decides.
+  the line says alternate: trust the source. Set the verdict from the **Quality** checks.
+  Start the note with `look-for:` and name the trait that you saw, so the owner can
+  correct the line. Keep `look_for.json` as it is, and do not set or change the species.
 - `look_for.json` is absent, or it has no line for the species and the channel: judge on
-  the **Quality** rule alone, and say so in the note.
+  the **Quality** checks alone, and say so in the note.
 
 ## The three escalation cases
 
 Escalate in these three cases and no others:
 
 1. `mismatch`: the species on the source page and the species on the row differ, or the
-   page names none, or the photo clearly shows a trait that contradicts the look-for line.
+   page names none.
 2. `license`: the license is missing, ambiguous, or not redistributable.
-3. `quality`: the quality falls below the threshold, but the feature is visible and the
-   photo is not only distant or cluttered, or the colour is toned or filtered so the tree
-   does not look real.
+3. `quality`: the image is sepia, toned, tinted, or heavily filtered, so the tree may not
+   look real.
 
 Everything else is an approve or a reject. The one exception is a Kew POWO row whose saved
 file is missing. That row gets no verdict, as **A Kew POWO row** says.
@@ -293,6 +336,7 @@ license text does not match the allowlist.
 - It does not judge the candidates of a full target. They stay unjudged.
 - It does not write `verdicts.jsonl`. `cli photos apply` writes it.
 - It does not write `decisions.json`. The owner writes that.
+- It does not edit `look_for.json`. The owner corrects a line from the `look-for:` notes.
 - It does not upload, resize, or delete any image. `cli build` does that.
 - It does not commit.
 - It does not continue after the stop rule fires.
