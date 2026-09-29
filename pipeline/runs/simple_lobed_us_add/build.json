@@ -946,8 +946,7 @@
     },
     "verdicts_by_kind": {
       "approve": 209,
-      "escalate": 36,
-      "reject": 142
+      "reject": 178
     },
     "fetch_failures": 0,
     "stop_rule_fired": false
