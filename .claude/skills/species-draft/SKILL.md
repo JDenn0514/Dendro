@@ -83,8 +83,9 @@ Write the form that matches what the references give:
 - A height is greater than zero. An elevation can be below zero, below sea level.
 - Height takes no single number. Write `[null, high]` for a maximum.
 - Elevation takes no `null`. Write one number, or leave the field out.
-- When a reference gives metres, convert to feet and round to the nearest 100 ft. For
-  example, 2,300 m is 7,546 ft, so write 7500.
+- When a reference gives metres, convert to feet. Round an elevation to the nearest 100 ft,
+  and a height to the nearest 5 ft. For example, 2,300 m is 7,546 ft, so write 7500 for an
+  elevation. A height of 13 m is 42.7 ft, so write 45.
 
 Use a partial form or leave a field out only when no reference in **The reference order**
 gives the number. Tell the owner which species and which field, and which references you
