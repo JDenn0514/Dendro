@@ -1,7 +1,7 @@
 // Session size, new cards per day, text size, export, import, reset, the
 // missing diagnostics, and the link to the photo sources. It opens with no
 // content, as the Sources screen does.
-import { isCount } from '../logic/store.js';
+import { isCount, edgesToShow } from '../logic/store.js';
 import { displayName } from '../logic/words.js';
 import { TEXT_SIZE_STEPS, applyTextSize } from '../ui/textsize.js';
 import { el, link } from '../ui/dom.js';
@@ -217,7 +217,7 @@ function diagnosticsGroup(root, ctx) {
   const group = el('div', 'setgroup');
   group.append(tick());
   group.append(el('h2', 'sec-h', 'Pairs with no note'));
-  const edges = store.readMissingEdges();
+  const edges = edgesToShow(store.readMissingEdges(), content);
   if (edges.length === 0) {
     group.append(el('p', 'fact-line',
       'Every pair you have confused carries a note.'));

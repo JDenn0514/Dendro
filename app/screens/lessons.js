@@ -173,11 +173,11 @@ function chevron() {
   return node;
 }
 
-// The way back to the three channels. `#app` is a flex column, so a bare
+// The way back to the lessons overview. `#app` is a flex column, so a bare
 // anchor would take the whole width. One row holds it to its own words.
 function footLinks() {
   const links = el('div', 'links');
-  links.append(link('#/lessons', 'foot', 'All three channels'));
+  links.append(link('#/lessons', 'foot', 'Back to Lessons'));
   return links;
 }
 
