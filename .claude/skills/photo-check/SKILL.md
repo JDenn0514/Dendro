@@ -108,6 +108,14 @@ one prints the error and exits 1.
 **When no channel is clear, reject the image. An unclear channel is a reject, not an
 escalation.**
 
+**A channel outside the run.** `photos fetch` does not filter the candidates by channel.
+So a leaf run also gets bark and fruit candidates. `photos stage` refuses an approve on a
+channel that is not in the run's channel list. When a photo is clear but its channel is
+not in that list, reject it. **A clear photo on a channel outside the run is a reject, not
+an escalation.** Give no `--case`. The note names the channel, such as
+`Clear bark photo. The run covers leaf only.` In the first version every run is leaf only
+(`docs/decisions/2026-09-30-leaf-only-v1.md`).
+
 **Quality.** The photo is close up and sharp. The subject fills the frame. No ruler is in
 the shot. A hand or fingers that hold the leaf or fruit are correct, when the feature is
 still clear (owner ruling 2026-09-26). A small file is not a reason to escalate: the VT

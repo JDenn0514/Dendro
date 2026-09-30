@@ -84,6 +84,21 @@ test('distractors are filtered to species with a card on this channel', () => {
   assert.deepEqual(picks.sort(), ['PLOC', 'QURU']);
 });
 
+test('a species whose only edge is on another channel is not picked first', () => {
+  // QUGA has no leaf edge here. Its one edge, to ACPL, is on bark.
+  const barkEdgeOnly = {
+    ...content,
+    confusion: [
+      { a: 'ACPL', b: 'QUGA', channel: 'bark', a_not_b: 'x', b_not_a: 'x', ref: 'x' }
+    ]
+  };
+  const picks = speciesDistractors({
+    symbol: 'QUGA', channel: 'leaf', count: 1, content: barkEdgeOnly, rng: makeRng(5)
+  });
+  // The genus step gives QURU. QUVE is a Quercus too, but it has no leaf card.
+  assert.deepEqual(picks, ['QURU']);
+});
+
 // Three varieties, two cards. The fixture holds two of each, so this case needs
 // an object of its own.
 const varietyPhoto = (digit) => [{

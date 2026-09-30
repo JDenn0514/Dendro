@@ -84,10 +84,12 @@ export function pickPhoto(card, excludedHashes = [], rng = Math.random) {
   return usable[Math.floor(rng() * usable.length)];
 }
 
-function edgeNeighbours(content, symbol, channel, sameChannelOnly) {
+// An edge on another channel says nothing about how two species differ on this
+// one, so it gives no wrong answer here.
+function edgeNeighbours(content, symbol, channel) {
   const out = [];
   for (const edge of content.confusion) {
-    if (sameChannelOnly && edge.channel !== channel) continue;
+    if (edge.channel !== channel) continue;
     if (edge.a === symbol) out.push(edge.b);
     if (edge.b === symbol) out.push(edge.a);
   }
@@ -101,8 +103,7 @@ export function speciesDistractors({ symbol, channel, count, content, rng = Math
   const bucket = record.concepts?.[channel] ?? null;
 
   const steps = [
-    edgeNeighbours(content, symbol, channel, true),
-    edgeNeighbours(content, symbol, channel, false),
+    edgeNeighbours(content, symbol, channel),
     [...eligible].filter((s) => content.species[s].genus === record.genus),
     [...eligible].filter((s) => content.species[s].family === record.family),
     [...eligible].filter((s) => content.species[s].concepts?.[channel] === bucket),

@@ -19,7 +19,7 @@ const SHAPE_NOTES = [
 
 function backLink() {
   const links = el('div', 'links');
-  links.append(link('#/progress', 'foot', 'All three channels'));
+  links.append(link('#/progress', 'foot', 'Back to Progress'));
   return links;
 }
 

@@ -315,11 +315,38 @@ export function validateContent(raw) {
   return { errors, warnings };
 }
 
-export function loadContent(raw) {
-  const { errors, warnings } = validateContent(raw);
-  if (errors.length > 0) return { ok: false, content: null, errors, warnings };
+// The errors for a list of active channels. No list means every channel.
+function activeChannelErrors(allChannels, active) {
+  if (active === undefined) return [];
+  if (active.length === 0) {
+    return [{ file: 'concepts.json', message: 'the list of active channels is empty' }];
+  }
+  return active
+    .filter((name) => !allChannels.includes(name))
+    .map((name) => ({
+      file: 'concepts.json',
+      message: `no concept is on the active channel ${name}`
+    }));
+}
 
-  const channels = deriveChannels(raw.concepts);
+// Validates the full content, then keeps only the active channels in the object
+// the screens read. A bad row on a hidden channel still fails. The species
+// records and the manifest stay whole, so a hidden channel comes back with no
+// content change.
+export function loadContent(raw, { channels: active } = {}) {
+  const { errors, warnings } = validateContent(raw);
+  const allChannels = deriveChannels(raw.concepts);
+  const failures = [...errors, ...activeChannelErrors(allChannels, active)];
+  if (failures.length > 0) return { ok: false, content: null, errors: failures, warnings };
+
+  const channels = active === undefined
+    ? allChannels
+    : allChannels.filter((channel) => active.includes(channel));
+  const onActiveChannel = (item) => channels.includes(item.channel);
+  const concepts = raw.concepts.filter(onActiveChannel);
+  const units = raw.units.filter(onActiveChannel);
+  const confusion = raw.confusion.filter(onActiveChannel);
+
   const cards = deriveCards(raw, channels);
   const cardsByChannel = {};
   for (const channel of channels) {
@@ -329,20 +356,20 @@ export function loadContent(raw) {
   }
   const conceptsByChannel = {};
   for (const channel of channels) {
-    conceptsByChannel[channel] = raw.concepts.filter((c) => c.channel === channel);
+    conceptsByChannel[channel] = concepts.filter((c) => c.channel === channel);
   }
   const unitMembersByKey = {};
   const unitCardsByKey = {};
-  for (const unit of raw.units) {
+  for (const unit of units) {
     unitMembersByKey[unit.key] = unitMembers(raw, unit);
     unitCardsByKey[unit.key] = unitCards(unit, cards, raw);
   }
 
   const content = {
     species: raw.species,
-    concepts: raw.concepts,
-    confusion: raw.confusion,
-    units: raw.units,
+    concepts,
+    confusion,
+    units,
     manifest: raw.manifest,
     channels,
     concepts_by_channel: conceptsByChannel,

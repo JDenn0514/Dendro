@@ -26,7 +26,8 @@ append them to `content/confusion.json`.
 ```
 
 - `a` and `b` are PLANTS symbols.
-- `channel` is one of `leaf`, `bark`, `fruit`, `flower`, `twig`.
+- `channel` is one of `leaf`, `bark`, `fruit`, `flower`, `twig`. In the first version,
+  write `leaf` only (see **The target**).
 - `a_not_b` says how `a` differs from `b`.
 - `b_not_a` says how `b` differs from `a`.
 - `ref` is one string that names the source of the two sentences.
@@ -37,6 +38,10 @@ Append each edge to the list in `content/confusion.json`.
 
 For `simple_lobed` in v0, draft 15 to 25 edges. Below 15 the distractor pool is thin. Above
 25 the owner's read gets long.
+
+In the first version, write leaf edges only. The owner ruled on 2026-09-30 that the app
+teaches leaves only (`docs/decisions/2026-09-30-leaf-only-v1.md`). The app does not use a
+bark or fruit edge, so a bark or fruit edge does not count toward the 15 to 25.
 
 ## The rules
 
