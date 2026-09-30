@@ -124,8 +124,10 @@ page. The owner is a learner and cannot judge them.
 
 **Reject** when any of these is yes:
 
-1. You cannot make out the feature. You cannot trace the outline of one leaf or one fruit,
-   or see one bark ridge or plate, without a guess.
+1. You cannot make out the feature. A learner cannot see, without close study, the
+   characteristics that tell this tree from others: the lobes and margin of one leaf, the
+   shape of the fruit, or the ridge or plate pattern of the bark. If you must look very
+   closely to trace it, the answer is yes (owner ruling 2026-09-30).
 2. Leaf: the photo shows a crown, a whole tree, or a sapling, and the leaves blend into a
    mass.
 3. Bark: the camera looks up into the crown, or the photo is too dark to read the texture.
@@ -138,6 +140,7 @@ page. The owner is a learner and cannot judge them.
    species' bucket.
 9. The image is black-and-white or greyscale (owner ruling 2026-09-24). The fetch drops
    these, so one that reaches you came through `photos add`.
+10. Fruit: the main part of the fruit is missing, for example acorn cups with no nut.
 
 **Escalate** with `--case quality` when no reject check is yes and the image is sepia,
 toned, tinted, or heavily filtered (owner ruling 2026-09-25). The owner judges whether the
@@ -154,8 +157,8 @@ filter is light enough to keep.
 is yes:
 
 1. Crowded leaves: no leaf shows its whole outline clear of overlap or shade.
-2. The feature is small in the frame, because the camera is farther away, but you can still
-   trace it. As a guide, not a fixed limit: the feature is less than about a sixth of the
+2. The feature is small in the frame, because the camera is farther away, but a learner
+   still sees its characteristics without close study. As a guide, not a fixed limit: the feature is less than about a sixth of the
    short side of the frame.
 3. The photo is soft, but you can trace the edges.
 4. The leaf is tilted, so its outline is foreshortened, or the angle hides its typical
@@ -163,11 +166,12 @@ is yes:
 5. The frame edge cuts off part of the leaf, and most of the leaf shows.
 6. The form is young: a young leaf, a green or unripe fruit, or young stem bark. A young
    form is never good.
-7. The fruit is not in its typical form: loose parts, caps off, or dry remains. Exception:
+7. The fruit is not in its typical form: loose parts, a nut without its cap, or dry remains. Exception:
    when the source or the look-for line says that the fruit looks like that in winter, dry
    winter fruit on the tree is good.
 8. The leaves show autumn colour: red, orange, or yellow.
-9. Bark from a distance: the whole trunk shows, and you can read the texture only in part.
+9. Bark from a distance: the whole trunk shows, and the ridge or plate pattern shows without
+   close study, but the fine texture does not.
 10. Backlight or deep shade hides the edges.
 
 Write the tag as `--tags hard` or `--tags hard,winter`. The `hard` tag goes onto the
@@ -178,9 +182,12 @@ manifest row as it is. The app hides a photo only when its manifest row has
 good photo looks like this:
 
 - **Leaf:** one or two leaves, attached or detached, show the full outline and are the
-  largest sharp thing in the frame. The best leaf photo is one leaf, not dead, that shows
-  its full shape. A photo of the underside only is good. Many leaves are good when one full
-  outline is large and clear.
+  largest sharp thing in the frame. The best leaf photo shows one petiole laid flat or
+  hanging flat: one whole leaf, or for a compound leaf all of its leaflets, not dead
+  (owner ruling 2026-09-30). A photo of the underside only is good. When one full outline
+  is large and clear among many leaves, approve with `hard` and start the note with
+  `one clear leaf:`. When a target has no better leaf photo, the owner can use it as a
+  good photo.
 - **Bark:** the texture fills the frame, the ridge or plate pattern shows, the photo is
   sharp, and the colour is true.
 - **Fruit:** the fruit is large in the frame, in its mature form.
