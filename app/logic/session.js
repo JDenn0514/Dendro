@@ -20,9 +20,13 @@ export function unitsForFocus(content, focus) {
   return content.units.filter((unit) => focus === 'all' || unit.channel === focus);
 }
 
-export function dueTomorrowCount(states, today) {
+// The cards due the day after today. A stored state whose card is not in the
+// content does not count, so a card on a hidden channel adds nothing.
+export function dueTomorrowCount(content, states, today) {
   const tomorrow = addDays(today, 1);
-  return Object.values(states).filter((state) => state && state.due === tomorrow).length;
+  return Object.entries(states)
+    .filter(([id, state]) => content.cards[id] && state && state.due === tomorrow)
+    .length;
 }
 
 // The progress bar: card n of N. An empty deck reads 0 of 0.

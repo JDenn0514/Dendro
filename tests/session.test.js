@@ -219,15 +219,15 @@ test('unitsForFocus keeps content order and answers all', () => {
   assert.equal(unitsForFocus(content, 'leaf')[0].key, 'leaf_types');
 });
 
-test('dueTomorrowCount counts the states due the next day', () => {
+test('dueTomorrowCount counts the cards due the next day', () => {
   const states = {
-    a: { due: '2026-03-11' },
-    b: { due: '2026-03-11' },
-    c: { due: '2026-03-12' },
-    d: { due: '2026-03-10' }
+    'species:QUGA:leaf': { due: '2026-03-11' },
+    'species:QURU:leaf': { due: '2026-03-11' },
+    'species:ACPL:leaf': { due: '2026-03-12' },
+    'species:PLOC:leaf': { due: '2026-03-10' }
   };
-  assert.equal(dueTomorrowCount(states, TODAY), 2);
-  assert.equal(dueTomorrowCount({}, TODAY), 0);
+  assert.equal(dueTomorrowCount(content, states, TODAY), 2);
+  assert.equal(dueTomorrowCount(content, {}, TODAY), 0);
 });
 
 test('the session position stays inside the deck', () => {
@@ -434,4 +434,29 @@ test('yesterdays new cards do not count against today', () => {
     content, states: {}, log, settings: { session_size: 20, new_per_day: 1 },
     focus: 'all', today: TODAY
   }), false);
+});
+
+test('a saved bark card is not due when only leaf is active', () => {
+  const { content: leafOnly } = loadContent(loadFixture(), { channels: ['leaf'] });
+  const saved = {
+    interval: 1, ease: 2.5, due: '2026-01-01', reps: 1, lapses: 0,
+    recent: [], tier: 'mc4', tier_passes: 0
+  };
+  const states = { 'species:QUGA:bark': saved };
+  const today = '2026-09-30';
+  assert.deepEqual(dueCardIds({ content: leafOnly, states, focus: 'bark', today }), []);
+  assert.deepEqual(dueCardIds({ content: leafOnly, states, focus: 'all', today }), []);
+  assert.deepEqual(unitsForFocus(leafOnly, 'bark'), []);
+});
+
+test('dueTomorrowCount counts only the cards in the content', () => {
+  const { content: leafOnly } = loadContent(loadFixture(), { channels: ['leaf'] });
+  const states = {
+    'species:QUGA:leaf': { due: '2026-03-11' },
+    'species:QUGA:bark': { due: '2026-03-11' },
+    'species:GONE:leaf': { due: '2026-03-11' }
+  };
+  // The bark card is hidden, and no species GONE is in the content.
+  assert.equal(dueTomorrowCount(leafOnly, states, TODAY), 1);
+  assert.equal(dueTomorrowCount(content, states, TODAY), 2);
 });

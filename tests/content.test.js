@@ -467,3 +467,101 @@ test('a manifest row with no author, source, or license fails validation', () =>
 
   assert.deepEqual(validateContent(badContent()).errors, []);
 });
+
+// The fixture holds leaf edges only. One bark edge gives the filter an edge to drop.
+function withBarkEdge() {
+  const raw = loadFixture();
+  raw.confusion.push({
+    a: 'QUGA', b: 'QURU', channel: 'bark',
+    a_not_b: 'x', b_not_a: 'x', ref: 'x'
+  });
+  return raw;
+}
+
+test('loadContent with no channel list keeps every channel', () => {
+  const raw = withBarkEdge();
+  const result = loadContent(raw);
+  assert.equal(result.ok, true);
+  const { content } = result;
+  assert.deepEqual(content.channels, ['leaf', 'bark', 'fruit']);
+  assert.ok(content.cards['species:QUGA:bark']);
+  assert.ok(content.cards['species:QUGA:fruit']);
+  assert.deepEqual(Object.keys(content.cards_by_channel), ['leaf', 'bark', 'fruit']);
+  assert.deepEqual(Object.keys(content.concepts_by_channel), ['leaf', 'bark', 'fruit']);
+  assert.equal(content.concepts.length, raw.concepts.length);
+  assert.equal(content.units.length, raw.units.length);
+  assert.equal(content.confusion.length, raw.confusion.length);
+  assert.ok(content.unit_cards.bark_types.length > 0);
+});
+
+test('loadContent with a channel list keeps only those channels', () => {
+  const raw = withBarkEdge();
+  const result = loadContent(raw, { channels: ['leaf'] });
+  assert.equal(result.ok, true);
+  const { content } = result;
+  assert.deepEqual(content.channels, ['leaf']);
+  const cards = Object.values(content.cards);
+  assert.ok(cards.length > 0);
+  assert.ok(cards.every((card) => card.channel === 'leaf'));
+  assert.deepEqual(Object.keys(content.cards_by_channel), ['leaf']);
+  assert.deepEqual(Object.keys(content.concepts_by_channel), ['leaf']);
+  assert.ok(content.concepts.length > 0);
+  assert.ok(content.concepts.every((concept) => concept.channel === 'leaf'));
+  assert.ok(content.units.length > 0);
+  assert.ok(content.units.every((unit) => unit.channel === 'leaf'));
+  const unitKeys = content.units.map((unit) => unit.key).sort();
+  assert.deepEqual(Object.keys(content.unit_cards).sort(), unitKeys);
+  assert.deepEqual(Object.keys(content.unit_members).sort(), unitKeys);
+  assert.equal(content.unit_cards.bark_types, undefined);
+  assert.equal(content.unit_cards.fruit_types, undefined);
+  assert.ok(content.confusion.length > 0);
+  assert.ok(content.confusion.every((edge) => edge.channel === 'leaf'));
+  // The hidden rows stay in the content. Only the screens stop showing them.
+  assert.equal(content.manifest.length, raw.manifest.length);
+  assert.equal(content.species.QUGA.concepts.bark, 'furrowed');
+});
+
+test('a channel list leaves the leaf cards as they were', () => {
+  const all = loadContent(loadFixture()).content;
+  const leaf = loadContent(loadFixture(), { channels: ['leaf'] }).content;
+  assert.deepEqual(leaf.cards_by_channel.leaf, all.cards_by_channel.leaf);
+  assert.deepEqual(leaf.unit_cards.leaf_types, all.unit_cards.leaf_types);
+  assert.deepEqual(leaf.unit_cards.quga_varieties, all.unit_cards.quga_varieties);
+  assert.deepEqual(leaf.cards['species:QUGA:leaf'], all.cards['species:QUGA:leaf']);
+});
+
+test('a channel list keeps the order of concepts.json', () => {
+  const { content } = loadContent(loadFixture(), { channels: ['fruit', 'leaf'] });
+  assert.deepEqual(content.channels, ['leaf', 'fruit']);
+});
+
+test('a channel list still fails on a bad bark row', () => {
+  const raw = loadFixture();
+  const bark = raw.manifest.find((m) => m.target === 'QUGA' && m.channel === 'bark');
+  delete bark.author;
+  const result = loadContent(raw, { channels: ['leaf'] });
+  assert.equal(result.ok, false);
+  assert.equal(result.content, null);
+  assert.match(
+    result.errors.map((e) => e.message).join(' | '),
+    /the QUGA bark row has no author/
+  );
+});
+
+test('a channel list that names no concept channel is an error', () => {
+  const result = loadContent(loadFixture(), { channels: ['leaf', 'twig_buds'] });
+  assert.equal(result.ok, false);
+  assert.equal(result.content, null);
+  assert.deepEqual(result.errors, [
+    { file: 'concepts.json', message: 'no concept is on the active channel twig_buds' }
+  ]);
+});
+
+test('an empty channel list is an error', () => {
+  const result = loadContent(loadFixture(), { channels: [] });
+  assert.equal(result.ok, false);
+  assert.equal(result.content, null);
+  assert.deepEqual(result.errors, [
+    { file: 'concepts.json', message: 'the list of active channels is empty' }
+  ]);
+});
