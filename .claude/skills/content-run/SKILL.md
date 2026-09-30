@@ -12,6 +12,13 @@ Every CLI command reads what earlier steps wrote and skips finished work, so a s
 run resumes with the same command. Every command takes `--refresh`, which bypasses the
 disk cache for that command.
 
+**The first version is leaf only.** The owner ruled on 2026-09-30 that the app teaches
+leaves only (`docs/decisions/2026-09-30-leaf-only-v1.md`). Every new run takes
+`--channels leaf`, so it collects, judges, and publishes leaf photos only. A concept run
+takes `leaf/<key>` values only. Do not retire a published bark or fruit row: it stays in
+the manifest, the app hides it, and a later version shows it again. A run on another
+channel needs the owner's go first.
+
 **The CLI commits. You do not.** The CLI commits at the end of `species list`,
 `photos fetch`, `build`, `report`, `run pr`, and `run finish`. Each commit stages only the
 run's paths: `pipeline/runs/<name>/`, `content/`, `content_src/`, and `pipeline/data/`. So
@@ -41,9 +48,10 @@ again just before its commit. Do not switch the branch of a checkout that a run 
 - [ ] **Step 1: Init the run (script)**
 
 ```bash
-node pipeline/cli.ts run init <name> --bucket <b> --states <csv> --genera <csv> --include <csv> --channels <csv>
+node pipeline/cli.ts run init <name> --bucket <b> --states <csv> --genera <csv> --include <csv> --channels leaf
 ```
 
+Give `--channels leaf`. The first version is leaf only (see the paragraph at the top).
 This creates the branch `content/<name>` from `main` and writes
 `pipeline/runs/<name>/run.json`. It prints `run <name> created on branch content/<name>`.
 When the run already exists it prints `run <name> already exists` and changes nothing.
@@ -299,9 +307,9 @@ no others:
 node pipeline/cli.ts run init <name> --concepts <csv>
 ```
 
-- Each `--concepts` value is qualified: `<channel>/<key>`, such as `bark/plated`. A value
-  with no `/` fails. A key that is not in `content/concepts.json` fails and the message
-  names it.
+- Each `--concepts` value is qualified: `<channel>/<key>`, such as `leaf/simple_lobed`. A
+  value with no `/` fails. A key that is not in `content/concepts.json` fails and the
+  message names it. In the first version every value starts with `leaf/`.
 - The run's channels are the distinct channel prefixes of those keys, so the command
   derives them and **`--channels` is an error on a concept run**.
 
