@@ -1,0 +1,31 @@
+{
+  "run": "leaf_edges",
+  "channels": [
+    "leaf"
+  ],
+  "species": [],
+  "gaps": [],
+  "units": [
+    {
+      "key": "leaf_types",
+      "cards": 8,
+      "warning": null
+    },
+    {
+      "key": "bark_types",
+      "cards": 6,
+      "warning": null
+    },
+    {
+      "key": "fruit_types",
+      "cards": 8,
+      "warning": null
+    }
+  ],
+  "counts": {
+    "candidates_by_source": {},
+    "verdicts_by_kind": {},
+    "fetch_failures": 0,
+    "stop_rule_fired": false
+  }
+}
