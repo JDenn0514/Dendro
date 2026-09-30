@@ -49,6 +49,8 @@ Remove the any-channel step at `question.js:105`. The chooser then uses edge nei
 - The species page shows only plates on active channels. `PLATE_SHAPES` in `app/screens/species.js:18` keeps its bark and fruit entries for later.
 - A saved `#/session?focus=bark` link shows the "nothing is due" text. No redirect.
 - Progress saved in localStorage for bark and fruit cards stays there. The app does not read it and does not delete it.
+- The "due tomorrow" count on the session summary (`app/screens/session.js:597`, `dueTomorrowCount` in `app/logic/session.js:23-26`) counts only the cards in `content.cards`, so a saved bark card does not count.
+- Settings lists a stored pair with no note (`app/screens/settings.js:228-236`) only when its channel is in `content.channels`. The stored list stays, and the export keeps it.
 
 ### Tests
 
@@ -56,12 +58,17 @@ Remove the any-channel step at `question.js:105`. The chooser then uses edge nei
 - `loadContent` with no list gives every channel, as before.
 - `loadContent` with an unknown channel name gives an error.
 - `speciesDistractors` does not put first a species whose only edge is on another channel.
-- `npm test`, `npm run validate`, and `npm run validate:dev` pass.
+- `dueTomorrowCount` does not count a stored state whose card is not in the content.
+- The Settings filter keeps only the pairs on an active channel, and keeps every pair when the content failed to load.
+- `npm test`, `npm run test:pipeline`, `npm run validate`, and `npm run validate:dev` pass.
 - The owner looks at the served app (`python -m http.server 8000`, `?content=dev` and the live content) on the home, lessons, session, species, and concept screens.
 
 ## Part 2: skill text
 
 A `docs(skills)` change: the `content-run` skill states the leaf-only scope and gives `--channels leaf` in the `run init` step. It links the ruling. This can be in the Part 1 pull request or its own.
+
+- The `photo-check` skill: `photos fetch` does not filter by channel, and `photos stage` refuses an approve on a channel outside the run. A clear photo on a channel outside the run is a reject, not an escalation.
+- The `edges-draft` skill: in the first version, write leaf edges only. A bark or fruit edge does not count toward the target. It links the ruling.
 
 ## Part 3: leaf edges (content, separate)
 
