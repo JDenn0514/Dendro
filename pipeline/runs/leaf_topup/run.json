@@ -1,0 +1,24 @@
+{
+  "name": "leaf_topup",
+  "bucket": "simple_lobed",
+  "concepts": [],
+  "concept_exemplars": {},
+  "states": [],
+  "genera": [],
+  "include": [
+    "QUVE",
+    "ACSA3",
+    "QUMA2",
+    "QUAL",
+    "PLOC"
+  ],
+  "channels": [
+    "leaf"
+  ],
+  "created_at": "2026-10-01T13:01:42Z",
+  "species": [],
+  "dropped": [],
+  "fetch_failures": 0,
+  "mono_dropped": 0,
+  "capped": []
+}
