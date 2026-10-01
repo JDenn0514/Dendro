@@ -16,9 +16,23 @@
     "leaf"
   ],
   "created_at": "2026-10-01T13:01:42Z",
-  "species": [],
+  "species": [
+    "QUVE",
+    "ACSA3",
+    "QUMA2",
+    "QUAL",
+    "PLOC"
+  ],
   "dropped": [],
   "fetch_failures": 0,
-  "mono_dropped": 0,
-  "capped": []
+  "mono_dropped": 1,
+  "capped": [
+    "QUVE: inat any listing capped at 4 pages",
+    "ACSA3: commons listing capped at 4 pages",
+    "ACSA3: inat any listing capped at 4 pages",
+    "QUMA2: inat any listing capped at 4 pages",
+    "QUAL: inat any listing capped at 4 pages",
+    "PLOC: inat any listing capped at 4 pages",
+    "PLOC: inat fruiting listing capped at 4 pages"
+  ]
 }
