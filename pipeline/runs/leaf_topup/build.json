@@ -1,0 +1,98 @@
+{
+  "run": "leaf_topup",
+  "channels": [
+    "leaf"
+  ],
+  "species": [
+    {
+      "symbol": "QUVE",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 5
+      }
+    },
+    {
+      "symbol": "ACSA3",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 4
+      }
+    },
+    {
+      "symbol": "QUMA2",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 3
+      }
+    },
+    {
+      "symbol": "QUAL",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 3
+      }
+    },
+    {
+      "symbol": "PLOC",
+      "status": "included",
+      "reason": null,
+      "counts": {
+        "leaf": 3
+      }
+    }
+  ],
+  "gaps": [
+    {
+      "symbol": "PLOC",
+      "channel": "leaf",
+      "count": 3
+    },
+    {
+      "symbol": "QUAL",
+      "channel": "leaf",
+      "count": 3
+    },
+    {
+      "symbol": "QUMA2",
+      "channel": "leaf",
+      "count": 3
+    }
+  ],
+  "units": [
+    {
+      "key": "leaf_types",
+      "cards": 8,
+      "warning": null
+    },
+    {
+      "key": "bark_types",
+      "cards": 6,
+      "warning": null
+    },
+    {
+      "key": "fruit_types",
+      "cards": 8,
+      "warning": null
+    }
+  ],
+  "counts": {
+    "candidates_by_source": {
+      "bioimages": 64,
+      "commons": 63,
+      "inat": 62,
+      "manual": 17,
+      "tso": 47,
+      "wildflower": 63
+    },
+    "verdicts_by_kind": {
+      "approve": 23,
+      "reject": 250
+    },
+    "fetch_failures": 0,
+    "stop_rule_fired": false
+  }
+}
