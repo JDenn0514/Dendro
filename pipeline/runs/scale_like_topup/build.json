@@ -9,17 +9,11 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 3
+        "leaf": 4
       }
     }
   ],
-  "gaps": [
-    {
-      "symbol": "leaf/scale_like",
-      "channel": "leaf",
-      "count": 3
-    }
-  ],
+  "gaps": [],
   "units": [
     {
       "key": "leaf_types",
@@ -42,11 +36,12 @@
       "bioimages": 9,
       "commons": 14,
       "inat": 13,
+      "manual": 6,
       "tso": 10,
       "wildflower": 14
     },
     "verdicts_by_kind": {
-      "approve": 4,
+      "approve": 5,
       "reject": 50
     },
     "fetch_failures": 0,

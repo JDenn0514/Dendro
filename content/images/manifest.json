@@ -32838,5 +32838,18 @@
     "checked_at": "2026-10-01T13:46:01Z",
     "note": "Rank 4, hard. Close juniper spray with the scales sharp, but many blue berries cover part of the frame.",
     "difficulty": "hard"
+  },
+  {
+    "hash": "1f4c475fa25765d17e857076621f018572cb165b87a03abbc52554537b71346b",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Alex Abair",
+    "license": "CC BY 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Juniperus_virginiana_556249203.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:58:41Z",
+    "note": "Rank 1 of the top-up. Close, sharp Juniperus virginiana shoots in true green; the tiny overlapping scales pressed flat on each twig fill the frame, with no cones or berries. Adds J. virginiana to the Thuja and J. scopulorum picks."
   }
 ]
