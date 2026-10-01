@@ -33032,5 +33032,70 @@
     "checked_by": "photo_check_agent",
     "checked_at": "2026-10-01T13:16:00Z",
     "note": "Rank 4. A branch with several leaves; two leaves in the front show the full lobed shape, sharp. Ranks lower because the leaves are crowded."
+  },
+  {
+    "hash": "aee77d76ca2fc663c6af79fc5fada1d5c04f614c00858b882b4302c45ea2546d",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Ayotte, Gilles, 1948-",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharum_15-p.bot-a.saccharum-049.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:33:26Z",
+    "note": "One detached green leaf, upper side, flat on black, sharp, full shape with 5 lobes and smooth margin. Rank 1: the cleanest full-shape leaf in the set."
+  },
+  {
+    "hash": "e7829a58ac5a40295520f60e2f3fc8942b78b3e44960be6a05f3eb9dbb1cb936",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "James St. John",
+    "license": "CC BY 2.0",
+    "origin": "https://commons.wikimedia.org/wiki/File:Acer_saccharum_(sugar_maple)_5_(46278880692).jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:33:26Z",
+    "note": "One detached leaf laid flat on wood chips, sharp, full shape and smooth lobes. Rank 2: a different photographer and setting from rank 1."
+  },
+  {
+    "hash": "bfe0d7de2facc57451d4e4942da2bfb980d7b2300fff9795b86c5920ff175387",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "Wikimedia Commons",
+    "author": "Vatadoshu",
+    "license": "CC0",
+    "origin": "https://commons.wikimedia.org/wiki/File:%C3%89rable_sirop_derable_(2)a.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:33:26Z",
+    "note": "One detached leaf on white with its petiole, sharp, full shape, 5 lobes. Rank 3: clear shape, a third photographer and background."
+  },
+  {
+    "hash": "88095f41d7147529bb494f2d8f5096a48b2403898ca24e32d0cd7321e441a81d",
+    "target": "ACSA3",
+    "channel": "leaf",
+    "source": "Bioimages",
+    "author": "Cole Sullivan",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/sullivanc/20190918_161645.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:33:26Z",
+    "note": "One attached leaf hanging flat, paler lower side, full 5-lobed shape, sharp; a second leaf overlaps at the lower right. Rank 4: adds an on-the-tree view to three detached leaves."
+  },
+  {
+    "hash": "28434ccc1dfad0bbf23319150d099b267a2531eec695697b935aaaf57b40706a",
+    "target": "PLOC",
+    "channel": "leaf",
+    "source": "iNaturalist",
+    "author": "no rights reserved",
+    "license": "CC0 1.0",
+    "origin": "https://www.inaturalist.org/observations/282485582#photo=507519549",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:33:26Z",
+    "note": "One attached leaf hanging flat over sand, sharp, full shape with toothed lobes and hairy petiole. Rank 1: the clearest single leaf and a new photographer; the mottled light patches are natural colour."
   }
 ]

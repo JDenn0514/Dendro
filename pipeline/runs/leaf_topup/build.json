@@ -16,7 +16,9 @@
       "symbol": "ACSA3",
       "status": "included",
       "reason": null,
-      "counts": {}
+      "counts": {
+        "leaf": 4
+      }
     },
     {
       "symbol": "QUMA2",
@@ -39,20 +41,15 @@
       "status": "included",
       "reason": null,
       "counts": {
-        "leaf": 2
+        "leaf": 3
       }
     }
   ],
   "gaps": [
     {
-      "symbol": "ACSA3",
-      "channel": "leaf",
-      "count": 0
-    },
-    {
       "symbol": "PLOC",
       "channel": "leaf",
-      "count": 2
+      "count": 3
     },
     {
       "symbol": "QUAL",
@@ -87,11 +84,12 @@
       "bioimages": 64,
       "commons": 63,
       "inat": 62,
+      "manual": 17,
       "tso": 47,
       "wildflower": 63
     },
     "verdicts_by_kind": {
-      "approve": 18,
+      "approve": 23,
       "reject": 250
     },
     "fetch_failures": 0,
