@@ -1,0 +1,32 @@
+{
+  "QUVE": {
+    "leaf": {
+      "text": "An alternate leaf, 4 to 10 inches long, with 5 to 7 bristle-tipped lobes and sinuses that range from deep to shallow. The upper side is shiny green; the lower side is paler with soft hairs.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus velutina (ID 39)"
+    }
+  },
+  "ACSA3": {
+    "leaf": {
+      "text": "An opposite leaf, 3 to 6 inches long, with 5 rounded lobes and a smooth margin. The upper side is green; the lower side is paler.",
+      "ref": "Virginia Tech Dendrology fact sheet, Acer saccharum (ID 2)"
+    }
+  },
+  "QUMA2": {
+    "leaf": {
+      "text": "An alternate leaf, 6 to 12 inches long, with many lobes and two deep middle sinuses that almost reach the midrib. The lobes near the tip form a crown shape; the upper side is green and the lower side is paler and fuzzy.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus macrocarpa (ID 72)"
+    }
+  },
+  "QUAL": {
+    "leaf": {
+      "text": "An alternate leaf, 4 to 7 inches long, with 7 to 10 rounded, finger-like lobes and sinuses from deep to shallow. The upper side is green to blue-green; the lower side is whitish.",
+      "ref": "Virginia Tech Dendrology fact sheet, Quercus alba (ID 35)"
+    }
+  },
+  "PLOC": {
+    "leaf": {
+      "text": "An alternate leaf, 4 to 8 inches wide, broadly ovate in shape, with 3 to 5 lobes and coarse, toothed margins. The veins may show fine hairs on the lower side.",
+      "ref": "Virginia Tech Dendrology fact sheet, Platanus occidentalis (ID 36)"
+    }
+  }
+}
