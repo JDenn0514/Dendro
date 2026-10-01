@@ -32783,5 +32783,60 @@
     "checked_by": "photo_check_agent",
     "checked_at": "2026-09-28T23:10:42Z",
     "note": "A twig holds many shiny leaves with 3 to 5 pointed lobes that end in bristle tips, close and sharp."
+  },
+  {
+    "hash": "69fee1fd957caf1b660d022a1c8d3f2971630dfe3253fd2a2cc18877be5c2983",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Bioimages",
+    "author": "Steven J. Baskauf",
+    "license": "CC BY 4.0",
+    "origin": "http://bioimages.vanderbilt.edu/baskauf/43546.htm",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:46:01Z",
+    "note": "Rank 1. Close, sharp Thuja shoots on a dark background; the tiny overlapping scales pressed flat on each twig are clear, in true green."
+  },
+  {
+    "hash": "66b7a72e8cb851ad56b1a2fab23043eda7484335fe0947c67aa1e40abb5c6696",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "James L. Reveal",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=63785",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:46:01Z",
+    "note": "Rank 2. Close, sharp juniper shoot tips; the overlapping scales are clear and fill the frame. One berry at the top edge does not distract."
+  },
+  {
+    "hash": "f3885edf74d0bf711bbc410f7e53287ad9f8d1a082ec5c4c704a1f56839437bd",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Trees and Shrubs Online",
+    "author": "Julian Sutton",
+    "license": "CC BY-SA 4.0",
+    "origin": "https://www.treesandshrubsonline.org/articles/juniperus/juniperus-scopulorum/#image=juniperus-scopulorum-1.jpg",
+    "tags": [],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:46:01Z",
+    "note": "Rank 3. Close juniper shoots with the overlapping scales easy to see in true green. A few small pollen cones and one berry sit among the shoots."
+  },
+  {
+    "hash": "042b0eb4f8936c39a8a062309261b92164d145032944eebe751178a97e638e24",
+    "target": "leaf/scale_like",
+    "channel": "leaf",
+    "source": "Lady Bird Johnson Wildflower Center",
+    "author": "James L. Reveal",
+    "license": "used with permission, non-commercial",
+    "origin": "https://www.wildflower.org/gallery/result.php?id_image=63783",
+    "tags": [
+      "hard"
+    ],
+    "checked_by": "photo_check_agent",
+    "checked_at": "2026-10-01T13:46:01Z",
+    "note": "Rank 4, hard. Close juniper spray with the scales sharp, but many blue berries cover part of the frame.",
+    "difficulty": "hard"
   }
 ]
