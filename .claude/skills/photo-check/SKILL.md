@@ -106,9 +106,7 @@ one prints the error and exits 1.
 **Channel.** Set the channel from the fixed list: `leaf`, `bark`, `fruit`, `flower`,
 `twig`. The row's `channel_hint` and `tags_hint` are suggestions only. Use your eyes.
 **When no channel is clear, reject the image. An unclear channel is a reject, not an
-escalation.** When the only clear channel is one that the run does not take, reject the
-image too. The run's channel list is `channels` in `run.json`. For example, a photo of
-flowers only is a reject in a run whose list is `leaf`, `bark`, and `fruit`.
+escalation.**
 
 **A channel outside the run.** `photos fetch` does not filter the candidates by channel.
 So a leaf run also gets bark and fruit candidates. `photos stage` refuses an approve on a
