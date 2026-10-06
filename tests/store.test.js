@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   STORE_VERSION, KEYS, LOG_CAP, defaultSettings, memoryStorage, createStore, isCount,
-  firstAnswerDay
+  firstAnswerDay, edgesToShow
 } from '../app/logic/store.js';
 
 function row(card, at) {
@@ -80,6 +80,18 @@ test('a missing edge counts the same pair in either direction', () => {
   const edges = store.readMissingEdges();
   assert.equal(edges.length, 1);
   assert.deepEqual(edges[0], { a: 'ACPL', b: 'QUGA', channel: 'leaf', count: 2 });
+});
+
+test('edgesToShow keeps only the pairs on an active channel', () => {
+  const edges = [
+    { a: 'ACPL', b: 'QUGA', channel: 'leaf', count: 2 },
+    { a: 'ACPL', b: 'QUGA', channel: 'bark', count: 1 }
+  ];
+  assert.deepEqual(edgesToShow(edges, { channels: ['leaf'] }), [edges[0]]);
+  assert.deepEqual(edgesToShow(edges, { channels: ['leaf', 'bark', 'fruit'] }), edges);
+  // Settings opens when the content failed to load. Then it lists every pair.
+  assert.deepEqual(edgesToShow(edges, null), edges);
+  assert.deepEqual(edgesToShow([], { channels: ['leaf'] }), []);
 });
 
 test('writeSettings ignores a value that is not a whole number of 1 or more', () => {

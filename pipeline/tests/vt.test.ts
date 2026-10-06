@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { captureConsole } from './helpers.ts';
+import { sha256Hex } from '../lib/hash.ts';
 import { licenseAllowedAt } from '../lib/licenses.ts';
 import { vtRowsMain } from '../scripts/vt-rows.ts';
 import { VT_SITE } from '../scripts/sources.ts';
@@ -143,7 +144,7 @@ test('vt-rows.ts writes one row per image of the channel, from the saved page', 
   assert.equal(code, 0);
   assert.deepEqual(calls, [`${IMAGES}/fruit1.jpg`]);
   const rows = JSON.parse(fs.readFileSync(path.join(out, 'vt-rows.json'), 'utf8'));
-  const local = path.join(out, 'images', 'QUGA4-fruit1.jpg');
+  const local = path.join(out, 'images', `QUGA4-${sha256Hex(JPEG)}.jpg`);
   assert.deepEqual(rows, [{ ...vtRow(parseVtImages(PAGE, PAGE_URL)[2], PAGE_URL, 'QUGA4', 'Quercus garryana', VT_AUTHORS), local }]);
   assert.deepEqual(new Uint8Array(fs.readFileSync(local)), JPEG);
   const report = fs.readFileSync(path.join(out, 'vt-report.md'), 'utf8');
@@ -178,6 +179,45 @@ test('vt-rows.ts fetches a missing page and skips an image the run holds', async
   const report = fs.readFileSync(path.join(out, 'vt-report.md'), 'utf8');
   assert.match(report, /bark1\.jpg: skipped, the run already holds it\./);
   assert.match(report, /## ACRU leaf[\s\S]*No Virginia Tech fact sheet/);
+});
+
+test('vt-rows.ts gives each species its own file when the image names are the same', async (t) => {
+  // Two concept rows, as in run scale_like_topup: one symbol, and leaf1.jpg on both pages.
+  const root = fakeRoot(t, false);
+  const species = [
+    { symbol: 'JUSC2', sci: 'Juniperus scopulorum', id: 165, bytes: new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 1]) },
+    { symbol: 'THOC2', sci: 'Thuja occidentalis', id: 118, bytes: new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 2]) },
+  ];
+  const routes = new Map<string, Uint8Array>();
+  for (const { symbol, sci, id, bytes } of species) {
+    const pageUrl = `https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=${id}`;
+    fs.writeFileSync(path.join(root, 'pipeline', 'sources', `${symbol}.json`), JSON.stringify({
+      symbol,
+      scientific_name: sci,
+      sources: [{ site: 'Virginia Tech Dendrology', url: pageUrl }],
+    }));
+    const page = PAGE.replaceAll('Quercus garryana', sci);
+    fs.writeFileSync(path.join(root, 'pipeline', 'sources', 'raw', `${symbol}.vt.html`), page);
+    routes.set(`https://dendro.cnre.vt.edu/dendrology/images/${encodeURIComponent(sci)}/leaf1.jpg`, bytes);
+  }
+  const out = path.join(root, 'out');
+  const gap = path.join(root, 'gap.json');
+  fs.writeFileSync(gap, JSON.stringify(species.map(({ sci }) => (
+    { symbol: 'scale_like', sci, channel: 'leaf', approved: 0 }
+  ))));
+  const calls: string[] = [];
+  captureConsole(t);
+
+  const code = await vtRowsMain(['--rows', gap, '--run', 'r1', '--out-dir', out, '--root', root], fakeFetch(routes, calls));
+
+  assert.equal(code, 0);
+  assert.deepEqual(calls, [...routes.keys()]);
+  const rows = JSON.parse(fs.readFileSync(path.join(out, 'vt-rows.json'), 'utf8')) as { file_url: string; local: string }[];
+  assert.deepEqual(rows.map((row) => row.file_url), [...routes.keys()]);
+  assert.notEqual(rows[0].local, rows[1].local);
+  for (const [index, row] of rows.entries()) {
+    assert.deepEqual(new Uint8Array(fs.readFileSync(row.local)), species[index].bytes);
+  }
 });
 
 test('vt-rows.ts names a missing flag and exits 1', async (t) => {

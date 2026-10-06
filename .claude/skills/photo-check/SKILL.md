@@ -110,6 +110,14 @@ escalation.** When the only clear channel is one that the run does not take, rej
 image too. The run's channel list is `channels` in `run.json`. For example, a photo of
 flowers only is a reject in a run whose list is `leaf`, `bark`, and `fruit`.
 
+**A channel outside the run.** `photos fetch` does not filter the candidates by channel.
+So a leaf run also gets bark and fruit candidates. `photos stage` refuses an approve on a
+channel that is not in the run's channel list. When a photo is clear but its channel is
+not in that list, reject it. **A clear photo on a channel outside the run is a reject, not
+an escalation.** Give no `--case`. The note names the channel, such as
+`Clear bark photo. The run covers leaf only.` In the first version every run is leaf only
+(`docs/decisions/2026-09-30-leaf-only-v1.md`).
+
 **Quality.** Answer each check below with yes or no, in order: the reject checks, then the
 hard checks (owner rulings 2026-09-26 and 2026-09-29). Each check is about the feature of
 the channel that you set:

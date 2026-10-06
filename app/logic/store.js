@@ -118,6 +118,14 @@ export function firstAnswerDay(rows) {
   return first;
 }
 
+// The stored pairs with no note that Settings lists. With content, only the
+// pairs on an active channel. With no content (it failed to load), every pair.
+// The stored list does not change, so the export still holds every pair.
+export function edgesToShow(edges, content) {
+  if (!content) return edges;
+  return edges.filter((edge) => content.channels.includes(edge.channel));
+}
+
 export function createStore(storage) {
   let available = true;
   let newerVersion = false;

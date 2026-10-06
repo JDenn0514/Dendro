@@ -594,7 +594,7 @@ export function render(root, ctx) {
     root.append(sumRow('promoted', String(results.promoted.length)));
     root.append(sumRow('demoted', String(results.demoted.length)));
     root.append(sumRow('due tomorrow',
-      String(dueTomorrowCount(store.readCards(), today))));
+      String(dueTomorrowCount(content, store.readCards(), today))));
 
     if (results.misses.length) {
       root.append(el('div', 'tick'));

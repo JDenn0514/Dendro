@@ -21,6 +21,11 @@ const CONTENT_FILES = {
   manifest: 'images/manifest.json'
 };
 
+// The channels the app teaches. The first version teaches leaves only
+// (docs/decisions/2026-09-30-leaf-only-v1.md). To show bark and fruit again,
+// add them here. The content keeps every channel.
+const ACTIVE_CHANNELS = ['leaf'];
+
 const DEAD_STORAGE = {
   getItem() { throw new Error('no storage'); },
   setItem() { throw new Error('no storage'); },
@@ -143,7 +148,7 @@ async function start() {
     contentFailure = { title: 'Content failed to load', lines: [errorText(error)] };
   }
   if (raw) {
-    const result = loadContent(raw);
+    const result = loadContent(raw, { channels: ACTIVE_CHANNELS });
     if (result.ok) {
       content = result.content;
     } else {

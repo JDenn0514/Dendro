@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+import { sha256Hex } from '../lib/hash.ts';
 import { createHttp } from '../lib/http.ts';
 import type { Http } from '../lib/http.ts';
 import type { AddRow } from '../lib/powo.ts';
@@ -143,7 +144,10 @@ async function oneRow(
       lines.push(`- ${image.file}: the download failed: ${result.error ?? `status ${result.status}`}.`);
       continue;
     }
-    const local = path.join(ctx.imageDir, `${safeName(row.symbol)}-${safeName(image.file)}`);
+    // The content hash, as `photos add` names its file. A concept row has the concept key as
+    // its symbol, and every fact sheet names its images leaf1.jpg and so on, so the symbol
+    // and the image name together do not give each species its own file.
+    const local = path.join(ctx.imageDir, `${safeName(row.symbol)}-${sha256Hex(result.bytes)}.jpg`);
     fs.writeFileSync(local, result.bytes);
     ctx.seen.add(add.origin);
     ctx.seen.add(add.file_url);

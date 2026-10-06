@@ -1014,5 +1014,77 @@
     "a_not_b": "Chisos red oak has 3 to 5 pointed lobes that end in bristle tips.",
     "b_not_a": "Gambel oak has 5 to 9 rounded lobes.",
     "ref": "FNA vol. 3, Quercus gravesii (taxon 233501040); Virginia Tech Dendrology fact sheet 315, Quercus gambelii"
+  },
+  {
+    "a": "LIST2",
+    "b": "PLRA",
+    "channel": "leaf",
+    "a_not_b": "Sweetgum has a star-shaped leaf with fine, even teeth along the whole margin, and a shiny upper surface.",
+    "b_not_a": "California sycamore has long lobes with a smooth margin or only a few small teeth, and often a woolly underside.",
+    "ref": "Virginia Tech Dendrology fact sheets 53, Liquidambar styraciflua, and 473, Platanus racemosa; FNA vol. 3, Liquidambar styraciflua (taxon 220007687) and Platanus racemosa (taxon 233500963); Trees and Shrubs Online, Liquidambar styraciflua and Platanus racemosa"
+  },
+  {
+    "a": "ACPS",
+    "b": "ACPL",
+    "channel": "leaf",
+    "a_not_b": "Sycamore maple has 5 lobes with coarse teeth all along the margin, and the underside is much paler than the top.",
+    "b_not_a": "Norway maple has 5 to 7 lobes with a few widely spaced, long pointed teeth, and a glossy green underside.",
+    "ref": "Virginia Tech Dendrology fact sheets 162, Acer pseudoplatanus, and 6, Acer platanoides; Trees and Shrubs Online, Acer pseudoplatanus and Acer platanoides"
+  },
+  {
+    "a": "LIST2",
+    "b": "PLOC",
+    "channel": "leaf",
+    "a_not_b": "Sweetgum has 5 to 7 narrow, pointed lobes that make a star shape, with fine, even teeth along the margin.",
+    "b_not_a": "American sycamore has 3 to 5 shallow lobes, mostly wider than long, with some large, uneven teeth on the margin.",
+    "ref": "Virginia Tech Dendrology fact sheets 53, Liquidambar styraciflua, and 36, Platanus occidentalis; FNA vol. 3, Platanus occidentalis (taxon 200010589); Trees and Shrubs Online, Liquidambar styraciflua and Platanus occidentalis"
+  },
+  {
+    "a": "QUCO2",
+    "b": "QUPA2",
+    "channel": "leaf",
+    "a_not_b": "Scarlet oak has deep rounded sinuses that curve into a C shape, and only tiny hair tufts in the vein angles below.",
+    "b_not_a": "Pin oak has U-shaped sinuses, its lowest lobes often bend back, and large hair tufts sit in the vein angles below.",
+    "ref": "Virginia Tech Dendrology fact sheets 37, Quercus coccinea, and 74, Quercus palustris; FNA vol. 3, Quercus coccinea (taxon 233501019) and Quercus palustris (taxon 210001860); NC State Extension Gardener Plant Toolbox, Quercus coccinea; Missouri Department of Conservation field guide, scarlet oak"
+  },
+  {
+    "a": "QUTE",
+    "b": "QUSH",
+    "channel": "leaf",
+    "a_not_b": "Nuttall oak has a dull green upper surface, narrow lobes of uneven length, and a blade base that is often lopsided.",
+    "b_not_a": "Shumard's oak has a glossy dark green upper surface, and its lobes grow wider toward the tip.",
+    "ref": "Virginia Tech Dendrology fact sheets 554, Quercus texana, and 169, Quercus shumardii; FNA vol. 3, Quercus texana (taxon 233501089) and Quercus shumardii (taxon 233501082); Missouri Department of Conservation field guide, Nuttall's oak and Shumard oak"
+  },
+  {
+    "a": "QULY",
+    "b": "QUAL",
+    "channel": "leaf",
+    "a_not_b": "Overcup oak has uneven lobes, and the middle lobes are the widest, often almost square with angular corners.",
+    "b_not_a": "White oak has even, finger-like lobes with rounded tips, spread along the whole length of the blade.",
+    "ref": "FNA vol. 3, Quercus lyrata (taxon 233501057), Quercus alba (taxon 233501007), and key to Quercus sect. Quercus (taxon 302029); Virginia Tech Dendrology fact sheets 71, Quercus lyrata, and 35, Quercus alba; Missouri Department of Conservation field guide, overcup oak and white oak; NC State Extension Gardener Plant Toolbox, Quercus alba"
+  },
+  {
+    "a": "ACLE",
+    "b": "ACFL",
+    "channel": "leaf",
+    "a_not_b": "Chalk maple has a bright yellowish green underside, not a whitish one.",
+    "b_not_a": "Southern sugar maple has a pale, whitish underside that is clearly lighter than the dark green top.",
+    "ref": "Trees and Shrubs Online, Acer leucoderme and Acer floridanum; NC State Extension Gardener Plant Toolbox, Acer floridanum; Virginia Tech Dendrology fact sheet 337, Acer floridanum"
+  },
+  {
+    "a": "QUCE",
+    "b": "QUMA2",
+    "channel": "leaf",
+    "a_not_b": "European turkey oak has an oblong blade with pairs of pointed, triangular lobes, angular sinuses, and a pointed tip.",
+    "b_not_a": "Bur oak has its deepest sinuses near the middle, cutting nearly to the midrib, and shallow rounded lobes at the wide tip.",
+    "ref": "Trees and Shrubs Online, Quercus cerris; NC State Extension Gardener Plant Toolbox, Quercus cerris and Quercus macrocarpa; FNA vol. 3, Quercus macrocarpa (taxon 233501058); Virginia Tech Dendrology fact sheet 72, Quercus macrocarpa; Missouri Department of Conservation field guide, bur oak"
+  },
+  {
+    "a": "PLHI",
+    "b": "PLRA",
+    "channel": "leaf",
+    "a_not_b": "London planetree has large, coarse teeth on most of its lobes.",
+    "b_not_a": "California sycamore has long, narrow lobes cut by deep sinuses, with a smooth margin or only a few small teeth.",
+    "ref": "FNA vol. 3, Platanus (taxon 125747), Platanus occidentalis (taxon 200010589), and Platanus racemosa (taxon 233500963); Virginia Tech Dendrology fact sheet 307, Platanus × hispanica; Trees and Shrubs Online, Platanus × hispanica and Platanus racemosa"
   }
 ]

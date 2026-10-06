@@ -25,6 +25,13 @@ function stateSentence(content, states, today) {
     line.append(document.createTextNode(' is due today.'));
     return line;
   }
+  const verb = total === 1 ? 'is' : 'are';
+  line.append(el('b', null, `${capitalize(numberWord(total))} ${total === 1 ? 'card' : 'cards'}`));
+  // With one channel, the breakdown repeats the total, so the line stops here.
+  if (content.channels.length === 1) {
+    line.append(document.createTextNode(` ${verb} due today.`));
+    return line;
+  }
   const parts = content.channels
     .map((channel) => ({
       channel,
@@ -32,10 +39,7 @@ function stateSentence(content, states, today) {
     }))
     .filter((part) => part.count > 0)
     .map((part) => `${numberWord(part.count)} ${channelLabel(part.channel)}`);
-  line.append(el('b', null, `${capitalize(numberWord(total))} ${total === 1 ? 'card' : 'cards'}`));
-  line.append(document.createTextNode(
-    ` ${total === 1 ? 'is' : 'are'} due today: ${parts.join(', ')}.`
-  ));
+  line.append(document.createTextNode(` ${verb} due today: ${parts.join(', ')}.`));
   return line;
 }
 
