@@ -142,8 +142,7 @@ page. The owner is a learner and cannot judge them.
 6. A plant name label that you can read is in the frame. It gives the answer away.
 7. Buds, flowers, or catkins take the place of the feature. Exception: the sweetgum
    flower-head ball counts as fruit, with the `hard` tag.
-8. The leaf is a sucker shoot, or another leaf form that is not the typical leaf of the
-   species' bucket.
+8. The leaf is from a sucker shoot (owner ruling 2026-10-07).
 9. The image is black-and-white or greyscale (owner ruling 2026-09-24). The fetch drops
    these, so one that reaches you came through `photos add`.
 10. Fruit: the main part of the fruit is missing, for example acorn cups with no nut.
@@ -172,7 +171,8 @@ is yes:
 5. The frame edge cuts off part of the leaf, and most of the leaf shows.
 6. The form is young: a young leaf, a green or unripe fruit, or young stem bark. A young
    form is never good.
-7. The fruit is not in its typical form: loose parts, a nut without its cap, or dry remains. Exception:
+7. The fruit is not in its typical form: loose parts, a nut without its cap, or dry remains,
+   such as a fallen, opened tuliptree cone on the ground (owner ruling 2026-10-07). Exception:
    when the source or the look-for line says that the fruit looks like that in winter, dry
    winter fruit on the tree is good.
 8. The leaves show autumn colour: red, orange, or yellow.
@@ -194,6 +194,12 @@ good photo looks like this:
   is large and clear among many leaves, approve with `hard` and start the note with
   `one clear leaf:`. When a target has no better leaf photo, the owner can use it as a
   good photo.
+- **Leaf forms:** some species have more than one normal leaf form on the mature tree,
+  such as the unlobed, mitten, and three-lobed leaves of sassafras. Judge each form like
+  any leaf, also a form that does not match the species' bucket. The form must be one
+  that the source or a reference names for the mature tree. Name the form in the note. A
+  photo that shows two or more forms side by side is the best leaf photo for that species
+  (owner ruling 2026-10-07).
 - **Bark:** the texture fills the frame, the ridge or plate pattern shows, the photo is
   sharp, and the colour is true.
 - **Fruit:** the fruit is large in the frame, in its mature form.
