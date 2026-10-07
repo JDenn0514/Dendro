@@ -61,3 +61,17 @@ A content run follows the `content-run` skill from `run init` to the merged pull
 - `docs/decisions/` holds the owner's rulings. `docs/superpowers/specs/` and `docs/superpowers/plans/` hold the design and the plan for each batch of work.
 - `DESIGN.md` holds the original design notes. Its section 17 is the decisions log of 2026-09-21, and it wins where it disagrees with the rest of the file.
 - Commit messages use a scope prefix: `content(<run>):`, `feat(<scope>):`, `fix(<scope>):`, `docs(skills):`, `ci:`, `test:`. Branch names are `content/<run>`, `feat/…`, `fix/…`, and `skills/…`. Work lands through pull requests.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues on JDenn0514/Dendro, through the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The five default labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: one `GLOSSARY.md` at the repo root, with decision records in `docs/decisions/`. See `docs/agents/domain.md`.
