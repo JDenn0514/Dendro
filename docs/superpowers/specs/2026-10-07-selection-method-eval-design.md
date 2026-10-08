@@ -18,6 +18,9 @@ The photo-check skill keeps "stop at 6 good photos" until this eval picks a meth
 4. The pools come from existing runs. No new fetch.
 5. Three judge models are tested: Opus 5.5, Sonnet 5.5, and Haiku 5.5 (`claude-haiku-5-5`). Haiku 4.5 is not used. Agents get full model IDs, because the short name `sonnet` ran Sonnet 5 in a run on 2026-09-26.
 6. The judge passes run as workflows. Everything else is scripts or owner clicks.
+7. (2026-10-08) Rows that the source flags as another species are dropped from the pools, unless they are a variety or subspecies of the target.
+8. (2026-10-08) A B or C result that P3 marks unreliable shows in the report, but it cannot enter the shortlist.
+9. (2026-10-08) Method C keeps going while it holds fewer than 6 good photos.
 
 ## Facts this design rests on
 
@@ -43,7 +46,7 @@ The photo-check skill keeps "stop at 6 good photos" until this eval picks a meth
 
 - The fetched rows hinted `leaf` or with no hint, in file order.
 - Manual rows from `photos add` are left out, because a real judge does not see them in the first pass.
-- Within each target, only the first row of each `file_hash` stays, in file order. Rows with no `file_hash`, or with `fetch_error` set, are dropped. `pools.json` records each dropped row and the reason.
+- Within each target, only the first row of each `file_hash` stays, in file order. Rows with no `file_hash`, or with `fetch_error` set, are dropped. A row with `identity_match: false` is dropped, unless its species is a variety or subspecies of the target. For example, 13 of the 24 PLHI rows are *Platanus orientalis* and drop out. The target's name comes from its PLANTS name. `pools.json` records each dropped row and the reason.
 - 24-60 photos per target, about 470 in all, before duplicates are dropped.
 
 ### Best-6 picks
@@ -87,12 +90,12 @@ Each method runs once per judge model.
 |---|---|---|
 | A, stop at 6 good | Walk the pool in fetch order, 10 photos at a time, with the model's P1 verdicts. Stop after the batch that brings the count of good photos to 6. Keep the first 6 good photos. | P1 tokens of the photos it saw |
 | B, collect K, rank, keep 6 | Take the first K photos in fetch order, with K = 12, 20, 30, or all. Drop the model's rejects, order the rest by its P2 ranking, and keep the top 6 photos tagged `good`. | Ranking cost for K photos |
-| C, adaptive batches | Add 12 photos at a time, and keep the top 6 `good` photos of all photos seen so far. Stop when a new batch does not change the top 6, or when the pool runs out. | Ranking cost for the photos it saw |
+| C, adaptive batches | Add 12 photos at a time, and keep the top 6 `good` photos of all photos seen so far. Stop when it holds 6 good photos and a new batch does not change them, or when the pool runs out. | Ranking cost for the photos it saw |
 | Filter first | The P1 rejects of Haiku or Sonnet drop out first. Then B or C runs on the rest, with any model as the ranker. | The filter's P1 cost, plus the ranker's cost on the rest |
 
 The ranking cost for K photos is a straight line per model, fitted from P3 (12 photos) and P2 (the whole pool).
 
-The replay of B and C cuts the full P2 ranking down to the photos seen. P3 tests that shortcut. When the P3 top 6 differs from the cut-down P2 top 6 by more than 1 photo on average, the report marks the B and C results at small K as unreliable for that model.
+The replay of B and C cuts the full P2 ranking down to the photos seen. P3 tests that shortcut. When the P3 top 6 differs from the cut-down P2 top 6 by more than 1 photo on average, the report marks the B and C results at small K as unreliable for that model. A marked result cannot enter the shortlist.
 
 ### Scores
 
