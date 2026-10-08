@@ -1,6 +1,6 @@
 # Selection-method eval for leaf photos: design
 
-Date: 2026-10-07. Status: design approved by the owner in conversation, spec not yet reviewed.
+Date: 2026-10-07. Status: design approved by the owner in conversation, spec not yet reviewed. Updated 2026-10-08 after an architecture review: a `hard` tag on ranked photos, and duplicate rows dropped from the pools.
 
 ## Goal
 
@@ -26,6 +26,8 @@ The photo-check skill keeps "stop at 6 good photos" until this eval picks a meth
 - The source turn order of 2026-09-25 (`TURN_ORDER`, `commands.ts:200,406-411`) applies to runs `simple_lobed_us` and `simple_lobed_us_add`. Older runs used another order. The files of the two top-up runs of 2026-10-01 are no longer on disk.
 - Those two runs fetched leaf, bark, and fruit, so a target has about 30-45 leaf rows.
 - The existing verdicts use the rules from before PR #34. Every photo is judged again.
+- In `simple_lobed_us`, 5 pairs of fetched rows share a target and a `file_hash`. `simple_lobed_us_add` has none. The 16 rows with no `file_hash` are all manual rows (counted 2026-10-08).
+- The validator does not count a `hard` photo as in play (`inPlay`, `app/logic/content.js:38`). A method must tag `hard`, or a run publishes wrong counts.
 - No token log exists. The "20M tokens" for run `simple_lobed_us` (issue #22) is an estimate of about 2,670 looks at about 7.5k tokens each.
 - Reusable tools are in `.superpowers/2026-09-30-photo-labels/`: `label-r3/images.mjs` (1,200 px copies with sharp), `label-r3/server.mjs` and `index.html` (a local labelling page), and `an2/sheet.mjs` (contact sheets with sharp `composite`).
 - Prices per 1M tokens, input / output: Opus 5.5 $4 / $20, Sonnet 5.5 $2 / $10, Haiku 5.5 $0.10 / $0.50 (claude-api skill, cached 2026-10-06).
@@ -41,6 +43,7 @@ The photo-check skill keeps "stop at 6 good photos" until this eval picks a meth
 
 - The fetched rows hinted `leaf` or with no hint, in file order.
 - Manual rows from `photos add` are left out, because a real judge does not see them in the first pass.
+- Within each target, only the first row of each `file_hash` stays, in file order. Rows with no `file_hash`, or with `fetch_error` set, are dropped. `pools.json` records each dropped row and the reason.
 - About 30-45 photos per target, about 400 in all.
 
 ### Best-6 picks
@@ -66,8 +69,8 @@ Every judge call happens once. The methods are then replayed from the results, s
 |---|---|---|---|
 | P0, model check | Opus, Sonnet, Haiku | A smoke test on 2 photos. It confirms from each agent's transcript which model ran. The Agent tool's `haiku` name must mean Haiku 5.5. | 2 photos |
 | P1, one photo at a time | Opus, Sonnet, Haiku | Judges each photo in fetch order under the Quality checks of the photo-check skill: reject, hard, or good. Batches of 10, a fresh agent per batch. | All ~400 photos, once per model |
-| P2, ranking | Opus, Sonnet, Haiku | One agent per target sees the whole pool as 3×3 contact sheets, and can open any photo at full size. It returns a ranked list of the photos it keeps, and a list of rejects. | 10 targets, once per model |
-| P3, small-pool ranking | Opus, Sonnet, Haiku | Ranks only the first 12 photos of a target. It checks that a ranking of 12 matches the full ranking cut to 12, and it gives the second point for the cost line in Part 3. | 3 targets |
+| P2, ranking | Opus, Sonnet, Haiku | One agent per target sees the whole pool as 3×3 contact sheets, and can open any photo at full size. It returns a ranked list of the photos it keeps, each tagged `good` or `hard` under the same Quality checks as P1, and a list of rejects. | 10 targets, once per model |
+| P3, small-pool ranking | Opus, Sonnet, Haiku | Ranks only the first 12 photos of a target, with the same output as P2. It checks that a ranking of 12 matches the full ranking cut to 12, and it gives the second point for the cost line in Part 3. | 3 targets |
 
 - Image size, tiles per sheet, and batch size stay as they are today. Tuning them is the work of #22.
 - Each agent's input, cache, and output tokens are recorded per target and per pass.
@@ -83,8 +86,8 @@ Each method runs once per judge model.
 | Method | How it runs in the replay | Its cost |
 |---|---|---|
 | A, stop at 6 good | Walk the pool in fetch order, 10 photos at a time, with the model's P1 verdicts. Stop after the batch that brings the count of good photos to 6. Keep the first 6 good photos. | P1 tokens of the photos it saw |
-| B, collect K, rank, keep 6 | Take the first K photos in fetch order, with K = 12, 20, 30, or all. Drop the model's rejects, order the rest by its P2 ranking, and keep the top 6. | Ranking cost for K photos |
-| C, adaptive batches | Add 12 photos at a time, and keep the top 6 of all photos seen so far. Stop when a new batch does not change the top 6, or when the pool runs out. | Ranking cost for the photos it saw |
+| B, collect K, rank, keep 6 | Take the first K photos in fetch order, with K = 12, 20, 30, or all. Drop the model's rejects, order the rest by its P2 ranking, and keep the top 6 photos tagged `good`. | Ranking cost for K photos |
+| C, adaptive batches | Add 12 photos at a time, and keep the top 6 `good` photos of all photos seen so far. Stop when a new batch does not change the top 6, or when the pool runs out. | Ranking cost for the photos it saw |
 | Filter first | The P1 rejects of Haiku or Sonnet drop out first. Then B or C runs on the rest, with any model as the ranker. | The filter's P1 cost, plus the ranker's cost on the rest |
 
 The ranking cost for K photos is a straight line per model, fitted from P3 (12 photos) and P2 (the whole pool).
@@ -95,7 +98,9 @@ The replay of B and C cuts the full P2 ranking down to the photos seen. P3 tests
 
 - **Quality:** of the 6 photos a method keeps, how many are in the owner's best 6, averaged over the 10 targets. When the owner picked fewer than 6, the score counts against that smaller number.
 - **Cost:** tokens, and price-weighted cost at the rates above, per target.
-- **Also reported:** rich and thin targets apart, the number of targets that end with fewer than 6 photos, and the spread from target to target.
+- **Also reported:** rich and thin targets apart, the number of targets that end with fewer than 6 photos, the spread from target to target, the number of `hard` photos each method and model ranks above its sixth kept photo, and the rows dropped from the pools for each reason.
+
+All methods keep `good` photos only, so they follow one rule. The `hard` tag of B and C comes from the ranking pass itself. The other option, the tag from the same model's P1 verdict, would add P1 to the cost of B and C. The owner can choose it instead.
 
 ### The winner
 
