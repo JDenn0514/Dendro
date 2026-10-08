@@ -25,7 +25,7 @@ Spec: `docs/superpowers/specs/2026-10-07-selection-method-eval-design.md`.
   - Sonnet 5.5: input $2, output $10, cache write 5 min $2.50, cache write 1 h $4, cache read $0.20.
   - Haiku 5.5, prompt of 100K tokens or fewer: input $0.10, output $0.50; cache read 0.1x input ($0.01), cache write 5 min 1.25x ($0.125), cache write 1 h 2x ($0.20).
   - Haiku 5.5, prompt over 100K tokens: input $0.50, output $2.50, and the same multipliers ($0.05, $0.625, $1.00).
-- Image size, sheet size (3 x 3 tiles of 440 px), and P1 batch size (10) stay fixed. Judges read the original file at the row's `local` path, as the photo-check skill does today. The 1,200 px copies are for the owner's pages and for the sheet tiles.
+- Image size, sheet size (3 x 3 tiles of 440 px), and P1 batch size (10) stay fixed. Every pass judges photos at the size the app shows a learner (owner ruling 2026-10-08): about 400 x 380 CSS px, so the long side of an app-size copy is `app_px` = 440 px. P0 and P1 judges read the app-size copy `app/<target>/<n>.jpg`, never the original. Ranking judges (P2, P3) read the contact sheets only, whose tiles are 440 px, and open no photo (owner ruling 2026-10-08, after the tracer P2 agent opened about 35 originals and filled its context). The owner's pick page shows the app-size copy at its natural size, with no full-size link. The 1,200 px copies feed the sheet tiles and the app-size copies are made from the originals.
 - Effort: the workflow-authoring skill documents `agent(..., { effort })` with `'low' | 'medium' | 'high' | 'xhigh' | 'max'`. Every judge agent gets an explicit effort from `config.json` `effort` (`high` for all three models), so no judge inherits the session effort. The generated script carries the effort in its job list, so the run record's `script` field holds it; `collect.mjs` copies it into `results.json`, and the report states it.
 - Bash commands stay under 5,000 bytes. Write files with the Write tool, not heredocs. Edit with the Edit tool.
 - Prose and code comments use Simplified Technical English: short sentences, active voice, plain words. Comments are sparse.
@@ -81,9 +81,10 @@ All paths are under `EVAL = C:/Users/jdennen/Dendro/.superpowers/2026-10-07-sele
 | `lib/views.mjs` | Turns collected results into per-model verdicts, rankings, and costs. Pure. | 1 |
 | `lib/replay.mjs` | Methods A, B, C (Task 1) and filter-first (Task 5). Pure. | 1, 5 |
 | `lib/score.mjs` | Quality score (Task 1); cost line, P3 check, row summary, winner, blind outcome (Task 5). Pure. | 1, 5 |
+| `lib/coverage.mjs`, `lib/journal.mjs` | Key coverage of a job result; failed agents of a run journal. Pure. | 1 |
 | `lib/picks.mjs` | Checks that `picks.json` is complete. Pure. | 1 |
 | `pools.mjs` | CLI. Writes a pools file and the public pick list. | 1, 2 |
-| `images.mjs` | CLI. Writes 1,200 px copies and contact sheets. | 1 |
+| `images.mjs` | CLI. Writes 1,200 px copies, app-size (440 px) copies, and contact sheets. | 1 |
 | `make-workflow.mjs` | CLI. Writes the briefs, the workflow script, and its job list. | 1 |
 | `collect.mjs` | CLI. Reads run records and transcripts. Writes results, tokens, and problems. | 1 |
 | `tracer-row.mjs` | CLI. One report row for the tracer target. | 1 |
@@ -94,7 +95,7 @@ All paths are under `EVAL = C:/Users/jdennen/Dendro/.superpowers/2026-10-07-sele
 | `report.mjs` | CLI. Writes `report.md` and `decision-draft.md`. | 7 |
 | `test/*.test.mjs` | Unit tests on small made-up data. | 1, 2, 5 |
 | `tracer/` | Tracer pools, public list, test picks. | 1 |
-| `img/<target>/<n>.jpg`, `sheets/<target>/*.jpg` | Generated images. | 1, 2 |
+| `img/<target>/<n>.jpg`, `app/<target>/<n>.jpg`, `sheets/<target>/*.jpg` | Generated images. | 1, 2 |
 | `briefs/P1.md`, `briefs/P2.md`, `briefs/P3.md` | Judge briefs, generated from the skill. | 1 |
 | `wf/<name>.js`, `wf/<name>.jobs.json` | Generated workflow script and its job list. | 1, 4 |
 | `runs/<name>/results.json`, `tokens.json`, `problems.txt` | Collected judge output. | 1, 4 |
@@ -130,9 +131,9 @@ One target (`QUAC2`, rich, pool 43) goes through every part once: pool, images, 
 
 **Files:**
 - Create: `EVAL/NOTES.md`, `EVAL/config.json`
-- Create: `EVAL/lib/data.mjs`, `EVAL/lib/seed.mjs`, `EVAL/lib/sheet.mjs`, `EVAL/lib/prompts.mjs`, `EVAL/lib/schemas.mjs`, `EVAL/lib/tokens.mjs`, `EVAL/lib/views.mjs`, `EVAL/lib/replay.mjs`, `EVAL/lib/score.mjs`, `EVAL/lib/picks.mjs`
+- Create: `EVAL/lib/data.mjs`, `EVAL/lib/seed.mjs`, `EVAL/lib/sheet.mjs`, `EVAL/lib/prompts.mjs`, `EVAL/lib/schemas.mjs`, `EVAL/lib/tokens.mjs`, `EVAL/lib/coverage.mjs`, `EVAL/lib/journal.mjs`, `EVAL/lib/views.mjs`, `EVAL/lib/replay.mjs`, `EVAL/lib/score.mjs`, `EVAL/lib/picks.mjs`
 - Create: `EVAL/pools.mjs`, `EVAL/images.mjs`, `EVAL/make-workflow.mjs`, `EVAL/collect.mjs`, `EVAL/tracer-row.mjs`, `EVAL/check-picks.mjs`, `EVAL/server.mjs`, `EVAL/pick.html`
-- Test: `EVAL/test/data.test.mjs`, `EVAL/test/prompts.test.mjs`, `EVAL/test/workflow.test.mjs`, `EVAL/test/tokens.test.mjs`, `EVAL/test/views.test.mjs`, `EVAL/test/replay.test.mjs`, `EVAL/test/score.test.mjs`, `EVAL/test/picks.test.mjs`, `EVAL/test/server.test.mjs`
+- Test: `EVAL/test/data.test.mjs`, `EVAL/test/prompts.test.mjs`, `EVAL/test/workflow.test.mjs`, `EVAL/test/tokens.test.mjs`, `EVAL/test/coverage.test.mjs`, `EVAL/test/journal.test.mjs`, `EVAL/test/views.test.mjs`, `EVAL/test/replay.test.mjs`, `EVAL/test/score.test.mjs`, `EVAL/test/picks.test.mjs`, `EVAL/test/server.test.mjs`
 
 **Interfaces:**
 - Consumes: nothing.
@@ -144,6 +145,8 @@ One target (`QUAC2`, rich, pool 43) goes through every part once: pool, images, 
   - `lib/schemas.mjs`: `SCHEMAS = { P0, P1, RANK }`.
   - `make-workflow.mjs`: `MODELS = ['opus', 'sonnet', 'haiku']`, `buildJobs(pools, plan, config) -> jobs`, `renderScript(name, jobs) -> string`. CLI: `node make-workflow.mjs --plan tracer|full`.
   - `lib/tokens.mjs`: `MODEL_IDS`, `RATES`, `messagesFrom(entries)`, `priceMessage(msg)`, `sumMessages(msgs)`.
+  - `lib/coverage.mjs`: `keyProblems(job, result) -> [problem]` (every key of the job comes back exactly once; no other key appears).
+  - `lib/journal.mjs`: `failedAgents(entries) -> [{ agentId, label }]` (agents with a `failed` line in `journal.jsonl`).
   - `collect.mjs` CLI: `node collect.mjs --name <workflow name> --record <run record path> [--record <path> ...]`.
   - `lib/views.mjs`: `buildViews(jobs, tokens) -> { p1, p1Cost, p2, p2Cost, p3, p3Cost, unread, tags, problems }`. `tags` counts `good` and `hard` ranked photos per pass and model.
   - `lib/replay.mjs`: `KEEP = 6`, `BATCH_A = 10`, `BATCH_C = 12`, `NOT_KEPT`, `lineAt(line, n)`, `cutOf(candidateSet, rank) -> [key]`, `topOf(candidateSet, rank) -> [key]` (top 6 tagged `good`), `hardAbove(order, isHard, picks) -> number`, `replayA(pool, p1, p1Cost)`, `replayB(pool, K, rank, line)`, `replayC(pool, rank, line)`. Each replay returns `{ picks, seen, cost, hardAbove }`.
@@ -174,6 +177,7 @@ Create `EVAL/config.json`:
   "tracer_target": "QUAC2",
   "tracer_model": "haiku",
   "port": 8770,
+  "app_px": 440,
   "pick_seed": 20261008,
   "same_species": { "QUMA13": ["Quercus margaretiae"] },
   "effort": { "opus": "high", "sonnet": "high", "haiku": "high" },
@@ -561,6 +565,7 @@ Create `EVAL/images.mjs`:
 ```js
 // node images.mjs --pools tracer/pools.json
 // Writes img/<target>/<n>.jpg (1,200 px long side, quality 85, EXIF rotate, as label-r3/images.mjs)
+// and app/<target>/<n>.jpg (the size the app shows a question photo: long side config.app_px = 440 px, same settings),
 // and sheets/<target>/all-<i>.jpg; for P3 targets also sheets/<target>/first12-<i>.jpg.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -572,6 +577,8 @@ const opt = name => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] 
 const poolsFile = path.join(EVAL, opt('--pools') ?? 'pools.json');
 const { default: sharp } = await import('sharp');
 const P = readJson(poolsFile);
+const appPx = readJson(path.join(EVAL, 'config.json')).app_px;
+if (!(appPx > 0)) throw new Error('config.json has no app_px');
 const failures = [];
 
 for (const t of P.targets) {
@@ -579,12 +586,16 @@ for (const t of P.targets) {
   const sheetDir = path.join(EVAL, 'sheets', t.target);
   fs.mkdirSync(imgDir, { recursive: true });
   fs.mkdirSync(sheetDir, { recursive: true });
+  const appDir = path.join(EVAL, 'app', t.target);
+  fs.mkdirSync(appDir, { recursive: true });
   for (const p of t.photos) {
-    const out = path.join(imgDir, `${p.n}.jpg`);
-    if (fs.existsSync(out)) continue;
-    try {
-      await sharp(p.abs).rotate().resize({ width: 1200, height: 1200, fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 85 }).toFile(out);
-    } catch (e) { failures.push({ key: p.key, abs: p.abs, error: e.message }); }
+    for (const [dir, px] of [[imgDir, 1200], [appDir, appPx]]) {
+      const out = path.join(dir, `${p.n}.jpg`);
+      if (fs.existsSync(out)) continue;
+      try {
+        await sharp(p.abs).rotate().resize({ width: px, height: px, fit: 'inside', withoutEnlargement: true }).jpeg({ quality: 85 }).toFile(out);
+      } catch (e) { failures.push({ key: p.key, abs: p.abs, error: e.message, px }); }
+    }
   }
   const ok = new Set(t.photos.filter(p => fs.existsSync(path.join(imgDir, `${p.n}.jpg`))).map(p => p.key));
   const tiles = keys => keys.filter(k => ok.has(k)).map(k => {
@@ -597,7 +608,8 @@ for (const t of P.targets) {
     const first = sheetGroups(t.photos.slice(0, 12).map(p => p.key));
     for (const [i, g] of first.entries()) await renderSheet(sharp, tiles(g), path.join(sheetDir, `first12-${i + 1}.jpg`));
   }
-  console.log(`${t.target}: ${ok.size}/${t.photos.length} images, ${all.length} sheets`);
+  const appOk = t.photos.filter(p => fs.existsSync(path.join(appDir, `${p.n}.jpg`))).length;
+  console.log(`${t.target}: ${ok.size}/${t.photos.length} images, ${appOk}/${t.photos.length} app-size copies, ${all.length} sheets`);
 }
 writeJson(path.join(path.dirname(poolsFile), 'img-failures.json'), failures);
 console.log(`failures: ${failures.length}`);
@@ -608,7 +620,7 @@ A failed copy leaves a gap in a sheet tile list. The judge still gets the origin
 - [ ] **Step 9: Run it for the tracer target and look at one sheet**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node images.mjs --pools tracer/pools.json`
-Expected: `QUAC2: 43/43 images, 5 sheets` and `failures: 0`.
+Expected: `QUAC2: 43/43 images, 43/43 app-size copies, 5 sheets` and `failures: 0`. Every file in `EVAL/app/QUAC2/` has a long side of 440 px or less.
 
 Then open `EVAL/sheets/QUAC2/all-1.jpg` with the Read tool. Expected: a 1320 x 1320 image, 9 photos in 3 columns, each with a yellow key label `QUAC2-01` to `QUAC2-09`.
 
@@ -657,7 +669,30 @@ test('briefs forbid Bash and carry the quality text', () => {
   assert.deepEqual(LABELS, ['good', 'hard', 'reject', 'escalate', 'unread']);
 });
 
-test('prompts list keys with original paths and sheets', () => {
+test('every brief limits the run to leaf and tells the judge to ignore the skill flags', () => {
+  for (const b of [briefP1('Q'), briefRank('Q', 'P2'), briefRank('Q', 'P3')]) {
+    assert.match(b, /leaf channel only/);
+    assert.match(b, /bark, a trunk, fruit, acorns, buds, flowers, and a whole tree/);
+    assert.match(b, /Ignore the command-line flags .*`--case`, `--tags`/);
+    assert.match(b, /references to Identity and the source page/);
+  }
+});
+
+test('the P1 brief says to judge at the size given and to open no other file', () => {
+  const b = briefP1('Q');
+  assert.match(b, /Judge the photo at the size given\. This is the size that the learner sees\. Do not open any other file\./);
+  assert.match(b, /only with a bigger view is `hard` at most, or a `reject`/);
+});
+
+test('ranking briefs say to rank from the sheets and not to open a photo', () => {
+  for (const b of [briefRank('Q', 'P2'), briefRank('Q', 'P3')]) {
+    assert.match(b, /Rank from the contact sheets only\. Do not open any photo file\./);
+    assert.ok(!/read the original file/i.test(b));
+  }
+  assert.ok(!/Rank from the contact sheets only/.test(briefP1('Q')));
+});
+
+test('prompts list keys with paths for P1 and sheets with keys only for a ranking', () => {
   const t = { target: 'QUAC2', species: 'Quercus acutissima' };
   const photos = [{ key: 'QUAC2-01', abs: 'C:/x/1.jpg' }, { key: 'QUAC2-02', abs: 'C:/x/2.jpg' }];
   const p = promptP1(t, photos, 'C:/e/briefs/P1.md');
@@ -666,6 +701,8 @@ test('prompts list keys with original paths and sheets', () => {
   assert.match(p, /- QUAC2-02: C:\/x\/2\.jpg/);
   const r = promptRank(t, photos, ['C:/e/sheets/QUAC2/all-1.jpg'], 'C:/e/briefs/P2.md');
   assert.match(r, /- C:\/e\/sheets\/QUAC2\/all-1\.jpg/);
+  assert.match(r, /- QUAC2-02$/m);
+  assert.ok(!r.includes('C:/x/'), 'a ranking prompt holds no path of an original photo');
 });
 ```
 
@@ -698,6 +735,19 @@ test('tracer plan: P0 for 3 full IDs and the short name haiku, P1 batches of 10,
   assert.equal(jobs.filter(j => j.pass === 'P2').length, 1);
   assert.equal(jobs.length, 10);
   assert.equal(new Set(jobs.map(j => j.label)).size, jobs.length);
+});
+
+test('P0 and P1 prompts list the app-size copies; P2 lists sheets and keys only', () => {
+  const jobs = buildJobs({ p3: [], targets: [{ target: 'QUAC2', species: 'Q', photos: photos('QUAC2', 12) }] }, 'tracer', config);
+  for (const j of jobs.filter(x => x.pass === 'P0' || x.pass === 'P1')) {
+    assert.ok(/\/app\/QUAC2\/\d+\.jpg/.test(j.prompt), j.label);
+    assert.ok(!j.prompt.includes('C:/x/'), `${j.label} lists an original`);
+  }
+  const p1 = jobs.find(j => j.label === 'P1:haiku:QUAC2:b2');
+  assert.ok(p1.prompt.includes('- QUAC2-11: ') && p1.prompt.includes('/app/QUAC2/11.jpg') && p1.prompt.includes('/app/QUAC2/12.jpg'));
+  assert.ok(!p1.prompt.includes('/app/QUAC2/10.jpg'));
+  const p2 = jobs.find(j => j.pass === 'P2');
+  assert.ok(!p2.prompt.includes('/app/') && !p2.prompt.includes('C:/x/'));
 });
 
 test('full plan: P1 and P2 for every model and target, P3 on the P3 targets with 12 photos', () => {
@@ -753,7 +803,8 @@ export function extractQuality(skill) {
 const RULES = [
   'Use only the Read tool. Do not run Bash or PowerShell. Do not write or edit any file.',
   'Read only the files that this brief and your prompt name.',
-  'The run covers leaf only. A photo whose feature is not a leaf is a reject.',
+  'The run covers the leaf channel only. A photo whose main subject is not a leaf is a reject. This holds for bark, a trunk, fruit, acorns, buds, flowers, and a whole tree.',
+  'The quality checks below come from a skill that has other uses. Ignore the command-line flags in them (`--case`, `--tags`) and the references to Identity and the source page. Answer only with the label or the tag that this brief asks for.',
   'Do not judge the licence or the species. Trust the source for the species.',
 ];
 
@@ -767,8 +818,8 @@ export function briefP1(quality) {
     '',
     '## Steps for each photo',
     '',
-    '1. Read the image file at its path.',
-    '2. Answer the reject checks below, in order. When one is yes, the label is `reject`.',
+    '1. Read the image file at its path. Judge the photo at the size given. This is the size that the learner sees. Do not open any other file.',
+    '2. Answer the reject checks below, in order. When one is yes, the label is `reject`. A photo whose feature you can make out only with a bigger view is `hard` at most, or a `reject`.',
     '3. When no reject check is yes and the image is sepia, toned, tinted, or heavily filtered, the label is `escalate`.',
     '4. Otherwise answer the hard checks. When one is yes, the label is `hard`. A photo that the checks call "one clear leaf:" is `hard`.',
     '5. When every check is no, the label is `good`.',
@@ -795,12 +846,12 @@ export function briefRank(quality, pass) {
     '## Steps',
     '',
     '1. Read each contact sheet. A sheet holds up to 9 photos in a 3 by 3 grid. The yellow label on each tile is the photo key.',
-    '2. When a tile is too small to judge, read the original file at its path.',
+    '2. Rank from the contact sheets only. Do not open any photo file. Read only the sheets that your prompt lists.',
     '3. Put each photo that fails a reject check below in `rejects`. A sepia, toned, tinted, or heavily filtered photo also goes in `rejects`.',
     '4. Put every other photo in `ranked`, best first. Rank the photos against each other.',
     '5. Give each ranked photo the tag `good` or `hard` under the same checks as a one-photo judge: the tag is `hard` when a hard check below is yes (a photo that the checks call "one clear leaf:" is `hard`), and `good` when every check is no.',
     '6. The best leaf photo shows one petiole laid flat or hanging flat: one whole leaf, sharp and large in the frame. A good photo ranks above a hard photo. Among hard photos, the clearer leaf ranks higher.',
-    '7. When a file does not open, put its key in `unread`.',
+    '7. When a sheet does not open, put the keys of its photos in `unread`.',
     '',
     'Every key in your prompt goes in exactly one of `ranked`, `rejects`, or `unread`. Each `ranked` item is `{ "key": ..., "tag": "good" }` or `{ "key": ..., "tag": "hard" }`.',
     '',
@@ -825,7 +876,7 @@ export function promptRank(t, photos, sheets, briefPath) {
   return [
     `Read the brief at ${briefPath} and follow it.`, head(t),
     'Contact sheets:', ...sheets.map(s => `- ${s}`),
-    'Photos (key: path of the original):', ...photos.map(p => `- ${p.key}: ${p.abs}`),
+    'Photo keys:', ...photos.map(p => `- ${p.key}`),
   ].join('\n');
 }
 ```
@@ -873,10 +924,12 @@ export const MODELS = ['opus', 'sonnet', 'haiku'];
 export function buildJobs(pools, plan, config) {
   const jobs = [];
   const brief = name => `${EVAL}/briefs/${name}.md`;
+  // P0 and P1 judges read the app-size copy (app/<target>/<n>.jpg): the size the learner sees. Ranking judges read sheets only.
+  const appCopy = (t, list) => list.map(p => ({ ...p, abs: `${EVAL}/app/${t.target}/${p.n}.jpg` }));
   const base = (pass, m, t) => ({ pass, phase: pass, model: m, model_opt: config.model_opt[m], effort: config.effort[m], target: t.target });
   const p1 = (m, t) => {
     for (let i = 0; i < t.photos.length; i += 10) {
-      const b = t.photos.slice(i, i + 10);
+      const b = appCopy(t, t.photos.slice(i, i + 10));
       jobs.push({ label: `P1:${m}:${t.target}:b${i / 10 + 1}`, ...base('P1', m, t), keys: b.map(p => p.key), schema: 'P1', prompt: promptP1(t, b, brief('P1')) });
     }
   };
@@ -886,7 +939,7 @@ export function buildJobs(pools, plan, config) {
   });
   if (plan === 'tracer') {
     const t = pools.targets[0];
-    const two = t.photos.slice(0, 2);
+    const two = appCopy(t, t.photos.slice(0, 2));
     for (const m of MODELS) jobs.push({ label: `P0:${m}`, ...base('P0', m, t), keys: two.map(p => p.key), schema: 'P0', prompt: promptP0(t, two, brief('P1')) });
     // A check only: which model the short name runs. The eval itself uses full IDs.
     jobs.push({ label: 'P0:haiku-alias', ...base('P0', 'haiku', t), model_opt: 'haiku', check_only: true, keys: two.map(p => p.key), schema: 'P0', prompt: promptP0(t, two, brief('P1')) });
@@ -940,7 +993,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
 - [ ] **Step 14: Run the tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/prompts.test.mjs" "test/workflow.test.mjs"`
-Expected: PASS, 8 tests.
+Expected: PASS, 12 tests.
 
 - [ ] **Step 15: Generate the tracer workflow and read one brief**
 
@@ -1080,7 +1133,126 @@ export function sumMessages(msgs) {
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/tokens.test.mjs"`
 Expected: PASS, 4 tests.
 
-- [ ] **Step 20: Write `collect.mjs`**
+- [ ] **Step 20: Write `lib/coverage.mjs` and `collect.mjs`**
+
+Create `EVAL/test/coverage.test.mjs`:
+
+```js
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { keyProblems } from '../lib/coverage.mjs';
+
+const item = key => ({ key, label: 'good', note: '' });
+
+test('P1 and P0: a complete result has no problem', () => {
+  const job = { label: 'P1:x', pass: 'P1', keys: ['a', 'b'] };
+  assert.deepEqual(keyProblems(job, { results: [item('b'), item('a')] }), []);
+  assert.deepEqual(keyProblems({ ...job, pass: 'P0' }, { results: [item('a'), item('b')] }), []);
+});
+
+test('P1: a missing key, a repeated key, and an unknown key are each a problem', () => {
+  const job = { label: 'P1:x', pass: 'P1', keys: ['a', 'b', 'c'] };
+  const p = keyProblems(job, { results: [item('a'), item('a'), item('z')] });
+  assert.deepEqual(p, ['P1:x: key a returned 2 times', 'P1:x: key b missing', 'P1:x: key c missing', 'P1:x: unknown key z']);
+});
+
+test('P2 and P3: ranked plus rejects cover the keys; a key in both is a problem', () => {
+  const job = { label: 'P2:x', pass: 'P2', keys: ['a', 'b', 'c'] };
+  const ok = { ranked: [{ key: 'b', tag: 'good' }, { key: 'a', tag: 'hard' }], rejects: ['c'], unread: [] };
+  assert.deepEqual(keyProblems(job, ok), []);
+  assert.deepEqual(keyProblems({ ...job, pass: 'P3' }, ok), []);
+  const bad = { ranked: [{ key: 'a', tag: 'good' }], rejects: ['a', 'q'], unread: [] };
+  assert.deepEqual(keyProblems(job, bad), ['P2:x: key a returned 2 times', 'P2:x: key b missing', 'P2:x: key c missing', 'P2:x: unknown key q']);
+});
+
+test('P2: a key in unread counts as covered', () => {
+  const job = { label: 'P2:x', pass: 'P2', keys: ['a', 'b'] };
+  assert.deepEqual(keyProblems(job, { ranked: [{ key: 'a', tag: 'good' }], rejects: [], unread: ['b'] }), []);
+});
+
+test('a job with no result returns no key problem', () => {
+  assert.deepEqual(keyProblems({ label: 'x', pass: 'P1', keys: ['a'] }, null), []);
+});
+```
+
+Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/coverage.test.mjs"`
+Expected: FAIL with `Cannot find module` for `../lib/coverage.mjs`.
+
+Create `EVAL/lib/coverage.mjs`:
+
+```js
+// Key coverage of one job. Every key of the job comes back exactly once, and no other key appears.
+// P0 and P1: the keys of result.results. P2 and P3: the keys of result.ranked plus result.rejects
+// (a key in result.unread counts as covered, because the judge says it could not read it).
+// Returns a list of problem strings. A job with no result returns [] (the caller reports that).
+export function keyProblems(job, result) {
+  if (result == null) return [];
+  const got = job.pass === 'P0' || job.pass === 'P1'
+    ? (result.results ?? []).map(x => x?.key)
+    : [...(result.ranked ?? []).map(x => x?.key), ...(result.rejects ?? []), ...(result.unread ?? [])];
+  const want = new Set(job.keys), count = new Map();
+  for (const k of got) count.set(k, (count.get(k) ?? 0) + 1);
+  const problems = [];
+  for (const k of job.keys) {
+    if (!count.has(k)) problems.push(`${job.label}: key ${k} missing`);
+    else if (count.get(k) > 1) problems.push(`${job.label}: key ${k} returned ${count.get(k)} times`);
+  }
+  for (const k of count.keys()) if (!want.has(k)) problems.push(`${job.label}: unknown key ${k}`);
+  return problems;
+}
+```
+
+Run the same test command. Expected: PASS, 5 tests.
+
+Create `EVAL/test/journal.test.mjs`:
+
+```js
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { failedAgents } from '../lib/journal.mjs';
+
+test('failedAgents lists each failed agent once, with the label of its started line', () => {
+  const entries = [
+    { type: 'launched' },
+    { type: 'started', agentId: 'a1', label: 'P2:haiku:T', phase: 'P2' },
+    { type: 'started', agentId: 'a2', label: 'P1:haiku:T:b1', phase: 'P1' },
+    { type: 'result', agentId: 'a2', result: {} },
+    { type: 'failed', agentId: 'a1' },
+    { type: 'failed', agentId: 'a1' },
+    { type: 'started', agentId: 'a3', label: 'P2:haiku:T', phase: 'P2' },
+    { type: 'result', agentId: 'a3', result: {} },
+    { type: 'failed', agentId: 'a9' },
+  ];
+  assert.deepEqual(failedAgents(entries), [{ agentId: 'a1', label: 'P2:haiku:T' }, { agentId: 'a9', label: null }]);
+});
+
+test('failedAgents returns an empty list when nothing failed', () => {
+  assert.deepEqual(failedAgents([{ type: 'launched' }, { type: 'started', agentId: 'a', label: 'x' }]), []);
+});
+```
+
+Create `EVAL/lib/journal.mjs`:
+
+```js
+// journal.jsonl of a run: one line per event. A "started" line has the agentId and the label.
+// A "failed" line has the agentId only. A failed attempt is real spend that the run record does not list.
+// entries: the parsed lines. Returns [{ agentId, label }] for every agent with a "failed" line,
+// in journal order, once each. The label is null when the journal has no "started" line for the agent.
+export function failedAgents(entries) {
+  const labelOf = new Map();
+  for (const e of entries) if (e.type === 'started' && e.agentId) labelOf.set(e.agentId, e.label ?? null);
+  const seen = new Set(), out = [];
+  for (const e of entries) {
+    if (e.type !== 'failed' || !e.agentId || seen.has(e.agentId)) continue;
+    seen.add(e.agentId);
+    out.push({ agentId: e.agentId, label: labelOf.get(e.agentId) ?? null });
+  }
+  return out;
+}
+```
+
+Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/journal.test.mjs"`
+Expected: PASS, 2 tests (after the file exists; before it, FAIL with `Cannot find module`).
 
 Create `EVAL/collect.mjs`:
 
@@ -1088,11 +1260,15 @@ Create `EVAL/collect.mjs`:
 // node collect.mjs --name selection-eval-tracer --record <run record> [--record <resumed run record> ...] [--fail-on-unread]
 // Reads the job list, the run records, and the agent transcripts.
 // Writes runs/<name>/results.json, tokens.json, tool-errors.json, problems.txt.
+// A job that had a failed attempt (a "failed" line in the run's journal.jsonl) gets `failed_attempts` in tokens.json.
+// The total line on the console includes the failed attempts.
 // Exits 1 on a model problem, or on any unread photo with --fail-on-unread. A check_only job never fails the model check.
 import fs from 'node:fs';
 import path from 'node:path';
 import { EVAL, readJson, readJsonl, writeJson } from './lib/data.mjs';
 import { MODEL_IDS, messagesFrom, sumMessages } from './lib/tokens.mjs';
+import { keyProblems } from './lib/coverage.mjs';
+import { failedAgents } from './lib/journal.mjs';
 
 const args = process.argv.slice(2);
 const name = args[args.indexOf('--name') + 1];
@@ -1106,6 +1282,11 @@ const records = recordFiles.map(f => {
     tdir: path.join(path.dirname(path.dirname(f)), 'subagents', 'workflows', rec.runId),
     progress: Object.values(rec.workflowProgress ?? {}).filter(e => e && e.type === 'workflow_agent'),
     results: new Map((Array.isArray(rec.result) ? rec.result : []).map(r => [r.label, r.result])),
+    // The journal lists the agents that failed. The run record does not, but they cost real tokens.
+    failed: (() => {
+      const j = path.join(path.dirname(path.dirname(f)), 'subagents', 'workflows', rec.runId, 'journal.jsonl');
+      return fs.existsSync(j) ? failedAgents(readJsonl(j)) : [];
+    })(),
   };
 });
 
@@ -1118,6 +1299,7 @@ const unreadIn = r => (r?.results ?? []).filter(x => x.label === 'unread').lengt
 
 const out = [], tokens = {}, problems = [], checks = [];
 let modelProblems = 0, unread = 0;
+const failedTotal = { count: 0, tokens: 0, usd: 0 };
 const errors = [];
 for (const j of jobs) {
   const want = MODEL_IDS[j.model];
@@ -1142,11 +1324,28 @@ for (const j of jobs) {
   }
   const sum = sumMessages(msgs);
   sum.record_tokens = recordTokens;
+  // Failed attempts of this job: priced from their transcripts, kept apart from the result's own tokens.
+  const failedIds = new Set();
+  const failedMsgs = [];
+  for (const r of records) {
+    for (const fa of r.failed.filter(x => x.label === j.label && !seen.has(x.agentId) && !failedIds.has(x.agentId))) {
+      failedIds.add(fa.agentId);
+      const f = path.join(r.tdir, `agent-${fa.agentId}.jsonl`);
+      if (fs.existsSync(f)) failedMsgs.push(...messagesFrom(readJsonl(f)));
+      else problems.push(`${j.label}: no transcript for failed agent ${fa.agentId}`);
+    }
+  }
+  if (failedIds.size) {
+    const fs_ = sumMessages(failedMsgs);
+    sum.failed_attempts = { agents: [...failedIds], count: failedIds.size, tokens: fs_.tokens, usd: fs_.usd, models: fs_.models };
+    failedTotal.count += failedIds.size; failedTotal.tokens += fs_.tokens; failedTotal.usd += fs_.usd;
+  }
   tokens[j.label] = sum;
   if (j.check_only) checks.push(`${j.label}: model option "${j.model_opt}" ran ${sum.models.join('+') || 'nothing'}`);
   else if (sum.models.some(m => m !== want)) { problems.push(`${j.label}: transcript model ${sum.models.join('+')}, want ${want}`); modelProblems++; }
   if (!seen.size) problems.push(`${j.label}: not in any run record`);
   if (result == null) problems.push(`${j.label}: no result`);
+  problems.push(...keyProblems(j, result));
   if (sum.unpriced) problems.push(`${j.label}: ${sum.unpriced} messages with no price`);
   unread += unreadIn(result);
   out.push({ label: j.label, pass: j.pass, model: j.model, model_opt: j.model_opt, effort: j.effort, check_only: !!j.check_only, target: j.target, keys: j.keys, agentIds: [...seen], states, result });
@@ -1157,8 +1356,9 @@ writeJson(path.join(dir, 'results.json'), { runIds: records.map(r => r.rec.runId
 writeJson(path.join(dir, 'tokens.json'), tokens);
 writeJson(path.join(dir, 'tool-errors.json'), errors);
 fs.writeFileSync(path.join(dir, 'problems.txt'), problems.join('\n') + '\n');
-const total = Object.values(tokens).reduce((s, t) => ({ tokens: s.tokens + t.tokens, usd: s.usd + t.usd }), { tokens: 0, usd: 0 });
+const total = Object.values(tokens).reduce((s, t) => ({ tokens: s.tokens + t.tokens, usd: s.usd + t.usd }), { tokens: failedTotal.tokens, usd: failedTotal.usd });
 console.log(`jobs ${jobs.length} | with result ${out.filter(o => o.result != null).length} | tokens ${total.tokens} | usd ${total.usd.toFixed(4)} | problems ${problems.length}`);
+console.log(`failed attempts: ${failedTotal.count} | usd ${failedTotal.usd.toFixed(4)} | tokens ${failedTotal.tokens}`);
 for (const c of checks) console.log(`check: ${c}`);
 const refused = errors.filter(e => PERMISSION.test(e.text));
 console.log(`unread photos: ${unread} | tool errors: ${errors.length} | permission refusals: ${refused.length}`);
@@ -1198,7 +1398,7 @@ Expected: the run completes with 10 agents. Keep the `runId` from the tool resul
 Find the record with the Glob tool: pattern `C:/Users/jdennen/.claude/projects/*/*/workflows/<runId>.json`. When a wrap script ran, collect from the child run record if it is a separate file; check the `workflowProgress` labels.
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node collect.mjs --name selection-eval-tracer --record "<record path>" --fail-on-unread`
-Expected: `jobs 10 | with result 10 | ... | problems 0`, a line `check: P0:haiku-alias: model option "haiku" ran <model ID>`, a line `unread photos: 0 | tool errors: <n> | permission refusals: 0`, and exit code 0.
+Expected: `jobs 10 | with result 10 | ... | problems 0`, a line `check: P0:haiku-alias: model option "haiku" ran <model ID>`, a line `failed attempts: <n> | usd <x> | tokens <t>` (agents with a `failed` line in the run's `journal.jsonl`, priced from their transcripts and added to the total line; the tracer had 1, USD 0.0309), a line `unread photos: 0 | tool errors: <n> | permission refusals: 0`, and exit code 0.
 
 This step fails when any photo comes back `unread` (exit code 1). Read the `permission refusals` count and the first refusal line:
 
@@ -1251,6 +1451,23 @@ test('buildViews spreads P1 tokens over the batch and marks missing verdicts unr
   assert.ok(v.problems.some(p => /T-04: no valid tag/.test(p)));
   assert.ok(v.problems.length >= 4);
 });
+
+test('a key that is ranked and rejected stays rejected, and a problem is logged', () => {
+  const jobs = [{ label: 'P2:haiku:T', pass: 'P2', model: 'haiku', target: 'T', keys: ['T-01', 'T-02', 'T-03'], result: { ranked: [{ key: 'T-01', tag: 'good' }, { key: 'T-02', tag: 'good' }], rejects: ['T-02', 'T-03'], unread: [] } }];
+  const v = buildViews(jobs, { 'P2:haiku:T': { tokens: 10, usd: 0.1 } });
+  assert.deepEqual(v.p2.haiku.T.rejects, ['T-02', 'T-03']);
+  assert.ok(v.problems.some(p => /T-02: ranked and rejected/.test(p)));
+  assert.equal(v.unread.P2.haiku, 0);
+});
+
+test('a P1 label outside the list and a missing tokens entry each log a problem', () => {
+  const jobs = [{ label: 'P1:haiku:T:b1', pass: 'P1', model: 'haiku', target: 'T', keys: ['T-01', 'T-02'], result: { results: [{ key: 'T-01', label: 'great', note: '' }, { key: 'T-02', label: 'good', note: '' }] } }];
+  const v = buildViews(jobs, {});
+  assert.equal(v.p1.haiku['T-01'], 'unread');
+  assert.equal(v.unread.P1.haiku, 1);
+  assert.ok(v.problems.some(p => /T-01: label "great" is not valid/.test(p)));
+  assert.ok(v.problems.some(p => /P1:haiku:T:b1: no tokens entry/.test(p)));
+});
 ```
 
 Create `EVAL/test/replay.test.mjs`:
@@ -1272,11 +1489,11 @@ const near = (a, b) => assert.ok(Math.abs(a - b) < 1e-9, `${a} != ${b}`);
 
 test('A stops after the batch that brings the good count to 6', () => {
   const p1 = Object.fromEntries(POOL.map(x => [x, 'hard']));
-  for (const n of [2, 5, 9, 12, 15, 18, 22]) p1[k(n)] = 'good';
+  for (const n of [2, 5, 9, 12, 15, 18, 19, 22]) p1[k(n)] = 'good';
   const r = replayA(POOL, p1, unit);
   assert.deepEqual(r.picks, [k(2), k(5), k(9), k(12), k(15), k(18)]);
   assert.equal(r.seen, 20);
-  assert.equal(r.hardAbove, 12);
+  assert.equal(r.hardAbove, null);
   near(r.cost.tokens, 20);
   near(r.cost.usd, 0.2);
 });
@@ -1325,7 +1542,7 @@ test('a target with fewer than 6 good photos keeps fewer than 6', () => {
   near(c.cost.tokens, 350);
   const a = replayA(POOL, { [k(1)]: 'good', [k(2)]: 'hard', [k(3)]: 'good' }, unit);
   assert.deepEqual(a.picks, [k(1), k(3)]);
-  assert.equal(a.hardAbove, 1);
+  assert.equal(a.hardAbove, null);
 });
 
 test('B with K above the pool size uses the whole pool', () => {
@@ -1383,16 +1600,19 @@ const zero = { tokens: 0, usd: 0 };
 
 // jobs: results.json jobs. tokens: tokens.json. A missing verdict or rank place counts as unread.
 // A ranked photo keeps the tag of its first place in the list. A missing or wrong tag counts as hard.
+// A key that is both ranked and rejected stays rejected (the reject wins) and logs a problem.
 export function buildViews(jobs, tokens) {
   const v = { p1: {}, p1Cost: {}, p2: {}, p2Cost: {}, p3: {}, p3Cost: {}, unread: { P1: {}, P2: {}, P3: {} }, tags: { P2: {}, P3: {} }, problems: [] };
   for (const j of jobs) {
     const r = j.result, t = tokens[j.label] ?? zero, m = j.model;
+    if (!tokens[j.label] && ['P1', 'P2', 'P3'].includes(j.pass)) v.problems.push(`${j.label}: no tokens entry`);
     if (j.pass === 'P1') {
       v.p1[m] ??= {}; v.p1Cost[m] ??= {};
       const got = new Map((r?.results ?? []).map(x => [x.key, x.label]));
       for (const key of j.keys) {
         const lab = LABELS.includes(got.get(key)) ? got.get(key) : 'unread';
         if (!got.has(key)) v.problems.push(`${j.label}: no verdict for ${key}`);
+        else if (!LABELS.includes(got.get(key))) v.problems.push(`${j.label}: ${key}: label ${JSON.stringify(got.get(key))} is not valid`);
         if (lab === 'unread') v.unread.P1[m] = (v.unread.P1[m] ?? 0) + 1;
         v.p1[m][key] = lab;
         v.p1Cost[m][key] = { tokens: t.tokens / j.keys.length, usd: t.usd / j.keys.length };
@@ -1408,7 +1628,8 @@ export function buildViews(jobs, tokens) {
         ranked.push(key);
       }
       const inRanked = new Set(ranked);
-      const rejects = [...new Set((r?.rejects ?? []).filter(key => keys.has(key) && !inRanked.has(key)))];
+      const rejects = [...new Set((r?.rejects ?? []).filter(key => keys.has(key)))];
+      for (const key of rejects) if (inRanked.has(key)) v.problems.push(`${j.label}: ${key}: ranked and rejected`);
       const missing = j.keys.filter(key => !inRanked.has(key) && !rejects.includes(key));
       const unread = missing.length;
       if (r == null) v.problems.push(`${j.label}: no result`);
@@ -1457,6 +1678,7 @@ export function hardAbove(order, isHard, picks) {
 const rankedHard = (candidates, rank, picks) => hardAbove(cutOf(candidates, rank), key => rank.tags[key] === 'hard', picks);
 
 // A: stop at 6 good. Walk in batches of 10, stop after the batch that brings good to 6.
+// A has no ranking, so hardAbove is null (not applicable).
 export function replayA(pool, p1, p1Cost) {
   const good = [];
   let seen = 0;
@@ -1467,7 +1689,7 @@ export function replayA(pool, p1, p1Cost) {
     if (good.length >= KEEP) break;
   }
   const picks = good.slice(0, KEEP);
-  return { picks, seen, cost: sumCost(pool.slice(0, seen), p1Cost), hardAbove: hardAbove(pool.slice(0, seen), key => p1[key] === 'hard', picks) };
+  return { picks, seen, cost: sumCost(pool.slice(0, seen), p1Cost), hardAbove: null };
 }
 
 // B(K): first K photos, ranked by the cut-down P2 ranking.
@@ -1510,7 +1732,7 @@ export function quality(picks, best) {
 - [ ] **Step 27: Run the tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/views.test.mjs" "test/replay.test.mjs" "test/score.test.mjs"`
-Expected: PASS, 12 tests.
+Expected: PASS, 14 tests.
 
 - [ ] **Step 28: Write the failing picks and server tests**
 
@@ -1536,6 +1758,11 @@ test('checkPicks names each problem', () => {
   assert.match(p, /A: 3 picks and not marked done/);
   assert.match(p, /B: no picks/);
 });
+
+test('checkPicks names more than 6 picks', () => {
+  const picks = { targets: { A: { picks: ['A-01', 'A-02', 'A-03', 'A-04', 'A-05', 'A-06', 'A-07'], done: true }, B: { picks: [], done: true } } };
+  assert.deepEqual(checkPicks(pools, picks), ['A: 7 picks, more than 6']);
+});
 ```
 
 Create `EVAL/test/server.test.mjs`:
@@ -1548,10 +1775,14 @@ import os from 'node:os';
 import path from 'node:path';
 import { createServer } from '../server.mjs';
 
-test('server saves picks, serves originals by key, and hides private files', async () => {
+test('server saves picks, serves the app-size copies only, and hides private files', async () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'sel-'));
   const photo = path.join(dir, 'x.jpg');
   fs.writeFileSync(photo, 'jpgbytes');
+  fs.mkdirSync(path.join(dir, 'app', 'QUAC2'), { recursive: true });
+  fs.mkdirSync(path.join(dir, 'img', 'QUAC2'), { recursive: true });
+  fs.writeFileSync(path.join(dir, 'app', 'QUAC2', '1.jpg'), 'appbytes');
+  fs.writeFileSync(path.join(dir, 'img', 'QUAC2', '1.jpg'), 'bigbytes');
   fs.writeFileSync(path.join(dir, 'pools.json'), JSON.stringify({ targets: [{ target: 'QUAC2', photos: [{ key: 'QUAC2-01', n: 1, abs: photo }] }] }));
   fs.writeFileSync(path.join(dir, 'pick-public.json'), JSON.stringify({ targets: [] }));
   const srv = createServer({ dir, evalDir: dir }).listen(0, '127.0.0.1');
@@ -1560,8 +1791,15 @@ test('server saves picks, serves originals by key, and hides private files', asy
   try {
     assert.equal((await fetch(`${base}/pools.json`)).status, 404);
     assert.equal((await fetch(`${base}/picks.json`)).status, 404);
-    assert.equal(await (await fetch(`${base}/full/QUAC2-01`)).text(), 'jpgbytes');
-    assert.equal((await fetch(`${base}/full/QUAC2-02`)).status, 404);
+    const appRes = await fetch(`${base}/app/QUAC2/1.jpg`);
+    assert.equal(appRes.status, 200);
+    assert.equal(await appRes.text(), 'appbytes');
+    assert.equal((await fetch(`${base}/app/QUAC2/2.jpg`)).status, 404);
+    // No route gives a bigger photo: not the 1,200 px copy, not the original.
+    assert.equal((await fetch(`${base}/full/QUAC2-01`)).status, 404);
+    assert.equal((await fetch(`${base}/img/QUAC2/1.jpg`)).status, 404);
+    assert.equal((await fetch(`${base}/x.jpg`)).status, 404);
+    assert.ok(!fs.readFileSync(path.join(import.meta.dirname, '..', 'pick.html'), 'utf8').match(/full size|\/full\/|\/img\//));
     assert.equal((await fetch(`${base}/pick-public.json`)).status, 200);
     const body = { targets: { QUAC2: { picks: ['QUAC2-01'], done: true } } };
     assert.equal((await fetch(`${base}/picks`, { method: 'POST', body: JSON.stringify(body) })).status, 200);
@@ -1622,7 +1860,8 @@ Create `EVAL/server.mjs`:
 
 ```js
 // node server.mjs [--dir tracer] [--port 8770]  ->  http://127.0.0.1:8770/
-// Serves the pick page, the blind page, their public JSON, the 1,200 px copies, and originals by key.
+// Serves the pick page, the blind page, their public JSON, and the app-size copies (app/<target>/<n>.jpg).
+// It has no route for a full-size photo or an original.
 // Never serves pools.json, runs/, out/, wf/, or briefs/.
 import http from 'node:http';
 import fs from 'node:fs';
@@ -1635,8 +1874,6 @@ const MAX_BODY = 1024 * 1024;
 
 export function createServer({ dir, evalDir = EVAL }) {
   const readJ = (f, dflt) => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return dflt; } };
-  const pools = readJ(path.join(dir, 'pools.json'), { targets: [] });
-  const absOf = new Map(pools.targets.flatMap(t => t.photos.map(p => [p.key, p.abs])));
   const send = (res, code, body, type = 'text/plain; charset=utf-8') => { res.writeHead(code, { 'Content-Type': type, 'Cache-Control': 'no-store' }); res.end(body); };
   const sendFile = (res, file) => fs.stat(file, (err, st) => {
     if (err || !st.isFile()) return send(res, 404, 'not found');
@@ -1681,10 +1918,8 @@ export function createServer({ dir, evalDir = EVAL }) {
     if (p === '/' || p === '/pick.html') return sendFile(res, path.join(evalDir, 'pick.html'));
     if (p === '/blind' || p === '/blind.html') return sendFile(res, path.join(evalDir, 'blind.html'));
     if (p === '/pick-public.json' || p === '/blind-public.json') return sendFile(res, path.join(dir, p.slice(1)));
-    const img = p.match(/^\/img\/([A-Z0-9]+)\/(\d+)\.jpg$/);
-    if (img) return sendFile(res, path.join(evalDir, 'img', img[1], `${img[2]}.jpg`));
-    const full = p.match(/^\/full\/([A-Z0-9]+-\d+)$/);
-    if (full) { const abs = absOf.get(full[1]); return abs ? sendFile(res, abs) : send(res, 404, 'no such photo'); }
+    const app = p.match(/^\/app\/([A-Z0-9]+)\/(\d+)\.jpg$/);
+    if (app) return sendFile(res, path.join(evalDir, 'app', app[1], `${app[2]}.jpg`));
     send(res, 404, 'not found');
   });
 }
@@ -1710,12 +1945,11 @@ Create `EVAL/pick.html`:
 <style>
 body { font: 15px system-ui, sans-serif; margin: 16px; background: #faf8f2; color: #222; }
 header { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; position: sticky; top: 0; background: #faf8f2; padding: 8px 0; z-index: 1; }
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(446px, 1fr)); gap: 10px; }
 .tile { position: relative; border: 3px solid transparent; cursor: pointer; background: #eee; }
-.tile img { width: 100%; height: 220px; object-fit: contain; display: block; }
+.tile img { display: block; margin: 0 auto; }
 .tile.on { border-color: #c60; }
 .badge { position: absolute; top: 4px; left: 4px; background: #c60; color: #fff; font-weight: bold; padding: 2px 8px; border-radius: 10px; }
-.full { position: absolute; bottom: 4px; right: 4px; background: #fff; padding: 2px 6px; font-size: 13px; }
 #status { color: #666; }
 </style>
 </head>
@@ -1727,7 +1961,7 @@ header { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; positio
   <label><input type="checkbox" id="done"> Done with this tree (check it also when fewer than 6 photos are usable)</label>
   <span id="status"></span>
 </header>
-<p>Click a photo to add it to your best 6, in order. Click it again to remove it. "full size" opens the original in a new tab.</p>
+<p>Click a photo to add it to your best 6, in order. Click it again to remove it. Each photo shows at the size that the app shows it to a learner (440 px on the long side).</p>
 <div class="grid" id="grid"></div>
 <script>
 let pub, picks = { targets: {} }, cur;
@@ -1747,10 +1981,8 @@ function draw() {
     const d = document.createElement('div');
     const i = e.picks.indexOf(p.key);
     d.className = 'tile' + (i >= 0 ? ' on' : '');
-    d.innerHTML = `<img loading="lazy" src="/img/${cur.target}/${p.n}.jpg" alt="${p.key}">`
-      + (i >= 0 ? `<span class="badge">${i + 1}</span>` : '')
-      + `<a class="full" target="_blank" href="/full/${p.key}">full size</a>`;
-    d.querySelector('a').onclick = ev => ev.stopPropagation();
+    d.innerHTML = `<img loading="lazy" src="/app/${cur.target}/${p.n}.jpg" alt="${p.key}">`
+      + (i >= 0 ? `<span class="badge">${i + 1}</span>` : '');
     d.onclick = () => {
       if (i >= 0) e.picks.splice(i, 1);
       else if (e.picks.length < 6) e.picks.push(p.key);
@@ -1778,14 +2010,14 @@ $('target').onchange = () => { cur = pub.targets[$('target').selectedIndex]; dra
 - [ ] **Step 31: Run all tests**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/*.test.mjs"`
-Expected: PASS, 39 tests, 0 failures.
+Expected: PASS, 53 tests, 0 failures.
 
 - [ ] **Step 32: Try the pick page on the tracer target and save test picks**
 
 Start the server in the background (Bash, `run_in_background: true`):
 `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node server.mjs --dir tracer`
 
-Open `http://127.0.0.1:8770/` in the built-in browser. Check: 43 photos show; a click adds an orange badge 1; a second click removes it; "full size" opens the original; the status says `saved`. Check that the grid is not in key order (the seeded display order). Click any 6 photos. These are test picks, not owner picks.
+Open `http://127.0.0.1:8770/` in the built-in browser. Check: 43 photos show; a click adds an orange badge 1; a second click removes it; each photo shows at its natural size (440 px long side), with no full-size link; the status says `saved`. Check that the grid is not in key order (the seeded display order). Click any 6 photos. These are test picks, not owner picks.
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node check-picks.mjs --dir tracer`
 Expected: `QUAC2: 6 picks` and `picks complete`.
@@ -1818,13 +2050,13 @@ const best = picks.targets[t.target]?.picks ?? [];
 console.log('| method | model | kept | seen | quality | hard above last kept | tokens | USD |');
 console.log('|---|---|---|---|---|---|---|---|');
 for (const [id, r] of [['A', replayA(pool, v.p1[m], v.p1Cost[m])], ['B(all)', replayB(pool, 'all', v.p2[m][t.target], line)], ['C', replayC(pool, v.p2[m][t.target], line)]]) {
-  console.log(`| ${id} | ${m} | ${r.picks.length} | ${r.seen} | ${quality(r.picks, best)?.toFixed(2)} | ${r.hardAbove} | ${Math.round(r.cost.tokens)} | ${r.cost.usd.toFixed(4)} |`);
+  console.log(`| ${id} | ${m} | ${r.picks.length} | ${r.seen} | ${quality(r.picks, best)?.toFixed(2)} | ${r.hardAbove ?? 'n/a'} | ${Math.round(r.cost.tokens)} | ${r.cost.usd.toFixed(4)} |`);
 }
 console.log(`unread: P1 ${v.unread.P1[m] ?? 0}, P2 ${v.unread.P2[m] ?? 0} | P2 tags: ${JSON.stringify(v.tags.P2[m])} | problems: ${v.problems.length}`);
 ```
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node tracer-row.mjs`
-Expected: a table with 3 rows (A, B(all), C) for `haiku`. Every value is a number. The B(all) row has `seen` 43. The tokens of A are the P1 tokens of the batches it saw. The P2 tags line shows `good` and `hard` counts that add up to the ranked photos; when every ranked photo is `good`, read the P2 result and check that the agent tagged at all.
+Expected: a table with 3 rows (A, B(all), C) for `haiku`. Every value is a number, except "hard above" of A, which is `n/a` (A has no ranking). The B(all) row has `seen` 43. The tokens of A are the P1 tokens of the batches it saw. The P2 tags line shows `good` and `hard` counts that add up to the ranked photos; when every ranked photo is `good`, read the P2 result and check that the agent tagged at all.
 
 - [ ] **Step 34: Record progress**
 
@@ -1844,7 +2076,7 @@ Blocked by: Task 1.
 **Files:**
 - Modify: `EVAL/lib/seed.mjs` (add `chooseTargets`)
 - Test: `EVAL/test/seed.test.mjs`
-- Output: `EVAL/pools.json`, `EVAL/pick-public.json`, `EVAL/img/<target>/`, `EVAL/sheets/<target>/`, `EVAL/img-failures.json`
+- Output: `EVAL/pools.json`, `EVAL/pick-public.json`, `EVAL/img/<target>/`, `EVAL/app/<target>/`, `EVAL/sheets/<target>/`, `EVAL/img-failures.json`
 
 **Interfaces:**
 - Consumes: `buildTargets`, `mulberry32`, `shuffle`, `MIN_POOL` (Task 1); `pools.mjs` and `images.mjs` (Task 1).
@@ -1915,7 +2147,7 @@ export function chooseTargets(targets, seed, nRich = 6, nThin = 4) {
 - [ ] **Step 4: Run all tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/*.test.mjs"`
-Expected: PASS, 42 tests.
+Expected: PASS, 56 tests.
 
 - [ ] **Step 5: Build the pools**
 
@@ -1966,7 +2198,7 @@ Expected: `selection-eval pages on http://127.0.0.1:8770/`.
 Send the owner this text, and nothing about judge results:
 
 > The pick page is at http://127.0.0.1:8770/. It has 10 trees. For each tree:
-> 1. Look at all the photos. Click "full size" to see a photo at full size.
+> 1. Look at all the photos. Each shows at the size that the app shows a learner.
 > 2. Click the best photo for learning this leaf, then the second best, up to 6. The orange number is the order. Click a photo again to remove it.
 > 3. When fewer than 6 photos are usable, pick only those, and tick "Done with this tree".
 > 4. Pick the next tree from the list at the top.
@@ -2126,7 +2358,7 @@ Every method runs once per judge model in the replay, plus the filter-first vari
 Rules pinned in this task (each one is in the code and in a test):
 
 - **Good only.** B, C, and filter-first keep the top 6 photos that the ranker tagged `good`, as A keeps the first 6 `good` photos. C's stop test compares the sets of top 6 `good` photos, and C stops only when it holds 6 `good` photos (owner ruling 2026-10-08); with fewer, it goes on to the end of the pool. The tag comes from the ranking pass itself, not from P1 (spec, Part 3).
-- **Hard above.** For each row and target: the number of `hard` photos placed above the sixth kept photo, or above the last kept photo when fewer than 6 are kept (0 when none is kept). For B, C, and filter-first the order is the ranker's order cut to the photos it saw; for A it is fetch order with the P1 labels.
+- **Hard above.** For each row and target: the number of `hard` photos placed above the sixth kept photo, or above the last kept photo when fewer than 6 are kept (0 when none is kept). The order is the ranker's order cut to the photos it saw. Method A has no ranking, so its value is `n/a` (null in the code), and it is left out of the means and totals (owner ruling 2026-10-08).
 - **Filter first.** The filter model (Haiku or Sonnet) judges the pool in fetch order, in batches of 10, and drops its `reject`, `escalate`, and `unread` photos. The ranker then runs B(K) or C on the survivors, in fetch order. For B(K), the filter stops after the batch that holds the K-th survivor; when there are fewer than K survivors, or K is `all`, it judges the whole pool. For C, the filter stops after the batch that holds the last survivor that C used; when C used every survivor, the filter judged the whole pool. Cost = the filter's P1 cost of the photos it judged + the ranker's cost line at the number of survivors it ranked (0 when there are none).
 - **Cost line.** For each model and each P3 target: `b_t = (c2 - c3) / (n2 - 12)` and `a_t = c3 - 12 * b_t`, where `c3` is the P3 cost (12 photos) and `c2` the P2 cost (`n2` = pool size). `a` and `b` are the means over the 3 P3 targets. This is done for tokens and for USD apart. A negative `a` is kept, and the table notes it.
 - **P3 check.** For each model and P3 target: top 6 of the P3 ranking against the top 6 of the P2 ranking cut to the same 12 photos, rejects dropped from both. The difference is half the size of the symmetric difference. When the mean over the 3 targets is more than 1 photo, the rows of that ranker for B(12), B(20), and C (also as filter-first rankers) are marked unreliable. C is marked because its stop test compares rankings of 12 and 24 photos.
@@ -2284,6 +2516,16 @@ test('summarizeRow gives the means, the splits, the short count, and the spread'
   near(r.seen_mean, 20);
 });
 
+test('summarizeRow skips a null hard_above, and gives null when every target is null', () => {
+  const per = h => ({ target: 'A', kind: 'rich', picks: ['a'], seen: 10, cost: { tokens: 1, usd: 1 }, q: 1, hard_above: h });
+  const some = summarizeRow('B|x', [per(2), per(null), per(4)]);
+  near(some.hard_above_mean, 3);
+  assert.equal(some.hard_above_total, 6);
+  const none = summarizeRow('A|x', [per(null), per(null)]);
+  assert.equal(none.hard_above_mean, null);
+  assert.equal(none.hard_above_total, null);
+});
+
 test('pickWinner: shortlist within 1/6 of Q*, cheapest is the candidate, unreliable rows left out', () => {
   const row = (id, q, usd, unreliable = false) => ({ id, q_mean: q, usd_mean: usd, tokens_mean: usd * 1000, unreliable });
   const rows = [row('R1', 0.8, 1.0), row('R2', 0.7, 0.2), row('R3', 0.6, 0.05), row('R4', 0.9, 0.5, true)];
@@ -2384,8 +2626,9 @@ export function summarizeRow(id, per, unreliable = false) {
     usd_mean: mean(per.map(p => p.cost.usd)),
     tokens_mean: mean(per.map(p => p.cost.tokens)),
     seen_mean: mean(per.map(p => p.seen)),
-    hard_above_mean: mean(per.map(p => p.hard_above)),
-    hard_above_total: per.reduce((s, p) => s + p.hard_above, 0),
+    // A null hard_above (method A) is skipped. When every target is null, both values are null.
+    hard_above_mean: mean(per.filter(p => p.hard_above != null).map(p => p.hard_above)),
+    hard_above_total: per.some(p => p.hard_above != null) ? per.reduce((s, p) => s + (p.hard_above ?? 0), 0) : null,
     per,
   };
 }
@@ -2408,7 +2651,7 @@ export function pickWinner(rows) {
 - [ ] **Step 5: Run all tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/*.test.mjs"`
-Expected: PASS, 53 tests.
+Expected: PASS, 68 tests.
 
 - [ ] **Step 6: Write `analyze.mjs`**
 
@@ -2467,12 +2710,12 @@ writeJson(path.join(EVAL, 'out/shortlist.json'), win);
 const f = (x, d = 2) => (x == null ? '-' : x.toFixed(d));
 const tags = r => [r.unreliable ? 'P3: unreliable' : '', win.shortlist.includes(r.id) ? 'shortlist' : '', r.id === win.candidate ? 'candidate' : '', r.id === win.best ? 'best quality' : ''].filter(Boolean).join(', ');
 const md = [
-  'Row IDs: `A` stop at 6 good; `B<K>` rank the first K; `C` adaptive batches of 12; `F<filter>>` the filter model drops its P1 rejects first. After `|`: the judge or ranker model. Every method keeps `good` photos only. "Hard above" is the number of `hard` photos placed above the sixth kept photo (or the last kept photo when fewer than 6), summed over the 10 targets.',
+  'Row IDs: `A` stop at 6 good; `B<K>` rank the first K; `C` adaptive batches of 12; `F<filter>>` the filter model drops its P1 rejects first. After `|`: the judge or ranker model. Every method keeps `good` photos only. "Hard above" is the number of `hard` photos placed above the sixth kept photo (or the last kept photo when fewer than 6), summed over the 10 targets. It is `n/a` for method A, which has no ranking.',
   '',
   '| method | Q | Q rich | Q thin | under 6 | Q min-max (sd) | hard above | photos seen | tokens per target | USD per target | note |',
   '|---|---|---|---|---|---|---|---|---|---|---|',
   ...[...rows].sort((a, b) => (b.q_mean ?? -1) - (a.q_mean ?? -1) || a.usd_mean - b.usd_mean)
-    .map(r => `| ${r.id} | ${f(r.q_mean)} | ${f(r.q_rich)} | ${f(r.q_thin)} | ${r.short} | ${f(r.q_min)}-${f(r.q_max)} (${f(r.q_sd)}) | ${r.hard_above_total} | ${f(r.seen_mean, 1)} | ${Math.round(r.tokens_mean)} | ${f(r.usd_mean, 4)} | ${tags(r)} |`),
+    .map(r => `| ${r.id} | ${f(r.q_mean)} | ${f(r.q_rich)} | ${f(r.q_thin)} | ${r.short} | ${f(r.q_min)}-${f(r.q_max)} (${f(r.q_sd)}) | ${r.hard_above_total ?? 'n/a'} | ${f(r.seen_mean, 1)} | ${Math.round(r.tokens_mean)} | ${f(r.usd_mean, 4)} | ${tags(r)} |`),
   '',
 ];
 fs.writeFileSync(path.join(EVAL, 'out/table.md'), md.join('\n'));
@@ -2566,7 +2809,7 @@ export function blindOutcome(answers, key) {
 - [ ] **Step 4: Run all tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/*.test.mjs"`
-Expected: PASS, 55 tests.
+Expected: PASS, 70 tests.
 
 - [ ] **Step 5: Write `blind.mjs` and `blind.html`**
 
@@ -2639,8 +2882,8 @@ header { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 .sets { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 @media (max-width: 800px) { .sets { grid-template-columns: 1fr; } }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-.grid a { display: block; background: #eee; }
-.grid img { width: 100%; height: 170px; object-fit: contain; display: block; }
+.grid div { display: block; background: #eee; }
+.grid img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
 button { font-size: 15px; padding: 6px 14px; }
 button.on { background: #c60; color: #fff; }
 #status { color: #666; }
@@ -2648,7 +2891,7 @@ button.on { background: #c60; color: #fff; }
 </head>
 <body>
 <header><select id="target"></select><span id="species"></span><span id="status"></span></header>
-<p>Each tree shows two sets of photos. Pick the set that is better for learning this leaf, or "Same" when neither set is better. Click a photo to open it at full size.</p>
+<p>Each tree shows two sets of photos. Pick the set that is better for learning this leaf, or "Same" when neither set is better. Each photo shows at the size that the app shows a learner.</p>
 <div class="sets">
   <section><h2>Set 1</h2><div class="grid" id="L"></div></section>
   <section><h2>Set 2</h2><div class="grid" id="R"></div></section>
@@ -2668,9 +2911,8 @@ async function save() {
 }
 function fill(id, photos) {
   $(id).replaceChildren(...photos.map(p => {
-    const a = document.createElement('a');
-    a.href = `/full/${p.key}`; a.target = '_blank';
-    a.innerHTML = `<img src="/img/${cur.target}/${p.n}.jpg" alt="">`;
+    const a = document.createElement('div');
+    a.innerHTML = `<img src="/app/${cur.target}/${p.n}.jpg" alt="">`;
     return a;
   }));
 }
@@ -2794,7 +3036,7 @@ export function describe(id) {
 - [ ] **Step 4: Run all tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/*.test.mjs"`
-Expected: PASS, 56 tests.
+Expected: PASS, 71 tests.
 
 - [ ] **Step 5: Write `report.mjs`**
 
@@ -2849,7 +3091,7 @@ const out = [
   '# Selection-method eval for leaf photos: report', '',
   `Date: ${today_date}. Spec: docs/superpowers/specs/2026-10-07-selection-method-eval-design.md. Plan: docs/superpowers/plans/2026-10-07-selection-method-eval.md. Progress log: NOTES.md.`, '',
   '## Result', '',
-  `- Winner: \`${w.id}\`: ${describe(w.id)}. Quality ${f(w.q_mean)} (rich ${f(w.q_rich)}, thin ${f(w.q_thin)}). Cost ${costText(w)}. Hard photos above the last kept photo: ${w.hard_above_total} over ${pools.targets.length} targets.`,
+  `- Winner: \`${w.id}\`: ${describe(w.id)}. Quality ${f(w.q_mean)} (rich ${f(w.q_rich)}, thin ${f(w.q_thin)}). Cost ${costText(w)}. Hard photos above the last kept photo: ${w.hard_above_total ?? 'n/a (no ranking)'} over ${pools.targets.length} targets.`,
   `- Best quality (Q*): \`${best.id}\` at ${f(sl.qStar)}. Cost ${costText(best)}.`,
   `- Shortlist (within 1/6 of Q*), cheapest first: ${sl.shortlist.map(id => `\`${id}\``).join(', ')}.`,
   `- Blind check: ${blindText}.`,
@@ -2946,12 +3188,12 @@ Checked against the spec on 2026-10-08.
 | P2 and P3: each ranked photo tagged `good` or `hard` | `briefRank` step 5, `SCHEMAS.RANK`, `buildViews` tag parsing and their tests (Task 1) |
 | B, C, filter-first keep the top 6 `good` | `topOf`, `replayB`, `replayC` tests (Task 1); `replayFilterB/C` test (Task 5) |
 | Report: hard photos above the sixth kept photo; dropped rows per reason | `hardAbove` (Task 1, 5), "hard above" column in `out/table.md`, "Rows dropped from the pools" in `report.md` (Task 7) |
-| Best-6 picks page: grid, full size, order, fewer than 6, photos only | `pick.html`, `server.mjs` (Task 1), Task 3 |
+| Best-6 picks page: grid at app size, order, fewer than 6, photos only | `pick.html`, `server.mjs` (Task 1), Task 3 |
 | Blind check: two sets, random order, no names, "same" | `blind.mjs`, `blind.html` (Task 6) |
 | Known bias in the report | `report.mjs` limit 1 (Task 7) |
 | P0 model check from the transcript | Task 1 Steps 21-23, `collect.mjs` model check |
 | P1 batches of 10, fresh agent per batch, Quality checks | `buildJobs`, `briefP1`, `extractQuality` (Task 1), Task 4 |
-| P2 contact sheets 3 x 3, open at full size, ranked list and rejects | `renderSheet`, `briefRank`, `SCHEMAS.RANK` (Task 1), Task 4 |
+| P2 contact sheets 3 x 3 (sheets only, no photo opened), ranked list and rejects | `renderSheet`, `briefRank`, `SCHEMAS.RANK` (Task 1), Task 4 |
 | P3 first 12 photos on 3 targets, all 3 models | `buildJobs` full plan (Task 1), `chooseTargets` P3 pick (Task 2), Task 4 |
 | Image size, tiles per sheet, batch size fixed | Global Constraints; `TILE`, `PER_SHEET`, batch 10 in `buildJobs` |
 | Tokens per agent: input, cache, output, per target and pass | `lib/tokens.mjs`, `collect.mjs` (Task 1); `check-run.mjs` (Task 4); report table (Task 7) |
@@ -2980,7 +3222,7 @@ Checked against the spec on 2026-10-08.
 7. The quality mean leaves out a target where the owner picked no photo.
 8. A pool drop has a fourth reason, `no_local`, as a guard; no row has it today.
 9. A ranked photo with a missing or wrong tag counts as `hard`, and `buildViews` lists it as a problem. A sepia or tinted photo goes in a ranking's `rejects`.
-10. "Hard above" is 0 when a method keeps no photo.
+10. "Hard above" is 0 when a ranked method keeps no photo. Method A has no ranking: "hard above" is `n/a` and is skipped in means and totals.
 11. The pick page shows each target's photos in a seeded random order (`pick_seed`), not fetch order.
 12. Every judge runs at an explicit effort (`high`) from `config.json`, not at the session effort.
 
@@ -2998,7 +3240,7 @@ Checked against the spec on 2026-10-08.
 
 **Placeholder scan.** No step says "TBD", "add error handling", or "similar to". Every code step shows the code. Values in angle brackets (`<runId>`, `<record path>`, `<date>`) are values that exist only at run time.
 
-**Name check.** `buildViews`, `replayA/B/C`, `replayFilterB/C`, `topOf`, `lineAt`, `quality`, `costLine`, `p3Diff`, `summarizeRow`, `pickWinner`, `blindOutcome`, `checkPicks`, `buildJobs`, `renderScript`, `messagesFrom`, `sumMessages`, `describe` keep the same names and arguments in every task that uses them. `splitPool`, `isInfraOf`, `pickOrder`, `cutOf`, and `hardAbove` also keep their names. Test totals: 39 (Task 1), 42 (Task 2), 53 (Task 5), 55 (Task 6), 56 (Task 7).
+**Name check.** `buildViews`, `replayA/B/C`, `replayFilterB/C`, `topOf`, `lineAt`, `quality`, `costLine`, `p3Diff`, `summarizeRow`, `pickWinner`, `blindOutcome`, `checkPicks`, `buildJobs`, `renderScript`, `messagesFrom`, `sumMessages`, `describe` keep the same names and arguments in every task that uses them. `splitPool`, `isInfraOf`, `pickOrder`, `cutOf`, and `hardAbove` also keep their names. Test totals: 53 (Task 1), 56 (Task 2), 68 (Task 5), 70 (Task 6), 71 (Task 7).
 
 Updated 2026-10-08 for the spec change of commit f02bc8f (duplicate rows dropped from the pools; a `hard` tag on ranked photos), the review fixes (owner yes before the tracer, explicit effort, seeded pick order, short-name P0 check, unread check, NOTES hold), and the three owner rulings above.
 
