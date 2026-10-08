@@ -1,66 +1,62 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
-Dendro is a tree-identification app (`app/`, plain HTML, CSS, and ES modules, no runtime dependencies) and a content pipeline (`pipeline/`, TypeScript) that builds the species content the app ships.
+Dendro is a tree-identification app (`app/`: plain HTML, CSS, and ES modules, no runtime dependencies) and a content pipeline (`pipeline/`, TypeScript) that builds the species content for the app.
 
 ## Commands
 
-- Node 24 or later is required. The pipeline TypeScript runs through Node's built-in type stripping, and the test globs need Node 24. There is no build step, no lint, and no typecheck.
-- Keep the TypeScript in the erasable subset: no enums, no parameter properties, no namespaces.
-- `npm test` runs the app tests. `npm run test:pipeline` runs the pipeline tests. `npm run test:all` runs these two and the live tests.
-- To run one file: `node --test tests/grader.test.js`. To run one test by name, add `--test-name-pattern="<regex>"`.
-- `npm run validate` checks `content/`. `npm run validate:dev` checks the `content_dev/` fixture set.
-- The pipeline CLI is `node pipeline/cli.ts <cmd>`. Run it from the repo root, because it resolves paths from `process.cwd()`. The usage text and the command table are in `pipeline/lib/commands.ts`. `--refresh` bypasses the cache on every command. `DENDRO_DEBUG=1` prints stack traces.
-- To see the app, serve the repo root (for example `python -m http.server 8000`) and open `index.html`. Add `?content=dev` to load `content_dev/`, which works offline.
+- Node 24 or later. It runs the pipeline TypeScript through type stripping, and the test globs need it. There is no build, lint, or typecheck step.
+- Keep the TypeScript erasable: no enums, no parameter properties, no namespaces.
+- `npm test`: app tests. `npm run test:pipeline`: pipeline tests. `npm run test:all`: both, plus the live tests.
+- One file: `node --test tests/grader.test.js`. One test: add `--test-name-pattern="<regex>"`.
+- `npm run validate` checks `content/`. `npm run validate:dev` checks `content_dev/`.
+- Run the pipeline CLI, `node pipeline/cli.ts <cmd>`, from the repo root. The usage text is in `pipeline/lib/commands.ts`. `--refresh` skips the cache. `DENDRO_DEBUG=1` prints stack traces.
+- To see the app, serve the repo root (for example `python -m http.server 8000`) and open `index.html`. Add `?content=dev` to load `content_dev/` offline.
 
 ## Architecture
 
-Content flows in one direction:
+Content flows one way:
 
-1. `content_src/species/<SYMBOL>.json` holds the hand-authored species fields, keyed by the USDA PLANTS symbol.
-2. `pipeline/runs/<name>/` holds one content run: `run.json`, `candidates.jsonl`, `verdicts.jsonl`, `look_for.json` (agent-written), `decisions.json` (owner-written), `build.json`, and `report.md`.
-3. `node pipeline/cli.ts build` merges the authored layer with the fetched layer (PLANTS, iNaturalist) into `content/species.json`. It resizes and uploads the approved photos to the R2 bucket, and it writes the manifest rows. It writes `content/` only after the validator and the append-only ID check pass.
-4. The app fetches `content/*.json` and loads images from `CDN_BASE` (`https://img.learndendro.com/`, which must end in `/`). The app keeps progress in localStorage.
+1. `content_src/species/<SYMBOL>.json`: the hand-authored species fields, keyed by the USDA PLANTS symbol.
+2. `pipeline/runs/<name>/`: the files of one content run.
+3. `node pipeline/cli.ts build` merges the authored layer with PLANTS and iNaturalist data into `content/species.json`. It uploads the approved photos to R2 and writes the manifest rows. It writes `content/` only after the validator and the append-only ID check pass.
+4. The app reads `content/*.json`, loads images from `CDN_BASE` (`https://img.learndendro.com/`, with the trailing `/`), and keeps progress in localStorage.
 
-Rules that hold this flow together:
+Rules:
 
-- `app/logic/content.js` is the single content validator. `pipeline/cli.ts` and `scripts/validate_content.js` import it. The pipeline imports from `app/`, and `app/` never imports from `pipeline/`.
-- The build writes `content/species.json` and `content/images/manifest.json`. Change them through the CLI, not by hand.
-- `photos add` and `photos verdict` append to the `.jsonl` files in a run. Change those files through the CLI.
-- A person authors `content/concepts.json` and `content/units.json`. Agents leave them as they are.
-- The edges-draft skill appends to `content/confusion.json`.
-- IDs are append-only. A published ID is retired, not deleted. `ids check --base origin/main` enforces this in CI.
-- A species retires only on purpose: through `species retire`, or when every manifest row for it is retired.
-- A manifest row's `source` is a display name that the credit prints word for word. A new `--source` value needs an entry in `app/logic/sources.js`, or `npm test` fails.
+- `app/logic/content.js` is the one content validator. The pipeline imports from `app/`. `app/` never imports from `pipeline/`.
+- Change `content/species.json`, `content/images/manifest.json`, and the `.jsonl` files of a run only through the CLI.
+- A person authors `content/concepts.json` and `content/units.json`. Agents do not change them.
+- IDs are append-only. Retire a published ID. Never delete it. `ids check --base origin/main` enforces this in CI.
+- A species retires only on purpose: through `species retire`, or when all of its manifest rows are retired.
+- The `source` of a manifest row is a display name that the credit prints word for word. A new value needs an entry in `app/logic/sources.js`.
 
 ## Content runs
 
-A content run follows the `content-run` skill from `run init` to the merged pull request. The `species-draft`, `photo-check`, `edges-draft`, and `powo-harvest` skills cover the steps inside it. Read the skill before you start a run or a step of one.
+Read the `content-run` skill before you start a run or a step of one.
 
-- The CLI commits with `git add -A` during a run. Put scratch files in the session scratchpad, not in the repo. Agents do not run `git commit` themselves during a run.
-- Photo licences: the allowlist is in `pipeline/lib/licenses.ts`. Two sources are accepted as "used with permission, non-commercial" by written permission: `www.wildflower.org` and `dendro.cnre.vt.edu` (`--source "VT Dendrology"`). The permissions are in `docs/decisions/`.
-- Kew POWO is the last resort. Use it only in the built-in browser, with a 10-second delay between pages, and stop at any challenge page.
-- Read credits and licences from the source page itself, not through WebFetch. The species identity comes from the source page, not from the image.
+- The licence allowlist is in `pipeline/lib/licenses.ts`. Two hosts give written permission for "used with permission, non-commercial": `www.wildflower.org` and `dendro.cnre.vt.edu` (`--source "VT Dendrology"`). The permissions are in `docs/decisions/`.
+- Kew POWO is the last resort. Use it only in the built-in browser, with 10 seconds between pages. Stop at any challenge page.
+- During a run, the CLI commits with `git add -A`. Put scratch files in the session scratchpad. Agents do not run `git commit` themselves.
+- Read the credit and the licence from the source page, not through WebFetch. The species comes from the source page, not from the image.
 
 ## Tests and CI
 
-- The pipeline tests never touch the network. Every HTTP call goes through an injected `fetchImpl`. Per-host rate limits and cache lifetimes are in `pipeline/lib/http.ts`.
-- `.github/workflows/check.yml` runs the app tests, validates `content/` and `content_dev/`, and runs `ids check`. CI does not run `npm install`, so `sharp` and the S3 client load lazily. Keep them lazy.
-- On `main`, CI deploys the whole repo root to GitHub Pages. `.nojekyll` must stay.
-- `.gitattributes` forces LF line endings. The fixtures must stay LF.
+- The pipeline tests never use the network. Every HTTP call goes through an injected `fetchImpl`. The rate limits and cache lifetimes per host are in `pipeline/lib/http.ts`.
+- CI (`.github/workflows/check.yml`) does not run `npm install`. Keep `sharp` and the S3 client loaded lazily.
+- On `main`, CI deploys the repo root to GitHub Pages. Keep `.nojekyll`.
+- `.gitattributes` forces LF. The fixtures must stay LF.
 
 ## Environment
 
-- `.env` (gitignored) holds `DENDRO_S3_ENDPOINT`, `DENDRO_S3_REGION`, `DENDRO_S3_BUCKET`, `DENDRO_S3_ACCESS_KEY_ID`, and `DENDRO_S3_SECRET_ACCESS_KEY`. `process.loadEnvFile` loads it.
-- On Windows, build file paths with `path.join`. Rows store root-relative paths with forward slashes.
-- Calls to `spawnSync` need a `maxBuffer` of 256 MB, because the manifest is larger than 1 MB.
+- `.env` (gitignored) holds the `DENDRO_S3_*` settings for R2. `process.loadEnvFile` loads it.
+- On Windows, build file paths with `path.join`. Rows store root-relative paths with `/`.
+- Give `spawnSync` a `maxBuffer` of 256 MB. The manifest is larger than 1 MB.
 
 ## Docs
 
-- `docs/decisions/` holds the owner's rulings. `docs/superpowers/specs/` and `docs/superpowers/plans/` hold the design and the plan for each batch of work.
-- `DESIGN.md` holds the original design notes. Its section 17 is the decisions log of 2026-09-21, and it wins where it disagrees with the rest of the file.
-- Commit messages use a scope prefix: `content(<run>):`, `feat(<scope>):`, `fix(<scope>):`, `docs(skills):`, `ci:`, `test:`. Branch names are `content/<run>`, `feat/…`, `fix/…`, and `skills/…`. Work lands through pull requests.
+- `docs/decisions/` holds the owner's rulings. `docs/superpowers/specs/` and `docs/superpowers/plans/` hold the design and plan of each batch.
+- `DESIGN.md` section 17 (2026-09-21) wins where it disagrees with the rest of `DESIGN.md`.
+- Commit scopes: `content(<run>):`, `feat(<scope>):`, `fix(<scope>):`, `docs(skills):`, `ci:`, `test:`. Branches: `content/<run>`, `feat/…`, `fix/…`, `skills/…`. Work lands through pull requests.
 
 ## Agent skills
 
