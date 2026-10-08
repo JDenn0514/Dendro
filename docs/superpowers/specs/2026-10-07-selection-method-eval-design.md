@@ -99,7 +99,8 @@ The replay of B and C cuts the full P2 ranking down to the photos seen. P3 tests
 
 ### Scores
 
-- **Quality:** of the 6 photos a method keeps, how many are in the owner's best 6, averaged over the 10 targets. When the owner picked fewer than 6, the score counts against that smaller number.
+- **Quality:** of the 6 photos a method keeps, how many are in the owner's best 6, averaged over the 10 targets. When the owner picked fewer than 6, the score counts against that smaller number. A target with no picks has no quality score.
+- **Extras** (owner ruling 2026-10-08): on each target where the owner picked fewer than 6 and marked it done, the owner's picks are every photo the owner would show. The extras score is the number of kept photos that are not in the picks, averaged over those targets. A target with no picks counts here. In the 2026-10-08 picks, 8 targets have fewer than 6 picks, and LITU has none.
 - **Cost:** tokens, and price-weighted cost at the rates above, per target.
 - **Also reported:** rich and thin targets apart, the number of targets that end with fewer than 6 photos, the spread from target to target, the number of `hard` photos each method and model ranks above its sixth kept photo, and the rows dropped from the pools for each reason.
 
@@ -108,7 +109,7 @@ All methods keep `good` photos only, so they follow one rule. The `hard` tag of 
 ### The winner
 
 1. Find the best average quality, Q*.
-2. Shortlist every method within 1 photo of Q*.
+2. Find the lowest average extras, E*. Shortlist every method within 1 photo of Q* and within 1 photo per target of E*.
 3. The cheapest method on the shortlist, by price-weighted cost, is the candidate.
 4. The blind check compares the candidate with the best-quality method on all 10 targets. The candidate wins unless the owner prefers the other set on more targets than the candidate's set. Ties do not count.
 5. When the candidate loses, the next-cheapest method on the shortlist gets one more blind check.
