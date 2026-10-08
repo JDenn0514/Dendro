@@ -112,6 +112,7 @@ import {
   validateFetched,
   type SpeciesRecord,
 } from './species.ts';
+import { spellingVariants } from './spellings.ts';
 import { deferredStorage, type Storage } from './storage.ts';
 import { tsoRows } from './tso.ts';
 import {
@@ -410,9 +411,12 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
       for (const key of TURN_ORDER) turns.push(await turnRows(key, context));
       const fromSources = [...interleave(turns), ...(await plantsRows(context))];
       // D17: the script compares the source's own name with the accepted name and its
-      // synonyms, so the photo-check agent reads a verdict instead of guessing.
+      // synonyms, so the photo-check agent reads a verdict instead of guessing. Other
+      // spellings of the accepted name count here only. The sources look species up by
+      // `names`, so the spellings stay out of it.
+      const matchNames = [...names, ...spellingVariants(symbol)];
       for (const row of fromSources) {
-        row.identity_match = identityMatches(row.source_species, names);
+        row.identity_match = identityMatches(row.source_species, matchNames);
       }
       perSymbol.push(fromSources);
     }
