@@ -16,7 +16,7 @@ The photo-check skill keeps "stop at 6 good photos" until this eval picks a meth
 2. 10 leaf targets: about 6 with many good photos and 4 thin ones.
 3. The winner is the cheapest method within 1 photo of the best quality, and it must survive the blind check.
 4. The pools come from existing runs. No new fetch.
-5. Three judge models are tested: Opus 5.5, Sonnet 5.5, and Haiku 5.5 (`claude-haiku-5-5`). Haiku 4.5 is not used.
+5. Three judge models are tested: Opus 5.5, Sonnet 5.5, and Haiku 5.5 (`claude-haiku-5-5`). Haiku 4.5 is not used. Agents get full model IDs, because the short name `sonnet` ran Sonnet 5 in a run on 2026-09-26.
 6. The judge passes run as workflows. Everything else is scripts or owner clicks.
 
 ## Facts this design rests on
@@ -24,7 +24,7 @@ The photo-check skill keeps "stop at 6 good photos" until this eval picks a meth
 - The fetch caps a target at 60 rows per run (`MAX_PER_SPECIES`, `pipeline/lib/candidates.ts:185`). Only `photos add` rows go past it.
 - In `candidates.jsonl`, file order within a target is fetch order. `photosFetch` (`pipeline/lib/commands.ts:380-466`) builds rows per target, and `collect` (`candidates.ts:254`) keeps their order. A file can hold more than one block for a target, so group by target and keep file order.
 - The source turn order of 2026-09-25 (`TURN_ORDER`, `commands.ts:200,406-411`) applies to runs `simple_lobed_us` and `simple_lobed_us_add`. Older runs used another order. The files of the two top-up runs of 2026-10-01 are no longer on disk.
-- Those two runs fetched leaf, bark, and fruit, so a target has about 30-45 leaf rows.
+- Those two runs fetched leaf, bark, and fruit, so a target has 24-60 leaf rows (mean 47 for the 10 targets).
 - The existing verdicts use the rules from before PR #34. Every photo is judged again.
 - In `simple_lobed_us`, 5 pairs of fetched rows share a target and a `file_hash`. `simple_lobed_us_add` has none. The 16 rows with no `file_hash` are all manual rows (counted 2026-10-08).
 - The validator does not count a `hard` photo as in play (`inPlay`, `app/logic/content.js:38`). A method must tag `hard`, or a run publishes wrong counts.
@@ -37,14 +37,14 @@ The photo-check skill keeps "stop at 6 good photos" until this eval picks a meth
 ### Targets
 
 - 10 leaf targets from `simple_lobed_us` and `simple_lobed_us_add`, chosen with a fixed seed.
-- 6 rich targets and 4 thin ones. A thin target has fewer than 6 good leaf photos among its fetched rows, under the old verdicts.
+- 6 rich targets and 4 thin ones. A thin target has fewer than 6 good leaf photos among its pool rows, under the old verdicts.
 
 ### The pool for each target
 
 - The fetched rows hinted `leaf` or with no hint, in file order.
 - Manual rows from `photos add` are left out, because a real judge does not see them in the first pass.
 - Within each target, only the first row of each `file_hash` stays, in file order. Rows with no `file_hash`, or with `fetch_error` set, are dropped. `pools.json` records each dropped row and the reason.
-- About 30-45 photos per target, about 400 in all.
+- 24-60 photos per target, about 470 in all, before duplicates are dropped.
 
 ### Best-6 picks
 
@@ -68,7 +68,7 @@ Every judge call happens once. The methods are then replayed from the results, s
 | Pass | Models | What it does | Covers |
 |---|---|---|---|
 | P0, model check | Opus, Sonnet, Haiku | A smoke test on 2 photos. It confirms from each agent's transcript which model ran. The Agent tool's `haiku` name must mean Haiku 5.5. | 2 photos |
-| P1, one photo at a time | Opus, Sonnet, Haiku | Judges each photo in fetch order under the Quality checks of the photo-check skill: reject, hard, or good. Batches of 10, a fresh agent per batch. | All ~400 photos, once per model |
+| P1, one photo at a time | Opus, Sonnet, Haiku | Judges each photo in fetch order under the Quality checks of the photo-check skill: reject, hard, or good. Batches of 10, a fresh agent per batch. | All ~470 photos, once per model |
 | P2, ranking | Opus, Sonnet, Haiku | One agent per target sees the whole pool as 3×3 contact sheets, and can open any photo at full size. It returns a ranked list of the photos it keeps, each tagged `good` or `hard` under the same Quality checks as P1, and a list of rejects. | 10 targets, once per model |
 | P3, small-pool ranking | Opus, Sonnet, Haiku | Ranks only the first 12 photos of a target, with the same output as P2. It checks that a ranking of 12 matches the full ranking cut to 12, and it gives the second point for the cost line in Part 3. | 3 targets |
 
@@ -133,7 +133,7 @@ All methods keep `good` photos only, so they follow one rule. The `hard` tag of 
 
 ### Workflow size
 
-P0-P3 are about 160 agents: P1 alone is 40 batches × 3 models. The session guideline keeps a workflow under 10 agents, so the owner approves the size before the run.
+P0-P3 are about 190 agents: P1 alone is about 48 batches × 3 models. The session guideline keeps a workflow under 10 agents, so the owner approves the size before the run.
 
 ### Fairness
 
