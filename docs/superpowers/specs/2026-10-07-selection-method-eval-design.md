@@ -136,7 +136,7 @@ All methods keep `good` photos only, so they follow one rule. The `hard` tag of 
 
 ### Workflow size
 
-P0-P3 are about 190 agents: P1 alone is about 48 batches × 3 models. The session guideline keeps a workflow under 10 agents, so the owner approves the size before the run.
+P0-P3 are about 195 agents: P1 alone is 52 batches × 3 models. The session guideline keeps a workflow under 10 agents, so the owner approves the size before the run.
 
 ### Fairness
 
