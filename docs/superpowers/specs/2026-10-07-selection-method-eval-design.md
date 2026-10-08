@@ -51,7 +51,7 @@ The photo-check skill keeps "stop at 6 good photos" until this eval picks a meth
 
 ### Best-6 picks
 
-- One page per target shows the whole pool as a grid. Any photo opens at full size.
+- One page per target shows the whole pool as a grid. Each photo shows at the app display size, about 440 px on its long side, with no full-size view (owner ruling 2026-10-08).
 - The owner clicks the best 6, in order. When fewer than 6 are usable, the owner picks fewer.
 - The page shows photos only, with no agent verdict.
 
@@ -71,7 +71,7 @@ Every judge call happens once. The methods are then replayed from the results, s
 | Pass | Models | What it does | Covers |
 |---|---|---|---|
 | P0, model check | Opus, Sonnet, Haiku | A smoke test on 2 photos. It confirms from each agent's transcript which model ran. The Agent tool's `haiku` name must mean Haiku 5.5. | 2 photos |
-| P1, one photo at a time | Opus, Sonnet, Haiku | Judges each photo in fetch order under the Quality checks of the photo-check skill: reject, hard, or good. Batches of 10, a fresh agent per batch. | All ~470 photos, once per model |
+| P1, one photo at a time | Opus, Sonnet, Haiku | Judges each photo in fetch order, from a copy at the app display size (440 px long side, owner ruling 2026-10-08), under the Quality checks of the photo-check skill: reject, hard, or good. Batches of 10, a fresh agent per batch. | All ~470 photos, once per model |
 | P2, ranking | Opus, Sonnet, Haiku | One agent per target sees the whole pool as 3×3 contact sheets, and ranks from the sheets only, with no photo opens (owner ruling 2026-10-08, after the Haiku ranker in the tracer filled its context by opening 35 originals). It returns a ranked list of the photos it keeps, each tagged `good` or `hard` under the same Quality checks as P1, and a list of rejects. | 10 targets, once per model |
 | P3, small-pool ranking | Opus, Sonnet, Haiku | Ranks only the first 12 photos of a target, with the same output as P2. It checks that a ranking of 12 matches the full ranking cut to 12, and it gives the second point for the cost line in Part 3. | 3 targets |
 
