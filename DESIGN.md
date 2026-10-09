@@ -777,15 +777,45 @@ At the start, the learner picks one of two areas:
 
 ### Relation to the leaf-only decision
 
-`docs/decisions/2026-09-30-leaf-only-v1.md` says the first version teaches leaves only,
-and the app hides bark and fruit. These decisions do not withdraw it. They do conflict
-with it in one place: a tree card unlocks only after part cards on two or more parts, so
-an app with leaf part cards only never unlocks a tree card. The prototype uses leaf,
-bark, and fruit, outside `app/`. Leaf work in content runs continues.
+`docs/decisions/2026-09-30-leaf-only-v1.md` said the first version teaches leaves only,
+and the app hides bark and fruit. It conflicted with this section: a tree card unlocks
+only after part cards on two or more parts, so leaf part cards alone never unlock one.
+The owner closed the conflict later on 2026-10-09 (see the next subsection).
+
+### First-version parts and teaching first (2026-10-09)
+
+The owner decided these later on 2026-10-09. The short record is
+`docs/decisions/2026-10-09-v1-parts-and-teach-first.md`. It replaces the leaf-only
+decision.
+
+- **Bark and fruit come back for the first version.** The 548 bark rows and 425 fruit
+  rows in the manifest are published. The app only hides them. New content runs collect
+  bark and fruit again, and the rule "every run takes `--channels leaf`" ends.
+  - Reason: the learning model above. Tree cards unlock after part cards on two parts.
+    Tree cards combine photos from several trees. Part cards with depth `group` need
+    fewer photos. The quota per step replaces "Stop at 6 good photos".
+  - The owner judges learner clarity. The photo judge and the source pages decide the
+    botany.
+- **Flowers come after the first version.** No flower photos exist. Most trees flower
+  for a short time, and many tree flowers are small or high in the crown.
+- **The app teaches before it tests.** This replaces section 1, "learning and testing are
+  the same activity", for new material. The teaching moment after a miss (section 9)
+  stays.
+  - New species come in small look-alike sets from `content/confusion.json`. Example:
+    vine maple, mountain maple, Rocky Mountain maple, and striped maple.
+  - An introduction page for each set comes before the first card on that set.
+  - The page shows the species side by side, part by part. It names the features that
+    tell them apart.
+  - It also names the parts that do not help, from the depth of each part.
+  - The quiz on the set comes after the page.
+  - The page stays open later as a reference, as the species and group pages.
+- **Open:** the size of a look-alike set and the exact layout of the introduction page.
+  Both wait for the prototype notes.
 
 ### Still open
 
-- Whether the app keeps the leaf-only rule, and when bark and fruit part cards come back.
+- Closed on 2026-10-09: the leaf-only rule ends, and bark and fruit part cards come back
+  for the first version (see the subsection above).
 - How the manifest records "any season".
 - How the difficulty steps 1 to 3 map onto the `difficulty` field, which has only `hard`
   today.

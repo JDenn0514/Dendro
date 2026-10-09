@@ -16,6 +16,14 @@ _Avoid_: Species card, channel card
 **Tree card**:
 A review card for one species in one season, with a button for each part. The learner can open any part at no cost.
 
+**Look-alike set**:
+A small set of species that a learner confuses, taken from `content/confusion.json`. New species come into the app one set at a time.
+_Avoid_: Confusion set, cluster
+
+**Introduction page**:
+The page that shows one look-alike set side by side, part by part, before the first card on that set. It names the features that tell the species apart and the parts that do not help. It stays open later as a reference.
+_Avoid_: Lesson, intro card
+
 **Depth**:
 How far one part can identify one species: `species`, `group`, or `none`. It is a content value for each species and part, not a learner level.
 _Avoid_: Level, tier
