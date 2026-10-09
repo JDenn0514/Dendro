@@ -61,6 +61,9 @@ The main path teaches every part of a group or a species together: leaf, bark, a
 - On tree cards, they appear on cards set in that season.
 - The difficulty step does not change with the season. It measures how hard the photo is to read. An autumn leaf can be step 1.
 - Autumn colour can be a real clue (red maple scarlet, sugar maple orange). A short autumn-colours lesson is possible later.
+- Stage works the same way as season:
+  - A young leaf that has not reached its full shape is step 3, because its features are not formed yet.
+  - An unripe fruit with its full shape, such as a green acorn, gets its step from clarity alone. It can be step 1. It is not the usual look, so it does not appear on the species page or in the first cards.
 
 ### Practice mode
 

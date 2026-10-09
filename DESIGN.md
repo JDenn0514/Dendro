@@ -847,7 +847,9 @@ The decisions in short:
   Which groups split is open.
 - **The usual look first.** A species is introduced with photos of its look for most of
   the year (red maple: green leaves). Photos from other seasons come after the learner
-  knows the species. The difficulty step does not change with the season.
+  knows the species. The difficulty step does not change with the season. Stage works the
+  same way: a full-shape unripe fruit (a green acorn) gets its step from clarity and comes
+  later; a young leaf without its full shape is step 3.
 - **Practice mode.** The learner practises one part only, on trees already met. The app
   suggests a part that the part cards show is weak.
 - **Tree cards start at the group:** "Which group is this tree in?" They ask for the
