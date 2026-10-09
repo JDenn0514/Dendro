@@ -98,7 +98,9 @@ This appends rows to `pipeline/runs/<name>/candidates.jsonl` and downloads each 
 `pipeline/cache/`. The sources take turns: each source gives one row per round, in this
 order: Bioimages, the Lady Bird Johnson Wildflower Center (wildflower.org), Trees and
 Shrubs Online, Wikimedia Commons, iNaturalist. A source that runs out drops out of the
-rounds. USDA PLANTS rows come after all the turn rows. A target keeps 60 rows at most.
+rounds. USDA PLANTS rows come after all the turn rows. A target keeps 60 rows at most. A
+row whose download failed does not count toward the 60, and the next `photos fetch` tries
+it again. A row whose file is the same as a file the target already holds is dropped.
 
 It prints one line per fetch failure, then
 `<n> candidates appended to pipeline/runs/<name>/candidates.jsonl, <m> download failures, <k> monochrome dropped`.
@@ -128,7 +130,10 @@ manifest rows, runs the validator and the append-only check, and writes
 A new species with no photo and no confusion edge does not stop the build. The build holds
 it back: it writes no record for it, prints `<SYMBOL>: held back: no photo and no confusion
 edge`, and lists it in `build.json` and in the report with status `no_photos` and that
-reason. Step 7 can find photos for it. The next build then writes it. A species that
+reason. A `hard` photo, or a photo on a variety key only, does not count as a photo here.
+The build drops the manifest rows of a held-back species that `main` does not hold, and it
+does not upload their files. A held-back species that has a retired row `main` does not hold
+still stops the build. The run owner fixes that row by hand. Step 7 can find photos for it. The next build then writes it. A species that
 `main` already publishes is never held back: with no photo and no edge it still fails the
 build. So draft every species file in step 3, before the photos.
 Do not leave a species file out to get past the build.

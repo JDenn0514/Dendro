@@ -5,7 +5,7 @@ import { loadContent } from '../app/logic/content.js';
 import {
   channelUnits, unitOrdinal, unitLevel, unitTree,
   defaultOpenUnits, openUnitsFor, mergeOpenUnits, channelMark,
-  channelLessons, unitThumb
+  channelLessons, unitThumb, lessonsDoorLine
 } from '../app/logic/lessons.js';
 
 const { content } = loadContent(loadFixture());
@@ -150,20 +150,32 @@ test('a channel with every branch folded reads back as every branch folded', () 
 });
 
 test('a fold on one channel keeps the other channels their keys and marks', () => {
+  // A key and a mark this content does not know also stay, because they can
+  // be from a hidden channel.
   const stored = [channelMark('bark'), 'bark_types', 'gone_away',
     channelMark('gone_channel'), channelMark('leaf'), 'leaf_types'];
   assert.deepEqual(
     mergeOpenUnits(stored, 'leaf',
       new Set(['leaf_types', 'simple_lobed_genus']), content),
-    [channelMark('bark'), 'bark_types', channelMark('leaf'),
-      'leaf_types', 'simple_lobed_genus']);
+    [channelMark('bark'), 'bark_types', 'gone_away', channelMark('gone_channel'),
+      channelMark('leaf'), 'leaf_types', 'simple_lobed_genus']);
   // Folding every leaf branch leaves bark its mark and its key.
   assert.deepEqual(mergeOpenUnits(stored, 'leaf', new Set(), content),
-    [channelMark('bark'), 'bark_types', channelMark('leaf')]);
+    [channelMark('bark'), 'bark_types', 'gone_away', channelMark('gone_channel'),
+      channelMark('leaf')]);
   // A key from another channel cannot enter through this channel's set.
   assert.deepEqual(
     mergeOpenUnits(null, 'leaf', new Set(['bark_types']), content),
     [channelMark('leaf')]);
+});
+
+test('a fold on the leaf page keeps the keys and marks of a hidden channel', () => {
+  // The app loads leaf alone, so the bark units are not in this content. The
+  // bark fold must still be there when bark comes back.
+  const { content: leafOnly } = loadContent(loadFixture(), { channels: ['leaf'] });
+  const stored = [channelMark('bark'), 'bark_types', channelMark('leaf'), 'leaf_types'];
+  assert.deepEqual(mergeOpenUnits(stored, 'leaf', new Set(), leafOnly),
+    [channelMark('bark'), 'bark_types', channelMark('leaf')]);
 });
 
 test('one channel summarises as three depths of unit squares', () => {
@@ -201,6 +213,19 @@ test('with the leaf concept alone the bark door carries the next unit', () => {
   const carrying = summaries.filter((summary) => summary.next_up_key !== null);
   assert.deepEqual(carrying.map((summary) => summary.channel), ['bark']);
   assert.equal(carrying[0].next_up_key, 'bark_types');
+});
+
+test('the lessons door line for one unit says unit, and no depth', () => {
+  const summaries = [{ total_count: 1, open_count: 1, depth: 1 }];
+  assert.equal(lessonsDoorLine(summaries), 'One unit, with one open now.');
+});
+
+test('the lessons door line for many units says the deepest stem', () => {
+  const summaries = [
+    { total_count: 7, open_count: 1, depth: 4 },
+    { total_count: 1, open_count: 1, depth: 1 }
+  ];
+  assert.equal(lessonsDoorLine(summaries), 'Eight units, four deep, with two open now.');
 });
 
 test('the unit thumbnail is the first card in the unit that carries a photo', () => {
