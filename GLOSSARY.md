@@ -34,6 +34,10 @@ _Avoid_: Level, tier
 A real tree group: a genus or a family, such as the oaks or the maples. The path runs from words, to groups, to species.
 _Avoid_: Bucket, leaf-shape group
 
+**Subgroup**:
+A part of a large group that the path teaches between the group and its species. Examples: red oaks and white oaks; soft pines and hard pines. Small groups have none.
+_Avoid_: Section (the botanical rank), red oak group
+
 **Batch**:
 The new items that the app teaches together: 4 at the start, then 3 to 5, and never more than 5. A look-alike pair is a batch of 2. The next batch opens when each card in the batch is answered right once.
 _Avoid_: Lesson, set

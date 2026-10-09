@@ -842,6 +842,9 @@ The decisions in short:
 - **All parts together.** The main path teaches leaf, bark, and fruit of a group or a
   species together. The page covers all parts. Part cards on each part follow it, and
   tree cards unlock after part cards on two parts.
+- **Subgroups.** A large group splits into subgroups before its species: the oaks into
+  red oaks and white oaks, the pines into soft and hard pines. Small groups skip this level.
+  Which groups split is open.
 - **Practice mode.** The learner practises one part only, on trees already met. The app
   suggests a part that the part cards show is weak.
 - **Tree cards start at the group:** "Which group is this tree in?" They ask for the

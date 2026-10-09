@@ -25,6 +25,14 @@ Date: 2026-10-09. Status: decided by the owner after the notes on the first prot
 - Leaf-shape buckets are no longer groups. Leaf shapes, such as "lobed", become words in the vocabulary.
 - The owner writes `content/units.json`. This decision changes how the owner groups the units. Agents do not change the file.
 
+### Subgroups in large groups
+
+- A large group splits into subgroups before its species. Examples: the oaks split into red oaks and white oaks; the pines into soft pines and hard pines.
+- The path for a large group runs: group, then subgroup, then species.
+- A small group, such as the tuliptree, has no subgroup level.
+- A per-part depth of `group` can name a subgroup. Example: most acorns tell you "red oak" or "white oak", not the species.
+- Which groups are large enough to split is open.
+
 ### Common trees first
 
 The most common trees in the learner's area come first. The counts come from two sources:
@@ -116,5 +124,5 @@ The beginner prototype runs the full path on four groups:
 - How the unit rules of section 17 (5 to 25 cards, the gate on the parent at 80%, wide first) apply to groups.
 - How batches fit the daily cap on new cards (section 17).
 - What a placement pass sets for a word or a group card. Section 17 sets tier `mc8` and an interval of 21 days.
-- Whether depth `group` uses the same groups as the path. The depth example "red oak group" is a section of the oaks, not a genus.
+- Which groups are large enough to get subgroups, and the subgroup list for each.
 - How the two new difficulty factors enter the computed difficulty step.
