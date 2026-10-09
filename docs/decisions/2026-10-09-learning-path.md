@@ -54,6 +54,14 @@ The main path teaches every part of a group or a species together: leaf, bark, a
 - The first cards after the page are part cards, one or more for each part.
 - Tree cards unlock after part cards on two parts, as the learning model says.
 
+### The usual look first
+
+- A species is introduced with photos of its usual look: what it shows for most of the year. Example: red maple leaves are green, not autumn red.
+- Photos from other seasons come in after the learner knows the species, for example once its part cards have each been answered right a few times.
+- On tree cards, they appear on cards set in that season.
+- The difficulty step does not change with the season. It measures how hard the photo is to read. An autumn leaf can be step 1.
+- Autumn colour can be a real clue (red maple scarlet, sugar maple orange). A short autumn-colours lesson is possible later.
+
 ### Practice mode
 
 - In practice mode the learner practises one part only, for example bark, on trees already met.

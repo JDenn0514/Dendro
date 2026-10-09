@@ -845,6 +845,9 @@ The decisions in short:
 - **Subgroups.** A large group splits into subgroups before its species: the oaks into
   red oaks and white oaks, the pines into soft and hard pines. Small groups skip this level.
   Which groups split is open.
+- **The usual look first.** A species is introduced with photos of its look for most of
+  the year (red maple: green leaves). Photos from other seasons come after the learner
+  knows the species. The difficulty step does not change with the season.
 - **Practice mode.** The learner practises one part only, on trees already met. The app
   suggests a part that the part cards show is weak.
 - **Tree cards start at the group:** "Which group is this tree in?" They ask for the
