@@ -2353,7 +2353,7 @@ Hold the rest of this step until Task 3 Step 4 is done (the owner may read `NOTE
 
 Blocked by: Task 3 and Task 4.
 
-Every method runs once per judge model in the replay, plus the filter-first variants. The script fits a cost line per model, checks P3, scores quality against the owner's picks, and picks the shortlist and the candidate.
+Every method runs once per judge model in the replay, plus the filter-first variants. The script fits a cost line per model, checks P3, scores quality and extras against the owner's picks, and picks the shortlist and the candidate.
 
 Rules pinned in this task (each one is in the code and in a test):
 
@@ -2362,12 +2362,15 @@ Rules pinned in this task (each one is in the code and in a test):
 - **Filter first.** The filter model (Haiku or Sonnet) judges the pool in fetch order, in batches of 10, and drops its `reject`, `escalate`, and `unread` photos. The ranker then runs B(K) or C on the survivors, in fetch order. For B(K), the filter stops after the batch that holds the K-th survivor; when there are fewer than K survivors, or K is `all`, it judges the whole pool. For C, the filter stops after the batch that holds the last survivor that C used; when C used every survivor, the filter judged the whole pool. Cost = the filter's P1 cost of the photos it judged + the ranker's cost line at the number of survivors it ranked (0 when there are none).
 - **Cost line.** For each model and each P3 target: `b_t = (c2 - c3) / (n2 - 12)` and `a_t = c3 - 12 * b_t`, where `c3` is the P3 cost (12 photos) and `c2` the P2 cost (`n2` = pool size). `a` and `b` are the means over the 3 P3 targets. This is done for tokens and for USD apart. A negative `a` is kept, and the table notes it.
 - **P3 check.** For each model and P3 target: top 6 of the P3 ranking against the top 6 of the P2 ranking cut to the same 12 photos, rejects dropped from both. The difference is half the size of the symmetric difference. When the mean over the 3 targets is more than 1 photo, the rows of that ranker for B(12), B(20), and C (also as filter-first rankers) are marked unreliable. C is marked because its stop test compares rankings of 12 and 24 photos.
-- **Quality.** `|picks ∩ ownerBest| / min(6, |ownerBest|)`, mean over the targets where the owner picked at least 1 photo.
-- **Winner.** Rows marked unreliable stay in the table, but they are not used for Q* or the shortlist. Q* = the best mean quality. Shortlist = rows with quality `>= Q* - 1/6`. Candidate = the cheapest shortlist row by USD per target (ties: fewer tokens, then the row ID). Best = the cheapest row with quality Q*. Next = the cheapest shortlist row that is neither the candidate nor the best.
+- **Quality.** `|picks ∩ ownerBest| / min(6, |ownerBest|)`, mean over the targets where the owner picked at least 1 photo. A target with 0 picks has no quality score.
+- **Extras** (owner ruling 2026-10-08). On each target where the owner picked fewer than 6 and marked it done, the owner's picks are every photo the owner would show. `extras = |picks \ ownerBest|`, the kept photos not in the picks. A target with 0 picks counts. A target with 6 picks has no extras score. The mean is over the targets with a score, and the table also gives it for rich and thin targets apart.
+- **Winner.** Rows marked unreliable stay in the table, but they are not used for Q*, E*, or the shortlist. Q* = the best mean quality. E* = the lowest mean extras. Shortlist = rows with quality `>= Q* - 1/6` (one photo) and extras `<= E* + 1` (one photo per target). Candidate = the cheapest shortlist row by USD per target (ties: fewer tokens, then the row ID). Best quality = the cheapest row with quality Q*. Best (the blind-check opponent) = the best-quality row, or `config.json` `blind_opponent` when it is set (owner ruling 2026-10-09: `Fhaiku>Ball|opus` for this run). Next = the cheapest shortlist row that keeps another set of photos than the candidate and than the opponent on at least 1 target. `blind_needed` is false when there is no candidate, or when the candidate keeps the same sets as the opponent on every target.
+- **Report data** (not in the winner rule). Each B(all) row also gives the real P2 USD per target; the cost line runs about 15-17% above it, because it is fitted from the 3 P3 targets. Each C row is marked "cost is a lower bound": a real C run calls the ranker once per batch of 12.
 
 **Files:**
 - Modify: `EVAL/lib/replay.mjs` (add `survivors`, `replayFilterB`, `replayFilterC`)
-- Modify: `EVAL/lib/score.mjs` (add `P3_LIMIT`, `costLine`, `p3Diff`, `summarizeRow`, `pickWinner`)
+- Modify: `EVAL/lib/score.mjs` (add `extras`, `P3_LIMIT`, `costLine`, `p3Diff`, `summarizeRow`, `pickWinner`)
+- Modify: `EVAL/config.json` (add `"blind_opponent": "Fhaiku>Ball|opus"`, owner ruling 2026-10-09)
 - Create: `EVAL/analyze.mjs`
 - Test: `EVAL/test/filter.test.mjs`, `EVAL/test/winner.test.mjs`
 - Output: `EVAL/out/table.json`, `EVAL/out/table.md`, `EVAL/out/shortlist.json`
@@ -2378,9 +2381,10 @@ Rules pinned in this task (each one is in the code and in a test):
   - `replayFilterB(pool, K, fP1, fCost, rank, line)` and `replayFilterC(pool, fP1, fCost, rank, line)`, each `-> { picks, seen, ranked, cost, hardAbove }` (`seen` = photos the filter judged, `ranked` = survivors the ranker saw).
   - `costLine(points) -> { tokens: { a, b }, usd: { a, b } }`, with `points = [{ n3, c3, n2, c2 }]`.
   - `p3Diff(p3Rank, p2Rank, first12) -> number`.
-  - `summarizeRow(id, per, unreliable) -> { id, unreliable, q_mean, q_rich, q_thin, q_min, q_max, q_sd, short, usd_mean, tokens_mean, seen_mean, hard_above_mean, hard_above_total, per }`, with `per = [{ target, kind, picks, seen, cost, q, hard_above }]`.
-  - `pickWinner(rows) -> { qStar, shortlist: [id], excluded: [id], candidate, best, next }`.
-  - `out/table.json`: `{ lines, p3, unread, problems, rows }`. `out/shortlist.json`: the `pickWinner` result. Row IDs: `A|<m>`, `B<K>|<m>`, `C|<m>`, `F<f>>B<K>|<m>`, `F<f>>C|<m>`, with `K` in `12, 20, 30, all`.
+  - `extras(picks, best, done) -> number | null` (null for a target with 6 picks, or with fewer than 6 and not done).
+  - `summarizeRow(id, per, unreliable) -> { id, unreliable, q_mean, q_rich, q_thin, q_min, q_max, q_sd, x_mean, x_rich, x_thin, short, usd_mean, tokens_mean, seen_mean, hard_above_mean, hard_above_total, per }`, with `per = [{ target, kind, picks, seen, cost, q, x, hard_above }]`.
+  - `pickWinner(rows, { opponent }) -> { qStar, eStar, shortlist: [id], excluded: [id], candidate, best, best_quality, next, blind_needed }`. `candidate` is null when the shortlist is empty. `best_quality` is the cheapest reliable row with quality Q*, on the shortlist or not. `best` is the blind-check opponent: `opponent` when it is set, else `best_quality`.
+  - `out/table.json`: `{ lines, p3, cost_line_vs_p2, unread, problems, rows }`; a B(all) row has `usd_p2_real`, a C row has `cost_lower_bound: true`. `out/shortlist.json`: the `pickWinner` result. Row IDs: `A|<m>`, `B<K>|<m>`, `C|<m>`, `F<f>>B<K>|<m>`, `F<f>>C|<m>`, with `K` in `12, 20, 30, all`.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -2467,9 +2471,10 @@ Create `EVAL/test/winner.test.mjs`:
 ```js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { costLine, p3Diff, summarizeRow, pickWinner, P3_LIMIT } from '../lib/score.mjs';
+import { costLine, p3Diff, extras, summarizeRow, pickWinner, P3_LIMIT } from '../lib/score.mjs';
 
 const near = (a, b) => assert.ok(Math.abs(a - b) < 1e-9, `${a} != ${b}`);
+const six = ['a', 'b', 'c', 'd', 'e', 'f'];
 
 test('costLine averages the per-target lines through the P3 and P2 points', () => {
   const line = costLine([
@@ -2495,12 +2500,28 @@ test('p3Diff is half the symmetric difference of the two top 6 sets', () => {
   assert.equal(P3_LIMIT, 1);
 });
 
+test('extras: with fewer than 6 picks and done, it counts the kept photos not in the picks', () => {
+  assert.equal(extras(six, ['a', 'x'], true), 5);
+  assert.equal(extras(['a', 'b'], ['a', 'b', 'c'], true), 0);
+  // Fewer than 6 picks and not done: the picks are not every photo the owner would show.
+  assert.equal(extras(six, ['a', 'x'], false), null);
+});
+
+test('extras: with 0 picks and done, every kept photo is an extra', () => {
+  assert.equal(extras(['a', 'b', 'c'], [], true), 3);
+  assert.equal(extras([], [], true), 0);
+});
+
+test('extras: a target with 6 picks has no extras score', () => {
+  assert.equal(extras(six, ['a', 'b', 'x', 'y', 'z', 'w'], true), null);
+  assert.equal(extras(six, ['a', 'b', 'x', 'y', 'z', 'w'], false), null);
+});
+
 test('summarizeRow gives the means, the splits, the short count, and the spread', () => {
-  const six = ['a', 'b', 'c', 'd', 'e', 'f'];
   const r = summarizeRow('B20|opus', [
-    { target: 'A', kind: 'rich', picks: six, seen: 20, cost: { tokens: 100, usd: 1 }, q: 0.5, hard_above: 2 },
-    { target: 'B', kind: 'thin', picks: ['a', 'b', 'c'], seen: 30, cost: { tokens: 300, usd: 3 }, q: 1, hard_above: 1 },
-    { target: 'C', kind: 'thin', picks: [], seen: 10, cost: { tokens: 0, usd: 0 }, q: null, hard_above: 0 },
+    { target: 'A', kind: 'rich', picks: six, seen: 20, cost: { tokens: 100, usd: 1 }, q: 0.5, x: null, hard_above: 2 },
+    { target: 'B', kind: 'thin', picks: ['a', 'b', 'c'], seen: 30, cost: { tokens: 300, usd: 3 }, q: 1, x: 1, hard_above: 1 },
+    { target: 'C', kind: 'thin', picks: [], seen: 10, cost: { tokens: 0, usd: 0 }, q: null, x: 0, hard_above: 0 },
   ], true);
   near(r.hard_above_mean, 1);
   assert.equal(r.hard_above_total, 3);
@@ -2508,6 +2529,9 @@ test('summarizeRow gives the means, the splits, the short count, and the spread'
   near(r.q_mean, 0.75);
   near(r.q_rich, 0.5);
   near(r.q_thin, 1);
+  near(r.x_mean, 0.5);
+  assert.equal(r.x_rich, null);
+  near(r.x_thin, 0.5);
   assert.equal(r.short, 2);
   near(r.q_min, 0.5);
   near(r.q_max, 1);
@@ -2517,20 +2541,23 @@ test('summarizeRow gives the means, the splits, the short count, and the spread'
 });
 
 test('summarizeRow skips a null hard_above, and gives null when every target is null', () => {
-  const per = h => ({ target: 'A', kind: 'rich', picks: ['a'], seen: 10, cost: { tokens: 1, usd: 1 }, q: 1, hard_above: h });
+  const per = h => ({ target: 'A', kind: 'rich', picks: ['a'], seen: 10, cost: { tokens: 1, usd: 1 }, q: 1, x: null, hard_above: h });
   const some = summarizeRow('B|x', [per(2), per(null), per(4)]);
   near(some.hard_above_mean, 3);
   assert.equal(some.hard_above_total, 6);
+  assert.equal(some.x_mean, null);
   const none = summarizeRow('A|x', [per(null), per(null)]);
   assert.equal(none.hard_above_mean, null);
   assert.equal(none.hard_above_total, null);
 });
 
+const row = (id, q, usd, unreliable = false, x = 0) => ({ id, q_mean: q, x_mean: x, usd_mean: usd, tokens_mean: usd * 1000, unreliable });
+
 test('pickWinner: shortlist within 1/6 of Q*, cheapest is the candidate, unreliable rows left out', () => {
-  const row = (id, q, usd, unreliable = false) => ({ id, q_mean: q, usd_mean: usd, tokens_mean: usd * 1000, unreliable });
   const rows = [row('R1', 0.8, 1.0), row('R2', 0.7, 0.2), row('R3', 0.6, 0.05), row('R4', 0.9, 0.5, true)];
   const w = pickWinner(rows);
   near(w.qStar, 0.8);
+  near(w.eStar, 0);
   assert.deepEqual(w.shortlist, ['R2', 'R1']);
   assert.deepEqual(w.excluded, ['R4']);
   assert.equal(w.candidate, 'R2');
@@ -2539,6 +2566,72 @@ test('pickWinner: shortlist within 1/6 of Q*, cheapest is the candidate, unrelia
   const w2 = pickWinner([...rows, row('R5', 0.75, 0.3)]);
   assert.deepEqual(w2.shortlist, ['R2', 'R5', 'R1']);
   assert.equal(w2.next, 'R5');
+});
+
+test('pickWinner: a row with top quality but more than E* + 1 extras is left off the shortlist', () => {
+  const rows = [row('Q1', 0.9, 1.0, false, 3), row('Q2', 0.8, 0.5, false, 1), row('Q3', 0.75, 0.1, false, 2.5), row('Q4', 0.5, 0.01, false, 0), row('Q5', 0.95, 0.02, true, 0)];
+  const w = pickWinner(rows);
+  near(w.qStar, 0.9);
+  near(w.eStar, 0);
+  assert.deepEqual(w.shortlist, ['Q2']);
+  assert.deepEqual(w.excluded, ['Q5']);
+  assert.equal(w.candidate, 'Q2');
+  // The best-quality row goes to the blind check, though it is off the shortlist.
+  assert.equal(w.best, 'Q1');
+  assert.equal(w.next, null);
+  assert.equal(w.blind_needed, true);
+});
+
+test('pickWinner: a set blind opponent replaces best, and the highest-Q row stays as best_quality', () => {
+  const rows = [row('R1', 0.8, 1.0), row('R2', 0.7, 0.2), row('R3', 0.6, 0.05), row('R5', 0.75, 0.3)];
+  const plain = pickWinner(rows);
+  assert.equal(plain.best, 'R1');
+  assert.equal(plain.best_quality, 'R1');
+  const w = pickWinner(rows, { opponent: 'R5' });
+  assert.equal(w.candidate, 'R2');
+  assert.equal(w.best, 'R5');
+  assert.equal(w.best_quality, 'R1');
+  // Next skips the candidate and the opponent.
+  assert.equal(w.next, 'R1');
+  assert.equal(w.blind_needed, true);
+  assert.throws(() => pickWinner(rows, { opponent: 'R9' }), /R9/);
+});
+
+// per: { target: picks }.
+const rowP = (id, q, usd, per) => ({ ...row(id, q, usd), per: Object.entries(per).map(([target, picks]) => ({ target, picks })) });
+
+test('pickWinner: a row with the same picks as the candidate or the best row on every target is not chosen as next', () => {
+  const rows = [
+    rowP('C1', 0.8, 0.1, { T1: ['a', 'b'], T2: ['c'] }),
+    rowP('D1', 0.8, 0.2, { T1: ['b', 'a'], T2: ['c'] }),
+    rowP('B2', 0.85, 0.3, { T1: ['a'], T2: ['d'] }),
+    rowP('N1', 0.8, 0.5, { T1: ['a', 'b'], T2: ['e'] }),
+    rowP('B1', 0.9, 1.0, { T1: ['a'], T2: ['d'] }),
+  ];
+  const w = pickWinner(rows);
+  assert.equal(w.candidate, 'C1');
+  assert.equal(w.best, 'B1');
+  assert.equal(w.next, 'N1');
+  assert.equal(w.blind_needed, true);
+});
+
+test('pickWinner: blind_needed is false when the candidate is the best row, has its picks, or is null', () => {
+  const same = pickWinner([row('R1', 0.9, 0.1), row('R2', 0.8, 0.2)]);
+  assert.equal(same.candidate, 'R1');
+  assert.equal(same.best, 'R1');
+  assert.equal(same.blind_needed, false);
+  const twin = pickWinner([rowP('S1', 0.8, 0.1, { T1: ['a'] }), rowP('S2', 0.8, 0.5, { T1: ['a'] })]);
+  assert.equal(twin.candidate, 'S1');
+  assert.equal(twin.best, 'S1');
+  assert.equal(twin.blind_needed, false);
+  const dup = pickWinner([rowP('P1', 0.8, 0.1, { T1: ['a'] }), rowP('P2', 0.85, 0.5, { T1: ['a'] })]);
+  assert.equal(dup.candidate, 'P1');
+  assert.equal(dup.best, 'P2');
+  assert.equal(dup.blind_needed, false);
+  const empty = pickWinner([row('Q1', 0.9, 1.0, false, 3), row('Q4', 0.5, 0.01, false, 0)]);
+  assert.equal(empty.candidate, null);
+  assert.equal(empty.next, null);
+  assert.equal(empty.blind_needed, false);
 });
 ```
 
@@ -2588,6 +2681,15 @@ import { KEEP, topOf } from './replay.mjs';
 Append to `EVAL/lib/score.mjs`:
 
 ```js
+// Owner ruling 2026-10-08: when the owner picked fewer than 6 and marked the target done, the picks are
+// every photo the owner would show. Extras = kept photos not in the picks. A target with 0 picks counts.
+// Null for a target with 6 picks, or with fewer than 6 and not done.
+export function extras(picks, best, done) {
+  if (best.length >= KEEP || done !== true) return null;
+  const b = new Set(best);
+  return picks.filter(key => !b.has(key)).length;
+}
+
 export const P3_LIMIT = 1;
 
 const mean = xs => (xs.length ? xs.reduce((s, x) => s + x, 0) / xs.length : null);
@@ -2614,6 +2716,7 @@ export function summarizeRow(id, per, unreliable = false) {
   const scored = per.filter(p => p.q != null);
   const q = scored.map(p => p.q);
   const m = mean(q);
+  const xs = kind => per.filter(p => p.x != null && (!kind || p.kind === kind)).map(p => p.x);
   return {
     id, unreliable,
     q_mean: m,
@@ -2622,6 +2725,10 @@ export function summarizeRow(id, per, unreliable = false) {
     q_min: q.length ? Math.min(...q) : null,
     q_max: q.length ? Math.max(...q) : null,
     q_sd: q.length ? Math.sqrt(mean(q.map(x => (x - m) ** 2))) : null,
+    // Extras: mean over the targets with an extras score (null x is skipped).
+    x_mean: mean(xs()),
+    x_rich: mean(xs('rich')),
+    x_thin: mean(xs('thin')),
     short: per.filter(p => p.picks.length < KEEP).length,
     usd_mean: mean(per.map(p => p.cost.usd)),
     tokens_mean: mean(per.map(p => p.cost.tokens)),
@@ -2633,25 +2740,49 @@ export function summarizeRow(id, per, unreliable = false) {
   };
 }
 
-export function pickWinner(rows) {
+// Q* = best mean quality; E* = lowest mean extras, both over the reliable rows.
+// Shortlist: quality >= Q* - 1/6 (one photo) and extras <= E* + 1 (one photo per target).
+// When no row has an extras score, E* is null and the extras test is skipped.
+// best = the blind-check opponent: the cheapest row with quality Q*, or opts.opponent when it is set
+// (owner ruling 2026-10-09, config.json blind_opponent). best_quality is always the cheapest row with Q*.
+export function pickWinner(rows, opts = {}) {
   const ok = rows.filter(r => !r.unreliable && r.q_mean != null);
   const byCost = (a, b) => a.usd_mean - b.usd_mean || a.tokens_mean - b.tokens_mean || a.id.localeCompare(b.id);
   const qStar = Math.max(...ok.map(r => r.q_mean));
-  const short = ok.filter(r => r.q_mean >= qStar - 1 / 6 - 1e-9).sort(byCost);
-  const best = ok.filter(r => Math.abs(r.q_mean - qStar) < 1e-9).sort(byCost)[0];
-  const candidate = short[0];
-  const next = short.find(r => r.id !== candidate.id && r.id !== best.id) ?? null;
+  const withX = ok.filter(r => r.x_mean != null);
+  const eStar = withX.length ? Math.min(...withX.map(r => r.x_mean)) : null;
+  const xOk = r => eStar == null || (r.x_mean != null && r.x_mean <= eStar + 1 + 1e-9);
+  const short = ok.filter(r => r.q_mean >= qStar - 1 / 6 - 1e-9 && xOk(r)).sort(byCost);
+  const bestQ = ok.filter(r => Math.abs(r.q_mean - qStar) < 1e-9).sort(byCost)[0];
+  const best = opts.opponent ? rows.find(r => r.id === opts.opponent) : bestQ;
+  if (!best) throw new Error(`blind opponent ${opts.opponent} is not a row`);
+  // The two tests can leave the shortlist empty; then there is no candidate.
+  const candidate = short[0] ?? null;
+  // Next: skip rows that show the same sets as the candidate or the best row on every target
+  // (for example C, when it sees the whole pool, keeps the same photos as B(all)).
+  const isDup = (r, s) => r.id === s.id || samePicks(r, s);
+  const next = short.find(r => !(candidate && isDup(r, candidate)) && !isDup(r, best)) ?? null;
+  // No blind check when there is no candidate, or when the candidate shows the same sets as the best row.
+  const blind_needed = candidate != null && !isDup(candidate, best);
   return {
-    qStar, shortlist: short.map(r => r.id), excluded: rows.filter(r => r.unreliable).map(r => r.id),
-    candidate: candidate.id, best: best.id, next: next ? next.id : null,
+    qStar, eStar, shortlist: short.map(r => r.id), excluded: rows.filter(r => r.unreliable).map(r => r.id),
+    candidate: candidate ? candidate.id : null, best: best.id, best_quality: bestQ.id, next: next ? next.id : null, blind_needed,
   };
+}
+
+// True when two rows keep the same set of photos on every target. False when a row has no per-target picks.
+function samePicks(a, b) {
+  if (!a.per || !b.per || a.per.length !== b.per.length) return false;
+  const of = r => new Map(r.per.map(p => [p.target, [...p.picks].sort().join('\n')]));
+  const pa = of(a), pb = of(b);
+  return [...pa].every(([t, k]) => pb.get(t) === k);
 }
 ```
 
 - [ ] **Step 5: Run all tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/*.test.mjs"`
-Expected: PASS, 68 tests.
+Expected: PASS, 75 tests.
 
 - [ ] **Step 6: Write `analyze.mjs`**
 
@@ -2664,10 +2795,11 @@ import fs from 'node:fs';
 import { EVAL, readJson, writeJson } from './lib/data.mjs';
 import { buildViews } from './lib/views.mjs';
 import { replayA, replayB, replayC, replayFilterB, replayFilterC } from './lib/replay.mjs';
-import { quality, costLine, p3Diff, summarizeRow, pickWinner, P3_LIMIT } from './lib/score.mjs';
+import { quality, extras, costLine, p3Diff, summarizeRow, pickWinner, P3_LIMIT } from './lib/score.mjs';
 import { checkPicks } from './lib/picks.mjs';
 
 const MODELS = ['opus', 'sonnet', 'haiku'], FILTERS = ['haiku', 'sonnet'], KS = [12, 20, 30, 'all'];
+const config = readJson(path.join(EVAL, 'config.json'));
 const pools = readJson(path.join(EVAL, 'pools.json'));
 const picks = readJson(path.join(EVAL, 'picks.json'));
 const bad = checkPicks(pools, picks);
@@ -2700,33 +2832,55 @@ for (const f of FILTERS) for (const m of MODELS) {
 
 const rows = methods.map(meth => summarizeRow(meth.id, pools.targets.map(t => {
   const r = meth.run(t.photos.map(p => p.key), t.target);
-  return { target: t.target, kind: t.kind, picks: r.picks, seen: r.seen, cost: r.cost, q: quality(r.picks, picks.targets[t.target].picks), hard_above: r.hardAbove };
+  const own = picks.targets[t.target];
+  return { target: t.target, kind: t.kind, picks: r.picks, seen: r.seen, cost: r.cost, q: quality(r.picks, own.picks), x: extras(r.picks, own.picks, own.done), hard_above: r.hardAbove };
 }), meth.unreliable));
-const win = pickWinner(rows);
+// Owner ruling 2026-10-09: config.json blind_opponent sets the blind-check opponent (shortlist.json best).
+const win = pickWinner(rows, { opponent: config.blind_opponent });
 
-writeJson(path.join(EVAL, 'out/table.json'), { lines, p3, unread: v.unread, problems: v.problems, rows });
+// Report data only (the winner rule does not use it).
+// B(all): the real P2 USD per target, next to the cost-line USD. The line is fitted from 3 P3 targets.
+const p2Real = m => pools.targets.reduce((s, t) => s + v.p2Cost[m][t.target].usd, 0) / pools.targets.length;
+const costLineVsP2 = {};
+for (const r of rows) {
+  const m = r.id.split('|')[1];
+  if (r.id === `Ball|${m}`) {
+    r.usd_p2_real = p2Real(m);
+    costLineVsP2[m] = { line_usd: r.usd_mean, p2_usd: r.usd_p2_real, over: r.usd_mean / r.usd_p2_real - 1 };
+  }
+  // A real C run calls the ranker once per batch of 12, so the cost line at the photos seen is a lower bound.
+  if (/(^|>)C\|/.test(r.id)) r.cost_lower_bound = true;
+}
+
+writeJson(path.join(EVAL, 'out/table.json'), { lines, p3, cost_line_vs_p2: costLineVsP2, unread: v.unread, problems: v.problems, rows });
 writeJson(path.join(EVAL, 'out/shortlist.json'), win);
 
 const f = (x, d = 2) => (x == null ? '-' : x.toFixed(d));
-const tags = r => [r.unreliable ? 'P3: unreliable' : '', win.shortlist.includes(r.id) ? 'shortlist' : '', r.id === win.candidate ? 'candidate' : '', r.id === win.best ? 'best quality' : ''].filter(Boolean).join(', ');
+const pct = x => `${Math.round(x * 100)}%`;
+const tags = r => [r.unreliable ? 'P3: unreliable' : '', win.shortlist.includes(r.id) ? 'shortlist' : '', r.id === win.candidate ? 'candidate' : '', r.id === win.best_quality ? 'best quality' : '', r.id === win.best ? 'blind opponent' : '', r.cost_lower_bound ? 'cost is a lower bound' : ''].filter(Boolean).join(', ');
 const md = [
-  'Row IDs: `A` stop at 6 good; `B<K>` rank the first K; `C` adaptive batches of 12; `F<filter>>` the filter model drops its P1 rejects first. After `|`: the judge or ranker model. Every method keeps `good` photos only. "Hard above" is the number of `hard` photos placed above the sixth kept photo (or the last kept photo when fewer than 6), summed over the 10 targets. It is `n/a` for method A, which has no ranking.',
+  'Row IDs: `A` stop at 6 good; `B<K>` rank the first K; `C` adaptive batches of 12; `F<filter>>` the filter model drops its P1 rejects first. After `|`: the judge or ranker model. Every method keeps `good` photos only. "Q" is the share of the owner\'s picks kept, over the targets with at least 1 pick. "E" (extras) is the number of kept photos not in the picks, over the targets where the owner picked fewer than 6 and marked done (a target with 0 picks counts). "Hard above" is the number of `hard` photos placed above the sixth kept photo (or the last kept photo when fewer than 6), summed over the 10 targets. It is `n/a` for method A, which has no ranking.',
   '',
-  '| method | Q | Q rich | Q thin | under 6 | Q min-max (sd) | hard above | photos seen | tokens per target | USD per target | note |',
-  '|---|---|---|---|---|---|---|---|---|---|---|',
+  `Q* ${f(win.qStar)}, E* ${f(win.eStar)}. Shortlist: Q >= Q* - 1/6 and E <= E* + 1, P3-reliable rows only. Blind check needed: ${win.blind_needed ? 'yes' : 'no'}. Blind opponent: ${win.best}${config.blind_opponent ? ' (set in config.json)' : ''}. Best quality: ${win.best_quality}.`,
+  '',
+  `Cost line against the real P2 cost (B(all), USD per target): ${Object.entries(costLineVsP2).map(([m, c]) => `${m} ${f(c.line_usd, 4)} against ${f(c.p2_usd, 4)} (${pct(c.over)} above)`).join('; ')}. The line is fitted from the 3 P3 targets, so it runs above the real P2 cost. C's cost is a lower bound: a real C run calls the ranker once per batch of 12, and the line prices one call at the photos seen.`,
+  '',
+  '| method | Q | E | Q rich | Q thin | E rich | E thin | under 6 | Q min-max (sd) | hard above | photos seen | tokens per target | USD per target | real P2 USD per target | note |',
+  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
   ...[...rows].sort((a, b) => (b.q_mean ?? -1) - (a.q_mean ?? -1) || a.usd_mean - b.usd_mean)
-    .map(r => `| ${r.id} | ${f(r.q_mean)} | ${f(r.q_rich)} | ${f(r.q_thin)} | ${r.short} | ${f(r.q_min)}-${f(r.q_max)} (${f(r.q_sd)}) | ${r.hard_above_total ?? 'n/a'} | ${f(r.seen_mean, 1)} | ${Math.round(r.tokens_mean)} | ${f(r.usd_mean, 4)} | ${tags(r)} |`),
+    .map(r => `| ${r.id} | ${f(r.q_mean)} | ${f(r.x_mean)} | ${f(r.q_rich)} | ${f(r.q_thin)} | ${f(r.x_rich)} | ${f(r.x_thin)} | ${r.short} | ${f(r.q_min)}-${f(r.q_max)} (${f(r.q_sd)}) | ${r.hard_above_total ?? 'n/a'} | ${f(r.seen_mean, 1)} | ${Math.round(r.tokens_mean)} | ${f(r.usd_mean, 4)} | ${f(r.usd_p2_real, 4)} | ${tags(r)} |`),
   '',
 ];
 fs.writeFileSync(path.join(EVAL, 'out/table.md'), md.join('\n'));
-console.log(`rows ${rows.length} | Q* ${f(win.qStar)} | shortlist ${win.shortlist.length} | candidate ${win.candidate} | best ${win.best} | next ${win.next}`);
+console.log(`rows ${rows.length} | Q* ${f(win.qStar)} | E* ${f(win.eStar)} | shortlist ${win.shortlist.length} | candidate ${win.candidate} | best_quality ${win.best_quality} | opponent ${win.best} | next ${win.next} | blind_needed ${win.blind_needed}`);
+console.log('cost line above real P2 (B(all)):', Object.entries(costLineVsP2).map(([m, c]) => `${m} ${pct(c.over)}`).join(', '));
 console.log('P3 mean difference:', MODELS.map(m => `${m} ${f(p3[m].mean)}${p3[m].unreliable ? ' (unreliable)' : ''}`).join(', '));
 ```
 
 - [ ] **Step 7: Run the replay**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node analyze.mjs`
-Expected: `rows 48 | Q* <value> | shortlist <n> | candidate <id> | best <id> | next <id or null>`, and one P3 line.
+Expected: `rows 48 | Q* <value> | E* <value> | shortlist <n> | candidate <id> | best_quality <id> | opponent <id> | next <id or null> | blind_needed <true or false>`, one line with the cost line against the real P2 cost, and one P3 line.
 
 Read `EVAL/out/table.md`. Check: 48 rows; every `Q` is between 0 and 1; every `A` row has a `photos seen` that is a multiple of 10 or a pool size; every `B12` row has `photos seen` 12; every USD value is above 0 (a negative `a` can make a small-K value low; when a value is negative, write it in `NOTES.md`).
 
@@ -2740,11 +2894,11 @@ Add to `EVAL/NOTES.md`: the date, `Task 5 done`, the console output of Step 7, a
 
 Blocked by: Task 5.
 
-The owner compares the candidate's 6 photos with the best-quality method's 6 photos for each target, without names, in a random order per target. The candidate wins unless the owner prefers the other set on more targets than the candidate's set. "Same" does not count. When the candidate loses, the next-cheapest shortlist row gets one more round against the best-quality method. When that row also loses, or there is no such row, the best-quality method wins.
+The owner compares the candidate's 6 photos with the blind opponent's 6 photos (`shortlist.json` `best`: the best-quality method, or `config.json` `blind_opponent` when it is set) for each target, without names, in a random order per target. The candidate wins unless the owner prefers the other set on more targets than the candidate's set. "Same" does not count. When the candidate loses, the next-cheapest shortlist row gets one more round against the best-quality method. When that row also loses, or there is no such row, the best-quality method wins.
 
 Rules pinned in this task:
 
-- When the candidate is the best-quality method, there is no blind check, and it wins.
+- When `shortlist.json` `blind_needed` is false, there is no blind check. The candidate wins; when there is no candidate (an empty shortlist), the opponent wins.
 - A target where the two sets hold the same photos is "same" without a question to the owner.
 - Left and right come from `mulberry32(seed + round)`, one draw per shown target, in pool order.
 
@@ -2809,7 +2963,7 @@ export function blindOutcome(answers, key) {
 - [ ] **Step 4: Run all tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/*.test.mjs"`
-Expected: PASS, 70 tests.
+Expected: PASS, 77 tests.
 
 - [ ] **Step 5: Write `blind.mjs` and `blind.html`**
 
@@ -2833,13 +2987,14 @@ const table = readJson(path.join(EVAL, 'out/table.json'));
 const sl = readJson(path.join(EVAL, 'out/shortlist.json'));
 const picksOf = (id, t) => table.rows.find(r => r.id === id).per.find(p => p.target === t).picks;
 const decide = (winner, r) => {
-  writeJson(path.join(EVAL, 'out/winner.json'), { winner, decided_in_round: r, qStar: sl.qStar, candidate: sl.candidate, best: sl.best, next: sl.next });
+  writeJson(path.join(EVAL, 'out/winner.json'), { winner, decided_in_round: r, qStar: sl.qStar, candidate: sl.candidate, best: sl.best, best_quality: sl.best_quality, next: sl.next, blind_needed: sl.blind_needed });
   console.log(`winner: ${winner} (round ${r})`);
 };
 
 if (!scoring) {
+  // No blind check: the candidate keeps the opponent's sets, or there is no candidate.
+  if (round === 1 && !sl.blind_needed) { decide(sl.candidate ?? sl.best, 0); process.exit(0); }
   const challenger = round === 1 ? sl.candidate : sl.next;
-  if (round === 1 && challenger === sl.best) { decide(sl.best, 0); process.exit(0); }
   if (!challenger) throw new Error(`round ${round}: no row to check`);
   const rng = mulberry32(config.seed + round);
   const sides = {}, auto_same = [], targets = [];
@@ -2947,7 +3102,7 @@ The page shows no method name, and `blind-public.json` holds no row ID. The serv
 - [ ] **Step 6: Build round 1**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node blind.mjs --round 1`
-Expected: either `winner: <id> (round 0)` (the candidate is the best-quality method; go to Step 10), or `round 1: <n> targets to show, <m> same without a question`.
+Expected: either `winner: <id> (round 0)` (`blind_needed` is false; go to Step 10), or `round 1: <n> targets to show, <m> same without a question`.
 
 Read `EVAL/blind-public.json` and check that it holds no row ID (no `|` character and no `opus`, `sonnet`, or `haiku`).
 
@@ -3036,7 +3191,7 @@ export function describe(id) {
 - [ ] **Step 4: Run all tests and see them pass**
 
 Run: `cd /c/Users/jdennen/Dendro/.superpowers/2026-10-07-selection-eval && node --test "test/*.test.mjs"`
-Expected: PASS, 71 tests.
+Expected: PASS, 78 tests.
 
 - [ ] **Step 5: Write `report.mjs`**
 
@@ -3055,11 +3210,12 @@ const R = J('runs/selection-eval-full/results.json'), T = J('runs/selection-eval
 const blind = [1, 2].map(r => path.join(EVAL, `out/blind-result-r${r}.json`)).filter(f => fs.existsSync(f)).map(f => readJson(f));
 const f = (x, d = 2) => (x == null ? '-' : Number(x).toFixed(d));
 const rowOf = id => table.rows.find(r => r.id === id);
-const w = rowOf(winner.winner), best = rowOf(sl.best), today = rowOf('A|opus');
+const w = rowOf(winner.winner), best = rowOf(sl.best_quality), opponent = rowOf(sl.best), today = rowOf('A|opus');
+const withPicks = pools.targets.filter(t => picks.targets[t.target].picks.length).length;
 const costText = r => `${f(r.usd_mean, 4)} USD and ${Math.round(r.tokens_mean)} tokens per target`;
 const blindText = blind.length
   ? blind.map(b => `round ${b.round}: ${b.challenger} preferred on ${b.cand} targets, ${b.opponent} preferred on ${b.other}, same on ${b.same}; ${b.candidateWins ? `${b.challenger} wins` : `${b.challenger} loses`}`).join('. ')
-  : 'not needed, because the cheapest shortlist method is also the best-quality method';
+  : 'not needed, because the candidate keeps the same photos as the blind opponent, or there is no candidate';
 const today_date = new Date().toISOString().slice(0, 10);
 const effortText = ['opus', 'sonnet', 'haiku'].map(m => `${m} ${[...new Set(R.jobs.filter(j => j.model === m).map(j => j.effort))].join('+')}`).join(', ');
 
@@ -3093,7 +3249,8 @@ const out = [
   '## Result', '',
   `- Winner: \`${w.id}\`: ${describe(w.id)}. Quality ${f(w.q_mean)} (rich ${f(w.q_rich)}, thin ${f(w.q_thin)}). Cost ${costText(w)}. Hard photos above the last kept photo: ${w.hard_above_total ?? 'n/a (no ranking)'} over ${pools.targets.length} targets.`,
   `- Best quality (Q*): \`${best.id}\` at ${f(sl.qStar)}. Cost ${costText(best)}.`,
-  `- Shortlist (within 1/6 of Q*), cheapest first: ${sl.shortlist.map(id => `\`${id}\``).join(', ')}.`,
+  `- Blind opponent: \`${opponent.id}\`, quality ${f(opponent.q_mean)}, extras ${f(opponent.x_mean)}. Cost ${costText(opponent)}.`,
+  `- Shortlist (within 1/6 of Q* and within 1 extra photo per target of E*), cheapest first: ${sl.shortlist.map(id => `\`${id}\``).join(', ')}.`,
   `- Blind check: ${blindText}.`,
   `- Today's method for comparison, \`A|opus\`: quality ${f(today.q_mean)}, cost ${costText(today)}.`, '',
   '## Targets', '',
@@ -3134,7 +3291,7 @@ const draft = [
   `Content runs pick the leaf photos of a target this way: ${describe(w.id)}.`, '',
   '## Evidence', '',
   '- Report: `.superpowers/2026-10-07-selection-eval/report.md` (git-ignored). Spec: `docs/superpowers/specs/2026-10-07-selection-method-eval-design.md`.',
-  `- Quality: the method kept ${f(w.q_mean)} of the owner's best 6 photos, mean over ${pools.targets.length} targets. The best method (\`${best.id}\`) kept ${f(sl.qStar)}.`,
+  `- Quality: the method kept ${f(w.q_mean)} of the owner's best 6 photos, mean over the ${withPicks} targets with picks. The best method (\`${best.id}\`) kept ${f(sl.qStar)}.`,
   `- Cost: ${costText(w)}. Today's method (stop at 6 good, Opus 5.5): ${costText(today)}.`,
   `- Blind check: ${blindText}.`,
   '- Limits: see the Limits section of the report.', '',
@@ -3202,7 +3359,8 @@ Checked against the spec on 2026-10-08.
 | Filter first with Haiku or Sonnet, any ranker | `replayFilterB`, `replayFilterC` with tests (Task 5), `analyze.mjs` |
 | Cost line from P3 and P2 | `costLine` with test (Task 5) |
 | P3 reliability mark | `p3Diff`, `P3_LIMIT`, `analyze.mjs` (Task 5) |
-| Quality score, fewer than 6 picks | `quality` with test (Task 1) |
+| Quality score, fewer than 6 picks | `quality` with test (Task 1); a target with 0 picks has no quality score |
+| Extras score (owner ruling 2026-10-08) | `extras` with 3 tests, `summarizeRow` `x_mean`, `x_rich`, `x_thin` (Task 5), `out/table.md` |
 | Also reported: rich and thin, under 6, spread | `summarizeRow` (Task 5), `out/table.md` |
 | Winner steps 1-5 | `pickWinner` (Task 5), `blind.mjs` and `blindOutcome` (Task 6) |
 | Eval in the git-ignored folder, no pipeline code | Global Constraints |
@@ -3218,7 +3376,7 @@ Checked against the spec on 2026-10-08.
 3. Filter-first: B and C run on the survivors in fetch order. The filter pays for whole batches of 10.
 4. The P3 mark covers B(12), B(20), and C, also as filter-first rankers. Marked rows stay out of Q* and the shortlist.
 5. P1 `escalate` (sepia) counts as not kept, like `reject`.
-6. When the candidate is the best-quality method, there is no blind check. A target with the same 6 photos in both sets is "same" without a question. After a lost round 2, the best-quality method wins.
+6. When `blind_needed` is false (the candidate keeps the opponent's sets, or there is no candidate), there is no blind check. A target with the same 6 photos in both sets is "same" without a question. After a lost round 2, the best-quality method wins.
 7. The quality mean leaves out a target where the owner picked no photo.
 8. A pool drop has a fourth reason, `no_local`, as a guard; no row has it today.
 9. A ranked photo with a missing or wrong tag counts as `hard`, and `buildViews` lists it as a problem. A sepia or tinted photo goes in a ranking's `rejects`.
@@ -3231,6 +3389,8 @@ Checked against the spec on 2026-10-08.
 1. A fetched row with `identity_match: false` leaves the pool as `wrong_species`, unless it names a variety or subspecies of the target's PLANTS name, or a name in `config.json` `same_species` (`QUMA13`: `Quercus margaretiae`). The PLANTS name is the display name. `PLHI` (11 photos) drops out of the eligible targets; the draw is in the facts list.
 2. Rows that the P3 check marks unreliable stay out of Q* and the shortlist. The report shows them in the table, marked "P3: unreliable".
 3. Method C stops only when it holds 6 `good` photos and a new batch does not change the top 6, or when the pool runs out.
+4. Extras: on a target where the owner picked fewer than 6 and marked it done, the picks are every photo the owner would show, and each other kept photo is an extra. E* is the lowest mean extras. The shortlist needs quality within 1/6 of Q* and extras within 1 of E*. A target with 0 picks has no quality score, but it has an extras score.
+5. (2026-10-09) The blind opponent for this run is `Fhaiku>Ball|opus` (`config.json` `blind_opponent`). `shortlist.json` `best` is the opponent, and `best_quality` is the highest-Q row. `next` skips a row with the same sets as the candidate or the opponent. Q* and E* use only P3-reliable rows.
 
 **Facts that differ from the spec**
 
@@ -3240,7 +3400,7 @@ Checked against the spec on 2026-10-08.
 
 **Placeholder scan.** No step says "TBD", "add error handling", or "similar to". Every code step shows the code. Values in angle brackets (`<runId>`, `<record path>`, `<date>`) are values that exist only at run time.
 
-**Name check.** `buildViews`, `replayA/B/C`, `replayFilterB/C`, `topOf`, `lineAt`, `quality`, `costLine`, `p3Diff`, `summarizeRow`, `pickWinner`, `blindOutcome`, `checkPicks`, `buildJobs`, `renderScript`, `messagesFrom`, `sumMessages`, `describe` keep the same names and arguments in every task that uses them. `splitPool`, `isInfraOf`, `pickOrder`, `cutOf`, and `hardAbove` also keep their names. Test totals: 53 (Task 1), 56 (Task 2), 68 (Task 5), 70 (Task 6), 71 (Task 7).
+**Name check.** `buildViews`, `replayA/B/C`, `replayFilterB/C`, `topOf`, `lineAt`, `quality`, `extras`, `costLine`, `p3Diff`, `summarizeRow`, `pickWinner`, `blindOutcome`, `checkPicks`, `buildJobs`, `renderScript`, `messagesFrom`, `sumMessages`, `describe` keep the same names and arguments in every task that uses them. `splitPool`, `isInfraOf`, `pickOrder`, `cutOf`, and `hardAbove` also keep their names. Test totals: 53 (Task 1), 56 (Task 2), 75 (Task 5), 77 (Task 6), 78 (Task 7).
 
 Updated 2026-10-08 for the spec change of commit f02bc8f (duplicate rows dropped from the pools; a `hard` tag on ranked photos), the review fixes (owner yes before the tracer, explicit effort, seeded pick order, short-name P0 check, unread check, NOTES hold), and the three owner rulings above.
 
