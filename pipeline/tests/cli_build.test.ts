@@ -14,7 +14,14 @@ import {
 } from '../lib/commands.ts';
 import { SOURCE_NAMES, makeCandidate, type Candidate } from '../lib/candidates.ts';
 import type { BytesResult, Http, HttpFailure, TextResult } from '../lib/http.ts';
-import { JPEG_QUALITY, MAX_SIDE, objectKey, reviewKey, type Resize } from '../lib/images.ts';
+import {
+  JPEG_QUALITY,
+  MAX_SIDE,
+  objectKey,
+  reviewKey,
+  sha256Hex,
+  type Resize,
+} from '../lib/images.ts';
 import { taxaUrl } from '../lib/inat.ts';
 import { readJsonl, writeJsonl } from '../lib/jsonl.ts';
 import { HELD_BACK } from '../lib/hold_back.ts';
@@ -1498,6 +1505,37 @@ test('a new species whose every photo is tagged hard is held back and its rows a
   assert.equal(status?.status, 'no_photos');
   assert.equal(status?.reason, HELD_BACK);
   assert.ok(out.includes(`QUGA: ${HELD_BACK}`), out.join(' | '));
+});
+
+test('a held-back species does not upload a file that a retired row on another target names', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  // seed writes LEAF as these four bytes and its index 0. fakeResize adds 0x52.
+  const leafHash = sha256Hex(new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 0, 0x52]));
+  const qual = record({
+    scientific: 'Quercus alba',
+    common: ['white oak'],
+    section: 'Quercus',
+    concepts: { leaf: 'simple_lobed' },
+  });
+  const qualRow = row({ hash: HASH_B, target: 'QUAL', channel: 'leaf' });
+  const takedown = row({
+    hash: leafHash,
+    target: 'QUAL',
+    channel: 'leaf',
+    retired: true,
+    retired_reason: 'takedown request',
+    retired_at: '2026-09-01',
+  });
+  seed(root, {
+    manifest: [qualRow, takedown],
+    verdicts: [verdict(LEAF.id, 'approve', { channel: 'leaf', tags: ['hard'] })],
+  });
+  fakeGitShow(exec, 'main', { species: { QUAL: qual }, manifest: [qualRow, takedown] });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.deepEqual(manifestOf(root), [qualRow, takedown]);
+  assert.equal(storage.puts.some((one) => one.key === objectKey(leafHash)), false);
 });
 
 // A retired row stops a later build from uploading a taken-down file again, so the build

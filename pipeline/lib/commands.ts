@@ -1618,10 +1618,11 @@ async function buildContent(
   }
 
   const kept = manifest.filter((one) => !dropped.has(one));
-  // A file that only a dropped row names does not go to the bucket.
+  // A file that no kept live row names does not go to the bucket. A retired row does not
+  // count: its file was taken down. A hard row counts, because its file stays in the bucket.
   const cancelled = new Set<string>();
   for (const one of dropped) {
-    if (kept.some((other) => other.hash === one.hash)) continue;
+    if (kept.some((other) => other.hash === one.hash && other.retired !== true)) continue;
     deferred.cancel(objectKey(one.hash));
     cancelled.add(objectKey(one.hash));
   }
