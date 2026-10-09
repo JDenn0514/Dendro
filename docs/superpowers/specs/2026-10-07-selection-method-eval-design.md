@@ -111,7 +111,7 @@ All methods keep `good` photos only, so they follow one rule. The `hard` tag of 
 1. Find the best average quality, Q*.
 2. Find the lowest average extras, E*. Shortlist every method within 1 photo of Q* and within 1 photo per target of E*.
 3. The cheapest method on the shortlist, by price-weighted cost, is the candidate.
-4. The blind check compares the candidate with the best-quality method on all 10 targets. The candidate wins unless the owner prefers the other set on more targets than the candidate's set. Ties do not count.
+4. The blind check compares the candidate with the best-quality method on all 10 targets. Owner ruling 2026-10-09: for this run the opponent is Fhaiku>Ball|opus (a Haiku filter, then Opus ranks the whole pool; Q 0.70, E 0.00), because it ties for the best quality and has the lowest extras. The candidate wins unless the owner prefers the other set on more targets than the candidate's set. Ties do not count.
 5. When the candidate loses, the next-cheapest method on the shortlist gets one more blind check.
 
 10 targets give a rough answer. A gap of less than 1 photo in 6 between two methods is a tie, not a win.
