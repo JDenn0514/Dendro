@@ -3,7 +3,7 @@
 import { cardId, channelLabel, unitFor, conceptFor } from '../logic/content.js';
 import { dueCardIds, newCardCapDone, recommendUnit } from '../logic/session.js';
 import { channelRung, leadingConcept } from '../logic/progress.js';
-import { channelLessons, unitOrdinal } from '../logic/lessons.js';
+import { channelLessons, lessonsDoorLine, unitOrdinal } from '../logic/lessons.js';
 import { numberWord, capitalize } from '../logic/words.js';
 import { el, link } from '../ui/dom.js';
 import { footNav, tick } from '../ui/chrome.js';
@@ -118,11 +118,7 @@ function lessonsDoor(content, states) {
   }
   door.append(thumb);
   door.append(el('span', 'dn', 'Lessons'));
-  const total = summaries.reduce((count, summary) => count + summary.total_count, 0);
-  const open = summaries.reduce((count, summary) => count + summary.open_count, 0);
-  door.append(el('span', 'dd',
-    `${capitalize(numberWord(total))} units, three deep, `
-    + `with ${numberWord(open)} open now.`));
+  door.append(el('span', 'dd', lessonsDoorLine(summaries)));
   return door;
 }
 
