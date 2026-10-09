@@ -64,6 +64,10 @@ The main path teaches every part of a group or a species together: leaf, bark, a
 - Stage works the same way as season:
   - A young leaf that has not reached its full shape is step 3, because its features are not formed yet.
   - An unripe fruit with its full shape, such as a green acorn, gets its step from clarity alone. It can be step 1. It is not the usual look, so it does not appear on the species page or in the first cards.
+- The usual look differs by part:
+  - Leaves: the look for most of the year. Autumn colour is not the usual look.
+  - Fruit: the ripe fruit, as guides describe it. Green acorns stay on the tree for months, but guides describe the ripe acorn, and ripe fruit lasts on the ground through autumn and winter.
+  - Bark: the same all year.
 
 ### Practice mode
 
