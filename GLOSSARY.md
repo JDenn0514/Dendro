@@ -16,17 +16,34 @@ _Avoid_: Species card, channel card
 **Tree card**:
 A review card for one species in one season, with a button for each part. The learner can open any part at no cost.
 
-**Look-alike set**:
-A small set of species that a learner confuses, taken from `content/confusion.json`. New species come into the app one set at a time.
-_Avoid_: Confusion set, cluster
+**Look-alike section**:
+The section of an introduction page about a look-alike that the learner has already met: "You have met X. Here is how they are alike, and how to tell them apart." A look-alike comes from `content/confusion.json`. A look-alike pair is a batch of 2.
+_Avoid_: Look-alike set, confusion set, cluster
 
 **Introduction page**:
-The page that shows one look-alike set side by side, part by part, before the first card on that set. It names the features that tell the species apart and the parts that do not help. It stays open later as a reference.
-_Avoid_: Lesson, intro card
+The information page about one species. The app shows it before the first card on that species, and it stays open later as a reference. Each part on the page says in plain words how reliable it is.
+_Avoid_: Lesson, intro card, comparison page
 
 **Depth**:
 How far one part can identify one species: `species`, `group`, or `none`. It is a content value for each species and part, not a learner level.
 _Avoid_: Level, tier
+
+### Learning path
+
+**Group**:
+A real tree group: a genus or a family, such as the oaks or the maples. The path runs from words, to groups, to species.
+_Avoid_: Bucket, leaf-shape group
+
+**Batch**:
+The new items that the app teaches together: 4 at the start, then 3 to 5, and never more than 5. A look-alike pair is a batch of 2. The next batch opens when each card in the batch is answered right once.
+_Avoid_: Lesson, set
+
+**Practice mode**:
+A mode where the learner practises one part only, such as bark, on trees already met. The main path teaches all parts together.
+_Avoid_: Drill, part focus
+
+**Placement test**:
+A test at the start on words and groups, so a learner can skip what they already know.
 
 ### Photos
 

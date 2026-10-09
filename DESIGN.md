@@ -602,7 +602,9 @@ Decisions from the review of the app spec. Each line changes a rule above or in
 
 This section wins over sections 2, 10, 11, and 12 where they disagree. It also wins over
 section 17's rule "species mastery = weakest channel" and over section 17's format and
-scheduling rules where they disagree. The list below names each rule it replaces.
+scheduling rules where they disagree. The list below names each rule it replaces. The
+round 2 subsection also replaces rules in sections 1 and 6, and section 17's unit and
+placement test rules. It names each one.
 
 The owner confirmed these decisions on 2026-10-09. The short record is
 `docs/decisions/2026-10-09-learning-model.md`.
@@ -811,11 +813,99 @@ decision.
   - The page stays open later as a reference, as the species and group pages.
 - **Open:** the size of a look-alike set and the exact layout of the introduction page.
   Both wait for the prototype notes.
+- Round 2 (next subsection) replaces the look-alike sets and the introduction page for
+  each set.
+
+### Learning path and species pages (2026-10-09, round 2)
+
+The owner decided these later on 2026-10-09, after the notes on the first prototype.
+There are two short records:
+
+- `docs/decisions/2026-10-09-learning-path.md`: the order of the path, groups, common
+  trees first, batches, practice mode, and the placement test.
+- `docs/decisions/2026-10-09-v1-parts-and-teach-first.md`, round 2: the species page,
+  matched photos, leaf size, and the card layout.
+
+The decisions in short:
+
+- **Broad to specific.** The path runs from words (the vocabulary), to groups, to
+  species. Each word comes a little before the first group that needs it. The stages
+  overlap, and older cards come back for review.
+- **Groups are real tree groups,** a genus or a family, such as the oaks and the maples.
+  Leaf shapes, such as "lobed", become words. The owner writes `content/units.json`, and
+  this changes how the owner groups the units.
+- **Common trees first.** The order comes from USDA Forest Service FIA counts for forest
+  trees, and from the McCoy et al. city street-tree dataset for planted trees
+  (<https://zenodo.org/records/6726506>). iNaturalist counts are a fallback for a planted
+  tree in a state with no city data, marked less certain. Canada and Mexico are a gap at
+  first, so "all of North America" means the US.
+- **All parts together.** The main path teaches leaf, bark, and fruit of a group or a
+  species together. The page covers all parts. Part cards on each part follow it, and
+  tree cards unlock after part cards on two parts.
+- **Practice mode.** The learner practises one part only, on trees already met. The app
+  suggests a part that the part cards show is weak.
+- **Tree cards start at the group:** "Which group is this tree in?" They ask for the
+  species when the learner reaches species for that group.
+- **Form rule, for later.** A form card asks for the shape word, or for the group where
+  shape is a real clue. It never asks for the species from one distant photo.
+- **Batches.** New material comes in batches: 4 items at the start, 5 after a good batch,
+  3 after several misses, 2 for a look-alike pair, never more than 5. The next batch opens
+  when each card in the batch is answered right once. The learner can skip ahead.
+- **Wrong options** come only from species, groups, or words the learner has met. Early
+  cards have fewer choices.
+- **Placement test.** It stays, and now tests words and groups.
+- **Species page.** The information page is about one species. Each part says in plain
+  words how reliable it is. When the learner has met a look-alike, the page gets a
+  section: "You have met X. Here is how they are alike, and how to tell them apart." The
+  labels "This tells them apart" and "This only tells you the group" are dropped.
+- **Matched photos.** Photos that the learner compares match in stage, season, and view,
+  in any layout.
+- **Leaf size on leaf part cards.** A leaf photo with a scale object counts as a better
+  photo, and "size can be judged" joins the leaf feature list.
+- **Layout.** Tap a photo to make it larger. On pages, photos stack at full width. Photo
+  credits are smaller.
+- **Two new photo difficulty factors:** an unusual angle, and light or shadow that changes
+  the colour.
+- **Next: a beginner prototype** of the full path on four groups: the maples (red maple,
+  sugar maple), the oaks (white oak, northern red oak), the tuliptree, and the sycamores
+  and planetrees (American sycamore, London planetree, the look-alike pair at the end).
+  An agent proposes photos with a difficulty step. The owner makes the final call.
+
+Rules that round 2 replaces:
+
+- **Section 1, "learning and testing are the same activity",** for new material. The
+  app teaches before it tests (subsection above), now through species pages and batches.
+- **Section 2, the depth levels "type, group, species".** They now run words, groups,
+  species. The words come just in time, not as one first tier.
+- **Section 2, "channel selection and depth progression are independent",** for the main
+  path. The main path teaches all parts together. One-part study moves to practice mode.
+- **Section 6, the channel focus of the session builder,** for the main path.
+- **Section 17, "Unit = one level-1 bucket taken through its depth levels".** Units now
+  follow tree groups.
+- **Section 17, the placement test:** the 20-card session and the deck of one card per
+  level-1 concept. The test now covers words and groups.
+- **Section 18, "the score is only whether the learner named the species",** for tree
+  cards in the group stage.
+- **The look-alike sets and the introduction page for each set** (subsection above).
 
 ### Still open
 
 - Closed on 2026-10-09: the leaf-only rule ends, and bark and fruit part cards come back
   for the first version (see the subsection above).
+- Closed in round 2: the size of a look-alike set. The batch rule replaces the sets.
+- The list of groups, and their order in each area.
+- The FIA and city data work: loading the counts, the crosswalk for ACFL, PLHI (FIA:
+  PLHY3), QUAC2, QUBO2, and QUMA13, and how forest and planted counts combine.
+- Canada and Mexico.
+- How many choices early cards have.
+- How the section 17 unit rules (5 to 25 cards, the gate at 80%, wide first) apply to
+  groups.
+- How batches fit the daily cap on new cards (section 17).
+- What a placement pass sets for a word or a group card.
+- Whether depth `group` uses the same groups as the path. "Red oak group" is a section of
+  the oaks, not a genus.
+- The exact layout of the species page, and which credit form the app uses.
+- How the two new difficulty factors enter the computed difficulty step.
 - How the manifest records "any season".
 - How the difficulty steps 1 to 3 map onto the `difficulty` field, which has only `hard`
   today.

@@ -2,6 +2,8 @@
 
 Date: 2026-10-09. Status: decided by the owner, not yet in the app. It replaces `2026-09-30-leaf-only-v1.md`.
 
+Changed later on 2026-10-09 (round 2), after the notes on the first prototype. Decision 3 changed, and decisions 4 to 6 are new. The order of the path is in `2026-10-09-learning-path.md`.
+
 ## Context
 
 - `2026-09-30-leaf-only-v1.md` limited the first version to leaves. Bark and fruit were thin in every run, and the owner found them hard to judge.
@@ -19,12 +21,23 @@ Date: 2026-10-09. Status: decided by the owner, not yet in the app. It replaces 
 1. **Bark and fruit come back for the first version.** The 548 bark rows and 425 fruit rows in `content/images/manifest.json` are published. The app only hides them.
 2. **Flowers come after the first version.**
 3. **The app teaches before it tests.**
-   - New species come in small look-alike sets, taken from `content/confusion.json`. Example: vine maple, mountain maple, Rocky Mountain maple, and striped maple.
-   - An introduction page for each set comes before the first card on that set.
-   - The page shows the species side by side, part by part. It names the features that tell them apart.
-   - It also names the parts that do not help, from the depth of each part (`species`, `group`, or `none`).
-   - The quiz on the set comes after the page.
-   - The page stays open later as a reference, as the species and group pages.
+   - New material comes in batches of 3 to 5 items, starting at 4. A look-alike pair is a batch of 2. The full batch rule is in `2026-10-09-learning-path.md`.
+   - The information page is about one species. It is not a comparison page for a pair.
+   - On the page, each part says in plain words how reliable it is. Example: "The acorns look like those of other white oaks."
+   - The reliability of each part comes from the sources and from `content/confusion.json`. The owner judges whether the words are clear.
+   - The learner can already know a look-alike of the new species. Then the page of the new species gets one more section: "You have met X. Here is how they are alike, and how to tell them apart."
+   - The labels "This tells them apart" and "This only tells you the group" are dropped. They were not clear.
+   - The cards on a species come after its page.
+   - The page stays open later as a reference.
+4. **Photos that the learner compares match** in stage, season, and view. Example: two ripe acorns, both from the side. A green unripe acorn next to a brown ripe acorn teaches a false difference. The rule holds for any layout, side by side or stacked.
+5. **Leaf part cards show the typical leaf size of the species.** Size is a clue that the learner must remember, as habitat and height are on tree cards.
+   - A leaf photo with a scale object (a hand, a ruler, or a coin) counts as a better photo.
+   - "Size can be judged" joins the leaf feature list.
+   - The owner watches in the notes whether learners answer from the number alone.
+6. **Card and page layout,** from the notes on the first prototype:
+   - The learner taps a photo to make it larger.
+   - On pages, the photos stack at full width.
+   - Photo credits are smaller: a small line under the photo, or a credit list at the bottom of the page. The wildflower.org and VT permissions require a credit, but say nothing about its place.
 
 ## Consequences
 
@@ -32,10 +45,15 @@ Date: 2026-10-09. Status: decided by the owner, not yet in the app. It replaces 
 - **The app shows bark and fruit again.** Add `bark` and `fruit` back to the active channels. No content changes are needed.
 - **Flowers wait.** Runs do not collect flower photos for the first version.
 - **Section 1 changes for new material.** The teaching moment after a miss (`DESIGN.md` section 9) stays.
-- **Open:** the size of a look-alike set and the exact layout of the introduction page. Both wait for the prototype notes.
+- **Leaf part cards need the typical leaf size.** The new species field of the learning model supplies it.
+- **Closed in round 2:** the size of a look-alike set. The batch rule replaces the sets.
+- **Open:**
+  - the exact layout of the species page;
+  - which of the two credit forms the app uses.
 
 ## What it replaces
 
 - `2026-09-30-leaf-only-v1.md`, in full.
+- In round 2, this record's first version of decision 3: look-alike sets from `content/confusion.json`, and one introduction page for each set, with the species side by side.
 - `DESIGN.md` section 1, "learning and testing are the same activity", for new material.
 - The open item "Whether the app keeps the leaf-only rule" in `DESIGN.md` section 18.
