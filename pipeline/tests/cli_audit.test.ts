@@ -169,6 +169,21 @@ test('photos audit --manifest measures the live rows and never requests a retire
   assert.ok(!http.urls.includes(retiredUrl), 'the retired hash was never requested');
 });
 
+test('photos audit <run> measures a retried candidate once, by its last row', async (t) => {
+  const { root, deps, out } = setup(t);
+  const grey = candidate(0, cache(root, 'grey.jpg', await greyJpeg()));
+  // photos fetch appends a second row for an id when a failed download later works.
+  const failed: Candidate = { ...grey, local: null, fetch_error: 'status 404' };
+  appendJsonl(path.join(runDir(root, 'demo'), 'candidates.jsonl'), [failed, grey]);
+
+  assert.equal(await runCommand(['photos', 'audit', 'demo'], deps), 0);
+
+  assert.deepEqual(out, [
+    `${grey.id} QUGA bark ${await scoreText(await greyJpeg())} ${grey.origin}`,
+    '1 measured, 0 skipped, 1 under threshold 3',
+  ]);
+});
+
 test('photos audit --threshold 0 prints no row lines', async (t) => {
   const { root, deps, out } = setup(t);
   await seedRunRows(root);

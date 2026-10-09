@@ -7,7 +7,9 @@ import {
   MONO_THRESHOLD,
   candidateId,
   collect,
+  downloadFailed,
   interleave,
+  lastRows,
   makeCandidate,
   mergeFound,
   type Candidate,
@@ -15,7 +17,7 @@ import {
 } from './candidates.ts';
 import { categoryUrl, commonsCandidates, parseCategoryListing } from './commons.ts';
 import { SECTION_PAGES, buildSectionTable, loadSectionTable, nextPageUrl, sectionFor } from './fna.ts';
-import { HELD_BACK, isHeldBack } from './hold_back.ts';
+import { HELD_BACK, heldBackRows, isHeldBack } from './hold_back.ts';
 import type { Http, TextResult } from './http.ts';
 import { appendOnlyErrors, gitShowOf, readPublished, type ContentSet } from './ids.ts';
 import {
@@ -431,14 +433,26 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
     // its cache file, so a rerun measures it again with no new download.
     const kept: Candidate[] = [];
     let mono = 0;
+    // `collect` cannot see the hash of a new row, because the hash comes from the download.
+    // This check drops a row whose bytes this target already holds under another url.
+    const hashes = targetHashes(existing, target.key);
+    let copies = 0;
+    // `collect` passes a failed row again, so this fetch retries it.
+    const failedBefore = new Set(existing.filter(downloadFailed).map((one) => one.id));
     for (const row of collected.added) {
       await download(deps, row);
       const bytes = localBytes(deps.root, row);
-      // A failed download has no cached file. Its row is still appended, as before.
+      // A failed download has no cached file. Its row is appended once, so the report counts
+      // the failure. A retry that fails again appends nothing.
       if (bytes === null) {
-        kept.push(row);
+        if (!failedBefore.has(row.id)) kept.push(row);
         continue;
       }
+      if (row.file_hash !== null && hashes.has(row.file_hash)) {
+        copies += 1;
+        continue;
+      }
+      if (row.file_hash !== null) hashes.add(row.file_hash);
       let score: number;
       try {
         score = await deps.chroma(bytes);
@@ -460,6 +474,9 @@ async function photosFetch(rest: string[], deps: CliDeps): Promise<number> {
       kept.push(row);
     }
     if (mono > 0) console.error(`${target.key}: ${mono} monochrome dropped`);
+    if (copies > 0) {
+      console.error(`${target.key}: ${copies} duplicate file${copies === 1 ? '' : 's'} dropped`);
+    }
     // The append happens per target, so a run that stops on the third target keeps the
     // rows of the first two.
     if (kept.length > 0) appendJsonl(candidatesPath, kept);
@@ -822,7 +839,7 @@ async function auditRun(
 ): Promise<void> {
   const dir = runDir(deps.root, name);
   if (!fs.existsSync(dir)) throw new Error(`run ${name} does not exist.`);
-  for (const row of readJsonl<Candidate>(path.join(dir, 'candidates.jsonl'))) {
+  for (const row of lastRows(readJsonl<Candidate>(path.join(dir, 'candidates.jsonl')))) {
     const bytes = localBytes(deps.root, row);
     const score = bytes === null ? null : await auditScore(deps, row.id, bytes);
     if (score === null) {
@@ -1140,6 +1157,15 @@ function noteCap(context: FetchContext, reason: string): void {
   const message = `${context.target}: ${reason}`;
   console.error(message);
   if (!context.scope.capped.includes(message)) context.scope.capped.push(message);
+}
+
+/** The file hashes the rows of one target already hold. */
+function targetHashes(rows: Candidate[], target: string): Set<string> {
+  const hashes = new Set<string>();
+  for (const row of rows) {
+    if (row.target === target && typeof row.file_hash === 'string') hashes.add(row.file_hash);
+  }
+  return hashes;
 }
 
 async function download(deps: CliDeps, row: Candidate): Promise<void> {
@@ -1516,6 +1542,8 @@ async function buildContent(
   const previous = readPublished(gitShowOf(deps.exec, base));
   const confusion = readJsonOr<RawContent['confusion']>(contentFile(deps.root, 'confusion.json'), []);
   const units = readContentList<Record<string, unknown>>(deps.root, 'units.json');
+  // The new rows of a held-back species. The build does not write them or upload their files.
+  const dropped = new Set<ManifestRow>();
 
   for (const symbol of scope.species) {
     const authored = readAuthored(authoredDir, symbol);
@@ -1569,7 +1597,6 @@ async function buildContent(
     // new species that nothing names waits outside species.json for a photo or an edge.
     const heldBack = isHeldBack({
       symbol,
-      targets: ownTargets(symbol, merged),
       published: previous !== null && previous.species[symbol] !== undefined,
       manifest,
       confusion,
@@ -1578,6 +1605,8 @@ async function buildContent(
     if (heldBack) {
       statuses[symbol] = { status: 'no_photos', reason: HELD_BACK };
       console.log(`${symbol}: ${HELD_BACK}`);
+      const own = ownTargets(symbol, merged);
+      for (const one of heldBackRows(manifest, own, previous?.manifest ?? [])) dropped.add(one);
       continue;
     }
     species[symbol] = merged;
@@ -1588,11 +1617,20 @@ async function buildContent(
     return null;
   }
 
+  const kept = manifest.filter((one) => !dropped.has(one));
+  // A file that only a dropped row names does not go to the bucket.
+  const cancelled = new Set<string>();
+  for (const one of dropped) {
+    if (kept.some((other) => other.hash === one.hash)) continue;
+    deferred.cancel(objectKey(one.hash));
+    cancelled.add(objectKey(one.hash));
+  }
+
   carryPublished(species, previous);
   carryRetired(species, previous);
-  markRetiredSpecies(species, manifest, at);
+  markRetiredSpecies(species, kept, at);
 
-  const raw = rawOf(deps.root, species, manifest);
+  const raw = rawOf(deps.root, species, kept);
   const result = validated(deps, raw);
   if (result === null) return null;
 
@@ -1629,7 +1667,7 @@ async function buildContent(
   for (const message of scope.capped) console.log(`capped: ${message}`);
   printFailures(deps);
   console.log(
-    `content built: ${Object.keys(raw.species).length} species, ${raw.manifest.length} manifest rows, ${published.uploaded.length} images uploaded`,
+    `content built: ${Object.keys(raw.species).length} species, ${raw.manifest.length} manifest rows, ${published.uploaded.filter((key) => !cancelled.has(key)).length} images uploaded`,
   );
   return data;
 }
@@ -1752,7 +1790,9 @@ function reportData(input: {
   const kinds: Record<string, number> = {};
   for (const one of lastVerdicts(verdicts)) kinds[one.verdict] = (kinds[one.verdict] ?? 0) + 1;
   const sources: Record<string, number> = {};
-  for (const one of candidates) sources[one.source_key] = (sources[one.source_key] ?? 0) + 1;
+  for (const one of lastRows(candidates)) {
+    sources[one.source_key] = (sources[one.source_key] ?? 0) + 1;
+  }
 
   return {
     run: name,

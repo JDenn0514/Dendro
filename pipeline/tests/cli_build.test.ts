@@ -1469,25 +1469,87 @@ test('a rebuild with a hard tag leaves the difficulty of a row already in the ma
   assert.equal(rows.some((one) => 'difficulty' in one), false);
 });
 
-// Hard rows still name the species, so the hold-back rule leaves it in and the validator
-// fails it. See the open question in docs/superpowers/plans/2026-09-28-run-safety.md.
-test('a build whose every photo of a species is tagged hard fails on the validator', async (t) => {
-  const { root, deps, storage, err } = setup(t);
+// Owner ruling of 2026-10-09: a hard photo does not keep a new species in. The build drops
+// its new rows and does not upload their files.
+test('a new species whose every photo is tagged hard is held back and its rows are dropped', async (t) => {
+  const { root, deps, exec, storage, out, err } = setup(t);
+  const qual = record({
+    scientific: 'Quercus alba',
+    common: ['white oak'],
+    section: 'Quercus',
+    concepts: { leaf: 'simple_lobed' },
+  });
+  const qualRow = row({ hash: HASH_B, target: 'QUAL', channel: 'leaf' });
   seed(root, {
+    manifest: [qualRow],
     verdicts: [
       verdict(LEAF.id, 'approve', { channel: 'leaf', tags: ['hard'] }),
       verdict(BARK.id, 'approve', { channel: 'bark', tags: ['hard'] }),
     ],
   });
+  fakeGitShow(exec, 'main', { species: { QUAL: qual }, manifest: [qualRow] });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.deepEqual(Object.keys(speciesOf(root)), ['QUAL']);
+  assert.deepEqual(manifestOf(root), [qualRow]);
+  assert.deepEqual(storage.puts, []);
+  const status = buildOf(root).species.find((one) => one.symbol === 'QUGA');
+  assert.equal(status?.status, 'no_photos');
+  assert.equal(status?.reason, HELD_BACK);
+  assert.ok(out.includes(`QUGA: ${HELD_BACK}`), out.join(' | '));
+});
+
+// A retired row stops a later build from uploading a taken-down file again, so the build
+// never drops it. The build stops instead, and the run owner fixes the row by hand.
+test('a held-back species with a retired row the base does not hold stops the build', async (t) => {
+  const { root, deps, exec, storage, err } = setup(t);
+  const qual = record({
+    scientific: 'Quercus alba',
+    common: ['white oak'],
+    section: 'Quercus',
+    concepts: { leaf: 'simple_lobed' },
+  });
+  const qualRow = row({ hash: HASH_B, target: 'QUAL', channel: 'leaf' });
+  const retiredRow = row({
+    hash: HASH_C,
+    target: 'QUGA',
+    channel: 'leaf',
+    retired: true,
+    retired_reason: 'takedown request',
+    retired_at: '2026-09-01',
+  });
+  seed(root, {
+    manifest: [qualRow, retiredRow],
+    verdicts: [
+      verdict(LEAF.id, 'approve', { channel: 'leaf', tags: ['hard'] }),
+      verdict(BARK.id, 'approve', { channel: 'bark', tags: ['hard'] }),
+    ],
+  });
+  fakeGitShow(exec, 'main', { species: { QUAL: qual }, manifest: [qualRow] });
 
   assert.equal(await runCommand(['build', 'demo'], deps), 1);
 
-  assert.ok(
-    err.includes('error species.json: QUGA has no manifest image and no confusion edge'),
-    err.join(' | '),
-  );
+  assert.ok(err.includes('error images/manifest.json: unknown target QUGA'), err.join(' | '));
   assert.deepEqual(storage.puts, []);
-  assert.equal(exists(root, 'content/images/manifest.json'), false);
+  assert.deepEqual(manifestOf(root), [qualRow, retiredRow]);
+  assert.equal(exists(root, 'content/species.json'), false);
+});
+
+test('a new species whose only photo is on a variety key is held back and the row is dropped', async (t) => {
+  const { root, deps, storage, out, err } = setup(t);
+  seed(root, {
+    units: LEVEL_ONE_UNITS,
+    candidates: [{ ...LEAF, target: 'QUGAG' }, BARK, MYSTERY],
+    verdicts: [verdict(LEAF.id, 'approve', { channel: 'leaf' })],
+  });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.deepEqual(speciesOf(root), {});
+  assert.deepEqual(manifestOf(root), []);
+  assert.deepEqual(storage.puts, []);
+  assert.ok(out.includes(`QUGA: ${HELD_BACK}`), out.join(' | '));
 });
 
 test('a new species with no photo and no edge is held back and listed as no_photos', async (t) => {
@@ -1728,4 +1790,15 @@ test('deferredStorage queues, answers head, drops a removed put, and flushes in 
 
   await deferred.flush();
   assert.equal(inner.puts.length, 2);
+});
+
+test('build.json counts a retried candidate once, by its last row', async (t) => {
+  const { root, deps, err } = setup(t);
+  // photos fetch appends a second row for an id when a failed download later works.
+  const failed: Candidate = { ...BLUR, local: null, fetch_error: 'status 404' };
+  seed(root, { candidates: [failed, ...CANDIDATES, BLUR] });
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+
+  assert.deepEqual(buildOf(root).counts.candidates_by_source, { commons: 1, inat: 2, plants: 1 });
 });
