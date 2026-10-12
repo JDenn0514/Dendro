@@ -69,6 +69,14 @@ The main path teaches every part of a group or a species together: leaf, bark, a
   - Fruit: the ripe fruit, as guides describe it. Green acorns stay on the tree for months, but guides describe the ripe acorn, and ripe fruit lasts on the ground through autumn and winter.
   - Bark: the same all year.
 
+### First-time hints (2026-10-12)
+
+- The app has no separate tutorial and no text block that explains the path.
+- The first time a learner meets each kind of screen (word page, card, tree card, end of a batch), the app shows hints on the real page.
+- A hint outlines the real button or photo and points a short callout at it. It waits for the learner to do the step, not for a "Next" button.
+- One to three steps per screen. Every step has "Skip". Each set shows once. A help button plays the hints again.
+- On a phone, the callout sits above or below the outlined element, so it never covers it.
+
 ### Practice mode
 
 - In practice mode the learner practises one part only, for example bark, on trees already met.
