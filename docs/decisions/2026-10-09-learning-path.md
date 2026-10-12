@@ -77,6 +77,20 @@ The main path teaches every part of a group or a species together: leaf, bark, a
 - One to three steps per screen. Every step has "Skip". Each set shows once. A help button plays the hints again.
 - On a phone, the callout sits above or below the outlined element, so it never covers it.
 
+### Drawings, marks, and comparisons (2026-10-12)
+
+From the owner's notes on the beginner prototype:
+
+- **Word pages use simple line drawings** that show only the feature, for example opposite and alternate leaves, or plated and furrowed bark. A photo of the same word follows the drawing.
+- **Group and species pages put arrows and labels on the photos.** Each mark points at what the text names, for example the veins that spread from the base. An agent places the marks. The owner checks them on a review page.
+- **Comparisons cross groups.** Pages and miss screens compare a tree with the most similar tree the learner has met in any group, for example sycamore leaves with maple leaves.
+- **Cards get a "Compare" button** that shows the two trees side by side, with their marks.
+- **Both path views stay.** The home page shows the trail. The tree is a progress screen the learner opens on purpose.
+- **Photo rules from the notes:**
+  - Leaf arrangement counts as visible only when the photo shows where the leaf stalks join the twig.
+  - A fruit photo must show how the fruit hangs when the card depends on it. A fruit held in a hand often hides this.
+  - A colour line on a page must agree with the photos next to it.
+
 ### Practice mode
 
 - In practice mode the learner practises one part only, for example bark, on trees already met.
