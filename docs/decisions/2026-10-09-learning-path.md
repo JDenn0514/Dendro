@@ -91,6 +91,13 @@ From the owner's notes on the beginner prototype:
   - A fruit photo must show how the fruit hangs when the card depends on it. A fruit held in a hand often hides this.
   - A colour line on a page must agree with the photos next to it.
 
+### Answer options and word cards (2026-10-13)
+
+- **A miss compares the learner's pick with the right answer.** Example: a learner picks maples for a London planetree leaf. The miss screen shows maple against London planetree and the clue that separates them. The "most similar tree met" comparison is for pages and the Compare button only.
+- **Word cards take options from one feature family only.** A leaf can be lobed and toothed at once, so a card with both words has two right answers. The families are outline (lobed or not), edge (toothed or smooth), lobe shape (rounded, pointed, bristle tip), arrangement (opposite or alternate), bark, and fruit.
+- **A small family gives fewer choices.** The app never fills a card with words from another family.
+- **A word gets cards only when the learner has met trees that differ on it.** Until then the word is taught on a page only. Example: every tree in the beginner prototype has lobed leaves, so "lobed" has no cards there. Its cards start when the path reaches a tree without lobes.
+
 ### Practice mode
 
 - In practice mode the learner practises one part only, for example bark, on trees already met.
