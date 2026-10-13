@@ -98,6 +98,23 @@ From the owner's notes on the beginner prototype:
 - **A small family gives fewer choices.** The app never fills a card with words from another family.
 - **A word gets cards only when the learner has met trees that differ on it.** Until then the word is taught on a page only. Example: every tree in the beginner prototype has lobed leaves, so "lobed" has no cards there. Its cards start when the path reaches a tree without lobes.
 
+### Comparisons and lobe tips (2026-10-13)
+
+These replace the cross-group comparisons and the Compare button of 2026-10-12.
+
+- **Side-by-side comparisons show only on miss screens.** They show the learner's pick against the right answer.
+  - On a part card, the comparison shows only the part the card asked about.
+  - On a tree card, it shows every part.
+- **Pages have no comparison sections. Cards have no Compare button.**
+- **Look-alikes are per part, not per tree.** Example: London planetree leaves look like maple leaves, but its bark and fruit balls look like American sycamore's.
+- **A species page says, part by part, which other trees that part looks like.** It then says which parts settle it. The aim is to teach the learner to judge the tree from all of its parts together. Example: "Leaf: looks like a maple leaf. Check the bark and the fruit balls."
+- **Lobe tips are one family with three answers, where only one can be true:**
+  - rounded (white oaks);
+  - sharp point, no bristle (maples);
+  - bristle tip (red oaks). A bristle is a thin hair past the leaf's edge.
+  The word page has a close-up drawing of all three tips.
+- **Small photos show numbered dots, with the labels listed under them.** Full labels stay on large photos.
+
 ### Practice mode
 
 - In practice mode the learner practises one part only, for example bark, on trees already met.
