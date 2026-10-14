@@ -114,6 +114,7 @@ These replace the cross-group comparisons and the Compare button of 2026-10-12.
   - bristle tip (red oaks). A bristle is a thin hair past the leaf's edge.
   The word page has a close-up drawing of all three tips.
 - **Small photos show numbered dots, with the labels listed under them.** Full labels stay on large photos.
+- **Trail markers show drawings, not photos** (2026-10-14). A small round marker would crop a photo, and photos stay whole at their own shape.
 
 ### Practice mode
 
