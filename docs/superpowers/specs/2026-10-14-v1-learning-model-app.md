@@ -31,6 +31,7 @@ The learner can name a real tree from what is visible that day, at a desk. The l
 - **Subgroups:** the oaks only, as red oaks (PLANTS section `Lobatae`, 17 species) and white oaks (section `Quercus`, 15 species, plus QUMA13). See question Q10 for QUCE.
 - **The path:** words just in time, then groups, then subgroups, then species, in batches.
 - **Part cards** with a depth for each species and part, and **tree cards** with their own schedule.
+- **Three rules kept from section 17** (section 5): SM-2 spaced repetition with the full review log and the daily new-card cap; formats that change with the interval, with inverted questions; and mastery.
 - **The miss comparison**, first-time hints, the enlarged view, the trail home, and the progress tree.
 - **Area choice** at the start: one or more US states, or all of the United States.
 - **The placement test,** rewritten for words and groups.
@@ -300,7 +301,7 @@ Content IDs stay append-only. `ids check --base origin/main` covers the new ones
 
 Path items use the content IDs: `concept:leaf/toothed`, `unit:maples`, `unit:red_oaks`, `species:ACRU`.
 
-Card IDs live in localStorage. They are not content IDs, but the migration (section 6) depends on them:
+Card IDs live in localStorage. They are not content IDs, but the migration (section 7) depends on them:
 
 | Card | ID | Today |
 |---|---|---|
@@ -373,7 +374,7 @@ Batches (prototype `cutBatch`, `nextBatchSize`):
 
 **Met.** An item is met when the learner sees its page in a batch, or skips its batch. A met item's page stays open as a reference.
 
-**Daily limit.** Section 17's cap of 10 new cards a day does not fit batches: one batch of species can hold 15 new part cards. This design replaces it with a cap on new batches a day, default 3, set in Settings. After the cap, sessions hold reviews only. See Q8.
+**Daily limit.** The daily cap on new cards stays (section 5.1). One batch of species can hold up to 15 new part cards, so the cap acts on whole batches. See Q8.
 
 ### 4.2 Word cards and word contrast
 
@@ -417,13 +418,8 @@ Prototype `choiceCount`, `wrongItems`.
 
 - Wrong options come only from items the learner has met, of the same kind as the answer.
 - For a species answer, the same group comes first, then edge neighbours on the card's part, then the rest.
-- **Choice count.** Early cards have fewer choices. The count is the smallest of:
-  - the tier count (4 at `mc4`, 8 at `mc8`);
-  - an early cap: 2 on a new card, 3 while its interval is under 4 days;
-  - the met items of the answer's kind, plus 1.
+- **Choice count, typed answers, and inverted questions:** section 5.2.
 - A card with no wrong option can not be asked.
-- **Typed answers.** At tier `typed`: a word grades against its `accept` list, a group or subgroup against its `accept` list, a species against its common and scientific names, as today. One normalizer for all.
-- **The inverted tier.** Version 1 keeps `inv` for species part cards only. Tree cards, word cards, group cards, and subgroup cards go from `mc8` straight to `typed`. See Q6.
 
 ### 4.6 Tree cards
 
@@ -481,36 +477,34 @@ Prototype `missCompare`, `missClueLine`, `standIn`, `separatingPart`, `placeClue
 - When no shown part tells two trees of one group apart and the right tree has `place_tells`, the clue is the place: both habitat lines.
 - **Separating part** on a tree card: the group pair `best`, else a part with an edge between the two, else a part the right species names, among the parts the card showed.
 - Photos on the comparison show their marks as numbered dots, with the labels listed under each photo.
-- The teaching moment of section 9 stays.
+- The teaching moment of `DESIGN.md` section 9 stays.
 
 ### 4.8 The scheduler
 
-- SM-2 for each card, as today (`scheduleCard`). The tier ladder and the promotion and demotion rules stay.
+- SM-2 for each card, with automatic grading and the full review log: section 5.1.
 - Tree cards have their own schedule. A tree card answer changes no part card. A part card answer changes no tree card.
 - **New card state field `first_right`:** the date of the first right answer since the item was met. The batch gate and the unlock read it.
-- **Slow answers.** A tree card does not grade a slow right answer `hard`. Opening parts takes time, and the time is not a sign of a weak answer. The "I guessed" flag still grades `hard`. See Q16.
 - **Relearning** stays: a miss comes back once at the end of the session as "to try again", with no log row and no state change.
-- **Mastery.** Species mastery is the level of its species tree card (`cardLevel`, levels 0 to 4). Part cards do not set mastery. They show which part is weak.
+- **Mastery:** section 5.3.
 
 ### 4.9 The session
 
-`buildSession` takes the open batch, the met items, the card states, and the date. Its queue holds, shuffled:
+`buildSession` takes the open batch, the met items, the card states, the log, and the date. It picks cards in this order, up to the session size (default 20, as today):
 
-1. the cards of the open batch not yet right once;
-2. due tree cards, most overdue first, at most 3;
-3. late cards (cards of skipped items, or words whose contrast arrived later), at most 3;
-4. due word and part cards, most overdue first;
+1. due cards first, most overdue first: word, part, and tree cards alike;
+2. the cards of the open batch not yet right once;
+3. late cards (cards of skipped items, or words whose contrast arrived later), at most 3.
 
-up to the session size (default 20, as today). The open batch cards always join, so a big batch can exceed the session size.
+Due cards come first, as section 17 says. When due cards fill the session, the batch waits for the next session. Rule 2 adds only cards that the daily new-card cap allows (section 5.1). The app then mixes the picked cards, so the learner does not meet all reviews before all new cards.
 
-When the new-batch cap is reached and nothing is due, the trail says "No cards are due. Come back later."
+When the cap is reached and nothing is due, the trail says "No cards are due. Come back later."
 
 ### 4.10 Practice mode (decided, Q38)
 
 - The learner picks a part: leaf, bark, or fruit.
 - The session holds the word cards and part cards of that part on met items only, due cards first, then the cards with the most misses.
 - **Schedule.** A practice answer writes a log row. It changes the card state only when the card is due, or when the answer is wrong. A right answer to a card that is not due does not push its interval out. See Q15.
-- **Weak part.** A part is weak when its share of right first tries over its last 30 part-card answers is 15 points or more below the best part, with at least 10 answers. The end-of-session screen and the progress screen suggest practice on that part.
+- **Weak part.** For each part, the app takes the share of right first tries in its last 30 part-card answers. A part is weak when its share is 15 points or more below the best part, with at least 10 answers. The end-of-session screen and the progress screen suggest practice on that part.
 
 ### 4.11 Placement test
 
@@ -523,7 +517,7 @@ The placement test stays, rewritten for words and groups (learning path).
 - About 20 cards in version 1. Section 17's rule that a placement test has no relearning stays.
 - **A pass** on a word card, or on both cards of a group:
   - marks the item met and right once;
-  - sets the card state as section 17 does: tier `mc8`, interval 21 days, ease 2.5, reps 1;
+  - sets the card state as section 17 does: interval 21 days, ease 2.5, reps 1, so the next format is 8 choices;
   - for a group, also counts two parts toward the group tree card.
 - The path then skips the passed items. Subgroups and species stay on the path. See Q9.
 
@@ -542,7 +536,101 @@ From `prototype/beginner-v2/hints.js` (owner review of 2026-10-13).
 - A help button plays the current screen's hints again. A screen with no hints has no help button.
 - The seen hints are in settings (`hints_seen`). Settings has "Show the hints again".
 
-## 5. Screens
+## 5. Kept from section 17: spaced repetition, formats, and mastery
+
+The owner asked that version 1 keep three rules of `DESIGN.md` section 17. This section states each one and how it fits section 18 and the learning path. The prototype used a simple ladder of intervals (10 minutes, then 1, 3, 7, 16, and 35 days). Version 1 does not copy that ladder.
+
+### 5.1 Spaced repetition as in Anki
+
+- **SM-2 for each card,** as `app/logic/scheduler.js` does today: ease, interval, the interval chain 1, 4, 10, 25 days, and the due date.
+- **Each card kind has its own schedule:** word cards, group and subgroup part cards, species part cards, and tree cards. A tree card answer changes no part card, and a part card answer changes no tree card (section 18).
+- **Automatic grading:**
+  - right maps to `good`;
+  - right with the "I guessed" flag maps to `hard`;
+  - wrong maps to `again`.
+- **The slow-answer rule** of the 2026-09-22 review (a slow right answer grades `hard`) stays on word and part cards. It is off on tree cards, because opening parts takes time. See Q16.
+- **The full review log.** Every answer writes one row: the card, the time, the grade, the time taken in ms, the format, and the option count, as today. New fields: the card kind, the photo hashes shown, and on a tree card the season and the parts opened before the answer. The log cap in the code is 5,000 rows (section 17 said 20,000). See Q22.
+- **Due cards first,** most overdue first (section 4.9).
+- **The daily new-card cap** stays: default 10, set in Settings.
+  - A card counts as new on the day of its first answer. Word, part, and tree cards all count.
+  - A batch opens only when its cards fit in what is left of today's cap. The first batch of a day always opens, so a batch larger than the cap never blocks the path.
+  - After the cap, sessions hold reviews only.
+  - See Q8.
+
+### 5.2 Formats that change as the learner improves
+
+The format of a question depends on the card's interval, as section 17 first said.
+
+| Interval | Format |
+|---|---|
+| a new card, or under 7 days | choice, from 2 options up to 4 |
+| 7 to 21 days | choice, 8 options |
+| over 21 days | typed recall |
+
+- **The early choices.** Under 7 days the option count grows: 2 on a new card, 3 after its first right answer, 4 once its interval is 4 days or more.
+- **Met items only.** The options come only from met items (section 18 and the learning path). The count is never more than the met items of the answer's kind allow. A card with 3 met items to choose from shows 3 options at most, at any interval.
+- **A lapse drops one format.** After `again`, SM-2 sets the interval to 1 day. The format does not fall to 2 options. It drops one step from the format before the lapse: typed falls to 8 choices, 8 choices fall to 4. It stays there until the interval earns a higher format again.
+- **Inverted questions** replace a normal question about one time in five, on the choice formats only. An inverted question shows the name and asks for the photo. It needs 4 different option items, each with a usable photo. With fewer, the app asks the normal question. A typed card never gets an inverted question.
+
+**How this fits the 2026-09-22 review.** That review replaced the interval rule with a tier ladder. A card moved up only after 2 `good` grades and an interval gate. The inverted question was a tier of its own. The app follows the ladder today. The owner's request brings back the interval rule and the one-in-five inverted question. This design follows the request. The stored `tier` and `tier_passes` fields go. A new field, `lapse_floor`, holds the format that a lapse set. See Q6.
+
+Which formats each card kind gets:
+
+| Card | Choice (2 to 4, then 8) | Inverted (about 1 in 5) | Typed |
+|---|---|---|---|
+| Word card | Words of the same feature | "Which photo shows a toothed edge?" The options are photos that show the other met words of the feature. No wrong photo may show the right word. A word in drawing mode asks "Which drawing shows bristle tips?" | The word, from its `accept` list |
+| Group or subgroup part card | Met groups, or the subgroups of the group | "Which leaf is from a maple?" The options are photos of the same part from other met groups. | The group or subgroup, from its `accept` list |
+| Species part card | Met species, the same group first | "Which leaf is red maple?" The options are photos of the same part from other met species, the same group first. | The common name or the scientific name |
+| Tree card | Met species (or groups), in the area and season | No. See below. | The common name or the scientific name, or the group |
+
+Rules for inverted photo options:
+
+- The photos match in growth stage, season, and view (section 4.4), so a difference in stage does not give the answer away.
+- They follow the card's step and usual-look rules.
+- An inverted question shows 4 photos, also at the 8-choice format. Eight photos do not fit a phone screen at a size where the learner can read them.
+- No caption names a tree until the answer.
+
+**Tree cards get no inverted question.** Recommendation, Q6:
+
+- Each option would be a whole tree: a set of up to three parts. Four sets of buttons and photos do not fit a phone screen.
+- The owner named only 4 choices, 8 choices, and typed for tree cards (section 18, still open).
+- The species part cards of the same tree already ask the inverted question on each part.
+
+**Typed recall.**
+
+- A species grades against any listed common name or the scientific name.
+- A word grades against its `accept` list. A group or subgroup grades against its `accept` list.
+- One normalizer for all, as section 17 says: lowercase, strip punctuation, collapse whitespace, and a hyphen equals a space.
+- No partial credit. The same group with the wrong species is wrong.
+
+### 5.3 Mastery
+
+- **A card is mastered** when its interval is over 21 days and its last three reviews have no lapse (section 17).
+- **A species is mastered** when its species tree card is mastered (section 18). Part cards do not set species mastery. They show which part is weak (section 4.10).
+- **A word, a group, or a subgroup** takes the lowest level of its cards. A group's tree card counts among its cards.
+
+Proposed levels that the learner sees, on the four darkest steps of the mastery ramp of the visual spec:
+
+| Level | Rule for one card | Colour |
+|---|---|---|
+| New | no right answer yet | `#E6DFCE` |
+| Learning | right at least once, interval under 7 days | `#C9D2B4` |
+| Known | interval 7 days or more, not yet mastered | `#6B8F6A` |
+| Mastered | interval over 21 days, no lapse in the last three reviews | `#3A5A3C` |
+
+- The levels follow the format bands of section 5.2: learning is the choice of 2 to 4 options, known is mostly 8 options, mastered is typed recall.
+- A species before its tree card opens is at most "learning", once any of its part cards is right. Known and mastered need the tree card.
+- These four replace the five level names of today's app (new, seen, familiar, strong, expert). `#9DB595` drops out of the ramp.
+
+How the screens show them:
+
+- **The trail** stays a map of the path. A done stop shows one small pressed leaf for each item, filled by its level. The current and later stops show no levels. The trail shows no counts and no bars.
+- **The progress tree** is where levels show in full. Each item's leaves take its level colour. A species twig takes the level of its tree card. A tap on an item shows its level by name and the level of each of its cards.
+- **The species page** shows the species level by name under the name: "Known".
+
+Recommendation: these four levels, shown as above. See Q21.
+
+## 6. Screens
 
 The screens reuse the prototype's working designs. They follow the visual rules:
 
@@ -553,13 +641,13 @@ The screens reuse the prototype's working designs. They follow the visual rules:
 
 The running foot becomes Home, Progress, Practice. Settings and Sources stay in the header.
 
-### 5.1 First run
+### 6.1 First run
 
 1. **Area.** "Where do you look at trees?" A list of states to tick, and "All of the United States". The learner can change it later in Settings.
 2. **Placement offer.** "Take a short test" or "Start from the beginning".
 3. **Trail.**
 
-### 5.2 Home: the trail
+### 6.2 Home: the trail
 
 From `prototype/beginner-v2/trail.js`.
 
@@ -570,22 +658,27 @@ From `prototype/beginner-v2/trail.js`.
 - A done stop lists its pages for reading again. A skipped stop says "Read these pages".
 - "Skip this stop" sits under Continue, as a plain text button.
 - No progress bars and no stop totals. The counts change as batch sizes change.
+- A done stop shows one small pressed leaf for each item, filled by its level (section 5.3).
 - `scripts/CHECKLIST.md` changes its Home lines: "Continue is the one filled button" replaces "Dendro is the largest thing on the screen".
 
-### 5.3 Pages
+### 6.3 Pages
 
 From `renderPage` in `prototype/beginner-v2/main.js`.
 
 - **Word page:** the feature's drawing once at the top when the feature has one; for each word, the word large, its definition, its drawing with the caption, then "In a photo" and one photo.
 - **Group page:** the group name, the intro, then for each part: the line, and matched photos of the first two species of the group in the area, by `species_order`. The prototype showed every species, but the maples have up to 11 in one state.
 - **Subgroup page:** one page for all subgroups of a group: the title and lines, then for each part, each subgroup's line and a matched photo.
-- **Species page:** the name and scientific name; "One of the red oaks, in the oaks."; a list of typical height, typical leaf length, and typical place; then for each part: the photo with marks, the line, "How much it tells you", and "Look-alikes".
+- **Species page:**
+  - the name, the scientific name, and the level (section 5.3);
+  - "One of the red oaks, in the oaks.";
+  - a list of typical height, typical leaf length, and typical place;
+  - for each part: the photo with marks, the line, "How much it tells you", and "Look-alikes".
 - Pages have no comparison sections (round 5).
 - Photos stack at full width. A tap opens the enlarged view.
 - Each page photo has a small credit line under it. See Q13.
 - In a batch, the bottom button says "Next page", then "Start the cards". As a reference, it says "Back".
 
-### 5.4 Cards and the answer
+### 6.4 Cards and the answer
 
 From `renderPartCard` and `answerDock`.
 
@@ -597,14 +690,14 @@ From `renderPartCard` and `answerDock`.
 - The credits of every photo shown come after the answer.
 - The head bar says "Card 3 of 12", then "Try again: 1 of 2".
 
-### 5.5 Tree cards
+### 6.5 Tree cards
 
 From `renderTreeCard` and `revealTree`.
 
 - The prompt, the context list, the part switch (Leaf, Bark, Fruit, with "No fruit" disabled), then the photo of the part on show, sized to the space left above the dock (`fitTreePhoto`).
 - After the answer: the parts the learner opened, the miss comparison for every part shown, and "About the <tree>".
 
-### 5.6 The enlarged view
+### 6.6 The enlarged view
 
 From `openLightbox`.
 
@@ -613,7 +706,7 @@ From `openLightbox`.
 - Escape, Close, or a tap on the space around the picture closes it.
 - The large view always shows full mark labels.
 
-### 5.7 End of session
+### 6.7 End of session
 
 From `renderEnd`.
 
@@ -623,32 +716,32 @@ From `renderEnd`.
 - One button: "Open the next batch" or "Continue".
 - A practice suggestion when a part is weak (section 4.10).
 
-### 5.8 Progress: the tree
+### 6.8 Progress: the tree
 
 From `prototype/beginner-v2/tree.js`. The learner opens it on purpose. Both path views stay.
 
 - Words are the roots. Groups are the trunk and main branches. Subgroups and species are smaller branches and twigs.
-- A branch gets leaves as its cards come right once. A species twig takes its colour from the level of its tree card, on the mastery ramp.
+- A branch gets leaves as its cards come right once. Each leaf takes the level colour of section 5.3. A species twig takes the level of its tree card.
 - A skipped item has a dashed branch and grows leaves only from right answers.
 - A tap on a part opens a sheet with the item's line and a link to its page. On a phone, the sheet lists every part, and that list is the main way to pick.
 - Under the tree, one line for each part: how often its part cards were right the first time. A weak part has a link to practice.
 - **Geometry.** The prototype drew each branch by hand for 4 groups. The app computes the layout from the path: one branch for each group in the area, its subgroups and species spread along it. This is the largest new UI work. See risk 5.
 
-### 5.9 Practice
+### 6.9 Practice
 
 - "Practise one part": three buttons, with the weak part marked "suggested".
-- The session screens are the card screens of section 5.4.
+- The session screens are the card screens of section 6.4.
 
-### 5.10 Settings and Sources
+### 6.10 Settings and Sources
 
-- Settings: area, session size, new batches a day, text size, "Show the hints again", export and import. `new_per_day` and `open_units` go.
+- Settings: area, session size, new cards a day, text size, "Show the hints again", export and import. `open_units` goes.
 - Sources: the photo sources as today, and the drawings line (section 3.3).
 
-### 5.11 Screens removed at cutover
+### 6.11 Screens removed at cutover
 
 Lessons (`#/lessons`, `#/lessons/<channel>`), the progress grid and the concept page (`#/progress/<channel>/<concept>`). The species route `#/species/<symbol>` becomes the species page. New routes: `#/page/<item>`, `#/session`, `#/practice/<part>`, `#/progress`, `#/start`.
 
-## 6. Migration of saved progress
+## 7. Migration of saved progress
 
 The app has a few real learners, the owner among them. Their progress is in `dendro_cards`, `dendro_log`, and `dendro_settings`, all at version 1. The prototype's progress (prefix `dendro-proto-beginner-v2:`) does not move.
 
@@ -664,7 +757,8 @@ The app has a few real learners, the owner among them. Their progress is in `den
 | `species:<SYMBOL>:<part>` | the same card, state kept; shown only when the depth gives that species a card on that part |
 | `variety:*` | kept in storage, not shown |
 | `dendro_log` rows | kept; new rows add `kind`, `opened`, and `season` |
-| `dendro_settings` | `session_size`, `text_size`, and `last_export` kept; `new_per_day` and `open_units` dropped; `batches_per_day: 3`, `hints_seen: []`, and `area: null` added |
+| `dendro_settings` | `session_size`, `new_per_day`, `text_size`, and `last_export` kept; `open_units` dropped; `hints_seen: []` and `area: null` added |
+| Card state fields | `interval`, `ease`, `due`, `reps`, `lapses`, and `recent` kept; `tier` and `tier_passes` dropped; `lapse_floor` added: the format one step below the old `tier` when that tier is below the card's interval band, else none |
 | `dendro_missing_edges` | kept |
 
 A new key, `dendro_path`, holds `met` (item to date) and `batches`.
@@ -679,9 +773,9 @@ After the migration, the app derives the rest:
 
 An export from version 2 does not import into the old app. An export from version 1 imports into version 2 through the same migration.
 
-## 7. Pipeline and content work
+## 8. Pipeline and content work
 
-### 7.1 Skills
+### 8.1 Skills
 
 - **species-draft:** the new fields of section 3.5, the `{ text, ref }` shape, and the text rules. A new fill mode drafts the new fields into an existing file and changes no old field.
 - **edges-draft:** the `apart` line, and new edges for group mates that version 1 pages and misses need.
@@ -689,19 +783,19 @@ An export from version 2 does not import into the old app. An export from versio
 - **photo-check:** the photo fields, through the intake spec.
 - **content-run:** runs collect leaf, bark, and fruit again (decided). The rule "every run takes `--channels leaf`" ends.
 
-### 7.2 Pipeline code
+### 8.2 Pipeline code
 
 - `pipeline/lib/species.ts`: allow and check the new authored fields; flatten `{ text, ref }`.
 - `pipeline/lib/ids.ts`: collect `feature:` and `drawing:` IDs.
 - `cli teaching build` (new command in `pipeline/lib/commands.ts`): sections 3.3, 3.6, and 3.9.
 - The manifest fields of section 3.7: the intake spec.
 
-### 7.3 Drawings and marks
+### 8.3 Drawings and marks
 
 - Drawings: port the 20 prototype SVGs, less the 3 old names. Draw the new words: at least `unlobed` (sassafras has unlobed leaves), the sweetgum's star-shaped leaf if the owner makes it a word, and any word in the owner's list without one. The owner checks them on a review page.
 - Marks: for each page photo of each version 1 species, group, subgroup, and word. A species page shows one photo for each part (174 photos), and the group, subgroup, and word pages add about 70. The marks agent places them group by group. The owner checks them on the review page.
 
-### 7.4 Content runs for thin spots
+### 8.4 Content runs for thin spots
 
 The prototype found page lines that no photo shows. Each needs a targeted photo run. The owner makes the photo calls.
 
@@ -714,7 +808,7 @@ The prototype found page lines that no photo shows. Each needs a targeted photo 
 | White upper limbs | PLOC | the upper trunk and limbs, view `far` (bark until the form part exists) |
 | Fruit sizes | ACRU keys, PLOC and PLHI balls, QURU acorns | fruit with a scale object |
 
-## 8. Phases and tickets
+## 9. Phases and tickets
 
 Each ticket is one pull request. "Owner" marks a ticket that needs the owner's own work. The owner merges every pull request.
 
@@ -724,8 +818,8 @@ Every code ticket's definition of done includes `npm test`, `npm run test:pipeli
 
 | # | Ticket | Needs | Done when |
 |---|---|---|---|
-| 0.1 | **Owner:** answers the open questions of section 9. | this spec | each question has a ruling |
-| 0.2 | A decision record and `DESIGN.md` section 19 for the rulings; `GLOSSARY.md` updates (section 9, Q18); the `CLAUDE.md` line for `content/features.json`. | 0.1 | the owner merges it |
+| 0.1 | **Owner:** answers the open questions of section 10. | this spec | each question has a ruling |
+| 0.2 | A decision record and `DESIGN.md` section 19 for the rulings; `GLOSSARY.md` updates (section 10, Q18); the `CLAUDE.md` line for `content/features.json`. | 0.1 | the owner merges it |
 | 0.3 | The implementation plan in `docs/superpowers/plans/`. | 0.2 | **Owner** reads the plan diff before any code |
 
 ### Phase 1: content model
@@ -734,7 +828,7 @@ Every code ticket's definition of done includes `npm test`, `npm run test:pipeli
 |---|---|---|---|
 | 1.1 | Validator: the rules of section 3.11, with the new fields optional. | 0.3 | new cases in `tests/content.test.js` pass; today's content still validates |
 | 1.2 | Fixture: `content_dev/` gets the 7 prototype species with every new field, 4 groups, 2 subgroups, the words and features, `teaching.json`, `marks.json`, and drawings. It is a port of `prototype/beginner-v2/data.js`. | 1.1 | `npm run validate:dev` passes; `tests/fixture.test.js` checks the new files |
-| 1.3 | Pipeline: authored species fields and `{ text, ref }` (section 7.2); new ID prefixes. | 1.1 | new cases in `pipeline/tests/species.test.ts` and `ids.test.ts` pass |
+| 1.3 | Pipeline: authored species fields and `{ text, ref }` (section 8.2); new ID prefixes. | 1.1 | new cases in `pipeline/tests/species.test.ts` and `ids.test.ts` pass |
 | 1.4 | `cli teaching build`. | 1.1 | `pipeline/tests/cli_teaching.test.ts` covers each check and the write-nothing-on-failure rule |
 | 1.5 | Photo fields in `ManifestRow` and the validator. | intake spec | its tests pass |
 
@@ -750,7 +844,7 @@ Every code ticket's definition of done includes `npm test`, `npm run test:pipeli
 
 | # | Ticket | Needs | Done when |
 |---|---|---|---|
-| 3.1 | Skill updates of section 7.1, less photo-check. | 1.3, 1.4 | `docs(skills):` pull request merged |
+| 3.1 | Skill updates of section 8.1, less photo-check. | 1.3, 1.4 | `docs(skills):` pull request merged |
 | 3.2 | Species fields: the maples (17). | 2.2, 2.3, 3.1 | a botany review agent finds no open error; **owner** checks for learner clarity; no validator warning for these species |
 | 3.3 | Species fields: the red oaks (17). | 3.2 | as 3.2 |
 | 3.4 | Species fields: the white oaks and QUCE (17). | 3.2 | as 3.2 |
@@ -760,7 +854,7 @@ Every code ticket's definition of done includes `npm test`, `npm run test:pipeli
 | 3.8 | Drawings and their review page. | 2.2 | `cli teaching build` passes; **owner** approves each drawing |
 | 3.9 | Marks, group by group, with the review page port. | 3.10, 1.4 | **owner** approves the marks of each group |
 | 3.10 | Photo audit of the version 1 species. | intake spec | every in-play row of the 58 species has the fields of section 3.7; **owner** photo calls |
-| 3.11 | Content runs for the thin spots of section 7.4. | 3.10 | **owner** photo calls; the rows are published |
+| 3.11 | Content runs for the thin spots of section 8.4. | 3.10 | **owner** photo calls; the rows are published |
 
 ### Phase 4: app logic
 
@@ -768,15 +862,15 @@ All new modules are pure. Each ticket ports the matching prototype tests.
 
 | # | Ticket | Needs | Done when |
 |---|---|---|---|
-| 4.1 | Store version 2 and the migration (section 6). | 1.1 | `tests/store.test.js` covers every row of the migration table, the backup, and a failed migration that leaves the old keys alone |
+| 4.1 | Store version 2 and the migration (section 7). | 1.1 | `tests/store.test.js` covers every row of the migration table, the backup, and a failed migration that leaves the old keys alone |
 | 4.2 | `cards.js`: card IDs, depth, word contrast, what can be asked, unlock. | 1.2 | `tests/cards.test.js` |
 | 4.3 | `path.js`: area filter, chunks, batches, gate, skip. | 1.2 | `tests/path.test.js`; the prototype `PATH` is the output for the fixture |
 | 4.4 | `photos.js`: step, usual look, season, matched photos, tree card season. | 1.2, 1.5 | `tests/photos.test.js` |
-| 4.5 | `options.js` and the `question.js` changes: wrong options, choice counts, prompts, typed answers. | 4.2 | `tests/question.test.js`, `tests/grader.test.js` |
+| 4.5 | `options.js` and the `question.js` changes: wrong options, the format by interval, choice counts, inverted questions for each card kind, prompts, typed answers (section 5.2). | 4.2, 4.4 | `tests/question.test.js`, `tests/grader.test.js`; a test for each row of the format table |
 | 4.6 | `miss.js`: the miss comparison and clue. | 4.4, 4.5 | `tests/miss.test.js` |
-| 4.7 | `session.js`: the session, `first_right`, tree card schedule, slow-answer rule, practice. | 4.2, 4.3 | `tests/session.test.js`, `tests/scheduler.test.js` |
+| 4.7 | `scheduler.js` and `session.js`: grading, `lapse_floor`, the tier fields removed, the daily new-card cap with the first-batch rule, due cards first, `first_right`, the tree card schedule, the slow-answer rule, practice, the new log fields (section 5.1). | 4.2, 4.3 | `tests/session.test.js`, `tests/scheduler.test.js` |
 | 4.8 | Placement test logic. | 4.7 | `tests/session.test.js` placement cases |
-| 4.9 | `progress.js`: tree progress, mastery from tree cards, weak parts. | 4.7 | `tests/progress.test.js` |
+| 4.9 | `progress.js`: the four levels, card mastery, species mastery from tree cards, tree progress, weak parts (section 5.3). | 4.7 | `tests/progress.test.js` |
 
 ### Phase 5: screens
 
@@ -810,7 +904,7 @@ The new screens ship behind `?path=1` until cutover. The old app stays the defau
 - Variety cards, if the owner wants them back.
 - The intake method, after the intake comparison.
 
-## 9. Open questions for the owner
+## 10. Open questions for the owner
 
 Each has a recommendation.
 
@@ -821,10 +915,10 @@ Each has a recommendation.
 | Q3 | Features: a new owner file `content/features.json`, or fields on each word? And should the judge's feature list (shape, margin) and the word features (outline, edge, lobe tips) become one list? | A new file of about 7 short rows: a feature has a prompt, photo features, and a drawing, which do not belong on a word. Keep the two lists for version 1, joined by `photo_features`. "Shape" covers both outline and lobe tips, so a merge needs a new judge prompt. |
 | Q4 | Common first: per-area FIA order in version 1, or one hand order? | One hand order, drafted from FIA and city totals (section 1). Per-area order after version 1. |
 | Q5 | The second area choice: "All of North America" or "All of the United States"? | "All of the United States", because the app has no Canada or Mexico data yet. |
-| Q6 | The inverted tier on tree, word, group, and subgroup cards? | No. Keep it on species part cards only. |
-| Q7 | Early choice counts: 2 on a new card, 3 while its interval is under 4 days, then the tier count? | Yes, as the prototype. |
-| Q8 | The daily cap: 10 new cards a day, or new batches a day? | 3 new batches a day, set in Settings. |
-| Q9 | What a placement pass sets for a word or group card. | Section 17's values: tier `mc8`, interval 21 days. A group passes with both of its cards right. |
+| Q6 | Formats (section 5.2): the interval rule of section 17 with the one-in-five inverted question, in place of the tier ladder of the 2026-09-22 review? Inverted questions on word, group, subgroup, and species part cards, and none on tree cards? | Yes to both, as the owner asked. Tree cards get no inverted question: four whole trees do not fit a phone screen. |
+| Q7 | Early choice counts: 2 on a new card, 3 after its first right answer, 4 from a 4-day interval, never more than the met items allow? | Yes, as the prototype. |
+| Q8 | The daily cap of new cards (default 10): may the first batch of a day open even when it is larger than the cap? | Yes. Otherwise a batch of 4 species, with up to 12 new cards, never opens at the default. |
+| Q9 | What a placement pass sets for a word or group card. | Section 17's values: interval 21 days, ease 2.5, reps 1, so the next format is 8 choices. A group passes with both of its cards right. |
 | Q10 | Subgroups in version 1: the oaks only? Where does QUCE (European turkey oak, section `Cerris`) go? | The oaks only. QUCE joins no subgroup. Its acorn and bark have depth `group`. The maples get no subgroups: no state has more than 11 maples, and batches of 3 to 5 handle that. |
 | Q11 | Variety cards in version 1? | No. Keep their saved states. |
 | Q12 | The range map on the answer screen? | The range text and elevation in version 1. A map after version 1 needs a state map source and its licence. |
@@ -836,8 +930,10 @@ Each has a recommendation.
 | Q18 | Glossary: add "drawing", "mark", "usual look", "trail", "progress tree", and "miss comparison"? The update of 2026-10-14 added words, features, pages, look-alike lines, stops, and met. | Yes, in ticket 0.2. |
 | Q19 | A licence for the drawings? | State none until the repo picks a licence. The Sources line says they are made for Dendro. |
 | Q20 | Ship the new screens behind `?path=1` until the content gate passes? | Yes. The old leaf app stays the default until ticket 6.2. |
+| Q21 | Learner levels (section 5.3): new, learning, known, mastered, with levels shown in full on the progress tree, and only on done stops of the trail? | Yes. Four levels follow the three format bands, and the trail stays a map of the path. |
+| Q22 | The review log cap: 5,000 rows (the code) or 20,000 (section 17)? | 20,000 only if a row stays under about 150 bytes, so the log fits in localStorage with the rest. Else keep 5,000 and keep the monthly export prompt. |
 
-## 10. Risks
+## 11. Risks
 
 1. **The photo audit is the critical path.** Every rule of sections 4.4 and 4.6 needs the fields of section 3.7. Without them, unaudited photos show late and seasons fall back to tags. Ticket 6.1 blocks cutover until the audit covers the 58 species.
 2. **Botany errors in teaching text.** The prototype's first botany review found 14 errors in the text of 7 species and 4 groups, and a second review found more. Version 1 has about 600 lines. Each content ticket gets a botany review agent pass, and every line keeps its source in `content_src`.
