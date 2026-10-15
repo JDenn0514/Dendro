@@ -36,8 +36,13 @@ _Avoid_: Tier, level, inverted
 The learner's pick and the right answer side by side on the miss screen. On a part card it shows only the part that the card asked about. On a tree card it shows every part.
 _Avoid_: Compare button, contrast, most similar tree met
 
+**Tip**:
+The sentence on the miss screen that says what to look at to tell the two items apart. The screen labels it "Tip".
+_Avoid_: Clue (a clue is read from a photo before the answer), miss line
+
 **Mastery**:
-How well the learner knows a species. It comes only from tree cards.
+How well the learner knows an item: new, learning, known, or mastered. A species gets its mastery only from tree cards. A word, a group, or a subgroup takes the lowest mastery of its cards.
+_Avoid_: Level (a stage is a level of the path)
 
 **Weak part**:
 A part whose part cards the learner often misses. The app suggests it for practice mode.
