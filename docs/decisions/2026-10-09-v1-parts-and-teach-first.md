@@ -4,6 +4,8 @@ Date: 2026-10-09. Status: decided by the owner, not yet in the app. It replaces 
 
 Changed later on 2026-10-09 (round 2), after the notes on the first prototype. Decision 3 changed, and decisions 4 to 6 are new. The order of the path is in `2026-10-09-learning-path.md`.
 
+Changed on 2026-10-13: pages have no comparison sections. The look-alike section of decision 3 ("You have met X…") is replaced by one look-alike line per part on the species page. See "Comparisons and lobe tips" in `2026-10-09-learning-path.md`.
+
 ## Context
 
 - `2026-09-30-leaf-only-v1.md` limited the first version to leaves. Bark and fruit were thin in every run, and the owner found them hard to judge.

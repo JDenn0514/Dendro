@@ -30,7 +30,7 @@ Date: 2026-10-09. Status: decided by the owner after the notes on the first prot
 - A large group splits into subgroups before its species. Examples: the oaks split into red oaks and white oaks; the pines into soft pines and hard pines.
 - The path for a large group runs: group, then subgroup, then species.
 - A small group, such as the tuliptree, has no subgroup level.
-- A per-part depth of `group` can name a subgroup. Example: most acorns tell you "red oak" or "white oak", not the species.
+- A per-part depth of `subgroup` names a subgroup. Example: most acorns tell you "red oak" or "white oak", not the species. (Changed on 2026-10-14: depth has four values, `species`, `subgroup`, `group`, and `none`, one for each level of the path. The first version said that depth `group` can name a subgroup.)
 - Which groups are large enough to split is open.
 
 ### Common trees first
