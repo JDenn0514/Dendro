@@ -236,9 +236,29 @@ export function interleave(groups: Candidate[][]): Candidate[] {
   return out;
 }
 
-/** How many more rows the target may take before it reaches MAX_PER_SPECIES. */
+/**
+ * The last row for each id, in the order each id first appears. A retried download appends
+ * a second row for its id, so a reader that counts rows reads them through this.
+ */
+export function lastRows(candidates: Candidate[]): Candidate[] {
+  const last = new Map<string, Candidate>();
+  for (const candidate of candidates) last.set(candidate.id, candidate);
+  return [...last.values()];
+}
+
+/** True when the row's download failed. A row from a file may have no fetch_error field. */
+export function downloadFailed(candidate: Candidate): boolean {
+  return typeof candidate.fetch_error === 'string';
+}
+
+/**
+ * How many more rows the target may take before it reaches MAX_PER_SPECIES. A row whose
+ * download failed holds no photo, so it does not count.
+ */
 export function underCap(existing: Candidate[], target: string): number {
-  const count = existing.filter((candidate) => candidate.target === target).length;
+  const count = existing.filter(
+    (candidate) => candidate.target === target && !downloadFailed(candidate),
+  ).length;
   return Math.max(0, MAX_PER_SPECIES - count);
 }
 
@@ -295,9 +315,15 @@ interface Seen {
   hashes: Set<string>;
 }
 
+/**
+ * A row whose download failed is left out, so a later fetch finds it again and retries it.
+ * The retry appends a second row with the same id. A reader takes the last row for an id.
+ */
 function newSeen(existing: Candidate[]): Seen {
   const seen: Seen = { ids: new Set(), origins: new Set(), hashes: new Set() };
-  for (const candidate of existing) addSeen(seen, candidate);
+  for (const candidate of existing) {
+    if (!downloadFailed(candidate)) addSeen(seen, candidate);
+  }
   return seen;
 }
 

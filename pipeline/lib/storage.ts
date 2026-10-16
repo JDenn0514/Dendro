@@ -36,7 +36,7 @@ export function memoryStorage(): Storage & {
  */
 export function deferredStorage(
   inner: Storage,
-): Storage & { flush(): Promise<void>; pending: string[] } {
+): Storage & { flush(): Promise<void>; cancel(key: string): void; pending: string[] } {
   const queue: { key: string; bytes: Uint8Array; contentType: string }[] = [];
   const pending: string[] = [];
 
@@ -63,6 +63,10 @@ export function deferredStorage(
     async remove(key: string): Promise<void> {
       drop(key);
       await inner.remove(key);
+    },
+    // Drops the queued put only. An object already in the bucket stays.
+    cancel(key: string): void {
+      drop(key);
     },
     async flush(): Promise<void> {
       for (const item of queue) await inner.put(item.key, item.bytes, item.contentType);

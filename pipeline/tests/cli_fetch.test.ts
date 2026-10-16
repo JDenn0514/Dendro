@@ -110,6 +110,19 @@ function jpeg(seed: number): Uint8Array {
 }
 
 /**
+ * The image with two bytes after its end marker. A decoder ignores them, so the image looks
+ * the same, but each index gives its own file hash. `photos fetch` drops a second row with
+ * one hash.
+ */
+function tagged(image: Uint8Array, index: number): Uint8Array {
+  const out = new Uint8Array(image.length + 2);
+  out.set(image);
+  out[image.length] = index & 0xff;
+  out[image.length + 1] = index >> 8;
+  return out;
+}
+
+/**
  * A hand-written Http over a route map. It skips the cache and the limiter, which the http
  * tests already cover. A POST keys on the url and the body together, because every
  * distribution call goes to one url. A url in `throwOn` throws, which stands for a dropped
@@ -971,11 +984,103 @@ test('photos fetch records a failed download and keeps the row', async (t) => {
   assert.deepEqual(out, [appendedLine(rows.length, failures), sourceLineOf(rows)]);
 });
 
+test('a later photos fetch retries a failed download and appends the result for the same id', async (t) => {
+  const routes = photoRoutes();
+  const failing = plantsRowsOf('QUGA')[0].file_url;
+  const bytes = routes.get(failing)?.bytes;
+  routes.set(failing, { status: 404 });
+  const { root, deps, out } = setup(t, routes);
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+  const broken = fetchedOf(root).find((row) => row.file_url === failing);
+  assert.ok(broken !== undefined && broken.fetch_error === 'status 404');
+
+  // The source answers on the second fetch.
+  routes.set(failing, { bytes });
+  out.length = 0;
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  const same = rows.filter((row) => row.id === broken.id);
+  assert.equal(same.length, 2, 'the failed row stays, and the retry appends a second row');
+  const retried = same[1];
+  assert.equal(retried.fetch_error, null);
+  assert.ok(retried.local !== null && fs.existsSync(path.join(root, retried.local)));
+  assert.ok(retried.file_hash !== null);
+  assert.equal(rows.length, expectedRows('QUGA').length + 1, 'no other row is appended again');
+  assert.equal(out[0].split(' ')[0], '1', 'the second fetch appends the retried row only');
+});
+
+test('a retry that fails again appends no second failed row', async (t) => {
+  const routes = photoRoutes();
+  const failing = plantsRowsOf('QUGA')[0].file_url;
+  routes.set(failing, { status: 404 });
+  const { root, deps, http } = setup(t, routes);
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  assert.equal(rows.filter((row) => row.file_url === failing).length, 1, 'one failed row on disk');
+  assert.equal(rows.length, expectedRows('QUGA').length);
+  assert.equal(
+    http.urls.filter((url) => url === failing).length,
+    2,
+    'the second fetch still tried the download',
+  );
+});
+
+test('photos fetch does not count a failed download toward the cap', async (t) => {
+  const { root, deps, out } = setup(t, photoRoutes());
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+  // The seeded rows leave room for the turn rows only. One more seeded row failed its
+  // download, so it holds no photo and must leave the room as it is.
+  const room = [
+    bioimagesRowsOf('QUGA'),
+    wildflowerRowsOf('QUGA'),
+    tsoRowsOf('QUGA'),
+    commonsRowsOf('QUGA'),
+    inatRowsOf('QUGA'),
+  ].reduce((sum, group) => sum + group.length, 0);
+  for (let index = 0; index < MAX_PER_SPECIES - room; index += 1) {
+    seedCandidate(root, 'QUGA', index);
+  }
+  const failed = makeCandidate({
+    target: 'QUGA',
+    source_key: 'manual',
+    source: 'a field notebook',
+    origin: 'https://example.org/seed/failed',
+    file_url: 'https://example.org/seed/failed.jpg',
+    author: 'A Seeder',
+    license: 'public domain',
+    fetched_at: NOW,
+    fetch_error: 'status 503',
+  });
+  appendJsonl(path.join(runDir(root, 'demo'), 'candidates.jsonl'), [failed]);
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  assert.equal(rows.length, room, 'the failed row takes no room under the cap');
+  assert.deepEqual(out, [appendedLine(room, 0), sourceLineOf(rows)]);
+});
+
 test('photos fetch drops a monochrome row and counts it', async (t) => {
   const routes = photoRoutes();
   const red = await redJpeg();
   const grey = await greyJpeg();
-  for (const url of fileUrls('QUGA')) routes.set(url, { bytes: red });
+  for (const [index, url] of fileUrls('QUGA').entries()) routes.set(url, { bytes: tagged(red, index) });
   const greyUrl = commonsRowsOf('QUGA')[0].file_url;
   routes.set(greyUrl, { bytes: grey });
   const { root, deps, out, err } = setup(t, routes);
@@ -1000,10 +1105,63 @@ test('photos fetch drops a monochrome row and counts it', async (t) => {
   assert.ok(fs.existsSync(cached), 'the cache keeps the grey file for a rerun');
 });
 
+test('photos fetch drops a row whose bytes match an earlier row of the same fetch', async (t) => {
+  const routes = photoRoutes();
+  // The Commons row comes first in the turns, so it keeps the bytes and the PLANTS row is the copy.
+  const first = commonsRowsOf('QUGA')[0].file_url;
+  const copy = plantsRowsOf('QUGA')[0].file_url;
+  routes.set(copy, { bytes: routes.get(first)?.bytes });
+  const { root, deps, err } = setup(t, routes);
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  assert.equal(rows.length, expectedRows('QUGA').length - 1);
+  assert.ok(rows.some((row) => row.file_url === first), 'the first row keeps the bytes');
+  assert.ok(!rows.some((row) => row.file_url === copy), 'the copy is not appended');
+  assert.equal(new Set(rows.map((row) => row.file_hash)).size, rows.length, 'one row per file hash');
+  assert.ok(err.includes('QUGA: 1 duplicate file dropped'));
+});
+
+test('photos fetch drops a row whose bytes match a row of an earlier fetch', async (t) => {
+  const routes = photoRoutes();
+  const copy = plantsRowsOf('QUGA')[0].file_url;
+  const bytes = routes.get(copy)?.bytes;
+  assert.ok(bytes !== undefined);
+  const { root, deps } = setup(t, routes);
+  seedInatTerms(root);
+  seedRun(root, { bucket: 'simple_lobed', channels: 'leaf,bark' }, (scope) => {
+    scope.species = ['QUGA'];
+  });
+  // A row from an earlier fetch holds the same bytes under another url.
+  const earlier = makeCandidate({
+    target: 'QUGA',
+    source_key: 'manual',
+    source: 'a field notebook',
+    origin: 'https://example.org/seed/same-bytes',
+    file_url: 'https://example.org/seed/same-bytes.jpg',
+    author: 'A Seeder',
+    license: 'public domain',
+    file_hash: sha256Hex(bytes),
+    fetched_at: NOW,
+  });
+  appendJsonl(path.join(runDir(root, 'demo'), 'candidates.jsonl'), [earlier]);
+
+  assert.equal(await runCommand(['photos', 'fetch', 'demo'], deps), 0);
+
+  const rows = fetchedOf(root);
+  assert.equal(rows.length, expectedRows('QUGA').length - 1);
+  assert.ok(!rows.some((row) => row.file_url === copy), 'the copy is not appended');
+});
+
 test('photos fetch counts an image that does not decode as a download failure', async (t) => {
   const routes = photoRoutes();
   const red = await redJpeg();
-  for (const url of fileUrls('QUGA')) routes.set(url, { bytes: red });
+  for (const [index, url] of fileUrls('QUGA').entries()) routes.set(url, { bytes: tagged(red, index) });
   const brokenUrl = commonsRowsOf('QUGA')[0].file_url;
   routes.set(brokenUrl, { bytes: NOT_AN_IMAGE });
   const { root, deps, out, err } = setup(t, routes);

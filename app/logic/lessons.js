@@ -1,6 +1,7 @@
 // The lessons tree, the fold defaults, and the per-channel unit summary. Pure.
 import { cardLevel, rollupLevel, gateStatus, unseenCount } from './progress.js';
 import { recommendUnit } from './session.js';
+import { numberWord, capitalize, plural } from './words.js';
 
 const DEPTH_NAMES = { 1: 'shapes', 2: 'genera', 3: 'species' };
 
@@ -90,7 +91,8 @@ export function defaultOpenUnits(content, states, channel) {
 }
 
 // The channel a unit key belongs to, or null when the content has no such
-// unit. A stored key with no unit comes from an older content set.
+// unit. A stored key with no unit comes from a hidden channel or from an
+// older content set.
 function channelOfKey(content, key) {
   return content.units.find((item) => item.key === key)?.channel ?? null;
 }
@@ -121,17 +123,14 @@ export function openUnitsFor(stored, channel, tree, content) {
 
 // The stored list after a fold on this channel. Every key and every mark from
 // another channel stays where it is, this channel's keys become the open set,
-// and this channel's mark goes in front of them. A unit key that names no unit
-// and a mark that names no channel both drop out, because they come from an
-// older content set.
+// and this channel's mark goes in front of them. A key that names no unit in
+// this content also stays: the content holds only the active channels, so the
+// key can be from a hidden channel that comes back later. The read side skips
+// it, so a key from an older content set does no harm.
 export function mergeOpenUnits(stored, channel, openKeys, content) {
   const other = (stored ?? []).filter((key) => {
-    if (isMark(key)) {
-      return key !== channelMark(channel)
-        && content.channels.includes(key.slice(MARK.length));
-    }
-    const owner = channelOfKey(content, key);
-    return owner !== null && owner !== channel;
+    if (isMark(key)) return key !== channelMark(channel);
+    return channelOfKey(content, key) !== channel;
   });
   const mine = [...openKeys].filter(
     (key) => channelOfKey(content, key) === channel
@@ -183,6 +182,18 @@ export function channelLessons(content, states, channel) {
     depth: treeDepth(unitTree(content, states, channel)),
     depths
   };
+}
+
+// The line under the Lessons door on home, from the summaries of every
+// channel. The depth is the deepest stem of all the channels. With only
+// level-1 units there is no stem, so the line does not give a depth.
+export function lessonsDoorLine(summaries) {
+  const total = summaries.reduce((count, summary) => count + summary.total_count, 0);
+  const open = summaries.reduce((count, summary) => count + summary.open_count, 0);
+  const depth = Math.max(0, ...summaries.map((summary) => summary.depth));
+  const units = `${capitalize(numberWord(total))} ${plural('unit', total)}`;
+  const deep = depth > 1 ? ` ${numberWord(depth)} deep,` : '';
+  return `${units},${deep} with ${numberWord(open)} open now.`;
 }
 
 // The small print beside a unit: the first card in the unit that has a photo.

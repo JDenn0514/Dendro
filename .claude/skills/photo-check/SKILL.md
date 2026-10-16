@@ -12,9 +12,12 @@ exception is a Kew POWO row whose saved file is missing. That row gets no verdic
 
 ## The loop
 
-1. Read `pipeline/runs/<name>/candidates.jsonl`.
+1. Read `pipeline/runs/<name>/candidates.jsonl`. One `id` can have two rows: when a
+   download fails, a later `photos fetch` tries it again and appends a second row. Keep
+   only the last row for each `id`. Then skip each row whose `fetch_error` is not null.
+   That row has no image file, and a later `photos fetch` tries it again.
 2. Read `pipeline/runs/<name>/verdicts.jsonl` when it exists.
-3. Take every candidate whose `id` has no row in `verdicts.jsonl`. Those are the unjudged
+3. From the rows of step 1, take every candidate whose `id` has no row in `verdicts.jsonl`. Those are the unjudged
    candidates. Keep them in file order. The fetch writes each target's candidates in the
    order of source quality. Skip every candidate of a full target (see **Stop at 6 good
    photos** below).
