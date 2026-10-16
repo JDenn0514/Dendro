@@ -595,3 +595,332 @@ Decisions from the review of the app spec. Each line changes a rule above or in
   before merge.
 - **Added 2026-09-23: an eighth fruit concept, `ball`.** A sycamore fruit is a head of
   many small dry fruits and fits none of the seven. The placement deck is 22 cards.
+
+---
+
+## 18. Decisions log (2026-10-09): learning model
+
+This section wins over sections 2, 10, 11, and 12 where they disagree. It also wins over
+section 17's rule "species mastery = weakest channel" and over section 17's format and
+scheduling rules where they disagree. The list below names each rule it replaces. The
+round 2 subsection also replaces rules in sections 1 and 6, and section 17's unit and
+placement test rules. It names each one.
+
+The owner confirmed these decisions on 2026-10-09. The short record is
+`docs/decisions/2026-10-09-learning-model.md`.
+
+### Rules this section replaces
+
+- **Section 2, the channel × depth grid as the whole model.** Part cards are now the first
+  stage only. Tree cards come after them. The depth of a part is now also a content value
+  for each species (see "Part cards").
+- **Section 5 and section 17, "Species mastery = weakest channel."** Species mastery now
+  comes from tree cards.
+- **Section 17, Review of 2026-09-22, "a species sits at the lowest level among its
+  cards."** This rule sets species progress from part cards. Tree cards now set it.
+- **Section 10, "This must not feed the scheduler."** Tree cards are normal review cards
+  with their own schedule. Section 10 also opens parts in a fixed order. On a tree card,
+  the learner opens any part, in any order.
+- **Section 11, range and elevation as clues.** On a tree card, the range map and the
+  elevation range show only on the answer screen. Range narrows the wrong options through
+  the area pick.
+- **Section 12, "Deprioritized. Not a scheduling driver."** A tree card is one species in
+  one season. Season now decides which tree cards exist and which wrong options are
+  allowed.
+- **Section 17, "No region setting in the app."** The learner now picks an area at the
+  start.
+- **Section 17, "Distractors come only from species with a card on this channel."** For
+  tree cards, the wrong options come from `content/confusion.json`, limited by season and
+  area.
+- **The photo-check rule "Stop at 6 good photos."** Intake now fills a quota at each
+  photo difficulty step.
+
+### Why
+
+- Real identification uses the whole tree, not one part.
+- A tree looks different through the year. Leaves fall and change colour, and flowers
+  open.
+- Place, habitat, size, and elevation help identification.
+- How the leaves sit on the branch helps as much as one leaf.
+- Photo intake is weak. Today the difficulty of a question depends only on its answer
+  format, not on how hard the photo is.
+
+### Goal
+
+- The learner can name a real tree from what is visible that day.
+- The app stays a desk tool (section 1).
+- The learner also learns the botany words and features. This is a planned side effect,
+  not the goal.
+
+### Part cards
+
+A part is one part of the tree: leaf, bark, fruit, twig, flower, or form. Earlier
+sections and the code call a part a "channel". A part card shows one part of one species.
+Form is a distant photo of the whole tree.
+
+- Part cards stay as the first stage. They teach the words for each part. They also show
+  which part a learner is weak on.
+- A part card asks only as deep as that part can tell. For each species and each part,
+  the content records a depth:
+  - `species`: the part names the species. Example: a bur oak acorn.
+  - `group`: the part names only the group. Example: most acorns give only the red oak
+    group or the white oak group.
+  - `none`: the part does not help.
+- Reason: many fruits, such as acorns, look alike, and so do many barks.
+
+### Tree cards
+
+A tree card is one species in one season, with a button for each part.
+
+- Form is one more part on a tree card.
+- A tree card can combine photos of the same species from several trees. When one real
+  iNaturalist observation has enough parts, the tree card uses that observation.
+- Season comes from what the photos show: the season tags in the manifest. It does not
+  come from the photo date, because dates can be missing or wrong.
+- A part that does not change through the year is marked "any season". Examples: bark,
+  and the form of an evergreen. An "any season" photo can join a tree card of any season.
+- Free context on a tree card is what a person standing at the tree knows: the state,
+  the season, the typical habitat, the typical height, and the typical leaf or needle
+  size. Habitat, height, and leaf size come from the authored species files. The card
+  labels them "typical".
+- The range map, the elevation range, and the description show only on the answer
+  screen.
+- The learner can open any part at no cost. Nothing counts as a hint. The score is only
+  whether the learner named the species. The app records which parts the learner opened.
+- After a miss, the app shows the right species. It also shows the part that best
+  separates the right species from the learner's answer, with a link to a photo that
+  shows that part clearly. Only parts with depth `species`, or parts that separate the
+  pair, are used.
+
+### Scheduling, unlock, and mastery
+
+- Tree cards are normal review cards with their own spaced-repetition schedule.
+- A tree-card answer does not change the schedule of any part card. This removes the
+  objection in section 10.
+- The tree cards of a species unlock when the learner has named that species right on
+  part cards for two or more different parts.
+- Gating stays soft: the app recommends, and the learner can skip.
+- Species mastery comes from tree cards. Part cards show weak parts. They do not decide
+  mastery.
+
+### Answer formats and wrong options
+
+- Tree cards use the same answer formats as part cards: 4 choices, then 8 choices, then
+  typed.
+- The wrong options (distractors) come from `content/confusion.json`. They are limited
+  to species found in the same season and in the learner's area.
+
+### Area
+
+At the start, the learner picks one of two areas:
+
+- "Trees in my area": one or more US states, matched against the USDA PLANTS
+  distribution.
+- "All of North America".
+
+### Photos and intake
+
+- **Photo difficulty step.** Each photo gets a difficulty step from 1 to 3 at intake. The
+  same frame applies to every part:
+  1. The feature shows alone and whole. Example: one leaf on a plain background.
+  2. The feature is clear, but among other things. Example: a branch where one leaf is
+     easy to read.
+  3. The learner must search for the feature, or the feature is not typical. Examples:
+     leaves at a distance, young leaves, damage.
+- **Features per part.** Each part has its own list of features to read. Leaf: shape,
+  margin, venation, and arrangement. Bark: texture, colour, and pattern. Fruit, twig, and
+  flower get their own lists. The lists start from the section 3 vocabularies and the
+  leaf traits of issue #14.
+- **The code computes the step.** The photo judge marks which features a photo shows
+  clearly. The code computes the difficulty step from those marks. This follows the
+  leaf-trait ruling of 2026-09-28: the traits are the data, and the code computes the
+  bucket.
+- **Quota per step.** Intake fills a quota at each difficulty step. This replaces "Stop
+  at 6 good photos".
+- **Intake method.** Several intake methods get a close comparison before one is picked.
+  The comparison waits for the prototype notes.
+
+### Content fields
+
+- Each authored species file, `content_src/species/<SYMBOL>.json`, gets two new values:
+  - a depth for each part (`species`, `group`, or `none`);
+  - a typical leaf or needle size, as a length range.
+- The species-draft skill writes these values from the trusted sources it already cites.
+- The owner checks them for learner clarity, not for botany.
+
+### Next steps
+
+- The selection-method eval (PR #35) stays paused before Task 5. It tuned the "Stop at 6
+  good photos" rule, and the quota per step replaces that rule.
+- A throwaway prototype page, outside `app/`, for 10 species. It uses leaf, bark, and
+  fruit only, because no twig, flower, or form photos exist yet.
+  - Four confusion pairs: QULA and QUSI, ACPE and ACSP2, ACCI and ACPA2, PLHI and PLRA.
+  - LITU: it has season tags on all its parts.
+  - ACFL: it has leaf photos from three seasons.
+  - PLHI had wrong-species rows in the selection eval. Check PLHI, or swap that pair.
+- The owner uses the prototype in three or four short sessions on different days, and
+  writes notes. The intake comparison waits for those notes.
+
+### Facts found on 2026-10-09
+
+- The manifest has active photos on three parts only: leaf 1,253, bark 548, fruit 425.
+  It has no twig, flower, or form photos.
+- Most bark and fruit photos have no season tag. LITU is the only species with season
+  tags on every part.
+- The iNaturalist observation ID is kept only in the `origin` URL of a row
+  (`.../observations/<obsId>#photo=<photoId>`). 224 manifest observations have two or
+  more photos. All the samples seen were leaf photos.
+- The cached iNaturalist JSON (`pipeline/cache/api.inaturalist.org/`) has `observed_on`,
+  location, and `place_guess`. The pipeline drops them. iNaturalist gives no elevation.
+- Manifest rows already have a `difficulty` field. Today its only value is `hard`, and a
+  `hard` row is held back (`app/logic/content.js`).
+- Species files already have `habitat`, `height_ft`, `elevation_ft`, `range`, and a
+  `concepts` value for each part. They have no leaf-size field.
+
+### Relation to the leaf-only decision
+
+`docs/decisions/2026-09-30-leaf-only-v1.md` said the first version teaches leaves only,
+and the app hides bark and fruit. It conflicted with this section: a tree card unlocks
+only after part cards on two or more parts, so leaf part cards alone never unlock one.
+The owner closed the conflict later on 2026-10-09 (see the next subsection).
+
+### First-version parts and teaching first (2026-10-09)
+
+The owner decided these later on 2026-10-09. The short record is
+`docs/decisions/2026-10-09-v1-parts-and-teach-first.md`. It replaces the leaf-only
+decision.
+
+- **Bark and fruit come back for the first version.** The 548 bark rows and 425 fruit
+  rows in the manifest are published. The app only hides them. New content runs collect
+  bark and fruit again, and the rule "every run takes `--channels leaf`" ends.
+  - Reason: the learning model above. Tree cards unlock after part cards on two parts.
+    Tree cards combine photos from several trees. Part cards with depth `group` need
+    fewer photos. The quota per step replaces "Stop at 6 good photos".
+  - The owner judges learner clarity. The photo judge and the source pages decide the
+    botany.
+- **Flowers come after the first version.** No flower photos exist. Most trees flower
+  for a short time, and many tree flowers are small or high in the crown.
+- **The app teaches before it tests.** This replaces section 1, "learning and testing are
+  the same activity", for new material. The teaching moment after a miss (section 9)
+  stays.
+  - New species come in small look-alike sets from `content/confusion.json`. Example:
+    vine maple, mountain maple, Rocky Mountain maple, and striped maple.
+  - An introduction page for each set comes before the first card on that set.
+  - The page shows the species side by side, part by part. It names the features that
+    tell them apart.
+  - It also names the parts that do not help, from the depth of each part.
+  - The quiz on the set comes after the page.
+  - The page stays open later as a reference, as the species and group pages.
+- **Open:** the size of a look-alike set and the exact layout of the introduction page.
+  Both wait for the prototype notes.
+- Round 2 (next subsection) replaces the look-alike sets and the introduction page for
+  each set.
+
+### Learning path and species pages (2026-10-09, round 2)
+
+The owner decided these later on 2026-10-09, after the notes on the first prototype.
+There are two short records:
+
+- `docs/decisions/2026-10-09-learning-path.md`: the order of the path, groups, common
+  trees first, batches, practice mode, and the placement test.
+- `docs/decisions/2026-10-09-v1-parts-and-teach-first.md`, round 2: the species page,
+  matched photos, leaf size, and the card layout.
+
+The decisions in short:
+
+- **Broad to specific.** The path runs from words (the vocabulary), to groups, to
+  species. Each word comes a little before the first group that needs it. The stages
+  overlap, and older cards come back for review.
+- **Groups are real tree groups,** a genus or a family, such as the oaks and the maples.
+  Leaf shapes, such as "lobed", become words. The owner writes `content/units.json`, and
+  this changes how the owner groups the units.
+- **Common trees first.** The order comes from USDA Forest Service FIA counts for forest
+  trees, and from the McCoy et al. city street-tree dataset for planted trees
+  (<https://zenodo.org/records/6726506>). iNaturalist counts are a fallback for a planted
+  tree in a state with no city data, marked less certain. Canada and Mexico are a gap at
+  first, so "all of North America" means the US.
+- **All parts together.** The main path teaches leaf, bark, and fruit of a group or a
+  species together. The page covers all parts. Part cards on each part follow it, and
+  tree cards unlock after part cards on two parts.
+- **Subgroups.** A large group splits into subgroups before its species: the oaks into
+  red oaks and white oaks, the pines into soft and hard pines. Small groups skip this level.
+  Which groups split is open.
+- **The usual look first.** A species is introduced with photos of its look for most of
+  the year (red maple: green leaves). Photos from other seasons come after the learner
+  knows the species. The difficulty step does not change with the season. Stage works the
+  same way: a full-shape unripe fruit (a green acorn) gets its step from clarity and comes
+  later; a young leaf without its full shape is step 3. For fruit, the usual look is the
+  ripe fruit, as guides describe it.
+- **Practice mode.** The learner practises one part only, on trees already met. The app
+  suggests a part that the part cards show is weak.
+- **Tree cards start at the group:** "Which group is this tree in?" They ask for the
+  species when the learner reaches species for that group.
+- **Form rule, for later.** A form card asks for the shape word, or for the group where
+  shape is a real clue. It never asks for the species from one distant photo.
+- **Batches.** New material comes in batches: 4 items at the start, 5 after a good batch,
+  3 after several misses, 2 for a look-alike pair, never more than 5. The next batch opens
+  when each card in the batch is answered right once. The learner can skip ahead.
+- **Wrong options** come only from species, groups, or words the learner has met. Early
+  cards have fewer choices.
+- **Placement test.** It stays, and now tests words and groups.
+- **Species page.** The information page is about one species. Each part says in plain
+  words how reliable it is. When the learner has met a look-alike, the page gets a
+  section: "You have met X. Here is how they are alike, and how to tell them apart." The
+  labels "This tells them apart" and "This only tells you the group" are dropped.
+- **Matched photos.** Photos that the learner compares match in stage, season, and view,
+  in any layout.
+- **Leaf size on leaf part cards.** A leaf photo with a scale object counts as a better
+  photo, and "size can be judged" joins the leaf feature list.
+- **Layout.** Tap a photo to make it larger. On pages, photos stack at full width. Photo
+  credits are smaller.
+- **Two new photo difficulty factors:** an unusual angle, and light or shadow that changes
+  the colour.
+- **Next: a beginner prototype** of the full path on four groups: the maples (red maple,
+  sugar maple), the oaks (white oak, northern red oak), the tuliptree, and the sycamores
+  and planetrees (American sycamore, London planetree, the look-alike pair at the end).
+  An agent proposes photos with a difficulty step. The owner makes the final call.
+
+Rules that round 2 replaces:
+
+- **Section 1, "learning and testing are the same activity",** for new material. The
+  app teaches before it tests (subsection above), now through species pages and batches.
+- **Section 2, the depth levels "type, group, species".** They now run words, groups,
+  species. The words come just in time, not as one first tier.
+- **Section 2, "channel selection and depth progression are independent",** for the main
+  path. The main path teaches all parts together. One-part study moves to practice mode.
+- **Section 6, the channel focus of the session builder,** for the main path.
+- **Section 17, "Unit = one level-1 bucket taken through its depth levels".** Units now
+  follow tree groups.
+- **Section 17, the placement test:** the 20-card session and the deck of one card per
+  level-1 concept. The test now covers words and groups.
+- **Section 18, "the score is only whether the learner named the species",** for tree
+  cards in the group stage.
+- **The look-alike sets and the introduction page for each set** (subsection above).
+
+### Still open
+
+- Closed on 2026-10-09: the leaf-only rule ends, and bark and fruit part cards come back
+  for the first version (see the subsection above).
+- Closed in round 2: the size of a look-alike set. The batch rule replaces the sets.
+- The list of groups, and their order in each area.
+- The FIA and city data work: loading the counts, the crosswalk for ACFL, PLHI (FIA:
+  PLHY3), QUAC2, QUBO2, and QUMA13, and how forest and planted counts combine.
+- Canada and Mexico.
+- How many choices early cards have.
+- How the section 17 unit rules (5 to 25 cards, the gate at 80%, wide first) apply to
+  groups.
+- How batches fit the daily cap on new cards (section 17).
+- What a placement pass sets for a word or a group card.
+- Whether depth `group` uses the same groups as the path. "Red oak group" is a section of
+  the oaks, not a genus.
+- The exact layout of the species page, and which credit form the app uses.
+- How the two new difficulty factors enter the computed difficulty step.
+- How the manifest records "any season".
+- How the difficulty steps 1 to 3 map onto the `difficulty` field, which has only `hard`
+  today.
+- Whether tree cards have the inverted tier (`inv`) of section 17. The owner named only
+  4 choices, 8 choices, and typed.
+- The size of the quota at each difficulty step.
+- The feature lists for fruit, twig, and flower.
+- The intake method, after the prototype notes.
+- Whether the range-prior questions of section 11 stay.
