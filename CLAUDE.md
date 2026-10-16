@@ -45,6 +45,8 @@ Read the `content-run` skill before you start a run or a step of one.
 - CI (`.github/workflows/check.yml`) does not run `npm install`. Keep `sharp` and the S3 client loaded lazily.
 - On `main`, CI deploys the repo root to GitHub Pages. Keep `.nojekyll`.
 - `.gitattributes` forces LF. The fixtures must stay LF.
+- Run `gh pr merge <number> --merge` and `gh run rerun <id> --failed` as Bash calls of their own. The allow rules in `~/.claude/settings.json` do not match a command chained with `&&`, `;`, or `|`, so the auto mode classifier blocks it. Check the result in a separate call.
+- If the classifier blocks a command, do not run it again in another form. Tell the user what was blocked.
 
 ## Environment
 
