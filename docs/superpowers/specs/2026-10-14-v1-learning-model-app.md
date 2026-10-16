@@ -597,7 +597,7 @@ Rules for the photo options of a reversed word or part card:
 - Reason: one part of two trees can look alike, and other parts settle it.
 - The app prefers wrong trees that are in the card's season, in the learner's area, and look-alikes of the answer on at least one part. A wrong tree does not have to meet all three, so that enough trees are available.
 - In the group stage, the card names a group and shows trees from different met groups.
-- The phone layout is open (Q6, section 6.5).
+- The phone layout is the card deck (decided 2026-10-15, section 6.5).
 
 **Typed recall.**
 
@@ -699,10 +699,21 @@ From `renderTreeCard` and `revealTree`.
 
 - The prompt, the context list, the part switch (Leaf, Bark, Fruit, with "No fruit" disabled), then the photo of the part on show, sized to the space left above the dock (`fitTreePhoto`).
 - After the answer: the parts the learner opened, the miss comparison for every part shown, and "About the <tree>".
-- **Reversed tree card.** The layout is open (Q6). Three layouts go to a prototype:
-  - **2×2 grid.** Each tile shows one part photo of its tree and its own Leaf, Bark, and Fruit buttons. A tap on the photo enlarges it.
-  - **Stacked list.** The four trees stack at full width, each with its own part buttons. The learner scrolls.
-  - **Part rows.** One part switch above all four trees. A tap on Bark turns all four trees to their bark at once, so the learner compares one part across the four trees, then picks a tree. This differs from the ruling, which gives each tree its own buttons. The owner decides whether that is allowed.
+- **Reversed tree card: the card deck** (owner's pick, 2026-10-15). The working prototype is `prototype/reversed-tree/concepts/deck3.html`. The owner tried 11 layouts there. The others are not used.
+  - **The stack.** The four trees are a stack of file cards, slightly fanned. Each card has an index tab with its letter, at its own place along the top edge, so all four tabs show. No other row of letters.
+  - **Tabs.** A tap on a tab brings that card to the top. Each tab shows three dots for the parts seen (leaf, bark, fruit; a dashed dot for a missing part), and marks the card on top and the picked card.
+  - **Parts.** A tap or an upward flick on the top card turns it to its next part. The card header shows the letter, the part, and the part dots.
+  - **Trees.** A sideways swipe throws the top card to the back. A short swipe springs back. "‹ Tree" and "Tree ›" buttons do the same.
+  - **Same part.** The next tree opens on the part the learner was looking at, so the learner compares one part across trees. A tree with no photo of that part shows its "No fruit" face, with "Tap the card for the next part".
+  - **Rule out.** A "✕ Rule out" button sits at the right end of the card header, in line with the part dots and off the photo. After the first use it shows only "✕". Its tap area is 44 px. A tap on it never turns the part or throws the card.
+    - The ruled-out card leaves the deck. Swipes no longer reach it. Its tab stays, grey, with a line through the letter.
+    - For 5 seconds the bottom dock shows "✕ Tree B ruled out" with "Undo", in place of the check button and at the same height. A pick ends the message at once.
+    - A tap on a grey tab shows the card, greyed, with "Bring back" and "Close". A ruled-out card can not be picked. Ruling out the picked tree clears the pick.
+    - When one tree is left, the dock offers "One tree left: pick tree D".
+    - No drawing gesture: on a phone, a drawn line fights the swipes (owner, 2026-10-15).
+  - **Pick, then check.** A full-width "Pick tree B" button under the card marks the pick. The dock then shows "Check: tree B is a red maple" ("a maple" in the group stage). No drag.
+  - **After the answer.** All four cards come back with names. The right card and the pick are marked. A ruled-out tree shows "You ruled it out". When the learner ruled out the right tree, the verdict names the part on show: "You ruled out tree D, the red maple, on the bark."
+  - Keys: arrows for trees and parts, P to pick, X or Delete to rule out, Escape to close a viewed card.
 
 ### 6.6 The enlarged view
 
@@ -922,7 +933,7 @@ Each has a recommendation.
 | Q3 | Features: a new owner file `content/features.json`, or fields on each word? And should the judge's feature list (shape, margin) and the word features (outline, edge, lobe tips) become one list? | A new file of about 7 short rows: a feature has a prompt, photo features, and a drawing, which do not belong on a word. Keep the two lists for version 1, joined by `photo_features`. "Shape" covers both outline and lobe tips, so a merge needs a new judge prompt. |
 | Q4 | Common first: per-area FIA order in version 1, or one hand order? | One hand order, drafted from FIA and city totals (section 1). Per-area order after version 1. |
 | Q5 | The second area choice: "All of North America" or "All of the United States"? | "All of the United States", because the app has no Canada or Mexico data yet. |
-| Q6 | Answer formats (section 5.2): the interval rule of section 17 with the one-in-five reversed card, in place of the tier ladder of the 2026-09-22 review? And the phone layout of a reversed tree card (section 6.5)? | Yes to the interval rule, as the owner asked. Reversed tree cards are decided (2026-10-14). For the layout, the owner tries three on a prototype and picks one: a 2×2 grid, a stacked list, and part rows. |
+| Q6 | Answer formats (section 5.2): the interval rule of section 17 with the one-in-five reversed card, in place of the tier ladder of the 2026-09-22 review? And the phone layout of a reversed tree card (section 6.5)? | Yes to the interval rule, as the owner asked. Reversed tree cards are decided (2026-10-14). Layout closed on 2026-10-15: the card deck with rule out (section 6.5), picked from 11 prototype layouts. |
 | Q7 | Early choice counts: 2 on a new card, 3 after its first right answer, 4 from a 4-day interval, never more than the met items allow? | Yes, as the prototype. |
 | Q8 | The daily cap of new cards (default 10): may the first batch of a day unlock even when it is larger than the cap? | Yes. Otherwise a batch of 4 species, with up to 12 new cards, never opens at the default. |
 | Q9 | What a placement pass sets for a word or group card. | Section 17's values: interval 21 days, ease 2.5, reps 1, so the next format is 8 choices. A group passes with both of its cards right. |
