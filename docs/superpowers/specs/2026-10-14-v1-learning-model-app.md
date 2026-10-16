@@ -28,7 +28,7 @@ The learner can name a real tree from what is visible that day, at a desk. The l
 - **Parts:** leaf, bark, and fruit. The app shows the 548 bark rows and 425 fruit rows again.
 - **Species:** the 58 species in `content/species.json` today. All of them are in the old `simple_lobed` leaf-shape row of section 17.
 - **Groups:** six, from the genera of those species: the maples (17 species), the oaks (34), the sycamores and planetrees (4), the sweetgum, the tuliptree, and the sassafras.
-- **Subgroups:** the oaks only, as red oaks (PLANTS section `Lobatae`, 17 species) and white oaks (section `Quercus`, 15 species, plus QUMA13). See question Q10 for QUCE.
+- **Subgroups:** the oaks only, as red oaks (PLANTS section `Lobatae`, 17 species) and white oaks (section `Quercus`, 15 species, plus QUMA13). The subgroup rule of section 3.4 gives this list (Q10). QUCE joins no subgroup.
 - **The path:** words just in time, then groups, then subgroups, then species, in batches.
 - **Part cards** with a depth for each species and part, and **tree cards** with their own schedule.
 - **Three rules kept from section 17** (section 5): SM-2 spaced repetition with the full review log and the daily new-card cap; answer formats that change with the interval, with reversed cards; and mastery.
@@ -45,7 +45,7 @@ The learner can name a real tree from what is visible that day, at a desk. The l
 - **A range map.** The tree card answer screen shows the range text and the elevation range. See Q12.
 - **Notes and feedback inside the app.** The prototype's note boxes, notes log, "Copy notes", "Reset progress", and "Jump to stop" are prototype tools. The app does not need them. The owner reports problems through GitHub Issues. Export and import of progress stay in Settings.
 - **Accounts.** Progress stays in localStorage (hosting decision of 2026-09-25).
-- **Canada and Mexico.** "All of North America" means the US until that gap closes.
+- **Canada and Mexico.** The area screen says "All of the United States" until that gap closes (Q5).
 
 ### Common trees first: FIA and city data
 
@@ -148,6 +148,14 @@ The learning path says units now follow tree groups. This design makes each grou
 - The three old rows (`leaf_types`, `bark_types`, `fruit_types`) stay, with `retired: true`.
 - The order of the group rows is the order of the path. That is the hand order of section 1.
 
+**Which groups get subgroups** (decided 2026-10-16, Q10). A group splits into subgroups when all three are true:
+
+1. Some state has more than 10 of its species, so the group alone runs past 2 batches.
+2. Botanists use the split: a PLANTS section or subgenus.
+3. A learner can see the split on at least one part, for most members. Examples: oak acorns and bristle tips; pine needle bundles.
+
+A species that fits no subgroup has depth `group` on the parts that show the split. In version 1 only the oaks pass. The maples fail test 3: no part shows a maple section to a learner. New large groups, such as the pines and the hickories, are checked against this rule when they come in.
+
 A group row:
 
 ```json
@@ -199,7 +207,7 @@ New fields in `content_src/species/<SYMBOL>.json`. The species-draft agent write
 | `leaf_length_in` | `[2, 4]` | The typical blade length in inches, not the width. Shown on leaf part cards, on tree cards, and on the species page. |
 | `words` | `{ "leaf": ["simple", "lobed", "toothed", "sharp_tips", "opposite"], "bark": ["plated"], "fruit": ["samara"] }` | The words that fit this species. They drive word contrast (section 4.2) and the words that are never wrong options on its photos. |
 | `lines` | one text for each part | What the part looks like, on the species page and the miss comparison. |
-| `looks_like` | one text for each part | The look-alike line: how far the part can be trusted, which trees share it, then "Check ..." (round 5). Plain words, such as "A weak clue. The keys look like those of other maples. Check the bark." |
+| `looks_like` | one text for each part | The fixed half of the look-alike line: how far the part can be trusted, then "Check ..." (round 5). It names no tree. Plain words, such as "A weak clue. Check the bark." The app adds the names of the look-alikes (section 3.5 rules, Q14). |
 | `description` | one text | One line on the tree card answer screen. |
 | `place_tells` | `true`, optional | The typical place tells this tree from its group mates, as with American sycamore (wild, along streams) and London planetree (planted). A miss on a tree card then shows both habitat lines (prototype `placeClue`). |
 
@@ -211,7 +219,8 @@ Fields that stay: `range.text`, `elevation_ft`, `height_ft`, `habitat`, `arrange
 Rules for the text, from the prototype content tests:
 
 - Every learner sentence has 20 words or fewer.
-- A look-alike line names trees the learner may have met first. It names an unmet tree only once, and only a common one.
+- **A look-alike line names met trees only** (decided 2026-10-16, Q14). The look-alikes of a part come from the confusion edges of that part. The app shows the names of the met look-alikes, then the `looks_like` text. Example, for the keys of a maple: "Looks like: red maple, silver maple. A weak clue. Check the bark."
+- When the learner has met no look-alike on a part, that part shows no look-alike line. The line shows once the learner meets a look-alike.
 - No line says a part "settles it" when it does not.
 - Every look-alike line has a "Check".
 - A colour line agrees with the photos next to it.
@@ -550,7 +559,7 @@ The owner asked that version 1 keep three rules of `DESIGN.md` section 17. This 
   - right with the "I guessed" flag maps to `hard`;
   - wrong maps to `again`.
 - **The slow-answer rule** of the 2026-09-22 review (a slow right answer grades `hard`) stays on word and part cards. It is off on tree cards, because opening parts takes time. See Q16.
-- **The full review log.** Every answer writes one row: the card, the time, the grade, the time taken in ms, the format, and the option count, as today. New fields: the card kind, the photo hashes shown, and on a tree card the season and the parts opened before the answer. The log cap in the code is 5,000 rows (section 17 said 20,000). See Q22.
+- **The full review log.** Every answer writes one row: the card, the time, the grade, the time taken in ms, the format, and the option count, as today. New fields: the card kind, the photo hashes shown, and on a tree card the season and the parts opened before the answer. The log cap stays at 5,000 rows, as in the code (section 17 said 20,000; Q22).
 - **Due cards first,** most overdue first (section 4.9).
 - **The daily new-card cap** stays: default 10, set in Settings.
   - A card counts as new on the day of its first answer. Word, part, and tree cards all count.
@@ -631,7 +640,7 @@ How the screens show them:
 - **The progress tree** is where mastery shows in full. Each item's leaves take its mastery colour. A species twig takes the mastery of its tree card. A tap on an item shows its mastery by name and the mastery of each of its cards.
 - **The species page** shows the species mastery by name under the name: "Known".
 
-Recommendation: these four mastery values, shown as above. See Q21.
+Decided 2026-10-16 (Q21): these four mastery values, shown as above.
 
 ## 6. Screens
 
@@ -675,7 +684,7 @@ From `renderPage` in `prototype/beginner-v2/main.js`.
   - the name, the scientific name, and the mastery (section 5.3);
   - "One of the red oaks, in the oaks.";
   - a list of typical height, typical leaf length, and typical place;
-  - for each part: the photo with marks, the part line, and the look-alike line.
+  - for each part: the photo with marks, the part line, and the look-alike line when the learner has met a look-alike on that part (section 3.5).
 - Pages have no comparison sections (round 5).
 - Photos stack at full width. A tap opens the enlarged view.
 - Each page photo has a small credit line under it. See Q13.
@@ -924,32 +933,32 @@ The new screens ship behind `?path=1` until cutover. The old app stays the defau
 
 ## 10. Open questions for the owner
 
-Each has a recommendation.
+The owner ruled on each question on 2026-10-16. Q18 closed on 2026-10-14.
 
-| # | Question | Recommendation |
+| # | Question | Ruling |
 |---|---|---|
-| Q1 | Add `not_for` to the photo fields of the intake spec (section 3.7)? | Yes. Without it, the two hand lists of the prototype come back as lists in `content_src`, and every new photo needs a hand check. |
-| Q2 | Who writes group text, pair tips, and word pair tips? | A teaching-draft agent, in `content_src/teaching/`, with sources. The owner checks learner clarity. The owner files hold structure and word definitions only. |
-| Q3 | Features: a new owner file `content/features.json`, or fields on each word? And should the judge's feature list (shape, margin) and the word features (outline, edge, lobe tips) become one list? | A new file of about 7 short rows: a feature has a prompt, photo features, and a drawing, which do not belong on a word. Keep the two lists for version 1, joined by `photo_features`. "Shape" covers both outline and lobe tips, so a merge needs a new judge prompt. |
-| Q4 | Common first: per-area FIA order in version 1, or one hand order? | One hand order, drafted from FIA and city totals (section 1). Per-area order after version 1. |
-| Q5 | The second area choice: "All of North America" or "All of the United States"? | "All of the United States", because the app has no Canada or Mexico data yet. |
-| Q6 | Answer formats (section 5.2): the interval rule of section 17 with the one-in-five reversed card, in place of the tier ladder of the 2026-09-22 review? And the phone layout of a reversed tree card (section 6.5)? | Yes to the interval rule, as the owner asked. Reversed tree cards are decided (2026-10-14). Layout closed on 2026-10-15: the card deck with rule out (section 6.5), picked from 11 prototype layouts. |
-| Q7 | Early choice counts: 2 on a new card, 3 after its first right answer, 4 from a 4-day interval, never more than the met items allow? | Yes, as the prototype. |
-| Q8 | The daily cap of new cards (default 10): may the first batch of a day unlock even when it is larger than the cap? | Yes. Otherwise a batch of 4 species, with up to 12 new cards, never opens at the default. |
-| Q9 | What a placement pass sets for a word or group card. | Section 17's values: interval 21 days, ease 2.5, reps 1, so the next format is 8 choices. A group passes with both of its cards right. |
-| Q10 | Subgroups in version 1: the oaks only? Where does QUCE (European turkey oak, section `Cerris`) go? | The oaks only. QUCE joins no subgroup. Its acorn and bark have depth `group`. The maples get no subgroups: no state has more than 11 maples, and batches of 3 to 5 handle that. |
-| Q11 | Variety cards in version 1? | No. Keep their saved states. |
-| Q12 | The range map on the answer screen? | The range text and elevation in version 1. A map after version 1 needs a state map source and its licence. |
-| Q13 | Credit form (open since round 2). | Pages: a small line under each photo. Cards: the credits after the answer, as today. |
-| Q14 | Look-alike lines: fixed text, or names chosen from the trees the learner has met? | Fixed text in version 1, with the naming rules of section 3.5. |
-| Q15 | Does a right practice answer on a card that is not due change its schedule? | No. Only a due card or a miss changes it. |
-| Q16 | The slow-answer rule on tree cards? | Off. Opening parts takes time. |
-| Q17 | One tree card for each species, or one for each species and season? | One for each species, season picked each time. Seasonal cards can come with more seasonal photos. |
+| Q1 | Add `not_for` to the photo fields of the intake spec (section 3.7)? | Decided 2026-10-16: yes, as recommended. Without it, the two hand lists of the prototype come back as lists in `content_src`, and every new photo needs a hand check. The intake spec review adds the field. |
+| Q2 | Who writes group text, pair tips, and word pair tips? | Decided 2026-10-16: as recommended. A teaching-draft agent, in `content_src/teaching/`, with sources. The owner checks learner clarity. The owner files hold structure and word definitions only. |
+| Q3 | Features: a new owner file `content/features.json`, or fields on each word? And should the judge's feature list (shape, margin) and the word features (outline, edge, lobe tips) become one list? | Decided 2026-10-16: as recommended. A new file of about 7 short rows: a feature has a prompt, photo features, and a drawing, which do not belong on a word. Keep the two lists for version 1, joined by `photo_features`. "Shape" covers both outline and lobe tips, so a merge needs a new judge prompt. |
+| Q4 | Common first: per-area FIA order in version 1, or one hand order? | Decided 2026-10-16: as recommended. One hand order, drafted from FIA and city totals (section 1). Per-area order after version 1. |
+| Q5 | The second area choice: "All of North America" or "All of the United States"? | Decided 2026-10-16: "All of the United States", because the app has no Canada or Mexico data yet. |
+| Q6 | Answer formats (section 5.2): the interval rule of section 17 with the one-in-five reversed card, in place of the tier ladder of the 2026-09-22 review? And the phone layout of a reversed tree card (section 6.5)? | Decided 2026-10-16: yes to the interval rule with the one-in-five reversed card, in place of the tier ladder. Reversed tree cards are decided (2026-10-14). Layout closed on 2026-10-15: the card deck with rule out (section 6.5), picked from 11 prototype layouts. |
+| Q7 | Early choice counts: 2 on a new card, 3 after its first right answer, 4 from a 4-day interval, never more than the met items allow? | Decided 2026-10-16: yes, as the prototype. |
+| Q8 | The daily cap of new cards (default 10): may the first batch of a day unlock even when it is larger than the cap? | Decided 2026-10-16: yes. Otherwise a batch of 4 species, with up to 12 new cards, never opens at the default. |
+| Q9 | What a placement pass sets for a word or group card. | Decided 2026-10-16: section 17's values: interval 21 days, ease 2.5, reps 1, so the next format is 8 choices. A group passes with both of its cards right. |
+| Q10 | Subgroups in version 1: the oaks only? Where does QUCE (European turkey oak, section `Cerris`) go? | Decided 2026-10-16: a rule, not a list (section 3.4). A group gets subgroups when some state has more than 10 of its species, botanists use the split, and a learner can see it on at least one part. In version 1 only the oaks pass. QUCE joins no subgroup. Its acorn and bark have depth `group`. The maples fail the third test. |
+| Q11 | Variety cards in version 1? | Decided 2026-10-16: no. Keep their saved states. |
+| Q12 | The range map on the answer screen? | Decided 2026-10-16: the range text and elevation in version 1. A map after version 1 needs a state map source and its licence. |
+| Q13 | Credit form (open since round 2). | Decided 2026-10-16: pages: a small line under each photo. Cards: the credits after the answer, as today. |
+| Q14 | Look-alike lines: fixed text, or names chosen from the trees the learner has met? | Decided 2026-10-16: names from met trees only, as decision 3 of 2026-10-09 first said. The look-alikes come from the confusion edges of each part. The fixed `looks_like` text (trust, then "Check") follows the names. With no met look-alike on a part, that part shows no look-alike line (section 3.5). |
+| Q15 | Does a right practice answer on a card that is not due change its schedule? | Decided 2026-10-16: no. Only a due card or a miss changes it. |
+| Q16 | The slow-answer rule on tree cards? | Decided 2026-10-16: off. Opening parts takes time. |
+| Q17 | One tree card for each species, or one for each species and season? | Decided 2026-10-16: one for each species, season picked each time. Seasonal cards can come with more seasonal photos. |
 | Q18 | Closed on 2026-10-14. `GLOSSARY.md` already has drawing, mark, usual look, trail, progress tree, and miss comparison. | None. |
-| Q19 | A licence for the drawings? | State none until the repo picks a licence. The Sources line says they are made for Dendro. |
-| Q20 | Ship the new screens behind `?path=1` until the content gate passes? | Yes. The old leaf app stays the default until ticket 6.2. |
-| Q21 | Mastery (section 5.3): new, learning, known, mastered, shown in full on the progress tree, and only on done stops of the trail? | Yes. The four values follow the three answer-format bands, and the trail stays a map of the path. |
-| Q22 | The review log cap: 5,000 rows (the code) or 20,000 (section 17)? | 20,000 only if a row stays under about 150 bytes, so the log fits in localStorage with the rest. Else keep 5,000 and keep the monthly export prompt. |
+| Q19 | A licence for the drawings? | Decided 2026-10-16: state none until the repo picks a licence. The Sources line says they are made for Dendro. |
+| Q20 | Ship the new screens behind `?path=1` until the content gate passes? | Decided 2026-10-16: yes. The old leaf app stays the default until ticket 6.2. |
+| Q21 | Mastery (section 5.3): new, learning, known, mastered, shown in full on the progress tree, and only on done stops of the trail? | Decided 2026-10-16: yes, as section 5.3. The four values follow the three answer-format bands, and the trail stays a map of the path. |
+| Q22 | The review log cap: 5,000 rows (the code) or 20,000 (section 17)? | Decided 2026-10-16: keep 5,000 and the monthly export prompt. A photo hash is 64 characters, so a tree card row is over 200 bytes, and 20,000 rows do not fit in localStorage with the rest. The full log moves to the server when accounts come. |
 
 ## 11. Risks
 
