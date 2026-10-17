@@ -30,7 +30,7 @@ Date: 2026-10-09. Status: decided by the owner after the notes on the first prot
 - A large group splits into subgroups before its species. Examples: the oaks split into red oaks and white oaks; the pines into soft pines and hard pines.
 - The path for a large group runs: group, then subgroup, then species.
 - A small group, such as the tuliptree, has no subgroup level.
-- A per-part depth of `group` can name a subgroup. Example: most acorns tell you "red oak" or "white oak", not the species.
+- A per-part depth of `subgroup` names a subgroup. Example: most acorns tell you "red oak" or "white oak", not the species. (Changed on 2026-10-14: depth has four values, `species`, `subgroup`, `group`, and `none`, one for each level of the path. The first version said that depth `group` can name a subgroup.)
 - Which groups are large enough to split is open.
 
 ### Common trees first
@@ -61,7 +61,7 @@ The main path teaches every part of a group or a species together: leaf, bark, a
 - On tree cards, they appear on cards set in that season.
 - The difficulty step does not change with the season. It measures how hard the photo is to read. An autumn leaf can be step 1.
 - Autumn colour can be a real clue (red maple scarlet, sugar maple orange). A short autumn-colours lesson is possible later.
-- Stage works the same way as season:
+- Stage works the same way as season: (Changed on 2026-10-17: read "stage" here as "growth stage", the photo value. In `GLOSSARY.md` a stage is a level of the path.)
   - A young leaf that has not reached its full shape is step 3, because its features are not formed yet.
   - An unripe fruit with its full shape, such as a green acorn, gets its step from clarity alone. It can be step 1. It is not the usual look, so it does not appear on the species page or in the first cards.
 - The usual look differs by part:

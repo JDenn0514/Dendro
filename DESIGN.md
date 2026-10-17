@@ -666,6 +666,10 @@ Form is a distant photo of the whole tree.
   - `group`: the part names only the group. Example: most acorns give only the red oak
     group or the white oak group.
   - `none`: the part does not help.
+  - (Changed on 2026-10-14: depth has a fourth value, `subgroup`: the part names only the
+    subgroup. Most acorns say "red oak" or "white oak", so their depth is `subgroup`, not
+    `group`. An example of `group` is oak bark that says only "an oak". Each of the four
+    values matches one stage of the path. See `2026-10-09-learning-path.md`.)
 - Reason: many fruits, such as acorns, look alike, and so do many barks.
 
 ### Tree cards
@@ -687,6 +691,8 @@ A tree card is one species in one season, with a button for each part.
   screen.
 - The learner can open any part at no cost. Nothing counts as a hint. The score is only
   whether the learner named the species. The app records which parts the learner opened.
+  (Changed on 2026-10-14: read "Nothing counts as a hint" as "Opening a part does not
+  lower the score". "Hint" now means a first-time callout. See `GLOSSARY.md`.)
 - After a miss, the app shows the right species. It also shows the part that best
   separates the right species from the learner's answer, with a link to a photo that
   shows that part clearly. Only parts with depth `species`, or parts that separate the
@@ -707,6 +713,13 @@ A tree card is one species in one season, with a button for each part.
 
 - Tree cards use the same answer formats as part cards: 4 choices, then 8 choices, then
   typed.
+- (Changed on 2026-10-14: tree cards also use the reversed format, section 17's `inv`. A
+  reversed tree card names the answer and shows four whole trees, each with a button for
+  each part. Reason: one part of two trees can look alike, and other parts settle it. The
+  app prefers wrong trees that are in the card's season and the learner's area, and that
+  are look-alikes of the answer on at least one part. A wrong tree does not have to meet
+  all three, so that enough trees are available. In the group stage, the card names a
+  group and shows trees from different met groups.)
 - The wrong options (distractors) come from `content/confusion.json`. They are limited
   to species found in the same season and in the learner's area.
 
@@ -743,7 +756,8 @@ At the start, the learner picks one of two areas:
 ### Content fields
 
 - Each authored species file, `content_src/species/<SYMBOL>.json`, gets two new values:
-  - a depth for each part (`species`, `group`, or `none`);
+  - a depth for each part (`species`, `subgroup`, `group`, or `none`; `subgroup` added on
+    2026-10-14);
   - a typical leaf or needle size, as a length range.
 - The species-draft skill writes these values from the trusted sources it already cites.
 - The owner checks them for learner clarity, not for botany.
@@ -847,7 +861,7 @@ The decisions in short:
   Which groups split is open.
 - **The usual look first.** A species is introduced with photos of its look for most of
   the year (red maple: green leaves). Photos from other seasons come after the learner
-  knows the species. The difficulty step does not change with the season. Stage works the
+  knows the species. The difficulty step does not change with the season. Growth stage works the
   same way: a full-shape unripe fruit (a green acorn) gets its step from clarity and comes
   later; a young leaf without its full shape is step 3. For fruit, the usual look is the
   ripe fruit, as guides describe it.
@@ -858,7 +872,7 @@ The decisions in short:
 - **Form rule, for later.** A form card asks for the shape word, or for the group where
   shape is a real clue. It never asks for the species from one distant photo.
 - **Batches.** New material comes in batches: 4 items at the start, 5 after a good batch,
-  3 after several misses, 2 for a look-alike pair, never more than 5. The next batch opens
+  3 after several misses, 2 for a look-alike pair, never more than 5. The next batch unlocks
   when each card in the batch is answered right once. The learner can skip ahead.
 - **Wrong options** come only from species, groups, or words the learner has met. Early
   cards have fewer choices.
@@ -867,10 +881,18 @@ The decisions in short:
   words how reliable it is. When the learner has met a look-alike, the page gets a
   section: "You have met X. Here is how they are alike, and how to tell them apart." The
   labels "This tells them apart" and "This only tells you the group" are dropped.
-- **Matched photos.** Photos that the learner compares match in stage, season, and view,
+  (Changed on 2026-10-13: pages have no comparison sections. Each part on the species page
+  has a part line and a look-alike line. The look-alike line says how far the part can be
+  trusted, which trees share it, and which parts settle it.)
+- **Matched photos.** Photos that the learner compares match in growth stage, season, and view,
   in any layout.
 - **Leaf size on leaf part cards.** A leaf photo with a scale object counts as a better
   photo, and "size can be judged" joins the leaf feature list.
+  (Changed on 2026-10-17: for leaves a scale object is neutral, and a clean frame is
+  preferred, because the app gives the typical leaf size as text. For fruit a scale object
+  stays a plus. Species also get a typical fruit size and a typical trunk diameter. Fruit
+  part cards show the fruit size. On reversed cards each choice shows its own typical
+  sizes. Crown shape waits for the form part.)
 - **Layout.** Tap a photo to make it larger. On pages, photos stack at full width. Photo
   credits are smaller.
 - **Two new photo difficulty factors:** an unusual angle, and light or shadow that changes
@@ -911,16 +933,22 @@ Rules that round 2 replaces:
   groups.
 - How batches fit the daily cap on new cards (section 17).
 - What a placement pass sets for a word or a group card.
-- Whether depth `group` uses the same groups as the path. "Red oak group" is a section of
-  the oaks, not a genus.
+- Closed on 2026-10-14: whether depth `group` uses the same groups as the path. Depth
+  `group` names a path group, and the new value `subgroup` names a subgroup such as the red
+  oaks.
 - The exact layout of the species page, and which credit form the app uses.
 - How the two new difficulty factors enter the computed difficulty step.
 - How the manifest records "any season".
-- How the difficulty steps 1 to 3 map onto the `difficulty` field, which has only `hard`
-  today.
-- Whether tree cards have the inverted tier (`inv`) of section 17. The owner named only
-  4 choices, 8 choices, and typed.
-- The size of the quota at each difficulty step.
-- The feature lists for fruit, twig, and flower.
+- Closed on 2026-10-17: how the difficulty steps 1 to 3 map onto the `difficulty` field.
+  A new `step` field holds the difficulty step. Until cutover, `hard` marks step 3, so
+  today's app hides only step 3 photos. At cutover the `hard` value goes. See the intake
+  spec, `docs/superpowers/specs/2026-10-14-intake-comparison-and-photo-audit.md`.
+- Closed on 2026-10-14: whether tree cards have the inverted tier (`inv`) of section 17.
+  They do, as the reversed format (see "Answer formats and wrong options").
+- Closed on 2026-10-17: the size of the quota at each difficulty step. Depth `species`: 3,
+  3, and 2 photos at steps 1, 2, and 3, with 2 or more usual-look photos at step 1. Depth
+  `subgroup`, `group`, or `none`: 2, 2, and 1 (intake spec).
+- The feature lists for twig and flower. (Closed on 2026-10-17 for fruit: key features
+  kind and shape; other features hang, wing, and cap. See the intake spec.)
 - The intake method, after the prototype notes.
 - Whether the range-prior questions of section 11 stay.
