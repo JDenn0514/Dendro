@@ -31,9 +31,9 @@ Changed on 2026-10-13: pages have no comparison sections. The look-alike section
    - The labels "This tells them apart" and "This only tells you the group" are dropped. They were not clear.
    - The cards on a species come after its page.
    - The page stays open later as a reference.
-4. **Photos that the learner compares match** in stage, season, and view. Example: two ripe acorns, both from the side. A green unripe acorn next to a brown ripe acorn teaches a false difference. The rule holds for any layout, side by side or stacked.
+4. **Photos that the learner compares match** in stage, season, and view. Example: two ripe acorns, both from the side. A green unripe acorn next to a brown ripe acorn teaches a false difference. The rule holds for any layout, side by side or stacked. (Changed on 2026-10-17: read "stage" here as "growth stage", the photo value. In `GLOSSARY.md` a stage is a level of the path.)
 5. **Leaf part cards show the typical leaf size of the species.** Size is a clue that the learner must remember, as habitat and height are on tree cards.
-   - A leaf photo with a scale object (a hand, a ruler, or a coin) counts as a better photo.
+   - A leaf photo with a scale object (a hand, a ruler, or a coin) counts as a better photo. (Changed on 2026-10-17: for leaves a scale object is neutral, and a clean frame is preferred, because the app gives the typical leaf size as text. For fruit a scale object stays a plus. Species also get a typical fruit size and a typical trunk diameter. See the intake spec and the v1 spec.)
    - "Size can be judged" joins the leaf feature list.
    - The owner watches in the notes whether learners answer from the number alone.
 6. **Card and page layout,** from the notes on the first prototype:

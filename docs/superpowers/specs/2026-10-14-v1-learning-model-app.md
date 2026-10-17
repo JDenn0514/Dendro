@@ -205,13 +205,15 @@ New fields in `content_src/species/<SYMBOL>.json`. The species-draft agent write
 | `depth` | `{ "leaf": "species", "bark": "group", "fruit": "subgroup" }` | Which card asks about each part (section 4.3). One value for each part. |
 | `depth_feature` | `{ "fruit": "two_heads" }`, optional | A photo must show this feature to ask for the species. Other photos ask for the next depth up: the subgroup, else the group. Example: a London planetree stalk with two seed balls names the species; one ball names the group (prototype `SPECIES_FRUIT_PHOTOS`). |
 | `leaf_length_in` | `[2, 4]` | The typical blade length in inches, not the width. Shown on leaf part cards, on tree cards, and on the species page. |
+| `fruit_length_in` | `[0.75, 1.25]` | The typical fruit size in inches: the longest side, or the width of a ball. Shown on fruit part cards, on tree cards, and on the species page (owner ruling 2026-10-17). |
+| `trunk_diameter_ft` | `[1, 3]` | The typical trunk diameter of a mature tree, in feet, as the sources give it. Shown as a diameter on tree cards and on the species page (owner ruling 2026-10-17). |
 | `words` | `{ "leaf": ["simple", "lobed", "toothed", "sharp_tips", "opposite"], "bark": ["plated"], "fruit": ["samara"] }` | The words that fit this species. They drive word contrast (section 4.2) and the words that are never wrong options on its photos. |
 | `lines` | one text for each part | What the part looks like, on the species page and the miss comparison. |
 | `looks_like` | one text for each part | The fixed half of the look-alike line: how far the part can be trusted, then "Check ..." (round 5). It names no tree. Plain words, such as "A weak clue. Check the bark." The app adds the names of the look-alikes (section 3.5 rules, Q14). |
 | `description` | one text | One line on the tree card answer screen. |
 | `place_tells` | `true`, optional | The typical place tells this tree from its group mates, as with American sycamore (wild, along streams) and London planetree (planted). A miss on a tree card then shows both habitat lines (prototype `placeClue`). |
 
-Fields that stay: `range.text`, `elevation_ft`, `height_ft`, `habitat`, `arrangement`, `ref`, and the rest.
+Fields that stay: `range.text`, `elevation_ft`, `height_ft`, `habitat`, `arrangement`, `ref`, and the rest. `height_ft` is the typical height that tree cards show.
 
 - `arrangement` must agree with `words.leaf`.
 - `concepts` (one old concept row for each part) stays required until the old screens go (ticket 6.2). After that it is optional, and `words` replaces it.
@@ -244,9 +246,9 @@ The species pair tip is in `content/confusion.json` (section 3.8).
 
 ### 3.7 Photo fields (dependency on the intake spec)
 
-The intake spec (`docs/superpowers/specs/2026-10-14-intake-comparison-and-photo-audit.md`, Part 1) decides how the judge sets the photo fields and how the 650 `hard` rows map onto steps. Its proposed manifest fields are `step`, `usual_look`, `season`, `stage`, `features` (the features marked `clear`), `scale`, and `rules`. Its plan fixes the exact names. This design uses them as follows.
+The intake spec (`docs/superpowers/specs/2026-10-14-intake-comparison-and-photo-audit.md`, Part 1) decides how the judge sets the photo fields and how the 650 `hard` rows map onto steps. Its manifest fields are `step`, `usual_look`, `season`, `growth_stage`, `photo_features` (the photo features marked `clear`), `side`, `scale`, `not_for`, and `rules`. This design uses them as follows.
 
-The intake spec calls the growth stage field `stage`. In `GLOSSARY.md`, a stage is a level of the path. This design uses `growth_stage`. Rename the field when the intake spec is reviewed.
+The intake spec called the growth stage field `stage`. In `GLOSSARY.md`, a stage is a level of the path. This design uses `growth_stage`. (Done on 2026-10-17: the intake spec review renamed `stage` to `growth_stage`, and the manifest field `features` to `photo_features`, because in `GLOSSARY.md` a feature is a word feature.)
 
 | Field | Values (intake spec) | App use |
 |---|---|---|
@@ -255,10 +257,11 @@ The intake spec calls the growth stage field `stage`. In `GLOSSARY.md`, a stage 
 | `usual_look` | true or false | The usual look comes first (section 4.4). |
 | `season` | `spring`, `summer`, `autumn`, `winter`, `any` | Which tree card season the photo joins. `any` joins every season. |
 | `growth_stage` | leaf: `young`, `mature`, `autumn`; fruit: `young`, `unripe`, `ripe`, `after_seed_fall`; bark: `young`, `mature`, `old` | The growth stage. Matched photos have the same growth stage. |
-| `features` | the judge's features marked `clear` | Word-card photos, the view, `depth_feature`, and the arrangement rule. |
-| `scale` | `hand`, `ruler`, `coin`, `person`, `other`, `none` | A photo with a scale object ranks first in its difficulty step. |
+| `photo_features` | the judge's photo features marked `clear` | Word-card photos, the view, `depth_feature`, and the arrangement rule. |
+| `side` | leaf only: `upper`, `under`, `both` | The view. Matched leaf photos show the same side (owner ruling 2026-10-17). |
+| `scale` | `hand`, `ruler`, `coin`, `person`, `other`, `none` | Fruit: a photo with a scale object ranks first in its difficulty step. Leaf and bark: neutral (owner ruling 2026-10-17). |
 
-This design needs one more field, which the intake spec does not have yet:
+This design needs one more field. The intake spec added it on 2026-10-17 (Q1):
 
 | Field | Values | App use |
 |---|---|---|
@@ -274,9 +277,9 @@ The judge proposes `not_for` from its `atypical` cause and the source text. The 
 Rules that use the fields:
 
 - **Step is computed.** The intake spec puts one pure function in `app/` that computes keep and step from the judge's marks. The pipeline imports it. The app reads the stored `step`.
-- **The word a photo shows** is derived, not stored. A photo shows a word of a feature when the species' `words` has that word and the photo's `features` holds every `photo_features` entry of that feature. `not_for` can take it away.
-- **Arrangement.** A leaf photo shows the arrangement only when `features` holds `arrangement`: the stalks show where they join the twig. The word is then the species' `arrangement`. This replaces the prototype's hand list `ARRANGEMENT`.
-- **View** is derived from `features`, as the prototype's `stageKey` does: a leaf on a twig when `arrangement` is clear, else one leaf; a fruit on the twig when `hang` is clear, else picked; bark close when `texture` is clear, else far.
+- **The word a photo shows** is derived, not stored. A photo shows a word of a feature when the species' `words` has that word and the photo's `photo_features` holds every `photo_features` entry of that feature. `not_for` can take it away.
+- **Arrangement.** A leaf photo shows the arrangement only when `photo_features` holds `arrangement`: the stalks show where they join the twig. The word is then the species' `arrangement`. This replaces the prototype's hand list `ARRANGEMENT`.
+- **View** is derived from `photo_features` and `side`, as the prototype's `stageKey` does: a leaf on a twig when `arrangement` is clear, else one leaf, and for a leaf also its `side`; a fruit on the twig when `hang` is clear, else picked; bark close when `texture` is clear, else far.
 - **Fruit hang.** A fruit card that depends on how the fruit hangs uses only photos with `hang` clear.
 - **One observation.** The iNaturalist observation ID comes from the `origin` URL. It needs no new field.
 
@@ -343,7 +346,7 @@ Errors:
 
 Warnings (they do not stop a build):
 
-- a species in a version 1 group has no `depth`, `words`, `lines`, `looks_like`, `description`, or `leaf_length_in`;
+- a species in a version 1 group has no `depth`, `words`, `lines`, `looks_like`, `description`, `leaf_length_in`, `fruit_length_in`, or `trunk_diameter_ft`;
 - a learner sentence has more than 20 words;
 - a group member is not in `species_order`;
 - an edge between two version 1 species has no `apart`.
@@ -408,7 +411,7 @@ For each met species and each part, the depth decides (prototype `speciesPartCar
 Photo rules for part cards (prototype `cardPool`):
 
 - A card that asks at subgroup or group depth leaves out photos whose `not_for` names that depth.
-- A leaf part card shows the typical leaf length of the tree in the photo: "Typical leaf: 2 to 4 in long."
+- A leaf part card shows the typical leaf length of the tree in the photo: "Typical leaf: 2 to 4 in long." A fruit part card shows the typical fruit size: "Typical fruit: 0.75 to 1.25 in."
 - Prompts: "Which group is this leaf from?", "Which kind of oak is this leaf from?" (from `noun`), "Which tree is this leaf from?".
 
 ### 4.4 Photos: usual look, step, season
@@ -418,7 +421,7 @@ Prototype `allowedPhotos`, `cardPhotos`, `pagePhoto`, `matchedPhotos`.
 - A new card shows usual-look photos at the lowest difficulty step in its pool.
 - The difficulty step widens with the card's interval: interval 1 day or more adds one step, interval 4 days or more adds another. Never above 3.
 - Photos that are not the usual look (autumn leaves, green acorns) join when the card's interval reaches 7 days.
-- A page shows the usual look at the lowest difficulty step, a scale object first.
+- A page shows the usual look at the lowest difficulty step. For leaves, a photo with nothing else in the frame comes first. For fruit, a photo with a scale object comes first (owner ruling 2026-10-17).
 - **Matched photos.** Photos shown side by side or stacked for comparison match in growth stage, season, and view. With no match among usual-look photos, the miss comparison tries every photo. With no match at all, each side shows its page photo.
 - A card does not show the same photo twice in a row.
 
@@ -456,7 +459,7 @@ Prototype `treeQuestion`, `treePhotos`, `openTreeCards`, `treeAsk`.
 - When one iNaturalist observation covers two or more parts in that season, the card uses its photos for those parts.
 - A species tree card must show at least one part that names the species, or the species has `place_tells`. Otherwise that season is not used.
 
-**Free context,** labelled "typical": the season, the state, the typical place (`habitat`), the typical height, and the typical leaf length.
+**Free context,** labelled "typical": the season, the state, the typical place (`habitat`), the typical height, the typical leaf length, the typical fruit size, and the typical trunk diameter.
 
 - The state is the first state of the learner's area where the tree grows. With "all of the US", it is the first state of its range.
 
@@ -599,6 +602,7 @@ Rules for the photo options of a reversed word or part card:
 - They follow the card's difficulty step and usual-look rules.
 - A reversed card shows 4 photos, also at the 8-choice format. Eight photos do not fit a phone screen at a size where the learner can read them.
 - No caption names a tree until the answer.
+- Each photo shows the typical size of its own tree for that part: the leaf length on a leaf card, the fruit size on a fruit card (owner ruling 2026-10-17). Every photo fills its frame, so without this line the sizes can not be compared.
 
 **Reversed tree cards** (ruling of 2026-10-14, `docs/decisions/2026-10-09-learning-model.md`):
 
@@ -606,6 +610,7 @@ Rules for the photo options of a reversed word or part card:
 - Reason: one part of two trees can look alike, and other parts settle it.
 - The app prefers wrong trees that are in the card's season, in the learner's area, and look-alikes of the answer on at least one part. A wrong tree does not have to meet all three, so that enough trees are available.
 - In the group stage, the card names a group and shows trees from different met groups.
+- Each tree shows its own typical sizes: height, trunk diameter, leaf length, and fruit size. The season and the state stay on the card, because the four trees share them (owner ruling 2026-10-17).
 - The phone layout is the card deck (decided 2026-10-15, section 6.5).
 
 **Typed recall.**
@@ -683,7 +688,7 @@ From `renderPage` in `prototype/beginner-v2/main.js`.
 - **Species page:**
   - the name, the scientific name, and the mastery (section 5.3);
   - "One of the red oaks, in the oaks.";
-  - a list of typical height, typical leaf length, and typical place;
+  - a list of typical height, typical trunk diameter, typical leaf length, typical fruit size, and typical place;
   - for each part: the photo with marks, the part line, and the look-alike line when the learner has met a look-alike on that part (section 3.5).
 - Pages have no comparison sections (round 5).
 - Photos stack at full width. A tap opens the enlarged view.
@@ -696,7 +701,7 @@ From `renderPartCard` and `answerDock`.
 
 - The prompt, then the photo (or drawing) in a frame of fixed height, then the choices in a bottom dock. The dock stays on screen at 375 by 667.
 - A question photo has no caption and no credit until the answer. Its alt text names no tree.
-- A leaf part card shows the typical leaf length under the photo.
+- A leaf part card shows the typical leaf length under the photo. A fruit part card shows the typical fruit size.
 - **Right:** "Right." and the item's part line, or the word's `short` line.
 - **Miss:** the answer named once, large ("A red maple"), the tip in the dock, labelled "Tip", then "Your pick and the right answer" (section 4.7).
 - The credits of every photo shown come after the answer.
@@ -710,6 +715,7 @@ From `renderTreeCard` and `revealTree`.
 - After the answer: the parts the learner opened, the miss comparison for every part shown, and "About the <tree>".
 - **Reversed tree card: the card deck** (owner's pick, 2026-10-15). The working prototype is `prototype/reversed-tree/concepts/deck3.html`. The owner tried 11 layouts there. The others are not used.
   - **The stack.** The four trees are a stack of file cards, slightly fanned. Each card has an index tab with its letter, at its own place along the top edge, so all four tabs show. No other row of letters.
+  - **Sizes.** Each card shows its own tree's typical sizes (section 5.2). The season and the state show once, above the deck.
   - **Tabs.** A tap on a tab brings that card to the top. Each tab shows three dots for the parts seen (leaf, bark, fruit; a dashed dot for a missing part), and marks the card on top and the picked card.
   - **Parts.** A tap or an upward flick on the top card turns it to its next part. The card header shows the letter, the part, and the part dots.
   - **Trees.** A sideways swipe throws the top card to the back. A short swipe springs back. "‹ Tree" and "Tree ›" buttons do the same.
@@ -804,7 +810,7 @@ An export from version 2 does not import into the old app. An export from versio
 
 ### 8.1 Skills
 
-- **species-draft:** the new fields of section 3.5, the `{ text, ref }` shape, and the text rules. A new fill mode drafts the new fields into an existing file and changes no old field.
+- **species-draft:** the new fields of section 3.5, with `fruit_length_in` and `trunk_diameter_ft` from the cited sources, the `{ text, ref }` shape, and the text rules. A new fill mode drafts the new fields into an existing file and changes no old field.
 - **edges-draft:** the `apart` line, and new edges for group mates that version 1 pages and misses need.
 - **teaching-draft** (new skill): the files of section 3.6.
 - **photo-check:** the photo fields, through the intake spec.
@@ -928,6 +934,7 @@ The new screens ship behind `?path=1` until cutover. The old app stays the defau
 - Per-area order from FIA and city data.
 - A range map on the tree card answer screen.
 - Flowers, then twig and form, with the form rule of the learning path.
+- Crown shape, with the form part (owner ruling 2026-10-17). Guides describe it in different words, and it changes with where the tree grows.
 - Variety cards, if the owner wants them back.
 - The intake method, after the intake comparison.
 

@@ -21,7 +21,7 @@ _Avoid_: Species card, channel card
 A review card for one species in one season, with a button for each part. It asks for the group, the subgroup, or the species, from the stage the learner is at for that group. The learner can open any part at no cost. Its context is free.
 
 **Context**:
-The facts that a tree card gives at no cost: the state, the season, and the typical habitat, height, and leaf or needle size.
+The facts that a tree card gives at no cost: the state, the season, and the typical habitat, height, trunk diameter, leaf or needle size, and fruit size. On a reversed tree card, each tree shows its own sizes.
 _Avoid_: Clue (a clue is read from a photo), hint
 
 **Depth**:
@@ -172,6 +172,10 @@ _Avoid_: Stage (a level of the path)
 
 **View**:
 The angle and distance of one photo, such as a close-up or an underside. Photos that the learner compares match in season, growth stage, and view.
+
+**Photo feature**:
+One thing the photo judge reads in a photo of a part, such as the leaf margin or how the fruit hangs. A word card can use a photo only when it shows the photo features of the word's feature clearly.
+_Avoid_: Feature (that is the word feature)
 
 **Difficulty step**:
 How hard it is to read the feature in one photo, from 1 (the feature alone and whole) to 3 (the learner must search for it, or it is not typical). It does not change with the season.

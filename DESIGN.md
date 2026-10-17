@@ -888,6 +888,11 @@ The decisions in short:
   in any layout.
 - **Leaf size on leaf part cards.** A leaf photo with a scale object counts as a better
   photo, and "size can be judged" joins the leaf feature list.
+  (Changed on 2026-10-17: for leaves a scale object is neutral, and a clean frame is
+  preferred, because the app gives the typical leaf size as text. For fruit a scale object
+  stays a plus. Species also get a typical fruit size and a typical trunk diameter. Fruit
+  part cards show the fruit size. On reversed cards each choice shows its own typical
+  sizes. Crown shape waits for the form part.)
 - **Layout.** Tap a photo to make it larger. On pages, photos stack at full width. Photo
   credits are smaller.
 - **Two new photo difficulty factors:** an unusual angle, and light or shadow that changes
@@ -934,11 +939,16 @@ Rules that round 2 replaces:
 - The exact layout of the species page, and which credit form the app uses.
 - How the two new difficulty factors enter the computed difficulty step.
 - How the manifest records "any season".
-- How the difficulty steps 1 to 3 map onto the `difficulty` field, which has only `hard`
-  today.
+- Closed on 2026-10-17: how the difficulty steps 1 to 3 map onto the `difficulty` field.
+  A new `step` field holds the difficulty step. Until cutover, `hard` marks step 3, so
+  today's app hides only step 3 photos. At cutover the `hard` value goes. See the intake
+  spec, `docs/superpowers/specs/2026-10-14-intake-comparison-and-photo-audit.md`.
 - Closed on 2026-10-14: whether tree cards have the inverted tier (`inv`) of section 17.
   They do, as the reversed format (see "Answer formats and wrong options").
-- The size of the quota at each difficulty step.
-- The feature lists for fruit, twig, and flower.
+- Closed on 2026-10-17: the size of the quota at each difficulty step. Depth `species`: 3,
+  3, and 2 photos at steps 1, 2, and 3, with 2 or more usual-look photos at step 1. Depth
+  `subgroup`, `group`, or `none`: 2, 2, and 1 (intake spec).
+- The feature lists for twig and flower. (Closed on 2026-10-17 for fruit: key features
+  kind and shape; other features hang, wing, and cap. See the intake spec.)
 - The intake method, after the prototype notes.
 - Whether the range-prior questions of section 11 stay.
