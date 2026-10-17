@@ -232,8 +232,10 @@ Every judge call happens once. The methods then replay from the stored results, 
 | S, single pass, stop at quota (baseline) | Walk the pool in fetch order, 10 photos to a call. The judge answers for each photo, and the code computes keep and difficulty step. Stop when the quota of every difficulty step is full, or the pool runs out. Keep the first photos in fetch order at each difficulty step. | The judge's cost for the photos seen |
 | F, reject pass first (baseline) | Haiku answers for every photo with the same schema. Its rejects drop out. The main judge answers for the rest, in fetch order, and stops at the quota. | Haiku's cost, plus the main judge's cost for the photos it sees |
 | R, collect K, rank in each difficulty step | The judge answers for the first K photos (K = 20, 30, or all). The code computes the difficulty steps. A ranking agent orders the photos of each difficulty step from contact sheets only (owner ruling 2026-10-08). Keep the top photos of each difficulty step up to the quota. The ranking prefers the usual look, then (for fruit) a scale object, then the whole subject, then the view that the other species of the group show. | The judge's cost for K photos, plus the ranking cost |
+| FR, reject pass, then rank | Haiku answers for every photo with the same schema. Its rejects drop out. The main judge answers for the rest. A ranking agent orders the photos of each difficulty step, as in R. In the old eval's blind round 1, a Haiku reject pass then an Opus ranking won the most targets (3 of 10). | Haiku's cost, plus the main judge's cost and the ranking cost for the photos that pass |
+| CR, code rank | As R, but the code ranks the photos of each difficulty step from the judge's answers, with no ranking agent. The order: the usual look, then (for fruit) a scale object, then `whole` and `alone`, then the most photo features at `clear`, then fetch order. | The judge's cost for K photos. The ranking costs no tokens. |
 
-- S and F keep photos in fetch order, not the best. That breaks the best-of ruling (2026-09-29). They run as cost baselines only. Only a method that ranks can be the candidate.
+- S and F keep photos in fetch order, not the best. That breaks the best-of ruling (2026-09-29). They run as cost baselines only. Only a method that ranks (R, FR, or CR) can be the candidate. CR shows whether the ranking agent is worth its cost.
 - With a small K, R ranks only the first sources in fetch order. The report shows how often the best photo of "all" comes after photo K.
 - Judge models: Opus 5.5, Sonnet 5.5, and Haiku 5.5 (`claude-opus-5-5`, `claude-sonnet-5-5`, `claude-haiku-5-5`). Agents get the full model IDs.
 - The reject pass uses Haiku only. Sonnet costs about half of Opus per photo, so a Sonnet reject pass saves little.
@@ -274,6 +276,7 @@ When neither variant passes the gates, a third variant adds a reference sheet wi
 | Repeat agreement | The same judge on the same photos twice. The owner's own repeat agreement was 80% in label round 3; the 40 relabelled photos measure it on the held-out set. | key, leading variant only; held-out |
 | Cost | Tokens, and price-weighted USD (prices in Part 5), per photo judged and per kept photo | key, held-out |
 | Quota fill | The share of species, part, and difficulty step cells that the method fills, and the photos judged to fill them | held-out |
+| Source yield | For each source, the photos kept at each difficulty step, and the cells that one fetch fills. It does not compare methods. It shows later whether the fetch needs a change, such as a new source or better search words. | held-out |
 | Time | Wall-clock minutes per 100 photos, from the workflow run record | all runs |
 
 Growth stage and species are not scored against the owner. Species doubt is scored against the source page.
@@ -296,8 +299,8 @@ The new eval folder is `.superpowers/2026-10-14-intake-eval/` (git-ignored). It 
 | `make-workflow.mjs`, `collect.mjs`, `check-run.mjs`, `lib/tokens.mjs` | yes | New job kinds (judge, reject pass, rank in each difficulty step). |
 | `lib/schemas.mjs` and `lib/prompts.mjs` | no | The new fields, the photo features per part, V1 and V2. Bark and fruit checks are in scope now. |
 | `pools.mjs` | no | Pools from the key and from the held-out fetch order. All three parts. |
-| `lib/replay.mjs` | partly | Quota per difficulty step in place of "6 good". Methods S and F (baselines) and R. |
-| `lib/score.mjs` | partly | Keep, difficulty step, top pick, and species doubt in place of best-6 quality and extras. The new decision rule. |
+| `lib/replay.mjs` | partly | Quota per difficulty step in place of "6 good". Methods S and F (baselines), R, FR, and CR. |
+| `lib/score.mjs` | partly | Keep, difficulty step, top pick, species doubt, and source yield in place of best-6 quality and extras. The new decision rule. |
 | `estimate.mjs` | yes | Per-photo costs from the old run, not from the tracer. |
 | Pick page and blind page | no | The 2026-10-11 review page: photos side by side, with captions. The suggestions are hidden for the held-out set. A best-photo pick for each cell. |
 | A new `lib/step.mjs` | new | The keep and difficulty step function, with unit tests. The pipeline later gets the same function. |
@@ -397,14 +400,16 @@ With the difficulty step changes on the `hard` rows and the 10% sample, the owne
 | 2 | Key: 211 photos, 3 models, V1 and V2 | 132 | 15 (11 to 25) | yes |
 | 2 | Key: repeat of the leading variant, 3 models | 66 | 8 (5 to 12) | yes, same approval |
 | 2 | Key: ranking in each difficulty step, 21 cells, 3 models | 63 | 4.5 (3 to 7) | yes, same approval |
+| 2 | Key: ranking for FR, on the photos that pass the Haiku reject pass, 21 cells, 3 models | 63 | 4 (3 to 6) | yes, same approval |
 | 3 | Held-out: 208 photos, 3 models, frozen variant | 63 | 8 (5 to 12) | yes |
 | 3 | Held-out: ranking in each difficulty step, 9 cells, 3 models | 27 | 2.5 (1.5 to 4) | yes, same approval |
+| 3 | Held-out: ranking for FR, 9 cells, 3 models | 27 | 2 (1.5 to 3.5) | yes, same approval |
 | 5 | Audit: 2,143 photos, Opus alone | 215 | 49 (39 to 72) | yes |
 | 5 | Audit: 2,143 photos, Sonnet alone | 215 | 27 (21 to 39) | yes |
 | 5 | Audit: 2,143 photos, Haiku alone | 215 | 2 (1.5 to 4) | yes |
 | 5 | Audit: Haiku reject pass, then Opus on the 80% that pass | about 390 | 42 (33 to 63) | yes |
 
-- The eval (phases 1 to 3) is about 360 agents and USD 39 (range 27 to 62).
+- The eval (phases 1 to 3) is about 450 agents and USD 45 (range 32 to 72). CR adds no cost, because it replays from stored answers.
 - The audit costs USD 2 to 49, by the method picked. A reject pass saves little in the audit, because most published photos pass it.
 - Every workflow over 10 agents needs the owner's yes before launch. Phases 2, 3, and 5 each need one.
 
@@ -414,7 +419,7 @@ With the difficulty step changes on the `hard` rows and the 10% sample, the owne
 |---|---|---|
 | 0, spec review | The owner reads this spec and answers the open questions. Done on 2026-10-17. | done |
 | 1, harness | Copy and adapt the old harness. Write `lib/step.mjs` with unit tests from the key's cases. Build the key pools and images. Run the tracer: model check, then 2 calls per model. | none |
-| 2, key runs | Run the judge passes on the key (owner's yes). Replay S, F, and R for every model, variant, rule, and quota. Score. Freeze the rule and the prompt. | the yes for the run |
+| 2, key runs | Run the judge passes on the key (owner's yes). Replay S, F, R, FR, and CR for every model, variant, rule, and quota. Score. Freeze the rule and the prompt. | the yes for the run |
 | 3, held-out | Build the held-out pools. The owner labels them blind. Run the frozen variant (owner's yes). Score, shortlist, check, and write the report. | about 210 blind labels (about 40 minutes); the best photo of 9 cells; 40 repeat labels a week later (about 8 minutes); the optional feature check (about 10 minutes); the ruling |
 | 4, pipeline and skills | A plan, then pull requests: data model, validator, CLI audit commands, the photo-check and content-run skills. | reads the plan diff; merges |
 | 5, audit | Images, the judge run (owner's yes), flags, gaps, review sheets. The owner reviews. The CLI applies the owner's calls on a `content/` branch. | about 1 to 1.5 hours of review; merges |
@@ -423,7 +428,7 @@ The audit's judge run (phase 5, items 1 to 5 of "What it does") can start when p
 
 ## Rulings on the open questions
 
-The owner ruled on each question on 2026-10-17. Questions 8 to 17 came from the review of this spec against `GLOSSARY.md` and the v1 spec.
+The owner ruled on each question on 2026-10-17. Questions 8 to 20 came from the review of this spec against `GLOSSARY.md` and the v1 spec.
 
 | # | Question | Ruling |
 |---|---|---|
@@ -445,6 +450,8 @@ The owner ruled on each question on 2026-10-17. Questions 8 to 17 came from the 
 | 16 | A variant leaf form. | Its difficulty step comes from clarity. It is not the usual look. `not_for` names the word features where it differs. It is not `atypical`. |
 | 17 | The hybrid rule, when the target PLHI is itself a hybrid. | Reject a photo whose source names a hybrid that is not the target. A PLHI photo whose source names PLHI passes. |
 | 18 | Is a photo with a scale object better? | Leaf and bark: neutral. A clean frame shows the subject best, and the app gives the typical leaf size as text. Fruit: a plus. The app also gets a typical fruit size field (v1 spec section 3.5). A hand that covers part of the subject makes `whole` false. |
+| 19 | Test more ranking methods? | Yes: FR (a Haiku reject pass, then judge and rank) and CR (the code ranks from the judge's answers, at no token cost). |
+| 20 | Does this eval test the photo fetch? | No. It tests the judging only. The held-out set adds a source yield score. A test of the fetch is a later spec, and the audit gap list feeds it. |
 
 ## Risks
 
@@ -462,7 +469,7 @@ The owner ruled on each question on 2026-10-17. Questions 8 to 17 came from the 
 ## Out of scope
 
 - Twig, flower, and form photos. None exist yet.
-- New photo fetches. The held-out set uses an existing run's candidates.
+- New photo fetches. The held-out set uses an existing run's candidates. A test of the fetch is a later spec. The source yield score and the audit gap list feed it.
 - Image size, photos per call, and effort. These belong to issue #22.
 - The app change that reads `step`, `usual_look`, and the other fields.
 - Photo marks (arrows and labels) and the choice of photos for species pages.
