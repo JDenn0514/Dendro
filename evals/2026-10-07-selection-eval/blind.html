@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blind set check</title>
+<style>
+[hidden] { display: none !important; }
+body { font: 15px system-ui, sans-serif; margin: 16px; background: #faf8f2; color: #222; }
+header { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; position: sticky; top: 0; background: #faf8f2; padding: 8px 0; z-index: 1; border-bottom: 1px solid #ddd; }
+.sets { display: grid; grid-template-columns: repeat(2, minmax(0, 446px)); gap: 16px; justify-content: center; }
+@media (max-width: 960px) { .sets { grid-template-columns: minmax(0, 446px); } }
+.col { background: #fff; padding: 3px; border: 3px solid transparent; }
+.col.on { border-color: #c60; }
+.col h2 { margin: 4px 0 8px; font-size: 16px; }
+.grid { display: flex; flex-direction: column; gap: 6px; }
+.grid div { background: #eee; }
+.grid img { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+.none { display: flex; align-items: center; justify-content: center; min-height: 160px; border: 2px dashed #999; color: #666; font-style: italic; background: #f3f0e8; }
+button { font-size: 15px; padding: 6px 14px; }
+button.on { background: #c60; color: #fff; }
+#status { color: #666; }
+</style>
+</head>
+<body>
+<header>
+  <select id="target"></select>
+  <span id="species"></span>
+  <button data-a="L">Set 1 is better</button>
+  <button data-a="same">Same</button>
+  <button data-a="R">Set 2 is better</button>
+  <span id="status"></span>
+</header>
+<p>Each tree shows two sets of photos. Pick the set that is better for learning this leaf, or "Same" when neither set is better. A set can hold fewer than 6 photos, or none. Each photo shows at the size that the app shows a learner (440 px on the long side). When the window is narrow, Set 2 moves below Set 1.</p>
+<div id="empty" hidden>No targets to answer in this round.</div>
+<div class="sets" id="sets">
+  <section class="col" id="colL"><h2>Set 1</h2><div class="grid" id="L"></div></section>
+  <section class="col" id="colR"><h2>Set 2</h2><div class="grid" id="R"></div></section>
+</div>
+<script>
+let pub, ans, cur;
+const $ = id => document.getElementById(id);
+async function save() {
+  $('status').textContent = 'saving...';
+  try {
+    const r = await fetch('/blind-answers', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(ans) });
+    $('status').textContent = r.ok ? `saved (${Object.keys(ans.answers).length} of ${pub.targets.length} answered)` : 'SAVE FAILED: ' + await r.text();
+  } catch (e) { $('status').textContent = 'SAVE FAILED: ' + e.message; }
+}
+function fill(id, ns) {
+  if (!ns.length) {
+    const box = document.createElement('div');
+    box.className = 'none';
+    box.textContent = 'no photos kept';
+    $(id).replaceChildren(box);
+    return;
+  }
+  $(id).replaceChildren(...ns.map(n => {
+    const d = document.createElement('div');
+    const img = document.createElement('img');
+    img.src = `/images/${cur.target}/${n}.jpg`;
+    img.alt = '';
+    d.append(img);
+    return d;
+  }));
+}
+function draw() {
+  $('species').textContent = cur.species || '';
+  fill('L', cur.L); fill('R', cur.R);
+  const a = ans.answers[cur.target];
+  $('colL').className = 'col' + (a === 'L' ? ' on' : '');
+  $('colR').className = 'col' + (a === 'R' ? ' on' : '');
+  for (const b of document.querySelectorAll('button[data-a]')) b.className = a === b.dataset.a ? 'on' : '';
+}
+for (const b of document.querySelectorAll('button[data-a]')) b.onclick = async () => {
+  if (!cur) return;
+  ans.answers[cur.target] = b.dataset.a;
+  draw();
+  await save();
+  const i = pub.targets.indexOf(cur);
+  if (i + 1 < pub.targets.length) { $('target').selectedIndex = i + 1; cur = pub.targets[i + 1]; draw(); scrollTo(0, 0); }
+};
+$('target').onchange = () => { cur = pub.targets[$('target').selectedIndex]; draw(); scrollTo(0, 0); };
+(async () => {
+  pub = await (await fetch('/blind-public.json')).json();
+  if (!pub.targets || !pub.targets.length) { $('empty').hidden = false; $('sets').hidden = true; return; }
+  const old = await (await fetch('/blind-answers')).json();
+  ans = old.round === pub.round && old.answers ? old : { round: pub.round, answers: {} };
+  $('target').replaceChildren(...pub.targets.map((t, i) => new Option(`${i + 1}. ${t.target}`)));
+  cur = pub.targets[0];
+  draw();
+})();
+</script>
+</body>
+</html>
