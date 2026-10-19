@@ -96,7 +96,7 @@ Result: a list of photo features is not enough to compute the difficulty step. T
 
 ### The paused selection-method eval
 
-The eval is on draft PR #35. Its spec is `.claude/worktrees/selection-eval/docs/superpowers/specs/2026-10-07-selection-method-eval-design.md`. Its ledger is `.claude/worktrees/selection-eval/.superpowers/sdd/2026-10-07-selection-method-eval/progress.md`. Its files are in the git-ignored folder `.superpowers/2026-10-07-selection-eval/`.
+The eval is on PR #35, closed on 2026-10-17 without a merge. Its spec and plan are on the branch `feat/selection-eval`: `docs/superpowers/specs/2026-10-07-selection-method-eval-design.md` and `docs/superpowers/plans/2026-10-07-selection-method-eval.md`. Its ledger is on the owner's laptop, in `.claude/worktrees/selection-eval/.superpowers/sdd/2026-10-07-selection-method-eval/progress.md`. Its harness code is in `evals/2026-10-07-selection-eval/` (moved from the git-ignored `.superpowers/` folder on 2026-10-19, code only).
 
 - It judged 473 leaf photos of 10 targets under the old rules, at 440 px, with effort high.
 - It ran 195 agents with no failures. It cost USD 17.56: Opus 11.09, Sonnet 6.01, Haiku 0.46. The estimate before the run was USD 43.
@@ -291,7 +291,7 @@ Growth stage and species are not scored against the owner. Species doubt is scor
 
 ### What is reused from the selection-method eval
 
-The new eval folder is `.superpowers/2026-10-14-intake-eval/` (git-ignored). It starts from a copy of `.superpowers/2026-10-07-selection-eval/`.
+The new eval folder is `evals/2026-10-14-intake-eval/`. Git tracks it, so a cloud session keeps its code and results (owner ruling 2026-10-19). Git ignores only the image copies. It starts from a copy of `evals/2026-10-07-selection-eval/`.
 
 | Part | Reused as it is | Changes |
 |---|---|---|
