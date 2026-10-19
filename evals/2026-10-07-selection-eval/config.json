@@ -1,0 +1,16 @@
+{
+  "seed": 20261007,
+  "tracer_target": "QUAC2",
+  "tracer_model": "haiku",
+  "port": 8770,
+  "app_px": 440,
+  "pick_seed": 20261008,
+  "blind_opponent": "Fhaiku>Ball|opus",
+  "same_species": { "QUMA13": ["Quercus margaretiae"] },
+  "effort": { "opus": "high", "sonnet": "high", "haiku": "high" },
+  "model_opt": {
+    "opus": "claude-opus-5-5",
+    "sonnet": "claude-sonnet-5-5",
+    "haiku": "claude-haiku-5-5"
+  }
+}
