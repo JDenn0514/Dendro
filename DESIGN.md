@@ -1,7 +1,8 @@
 # Tree ID Learning Tool — Design Notes
 
 Status: pre-implementation. Sections 1 to 16 are the original design notes.
-Section 17 records the decisions made on 2026-09-21. Where the two disagree, section 17 wins.
+Sections 17, 18, and 19 are decisions logs (2026-09-21, 2026-10-09, and 2026-10-16 to
+2026-10-17). Where two sections disagree, the newer one wins.
 Nothing here is built yet.
 
 ---
@@ -952,3 +953,126 @@ Rules that round 2 replaces:
   kind and shape; other features hang, wing, and cap. See the intake spec.)
 - The intake method, after the prototype notes.
 - Whether the range-prior questions of section 11 stay.
+
+## 19. Decisions log (2026-10-16 and 2026-10-17): version 1 and photo intake
+
+This section wins over section 18, and over the rest of this document, where they
+disagree. The list below names each rule it replaces.
+
+The owner ruled on the open questions of two specs: the v1 spec
+(`docs/superpowers/specs/2026-10-14-v1-learning-model-app.md`, section 10) on 2026-10-16,
+and the intake spec
+(`docs/superpowers/specs/2026-10-14-intake-comparison-and-photo-audit.md`, "Rulings on the
+open questions") on 2026-10-17. The short record is
+`docs/decisions/2026-10-17-v1-and-intake-rulings.md`. The specs keep the full tables.
+
+### Rules this section replaces
+
+- **Section 17, Review of 2026-09-22, the tier ladder** (`mc4`, `mc8`, `inv`, `typed`,
+  with 2 `good` grades and an interval gate to move up). The answer format now follows the
+  card's interval, as section 17 first said: choices of 2 to 4 options under 7 days, 8
+  options from 7 to 21 days, typed recall after 21 days. A reversed card replaces a choice
+  question about one time in five. A lapse drops one format. The stored `tier` and
+  `tier_passes` fields go.
+- **Section 17, the log cap of 20,000 rows.** The cap stays at 5,000 rows, as in the code,
+  with the monthly export prompt.
+- **Section 17, the unit card-count rule (5 to 25 cards).** Batches replace units as the
+  size rule.
+- **Section 17, the five level names** (new, seen, familiar, strong, expert). Mastery has
+  four values: new, learning, known, and mastered.
+- **Section 18, Area, "All of North America".** The second choice says "All of the United
+  States" until the app has Canada and Mexico data.
+- **Section 18, Tree cards, "Season comes from ... the season tags in the manifest".**
+  Season comes from the new `season` field of each photo, which the photo judge sets. A
+  season tag is the fallback for a photo that is not audited yet.
+- **Section 18, Free context.** It also gives the typical fruit size and the typical trunk
+  diameter. On a reversed tree card, each tree shows its own sizes.
+- **Section 18, round 2, "A leaf photo with a scale object counts as a better photo".**
+  For leaf and bark a scale object is neutral, and a clean frame is preferred. For fruit
+  it stays a plus.
+- **Section 18, Photos and intake, the `difficulty` field.** A new `step` field holds the
+  photo difficulty step. Until cutover, `hard` marks step 3 only. At cutover the `hard`
+  value goes.
+
+### Version 1 of the app (2026-10-16)
+
+- **Owner files.** `content/features.json` is a new owner file: one row for each feature,
+  with a prompt, the photo features, and a drawing. Agents do not change it. The judge's
+  photo features and the word features stay two lists, joined by `photo_features`.
+- **Teaching text.** A teaching-draft agent writes group text, pair tips, and word pair
+  tips in `content_src/teaching/`, with sources. The owner checks learner clarity.
+- **Photos get `not_for`:** the word features or depths that a photo must not test.
+- **Order.** One hand order of groups and species, drafted from FIA and city totals.
+  Per-area order comes after version 1.
+- **Subgroups follow a rule.** A group splits when some state has more than 10 of its
+  species, botanists use the split, and a learner can see it on at least one part. In
+  version 1 only the oaks pass. QUCE joins no subgroup.
+- **Early choices.** 2 on a new card, 3 after its first right answer, 4 from a 4-day
+  interval, never more than the met items allow.
+- **Reversed tree cards** use the card deck with rule out (2026-10-15).
+- **Daily cap.** The cap of new cards stays. The first batch of a day unlocks even when it
+  is larger than the cap.
+- **Placement test.** A pass sets interval 21 days, ease 2.5, and reps 1. A group passes
+  with both of its cards right.
+- **Left out of version 1:** variety cards (their saved states stay) and a range map (the
+  answer screen shows the range text and the elevation).
+- **Credits.** Pages: a small line under each photo. Cards: the credits after the answer.
+- **Look-alike lines** name met trees only. With no met look-alike on a part, the part
+  shows no look-alike line.
+- **Practice mode.** A right answer to a card that is not due does not change its
+  schedule.
+- **The slow-answer rule** is off on tree cards.
+- **One tree card for each species.** The app picks the season each time.
+- **Drawings** state no licence until the repo picks one.
+- **The new screens** ship behind `?path=1`. The old leaf app stays the default until the
+  cutover ticket.
+
+### Sizes (2026-10-17)
+
+- Species get a typical fruit size (`fruit_length_in`) and a typical trunk diameter
+  (`trunk_diameter_ft`). The app shows the trunk as a diameter. `height_ft` already gives
+  the typical height.
+- Fruit part cards show the typical fruit size, as leaf part cards show the leaf length.
+- On a reversed card, each choice shows its own typical sizes.
+- Crown shape waits for the form part.
+
+### Photo intake and the audit (2026-10-17)
+
+- **Quota per difficulty step.** Depth `species`: 3, 3, and 2 photos at steps 1, 2, and 3,
+  with 2 or more usual-look photos at step 1. Depth `subgroup`, `group`, or `none`: 2, 2,
+  and 1.
+- **Fruit photo features.** Key: kind and shape. Other: hang, wing, and cap.
+- **The eval.** A blind held-out set of 208 photos. Only a ranking method can win: R, FR,
+  or CR. Methods S and F are cost baselines. The held-out check uses the owner's own
+  repeat agreement. The eval tests the judging only. A test of the photo fetch is a later
+  spec.
+- **The audit.** The owner reviews every flagged photo and a random 10% of the rest. The
+  14 bark and fruit word targets are in. The 8 old leaf-shape targets are out.
+- **The owner labels** part, keep, and difficulty step. The usual look and the growth
+  stage come from the judge and the source page.
+- **Photo rules.** A green, full-size leaf with no other sign of season is summer. Mature
+  and old bark are the usual look. A variant leaf form gets its step from clarity, is not
+  the usual look, and gets `not_for`. A source that names a hybrid other than the target
+  is a reject.
+- **PR #35** closed without a merge.
+
+### Section 18 items this section closes
+
+- How many choices early cards have.
+- How the section 17 unit rules apply to groups: they do not. Batches replace them.
+- How batches fit the daily cap on new cards.
+- What a placement pass sets for a word or a group card.
+- The exact layout of the species page, and which credit form the app uses (v1 spec
+  section 6.3).
+- How the two new difficulty factors enter the computed difficulty step: as the causes
+  `angle` and `light`, which make a photo step 3. The intake eval tests this rule.
+- How the manifest records "any season": the `season` field has the value `any`.
+
+### Still open
+
+- The intake method, after the intake eval.
+- Per-area order from FIA and city data, and Canada and Mexico.
+- The feature lists for twig and flower.
+- A licence for the drawings.
+- Whether the range-prior questions of section 11 stay.
+
