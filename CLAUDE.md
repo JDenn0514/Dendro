@@ -25,7 +25,7 @@ Rules:
 
 - `app/logic/content.js` is the one content validator. The pipeline imports from `app/`. `app/` never imports from `pipeline/`.
 - Change `content/species.json`, `content/images/manifest.json`, and the `.jsonl` files of a run only through the CLI.
-- A person authors `content/concepts.json` and `content/units.json`. Agents do not change them.
+- A person authors `content/concepts.json`, `content/units.json`, and `content/features.json`. Agents do not change them.
 - IDs are append-only. Retire a published ID. Never delete it. `ids check --base origin/main` enforces this in CI.
 - A species retires only on purpose: through `species retire`, or when all of its manifest rows are retired.
 - The `source` of a manifest row is a display name that the credit prints word for word. A new value needs an entry in `app/logic/sources.js`.
@@ -57,7 +57,7 @@ Read the `content-run` skill before you start a run or a step of one.
 ## Docs
 
 - `docs/decisions/` holds the owner's rulings. `docs/superpowers/specs/` and `docs/superpowers/plans/` hold the design and plan of each batch.
-- `DESIGN.md` section 17 (2026-09-21) wins where it disagrees with the rest of `DESIGN.md`.
+- `DESIGN.md` sections 17, 18, and 19 are decisions logs. Where two sections disagree, the newer one wins: 19 over 18, 18 over 17, and 17 over sections 1 to 16.
 - Commit scopes: `content(<run>):`, `feat(<scope>):`, `fix(<scope>):`, `docs(skills):`, `ci:`, `test:`. Branches: `content/<run>`, `feat/…`, `fix/…`, `skills/…`. Work lands through pull requests.
 
 ## Agent skills
