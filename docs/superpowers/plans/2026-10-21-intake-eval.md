@@ -43,9 +43,9 @@ The image hosts, probed from this container with a User-Agent header:
 | `dendro.cnre.vt.edu` | 200, image | key 2, held-out 2 |
 | `bioimages.vanderbilt.edu` | 200, image | key 12 |
 | `upload.wikimedia.org` | **429**, "Too many requests ... use thumbnail images" | key 2, held-out 11 |
-| `plants.sc.egov.usda.gov` | **blocked**: the proxy answers 403 to CONNECT (environment policy) | key 3 |
+| `plants.sc.egov.usda.gov` | 200, image (blocked at first; allowed on 2026-10-21) | key 3 |
 
-- `plants.sc.egov.usda.gov`: the owner added it to the environment's allowed domains on 2026-10-21. A check after that change still got 403 in this container. Task 2 checks it again, and stops until it answers.
+- `plants.sc.egov.usda.gov`: the owner added it to the environment's allowed domains on 2026-10-21. After a typo fix, the 3 key photos answered 200 with images.
 - `upload.wikimedia.org` is not blocked by the environment. Wikimedia refuses this container's shared address for full-size files and for thumbnails on that host. The same files at a standard thumbnail width (960 or 1280 px) on `thumb.wikimedia.org` answer 200. Owner ruling 2026-10-21: use the 1280 px thumbnail from `thumb.wikimedia.org`, then make the 440 px copy.
 - wildflower.org answered with and without a User-Agent in the probe. The owner's ruling stands all the same: every download sends a User-Agent header, and a response that is not an image (such as a "Just a moment..." page) is a failure, never a saved image.
 
@@ -476,7 +476,7 @@ CR, S, and F add no tokens: they replay from stored answers. A third prompt vari
 2. **The quota without a depth.** Ruling: the headline uses the depth `species` quota (3, 3, and 2) on every cell, and the report also shows 2, 2, and 1.
 3. **The feature check.** Ruling: yes, after the held-out labels (Task 8).
 4. **The pull request for this plan.** Open after the owner's comments on the plan are settled.
-5. **`plants.sc.egov.usda.gov`.** The owner added it to the allowed domains. Task 2 checks it again before the key images.
+5. **`plants.sc.egov.usda.gov`.** The owner added it to the allowed domains. It answers now.
 
 ## Later plans
 
