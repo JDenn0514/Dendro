@@ -13,7 +13,7 @@ import path from 'node:path';
 import { EVAL } from './lib/paths.mjs';
 import { readJson, readJsonl, writeJson } from './lib/data.mjs';
 import { MODEL_IDS, messagesFrom, sumMessages } from './lib/tokens.mjs';
-import { keyProblems } from './lib/coverage.mjs';
+import { keyProblems, decodeResult } from './lib/coverage.mjs';
 import { failedAgents, timeSpan, findRecord } from './lib/journal.mjs';
 
 const args = process.argv.slice(2);
@@ -56,6 +56,8 @@ for (const j of jobs) {
   const want = MODEL_IDS[j.model];
   let result = null;
   for (const r of records) if (r.results.get(j.label) != null) result = r.results.get(j.label);
+  // The agent answers with photo codes. results.json holds the keys.
+  result = decodeResult(j, result);
   const seen = new Set(), msgs = [], states = [], lines = [];
   let recordTokens = 0;
   for (const r of records) {

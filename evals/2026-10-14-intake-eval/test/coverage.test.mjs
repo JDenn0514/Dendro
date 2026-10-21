@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { keyProblems } from '../lib/coverage.mjs';
+import { keyProblems, decodeResult } from '../lib/coverage.mjs';
 
 const item = key => ({ key, part: 'leaf' });
 
@@ -32,4 +32,14 @@ test('rank: a key in the order of another group is a problem', () => {
 
 test('a job with no result returns no key problem', () => {
   assert.deepEqual(keyProblems({ label: 'x', kind: 'judge', keys: ['a'] }, null), []);
+});
+
+test('decodeResult turns the codes of a judge result back into keys, and leaves an unknown code as it is', () => {
+  const job = { kind: 'judge', codes: { p007: 'ACRU-leaf-02', p031: 'QUAL-bark-01' } };
+  const r = decodeResult(job, { results: [item('p031'), item('p007'), item('p999')] });
+  assert.deepEqual(r.results.map(x => x.key), ['QUAL-bark-01', 'ACRU-leaf-02', 'p999']);
+  assert.equal(decodeResult(job, null), null);
+  const rank = { kind: 'rank', orders: { 1: ['a'] } };
+  const same = { orders: { 1: ['a'] }, unread: [], note: '' };
+  assert.equal(decodeResult(rank, same), same);
 });

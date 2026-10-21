@@ -28,18 +28,23 @@ export function tracerPhotos(pool, seed) {
 export function buildJobs(pool, plan, config, opts = {}) {
   const brief = name => path.join(EVAL, 'briefs', `${name}.md`);
   const cellOf = new Map(pool.cells.flatMap(c => c.photos.map(p => [p.key, c])));
-  // Judges read the 440 px copy: the size that the learner sees.
+  // Judges read the 440 px copy: the size that the learner sees. They see only the photo code (key-pools.mjs),
+  // never the key, so the prompt does not give away the part or the place in the cell.
   const line = p => {
     const c = cellOf.get(p.key);
-    return { key: p.key, abs: path.join(EVAL, 'images', 'app', pool.set, `${p.key}.jpg`), tree: c.species, source_species: p.source_species, depth: config.depth_features?.[c.target] };
+    return { key: p.code, abs: path.join(EVAL, 'images', 'app', pool.set, `${p.code}.jpg`), tree: c.species, source_species: p.source_species, depth: config.depth_features?.[c.target] };
   };
+  const codes = list => Object.fromEntries(list.map(p => [p.code, p.key]));
   const base = (kind, m, effort) => ({ kind, phase: kind, set: pool.set, model: m, model_opt: config.model_opt[m], effort });
   const jobs = [];
   const judge = (photos, m, effort, variant) => {
     for (let i = 0; i < photos.length; i += BATCH) {
       const b = photos.slice(i, i + BATCH);
       const n = String(i / BATCH + 1).padStart(2, '0');
-      jobs.push({ label: `judge:${m}:${effort}:${variant}:b${n}`, ...base('judge', m, effort), variant, keys: b.map(p => p.key), schema: 'JUDGE', prompt: promptJudge(b.map(line), brief(`judge-${variant}`)) });
+      // The photos of a call in an order fixed per call, the same for every model and variant.
+      // The key order inside a cell follows the review prototype, so the prompt does not show it.
+      const shown = shuffle(b, mulberry32(config.seed + i));
+      jobs.push({ label: `judge:${m}:${effort}:${variant}:b${n}`, ...base('judge', m, effort), variant, keys: b.map(p => p.key), codes: codes(b), schema: 'JUDGE', prompt: promptJudge(shown.map(line), brief(`judge-${variant}`)) });
     }
   };
   const rank = (m, c, groups, groupLine) => {
@@ -56,7 +61,7 @@ export function buildJobs(pool, plan, config, opts = {}) {
   if (plan === 'tracer') {
     const ten = tracerPhotos(pool, config.seed);
     const two = ten.slice(0, 2);
-    for (const m of MODELS) jobs.push({ label: `check:${m}`, ...base('check', m, config.effort[m]), variant: 'V1', keys: two.map(p => p.key), schema: 'CHECK', prompt: promptCheck(two.map(line), brief('judge-V1')) });
+    for (const m of MODELS) jobs.push({ label: `check:${m}`, ...base('check', m, config.effort[m]), variant: 'V1', keys: two.map(p => p.key), codes: codes(two), schema: 'CHECK', prompt: promptCheck(two.map(line), brief('judge-V1')) });
     for (const m of MODELS) for (const v of config.variants) judge(ten, m, config.effort[m], v);
     // One cell that fits on one sheet, ranked as one group: the tracer has no judge answers to group by yet.
     const c = pool.cells.find(x => x.photos.length <= PER_SHEET);

@@ -20,7 +20,8 @@ const candidates = Object.fromEntries(runs.map(r => [r, readJsonl(path.join(ROOT
 const species = readJson(path.join(ROOT, 'content', 'species.json'));
 const plantsNames = Object.fromEntries(Object.entries(species).map(([sym, s]) => [sym, s.scientific]));
 
-const pool = buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx: config.wikimedia_thumb_px });
+// The codes take their own seed, so that they do not follow the tracer draw of config.seed.
+const pool = buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx: config.wikimedia_thumb_px, seed: config.seed + 1 });
 writeJson(path.join(EVAL, 'key', 'pools.json'), pool);
 const sizes = pool.cells.map(c => c.photos.length);
 const photos = pool.cells.flatMap(c => c.photos);

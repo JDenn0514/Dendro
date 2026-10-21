@@ -1,4 +1,5 @@
-// node images.mjs --set key|heldout   ->  images/orig/, images/app/<set>/<key>.jpg, images/sheets/<set>/<cell>/all-<i>.jpg
+// node images.mjs --set key|heldout   ->  images/orig/, images/app/<set>/<code>.jpg, images/sheets/<set>/<cell>/all-<i>.jpg
+// The copy is named by the photo code, not the key: the judges read it, and the key names the part.
 // node images.mjs --set key --jobs <plan>   ->  also the ranking sheets of the rank jobs in wf/<plan>.jobs.json
 // Downloads each original once (lib/fetch.mjs) to images/orig/<sha256 of the fetch URL>.<ext>, and makes the
 // 440 px copy (config.app_px; EXIF rotate, fit inside, quality 85). A file is saved only when the response is
@@ -36,7 +37,7 @@ const appCopy = input => sharp(input).rotate().resize({ width: appPx, height: ap
 
 const failures = [];
 async function one(p) {
-  const out = path.join(appDir, `${p.key}.jpg`);
+  const out = path.join(appDir, `${p.code}.jpg`);
   const host = new URL(p.fetch_url).hostname;
   const fail = (status, error) => failures.push({ key: p.key, host, url: p.fetch_url, status, error });
   let orig = savedOrig(p.fetch_url);
@@ -66,8 +67,10 @@ for (const p of photos) {
 }
 await Promise.all([...byHost.values()].map(async list => { for (const p of list) await one(p); }));
 
-const done = new Set(photos.filter(p => fs.existsSync(path.join(appDir, `${p.key}.jpg`))).map(p => p.key));
-const tile = key => ({ file: path.join(appDir, `${key}.jpg`), label: key });
+const codeOf = new Map(photos.map(p => [p.key, p.code]));
+const done = new Set(photos.filter(p => fs.existsSync(path.join(appDir, `${p.code}.jpg`))).map(p => p.key));
+// The tiles show the key: the ranking agents and the owner read the sheets, not the judges.
+const tile = key => ({ file: path.join(appDir, `${codeOf.get(key)}.jpg`), label: key });
 let sheets = 0;
 for (const c of pool.cells) {
   for (const s of sheetsFor(EVAL, set, c.cell, 'all', c.photos.map(p => p.key))) {

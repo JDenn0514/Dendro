@@ -24,9 +24,10 @@ const PICKS = [
 ];
 const CANDIDATES = { leaf_topup: [{ id: 'c1c1', target: 'PLOC', file_url: 'https://upload.wikimedia.org/wikipedia/commons/6/66/P.jpg', source_species: 'Platanus occidentalis var. glabrata' }] };
 const NAMES = { ACRU: 'Acer rubrum', PLOC: 'Platanus occidentalis' };
+const OPTS = { thumbPx: 1280, seed: 20261014 };
 
 test('the key pool has one cell per section, with keys in key order', () => {
-  const P = buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, { thumbPx: 1280 });
+  const P = buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS);
   assert.equal(P.set, 'key');
   assert.deepEqual(P.cells.map(c => [c.cell, c.target, c.part, c.species]), [['ACRU-leaf', 'ACRU', 'leaf', 'Acer rubrum'], ['PLOC-fruit', 'PLOC', 'fruit', 'Platanus occidentalis']]);
   assert.deepEqual(P.cells[0].photos.map(p => [p.key, p.n, p.order]), [['ACRU-leaf-01', 1, 1], ['ACRU-leaf-02', 2, 2]]);
@@ -35,7 +36,7 @@ test('the key pool has one cell per section, with keys in key order', () => {
 });
 
 test('a published photo takes the CDN src, the PLANTS name, and the owner call from the picks', () => {
-  const p = buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, { thumbPx: 1280 }).cells[0].photos[1];
+  const p = buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS).cells[0].photos[1];
   assert.equal(p.review_key, 'bbb2');
   assert.equal(p.url, 'https://img.learndendro.com/img/bbb2.jpg');
   assert.equal(p.fetch_url, p.url);
@@ -47,7 +48,7 @@ test('a published photo takes the CDN src, the PLANTS name, and the owner call f
 });
 
 test('a cand: photo takes the candidate file_url and source name, and a Wikimedia file goes through the thumbnail', () => {
-  const p = buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, { thumbPx: 1280 }).cells[1].photos[0];
+  const p = buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS).cells[1].photos[0];
   assert.equal(p.url, 'https://upload.wikimedia.org/wikipedia/commons/6/66/P.jpg');
   assert.equal(p.fetch_url, 'https://thumb.wikimedia.org/wikipedia/commons/thumb/6/66/P.jpg/1280px-P.jpg');
   assert.equal(p.source_species, 'Platanus occidentalis var. glabrata');
@@ -57,13 +58,22 @@ test('a cand: photo takes the candidate file_url and source name, and a Wikimedi
 });
 
 test('no agent suggestion reaches the pool', () => {
-  const text = JSON.stringify(buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, { thumbPx: 1280 }));
+  const text = JSON.stringify(buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS));
   for (const word of ['reason', 'features', 'stage', 'season', 'scale', 'usualLook', 'usual_look', 'suggested_step', 'statusText', 'One whole leaf stands alone', 'Looks upside down']) {
     assert.ok(!text.includes(word), `the pool holds ${word}`);
   }
 });
 
 test('a photo with no pick row or no candidate row throws', () => {
-  assert.throws(() => buildKeyPool(SECTIONS, PICKS.slice(1), CANDIDATES, NAMES, { thumbPx: 1280 }), /no pick row for aaa1/);
-  assert.throws(() => buildKeyPool(SECTIONS, PICKS, { leaf_topup: [] }, NAMES, { thumbPx: 1280 }), /no candidate c1c1 in leaf_topup/);
+  assert.throws(() => buildKeyPool(SECTIONS, PICKS.slice(1), CANDIDATES, NAMES, OPTS), /no pick row for aaa1/);
+  assert.throws(() => buildKeyPool(SECTIONS, PICKS, { leaf_topup: [] }, NAMES, OPTS), /no candidate c1c1 in leaf_topup/);
+});
+
+test('each photo gets an opaque code, unique and fixed by the seed', () => {
+  const codes = P => P.cells.flatMap(c => c.photos.map(p => p.code));
+  const a = codes(buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS));
+  assert.ok(a.every(c => /^p\d{3}$/.test(c)), a.join(' '));
+  assert.equal(new Set(a).size, 3);
+  assert.deepEqual(a, codes(buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS)));
+  assert.notDeepEqual(a, codes(buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, { ...OPTS, seed: 5 })));
 });

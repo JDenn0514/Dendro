@@ -3,6 +3,7 @@ import path from 'node:path';
 
 import { ROOT } from './paths.mjs';
 import { fetchUrlOf } from './fetch.mjs';
+import { mulberry32, shuffle } from './seed.mjs';
 
 export const RUNS = ['simple_lobed_us', 'simple_lobed_us_add'];
 
@@ -88,7 +89,9 @@ export function buildTargets(run, candidates, verdicts, plantsNames, sameSpecies
 // Each photo keeps only what the judge prompt and the scores need. No agent suggestion of data.js
 // (step, features, stage, season, scale, reason, usualLook) and no owner note goes into the pool.
 // n is the place in the cell (the stand-in for fetch order, plan choice 2); order is the place in the key.
-export function buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx }) {
+// code: an opaque name (p001, p002, ...) in an order fixed by the seed. The judge sees only the code,
+// so the key cannot tell it the part or the place in the cell.
+export function buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx, seed }) {
   const pick = new Map(picks.map(r => [r.key, r]));
   const cand = new Map(Object.entries(candidates).flatMap(([run, rows]) => rows.map(r => [`${run}:${r.id}`, r])));
   let order = 0;
@@ -113,5 +116,11 @@ export function buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx
       };
     }),
   }));
+  assignCodes(cells, seed);
   return { set: 'key', cells };
+}
+
+function assignCodes(cells, seed) {
+  const all = shuffle(cells.flatMap(c => c.photos), mulberry32(seed));
+  all.forEach((p, i) => { p.code = `p${String(i + 1).padStart(3, '0')}`; });
 }

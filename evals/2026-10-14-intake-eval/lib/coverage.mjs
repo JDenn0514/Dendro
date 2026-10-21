@@ -1,3 +1,10 @@
+// A judge or check agent answers with the photo codes of its prompt. decodeResult turns each code
+// back into the photo key, from job.codes. An unknown code stays as it is, so keyProblems reports it.
+export function decodeResult(job, result) {
+  if (result == null || job.kind === 'rank' || !job.codes) return result;
+  return { ...result, results: (result.results ?? []).map(a => (a && job.codes[a.key] ? { ...a, key: job.codes[a.key] } : a)) };
+}
+
 // Key coverage of one job. Every key of the job comes back exactly once, and no other key appears.
 // check and judge: the keys of result.results. rank: the keys of every order plus result.unread
 // (a key in unread counts as covered, because the agent says it could not read it). A ranked key must
