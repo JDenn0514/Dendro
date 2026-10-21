@@ -78,6 +78,8 @@ These cases were hard checks before. Answer them this way:
 
 Each check is about the key photo features of the part that you set. Use the code before each check in `reject`.
 
+A key photo feature that a learner finds only with a search or close study is `search`, not a reject. Use `feature_unclear` only when a key photo feature is `no`.
+
 1. `feature_unclear`: You cannot make out the feature. A learner cannot see, without close study, the characteristics that tell this tree from others: the lobes and margin of one leaf, the shape of the fruit, or the ridge or plate pattern of the bark. If you must look very closely to trace it, the answer is yes (owner ruling 2026-09-30).
 2. `leaf_mass`: Leaf: the photo shows a crown, a whole tree, or a sapling, and the leaves blend into a mass.
 3. `bark_up_or_dark`: Bark: the camera looks up into the crown, or the photo is too dark to read the texture.

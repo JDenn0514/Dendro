@@ -132,6 +132,9 @@ export function briefJudge(checks, variant) {
     '',
     'Each check is about the key photo features of the part that you set. Use the code before each check in `reject`.',
     '',
+    // Check 1 comes from a skill that had no `search` value. The spec's rule makes close study `search` (owner ruling 2026-10-21).
+    'A key photo feature that a learner finds only with a search or close study is `search`, not a reject. Use `feature_unclear` only when a key photo feature is `no`.',
+    '',
     ...checks.rejects.map((t, i) => `${i + 1}. ${code(REJECT_CODES[i])}: ${t}`),
     `11. ${code('feature_not_found')}: the part is leaf, bark, or fruit, but the photo does not show its key photo features at all.`,
     `12. ${code('hybrid')}: see **Identity** above.`,

@@ -34,6 +34,12 @@ test('the judge brief copies each reject check with its code, and none of the ha
   assert.ok(V1.includes(checks.notAFault));
   assert.ok(V1.includes(checks.escalations));
   assert.match(V1, /`quality` only when no reject check is yes/);
+  // Reject check 1 says close study is a reject; the spec's rule says it is `search`. The brief settles it (owner ruling 2026-10-21).
+  const settle = 'A key photo feature that a learner finds only with a search or close study is `search`, not a reject. Use `feature_unclear` only when a key photo feature is `no`.';
+  for (const b of [V1, V2]) {
+    assert.ok(b.includes(settle));
+    assert.ok(b.indexOf(settle) < b.indexOf('1. `feature_unclear`'), 'the line comes before the checks');
+  }
   assert.ok(!V1.includes('**Hard:**'));
   assert.ok(!V1.includes('Crowded leaves: no leaf shows its whole outline'));
 });
