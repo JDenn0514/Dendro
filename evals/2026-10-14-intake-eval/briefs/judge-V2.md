@@ -52,7 +52,7 @@ You answer a fixed checklist on each photo for a tree-identification app. Each p
 12. `usual_look`: true for green mature leaves, ripe fruit, and mature or old bark. A leaf form that is not the typical form is not the usual look.
 13. `not_for`: the word features or depths that this photo must not test, such as `["edge"]` or `["subgroup"]`. The word features are `outline`, `blade`, `lobe_tips`, `edge`, `arrangement`, `bark_pattern`, and `fruit_kind`. The depths are `subgroup` and `group`. Propose it from an `atypical` cause or a variant leaf form. Most photos get `[]`.
 14. `reject`: every reject check below that is yes, as its code. `[]` when none is yes.
-15. `escalate`: `mismatch`, `quality`, or `none`. See the escalation cases below.
+15. `escalate`: `mismatch`, `quality`, or `none`. See the escalation cases below. Set `quality` only when no reject check is yes.
 16. `note`: one or two sentences. What you saw, and the reason for each answer that makes the photo harder.
 
 ## How to answer some cases

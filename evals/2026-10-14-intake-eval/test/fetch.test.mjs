@@ -53,6 +53,21 @@ test('two calls to one host wait 1 s on the clock; another host does not wait', 
   assert.deepEqual(c.waits, [1000]);
 });
 
+test('two calls at once to one host group take turns, 1 s apart', async () => {
+  const c = clock(), f = fake(response(200, 'image/jpeg')), last = new Map();
+  const at = [];
+  const fetchImpl = async (url, init) => { at.push(c.t); return f.fetchImpl(url, init); };
+  // Two hosts of the api.inaturalist.org group, at 1 per second.
+  // Sleeps that overlap, as real timers do: each one ends at its own target time.
+  const sleep = async ms => { const end = c.t + ms; await new Promise(r => setImmediate(r)); c.t = Math.max(c.t, end); };
+  const opts = { fetchImpl, sleep, now: c.now, last };
+  // A request of the group just went out, so both calls must wait.
+  last.set('api.inaturalist.org', c.t);
+  await Promise.all([download('https://static.inaturalist.org/a.jpg', opts), download('https://inaturalist-open-data.s3.amazonaws.com/b.jpg', opts)]);
+  assert.equal(at.length, 2);
+  assert.ok(at[0] - 1_000_000 >= 1000 && at[1] - at[0] >= 1000, `calls at ${at.map(t => t - 1_000_000)} ms`);
+});
+
 test('the gap comes from RATE_PER_SECOND, through the host group of the pipeline', () => {
   assert.equal(gapMs('www.wildflower.org'), 1000);
   assert.equal(gapMs('not-listed.example'), 1000);

@@ -1,5 +1,5 @@
-// node collect.mjs --name intake-eval-tracer --run <run ID> [--run <resumed run ID> ...] [--fail-on-unread]
-// node collect.mjs --name intake-eval-tracer --record <run record file> [...]
+// node collect.mjs --name <plan> --run <run ID> [--run <resumed run ID> ...] [--fail-on-unread]
+// node collect.mjs --name <plan> --record <run record file> [...]
 // Reads the job list, the run records, and the agent transcripts. --run finds the record of a run ID in the
 // session folders under $HOME/.claude/projects/. Run it in the session of the workflow: the records go away with the container.
 // Writes runs/<name>/results.json, tokens.json, times.json, tool-errors.json, problems.txt.

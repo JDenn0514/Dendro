@@ -25,9 +25,10 @@ export async function download(url, { fetchImpl = fetch, sleep = realSleep, now 
   let fail = null;
   for (let attempt = 0; attempt <= RETRIES; attempt++) {
     if (attempt > 0) await sleep(BACKOFF_MS * 2 ** (attempt - 1));
-    const wait = (last.get(group) ?? -Infinity) + gap - now();
-    if (wait > 0) await sleep(wait);
-    last.set(group, now());
+    // Reserve the next slot of the group before the wait, so that parallel calls take turns.
+    const slot = Math.max(now(), (last.get(group) ?? -Infinity) + gap);
+    last.set(group, slot);
+    if (slot > now()) await sleep(slot - now());
     let res;
     try {
       res = await fetchImpl(url, { headers: { 'User-Agent': USER_AGENT }, redirect: 'follow' });

@@ -1,5 +1,6 @@
 // node make-workflow.mjs --plan tracer|tracer-effort|key-high|key-effort [--variant V1|V2]
-// Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/intake-eval-<plan>.js, and wf/intake-eval-<plan>.jobs.json.
+// Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/<plan>.js, and wf/<plan>.jobs.json.
+// The workflow is named intake-eval-<plan>. collect.mjs --name <plan> then writes runs/<plan>/.
 // Prints the agent count per kind, model, and effort, and the USD estimate of estimate.mjs.
 // Job kinds: `check` (the model check), `judge` (model, effort, variant, batch), and `rank` (model, set, cell, groups).
 import fs from 'node:fs';
@@ -74,7 +75,7 @@ export function buildJobs(pool, plan, config, opts = {}) {
 
 export function renderScript(name, jobs) {
   const phases = [...new Set(jobs.map(j => j.phase))].map(title => ({ title }));
-  const meta = { name, description: `Intake eval agents (${jobs.length} agents)`, phases };
+  const meta = { name: `intake-eval-${name}`, description: `Intake eval agents (${jobs.length} agents)`, phases };
   const slim = jobs.map(j => ({ label: j.label, phase: j.phase, model: j.model_opt, effort: j.effort, schema: j.schema, prompt: j.prompt }));
   return [
     `export const meta = ${JSON.stringify(meta)}`,
@@ -98,7 +99,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const args = process.argv.slice(2);
   const opt = n => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
   const plan = opt('--plan');
-  const name = `intake-eval-${plan}`;
+  const name = plan;
   const config = readJson(path.join(EVAL, 'config.json'));
   const pool = readJson(path.join(EVAL, 'key', 'pools.json'));
   writeBriefs();

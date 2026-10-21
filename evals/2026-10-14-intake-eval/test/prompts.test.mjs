@@ -23,6 +23,9 @@ test('extractChecks takes the 10 reject checks, Not a fault, and the three escal
   assert.match(checks.escalations, /`license`/);
   assert.match(checks.escalations, /`quality`: the image is sepia/);
   assert.throws(() => extractChecks('no headings here'), /not found in photo-check SKILL.md/);
+  // A reordered list would put each code on the wrong check, so it throws.
+  const swapped = SKILL.replace('4. Blur smears', '4. XBlur').replace('5. The subject is a dead', '4. Blur smears').replace('4. XBlur', '5. The subject is a dead');
+  assert.throws(() => extractChecks(swapped), /reject check 4 is not `blur`/);
 });
 
 test('the judge brief copies each reject check with its code, and none of the hard checks', () => {
@@ -30,6 +33,7 @@ test('the judge brief copies each reject check with its code, and none of the ha
   for (const code of ['feature_not_found', 'hybrid', 'unread']) assert.ok(V1.includes(`\`${code}\``), code);
   assert.ok(V1.includes(checks.notAFault));
   assert.ok(V1.includes(checks.escalations));
+  assert.match(V1, /`quality` only when no reject check is yes/);
   assert.ok(!V1.includes('**Hard:**'));
   assert.ok(!V1.includes('Crowded leaves: no leaf shows its whole outline'));
 });

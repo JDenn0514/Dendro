@@ -1,4 +1,4 @@
-// node check-run.mjs <plan name>  ->  agents, failures, tokens, USD, and minutes per kind, model, effort, and variant;
+// node check-run.mjs <plan>  ->  agents, failures, tokens, USD, and minutes per kind, model, effort, and variant;
 // answers missing and unread per set-up; ranking keys unread.
 import path from 'node:path';
 import { EVAL } from './lib/paths.mjs';
@@ -28,7 +28,7 @@ console.table(agg);
 console.log('answers missing per set-up:', JSON.stringify(v.noAnswer));
 console.log('unread photos per set-up:', JSON.stringify(v.unread));
 console.log('model checks:', JSON.stringify(v.checks));
-// stepOf must run on every stored answer.
+// A smoke test: stepOf must not throw on any stored answer.
 let stepped = 0;
 for (const a of Object.values(v.answers)) for (const x of Object.values(a)) { stepOf(x); stepped++; }
 console.log(`stepOf ran on ${stepped} answers | view problems: ${v.problems.length}`);

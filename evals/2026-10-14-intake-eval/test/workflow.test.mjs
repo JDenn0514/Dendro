@@ -105,7 +105,7 @@ test('the depth feature goes on the PLHI photos only, for the part fruit', () =>
 
 test('renderScript writes a pure-literal meta and the job list', () => {
   const jobs = buildJobs(POOL, 'tracer', config);
-  const s = renderScript('intake-eval-tracer', jobs);
+  const s = renderScript('tracer', jobs);
   const lines = s.split('\n');
   assert.ok(lines[0].startsWith('export const meta = {'));
   const meta = JSON.parse(lines[0].slice('export const meta = '.length));

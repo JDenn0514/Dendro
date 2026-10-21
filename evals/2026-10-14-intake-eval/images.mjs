@@ -1,5 +1,5 @@
 // node images.mjs --set key|heldout   ->  images/orig/, images/app/<set>/<key>.jpg, images/sheets/<set>/<cell>/all-<i>.jpg
-// node images.mjs --set key --jobs <plan name>   ->  also the ranking sheets of the rank jobs in wf/<plan name>.jobs.json
+// node images.mjs --set key --jobs <plan>   ->  also the ranking sheets of the rank jobs in wf/<plan>.jobs.json
 // Downloads each original once (lib/fetch.mjs) to images/orig/<sha256 of the fetch URL>.<ext>, and makes the
 // 440 px copy (config.app_px; EXIF rotate, fit inside, quality 85). A file is saved only when the response is
 // an image and sharp can decode it. A failure is never replaced: it goes in <set>/img-failures.json with its
@@ -15,7 +15,7 @@ import { sheetsFor, renderSheet } from './lib/sheet.mjs';
 const args = process.argv.slice(2);
 const opt = name => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : null; };
 const set = opt('--set');
-if (!['key', 'heldout'].includes(set)) throw new Error('usage: node images.mjs --set key|heldout [--jobs <plan name>]');
+if (!['key', 'heldout'].includes(set)) throw new Error('usage: node images.mjs --set key|heldout [--jobs <plan>]');
 const { default: sharp } = await import('sharp');
 const appPx = readJson(path.join(EVAL, 'config.json')).app_px;
 if (!(appPx > 0)) throw new Error('config.json has no app_px');
@@ -51,7 +51,7 @@ async function one(p) {
     orig = path.join(origDir, `${hash(p.fetch_url)}.${ext}`);
   }
   let copy;
-  try { copy = await appCopy(bytes); } catch (e) { return fail(200, `sharp cannot decode: ${e.message}`); }
+  try { copy = await appCopy(bytes); } catch (e) { return fail(null, `sharp cannot decode: ${e.message}`); }
   if (!fs.existsSync(orig)) fs.writeFileSync(orig, bytes);
   fs.writeFileSync(out, copy);
 }

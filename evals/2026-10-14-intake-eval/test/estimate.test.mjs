@@ -17,11 +17,13 @@ test('with no tracer, a photo costs the old per-photo USD plus 30%', () => {
 
 test('perPhotoFromRun prices each set-up and variant from a run; the estimate takes the closest match', () => {
   const run = [job('j1', 'judge', 'sonnet', 'high', 'V2', 10), job('j2', 'judge', 'sonnet', 'high', 'V2', 10), job('c', 'check', 'sonnet', 'high', 'V1', 2)];
-  const per = perPhotoFromRun(run, { j1: { usd: 0.2 }, j2: { usd: 0.4 }, c: { usd: 1 } });
-  near(per['sonnet:high:V2'], 0.03);
-  near(per['sonnet:high'], 0.03);
+  const per = perPhotoFromRun(run, { j1: { usd: 0.2, tokens: 2000 }, j2: { usd: 0.4, tokens: 4000 }, c: { usd: 1, tokens: 9 } });
+  near(per['sonnet:high:V2'].usd, 0.03);
+  near(per['sonnet:high'].tokens, 300);
   assert.equal(per['sonnet:high:V1'], undefined, 'a check job does not price a judge photo');
   const e = estimateJobs([job('x', 'judge', 'sonnet', 'high', 'V2', 20), job('y', 'judge', 'sonnet', 'high', 'V1', 20), job('z', 'judge', 'sonnet', 'xhigh', 'V1', 20)], per);
   near(e.rows['judge sonnet high'].usd, 20 * 0.03 + 20 * 0.03);
+  near(e.rows['judge sonnet high'].tokens, 40 * 300);
+  assert.equal(e.rows['judge sonnet xhigh'].tokens, null, 'the old costs give no tokens');
   assert.equal(e.rows['judge sonnet xhigh'].source, 'old + 30%');
 });

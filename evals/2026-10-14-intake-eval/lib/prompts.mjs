@@ -13,10 +13,17 @@ const oneLine = s => s.replace(/\s+/g, ' ').trim();
 
 // skill: the text of .claude/skills/photo-check/SKILL.md.
 // Returns { rejects: [10 check texts, on one line each], notAFault, escalations }.
+// The first words of each reject check, in the order of REJECT_CODES. A reordered list throws,
+// so that no code goes on the wrong check.
+const REJECT_STARTS = ['You cannot make out', 'Leaf: the photo shows a crown', 'Bark: the camera looks up', 'Blur smears', 'The subject is a dead', 'A plant name label', 'Buds, flowers, or catkins', 'The leaf is from a sucker', 'The image is black-and-white', 'Fruit: the main part'];
+
 export function extractChecks(skill) {
   const list = between(skill, '**Reject** when any of these is yes:', '**Escalate**', 'The reject checks');
   const rejects = list.split('\n').slice(1).join('\n').split(/^\d+\.\s/m).map(oneLine).filter(Boolean);
   if (rejects.length !== 10) throw new Error(`The reject checks not found in photo-check SKILL.md: ${rejects.length} checks, want 10`);
+  for (const [i, t] of rejects.entries()) {
+    if (!t.startsWith(REJECT_STARTS[i])) throw new Error(`photo-check SKILL.md: reject check ${i + 1} is not \`${REJECT_CODES[i]}\`: ${t.slice(0, 40)}`);
+  }
   const notAFault = between(skill, '**Not a fault.**', '**Hard:**', 'Not a fault').trim();
   const cases = between(skill, '## The three escalation cases', 'Everything else', 'The three escalation cases');
   const escalations = cases.slice(cases.indexOf('1. ')).trim();
@@ -99,7 +106,7 @@ export function briefJudge(checks, variant) {
     '12. `usual_look`: true for green mature leaves, ripe fruit, and mature or old bark. A leaf form that is not the typical form is not the usual look.',
     '13. `not_for`: the word features or depths that this photo must not test, such as `["edge"]` or `["subgroup"]`. The word features are `outline`, `blade`, `lobe_tips`, `edge`, `arrangement`, `bark_pattern`, and `fruit_kind`. The depths are `subgroup` and `group`. Propose it from an `atypical` cause or a variant leaf form. Most photos get `[]`.',
     '14. `reject`: every reject check below that is yes, as its code. `[]` when none is yes.',
-    '15. `escalate`: `mismatch`, `quality`, or `none`. See the escalation cases below.',
+    '15. `escalate`: `mismatch`, `quality`, or `none`. See the escalation cases below. Set `quality` only when no reject check is yes.',
     '16. `note`: one or two sentences. What you saw, and the reason for each answer that makes the photo harder.',
     '',
     '## How to answer some cases',
