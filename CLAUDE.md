@@ -56,7 +56,8 @@ Read the `content-run` skill before you start a run or a step of one.
 
 ## Docs
 
-- `docs/decisions/` holds the owner's rulings. `docs/superpowers/specs/` and `docs/superpowers/plans/` hold the design and plan of each batch.
+- `docs/decisions/` holds the owner's rulings. `docs/superpowers/specs/` and `docs/superpowers/plans/` hold the design and plan of each batch. The folder name is historical: the Superpowers plugin is off.
+- The flow for a batch: the spec and the plan go in `docs/`, and the owner reviews their diffs. After the owner approves a plan, `/to-tickets` makes one GitHub issue for each task, and `/implement` builds each ticket. Both skills are in the `mattpocock-skills` plugin, and only the owner can start them.
 - `DESIGN.md` sections 17, 18, and 19 are decisions logs. Where two sections disagree, the newer one wins: 19 over 18, 18 over 17, and 17 over sections 1 to 16.
 - Commit scopes: `content(<run>):`, `feat(<scope>):`, `fix(<scope>):`, `docs(skills):`, `ci:`, `test:`. Branches: `content/<run>`, `feat/…`, `fix/…`, `skills/…`. Work lands through pull requests.
 

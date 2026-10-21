@@ -1,6 +1,6 @@
 # Intake eval, phases 1 to 3: implementation plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task by task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** The owner runs `/to-tickets` on this plan, which makes one GitHub issue for each task, blocked by the tasks it depends on. Then the owner runs `/implement` on each ticket whose blockers are done. The plan holds the detail (files, tests, agents, cost). The ticket tracks the work. Steps use checkbox (`- [ ]`) syntax.
 
 **Goal:** Find the photo intake method that agrees best with the owner on keep and on the difficulty step, at a cost the owner accepts. This plan covers phases 1 to 3 of the intake spec: the harness, the runs on the key, and the blind held-out set with the report.
 
