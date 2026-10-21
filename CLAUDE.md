@@ -67,6 +67,8 @@ Read the `content-run` skill before you start a run or a step of one.
 
 Issues live in GitHub Issues on JDenn0514/Dendro, through the `gh` CLI. See `docs/agents/issue-tracker.md`.
 
+When the pull request of a ticket merges, update the issue before you report to the owner. Tick each acceptance criterion that is met. Add a comment that links the pull request and lists the results, the owner's rulings, and the work still open. Remove the `ready-for-agent` label. A `Closes #<n>` line closes the issue but does none of this.
+
 ### Triage labels
 
 The five default labels: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. See `docs/agents/triage-labels.md`.
