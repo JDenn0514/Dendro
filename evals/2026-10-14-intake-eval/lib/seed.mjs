@@ -18,7 +18,8 @@ export function shuffle(items, rng) {
   return a;
 }
 
-// Display order for the pick page: fixed per seed and target, so the owner does not see fetch order.
+// An order fixed per seed and target (or cell). The old pick page used it so that the owner did not see
+// fetch order. The key pool uses it for the order of the photos of a cell.
 export function pickOrder(photos, seed, target) {
   let h = seed >>> 0;
   for (const ch of target) h = Math.imul(h ^ ch.charCodeAt(0), 16777619) >>> 0;

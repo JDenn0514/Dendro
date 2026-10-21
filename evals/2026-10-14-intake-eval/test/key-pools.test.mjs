@@ -31,12 +31,13 @@ test('the key pool has one cell per section, with keys in key order', () => {
   assert.equal(P.set, 'key');
   assert.deepEqual(P.cells.map(c => [c.cell, c.target, c.part, c.species]), [['ACRU-leaf', 'ACRU', 'leaf', 'Acer rubrum'], ['PLOC-fruit', 'PLOC', 'fruit', 'Platanus occidentalis']]);
   assert.deepEqual(P.cells[0].photos.map(p => [p.key, p.n, p.order]), [['ACRU-leaf-01', 1, 1], ['ACRU-leaf-02', 2, 2]]);
+  assert.deepEqual(P.cells[0].photos.map(p => p.review_key).sort(), ['aaa1', 'bbb2']);
   assert.equal(P.cells[1].photos[0].key, 'PLOC-fruit-01');
   assert.equal(P.cells[1].photos[0].order, 3);
 });
 
 test('a published photo takes the CDN src, the PLANTS name, and the owner call from the picks', () => {
-  const p = buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS).cells[0].photos[1];
+  const p = buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS).cells[0].photos.find(x => x.review_key === 'bbb2');
   assert.equal(p.review_key, 'bbb2');
   assert.equal(p.url, 'https://img.learndendro.com/img/bbb2.jpg');
   assert.equal(p.fetch_url, p.url);
@@ -76,4 +77,20 @@ test('each photo gets an opaque code, unique and fixed by the seed', () => {
   assert.equal(new Set(a).size, 3);
   assert.deepEqual(a, codes(buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, OPTS)));
   assert.notDeepEqual(a, codes(buildKeyPool(SECTIONS, PICKS, CANDIDATES, NAMES, { ...OPTS, seed: 5 })));
+});
+
+// The review prototype lists each cell by the agent's suggested difficulty step, so its order must not
+// stand in for fetch order (owner ruling 2026-10-21, a change to plan choice 2).
+test('the photos of a cell are in a seeded shuffle, not in the order of the review prototype', () => {
+  const twelve = Array.from({ length: 12 }, (_, i) => photo(`r${i}`, `r${i}`, `https://img.learndendro.com/img/r${i}.jpg`, true, null, 'iNaturalist'));
+  const sections = [{ symbol: 'LITU', common: 'tuliptree', scientific: 'Liriodendron tulipifera', part: 'bark', photos: twelve }];
+  const picks = twelve.map(p => ({ key: p.key, id: p.id, species: 'LITU', part: 'bark', published: true, keep: true, step: Number(p.id.slice(1)) % 3 + 1, suggested_step: 1, usual_look: true, note: '' }));
+  const order = o => buildKeyPool(sections, picks, {}, { LITU: 'Liriodendron tulipifera' }, o).cells[0].photos;
+  const a = order(OPTS);
+  assert.notDeepEqual(a.map(p => p.review_key), twelve.map(p => p.key));
+  assert.deepEqual(a.map(p => p.review_key), order(OPTS).map(p => p.review_key));
+  assert.notDeepEqual(a.map(p => p.review_key), order({ ...OPTS, seed: 5 }).map(p => p.review_key));
+  assert.deepEqual(a.map(p => p.key), twelve.map((_, i) => `LITU-bark-${String(i + 1).padStart(2, '0')}`));
+  assert.deepEqual(a.map(p => p.n), twelve.map((_, i) => i + 1));
+  for (const p of a) assert.equal(p.owner.step, Number(p.review_key.slice(1)) % 3 + 1, p.key);
 });

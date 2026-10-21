@@ -102,7 +102,7 @@ The old harness:
 | `estimate.mjs` | USD estimate of a job list, from the old per-photo costs plus 30%, then from the tracer. | 2, 3 |
 | `lib/replay.mjs` | Methods S, F, R, FR, and CR with the quota per difficulty step. | 4 |
 | `lib/score.mjs` | Keep, drop recall, difficulty step, top pick, species doubt, repeat, cost, quota fill, source yield, time; the decision rule. | 4 |
-| `analyze.mjs` | Writes `out/<set>/table.json` and `table.md`. | 4, 7, 11 |
+| `analyze.mjs` | Writes `tables/<set>/table.json` and `table.md`. | 4, 7, 11 |
 | `freeze.mjs` | Writes and checks `frozen.json`. | 7 |
 | `heldout-pools.mjs` | Builds `heldout/pools.json`. | 8 |
 | `pages/` | Builders of the label page, the repeat page, and the review sheets. | 7, 8, 10 |
@@ -112,7 +112,7 @@ The old harness:
 
 Files of the old harness that go: `server.mjs`, `pick.html`, `blind.html`, `blind.mjs`, `check-picks.mjs`, `tracer-row.mjs`, `lib/picks.mjs`, and their tests. The owner's pages are now artifact pages (spec, "What is reused": the pick and blind pages are not reused).
 
-Data layout in `EVAL`: `key/`, `heldout/`, `briefs/`, `wf/`, `runs/<name>/`, `out/`, and `images/` (git-ignored: `images/orig/`, `images/app/<set>/<n>.jpg`, `images/sheets/`).
+Data layout in `EVAL`: `key/`, `heldout/`, `briefs/`, `wf/`, `runs/<name>/`, `tables/`, and `images/` (git-ignored: `images/orig/`, `images/app/<set>/<code>.jpg`, `images/sheets/`). The tables go in `tables/`, not `out/`, because the root `.gitignore` ignores every `out/` folder (owner ruling 2026-10-21).
 
 ## Effort levels (owner ruling 2026-10-21)
 
@@ -131,7 +131,7 @@ The spec keeps effort at `high` and leaves tuning to issue #22. The owner change
 Each choice is the plan's default. The owner can change any of them in the plan diff.
 
 1. **The key's cells come from the key.** A key photo's cell is its `species` and `part` in the picks file. When the judge sets a different part, the photo counts as a reject for keep, and the report counts it as a part error.
-2. **The key's order.** The order of the photos in `data.js` stands in for fetch order. It matters only for the cost of S and F, because the key cannot test the quota fill (spec, "The sample").
+2. **The key's order.** A shuffle of each cell's photos, fixed by the seed, stands in for fetch order. The order of `data.js` does not, because it lists each cell by the agent's suggested difficulty step (owner ruling 2026-10-21). The key number `<nn>` follows the shuffle. The order matters for the cost of S and F and for the ties of CR, because the key cannot test the quota fill (spec, "The sample"). The judges see neither the key nor this order: their prompts give an opaque photo code (`p001` to `p211`), and the photos of each call are in a fixed shuffled order (owner ruling 2026-10-21).
 3. **Batches.** On the key, calls of 10 run across the cells in key order: 22 calls per model and prompt variant, as in the spec (132 agents for 2 variants and 3 models). On the held-out set, calls of 10 stay inside one species, so that the prompt names one tree: PLRA 9, QULA 7, and QUAU 6, which is 22 calls per model, 66 agents, not the spec's 63.
 4. **The source name goes to the judge.** The hybrid rule needs the name on the source page (spec, Identity). Each photo line in the prompt gives that name: the candidate's `source_species`, or for a published key photo the target's PLANTS name. The judge opens no page. Species doubt is scored against that name.
 5. **The depth feature.** `config.json` has `depth_features: { "PLHI": { "fruit": "two_heads" } }`, from the spec's example. The judge answers it on a PLHI fruit photo. It does not enter the difficulty step.
@@ -362,7 +362,7 @@ Steps:
 - [ ] Re-run the failed jobs once with `resumeFromRunId`. A photo still with no answer counts as a reject (choice 13).
 - [ ] Run `analyze.mjs --set key`. Name the leading variant (choice 14) in `NOTES.md`.
 - [ ] Part 2: run `make-workflow.mjs --plan key-effort`. Launch. Collect at once. Run `analyze.mjs --set key` again with all 9 set-ups. Name each model's leading effort in `NOTES.md`.
-- [ ] Commit `runs/key-judge/`, `runs/key-effort/`, and `out/key/`.
+- [ ] Commit `runs/key-judge/`, `runs/key-effort/`, and `tables/key/`.
 
 Done when: every job has a result or a recorded failure, the model check passes, the leading variant is named, and each model has a leading effort.
 
@@ -392,12 +392,12 @@ Same pull request as Tasks 5 and 6. Agents: 0. Cost: USD 0.
 
 Steps:
 
-- [ ] Run `analyze.mjs --set key` on all key data: every method, model, variant, rule, and quota. Write `out/key/table.md`.
+- [ ] Run `analyze.mjs --set key` on all key data: every method, model, variant, rule, and quota. Write `tables/key/table.md`.
 - [ ] Apply the gates. Write which set-ups pass.
 - [ ] Make a review sheet (an artifact page, see Task 8 for the page rules) for the photo calls that need the owner's eye: each thin-cell photo, and each species doubt. Photos side by side, with captions: the judge's answers, the computed difficulty step, the note, and the source name.
 - [ ] When no set-up passes a gate: make a second review sheet with examples of the failing gate, and ask the owner a policy question with options. The spec's first option is a third prompt variant with a reference sheet (two example photos for each difficulty step, from species outside the key and the held-out set). That variant is a new task and a new owner's yes (about 66 agents, about USD 8).
 - [ ] Freeze: `freeze.mjs` writes `frozen.json` with the prompt variant, the rule, the effort of each model, and the sha256 of `lib/step.mjs`, of the judge brief, and of `lib/schemas.mjs`. Write the key section of the report draft, with the chart of the 9 set-ups (exact difficulty step against USD per kept photo).
-- [ ] Commit `out/key/`, `frozen.json`, and the owner's answers on the review sheets. Ask the owner to merge.
+- [ ] Commit `tables/key/`, `frozen.json`, and the owner's answers on the review sheets. Ask the owner to merge.
 
 Done when: the key table is committed, one variant and one rule are frozen, and the owner answered each photo call on the review sheet.
 

@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { ROOT } from './paths.mjs';
 import { fetchUrlOf } from './fetch.mjs';
-import { mulberry32, shuffle } from './seed.mjs';
+import { mulberry32, shuffle, pickOrder } from './seed.mjs';
 
 export const RUNS = ['simple_lobed_us', 'simple_lobed_us_add'];
 
@@ -88,7 +88,10 @@ export function buildTargets(run, candidates, verdicts, plantsNames, sameSpecies
 // plantsNames: { <symbol>: PLANTS name }, from content/species.json.
 // Each photo keeps only what the judge prompt and the scores need. No agent suggestion of data.js
 // (step, features, stage, season, scale, reason, usualLook) and no owner note goes into the pool.
-// n is the place in the cell (the stand-in for fetch order, plan choice 2); order is the place in the key.
+// The review prototype lists each cell by the agent's suggested difficulty step. So the photos of a cell
+// take a shuffle fixed by the seed and the cell, and that order stands in for fetch order (owner ruling
+// 2026-10-21, a change to plan choice 2). n is the place in that order, and the key number; order is the
+// place in the key.
 // code: an opaque name (p001, p002, ...) in an order fixed by the seed. The judge sees only the code,
 // so the key cannot tell it the part or the place in the cell.
 export function buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx, seed }) {
@@ -97,7 +100,7 @@ export function buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx
   let order = 0;
   const cells = sections.map(s => ({
     cell: `${s.symbol}-${s.part}`, target: s.symbol, part: s.part, species: plantsNames[s.symbol] ?? null,
-    photos: s.photos.map((p, i) => {
+    photos: pickOrder(s.photos, seed, `${s.symbol}-${s.part}`).map((p, i) => {
       const owner = pick.get(p.key);
       if (!owner) throw new Error(`no pick row for ${p.key}`);
       let url = p.src, sourceSpecies = plantsNames[s.symbol] ?? null;
