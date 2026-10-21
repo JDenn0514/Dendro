@@ -149,7 +149,9 @@ test('thin cell: no photo comes back when one photo of the cell is kept', () => 
 });
 
 test('thin cell: no photo comes back when every reject is key_no or reject_list', () => {
-  const photos = LITU_BARK().filter(p => !['58137e0b947f', '212bc18d9a4f'].includes(p.key));
+  const photos = LITU_BARK();
+  photos[3].answers = ans('bark', { photo_features: { pattern: 'no' }, causes: ['angle'] });
+  photos[5].answers = ans('bark', { reject: ['feature_unclear'] });
   const out = cellSteps(photos, 'bark');
   assert.deepEqual(thin(out), []);
   assert.ok(out.every(r => !r.keep));

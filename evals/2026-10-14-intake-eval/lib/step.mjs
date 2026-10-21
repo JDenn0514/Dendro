@@ -24,7 +24,7 @@ export function stepOf(answers, { rule = 'P' } = {}) {
 
 // The order of method CR inside one cell. Each photo is { key, n, answers }; n is the fetch order.
 export function codeOrder(photos, part) {
-  const features = [...KEY_FEATURES[part], ...OTHER_FEATURES[part]];
+  const features = [...(KEY_FEATURES[part] ?? []), ...(OTHER_FEATURES[part] ?? [])];
   const rank = ({ answers: a, n }) => [
     a?.usual_look === true ? 0 : 1,
     part === 'fruit' && a?.scale && a.scale !== 'none' ? 0 : 1,
