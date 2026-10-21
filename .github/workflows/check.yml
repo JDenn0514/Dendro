@@ -23,6 +23,9 @@ jobs:
           # The pipeline runs TypeScript through Node's type stripping, so the
           # repo is on Node 24. `node --test` reads a glob pattern from Node 21.
           node-version: '24'
+          # Take the newest 24.x, not an older one cached on the runner, so CI
+          # gets each security release.
+          check-latest: true
       - name: Run the tests
         run: node --test "tests/**/*.test.js"
       - name: Validate the live content
