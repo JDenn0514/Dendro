@@ -69,7 +69,7 @@ The old harness:
 - `lib/step.mjs` is plain JavaScript with no import. Phase 4 moves it into `app/logic/` unchanged, and the pipeline imports it from there (spec Part 4).
 - Every image download sends `User-Agent: Mozilla/5.0 (compatible; dendro-eval/0.1; +https://github.com/JDenn0514/Dendro)`. It keeps the per-host rates of `RATE_PER_SECOND` in `pipeline/lib/http.ts`. It saves a file only when the response is an image and `sharp` can decode it. It never fakes, skips, or replaces a photo that fails: the photo stays in the pool, and the task stops and names the host.
 - Judges read the 440 px copy only, with the Read tool. They run no Bash, write no file, and open no web page. Ranking agents read contact sheets only, never a photo file (owner ruling 2026-10-08).
-- Judge models: `claude-opus-5-5`, `claude-sonnet-5-5`, and `claude-haiku-5-5`. Every agent gets the full model ID and an explicit effort (`high`) from `config.json`.
+- Judge models: `claude-opus-5-5`, `claude-sonnet-5-5`, and `claude-haiku-5-5`. Every agent gets the full model ID and an explicit effort from its job. Judges run at `medium`, `high`, or `xhigh` (owner ruling 2026-10-21, see "Effort levels"). Ranking agents always run at `high`.
 - Prices per 1M tokens, input and output: Opus USD 4 and 20, Sonnet 2 and 10, Haiku 0.10 and 0.50. Cache writes and reads keep the rates of the old `lib/tokens.mjs`. Every cost shows as tokens and as price-weighted USD.
 - Every workflow over 10 agents needs the owner's yes before launch. The tracer (10 agents) does not. A launch over 10 agents states the agent count and the USD range first.
 - Fairness:
@@ -114,6 +114,18 @@ Files of the old harness that go: `server.mjs`, `pick.html`, `blind.html`, `blin
 
 Data layout in `EVAL`: `key/`, `heldout/`, `briefs/`, `wf/`, `runs/<name>/`, `out/`, and `images/` (git-ignored: `images/orig/`, `images/app/<set>/<n>.jpg`, `images/sheets/`).
 
+## Effort levels (owner ruling 2026-10-21)
+
+The spec keeps effort at `high` and leaves tuning to issue #22. The owner changed that on 2026-10-21: the eval also tests effort, because cost and quality both count. A judge **set-up** is one model at one effort.
+
+- **The grid:** Opus, Sonnet, and Haiku, each at `medium`, `high`, and `xhigh`. That is 9 set-ups.
+- **Cost first, from the effort tracer** (Task 3, part 2). The 6 set-ups that the first tracer does not run judge the same 10 key photos with V1. It gives the real USD and tokens per photo for all 9 set-ups before any large run.
+- **Quality on the key** (Task 5, part 2). V1 and V2 run at `high` first, as the spec says. The leading variant then also runs at `medium` and `xhigh` for all 3 models. So every set-up has 211 key photos to score.
+- **The replay is free across set-ups.** Every method can use any stored set-up: for example, a Haiku `medium` reject pass before Opus `xhigh`. The report shows every set-up on one chart of exact difficulty step against USD per kept photo, so the owner sees where more effort buys quality.
+- **The decision rule does not change.** A set-up that is more than 5 points better than all the others is the only one on the shortlist, whatever its cost. Within 5 points, the cheapest one wins. The owner rules on the report as before.
+- **The freeze** (Task 7) names one effort for each model: the effort with the best exact difficulty step on the key, or the cheaper one in a tie within 5 points. The held-out run uses those 3 set-ups.
+- The repeat run (Task 6) uses the same effort for each model.
+
 ## Choices made where the spec is silent
 
 Each choice is the plan's default. The owner can change any of them in the plan diff.
@@ -127,11 +139,11 @@ Each choice is the plan's default. The owner can change any of them in the plan 
 7. **The thin-cell rule.** It runs inside `cellSteps`, after `stepOf` has run on every photo of the cell. When no photo of the cell is kept, and one or more photos were rejected by the last reject line only, the first of those in code order comes back at difficulty step 3 with `thin_cell: true`. Code order is the CR order (method CR in spec Part 2). The scores count a thin-cell photo as kept at difficulty step 3. The report lists each one, and Task 7 puts each one on a review sheet for the owner. Under rule `K3` the thin-cell rule never fires, because that line does not exist.
 8. **What a ranking agent sees.** One agent per cell and judge model. It gets the cell's photos that the judge does not reject under rule `K3`, on contact sheets grouped by the difficulty step of rule `P` (photos that only the last reject line rejects sit with difficulty step 3). It returns one order for each difficulty step. The replay joins the three orders (difficulty step 1, then 2, then 3) into one list. Each method and rule then keeps that list's order inside each of its own difficulty steps. A cell with fewer than 2 photos to rank needs no agent.
 9. **The ranker's group line.** The spec's ranking order ends with "the view that the other species of the group show". The code derives each photo's view from the judge's answers (v1 spec section 3.7: a leaf on a twig or one leaf, and the side; a fruit on the twig or picked; bark close or far). The prompt then gives one line: the most common view among the kept difficulty step 1 photos of the same part of the other species of the same genus in the same set. A species with no genus mate in its set gets no line.
-10. **FR with Haiku as the main judge is R with Haiku.** Haiku's reject pass and Haiku's main answers are the same stored answers, so the set to rank is the same. Those ranking jobs do not run. A cell where FR's set equals R's set for the same model reuses R's ranking. So FR ranking is at most 42 agents on the key (spec: 63) and at most 18 on the held-out set (spec: 27).
+10. **FR with Haiku as the main judge is R with Haiku.** The ranking jobs use Haiku's leading effort for the reject pass. Haiku's reject pass and Haiku's main answers are then the same stored answers, so the set to rank is the same. Those ranking jobs do not run. A cell where FR's set equals R's set for the same model reuses R's ranking. So FR ranking is at most 42 agents on the key (spec: 63) and at most 18 on the held-out set (spec: 27).
 11. **The ranking cost line.** For each model, the replay fits USD and tokens as `a + b × n` (n photos ranked) from this eval's real ranking jobs: the key cells and the held-out cells give many values of n. R at K = 20 or 30 prices its ranking from that line. The old eval's line shows next to it as a check.
 12. **The usual-look rule in the quota.** At difficulty step 1, a method fills the quota in its own order, then swaps in the highest usual-look photos it holds until 2 or more of the step 1 photos are the usual look. S and F stop only when every quota of the species is full, the usual-look rule included, or the pool ends.
 13. **A photo with no answer** (a failed agent, a file the judge could not open) counts as a reject, and the report counts these photos per model.
-14. **The leading prompt variant.** The variant whose best model has the higher exact difficulty step on the key, under rule `P`. A tie within 5 points goes to V1, because V1 writes less output. The repeat run (Task 6) uses it.
+14. **The leading prompt variant.** The variant whose best model at `high` has the higher exact difficulty step on the key, under rule `P`. A tie within 5 points goes to V1, because V1 writes less output. The effort runs and the repeat run use it.
 15. **Keep agreement belongs to the judge set-up, not the method.** Every photo of a pool gets judged, so keep and difficulty step agreement depend on the model, the variant, the rule, and the Haiku reject pass. S, R, and CR with the same set-up have the same agreement. The methods differ in cost, quota fill, and top pick.
 16. **The decision rule after the freeze.** Task 7 freezes one prompt variant and one rule from the key's gates. The shortlist (spec, decision rule step 2) is then made of the ranking methods under that variant and rule: R at each K, FR, and CR, for each model.
 17. **The report goes to the owner as a private artifact page** too, so it reads on a phone. `report.md` in git is the record.
@@ -278,6 +290,15 @@ Steps:
 
 Done when: all 10 agents returned, the model check names the right model for each job, and the new estimates are in `NOTES.md`. When a model costs more than 1.5 times its estimate, the next owner's yes shows the new numbers.
 
+**Part 2: the effort tracer.** A second workflow of 6 agents, after part 1. The owner asked for it on 2026-10-21, so it needs no other yes. Cost: about USD 1.5 (0.5 to 3).
+
+- Jobs: the same 10 key photos, V1, one call each for Opus, Sonnet, and Haiku at `medium` and at `xhigh`. Part 1 already gives `high`.
+- [ ] Run it as part 1. Collect at once.
+- [ ] Write a table in `NOTES.md`: for each of the 9 set-ups, the input and output tokens per photo, the USD per photo, the minutes per 100 photos, and the agreement with the owner on the 10 photos. Ten photos are too few to judge quality. The table is for cost; the key run judges quality.
+- [ ] Run `estimate.mjs` for the effort runs of Task 5 with these numbers.
+
+Done when: all 6 agents returned, the model check passes, and the cost table for the 9 set-ups is in `NOTES.md`.
+
 ## Phase 2: the key runs
 
 ### Task 4: Replay and scores
@@ -329,17 +350,21 @@ Done when: the tests pass and `analyze.mjs` writes a table from the tracer data 
 
 Workflow run. **Needs the owner's yes** (one yes covers Tasks 5 and 6). Pull request: `feat/intake-eval-5-key-runs` (Tasks 5 to 7 share it).
 
-Agents: 132 (22 calls × 3 models × 2 variants). Cost: USD 15 (11 to 25), or the tracer's corrected estimate.
+Agents and cost, from the spec and the old eval's real costs. The tracers correct them before the owner's yes:
+
+- Part 1, V1 and V2 at `high`: 132 agents (22 calls × 3 models × 2 variants). USD 15 (11 to 25).
+- Part 2, the leading variant at `medium` and `xhigh`: 132 agents (22 calls × 3 models × 2 efforts). About USD 17 (11 to 28). This is a guess until the effort tracer: `medium` at 0.6 to 0.9 times the cost of `high`, and `xhigh` at 1.1 to 2 times.
 
 Steps:
 
-- [ ] Ask the owner for the yes for Tasks 5 and 6, with the agent counts and the USD ranges.
-- [ ] Run `make-workflow.mjs --plan key-judge`. Launch. Run `collect.mjs` at once. Run `check-run.mjs`.
+- [ ] Ask the owner for the yes for Tasks 5 and 6, with the agent counts and the USD ranges from the tracers.
+- [ ] Part 1: run `make-workflow.mjs --plan key-judge`. Launch. Run `collect.mjs` at once. Run `check-run.mjs`.
 - [ ] Re-run the failed jobs once with `resumeFromRunId`. A photo still with no answer counts as a reject (choice 13).
 - [ ] Run `analyze.mjs --set key`. Name the leading variant (choice 14) in `NOTES.md`.
-- [ ] Commit `runs/key-judge/` and `out/key/`.
+- [ ] Part 2: run `make-workflow.mjs --plan key-effort`. Launch. Collect at once. Run `analyze.mjs --set key` again with all 9 set-ups. Name each model's leading effort in `NOTES.md`.
+- [ ] Commit `runs/key-judge/`, `runs/key-effort/`, and `out/key/`.
 
-Done when: every job has a result or a recorded failure, the model check passes, and the leading variant is named.
+Done when: every job has a result or a recorded failure, the model check passes, the leading variant is named, and each model has a leading effort.
 
 ### Task 6: The key repeat and the rankings
 
@@ -347,7 +372,8 @@ Workflow run, same yes as Task 5. Same pull request.
 
 Agents:
 
-- The repeat of the leading variant, 3 models: 66 agents, USD 8 (5 to 12).
+- The repeat of the leading variant, 3 models, each at its leading effort: 66 agents, USD 8 (5 to 12) at `high`; the tracer numbers correct it for another effort.
+- The ranking jobs use the judge answers of each model's leading effort.
 - The R ranking, 21 cells × 3 models: up to 63 agents, USD 4.5 (3 to 7).
 - The FR ranking, 21 cells × Opus and Sonnet (choice 10): up to 42 agents, about USD 4 (3 to 6). The spec counts 63 agents. Haiku ranking is cheap, so the USD stays about the same.
 
@@ -370,7 +396,7 @@ Steps:
 - [ ] Apply the gates. Write which set-ups pass.
 - [ ] Make a review sheet (an artifact page, see Task 8 for the page rules) for the photo calls that need the owner's eye: each thin-cell photo, and each species doubt. Photos side by side, with captions: the judge's answers, the computed difficulty step, the note, and the source name.
 - [ ] When no set-up passes a gate: make a second review sheet with examples of the failing gate, and ask the owner a policy question with options. The spec's first option is a third prompt variant with a reference sheet (two example photos for each difficulty step, from species outside the key and the held-out set). That variant is a new task and a new owner's yes (about 66 agents, about USD 8).
-- [ ] Freeze: `freeze.mjs` writes `frozen.json` with the prompt variant, the rule, and the sha256 of `lib/step.mjs`, of the judge brief, and of `lib/schemas.mjs`. Write the key section of the report draft.
+- [ ] Freeze: `freeze.mjs` writes `frozen.json` with the prompt variant, the rule, the effort of each model, and the sha256 of `lib/step.mjs`, of the judge brief, and of `lib/schemas.mjs`. Write the key section of the report draft, with the chart of the 9 set-ups (exact difficulty step against USD per kept photo).
 - [ ] Commit `out/key/`, `frozen.json`, and the owner's answers on the review sheets. Ask the owner to merge.
 
 Done when: the key table is committed, one variant and one rule are frozen, and the owner answered each photo call on the review sheet.
@@ -418,7 +444,7 @@ Workflow run. **Needs the owner's yes.** It can run while the owner labels, beca
 
 Agents:
 
-- The judge, frozen variant, 3 models: 66 agents (choice 3; the spec counts 63). USD 8 (5 to 12).
+- The judge, frozen variant, 3 models, each at its frozen effort: 66 agents (choice 3; the spec counts 63). USD 8 (5 to 12).
 - The R ranking, up to 9 cells × 3 models: up to 27 agents. USD 2.5 (1.5 to 4).
 - The FR ranking, up to 9 cells × Opus and Sonnet: up to 18 agents. About USD 2 (1.5 to 3.5).
 
@@ -462,13 +488,15 @@ Done when: `report.md` and its tables are committed, the owner has ruled, and th
 
 | Task | Work | Agents | USD (range) | Owner's yes |
 |---|---|---|---|---|
-| 3 | Tracer | 10 | 1 (0.5 to 2) | no |
-| 5 | Key judge, V1 and V2 | 132 | 15 (11 to 25) | yes, covers 5 and 6 |
+| 3 | Tracer, part 1 | 10 | 1 (0.5 to 2) | no |
+| 3 | Effort tracer, part 2 | 6 | 1.5 (0.5 to 3) | asked for by the owner |
+| 5 | Key judge, V1 and V2 at `high` | 132 | 15 (11 to 25) | yes, covers 5 and 6 |
+| 5 | Key effort runs, `medium` and `xhigh` | 132 | 17 (11 to 28) | same yes |
 | 6 | Key repeat, R and FR rankings | up to 171 | 16.5 (11 to 25) | same yes |
 | 9 | Held-out judge, R and FR rankings | up to 111 | 12.5 (8 to 19.5) | yes |
-| | All | up to 424 | 45 (30.5 to 71.5) | |
+| | All | up to 562 | 63.5 (42 to 102.5) | |
 
-CR, S, and F add no tokens: they replay from stored answers. A third prompt variant, if one is needed, is a new task with its own yes.
+The effort runs add 138 agents and about USD 18.5 to the spec's plan. The tracers replace these guesses with measured numbers before each yes. CR, S, and F add no tokens: they replay from stored answers. A third prompt variant, if one is needed, is a new task with its own yes.
 
 ## Rulings on the open questions (2026-10-21)
 
@@ -477,6 +505,8 @@ CR, S, and F add no tokens: they replay from stored answers. A third prompt vari
 3. **The feature check.** Ruling: yes, after the held-out labels (Task 8).
 4. **The pull request for this plan.** Open after the owner's comments on the plan are settled.
 5. **`plants.sc.egov.usda.gov`.** The owner added it to the allowed domains. It answers now.
+6. **Effort.** Test `medium`, `high`, and `xhigh` for all 3 models (see "Effort levels").
+7. **wildflower.org.** Every download sends the User-Agent header. The owner asked whether a first try without it saves work. It does not: the header costs nothing, and a failed first try costs one more request against the limit of 1 per second.
 
 ## Later plans
 
