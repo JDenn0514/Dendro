@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { ROOT } from './paths.mjs';
+import { fetchUrlOf } from './fetch.mjs';
+import { mulberry32, shuffle, pickOrder } from './seed.mjs';
 
 export const RUNS = ['simple_lobed_us', 'simple_lobed_us_add'];
 
@@ -79,4 +81,49 @@ export function buildTargets(run, candidates, verdicts, plantsNames, sameSpecies
     });
   }
   return out;
+}
+
+// The key (Task 2). sections: REVIEW_SECTIONS of prototype/photo-review/data.js, in key order.
+// picks: the rows of photo-picks-2026-10-11.json. candidates: { <run>: candidates.jsonl rows }.
+// plantsNames: { <symbol>: PLANTS name }, from content/species.json.
+// Each photo keeps only what the judge prompt and the scores need. No agent suggestion of data.js
+// (step, features, stage, season, scale, reason, usualLook) and no owner note goes into the pool.
+// The review prototype lists each cell by the agent's suggested difficulty step. So the photos of a cell
+// take a shuffle fixed by the seed and the cell, and that order stands in for fetch order (owner ruling
+// 2026-10-21, a change to plan choice 2). n is the place in that order, and the key number; order is the
+// place in the key.
+// code: an opaque name (p001, p002, ...) in an order fixed by the seed. The judge sees only the code,
+// so the key cannot tell it the part or the place in the cell.
+export function buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx, seed }) {
+  const pick = new Map(picks.map(r => [r.key, r]));
+  const cand = new Map(Object.entries(candidates).flatMap(([run, rows]) => rows.map(r => [`${run}:${r.id}`, r])));
+  let order = 0;
+  const cells = sections.map(s => ({
+    cell: `${s.symbol}-${s.part}`, target: s.symbol, part: s.part, species: plantsNames[s.symbol] ?? null,
+    photos: pickOrder(s.photos, seed, `${s.symbol}-${s.part}`).map((p, i) => {
+      const owner = pick.get(p.key);
+      if (!owner) throw new Error(`no pick row for ${p.key}`);
+      let url = p.src, sourceSpecies = plantsNames[s.symbol] ?? null;
+      if (p.key.startsWith('cand:')) {
+        const id = p.key.slice('cand:'.length), c = cand.get(`${p.run}:${id}`);
+        if (!c) throw new Error(`no candidate ${id} in ${p.run}`);
+        url = c.file_url;
+        sourceSpecies = c.source_species;
+      }
+      return {
+        key: `${s.symbol}-${s.part}-${String(i + 1).padStart(2, '0')}`, n: i + 1, order: ++order,
+        review_key: p.key, id: p.id, target: s.symbol, part: s.part, run: p.run ?? null,
+        url, fetch_url: fetchUrlOf(url, thumbPx), source: p.credit.source,
+        credit: { author: p.credit.author, license: p.credit.license, origin: p.credit.origin },
+        source_species: sourceSpecies, published: p.published, owner: { keep: owner.keep, step: owner.step },
+      };
+    }),
+  }));
+  assignCodes(cells, seed);
+  return { set: 'key', cells };
+}
+
+function assignCodes(cells, seed) {
+  const all = shuffle(cells.flatMap(c => c.photos), mulberry32(seed));
+  all.forEach((p, i) => { p.code = `p${String(i + 1).padStart(3, '0')}`; });
 }

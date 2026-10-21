@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import path from 'node:path';
 import { buildTargets, keyOf, inPool, splitPool, isInfraOf, isGoodLeaf } from '../lib/data.mjs';
 import { mulberry32, shuffle, pickOrder } from '../lib/seed.mjs';
-import { sheetGroups, sheetPaths } from '../lib/sheet.mjs';
+import { sheetGroups, sheetsFor } from '../lib/sheet.mjs';
 import { ROOT } from '../lib/paths.mjs';
 
 const row = (id, target, extra = {}) => ({ id, target, source_key: 'inat', channel_hint: null, local: `pipeline/cache/inat/${id}.jpg`, file_hash: `h-${id}`, fetch_error: null, source_species: 'Quercus alba', ...extra });
@@ -128,8 +128,10 @@ test('pickOrder is a permutation of the photos and stable for a seed and target'
   assert.equal(a.find(p => p.n === 7).key, 'QUAC2-07');
 });
 
-test('sheetGroups cuts 9 per sheet and sheetPaths names them', () => {
+test('sheetGroups cuts 9 per sheet and sheetsFor names the sheets of one cell', () => {
   const keys = Array.from({ length: 20 }, (_, i) => `T-${i + 1}`);
   assert.deepEqual(sheetGroups(keys).map(g => g.length), [9, 9, 2]);
-  assert.deepEqual(sheetPaths('E', 'T', 12, 'first12'), ['E/sheets/T/first12-1.jpg', 'E/sheets/T/first12-2.jpg']);
+  const sheets = sheetsFor('E', 'key', 'ACRU-leaf', 'haiku-2', keys.slice(0, 12));
+  assert.deepEqual(sheets.map(s => s.file), [path.join('E', 'images', 'sheets', 'key', 'ACRU-leaf', 'haiku-2-1.jpg'), path.join('E', 'images', 'sheets', 'key', 'ACRU-leaf', 'haiku-2-2.jpg')]);
+  assert.deepEqual(sheets.map(s => s.keys.length), [9, 3]);
 });

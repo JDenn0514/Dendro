@@ -1,4 +1,4 @@
-// node analyze.mjs  ->  out/table.json, out/table.md, out/shortlist.json
+// node analyze.mjs  ->  tables/table.json, tables/table.md, tables/shortlist.json
 import path from 'node:path';
 import fs from 'node:fs';
 import { EVAL } from './lib/paths.mjs';
@@ -59,8 +59,8 @@ for (const r of rows) {
   if (/(^|>)C\|/.test(r.id)) r.cost_lower_bound = true;
 }
 
-writeJson(path.join(EVAL, 'out/table.json'), { lines, p3, cost_line_vs_p2: costLineVsP2, unread: v.unread, problems: v.problems, rows });
-writeJson(path.join(EVAL, 'out/shortlist.json'), win);
+writeJson(path.join(EVAL, 'tables/table.json'), { lines, p3, cost_line_vs_p2: costLineVsP2, unread: v.unread, problems: v.problems, rows });
+writeJson(path.join(EVAL, 'tables/shortlist.json'), win);
 
 const f = (x, d = 2) => (x == null ? '-' : x.toFixed(d));
 const pct = x => `${Math.round(x * 100)}%`;
@@ -78,7 +78,7 @@ const md = [
     .map(r => `| ${r.id} | ${f(r.q_mean)} | ${f(r.x_mean)} | ${f(r.q_rich)} | ${f(r.q_thin)} | ${f(r.x_rich)} | ${f(r.x_thin)} | ${r.short} | ${f(r.q_min)}-${f(r.q_max)} (${f(r.q_sd)}) | ${r.hard_above_total ?? 'n/a'} | ${f(r.seen_mean, 1)} | ${Math.round(r.tokens_mean)} | ${f(r.usd_mean, 4)} | ${f(r.usd_p2_real, 4)} | ${tags(r)} |`),
   '',
 ];
-fs.writeFileSync(path.join(EVAL, 'out/table.md'), md.join('\n'));
+fs.writeFileSync(path.join(EVAL, 'tables/table.md'), md.join('\n'));
 console.log(`rows ${rows.length} | Q* ${f(win.qStar)} | E* ${f(win.eStar)} | shortlist ${win.shortlist.length} | candidate ${win.candidate} | best_quality ${win.best_quality} | opponent ${win.best} | next ${win.next} | blind_needed ${win.blind_needed}`);
 console.log('cost line above real P2 (B(all)):', Object.entries(costLineVsP2).map(([m, c]) => `${m} ${pct(c.over)}`).join(', '));
 console.log('P3 mean difference:', MODELS.map(m => `${m} ${f(p3[m].mean)}${p3[m].unreliable ? ' (unreliable)' : ''}`).join(', '));

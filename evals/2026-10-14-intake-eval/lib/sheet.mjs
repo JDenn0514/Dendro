@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 export const TILE = 440, COLS = 3, PER_SHEET = 9, LABEL_H = 22;
 
 export function sheetGroups(keys) {
@@ -6,8 +8,10 @@ export function sheetGroups(keys) {
   return groups;
 }
 
-export const sheetPaths = (evalDir, target, count, prefix) =>
-  Array.from({ length: Math.ceil(count / PER_SHEET) }, (_, i) => `${evalDir}/sheets/${target}/${prefix}-${i + 1}.jpg`);
+// The contact sheets of one cell: [{ file, keys }], at most PER_SHEET keys each.
+// file: images/sheets/<set>/<cell>/<prefix>-<i>.jpg. The prefix is `all`, or `<model>-<group>` for a ranking.
+export const sheetsFor = (evalDir, set, cell, prefix, keys) =>
+  sheetGroups(keys).map((g, i) => ({ file: path.join(evalDir, 'images', 'sheets', set, cell, `${prefix}-${i + 1}.jpg`), keys: g }));
 
 // tiles: [{ file, label }], at most PER_SHEET. Same look as an2/sheet.mjs, with 3 columns.
 export async function renderSheet(sharp, tiles, out) {
