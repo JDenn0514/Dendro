@@ -1,0 +1,27 @@
+{
+  "seed": 20261014,
+  "pick_seed": 20261021,
+  "app_px": 440,
+  "wikimedia_thumb_px": 1280,
+  "batch_size": 10,
+  "user_agent": "Mozilla/5.0 (compatible; dendro-eval/0.1; +https://github.com/JDenn0514/Dendro)",
+  "model_opt": {
+    "opus": "claude-opus-5-5",
+    "sonnet": "claude-sonnet-5-5",
+    "haiku": "claude-haiku-5-5"
+  },
+  "tracer_model": "haiku",
+  "efforts": ["medium", "high", "xhigh"],
+  "effort": { "opus": "high", "sonnet": "high", "haiku": "high" },
+  "rank_effort": "high",
+  "variants": ["V1", "V2"],
+  "rules": ["P", "K3"],
+  "ks": [20, 30, "all"],
+  "quotas": {
+    "Q332": { "1": 3, "2": 3, "3": 2, "usual_look_min": 2 },
+    "Q221": { "1": 2, "2": 2, "3": 1, "usual_look_min": 2 },
+    "Q442": { "1": 4, "2": 4, "3": 2, "usual_look_min": 2 }
+  },
+  "headline_quota": "Q332",
+  "depth_features": { "PLHI": { "fruit": "two_heads" } }
+}
