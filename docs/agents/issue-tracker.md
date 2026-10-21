@@ -14,6 +14,8 @@ Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all o
 
 Infer the repo from `git remote -v`; `gh` does this automatically when run inside a clone.
 
+**Cloud sessions have no `gh` CLI.** There, use the GitHub MCP tools (`mcp__github__*`) for the same operations: create, read, list, label, comment on, and close issues, and add sub-issues.
+
 ## Pull requests as a triage surface
 
 **PRs as a request surface: no.** _(Set to `yes` if this repo treats external PRs as feature requests; `/triage` reads this flag.)_
