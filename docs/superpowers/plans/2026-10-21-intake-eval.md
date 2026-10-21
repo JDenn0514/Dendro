@@ -29,7 +29,7 @@ The inputs:
 - 41 key photos are not published. Their `src` is a local file, `img/<id>.jpg`, that is not in git. Their `key` is `cand:<candidate id>`. All 41 are rows in `pipeline/runs/leaf_topup/candidates.jsonl` (37) and `pipeline/runs/simple_lobed_co/candidates.jsonl` (4), so `file_url` gives each image. Their hosts: Bioimages 12, iNaturalist 10, wildflower.org 7, Trees and Shrubs Online 3, `plants.sc.egov.usda.gov` 3, VT Dendrology 2, `upload.wikimedia.org` 2, and `thumb.wikimedia.org` 2.
 - The held-out pools are in `pipeline/runs/simple_lobed_us/candidates.jsonl`. With the last row of each `id`: PLRA 82 rows (22 of them manual), QULA 70 (10 manual), and QUAU 60. QUAU has 4 rows whose `file_hash` repeats an earlier row. No row has `fetch_error` or `identity_match: false`. After the duplicate drop: 82 + 70 + 56 = 208 photos, as the spec says. The manual rows stay in, because the spec counts them.
 - The held-out hosts: iNaturalist 125, `thumb.wikimedia.org` 37, wildflower.org 33, `upload.wikimedia.org` 11, Trees and Shrubs Online 4, and VT Dendrology 2.
-- No species file in `content_src/species/` has `depth` or `depth_feature` yet. The quota depends on the depth of the part (spec ruling 1). See "Open questions".
+- No species file in `content_src/species/` has `depth` or `depth_feature` yet. The quota depends on the depth of the part (spec ruling 1). Owner ruling 2026-10-21: the headline uses the depth `species` quota (3, 3, and 2) on every cell, and the report also shows 2, 2, and 1.
 
 The image hosts, probed from this container with a User-Agent header:
 
@@ -45,8 +45,8 @@ The image hosts, probed from this container with a User-Agent header:
 | `upload.wikimedia.org` | **429**, "Too many requests ... use thumbnail images" | key 2, held-out 11 |
 | `plants.sc.egov.usda.gov` | **blocked**: the proxy answers 403 to CONNECT (environment policy) | key 3 |
 
-- `plants.sc.egov.usda.gov` needs a line in the environment's allowed domains. Task 2 stops until it answers.
-- `upload.wikimedia.org` is not blocked by the environment. Wikimedia refuses this container's shared address for full-size files and for thumbnails on that host. The same files at a standard thumbnail width (960 or 1280 px) on `thumb.wikimedia.org` answer 200. See "Open questions".
+- `plants.sc.egov.usda.gov`: the owner added it to the environment's allowed domains on 2026-10-21. A check after that change still got 403 in this container. Task 2 checks it again, and stops until it answers.
+- `upload.wikimedia.org` is not blocked by the environment. Wikimedia refuses this container's shared address for full-size files and for thumbnails on that host. The same files at a standard thumbnail width (960 or 1280 px) on `thumb.wikimedia.org` answer 200. Owner ruling 2026-10-21: use the 1280 px thumbnail from `thumb.wikimedia.org`, then make the 440 px copy.
 - wildflower.org answered with and without a User-Agent in the probe. The owner's ruling stands all the same: every download sends a User-Agent header, and a response that is not an image (such as a "Just a moment..." page) is a failure, never a saved image.
 
 The container:
@@ -216,7 +216,7 @@ Files: `lib/fetch.mjs`, `images.mjs`, `key-pools.mjs`, `lib/data.mjs`, `lib/sche
 `lib/fetch.mjs`:
 
 - `download(url, { fetchImpl, sleep, now })` sends the User-Agent header, waits per host as `RATE_PER_SECOND` says (1 per second when the host is not listed), retries a 429 or a 5xx 3 times with backoff from 2 s, and returns the bytes only when the content type is `image/*`.
-- `wikimediaThumb(url, width)` turns an `upload.wikimedia.org/wikipedia/commons/<a>/<ab>/<name>` URL into `thumb.wikimedia.org/wikipedia/commons/thumb/<a>/<ab>/<name>/<width>px-<name>`. It is used only when the owner says yes to it (open question 1).
+- `wikimediaThumb(url, width)` turns an `upload.wikimedia.org/wikipedia/commons/<a>/<ab>/<name>` URL into `thumb.wikimedia.org/wikipedia/commons/thumb/<a>/<ab>/<name>/<width>px-<name>`. `images.mjs` uses it at 1280 px for every `upload.wikimedia.org` URL (owner ruling 2026-10-21). It drops the `?utm_...` query first. On 2026-10-21 all 13 of these photos answered 200 at 1280 px. When one fails later, the task stops and names it. The pool records the URL that was used.
 
 `images.mjs --set key|heldout`:
 
@@ -293,7 +293,7 @@ Files: `lib/replay.mjs`, `lib/score.mjs`, `analyze.mjs`, `lib/views.mjs`, and th
 - `R(K)`, K = 20, 30, or all: the first K photos of the pool. The ranking order of choice 8, cut to those photos. Keep the top photos of each difficulty step up to the quota. Cost: the judge for K photos, plus the ranking line at the photos ranked.
 - `FR`: Haiku's rejects drop out of the whole pool. The main judge's answers on the rest. The FR ranking order. Cost: Haiku for every photo, the main judge for the rest, and the ranking line.
 - `CR(K)`: as R, but `codeOrder` orders each difficulty step. No ranking cost.
-- Quotas: `Q332` (3, 3, 2, with 2 or more usual look at difficulty step 1), `Q221` (2, 2, 1, the same usual-look rule with 2), and `Q442` as a larger test.
+- Quotas: `Q332` (3, 3, 2, with 2 or more usual look at difficulty step 1), `Q221` (2, 2, 1, the same usual-look rule with 2), and `Q442` as a larger test. `Q332` on every cell is the headline, and `Q221` shows next to it (owner ruling 2026-10-21: no species has a `depth` yet).
 
 `lib/score.mjs`, per method, model, variant, rule, and quota:
 
@@ -410,7 +410,7 @@ Steps:
 
 Done when: all 208 photos have a part, a keep, and (on a keep) a difficulty step, each labelled cell has a best photo, and the files are committed.
 
-**Optional feature check** (spec, "The sample"). When the owner says yes (open question 3): a page of 60 key photos with one yes or no question per photo feature in learner words, about 10 minutes. It compares the answers with the stored key answers of the three models. No new tokens.
+**The feature check** (spec, "The sample"; owner ruling 2026-10-21: yes). After the held-out labels and best picks are in, a second page: 60 key photos chosen with `config.seed` (20 per part), with one yes or no question per photo feature in learner words, such as "Can you see where the leaf stalks join the twig?". About 10 minutes. The page saves to `features/<opaque id>`. `analyze.mjs` compares the answers with the stored key answers of the three models (a photo feature at `clear` is a yes) and between the models. No new tokens. Done when: all 60 photos have an answer to each question, and `key/feature-check.json` is committed.
 
 ### Task 9: The frozen held-out run
 
@@ -470,14 +470,13 @@ Done when: `report.md` and its tables are committed, the owner has ruled, and th
 
 CR, S, and F add no tokens: they replay from stored answers. A third prompt variant, if one is needed, is a new task with its own yes.
 
-## Open questions
+## Rulings on the open questions (2026-10-21)
 
-1. **Wikimedia full-size files.** `upload.wikimedia.org` refuses this container (429) for 13 photos: 2 of the key and 11 of the held-out set. Recommended: download the same file as a 1280 px thumbnail from `thumb.wikimedia.org`, then make the 440 px copy as for every photo. The judge and the owner see the same photo at the same size. Other options: retry `upload.wikimedia.org` with long waits, which may never work from a shared cloud address; or the owner downloads the 13 files on a laptop and adds them.
-2. **The quota without a depth.** No species has `depth` yet, and the quota per difficulty step depends on it. Recommended: the headline uses the depth `species` quota (3, 3, and 2) on every cell, and the report also shows 2, 2, and 1. The replay is free, so both cost nothing. Other options: an agent drafts a provisional depth for the 10 species from sources, for the owner to check; or the eval waits for the species-draft work.
-3. **The optional feature check.** Recommended: yes, after the held-out labels. 60 key photos, about 10 minutes, no new tokens. It shows whether the judge reads each photo feature as a learner does. Other option: skip it.
-4. **The pull request for this plan.** Recommended: open it now from `feat/intake-eval-plan`, so the plan diff is on GitHub for review. Other option: review the branch first, and open it later.
-
-Not a question: `plants.sc.egov.usda.gov` is blocked by the environment's network policy. 3 key photos need it. Add it to the allowed domains before Task 2.
+1. **Wikimedia full-size files.** `upload.wikimedia.org` refuses this container (429) for 13 photos: 2 of the key and 11 of the held-out set. Ruling: download the same file as a 1280 px thumbnail from `thumb.wikimedia.org`, then make the 440 px copy as for every photo.
+2. **The quota without a depth.** Ruling: the headline uses the depth `species` quota (3, 3, and 2) on every cell, and the report also shows 2, 2, and 1.
+3. **The feature check.** Ruling: yes, after the held-out labels (Task 8).
+4. **The pull request for this plan.** Open after the owner's comments on the plan are settled.
+5. **`plants.sc.egov.usda.gov`.** The owner added it to the allowed domains. Task 2 checks it again before the key images.
 
 ## Later plans
 
