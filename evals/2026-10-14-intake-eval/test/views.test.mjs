@@ -2,41 +2,57 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildViews } from '../lib/views.mjs';
 
-test('buildViews spreads P1 tokens over the batch and marks missing verdicts unread', () => {
+const ans = (key, extra = {}) => ({ key, part: 'leaf', photo_features: { shape: 'clear', margin: 'clear' }, reject: [], ...extra });
+
+test('judge answers go under model, effort, and variant; tokens spread over the batch; a missing answer is null', () => {
   const jobs = [
-    { label: 'P1:haiku:T:b1', pass: 'P1', model: 'haiku', target: 'T', keys: ['T-01', 'T-02'], result: { results: [{ key: 'T-01', label: 'good', note: '' }] } },
-    { label: 'P2:haiku:T', pass: 'P2', model: 'haiku', target: 'T', keys: ['T-01', 'T-02', 'T-03', 'T-04'], result: { ranked: [{ key: 'T-02', tag: 'good' }, { key: 'T-02', tag: 'hard' }, { key: 'X-09', tag: 'good' }, { key: 'T-04', tag: 'odd' }], rejects: ['T-01'], unread: [] } },
-    { label: 'P3:haiku:T', pass: 'P3', model: 'haiku', target: 'T', keys: ['T-01', 'T-02'], result: null },
+    { label: 'judge:haiku:high:V1:b01', kind: 'judge', model: 'haiku', effort: 'high', variant: 'V1', keys: ['T-01', 'T-02'], result: { results: [ans('T-01')] } },
+    { label: 'judge:haiku:xhigh:V1:b01', kind: 'judge', model: 'haiku', effort: 'xhigh', variant: 'V1', keys: ['T-01'], result: null },
   ];
-  const tokens = { 'P1:haiku:T:b1': { tokens: 100, usd: 0.2 }, 'P2:haiku:T': { tokens: 900, usd: 0.9 } };
-  const v = buildViews(jobs, tokens);
-  assert.deepEqual(v.p1.haiku, { 'T-01': 'good', 'T-02': 'unread' });
-  assert.deepEqual(v.p1Cost.haiku['T-02'], { tokens: 50, usd: 0.1 });
-  assert.deepEqual(v.p2.haiku.T, { ranked: ['T-02', 'T-04'], tags: { 'T-02': 'good', 'T-04': 'hard' }, rejects: ['T-01', 'T-03'] });
-  assert.deepEqual(v.p2Cost.haiku.T, { tokens: 900, usd: 0.9, n: 4 });
-  assert.deepEqual(v.p3.haiku.T, { ranked: [], tags: {}, rejects: ['T-01', 'T-02'] });
-  assert.deepEqual(v.tags.P2.haiku, { good: 1, hard: 1 });
-  assert.deepEqual(v.p3Cost.haiku.T, { tokens: 0, usd: 0, n: 2 });
-  assert.equal(v.unread.P1.haiku, 1);
-  assert.equal(v.unread.P2.haiku, 1);
-  assert.equal(v.unread.P3.haiku, 2);
-  assert.ok(v.problems.some(p => /T-04: no valid tag/.test(p)));
-  assert.ok(v.problems.length >= 4);
+  const v = buildViews(jobs, { 'judge:haiku:high:V1:b01': { tokens: 100, usd: 0.2 }, 'judge:haiku:xhigh:V1:b01': { tokens: 50, usd: 0.1 } });
+  assert.deepEqual(v.answers['haiku:high:V1']['T-01'], ans('T-01'));
+  assert.equal(v.answers['haiku:high:V1']['T-02'], null);
+  assert.equal(v.answers['haiku:xhigh:V1']['T-01'], null);
+  assert.deepEqual(v.judgeCost['haiku:high:V1']['T-02'], { tokens: 50, usd: 0.1 });
+  assert.deepEqual(v.noAnswer, { 'haiku:high:V1': 1, 'haiku:xhigh:V1': 1 });
+  assert.ok(v.problems.some(p => /judge:haiku:high:V1:b01: no answer for T-02/.test(p)));
+  assert.ok(v.problems.some(p => /judge:haiku:xhigh:V1:b01: no result/.test(p)));
 });
 
-test('a key that is ranked and rejected stays rejected, and a problem is logged', () => {
-  const jobs = [{ label: 'P2:haiku:T', pass: 'P2', model: 'haiku', target: 'T', keys: ['T-01', 'T-02', 'T-03'], result: { ranked: [{ key: 'T-01', tag: 'good' }, { key: 'T-02', tag: 'good' }], rejects: ['T-02', 'T-03'], unread: [] } }];
-  const v = buildViews(jobs, { 'P2:haiku:T': { tokens: 10, usd: 0.1 } });
-  assert.deepEqual(v.p2.haiku.T.rejects, ['T-02', 'T-03']);
-  assert.ok(v.problems.some(p => /T-02: ranked and rejected/.test(p)));
-  assert.equal(v.unread.P2.haiku, 0);
+test('an unread answer counts as unread; an answer with a bad part becomes null; the first answer of a key wins', () => {
+  const jobs = [{ label: 'judge:opus:high:V2:b01', kind: 'judge', model: 'opus', effort: 'high', variant: 'V2', keys: ['A', 'B', 'C'], result: { results: [ans('A', { reject: ['unread'] }), ans('B', { part: 'twig' }), ans('C'), ans('C', { part: 'bark' }), ans('Z')] } }];
+  const v = buildViews(jobs, { 'judge:opus:high:V2:b01': { tokens: 30, usd: 0.3 } });
+  const a = v.answers['opus:high:V2'];
+  assert.deepEqual(a.A.reject, ['unread']);
+  assert.equal(a.B, null);
+  assert.equal(a.C.part, 'leaf');
+  assert.equal('Z' in a, false);
+  assert.deepEqual(v.unread, { 'opus:high:V2': 1 });
+  assert.ok(v.problems.some(p => /B: part "twig" is not valid/.test(p)));
+  assert.ok(v.problems.some(p => /C: answered 2 times/.test(p)));
+  assert.ok(v.problems.some(p => /unknown key Z/.test(p)));
 });
 
-test('a P1 label outside the list and a missing tokens entry each log a problem', () => {
-  const jobs = [{ label: 'P1:haiku:T:b1', pass: 'P1', model: 'haiku', target: 'T', keys: ['T-01', 'T-02'], result: { results: [{ key: 'T-01', label: 'great', note: '' }, { key: 'T-02', label: 'good', note: '' }] } }];
-  const v = buildViews(jobs, {});
-  assert.equal(v.p1.haiku['T-01'], 'unread');
-  assert.equal(v.unread.P1.haiku, 1);
-  assert.ok(v.problems.some(p => /T-01: label "great" is not valid/.test(p)));
-  assert.ok(v.problems.some(p => /P1:haiku:T:b1: no tokens entry/.test(p)));
+test('a check job gives the self report and no answer', () => {
+  const jobs = [{ label: 'check:sonnet', kind: 'check', model: 'sonnet', effort: 'high', variant: 'V1', keys: ['A'], result: { model_self_report: 'Sonnet 5.5', results: [ans('A')] } }];
+  const v = buildViews(jobs, { 'check:sonnet': { tokens: 1, usd: 0.01 } });
+  assert.deepEqual(v.checks, { 'check:sonnet': 'Sonnet 5.5' });
+  assert.deepEqual(v.answers, {});
+});
+
+test('a ranking keeps each group order, drops keys of other groups, and adds the left-out keys to unread', () => {
+  const jobs = [{
+    label: 'rank:haiku:high:T-leaf', kind: 'rank', model: 'haiku', effort: 'high', cell: 'T-leaf', keys: ['a', 'b', 'c', 'd', 'e'], groups: { 1: ['a', 'b', 'c'], 3: ['d', 'e'] },
+    result: { orders: { 1: ['c', 'a', 'c', 'd'], 3: ['e'] }, unread: ['q'], note: '' },
+  }];
+  const v = buildViews(jobs, { 'rank:haiku:high:T-leaf': { tokens: 900, usd: 0.9 } });
+  assert.deepEqual(v.rank['haiku:high']['T-leaf'], { orders: { 1: ['c', 'a'], 3: ['e'] }, unread: ['b', 'd'] });
+  assert.deepEqual(v.rankCost['haiku:high']['T-leaf'], { tokens: 900, usd: 0.9, n: 5 });
+  assert.ok(v.problems.some(p => /2 keys unread or left out/.test(p)));
+});
+
+test('a job with no tokens entry logs a problem', () => {
+  const v = buildViews([{ label: 'judge:x:high:V1:b01', kind: 'judge', model: 'x', effort: 'high', variant: 'V1', keys: ['A'], result: { results: [ans('A')] } }], {});
+  assert.ok(v.problems.some(p => /judge:x:high:V1:b01: no tokens entry/.test(p)));
+  assert.deepEqual(v.judgeCost['x:high:V1'].A, { tokens: 0, usd: 0 });
 });

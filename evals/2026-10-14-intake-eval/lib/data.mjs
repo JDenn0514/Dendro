@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { ROOT } from './paths.mjs';
+import { fetchUrlOf } from './fetch.mjs';
 
 export const RUNS = ['simple_lobed_us', 'simple_lobed_us_add'];
 
@@ -79,4 +80,38 @@ export function buildTargets(run, candidates, verdicts, plantsNames, sameSpecies
     });
   }
   return out;
+}
+
+// The key (Task 2). sections: REVIEW_SECTIONS of prototype/photo-review/data.js, in key order.
+// picks: the rows of photo-picks-2026-10-11.json. candidates: { <run>: candidates.jsonl rows }.
+// plantsNames: { <symbol>: PLANTS name }, from content/species.json.
+// Each photo keeps only what the judge prompt and the scores need. No agent suggestion of data.js
+// (step, features, stage, season, scale, reason, usualLook) and no owner note goes into the pool.
+// n is the place in the cell (the stand-in for fetch order, plan choice 2); order is the place in the key.
+export function buildKeyPool(sections, picks, candidates, plantsNames, { thumbPx }) {
+  const pick = new Map(picks.map(r => [r.key, r]));
+  const cand = new Map(Object.entries(candidates).flatMap(([run, rows]) => rows.map(r => [`${run}:${r.id}`, r])));
+  let order = 0;
+  const cells = sections.map(s => ({
+    cell: `${s.symbol}-${s.part}`, target: s.symbol, part: s.part, species: plantsNames[s.symbol] ?? null,
+    photos: s.photos.map((p, i) => {
+      const owner = pick.get(p.key);
+      if (!owner) throw new Error(`no pick row for ${p.key}`);
+      let url = p.src, sourceSpecies = plantsNames[s.symbol] ?? null;
+      if (p.key.startsWith('cand:')) {
+        const id = p.key.slice('cand:'.length), c = cand.get(`${p.run}:${id}`);
+        if (!c) throw new Error(`no candidate ${id} in ${p.run}`);
+        url = c.file_url;
+        sourceSpecies = c.source_species;
+      }
+      return {
+        key: `${s.symbol}-${s.part}-${String(i + 1).padStart(2, '0')}`, n: i + 1, order: ++order,
+        review_key: p.key, id: p.id, target: s.symbol, part: s.part, run: p.run ?? null,
+        url, fetch_url: fetchUrlOf(url, thumbPx), source: p.credit.source,
+        credit: { author: p.credit.author, license: p.credit.license, origin: p.credit.origin },
+        source_species: sourceSpecies, published: p.published, owner: { keep: owner.keep, step: owner.step },
+      };
+    }),
+  }));
+  return { set: 'key', cells };
 }

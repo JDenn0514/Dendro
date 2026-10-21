@@ -1,51 +1,80 @@
-// node make-workflow.mjs --plan tracer|full
-// Writes briefs/P1.md, P2.md, P3.md, wf/<name>.js, and wf/<name>.jobs.json.
+// node make-workflow.mjs --plan tracer|tracer-effort|key-high|key-effort [--variant V1|V2]
+// Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/intake-eval-<plan>.js, and wf/intake-eval-<plan>.jobs.json.
+// Prints the agent count per kind, model, and effort, and the USD estimate of estimate.mjs.
+// Job kinds: `check` (the model check), `judge` (model, effort, variant, batch), and `rank` (model, set, cell, groups).
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { ROOT, EVAL } from './lib/paths.mjs';
 import { readJson, writeJson } from './lib/data.mjs';
 import { SCHEMAS } from './lib/schemas.mjs';
-import { extractQuality, briefP1, briefRank, promptP0, promptP1, promptRank } from './lib/prompts.mjs';
-import { sheetPaths } from './lib/sheet.mjs';
+import { extractChecks, briefJudge, briefRank, promptJudge, promptCheck, promptRank } from './lib/prompts.mjs';
+import { mulberry32, shuffle } from './lib/seed.mjs';
+import { sheetsFor, PER_SHEET } from './lib/sheet.mjs';
+import { estimateJobs, printEstimate } from './estimate.mjs';
 
 export const MODELS = ['opus', 'sonnet', 'haiku'];
+const BATCH = 10;
 
-export function buildJobs(pools, plan, config) {
+// The tracer's 10 key photos: 4 leaf, 3 bark, and 3 fruit, drawn with the seed, then in key order.
+export function tracerPhotos(pool, seed) {
+  const all = shuffle(pool.cells.flatMap(c => c.photos.map(p => ({ ...p, part: c.part }))), mulberry32(seed));
+  const want = { leaf: 4, bark: 3, fruit: 3 };
+  return all.filter(p => want[p.part]-- > 0).sort((a, b) => a.order - b.order);
+}
+
+// pool: a set's pools.json. opts.variant: the variant of the key-effort plan.
+export function buildJobs(pool, plan, config, opts = {}) {
+  const brief = name => path.join(EVAL, 'briefs', `${name}.md`);
+  const cellOf = new Map(pool.cells.flatMap(c => c.photos.map(p => [p.key, c])));
+  // Judges read the 440 px copy: the size that the learner sees.
+  const line = p => {
+    const c = cellOf.get(p.key);
+    return { key: p.key, abs: path.join(EVAL, 'images', 'app', pool.set, `${p.key}.jpg`), tree: c.species, source_species: p.source_species, depth: config.depth_features?.[c.target] };
+  };
+  const base = (kind, m, effort) => ({ kind, phase: kind, set: pool.set, model: m, model_opt: config.model_opt[m], effort });
   const jobs = [];
-  const brief = name => `${EVAL}/briefs/${name}.md`;
-  // P0 and P1 judges read the app-size copy (images/<target>/<n>.jpg): the size the learner sees. Ranking judges read sheets only.
-  const appCopy = (t, list) => list.map(p => ({ ...p, abs: `${EVAL}/images/${t.target}/${p.n}.jpg` }));
-  const base = (pass, m, t) => ({ pass, phase: pass, model: m, model_opt: config.model_opt[m], effort: config.effort[m], target: t.target });
-  const p1 = (m, t) => {
-    for (let i = 0; i < t.photos.length; i += 10) {
-      const b = appCopy(t, t.photos.slice(i, i + 10));
-      jobs.push({ label: `P1:${m}:${t.target}:b${i / 10 + 1}`, ...base('P1', m, t), keys: b.map(p => p.key), schema: 'P1', prompt: promptP1(t, b, brief('P1')) });
+  const judge = (photos, m, effort, variant) => {
+    for (let i = 0; i < photos.length; i += BATCH) {
+      const b = photos.slice(i, i + BATCH);
+      const n = String(i / BATCH + 1).padStart(2, '0');
+      jobs.push({ label: `judge:${m}:${effort}:${variant}:b${n}`, ...base('judge', m, effort), variant, keys: b.map(p => p.key), schema: 'JUDGE', prompt: promptJudge(b.map(line), brief(`judge-${variant}`)) });
     }
   };
-  const rank = (pass, m, t, photos, prefix) => jobs.push({
-    label: `${pass}:${m}:${t.target}`, ...base(pass, m, t), keys: photos.map(p => p.key), schema: 'RANK',
-    prompt: promptRank(t, photos, sheetPaths(EVAL, t.target, photos.length, prefix), brief(pass)),
-  });
+  const rank = (m, c, groups, groupLine) => {
+    const prefix = g => (g === 'all' ? 'all' : `${m}-${g}`);
+    const sheets = Object.entries(groups).flatMap(([g, keys]) => sheetsFor(EVAL, pool.set, c.cell, prefix(g), keys));
+    jobs.push({
+      label: `rank:${m}:${config.rank_effort}:${c.cell}`, ...base('rank', m, config.rank_effort), cell: c.cell, groups,
+      keys: Object.values(groups).flat(), sheets, schema: 'RANK',
+      prompt: promptRank(c, groups, sheets.map(s => s.file), brief('rank'), groupLine),
+    });
+  };
+  const all = pool.cells.flatMap(c => c.photos);
+  const offHigh = config.efforts.filter(e => e !== 'high');
   if (plan === 'tracer') {
-    const t = pools.targets[0];
-    const two = appCopy(t, t.photos.slice(0, 2));
-    for (const m of MODELS) jobs.push({ label: `P0:${m}`, ...base('P0', m, t), keys: two.map(p => p.key), schema: 'P0', prompt: promptP0(t, two, brief('P1')) });
-    // A check only: which model the short name runs. The eval itself uses full IDs.
-    jobs.push({ label: 'P0:haiku-alias', ...base('P0', 'haiku', t), model_opt: 'haiku', check_only: true, keys: two.map(p => p.key), schema: 'P0', prompt: promptP0(t, two, brief('P1')) });
-    p1(config.tracer_model, t);
-    rank('P2', config.tracer_model, t, t.photos, 'all');
-  } else if (plan === 'full') {
-    for (const m of MODELS) for (const t of pools.targets) p1(m, t);
-    for (const m of MODELS) for (const t of pools.targets) rank('P2', m, t, t.photos, 'all');
-    for (const m of MODELS) for (const t of pools.targets.filter(x => pools.p3.includes(x.target))) rank('P3', m, t, t.photos.slice(0, 12), 'first12');
+    const ten = tracerPhotos(pool, config.seed);
+    const two = ten.slice(0, 2);
+    for (const m of MODELS) jobs.push({ label: `check:${m}`, ...base('check', m, config.effort[m]), variant: 'V1', keys: two.map(p => p.key), schema: 'CHECK', prompt: promptCheck(two.map(line), brief('judge-V1')) });
+    for (const m of MODELS) for (const v of config.variants) judge(ten, m, config.effort[m], v);
+    // One cell that fits on one sheet, ranked as one group: the tracer has no judge answers to group by yet.
+    const c = pool.cells.find(x => x.photos.length <= PER_SHEET);
+    rank(config.tracer_model, c, { all: c.photos.map(p => p.key) }, null);
+  } else if (plan === 'tracer-effort') {
+    const ten = tracerPhotos(pool, config.seed);
+    for (const m of MODELS) for (const e of offHigh) judge(ten, m, e, 'V1');
+  } else if (plan === 'key-high') {
+    for (const m of MODELS) for (const v of config.variants) judge(all, m, 'high', v);
+  } else if (plan === 'key-effort') {
+    if (!config.variants.includes(opts.variant)) throw new Error('the key-effort plan needs --variant V1 or V2');
+    for (const m of MODELS) for (const e of offHigh) judge(all, m, e, opts.variant);
   } else throw new Error(`unknown plan ${plan}`);
   return jobs;
 }
 
 export function renderScript(name, jobs) {
   const phases = [...new Set(jobs.map(j => j.phase))].map(title => ({ title }));
-  const meta = { name, description: `Selection-method eval judges (${jobs.length} agents)`, phases };
+  const meta = { name, description: `Intake eval agents (${jobs.length} agents)`, phases };
   const slim = jobs.map(j => ({ label: j.label, phase: j.phase, model: j.model_opt, effort: j.effort, schema: j.schema, prompt: j.prompt }));
   return [
     `export const meta = ${JSON.stringify(meta)}`,
@@ -58,23 +87,28 @@ export function renderScript(name, jobs) {
   ].join('\n');
 }
 
+export function writeBriefs() {
+  const checks = extractChecks(fs.readFileSync(path.join(ROOT, '.claude', 'skills', 'photo-check', 'SKILL.md'), 'utf8'));
+  fs.mkdirSync(path.join(EVAL, 'briefs'), { recursive: true });
+  for (const v of ['V1', 'V2']) fs.writeFileSync(path.join(EVAL, 'briefs', `judge-${v}.md`), briefJudge(checks, v));
+  fs.writeFileSync(path.join(EVAL, 'briefs', 'rank.md'), briefRank());
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const args = process.argv.slice(2);
-  const plan = args[args.indexOf('--plan') + 1];
-  const name = `selection-eval-${plan}`;
+  const opt = n => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
+  const plan = opt('--plan');
+  const name = `intake-eval-${plan}`;
   const config = readJson(path.join(EVAL, 'config.json'));
-  const pools = readJson(path.join(EVAL, plan === 'tracer' ? 'tracer/pools.json' : 'pools.json'));
-  const quality = extractQuality(fs.readFileSync(path.join(ROOT, '.claude', 'skills', 'photo-check', 'SKILL.md'), 'utf8'));
-  fs.mkdirSync(path.join(EVAL, 'briefs'), { recursive: true });
-  fs.writeFileSync(path.join(EVAL, 'briefs', 'P1.md'), briefP1(quality));
-  fs.writeFileSync(path.join(EVAL, 'briefs', 'P2.md'), briefRank(quality, 'P2'));
-  fs.writeFileSync(path.join(EVAL, 'briefs', 'P3.md'), briefRank(quality, 'P3'));
-  const jobs = buildJobs(pools, plan, config);
+  const pool = readJson(path.join(EVAL, 'key', 'pools.json'));
+  writeBriefs();
+  const jobs = buildJobs(pool, plan, config, { variant: opt('--variant') });
   fs.mkdirSync(path.join(EVAL, 'wf'), { recursive: true });
   fs.writeFileSync(path.join(EVAL, 'wf', `${name}.js`), renderScript(name, jobs));
   writeJson(path.join(EVAL, 'wf', `${name}.jobs.json`), jobs);
   const count = {};
-  for (const j of jobs) count[`${j.pass} ${j.model}`] = (count[`${j.pass} ${j.model}`] || 0) + 1;
+  for (const j of jobs) count[`${j.kind} ${j.model} ${j.effort}`] = (count[`${j.kind} ${j.model} ${j.effort}`] || 0) + 1;
   console.log(JSON.stringify(count, null, 1));
   console.log(`agents: ${jobs.length} | script: ${path.join(EVAL, 'wf', `${name}.js`)}`);
+  printEstimate(estimateJobs(jobs));
 }

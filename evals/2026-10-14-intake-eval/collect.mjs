@@ -1,20 +1,29 @@
-// node collect.mjs --name selection-eval-tracer --record <run record> [--record <resumed run record> ...] [--fail-on-unread]
-// Reads the job list, the run records, and the agent transcripts.
-// Writes runs/<name>/results.json, tokens.json, tool-errors.json, problems.txt.
+// node collect.mjs --name intake-eval-tracer --run <run ID> [--run <resumed run ID> ...] [--fail-on-unread]
+// node collect.mjs --name intake-eval-tracer --record <run record file> [...]
+// Reads the job list, the run records, and the agent transcripts. --run finds the record of a run ID in the
+// session folders under $HOME/.claude/projects/. Run it in the session of the workflow: the records go away with the container.
+// Writes runs/<name>/results.json, tokens.json, times.json, tool-errors.json, problems.txt.
 // A job that had a failed attempt (a "failed" line in the run's journal.jsonl) gets `failed_attempts` in tokens.json.
+// times.json: the wall-clock start and end of each job, from its transcript timestamps (the time metric).
 // The total line on the console includes the failed attempts.
-// Exits 1 on a model problem, or on any unread photo with --fail-on-unread. A check_only job never fails the model check.
+// Exits 1 on a model problem, or on any unread photo with --fail-on-unread.
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { EVAL } from './lib/paths.mjs';
 import { readJson, readJsonl, writeJson } from './lib/data.mjs';
 import { MODEL_IDS, messagesFrom, sumMessages } from './lib/tokens.mjs';
 import { keyProblems } from './lib/coverage.mjs';
-import { failedAgents } from './lib/journal.mjs';
+import { failedAgents, timeSpan, findRecord } from './lib/journal.mjs';
 
 const args = process.argv.slice(2);
 const name = args[args.indexOf('--name') + 1];
-const recordFiles = args.flatMap((a, i) => (a === '--record' ? [args[i + 1]] : []));
+const projects = path.join(os.homedir(), '.claude', 'projects');
+const recordFiles = [
+  ...args.flatMap((a, i) => (a === '--record' ? [args[i + 1]] : [])),
+  ...args.flatMap((a, i) => (a === '--run' ? [findRecord(projects, args[i + 1])] : [])),
+];
+if (!recordFiles.length) throw new Error('usage: node collect.mjs --name <plan name> --run <run ID> [--run ...]');
 const jobs = readJson(path.join(EVAL, 'wf', `${name}.jobs.json`));
 
 const records = recordFiles.map(f => {
@@ -37,9 +46,9 @@ const toolErrors = entries => entries.flatMap(e => (e.type === 'user' && Array.i
   .filter(c => c?.type === 'tool_result' && c.is_error)
   .map(c => (typeof c.content === 'string' ? c.content : JSON.stringify(c.content)).slice(0, 200));
 const PERMISSION = /permission|denied|not allowed|outside|blocked|refused/i;
-const unreadIn = r => (r?.results ?? []).filter(x => x.label === 'unread').length + (r?.unread ?? []).length;
+const unreadIn = r => (r?.results ?? []).filter(x => (x?.reject ?? []).includes('unread')).length + (r?.unread ?? []).length;
 
-const out = [], tokens = {}, problems = [], checks = [];
+const out = [], tokens = {}, times = {}, problems = [], checks = [];
 let modelProblems = 0, unread = 0;
 const failedTotal = { count: 0, tokens: 0, usd: 0 };
 const errors = [];
@@ -47,12 +56,12 @@ for (const j of jobs) {
   const want = MODEL_IDS[j.model];
   let result = null;
   for (const r of records) if (r.results.get(j.label) != null) result = r.results.get(j.label);
-  const seen = new Set(), msgs = [], states = [];
+  const seen = new Set(), msgs = [], states = [], lines = [];
   let recordTokens = 0;
   for (const r of records) {
     for (const e of r.progress.filter(x => x.label === j.label)) {
       states.push(e.state);
-      if (e.model && e.model !== want && !j.check_only) { problems.push(`${j.label}: run record model ${e.model}, want ${want}`); modelProblems++; }
+      if (e.model && e.model !== want) { problems.push(`${j.label}: run record model ${e.model}, want ${want}`); modelProblems++; }
       if (seen.has(e.agentId)) continue;
       seen.add(e.agentId);
       recordTokens += e.tokens ?? 0;
@@ -60,6 +69,7 @@ for (const j of jobs) {
       if (fs.existsSync(f)) {
         const entries = readJsonl(f);
         msgs.push(...messagesFrom(entries));
+        lines.push(...entries);
         for (const text of toolErrors(entries)) errors.push({ label: j.label, text });
       } else problems.push(`${j.label}: no transcript ${f}`);
     }
@@ -83,19 +93,21 @@ for (const j of jobs) {
     failedTotal.count += failedIds.size; failedTotal.tokens += fs_.tokens; failedTotal.usd += fs_.usd;
   }
   tokens[j.label] = sum;
-  if (j.check_only) checks.push(`${j.label}: model option "${j.model_opt}" ran ${sum.models.join('+') || 'nothing'}`);
-  else if (sum.models.some(m => m !== want)) { problems.push(`${j.label}: transcript model ${sum.models.join('+')}, want ${want}`); modelProblems++; }
+  times[j.label] = timeSpan(lines);
+  if (j.kind === 'check') checks.push(`${j.label}: model option "${j.model_opt}" ran ${sum.models.join('+') || 'nothing'}, self report ${JSON.stringify(result?.model_self_report ?? null)}`);
+  if (sum.models.some(m => m !== want)) { problems.push(`${j.label}: transcript model ${sum.models.join('+')}, want ${want}`); modelProblems++; }
   if (!seen.size) problems.push(`${j.label}: not in any run record`);
   if (result == null) problems.push(`${j.label}: no result`);
   problems.push(...keyProblems(j, result));
   if (sum.unpriced) problems.push(`${j.label}: ${sum.unpriced} messages with no price`);
   unread += unreadIn(result);
-  out.push({ label: j.label, pass: j.pass, model: j.model, model_opt: j.model_opt, effort: j.effort, check_only: !!j.check_only, target: j.target, keys: j.keys, agentIds: [...seen], states, result });
+  out.push({ label: j.label, kind: j.kind, set: j.set, model: j.model, model_opt: j.model_opt, effort: j.effort, variant: j.variant ?? null, cell: j.cell ?? null, groups: j.groups ?? null, keys: j.keys, agentIds: [...seen], states, result });
 }
 
 const dir = path.join(EVAL, 'runs', name);
 writeJson(path.join(dir, 'results.json'), { runIds: records.map(r => r.rec.runId), jobs: out });
 writeJson(path.join(dir, 'tokens.json'), tokens);
+writeJson(path.join(dir, 'times.json'), times);
 writeJson(path.join(dir, 'tool-errors.json'), errors);
 fs.writeFileSync(path.join(dir, 'problems.txt'), problems.join('\n') + '\n');
 const total = Object.values(tokens).reduce((s, t) => ({ tokens: s.tokens + t.tokens, usd: s.usd + t.usd }), { tokens: failedTotal.tokens, usd: failedTotal.usd });

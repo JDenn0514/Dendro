@@ -1,70 +1,121 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { buildJobs, renderScript, MODELS } from '../make-workflow.mjs';
+import path from 'node:path';
+import { buildJobs, renderScript, tracerPhotos, MODELS } from '../make-workflow.mjs';
 import { SCHEMAS } from '../lib/schemas.mjs';
+import { EVAL } from '../lib/paths.mjs';
 
-const photos = (t, n) => Array.from({ length: n }, (_, i) => ({ key: `${t}-${String(i + 1).padStart(2, '0')}`, n: i + 1, abs: `/x/${t}/${i + 1}.jpg` }));
 const config = {
+  seed: 20261014,
   tracer_model: 'haiku',
+  efforts: ['medium', 'high', 'xhigh'],
   effort: { opus: 'high', sonnet: 'high', haiku: 'high' },
+  rank_effort: 'high',
+  variants: ['V1', 'V2'],
   model_opt: { opus: 'claude-opus-5-5', sonnet: 'claude-sonnet-5-5', haiku: 'claude-haiku-5-5' },
+  depth_features: { PLHI: { fruit: 'two_heads' } },
 };
+let order = 0;
+const cell = (target, part, n, species = `${target} species`) => ({
+  cell: `${target}-${part}`, target, part, species,
+  photos: Array.from({ length: n }, (_, i) => ({
+    key: `${target}-${part}-${String(i + 1).padStart(2, '0')}`, n: i + 1, order: ++order, target, part,
+    url: `https://x/${target}/${part}/${i + 1}.jpg`, fetch_url: `https://x/${target}/${part}/${i + 1}.jpg`,
+    source_species: `${target} source`, owner: { keep: true, step: 1 },
+  })),
+});
+// 13 + 12 + 6 + 8 + 7 + 9 = 55 photos, in key order.
+const POOL = { set: 'key', cells: [cell('ACRU', 'leaf', 13), cell('ACRU', 'bark', 12), cell('ACRU', 'fruit', 6), cell('PLHI', 'leaf', 8), cell('PLHI', 'bark', 7), cell('PLHI', 'fruit', 9, 'Platanus ×hispanica')] };
+const keysOf = jobs => jobs.flatMap(j => j.keys);
 
-test('tracer plan: P0 for 3 full IDs and the short name haiku, P1 batches of 10, one P2', () => {
-  const jobs = buildJobs({ p3: [], targets: [{ target: 'QUAC2', species: 'Q', photos: photos('QUAC2', 43) }] }, 'tracer', config);
-  assert.deepEqual(jobs.filter(j => j.pass === 'P0' && !j.check_only).map(j => j.model), MODELS);
-  const alias = jobs.find(j => j.check_only);
-  assert.equal(alias.label, 'P0:haiku-alias');
-  assert.equal(alias.model_opt, 'haiku');
-  assert.equal(jobs.find(j => j.pass === 'P0').keys.length, 2);
-  const p1 = jobs.filter(j => j.pass === 'P1');
-  assert.deepEqual(p1.map(j => j.keys.length), [10, 10, 10, 10, 3]);
-  assert.ok(p1.every(j => j.model === 'haiku' && j.model_opt === 'claude-haiku-5-5'));
-  assert.ok(jobs.every(j => j.effort === 'high'));
-  assert.equal(jobs.filter(j => j.pass === 'P2').length, 1);
+test('tracerPhotos takes 4 leaf, 3 bark, and 3 fruit photos, fixed by the seed', () => {
+  const a = tracerPhotos(POOL, config.seed);
+  assert.deepEqual(['leaf', 'bark', 'fruit'].map(p => a.filter(x => x.part === p).length), [4, 3, 3]);
+  assert.deepEqual(a.map(x => x.key), tracerPhotos(POOL, config.seed).map(x => x.key));
+  assert.notDeepEqual(a.map(x => x.key), tracerPhotos(POOL, 7).map(x => x.key));
+  assert.deepEqual(a.map(x => x.order), [...a.map(x => x.order)].sort((x, y) => x - y));
+});
+
+test('tracer plan: 3 model checks, a V1 and a V2 call per model, and one Haiku ranking', () => {
+  const jobs = buildJobs(POOL, 'tracer', config);
   assert.equal(jobs.length, 10);
-  assert.equal(new Set(jobs.map(j => j.label)).size, jobs.length);
+  assert.equal(new Set(jobs.map(j => j.label)).size, 10);
+  const checks = jobs.filter(j => j.kind === 'check');
+  assert.deepEqual(checks.map(j => [j.label, j.model_opt, j.schema, j.keys.length]), [
+    ['check:opus', 'claude-opus-5-5', 'CHECK', 2], ['check:sonnet', 'claude-sonnet-5-5', 'CHECK', 2], ['check:haiku', 'claude-haiku-5-5', 'CHECK', 2],
+  ]);
+  const judges = jobs.filter(j => j.kind === 'judge');
+  assert.deepEqual(judges.map(j => j.label), MODELS.flatMap(m => [`judge:${m}:high:V1:b01`, `judge:${m}:high:V2:b01`]));
+  const ten = tracerPhotos(POOL, config.seed).map(p => p.key);
+  for (const j of judges) assert.deepEqual(j.keys, ten);
+  assert.ok(judges.every(j => j.schema === 'JUDGE' && j.effort === 'high'));
+  assert.ok(judges.find(j => j.variant === 'V2').prompt.includes(path.join(EVAL, 'briefs', 'judge-V2.md')));
+  const [rank] = jobs.filter(j => j.kind === 'rank');
+  assert.equal(rank.label, 'rank:haiku:high:ACRU-fruit');
+  assert.equal(rank.model_opt, 'claude-haiku-5-5');
+  assert.deepEqual(Object.keys(rank.groups), ['all']);
+  assert.equal(rank.keys.length, 6);
+  assert.deepEqual(rank.sheets.map(s => s.file), [path.join(EVAL, 'images', 'sheets', 'key', 'ACRU-fruit', 'all-1.jpg')]);
 });
 
-test('P0 and P1 prompts list the app-size copies; P2 lists sheets and keys only', () => {
-  const jobs = buildJobs({ p3: [], targets: [{ target: 'QUAC2', species: 'Q', photos: photos('QUAC2', 12) }] }, 'tracer', config);
-  for (const j of jobs.filter(x => x.pass === 'P0' || x.pass === 'P1')) {
-    assert.ok(/\/images\/QUAC2\/\d+\.jpg/.test(j.prompt), j.label);
-    assert.ok(!j.prompt.includes('/x/'), `${j.label} lists an original`);
+test('tracer-effort plan: V1 at medium and xhigh for each model, on the same 10 photos', () => {
+  const jobs = buildJobs(POOL, 'tracer-effort', config);
+  assert.deepEqual(jobs.map(j => j.label), MODELS.flatMap(m => [`judge:${m}:medium:V1:b01`, `judge:${m}:xhigh:V1:b01`]));
+  assert.ok(jobs.every(j => j.keys.length === 10 && j.variant === 'V1'));
+});
+
+test('key-high plan: calls of 10 across the cells in key order, for each model and variant', () => {
+  const jobs = buildJobs(POOL, 'key-high', config);
+  assert.equal(jobs.length, 3 * 2 * 6);
+  const one = jobs.filter(j => j.model === 'sonnet' && j.variant === 'V2');
+  assert.deepEqual(one.map(j => j.keys.length), [10, 10, 10, 10, 10, 5]);
+  assert.deepEqual(keysOf(one), POOL.cells.flatMap(c => c.photos.map(p => p.key)));
+  // The first call ends inside ACRU-leaf; the second crosses into ACRU-bark.
+  assert.deepEqual(one[1].keys.slice(2, 4), ['ACRU-leaf-13', 'ACRU-bark-01']);
+  assert.equal(one[5].label, 'judge:sonnet:high:V2:b06');
+  assert.ok(jobs.every(j => j.effort === 'high' && j.model_opt === config.model_opt[j.model]));
+});
+
+test('key-effort plan: the named variant at medium and xhigh for each model', () => {
+  const jobs = buildJobs(POOL, 'key-effort', config, { variant: 'V2' });
+  assert.equal(jobs.length, 3 * 2 * 6);
+  assert.deepEqual([...new Set(jobs.map(j => j.effort))], ['medium', 'xhigh']);
+  assert.ok(jobs.every(j => j.variant === 'V2'));
+  assert.throws(() => buildJobs(POOL, 'key-effort', config), /needs --variant/);
+  assert.throws(() => buildJobs(POOL, 'nope', config), /unknown plan nope/);
+});
+
+test('judge prompts list the 440 px copies, the tree, and the source name, and nothing of the owner', () => {
+  const jobs = buildJobs(POOL, 'key-high', config);
+  const j = jobs.find(x => x.label === 'judge:opus:high:V1:b01');
+  assert.ok(j.prompt.includes(`- ACRU-leaf-02: ${path.join(EVAL, 'images', 'app', 'key', 'ACRU-leaf-02.jpg')} | tree: ACRU species | source name: ACRU source`));
+  for (const x of jobs) {
+    assert.ok(!x.prompt.includes('https://x/'), `${x.label} lists a source URL`);
+    assert.ok(!/owner|keep|step/i.test(x.prompt.split('\n').slice(1).join('\n')), `${x.label} names an owner field`);
   }
-  const p1 = jobs.find(j => j.label === 'P1:haiku:QUAC2:b2');
-  assert.ok(p1.prompt.includes('- QUAC2-11: ') && p1.prompt.includes('/images/QUAC2/11.jpg') && p1.prompt.includes('/images/QUAC2/12.jpg'));
-  assert.ok(!p1.prompt.includes('/images/QUAC2/10.jpg'));
-  const p2 = jobs.find(j => j.pass === 'P2');
-  assert.ok(!p2.prompt.includes('/images/') && !p2.prompt.includes('/x/'));
 });
 
-test('full plan: P1 and P2 for every model and target, P3 on the P3 targets with 12 photos', () => {
-  const pools = { p3: ['B'], targets: [{ target: 'A', photos: photos('A', 25) }, { target: 'B', photos: photos('B', 31) }] };
-  const jobs = buildJobs(pools, 'full', config);
-  assert.equal(jobs.filter(j => j.pass === 'P1').length, 3 * (3 + 4));
-  assert.equal(jobs.filter(j => j.pass === 'P2').length, 6);
-  const p3 = jobs.filter(j => j.pass === 'P3');
-  assert.equal(p3.length, 3);
-  assert.ok(p3.every(j => j.target === 'B' && j.keys.length === 12));
-  assert.ok(p3[0].prompt.includes('/sheets/B/first12-2.jpg'));
+// The judge sets the part, so every PLHI photo names the depth feature, with the part it applies to.
+test('the depth feature goes on the PLHI photos only, for the part fruit', () => {
+  const jobs = buildJobs(POOL, 'key-high', config);
+  const lines = jobs.filter(j => j.model === 'opus' && j.variant === 'V1').flatMap(j => j.prompt.split('\n')).filter(l => l.startsWith('- '));
+  const withDepth = lines.filter(l => l.includes('when the part is fruit, also answer `two_heads`')).map(l => l.slice(2, l.indexOf(':')));
+  assert.deepEqual(withDepth, POOL.cells.slice(3).flatMap(c => c.photos.map(p => p.key)));
 });
 
 test('renderScript writes a pure-literal meta and the job list', () => {
-  const jobs = buildJobs({ p3: [], targets: [{ target: 'T', photos: photos('T', 3) }] }, 'tracer', config);
-  const s = renderScript('selection-eval-tracer', jobs);
+  const jobs = buildJobs(POOL, 'tracer', config);
+  const s = renderScript('intake-eval-tracer', jobs);
   const lines = s.split('\n');
   assert.ok(lines[0].startsWith('export const meta = {'));
   const meta = JSON.parse(lines[0].slice('export const meta = '.length));
-  assert.equal(meta.name, 'selection-eval-tracer');
-  assert.deepEqual(meta.phases.map(p => p.title), ['P0', 'P1', 'P2']);
+  assert.equal(meta.name, 'intake-eval-tracer');
+  assert.deepEqual(meta.phases.map(p => p.title), ['check', 'judge', 'rank']);
   const slim = JSON.parse(lines[1].slice('const JOBS = '.length));
   assert.equal(slim.length, jobs.length);
   assert.equal(slim[0].model, 'claude-opus-5-5');
   assert.equal(slim[0].effort, 'high');
   assert.ok(s.includes('agent(j.prompt, { label: j.label, phase: j.phase, model: j.model, effort: j.effort, schema: SCHEMAS[j.schema] })'));
-  const tagged = SCHEMAS.RANK.properties.ranked.items;
-  assert.deepEqual(tagged.required, ['key', 'tag']);
-  assert.deepEqual(tagged.properties.tag.enum, ['good', 'hard']);
-  assert.ok(s.includes('"enum":["good","hard"]'));
+  const schemas = JSON.parse(lines[2].slice('const SCHEMAS = '.length));
+  assert.deepEqual(schemas, SCHEMAS);
 });

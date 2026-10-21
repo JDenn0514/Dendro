@@ -1,19 +1,28 @@
 // Key coverage of one job. Every key of the job comes back exactly once, and no other key appears.
-// P0 and P1: the keys of result.results. P2 and P3: the keys of result.ranked plus result.rejects
-// (a key in result.unread counts as covered, because the judge says it could not read it).
-// Returns a list of problem strings. A job with no result returns [] (the caller reports that).
+// check and judge: the keys of result.results. rank: the keys of every order plus result.unread
+// (a key in unread counts as covered, because the agent says it could not read it). A ranked key must
+// stay in its own group. Returns a list of problem strings. A job with no result returns [] (the caller reports that).
 export function keyProblems(job, result) {
   if (result == null) return [];
-  const got = job.pass === 'P0' || job.pass === 'P1'
-    ? (result.results ?? []).map(x => x?.key)
-    : [...(result.ranked ?? []).map(x => x?.key), ...(result.rejects ?? []), ...(result.unread ?? [])];
+  const problems = [];
+  let got;
+  if (job.kind === 'rank') {
+    const groupOf = new Map(Object.entries(job.groups ?? {}).flatMap(([g, keys]) => keys.map(k => [k, g])));
+    got = [...(result.unread ?? [])];
+    for (const [g, keys] of Object.entries(result.orders ?? {})) {
+      for (const k of keys ?? []) {
+        got.push(k);
+        if (groupOf.has(k) && groupOf.get(k) !== g) problems.push(`${job.label}: key ${k} in group ${g}, want group ${groupOf.get(k)}`);
+      }
+    }
+  } else got = (result.results ?? []).map(x => x?.key);
   const want = new Set(job.keys), count = new Map();
   for (const k of got) count.set(k, (count.get(k) ?? 0) + 1);
-  const problems = [];
+  const cover = [];
   for (const k of job.keys) {
-    if (!count.has(k)) problems.push(`${job.label}: key ${k} missing`);
-    else if (count.get(k) > 1) problems.push(`${job.label}: key ${k} returned ${count.get(k)} times`);
+    if (!count.has(k)) cover.push(`${job.label}: key ${k} missing`);
+    else if (count.get(k) > 1) cover.push(`${job.label}: key ${k} returned ${count.get(k)} times`);
   }
-  for (const k of count.keys()) if (!want.has(k)) problems.push(`${job.label}: unknown key ${k}`);
-  return problems;
+  for (const k of count.keys()) if (!want.has(k)) cover.push(`${job.label}: unknown key ${k}`);
+  return [...cover, ...problems];
 }

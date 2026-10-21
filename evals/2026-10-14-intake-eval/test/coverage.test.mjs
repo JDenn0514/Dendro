@@ -2,34 +2,34 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { keyProblems } from '../lib/coverage.mjs';
 
-const item = key => ({ key, label: 'good', note: '' });
+const item = key => ({ key, part: 'leaf' });
 
-test('P1 and P0: a complete result has no problem', () => {
-  const job = { label: 'P1:x', pass: 'P1', keys: ['a', 'b'] };
+test('check and judge: a complete result has no problem', () => {
+  const job = { label: 'judge:x', kind: 'judge', keys: ['a', 'b'] };
   assert.deepEqual(keyProblems(job, { results: [item('b'), item('a')] }), []);
-  assert.deepEqual(keyProblems({ ...job, pass: 'P0' }, { results: [item('a'), item('b')] }), []);
+  assert.deepEqual(keyProblems({ ...job, kind: 'check' }, { model_self_report: 'm', results: [item('a'), item('b')] }), []);
 });
 
-test('P1: a missing key, a repeated key, and an unknown key are each a problem', () => {
-  const job = { label: 'P1:x', pass: 'P1', keys: ['a', 'b', 'c'] };
+test('judge: a missing key, a repeated key, and an unknown key are each a problem', () => {
+  const job = { label: 'judge:x', kind: 'judge', keys: ['a', 'b', 'c'] };
   const p = keyProblems(job, { results: [item('a'), item('a'), item('z')] });
-  assert.deepEqual(p, ['P1:x: key a returned 2 times', 'P1:x: key b missing', 'P1:x: key c missing', 'P1:x: unknown key z']);
+  assert.deepEqual(p, ['judge:x: key a returned 2 times', 'judge:x: key b missing', 'judge:x: key c missing', 'judge:x: unknown key z']);
 });
 
-test('P2 and P3: ranked plus rejects cover the keys; a key in both is a problem', () => {
-  const job = { label: 'P2:x', pass: 'P2', keys: ['a', 'b', 'c'] };
-  const ok = { ranked: [{ key: 'b', tag: 'good' }, { key: 'a', tag: 'hard' }], rejects: ['c'], unread: [] };
-  assert.deepEqual(keyProblems(job, ok), []);
-  assert.deepEqual(keyProblems({ ...job, pass: 'P3' }, ok), []);
-  const bad = { ranked: [{ key: 'a', tag: 'good' }], rejects: ['a', 'q'], unread: [] };
-  assert.deepEqual(keyProblems(job, bad), ['P2:x: key a returned 2 times', 'P2:x: key b missing', 'P2:x: key c missing', 'P2:x: unknown key q']);
+test('rank: the orders plus unread cover the keys; a key in two places is a problem', () => {
+  const job = { label: 'rank:x', kind: 'rank', keys: ['a', 'b', 'c'], groups: { 1: ['a', 'b'], 3: ['c'] } };
+  assert.deepEqual(keyProblems(job, { orders: { 1: ['b', 'a'], 3: ['c'] }, unread: [], note: '' }), []);
+  assert.deepEqual(keyProblems(job, { orders: { 1: ['a'] }, unread: ['b', 'c'], note: '' }), []);
+  const bad = { orders: { 1: ['a', 'q'], 3: ['a'] }, unread: [], note: '' };
+  assert.deepEqual(keyProblems(job, bad), ['rank:x: key a returned 2 times', 'rank:x: key b missing', 'rank:x: key c missing', 'rank:x: unknown key q', 'rank:x: key a in group 3, want group 1']);
 });
 
-test('P2: a key in unread counts as covered', () => {
-  const job = { label: 'P2:x', pass: 'P2', keys: ['a', 'b'] };
-  assert.deepEqual(keyProblems(job, { ranked: [{ key: 'a', tag: 'good' }], rejects: [], unread: ['b'] }), []);
+test('rank: a key in the order of another group is a problem', () => {
+  const job = { label: 'rank:x', kind: 'rank', keys: ['a', 'b'], groups: { 1: ['a'], 2: ['b'] } };
+  assert.deepEqual(keyProblems(job, { orders: { 1: ['a', 'b'] }, unread: [], note: '' }), ['rank:x: key b in group 1, want group 2']);
+  assert.deepEqual(keyProblems(job, { orders: { 1: ['a'], 9: ['b'] }, unread: [], note: '' }), ['rank:x: key b in group 9, want group 2']);
 });
 
 test('a job with no result returns no key problem', () => {
-  assert.deepEqual(keyProblems({ label: 'x', pass: 'P1', keys: ['a'] }, null), []);
+  assert.deepEqual(keyProblems({ label: 'x', kind: 'judge', keys: ['a'] }, null), []);
 });
