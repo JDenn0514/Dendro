@@ -77,6 +77,18 @@ test('key-judge plan: calls of 10 across the cells in key order, for each model 
   assert.ok(jobs.every(j => j.effort === 'high' && j.model_opt === config.model_opt[j.model]));
 });
 
+test('key-batch20 plan: V1 at high in calls of 20, for each model, with labels apart from the calls of 10', () => {
+  const jobs = buildJobs(POOL, 'key-batch20', config);
+  const one = jobs.filter(j => j.model === 'haiku');
+  assert.deepEqual(one.map(j => j.keys.length), [20, 20, 15]);
+  assert.deepEqual(keysOf(one), POOL.cells.flatMap(c => c.photos.map(p => p.key)));
+  assert.deepEqual(jobs.map(j => j.label).slice(0, 3), ['judge:opus:high:V1:n20:b01', 'judge:opus:high:V1:n20:b02', 'judge:opus:high:V1:n20:b03']);
+  assert.ok(jobs.every(j => j.batch === 20 && j.variant === 'V1' && j.effort === 'high'));
+  assert.ok(buildJobs(POOL, 'key-judge', config).every(j => j.batch === 10));
+  const ten = new Set(buildJobs(POOL, 'key-judge', config).map(j => j.label));
+  assert.ok(jobs.every(j => !ten.has(j.label)));
+});
+
 test('key-effort plan: the named variant at medium and xhigh for each model', () => {
   const jobs = buildJobs(POOL, 'key-effort', config, { variant: 'V2' });
   assert.equal(jobs.length, 3 * 2 * 6);

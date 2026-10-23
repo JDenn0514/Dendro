@@ -103,7 +103,7 @@ for (const j of jobs) {
   problems.push(...keyProblems(j, result));
   if (sum.unpriced) problems.push(`${j.label}: ${sum.unpriced} messages with no price`);
   unread += unreadIn(result);
-  out.push({ label: j.label, kind: j.kind, set: j.set, model: j.model, model_opt: j.model_opt, effort: j.effort, variant: j.variant ?? null, cell: j.cell ?? null, groups: j.groups ?? null, keys: j.keys, agentIds: [...seen], states, result });
+  out.push({ label: j.label, kind: j.kind, set: j.set, model: j.model, model_opt: j.model_opt, effort: j.effort, variant: j.variant ?? null, batch: j.batch ?? null, cell: j.cell ?? null, groups: j.groups ?? null, keys: j.keys, agentIds: [...seen], states, result });
 }
 
 const dir = path.join(EVAL, 'runs', name);

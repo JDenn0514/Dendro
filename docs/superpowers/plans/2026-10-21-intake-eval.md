@@ -324,6 +324,7 @@ Files: `lib/replay.mjs`, `lib/score.mjs`, `analyze.mjs`, `lib/views.mjs`, and th
 - Usual look on the key, secondary.
 - Species doubt: `mismatch` escalations and `hybrid` rejects, with the source name of each.
 - Repeat agreement: two runs of the same model and variant, on keep and on the difficulty step.
+- Batch size (owner ruling 2026-10-23): for each model, V1 at `high` in calls of 20 (set-up `<model>:high:V1:n20`) against calls of 10 (`<model>:high:V1`): keep agreement, exact difficulty step, and within one, each against the owner, and the agreement of the two with each other. Also the USD per photo of each.
 - Cost per photo judged and per kept photo, in tokens and USD. Time: minutes per 100 photos.
 - Quota fill: the share of cells and difficulty steps filled, and the photos judged to fill them.
 - Source yield: per source, the photos kept at each difficulty step, and the cells one fetch fills.
@@ -350,21 +351,23 @@ Done when: the tests pass and `analyze.mjs` writes a table from the tracer data 
 
 Workflow run. **Needs the owner's yes** (one yes covers Tasks 5 and 6). Pull request: `feat/intake-eval-5-key-runs` (Tasks 5 to 7 share it).
 
-Agents and cost, from the spec and the old eval's real costs. The tracers correct them before the owner's yes:
+Agents and cost, from the tracers of Task 3 (`NOTES.md`). The owner gave the yes for Tasks 5 and 6 on 2026-10-23 at these numbers:
 
-- Part 1, V1 and V2 at `high`: 132 agents (22 calls × 3 models × 2 variants). USD 15 (11 to 25).
-- Part 2, the leading variant at `medium` and `xhigh`: 132 agents (22 calls × 3 models × 2 efforts). About USD 17 (11 to 28). This is a guess until the effort tracer: `medium` at 0.6 to 0.9 times the cost of `high`, and `xhigh` at 1.1 to 2 times.
+- Part 1, V1 and V2 at `high`, calls of 10: 132 agents (22 calls × 3 models × 2 variants). USD 26 (19 to 39).
+- Part 1b, the batch-size test (owner ruling 2026-10-23): V1 at `high` in calls of 20, for all 3 models: 33 agents (11 calls × 3 models). About USD 8 (6 to 15). The photos, the prompt, and the effort are those of part 1 V1, so a difference comes from the call size alone.
+- Part 2, the leading variant at `medium` and `xhigh`, calls of 10: 132 agents (22 calls × 3 models × 2 efforts). USD 22 (16 to 33).
 
 Steps:
 
-- [ ] Ask the owner for the yes for Tasks 5 and 6, with the agent counts and the USD ranges from the tracers.
+- [x] Ask the owner for the yes for Tasks 5 and 6, with the agent counts and the USD ranges from the tracers. (Given 2026-10-23.)
 - [ ] Part 1: run `make-workflow.mjs --plan key-judge`. Launch. Run `collect.mjs` at once. Run `check-run.mjs`.
+- [ ] Part 1b: run `make-workflow.mjs --plan key-batch20`. Launch. Collect at once. Run `check-run.mjs`. Parts 1 and 1b can run in one session, one after the other.
 - [ ] Re-run the failed jobs once with `resumeFromRunId`. A photo still with no answer counts as a reject (choice 13).
-- [ ] Run `analyze.mjs --set key`. Name the leading variant (choice 14) in `NOTES.md`.
+- [ ] Run `analyze.mjs --set key`. Name the leading variant (choice 14) in `NOTES.md`. Write the batch-size result in `NOTES.md`: calls of 20 are as accurate as calls of 10 for a model when its keep agreement and exact difficulty step are each no more than 5 points below those of calls of 10. The owner then rules whether later runs use calls of 20.
 - [ ] Part 2: run `make-workflow.mjs --plan key-effort`. Launch. Collect at once. Run `analyze.mjs --set key` again with all 9 set-ups. Name each model's leading effort in `NOTES.md`.
-- [ ] Commit `runs/key-judge/`, `runs/key-effort/`, and `tables/key/`.
+- [ ] Commit `runs/key-judge/`, `runs/key-batch20/`, `runs/key-effort/`, and `tables/key/`.
 
-Done when: every job has a result or a recorded failure, the model check passes, the leading variant is named, and each model has a leading effort.
+Done when: every job has a result or a recorded failure, the model check passes, the leading variant is named, each model has a leading effort, and the batch-size result is in `NOTES.md`.
 
 ### Task 6: The key repeat and the rankings
 
@@ -372,12 +375,12 @@ Workflow run, same yes as Task 5. Same pull request.
 
 Agents:
 
-- The repeat of the leading variant, 3 models, each at its leading effort: 66 agents, USD 8 (5 to 12) at `high`; the tracer numbers correct it for another effort.
+- The repeat of the leading variant, 3 models, each at its leading effort: 66 agents, USD 15 at `high` (the tracer numbers; another effort or the owner's batch-size ruling changes it).
 - The ranking jobs use the judge answers of each model's leading effort.
-- The R ranking, 21 cells × 3 models: up to 63 agents, USD 4.5 (3 to 7).
-- The FR ranking, 21 cells × Opus and Sonnet (choice 10): up to 42 agents, about USD 4 (3 to 6). The spec counts 63 agents. Haiku ranking is cheap, so the USD stays about the same.
+- The R ranking, 21 cells × 3 models: up to 63 agents, USD 10.6.
+- The FR ranking, 21 cells × Opus and Sonnet (choice 10): up to 42 agents, USD 10.4. The spec counts 63 agents.
 
-In all: up to 171 agents, USD 16.5 (11 to 25).
+In all: up to 171 agents, USD 36 (27 to 54), from the tracers.
 
 Steps:
 
@@ -488,13 +491,16 @@ Done when: `report.md` and its tables are committed, the owner has ruled, and th
 
 | Task | Work | Agents | USD (range) | Owner's yes |
 |---|---|---|---|---|
-| 3 | Tracer, part 1 | 10 | 1 (0.5 to 2) | no |
-| 3 | Effort tracer, part 2 | 6 | 1.5 (0.5 to 3) | asked for by the owner |
-| 5 | Key judge, V1 and V2 at `high` | 132 | 15 (11 to 25) | yes, covers 5 and 6 |
-| 5 | Key effort runs, `medium` and `xhigh` | 132 | 17 (11 to 28) | same yes |
-| 6 | Key repeat, R and FR rankings | up to 171 | 16.5 (11 to 25) | same yes |
-| 9 | Held-out judge, R and FR rankings | up to 111 | 12.5 (8 to 19.5) | yes |
-| | All | up to 562 | 63.5 (42 to 102.5) | |
+| 3 | Tracer, part 1 | 10 | 1.76, spent | no |
+| 3 | Effort tracer, part 2 | 6 | 1.03, spent | asked for by the owner |
+| 5 | Key judge, V1 and V2 at `high`, calls of 10 | 132 | 26 (19 to 39) | yes, given 2026-10-23, covers 5 and 6 |
+| 5 | Batch-size test, V1 at `high`, calls of 20 | 33 | 8 (6 to 15) | same yes |
+| 5 | Key effort runs, `medium` and `xhigh` | 132 | 22 (16 to 33) | same yes |
+| 6 | Key repeat, R and FR rankings | up to 171 | 36 (27 to 54) | same yes |
+| 9 | Held-out judge, R and FR rankings | up to 111 | 24 (18 to 36) | yes |
+| | All | up to 595 | 119 (89 to 179) | |
+
+The costs from Task 3 on are from the tracers (`NOTES.md`). Most of each agent's cost is a fixed context of about 150k to 170k tokens, which is why the batch-size test can matter.
 
 The effort runs add 138 agents and about USD 18.5 to the spec's plan. The tracers replace these guesses with measured numbers before each yes. CR, S, and F add no tokens: they replay from stored answers. A third prompt variant, if one is needed, is a new task with its own yes.
 
@@ -507,6 +513,11 @@ The effort runs add 138 agents and about USD 18.5 to the spec's plan. The tracer
 5. **`plants.sc.egov.usda.gov`.** The owner added it to the allowed domains. It answers now.
 6. **Effort.** Test `medium`, `high`, and `xhigh` for all 3 models (see "Effort levels").
 7. **wildflower.org.** Every download sends the User-Agent header. The owner asked whether a first try without it saves work. It does not: the header costs nothing, and a failed first try costs one more request against the limit of 1 per second.
+
+## Rulings of 2026-10-23
+
+1. **Batch size.** Test calls of 20 photos against calls of 10: V1 at `high`, all 3 models, on the key (Task 5, part 1b). The owner rules on the result before Task 6.
+2. **The yes for Tasks 5 and 6.** Given at the tracer numbers: Task 5 USD 56 with the batch-size test, Task 6 USD 36.
 
 ## Later plans
 

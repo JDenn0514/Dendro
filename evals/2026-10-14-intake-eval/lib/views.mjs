@@ -3,7 +3,7 @@ import { PARTS } from './schemas.mjs';
 const zero = { tokens: 0, usd: 0 };
 
 // jobs: results.json jobs. tokens: tokens.json.
-// answers[<model>:<effort>:<variant>][key]: the judge's answer object, or null when there is none
+// answers[<model>:<effort>:<variant>[:n<call size>]][key]: the judge's answer object, or null when there is none
 // (a failed agent, a missing key, or an answer with no valid part). The replay counts null as a reject (plan choice 13).
 // rank[<model>:<effort>][cell]: { orders: { <group>: [keys] }, unread: [keys] }. A key left out of its group is unread.
 export function buildViews(jobs, tokens) {
@@ -15,7 +15,8 @@ export function buildViews(jobs, tokens) {
     if (j.kind === 'check') {
       v.checks[j.label] = r?.model_self_report ?? null;
     } else if (j.kind === 'judge') {
-      const setup = `${j.model}:${j.effort}:${j.variant}`;
+      // A call size other than 10 is its own set-up (the batch-size test), such as opus:high:V1:n20.
+      const setup = `${j.model}:${j.effort}:${j.variant}${j.batch && j.batch !== 10 ? `:n${j.batch}` : ''}`;
       v.answers[setup] ??= {}; v.judgeCost[setup] ??= {};
       const keys = new Set(j.keys), got = new Map();
       for (const a of r?.results ?? []) {
