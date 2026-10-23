@@ -1,4 +1,4 @@
-// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-effort [--variant V1|V2]
+// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-batch20|key-effort [--variant V1|V2]
 // Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/<plan>.js, and wf/<plan>.jobs.json.
 // The workflow is named intake-eval-<plan>. collect.mjs --name <plan> then writes runs/<plan>/.
 // Prints the agent count per kind, model, and effort, and the USD estimate of estimate.mjs.
@@ -16,6 +16,8 @@ import { estimateJobs, printEstimate } from './estimate.mjs';
 
 export const MODELS = ['opus', 'sonnet', 'haiku'];
 const BATCH = 10;
+// The batch-size test (owner ruling 2026-10-23): V1 at high in calls of 20, against the calls of 10 of key-judge.
+const BATCH_TEST = 20;
 
 // The tracer's 10 key photos: 4 leaf, 3 bark, and 3 fruit, drawn with the seed, then in key order.
 export function tracerPhotos(pool, seed) {
@@ -37,14 +39,15 @@ export function buildJobs(pool, plan, config, opts = {}) {
   const codes = list => Object.fromEntries(list.map(p => [p.code, p.key]));
   const base = (kind, m, effort) => ({ kind, phase: kind, set: pool.set, model: m, model_opt: config.model_opt[m], effort });
   const jobs = [];
-  const judge = (photos, m, effort, variant) => {
-    for (let i = 0; i < photos.length; i += BATCH) {
-      const b = photos.slice(i, i + BATCH);
-      const n = String(i / BATCH + 1).padStart(2, '0');
+  const judge = (photos, m, effort, variant, size = BATCH) => {
+    for (let i = 0; i < photos.length; i += size) {
+      const b = photos.slice(i, i + size);
+      const n = String(i / size + 1).padStart(2, '0');
+      const tag = size === BATCH ? '' : `:n${size}`;
       // The photos of a call in an order fixed per call, the same for every model and variant.
       // The key order inside a cell follows the review prototype, so the prompt does not show it.
       const shown = shuffle(b, mulberry32(config.seed + i));
-      jobs.push({ label: `judge:${m}:${effort}:${variant}:b${n}`, ...base('judge', m, effort), variant, keys: b.map(p => p.key), codes: codes(b), schema: 'JUDGE', prompt: promptJudge(shown.map(line), brief(`judge-${variant}`)) });
+      jobs.push({ label: `judge:${m}:${effort}:${variant}${tag}:b${n}`, ...base('judge', m, effort), variant, batch: size, keys: b.map(p => p.key), codes: codes(b), schema: 'JUDGE', prompt: promptJudge(shown.map(line), brief(`judge-${variant}`)) });
     }
   };
   const rank = (m, c, groups, groupLine) => {
@@ -71,6 +74,8 @@ export function buildJobs(pool, plan, config, opts = {}) {
     for (const m of MODELS) for (const e of offHigh) judge(ten, m, e, 'V1');
   } else if (plan === 'key-judge') {
     for (const m of MODELS) for (const v of config.variants) judge(all, m, 'high', v);
+  } else if (plan === 'key-batch20') {
+    for (const m of MODELS) judge(all, m, 'high', 'V1', BATCH_TEST);
   } else if (plan === 'key-effort') {
     if (!config.variants.includes(opts.variant)) throw new Error('the key-effort plan needs --variant V1 or V2');
     for (const m of MODELS) for (const e of offHigh) judge(all, m, e, opts.variant);

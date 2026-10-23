@@ -56,3 +56,13 @@ test('a job with no tokens entry logs a problem', () => {
   assert.ok(v.problems.some(p => /judge:x:high:V1:b01: no tokens entry/.test(p)));
   assert.deepEqual(v.judgeCost['x:high:V1'].A, { tokens: 0, usd: 0 });
 });
+
+test('answers in calls of 20 go under their own set-up, apart from the calls of 10', () => {
+  const jobs = [
+    { label: 'judge:opus:high:V1:b01', kind: 'judge', model: 'opus', effort: 'high', variant: 'V1', batch: 10, keys: ['A'], result: { results: [ans('A')] } },
+    { label: 'judge:opus:high:V1:n20:b01', kind: 'judge', model: 'opus', effort: 'high', variant: 'V1', batch: 20, keys: ['A'], result: { results: [ans('A', { part: 'bark' })] } },
+  ];
+  const v = buildViews(jobs, { 'judge:opus:high:V1:b01': { tokens: 1, usd: 1 }, 'judge:opus:high:V1:n20:b01': { tokens: 1, usd: 1 } });
+  assert.equal(v.answers['opus:high:V1'].A.part, 'leaf');
+  assert.equal(v.answers['opus:high:V1:n20'].A.part, 'bark');
+});
