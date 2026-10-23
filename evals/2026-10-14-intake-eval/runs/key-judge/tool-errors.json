@@ -1,0 +1,26 @@
+[
+  {
+    "label": "judge:opus:high:V2:b11",
+    "text": "<tool_use_error>InputValidationError: StructuredOutput was called with input that could not be parsed as JSON.\nYou sent (first 200 of 997 bytes): {\"results\": [{\"key\":\"p179\",\"description\":\"A tight clos"
+  },
+  {
+    "label": "judge:opus:high:V2:b16",
+    "text": "<tool_use_error>InputValidationError: StructuredOutput was called with input that could not be parsed as JSON.\nYou sent (first 200 of 6825 bytes): {\"results\": [{\"key\":\"p118\",\"description\":\"One large g"
+  },
+  {
+    "label": "judge:opus:high:V2:b18",
+    "text": "<tool_use_error>InputValidationError: StructuredOutput was called with input that could not be parsed as JSON.\nYou sent (first 200 of 6174 bytes): {\"results\": [{\"key\":\"p038\",\"description\":\"A single sy"
+  },
+  {
+    "label": "judge:sonnet:high:V1:b02",
+    "text": "<tool_use_error>InputValidationError: StructuredOutput was called with input that could not be parsed as JSON.\nYou sent (first 200 of 5114 bytes): {\"results\": [\n{\"key\":\"p141\",\"description\":\"\",\"part\":\""
+  },
+  {
+    "label": "judge:sonnet:high:V2:b06",
+    "text": "<tool_use_error>InputValidationError: StructuredOutput was called with input that could not be parsed as JSON.\nYou sent (first 200 of 6343 bytes): {\"results\": [\n{\"key\":\"p194\",\"description\":\"A twig on "
+  },
+  {
+    "label": "judge:sonnet:high:V2:b10",
+    "text": "<tool_use_error>InputValidationError: StructuredOutput was called with input that could not be parsed as JSON.\nYou sent (first 200 of 7561 bytes): {\"results\": [\n{\"key\":\"p089\",\"description\":\"A red oak "
+  }
+]
