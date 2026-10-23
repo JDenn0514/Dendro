@@ -65,8 +65,8 @@ test('tracer-effort plan: V1 at medium and xhigh for each model, on the same 10 
   assert.ok(jobs.every(j => j.keys.length === 10 && j.variant === 'V1'));
 });
 
-test('key-high plan: calls of 10 across the cells in key order, for each model and variant', () => {
-  const jobs = buildJobs(POOL, 'key-high', config);
+test('key-judge plan: calls of 10 across the cells in key order, for each model and variant', () => {
+  const jobs = buildJobs(POOL, 'key-judge', config);
   assert.equal(jobs.length, 3 * 2 * 6);
   const one = jobs.filter(j => j.model === 'sonnet' && j.variant === 'V2');
   assert.deepEqual(one.map(j => j.keys.length), [10, 10, 10, 10, 10, 5]);
@@ -87,7 +87,7 @@ test('key-effort plan: the named variant at medium and xhigh for each model', ()
 });
 
 test('judge prompts list the 440 px copies, the tree, and the source name, and nothing of the owner', () => {
-  const jobs = buildJobs(POOL, 'key-high', config);
+  const jobs = buildJobs(POOL, 'key-judge', config);
   const j = jobs.find(x => x.label === 'judge:opus:high:V1:b01');
   assert.ok(j.prompt.includes(`- p002: ${path.join(EVAL, 'images', 'app', 'key', 'p002.jpg')} | tree: ACRU species | source name: ACRU source`));
   for (const x of jobs) {
@@ -98,7 +98,7 @@ test('judge prompts list the 440 px copies, the tree, and the source name, and n
 
 // The judge sets the part, so every PLHI photo names the depth feature, with the part it applies to.
 test('judge and check prompts show only the codes, never a key or a part, and the job maps each code back', () => {
-  const jobs = [...buildJobs(POOL, 'tracer', config), ...buildJobs(POOL, 'key-high', config)].filter(j => j.kind !== 'rank');
+  const jobs = [...buildJobs(POOL, 'tracer', config), ...buildJobs(POOL, 'key-judge', config)].filter(j => j.kind !== 'rank');
   for (const j of jobs) {
     const body = j.prompt.split('\n').slice(1).join('\n');
     assert.ok(!/ACRU-|PLHI-|-leaf|-bark|-fruit/.test(body), `${j.label} shows a key`);
@@ -108,15 +108,15 @@ test('judge and check prompts show only the codes, never a key or a part, and th
 });
 
 test('the photos of a judge call are in a fixed shuffled order, not in key order', () => {
-  const jobs = buildJobs(POOL, 'key-high', config).filter(j => j.model === 'opus' && j.variant === 'V1');
+  const jobs = buildJobs(POOL, 'key-judge', config).filter(j => j.model === 'opus' && j.variant === 'V1');
   const shown = j => j.prompt.split('\n').filter(l => l.startsWith('- ')).map(l => j.codes[l.slice(2, l.indexOf(':'))]);
   assert.deepEqual(shown(jobs[0]).sort(), [...jobs[0].keys].sort());
   assert.ok(jobs.some(j => shown(j).join() !== j.keys.join()), 'no call is shuffled');
-  assert.deepEqual(shown(jobs[0]), shown(buildJobs(POOL, 'key-high', config)[0]));
+  assert.deepEqual(shown(jobs[0]), shown(buildJobs(POOL, 'key-judge', config)[0]));
 });
 
 test('the depth feature goes on the PLHI photos only, for the part fruit', () => {
-  const jobs = buildJobs(POOL, 'key-high', config);
+  const jobs = buildJobs(POOL, 'key-judge', config);
   const lines = jobs.filter(j => j.model === 'opus' && j.variant === 'V1').flatMap(j => j.prompt.split('\n')).filter(l => l.startsWith('- '));
   const withDepth = lines.filter(l => l.includes('when the part is fruit, also answer `two_heads`')).map(l => l.slice(2, l.indexOf(':')));
   assert.deepEqual(withDepth.sort(), POOL.cells.slice(3).flatMap(c => c.photos.map(p => p.code)).sort());

@@ -1,4 +1,4 @@
-// node make-workflow.mjs --plan tracer|tracer-effort|key-high|key-effort [--variant V1|V2]
+// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-effort [--variant V1|V2]
 // Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/<plan>.js, and wf/<plan>.jobs.json.
 // The workflow is named intake-eval-<plan>. collect.mjs --name <plan> then writes runs/<plan>/.
 // Prints the agent count per kind, model, and effort, and the USD estimate of estimate.mjs.
@@ -69,7 +69,7 @@ export function buildJobs(pool, plan, config, opts = {}) {
   } else if (plan === 'tracer-effort') {
     const ten = tracerPhotos(pool, config.seed);
     for (const m of MODELS) for (const e of offHigh) judge(ten, m, e, 'V1');
-  } else if (plan === 'key-high') {
+  } else if (plan === 'key-judge') {
     for (const m of MODELS) for (const v of config.variants) judge(all, m, 'high', v);
   } else if (plan === 'key-effort') {
     if (!config.variants.includes(opts.variant)) throw new Error('the key-effort plan needs --variant V1 or V2');
