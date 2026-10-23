@@ -1,6 +1,7 @@
 {
   "runIds": [
-    "wf_e73160d3-efe"
+    "wf_e73160d3-efe",
+    "wf_58284c34-28a"
   ],
   "jobs": [
     {
@@ -13191,9 +13192,11 @@
         "ACSA3-bark-04"
       ],
       "agentIds": [
-        "a77e7ca14cc8463f6"
+        "a77e7ca14cc8463f6",
+        "af2c88d0fa48c0c77"
       ],
       "states": [
+        "done",
         "done"
       ],
       "result": {
@@ -13214,12 +13217,12 @@
             "causes": [],
             "scale": "none",
             "season": "any",
-            "growth_stage": "mature",
+            "growth_stage": "old",
             "usual_look": true,
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A wide stretch of trunk with vertical ridges and flaking plates, trunk edges in frame, a brick building behind. Ridge pattern and colour read easily; nothing makes it harder."
+            "note": "A wide, sharp trunk with long vertical furrows and narrow flaking ridges, with both trunk edges in frame. The brick wall behind does not compete with the trunk."
           },
           {
             "key": "ACSA3-leaf-11",
@@ -13244,41 +13247,33 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "One whole green leaf on a plain white background, upper side, with the petiole. Outline, lobe tips, edge and veins are all easy to read. No scale object and no twig, so size and arrangement are not shown."
+            "note": "One whole green five-lobed leaf, upper side, on a plain white background. The outline, lobe tips and margin read at once. No scale object and no twig are shown."
           },
           {
             "key": "ACSA3-leaf-09",
             "description": "",
-            "part": "leaf",
-            "photo_features": {
-              "shape": "search",
-              "margin": "search",
-              "venation": "no",
-              "arrangement": "search",
-              "size": "no"
-            },
-            "whole": false,
+            "part": "other",
+            "photo_features": {},
+            "whole": true,
             "alone": false,
             "too_close": null,
-            "side": "upper",
+            "side": null,
             "causes": [],
             "scale": "none",
             "season": "summer",
-            "growth_stage": "mature",
-            "usual_look": true,
+            "growth_stage": null,
+            "usual_look": false,
             "not_for": [],
-            "reject": [
-              "leaf_mass"
-            ],
+            "reject": [],
             "escalate": "none",
-            "note": "A small sapling in a garden bed, seen whole from a distance. The leaves blend into a mass and no single leaf outline can be traced without close study, so it is a leaf_mass reject."
+            "note": "A whole sapling in a garden bed with a hedge and lawn behind it. The main subject is the whole young tree, so the part is other. No single leaf is the subject, and the leaves blend into a mass."
           },
           {
             "key": "ACSA3-leaf-08",
             "description": "",
             "part": "leaf",
             "photo_features": {
-              "shape": "search",
+              "shape": "clear",
               "margin": "clear",
               "venation": "clear",
               "arrangement": "no",
@@ -13298,35 +13293,64 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Underside of a hanging leaf with its petiole, tilted away and cut off by the top frame edge, with other leaves overlapping and busy foliage behind. The lobes need a careful look; the edge and veins are readable. The tilt counts as angle."
+            "note": "The underside of a green leaf seen from below and tilted, with the left lobe cut by the frame edge. A second leaf overlaps it on the right, and a crowded leafy background competes. The lobes and veins can still be read."
           },
           {
             "key": "ACSA3-bark-03",
-            "description": "",
-            "part": "other",
-            "photo_features": {},
-            "whole": false,
-            "alone": false,
-            "too_close": null,
-            "side": null,
-            "causes": [],
-            "scale": "none",
-            "season": "autumn",
-            "growth_stage": null,
-            "usual_look": false,
-            "not_for": [],
-            "reject": [],
-            "escalate": "none",
-            "note": "A large forked trunk and limbs with yellow autumn foliage and sky behind. The main subject is the whole tree, not a bark close-up, so the part is other."
-          },
-          {
-            "key": "ACSA3-bark-04",
             "description": "",
             "part": "bark",
             "photo_features": {
               "texture": "clear",
               "pattern": "clear",
               "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": false,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A whole trunk with vertical furrows and narrow ridges, partly covered in grey-green lichen. A small vine and a few leaves cross the edges. The ridges are still readable."
+          },
+          {
+            "key": "ACSA3-bark-04",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle"
+            ],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "old",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A large old forked trunk shot from low down, with autumn foliage and forest behind it. The bark is smooth to shallowly furrowed and small in the frame, so a learner has to search for the ridge pattern. The shot is from below but not into the crown. The scene around the trunk competes."
+          },
+          {
+            "key": "ACSA3-bark-01",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "clear",
+              "pattern": "clear",
+              "colour": "search"
             },
             "whole": true,
             "alone": true,
@@ -13342,64 +13366,45 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Tight crop of deeply furrowed bark with flaking plates and ridges, with no trunk edge, branch or scale object, so it is texture only. The warm reddish tones look boosted by warm light, which shifts the colour."
-          },
-          {
-            "key": "ACSA3-bark-01",
-            "description": "",
-            "part": "leaf",
-            "photo_features": {
-              "shape": "search",
-              "margin": "search",
-              "venation": "no",
-              "arrangement": "search",
-              "size": "no"
-            },
-            "whole": false,
-            "alone": false,
-            "too_close": null,
-            "side": "upper",
-            "causes": [],
-            "scale": "none",
-            "season": "summer",
-            "growth_stage": "mature",
-            "usual_look": true,
-            "not_for": [],
-            "reject": [
-              "leaf_mass"
-            ],
-            "escalate": "none",
-            "note": "A whole young shrub-sized sapling among garden plants. The leaves merge into one mass, and a learner cannot trace one leaf outline or edge without close study, so it is a leaf_mass reject."
+            "note": "A close, sharp view of deeply ridged, plated bark with no trunk edge, branch or scale object. Warm light gives the bark a strong red-orange cast, which makes the true colour hard to read."
           },
           {
             "key": "ACSA3-leaf-12",
             "description": "",
-            "part": "leaf",
-            "photo_features": {
-              "shape": "no",
-              "margin": "no",
-              "venation": "no",
-              "arrangement": "no",
-              "size": "no"
-            },
-            "whole": false,
+            "part": "other",
+            "photo_features": {},
+            "whole": true,
             "alone": false,
             "too_close": null,
-            "side": "upper",
-            "causes": [
-              "angle"
-            ],
+            "side": null,
+            "causes": [],
             "scale": "none",
-            "season": "autumn",
-            "growth_stage": "autumn",
+            "season": "summer",
+            "growth_stage": null,
             "usual_look": false,
             "not_for": [],
-            "reject": [
-              "leaf_mass",
-              "feature_unclear"
-            ],
+            "reject": [],
             "escalate": "none",
-            "note": "Crown of orange autumn leaves seen from below, with the leaves blending into a mass and no single leaf outline or edge readable. Autumn colour is not a cause, but the view from below is angle."
+            "note": "A whole sapling in a garden with a spruce, a fence and plants around it. The main subject is the whole young tree, so the part is other. The leaves are small in the frame and blend into a mass."
+          },
+          {
+            "key": "ACSA3-leaf-10",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": false,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": null,
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A crown full of orange and red autumn foliage that fills the frame and is cut by its edges. The main subject is the crown, so the part is other. No single leaf can be read."
           },
           {
             "key": "ACSA3-leaf-07",
@@ -13424,7 +13429,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A pile of fallen autumn leaves in yellow, orange and brown, with the central yellow-orange leaf overlapped by others. Its outline and edge can be traced only with close study, and the many leaves compete for attention. Autumn colour makes it not the usual look."
+            "note": "A pile of fallen autumn leaves in yellow, orange and red. The central yellow-orange leaf is overlapped by others, so its outline and lobes need close study. Autumn colour makes it not the usual look."
           }
         ]
       }
@@ -15700,9 +15705,11 @@
         "LITU-fruit-10"
       ],
       "agentIds": [
-        "a2ca9fae354925194"
+        "a2ca9fae354925194",
+        "a21f8ff72882779e4"
       ],
       "states": [
+        "done",
         "done"
       ],
       "result": {
@@ -15715,7 +15722,7 @@
               "kind": "clear",
               "shape": "clear",
               "hang": "clear",
-              "wing": "search"
+              "wing": "clear"
             },
             "whole": true,
             "alone": true,
@@ -15729,7 +15736,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A dry tan tulip tree cone of samaras stands upright on a twig against a soft green background. The outer samaras have started to open, the cone outline is sharp, and the individual wings can be seen only on a closer look."
+            "note": "One dry brown cone of samaras sits upright on the twig, sharp against a soft green and yellow background. The wing scales and the outline read easily."
           },
           {
             "key": "LITU-fruit-06",
@@ -15737,8 +15744,8 @@
             "part": "fruit",
             "photo_features": {
               "kind": "search",
-              "shape": "search",
-              "hang": "no",
+              "shape": "clear",
+              "hang": "search",
               "wing": "clear"
             },
             "whole": true,
@@ -15746,19 +15753,16 @@
             "too_close": null,
             "side": null,
             "causes": [
-              "angle",
-              "atypical"
+              "angle"
             ],
             "scale": "none",
             "season": "winter",
             "growth_stage": "after_seed_fall",
             "usual_look": false,
-            "not_for": [
-              "fruit_kind"
-            ],
+            "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A top view of an opened cone on snow: the samaras splay out around the bare central axis like a flower. The unusual view (angle) and the opened, spent form (atypical) make the cone shape and kind hard to read, so kind and shape are search."
+            "note": "Top view of a spent cone of samaras, spread out like a rosette around the bare central axis on snow. The top view hides the cone shape and the hang on the twig, so the angle makes it harder."
           },
           {
             "key": "LITU-fruit-04",
@@ -15768,7 +15772,7 @@
               "kind": "search",
               "shape": "clear",
               "hang": "clear",
-              "wing": "no"
+              "wing": "search"
             },
             "whole": true,
             "alone": true,
@@ -15782,7 +15786,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A green, unripe cone of full shape sits upright on its twig among green leaves with a soft background. The closed green cone looks like a bud, so the fruit kind needs close study, and no wings show yet."
+            "note": "A full-size green, closed cone stands upright on the twig among green leaves with a soft background. It is not ripe, and the closed green scales hide the samara kind and wings until close study."
           },
           {
             "key": "LITU-fruit-08",
@@ -15798,6 +15802,32 @@
             "alone": true,
             "too_close": null,
             "side": null,
+            "causes": [
+              "light"
+            ],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "One dry, weathered cone of samaras fills the frame against a black background that looks like flash. Only the stalk shows below it, so the hang is not visible."
+          },
+          {
+            "key": "LITU-fruit-05",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "search",
+              "shape": "search",
+              "hang": "clear",
+              "wing": "search"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
             "causes": [],
             "scale": "none",
             "season": "autumn",
@@ -15806,10 +15836,10 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "One dry, whole cone of samaras fills the frame against a plain black background, with the overlapping wings easy to read. Only a short stub of stalk shows, so how it hangs on the twig is not visible."
+            "note": "Two small, dry cones sit upright on a bare twig against soft autumn foliage. The cones are small in the frame, so the shape and wings take a close look."
           },
           {
-            "key": "LITU-fruit-05",
+            "key": "LITU-fruit-02",
             "description": "",
             "part": "fruit",
             "photo_features": {
@@ -15822,7 +15852,9 @@
             "alone": true,
             "too_close": null,
             "side": null,
-            "causes": [],
+            "causes": [
+              "light"
+            ],
             "scale": "none",
             "season": "winter",
             "growth_stage": "ripe",
@@ -15830,15 +15862,15 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Frosted dry cones on a bare twig against a soft blue background; the sharp one in front shows its outline and how it sits on the twig. The wings are covered by frost and need a closer look."
+            "note": "A frosted cone of samaras hangs on a twig with other cones, against a deep blue soft background. The blue cast changes the colour, so light is a cause, but the cones look real and the frost is natural."
           },
           {
-            "key": "LITU-fruit-02",
+            "key": "LITU-fruit-09",
             "description": "",
             "part": "fruit",
             "photo_features": {
               "kind": "search",
-              "shape": "clear",
+              "shape": "search",
               "hang": "no",
               "wing": "search"
             },
@@ -15847,20 +15879,22 @@
             "too_close": null,
             "side": null,
             "causes": [
-              "angle",
-              "atypical"
+              "atypical",
+              "angle"
             ],
             "scale": "none",
-            "season": "any",
+            "season": "winter",
             "growth_stage": "after_seed_fall",
             "usual_look": false,
-            "not_for": [],
+            "not_for": [
+              "fruit_kind"
+            ],
             "reject": [],
             "escalate": "none",
-            "note": "A pale, weathered cone lying on the ground in dead grass and leaf litter, seen from above. The litter crowds the subject (alone false), and the fallen weathered form with the top view makes kind and wings hard to find (atypical, angle)."
+            "note": "A pale, weathered, fallen cone lies on the ground in dead grass, leaves and clover, seen from above. The litter competes with it, and it is not the usual form of a hanging cone."
           },
           {
-            "key": "LITU-fruit-09",
+            "key": "LITU-fruit-01",
             "description": "",
             "part": "fruit",
             "photo_features": {
@@ -15881,10 +15915,10 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A brown, partly open cone of samaras sits sharp on its twig in front of a soft background of autumn leaves, with a green tulip leaf at the edge. The outline, wings and attachment are all readable."
+            "note": "A sharp, dry, brown cone of samaras sits on the twig against a soft autumn background, with a green tulip tree leaf at the edge. The wings and the outline are easy to read."
           },
           {
-            "key": "LITU-fruit-01",
+            "key": "LITU-fruit-07",
             "description": "",
             "part": "fruit",
             "photo_features": {
@@ -15905,10 +15939,10 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "One dry cone on a bare twig against blue sky, with a soft branch background. The outline and the way it sits on the twig are clear. The cone is fairly small in the frame, so the individual wings need a closer look."
+            "note": "A pale dry cone of samaras sits upright on a bare twig against a soft blue sky and out-of-focus branches. The outline reads clearly, and the individual wings need a closer look."
           },
           {
-            "key": "LITU-fruit-07",
+            "key": "LITU-fruit-03",
             "description": "",
             "part": "other",
             "photo_features": {},
@@ -15924,7 +15958,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A view up into the crown of a tree with many small twigs, scattered cones and a few yellow leaves against a cloudy sky. The main subject is the crown, so the part is other."
+            "note": "A view up into the crown of a tree with yellowing leaves and many small fruit among the branches. The fruit are tiny and no single fruit is the subject, so the part is other."
           }
         ]
       }
