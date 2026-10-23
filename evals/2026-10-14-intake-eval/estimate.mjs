@@ -1,4 +1,4 @@
-// node estimate.mjs --plan <plan> [--from <run plan>]
+// node estimate.mjs --plan <plan> [--from <run plan>[,<run plan>...]]
 // The USD estimate of a job list. With no run, a photo costs the old eval's per-photo USD
 // (pass P1, 440 px, calls of 10, effort high) plus 30% for the new schema. With --from, it costs what the
 // photos of the same model, effort, and variant cost in that run (the tracer), then the same model and effort.
@@ -51,8 +51,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const args = process.argv.slice(2);
   const opt = n => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
   const jobs = readJson(path.join(EVAL, 'wf', `${opt('--plan')}.jobs.json`));
-  const from = opt('--from');
-  const per = from ? perPhotoFromRun(readJson(path.join(EVAL, 'wf', `${from}.jobs.json`)), readJson(path.join(EVAL, 'runs', from, 'tokens.json'))) : {};
-  if (from) console.log('USD per photo from the run:', JSON.stringify(per));
+  // Several runs price together, for example the tracer (high) and the effort tracer (medium and xhigh).
+  const from = opt('--from')?.split(',') ?? [];
+  const run = from.flatMap(f => readJson(path.join(EVAL, 'wf', `${f}.jobs.json`)));
+  const tokens = Object.assign({}, ...from.map(f => readJson(path.join(EVAL, 'runs', f, 'tokens.json'))));
+  const per = from.length ? perPhotoFromRun(run, tokens) : {};
+  if (from.length) console.log('USD per photo from the run:', JSON.stringify(per));
   printEstimate(estimateJobs(jobs, per));
 }

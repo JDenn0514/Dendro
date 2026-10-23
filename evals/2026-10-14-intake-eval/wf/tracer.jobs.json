@@ -1,0 +1,321 @@
+[
+  {
+    "label": "check:opus",
+    "kind": "check",
+    "phase": "check",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "variant": "V1",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03"
+    },
+    "schema": "CHECK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V1.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum\n\nThis is a test run. Also fill `model_self_report` with the model name that you think you are."
+  },
+  {
+    "label": "check:sonnet",
+    "kind": "check",
+    "phase": "check",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "variant": "V1",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03"
+    },
+    "schema": "CHECK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V1.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum\n\nThis is a test run. Also fill `model_self_report` with the model name that you think you are."
+  },
+  {
+    "label": "check:haiku",
+    "kind": "check",
+    "phase": "check",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "variant": "V1",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03"
+    },
+    "schema": "CHECK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V1.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum\n\nThis is a test run. Also fill `model_self_report` with the model name that you think you are."
+  },
+  {
+    "label": "judge:opus:high:V1:b01",
+    "kind": "judge",
+    "phase": "judge",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "variant": "V1",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03",
+      "ACRU-leaf-10",
+      "ACRU-fruit-01",
+      "QUAL-bark-05",
+      "QURU-bark-02",
+      "PLOC-bark-08",
+      "PLOC-fruit-08",
+      "PLOC-fruit-11",
+      "PLHI-leaf-02"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03",
+      "p182": "ACRU-leaf-10",
+      "p123": "ACRU-fruit-01",
+      "p063": "QUAL-bark-05",
+      "p029": "QURU-bark-02",
+      "p059": "PLOC-bark-08",
+      "p088": "PLOC-fruit-08",
+      "p161": "PLOC-fruit-11",
+      "p131": "PLHI-leaf-02"
+    },
+    "schema": "JUDGE",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V1.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p063: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p063.jpg | tree: Quercus alba | source name: Quercus alba\n- p182: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p182.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p123: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p123.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p088: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p088.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p059: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p059.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p029: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p029.jpg | tree: Quercus rubra | source name: Quercus rubra\n- p131: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p131.jpg | tree: Platanus ×hispanica | source name: Platanus ×hispanica | depth feature: when the part is fruit, also answer `two_heads`: two seed balls on one stalk show clearly.\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p161: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p161.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum"
+  },
+  {
+    "label": "judge:opus:high:V2:b01",
+    "kind": "judge",
+    "phase": "judge",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "variant": "V2",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03",
+      "ACRU-leaf-10",
+      "ACRU-fruit-01",
+      "QUAL-bark-05",
+      "QURU-bark-02",
+      "PLOC-bark-08",
+      "PLOC-fruit-08",
+      "PLOC-fruit-11",
+      "PLHI-leaf-02"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03",
+      "p182": "ACRU-leaf-10",
+      "p123": "ACRU-fruit-01",
+      "p063": "QUAL-bark-05",
+      "p029": "QURU-bark-02",
+      "p059": "PLOC-bark-08",
+      "p088": "PLOC-fruit-08",
+      "p161": "PLOC-fruit-11",
+      "p131": "PLHI-leaf-02"
+    },
+    "schema": "JUDGE",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V2.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p063: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p063.jpg | tree: Quercus alba | source name: Quercus alba\n- p182: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p182.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p123: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p123.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p088: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p088.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p059: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p059.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p029: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p029.jpg | tree: Quercus rubra | source name: Quercus rubra\n- p131: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p131.jpg | tree: Platanus ×hispanica | source name: Platanus ×hispanica | depth feature: when the part is fruit, also answer `two_heads`: two seed balls on one stalk show clearly.\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p161: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p161.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum"
+  },
+  {
+    "label": "judge:sonnet:high:V1:b01",
+    "kind": "judge",
+    "phase": "judge",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "variant": "V1",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03",
+      "ACRU-leaf-10",
+      "ACRU-fruit-01",
+      "QUAL-bark-05",
+      "QURU-bark-02",
+      "PLOC-bark-08",
+      "PLOC-fruit-08",
+      "PLOC-fruit-11",
+      "PLHI-leaf-02"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03",
+      "p182": "ACRU-leaf-10",
+      "p123": "ACRU-fruit-01",
+      "p063": "QUAL-bark-05",
+      "p029": "QURU-bark-02",
+      "p059": "PLOC-bark-08",
+      "p088": "PLOC-fruit-08",
+      "p161": "PLOC-fruit-11",
+      "p131": "PLHI-leaf-02"
+    },
+    "schema": "JUDGE",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V1.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p063: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p063.jpg | tree: Quercus alba | source name: Quercus alba\n- p182: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p182.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p123: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p123.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p088: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p088.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p059: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p059.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p029: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p029.jpg | tree: Quercus rubra | source name: Quercus rubra\n- p131: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p131.jpg | tree: Platanus ×hispanica | source name: Platanus ×hispanica | depth feature: when the part is fruit, also answer `two_heads`: two seed balls on one stalk show clearly.\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p161: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p161.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum"
+  },
+  {
+    "label": "judge:sonnet:high:V2:b01",
+    "kind": "judge",
+    "phase": "judge",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "variant": "V2",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03",
+      "ACRU-leaf-10",
+      "ACRU-fruit-01",
+      "QUAL-bark-05",
+      "QURU-bark-02",
+      "PLOC-bark-08",
+      "PLOC-fruit-08",
+      "PLOC-fruit-11",
+      "PLHI-leaf-02"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03",
+      "p182": "ACRU-leaf-10",
+      "p123": "ACRU-fruit-01",
+      "p063": "QUAL-bark-05",
+      "p029": "QURU-bark-02",
+      "p059": "PLOC-bark-08",
+      "p088": "PLOC-fruit-08",
+      "p161": "PLOC-fruit-11",
+      "p131": "PLHI-leaf-02"
+    },
+    "schema": "JUDGE",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V2.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p063: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p063.jpg | tree: Quercus alba | source name: Quercus alba\n- p182: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p182.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p123: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p123.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p088: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p088.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p059: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p059.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p029: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p029.jpg | tree: Quercus rubra | source name: Quercus rubra\n- p131: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p131.jpg | tree: Platanus ×hispanica | source name: Platanus ×hispanica | depth feature: when the part is fruit, also answer `two_heads`: two seed balls on one stalk show clearly.\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p161: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p161.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum"
+  },
+  {
+    "label": "judge:haiku:high:V1:b01",
+    "kind": "judge",
+    "phase": "judge",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "variant": "V1",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03",
+      "ACRU-leaf-10",
+      "ACRU-fruit-01",
+      "QUAL-bark-05",
+      "QURU-bark-02",
+      "PLOC-bark-08",
+      "PLOC-fruit-08",
+      "PLOC-fruit-11",
+      "PLHI-leaf-02"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03",
+      "p182": "ACRU-leaf-10",
+      "p123": "ACRU-fruit-01",
+      "p063": "QUAL-bark-05",
+      "p029": "QURU-bark-02",
+      "p059": "PLOC-bark-08",
+      "p088": "PLOC-fruit-08",
+      "p161": "PLOC-fruit-11",
+      "p131": "PLHI-leaf-02"
+    },
+    "schema": "JUDGE",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V1.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p063: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p063.jpg | tree: Quercus alba | source name: Quercus alba\n- p182: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p182.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p123: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p123.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p088: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p088.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p059: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p059.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p029: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p029.jpg | tree: Quercus rubra | source name: Quercus rubra\n- p131: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p131.jpg | tree: Platanus ×hispanica | source name: Platanus ×hispanica | depth feature: when the part is fruit, also answer `two_heads`: two seed balls on one stalk show clearly.\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p161: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p161.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum"
+  },
+  {
+    "label": "judge:haiku:high:V2:b01",
+    "kind": "judge",
+    "phase": "judge",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "variant": "V2",
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-03",
+      "ACRU-leaf-10",
+      "ACRU-fruit-01",
+      "QUAL-bark-05",
+      "QURU-bark-02",
+      "PLOC-bark-08",
+      "PLOC-fruit-08",
+      "PLOC-fruit-11",
+      "PLHI-leaf-02"
+    ],
+    "codes": {
+      "p136": "ACRU-leaf-02",
+      "p122": "ACRU-leaf-03",
+      "p182": "ACRU-leaf-10",
+      "p123": "ACRU-fruit-01",
+      "p063": "QUAL-bark-05",
+      "p029": "QURU-bark-02",
+      "p059": "PLOC-bark-08",
+      "p088": "PLOC-fruit-08",
+      "p161": "PLOC-fruit-11",
+      "p131": "PLHI-leaf-02"
+    },
+    "schema": "JUDGE",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/judge-V2.md and follow it.\nPhotos (key: path | the tree | the name on the source page):\n- p063: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p063.jpg | tree: Quercus alba | source name: Quercus alba\n- p182: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p182.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p123: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p123.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p088: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p088.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p059: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p059.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p029: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p029.jpg | tree: Quercus rubra | source name: Quercus rubra\n- p131: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p131.jpg | tree: Platanus ×hispanica | source name: Platanus ×hispanica | depth feature: when the part is fruit, also answer `two_heads`: two seed balls on one stalk show clearly.\n- p136: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p136.jpg | tree: Acer rubrum | source name: Acer rubrum\n- p161: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p161.jpg | tree: Platanus occidentalis | source name: Platanus occidentalis\n- p122: /home/user/Dendro/evals/2026-10-14-intake-eval/images/app/key/p122.jpg | tree: Acer rubrum | source name: Acer rubrum"
+  },
+  {
+    "label": "rank:haiku:high:ACSA3-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "cell": "ACSA3-fruit",
+    "groups": {
+      "all": [
+        "ACSA3-fruit-01",
+        "ACSA3-fruit-02",
+        "ACSA3-fruit-03",
+        "ACSA3-fruit-04",
+        "ACSA3-fruit-05",
+        "ACSA3-fruit-06"
+      ]
+    },
+    "keys": [
+      "ACSA3-fruit-01",
+      "ACSA3-fruit-02",
+      "ACSA3-fruit-03",
+      "ACSA3-fruit-04",
+      "ACSA3-fruit-05",
+      "ACSA3-fruit-06"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/all-1.jpg",
+        "keys": [
+          "ACSA3-fruit-01",
+          "ACSA3-fruit-02",
+          "ACSA3-fruit-03",
+          "ACSA3-fruit-04",
+          "ACSA3-fruit-05",
+          "ACSA3-fruit-06"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/all-1.jpg\nGroups:\n- group \"all\": ACSA3-fruit-01, ACSA3-fruit-02, ACSA3-fruit-03, ACSA3-fruit-04, ACSA3-fruit-05, ACSA3-fruit-06"
+  }
+]

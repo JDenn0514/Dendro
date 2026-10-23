@@ -1,0 +1,1679 @@
+{
+  "runIds": [
+    "wf_cd682e78-7dd"
+  ],
+  "jobs": [
+    {
+      "label": "judge:opus:medium:V1:b01",
+      "kind": "judge",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "medium",
+      "variant": "V1",
+      "cell": null,
+      "groups": null,
+      "keys": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-03",
+        "ACRU-leaf-10",
+        "ACRU-fruit-01",
+        "QUAL-bark-05",
+        "QURU-bark-02",
+        "PLOC-bark-08",
+        "PLOC-fruit-08",
+        "PLOC-fruit-11",
+        "PLHI-leaf-02"
+      ],
+      "agentIds": [
+        "a8c896cadfd108128"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "results": [
+          {
+            "key": "QUAL-bark-05",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle",
+              "light"
+            ],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "Forked trunk shot from below looking up into a backlit green crown. The camera looks up into the crown, so it is a bark_up_or_dark reject, and the ridges are only readable on the lower trunk."
+          },
+          {
+            "key": "ACRU-leaf-10",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "no",
+              "venation": "no",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [
+              "leaf_mass",
+              "feature_unclear"
+            ],
+            "escalate": "none",
+            "note": "A sapling in autumn colour in a weedy scene. The leaves blend into a mass, and no single leaf margin can be read at this size."
+          },
+          {
+            "key": "ACRU-fruit-01",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "search",
+              "hang": "clear",
+              "wing": "search"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": null,
+            "side": null,
+            "causes": [
+              "angle"
+            ],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Many clusters of red samaras hang from bare twigs, seen from below against a pine and the sky. Each samara is small in the frame, so shape and wing need close study, and the many clusters compete with each other."
+          },
+          {
+            "key": "PLOC-fruit-08",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "winter",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "One sycamore seed ball hangs on its long stalk from a bare winter twig, sharp against the sky. Other balls show only as small soft shapes in the background."
+          },
+          {
+            "key": "PLOC-bark-08",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "clear",
+              "pattern": "clear",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": true,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A close view of mottled, peeling sycamore bark with a small burl. The frame shows texture only, with no trunk edge and no scale object."
+          },
+          {
+            "key": "QURU-bark-02",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle"
+            ],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "Looks straight up a trunk into the green canopy. The ridges and flat stripes show only on the foreshortened lower trunk, so it is a bark_up_or_dark reject."
+          },
+          {
+            "key": "PLHI-leaf-02",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": true,
+            "alone": false,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": null,
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "An avenue of planetrees over a path in summer. It is a scene, so the part is other. No fruit shows, so the two_heads depth feature does not apply."
+          },
+          {
+            "key": "ACRU-leaf-02",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "clear",
+              "margin": "clear",
+              "venation": "clear",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "One red and green three-lobed leaf with a toothed margin fills the centre. Other leaves crowd around it, so alone is false. Autumn colour makes usual_look false."
+          },
+          {
+            "key": "PLOC-fruit-11",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [
+              "young"
+            ],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "young",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A young, bristly seed ball hangs on its stalk below a twig with a new unfolding leaf, against a soft green background. The fruit is still developing, so young applies."
+          },
+          {
+            "key": "ACRU-leaf-03",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "search",
+              "arrangement": "search",
+              "size": "no"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": null,
+            "side": "both",
+            "causes": [
+              "light"
+            ],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Crowded autumn leaves, orange to red, backlit on twigs with a soft background. Backlight and overlap make the outline and margin need close study."
+          }
+        ]
+      }
+    },
+    {
+      "label": "judge:opus:xhigh:V1:b01",
+      "kind": "judge",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "xhigh",
+      "variant": "V1",
+      "cell": null,
+      "groups": null,
+      "keys": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-03",
+        "ACRU-leaf-10",
+        "ACRU-fruit-01",
+        "QUAL-bark-05",
+        "QURU-bark-02",
+        "PLOC-bark-08",
+        "PLOC-fruit-08",
+        "PLOC-fruit-11",
+        "PLHI-leaf-02"
+      ],
+      "agentIds": [
+        "a1b42df5b2ab09ca6"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "results": [
+          {
+            "key": "QUAL-bark-05",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "search"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle",
+              "light"
+            ],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "The camera looks up a forked trunk into a sunlit green crown, so the bark is foreshortened and shaded, with only the lower trunk showing its scaly texture. Angle (view from below) and light (backlit trunk against bright sky) add difficulty; the upward view is the bark_up_or_dark reject."
+          },
+          {
+            "key": "ACRU-leaf-10",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "no",
+              "venation": "no",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [
+              "leaf_mass",
+              "feature_unclear"
+            ],
+            "escalate": "none",
+            "note": "A sapling with red, orange, and green autumn leaves in a meadow scene with asters. The leaves blend into a mass, the lobes are readable only with a search, and at this size the toothed margin cannot be seen at all."
+          },
+          {
+            "key": "ACRU-fruit-01",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "search",
+              "hang": "clear",
+              "wing": "search"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Many clusters of red samaras hang on long stalks from leafless twigs in front of a pine and blue sky. The clusters read clearly as samaras and show how they hang, but each fruit is small in the frame, so its outline and wings need a search, and the many clusters compete."
+          },
+          {
+            "key": "PLOC-fruit-08",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "unripe",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A single full-size seed ball hangs on a long green stalk from a bare twig against blue sky, with a soft background. The ball is still yellow-green with a green stalk, while the balls behind it are brown, so it reads as full-shape but unripe."
+          },
+          {
+            "key": "PLOC-bark-08",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "clear",
+              "pattern": "clear",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": true,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A close, sharp view of mottled, peeling bark in white, grey, olive, and yellow patches around a small bulge. The pattern is clear, but the frame shows texture only, with no trunk edge, branch, or scale object."
+          },
+          {
+            "key": "QURU-bark-02",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "search"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle",
+              "light"
+            ],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "The camera looks straight up a tall trunk into the crown, so the striped ridges are foreshortened and in shade against a bright sky. Angle (view from below) and light (backlit, shaded trunk) add difficulty; the upward view is the bark_up_or_dark reject."
+          },
+          {
+            "key": "PLHI-leaf-02",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": null,
+            "causes": [
+              "light"
+            ],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": null,
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A scene of an avenue of trees arching over a paved path, with roads on both sides and the crowns cut off by the frame. No leaf, bark, or fruit is the main subject, and the canopy is backlit by sun. The source name is the London planetree hybrid itself, so it passes identity."
+          },
+          {
+            "key": "ACRU-leaf-02",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "clear",
+              "margin": "clear",
+              "venation": "clear",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A sharp three-lobed leaf in red, green, and yellow autumn colour, with clear toothed margin and palmate veins. The frame cuts off its left lobe tip, and crowded leaves of the same colours surround it."
+          },
+          {
+            "key": "PLOC-fruit-11",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [
+              "young"
+            ],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "young",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A small, developing seed ball with protruding dried styles hangs on a stalk from a twig beside an unfolding new leaf, over a soft green background. The new shoot marks spring, and the ball has not reached its full size and form, so it is young."
+          },
+          {
+            "key": "ACRU-leaf-03",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "search",
+              "arrangement": "search",
+              "size": "no"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": null,
+            "side": "both",
+            "causes": [
+              "angle",
+              "light"
+            ],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Many orange, red, and yellow autumn leaves hang from thin twigs, backlit by sun against a soft background. The leaves are crowded and tilted at many angles, so outline and margin need a search, and the warm backlight shifts the colour."
+          }
+        ]
+      }
+    },
+    {
+      "label": "judge:sonnet:medium:V1:b01",
+      "kind": "judge",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "medium",
+      "variant": "V1",
+      "cell": null,
+      "groups": null,
+      "keys": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-03",
+        "ACRU-leaf-10",
+        "ACRU-fruit-01",
+        "QUAL-bark-05",
+        "QURU-bark-02",
+        "PLOC-bark-08",
+        "PLOC-fruit-08",
+        "PLOC-fruit-11",
+        "PLHI-leaf-02"
+      ],
+      "agentIds": [
+        "aa45e4d933c77a402"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "results": [
+          {
+            "key": "QUAL-bark-05",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle"
+            ],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "Camera looks up a forked trunk into the crown against the sky. The ridges are small and hard to read, and the crown competes with the bark, so the view is from below."
+          },
+          {
+            "key": "ACRU-leaf-10",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "no",
+              "venation": "no",
+              "arrangement": "search",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [
+              "leaf_mass"
+            ],
+            "escalate": "none",
+            "note": "A whole leafy sapling with red, orange and green leaves that blend into a mass among other plants. No single leaf outline or edge can be read. Autumn colour, so the growth stage is autumn."
+          },
+          {
+            "key": "ACRU-fruit-01",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "search",
+              "hang": "clear",
+              "wing": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Red paired samaras hang in clusters on bare twigs against soft pine foliage and sky. The clusters are small in the frame, so the single fruit outline needs close study."
+          },
+          {
+            "key": "PLOC-fruit-08",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "winter",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "One spiky seed ball hangs on a long stalk from a bare twig, sharp against a blue sky. Kind, shape and hang are all easy to read."
+          },
+          {
+            "key": "PLOC-bark-08",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "clear",
+              "pattern": "clear",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": true,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Close view of mottled, flaking bark in grey, cream and olive patches, with a knot. The frame shows texture only, with no trunk edge, branch or scale object."
+          },
+          {
+            "key": "QURU-bark-02",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "search"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle"
+            ],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "Camera looks steeply up a tall trunk into the crown. The bark is dark and foreshortened, so the ridges are hard to read."
+          },
+          {
+            "key": "PLHI-leaf-02",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": null,
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A tree-lined path in leaf, a scene with no leaf, bark or fruit as the subject. The source name Platanus x hispanica matches the tree, so it passes identity."
+          },
+          {
+            "key": "ACRU-leaf-02",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "clear",
+              "margin": "clear",
+              "venation": "clear",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "One sharp, whole leaf in the centre with red and green autumn colour, lobes and toothed edge readable. Other leaves sit around it but it is the main subject. Autumn colour, so not the usual look."
+          },
+          {
+            "key": "PLOC-fruit-11",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "search",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [
+              "young"
+            ],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "young",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A small brownish head hangs on a stalk from a twig against soft green, with pale new leaves beside it. It looks like a young head still carrying flower remnants, so it is young and small in the frame."
+          },
+          {
+            "key": "ACRU-leaf-03",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "no",
+              "arrangement": "search",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "both",
+            "causes": [
+              "light"
+            ],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Backlit autumn leaves in orange, red and yellow overlap on a twig. They crowd each other and the light washes out the edges, so outlines are found only with close study."
+          }
+        ]
+      }
+    },
+    {
+      "label": "judge:sonnet:xhigh:V1:b01",
+      "kind": "judge",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "xhigh",
+      "variant": "V1",
+      "cell": null,
+      "groups": null,
+      "keys": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-03",
+        "ACRU-leaf-10",
+        "ACRU-fruit-01",
+        "QUAL-bark-05",
+        "QURU-bark-02",
+        "PLOC-bark-08",
+        "PLOC-fruit-08",
+        "PLOC-fruit-11",
+        "PLHI-leaf-02"
+      ],
+      "agentIds": [
+        "a3466a405112212e2"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "results": [
+          {
+            "key": "QUAL-bark-05",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": false,
+            "causes": [
+              "angle"
+            ],
+            "side": null,
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "The camera looks up a forked oak trunk into the crown, and the bark ridges are small and foreshortened, so the texture and pattern can only be found with a search. The unusual view from below is the `angle` cause, and the camera looking up into the crown triggers the reject."
+          },
+          {
+            "key": "ACRU-leaf-10",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "no",
+              "arrangement": "search",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "causes": [],
+            "side": "upper",
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [
+              "leaf_mass"
+            ],
+            "escalate": "none",
+            "note": "A small sapling in a meadow with red, orange and green leaves that blend into a mass; each leaf is small and overlaps its neighbours, so the lobes and teeth can only be found with a search. The autumn colour makes the usual look false but is not a cause."
+          },
+          {
+            "key": "ACRU-fruit-01",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "search",
+              "hang": "clear",
+              "wing": "search"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "causes": [],
+            "side": null,
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Red paired samaras hang in drooping clusters from bare twigs against soft pine and sky, so the fruit kind and the hang are readable. Each samara is small in the frame, so the single-fruit outline and the wing angle need a search."
+          },
+          {
+            "key": "PLOC-fruit-08",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "causes": [],
+            "side": null,
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "One whole seed ball hangs on a long stalk from a bare twig against a soft blue sky, sharp and centred. The kind, the round outline and the hang are all easy to read."
+          },
+          {
+            "key": "PLOC-bark-08",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "clear",
+              "pattern": "clear",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": true,
+            "causes": [],
+            "side": null,
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Sharp, evenly lit close view of mottled, flaking cream, green and grey bark that fills the frame. It shows texture only, with no trunk edge, branch or scale object, so too_close is true."
+          },
+          {
+            "key": "QURU-bark-02",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "search"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": false,
+            "causes": [
+              "angle",
+              "light"
+            ],
+            "side": null,
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "The camera looks straight up a tall oak trunk into the crown, and the trunk is dark against a bright sky, so the ridges and colour are hard to read. The view from below is `angle`, the backlit dark trunk is `light`, and the camera looking up triggers the reject."
+          },
+          {
+            "key": "PLHI-leaf-02",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "causes": [],
+            "side": null,
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": null,
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A scene of a path lined with trees under a green summer canopy, with no leaf, bark or fruit as the main subject, so the part is other. The source name Platanus ×hispanica is the London planetree itself, so it is not a hybrid reject and there is no mismatch."
+          },
+          {
+            "key": "ACRU-leaf-02",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "clear",
+              "margin": "clear",
+              "venation": "clear",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": true,
+            "alone": false,
+            "too_close": null,
+            "causes": [],
+            "side": "upper",
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "One large, sharp red-and-green maple leaf in the centre shows its pointed lobes, toothed edge and palmate veins, but other leaves crowd the frame around it. The autumn colour makes the usual look false and is not a cause."
+          },
+          {
+            "key": "PLOC-fruit-11",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "causes": [
+              "young"
+            ],
+            "side": null,
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "young",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A small, brown, fuzzy young seed ball hangs on a long stalk against a soft green background, with new pale leaves and a stipule beside it. It has the ball shape and hang, but it has not reached its mature fruit look, so `young`; I judged it a young fruit head and not a flower."
+          },
+          {
+            "key": "ACRU-leaf-03",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "search",
+              "arrangement": "search",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "causes": [
+              "angle",
+              "light"
+            ],
+            "side": "both",
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Backlit orange, red and yellow autumn leaves overlap on a twig, hanging at different tilts, so no single outline or edge is clean and each feature needs a search. The tilt is `angle` and the backlight is `light`; the autumn colour makes the usual look false but is not a cause."
+          }
+        ]
+      }
+    },
+    {
+      "label": "judge:haiku:medium:V1:b01",
+      "kind": "judge",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "medium",
+      "variant": "V1",
+      "cell": null,
+      "groups": null,
+      "keys": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-03",
+        "ACRU-leaf-10",
+        "ACRU-fruit-01",
+        "QUAL-bark-05",
+        "QURU-bark-02",
+        "PLOC-bark-08",
+        "PLOC-fruit-08",
+        "PLOC-fruit-11",
+        "PLHI-leaf-02"
+      ],
+      "agentIds": [
+        "a767c1fe5f9e7cf63"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "results": [
+          {
+            "key": "QUAL-bark-05",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": false,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": null,
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Tall trunk and crown of a tree seen from below, so the main subject is the whole tree and part is other. The crown is cut off at the top of the frame and there is no scale object. The source name is trusted. The bark is visible but the view is up into the crown, which would be a bark reject if the owner counts this as bark."
+          },
+          {
+            "key": "ACRU-leaf-10",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "no",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A shrub of many red and green leaves that overlap, with purple flowers low in the frame. The lobes of the red leaves are visible but small and crowded, so shape and margin are search. The autumn colour gives growth_stage autumn and usual_look false, and it is not a cause."
+          },
+          {
+            "key": "ACRU-fruit-01",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "search",
+              "hang": "clear",
+              "wing": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Red winged samaras hang in clusters from bare twigs against a soft pine background. The kind and the hanging are clear, and single samara outlines are small in frame, so shape is search. The wings read clearly."
+          },
+          {
+            "key": "PLOC-fruit-08",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "unripe",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A full-sized, green-yellow spiky seed ball hangs on a long stalk from a leafless twig. It is round and whole, and the hanging is clear. It is not yet brown, so it is unripe. The source name is trusted."
+          },
+          {
+            "key": "PLOC-bark-08",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "clear",
+              "pattern": "clear",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": true,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A close view of mottled, flaking grey, cream and green bark. The frame has no trunk edge, branch, or scale, so too_close is true. The plates and patches read clearly."
+          },
+          {
+            "key": "QURU-bark-02",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": false,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": null,
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A tall dark trunk seen from below with a full green canopy around it. The main subject is the whole tree, so part is other. The trunk is dark, which would count as bark_up_or_dark if the owner counts this as bark. There is no scale object."
+          },
+          {
+            "key": "PLHI-leaf-02",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": null,
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A tree-lined avenue of plane trees in full leaf. This is a scene, so part is other. The depth feature two_heads applies only to fruit and does not apply here. The source name is the hybrid that is the tree, so it passes."
+          },
+          {
+            "key": "ACRU-leaf-02",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "clear",
+              "margin": "clear",
+              "venation": "clear",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "One large red and green leaf in sharp focus with its lobes, toothed margin and palmate veins visible. The leaf is whole and the upper side shows. The autumn colour gives growth_stage autumn and usual_look false, and it is not a cause."
+          },
+          {
+            "key": "PLOC-fruit-11",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A full-sized brown-green spiky seed ball hangs on a stalk beside a fresh green leaf, against a soft green background. The ball is whole, round, and clearly hanging. It looks dried and mature, so it is ripe."
+          },
+          {
+            "key": "ACRU-leaf-03",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "search",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [
+              "light"
+            ],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Several orange-red leaves overlap in warm, backlit sun. The edges and lobes of the central leaf can be traced only with search, and the leaves crowd the frame. The backlight is a cause, and the autumn colour gives growth_stage autumn and usual_look false."
+          }
+        ]
+      }
+    },
+    {
+      "label": "judge:haiku:xhigh:V1:b01",
+      "kind": "judge",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "xhigh",
+      "variant": "V1",
+      "cell": null,
+      "groups": null,
+      "keys": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-03",
+        "ACRU-leaf-10",
+        "ACRU-fruit-01",
+        "QUAL-bark-05",
+        "QURU-bark-02",
+        "PLOC-bark-08",
+        "PLOC-fruit-08",
+        "PLOC-fruit-11",
+        "PLHI-leaf-02"
+      ],
+      "agentIds": [
+        "a1ab5aa2d0360352d"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "results": [
+          {
+            "key": "QUAL-bark-05",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "clear"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle"
+            ],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "Trunk and fork of Quercus alba seen from below with the crown and bright sky above, so the camera looks up into the crown. Texture and pattern read only at a distance (search), colour is clear, and the upward view is a cause; the trunk runs out of frame and the crown competes, so whole and alone are false."
+          },
+          {
+            "key": "ACRU-leaf-10",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "no",
+              "arrangement": "search",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [
+              "leaf_mass"
+            ],
+            "escalate": "none",
+            "note": "A young Acer rubrum in autumn colour in a meadow with asters, its leaves blending into one mass with no scale in the frame, so leaf_mass. Lobes and margin show only on a few small leaves (search), and the autumn colour makes the usual look false."
+          },
+          {
+            "key": "ACRU-fruit-01",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "search",
+              "hang": "clear",
+              "wing": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "spring",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Acer rubrum samaras in drooping clusters on bare twigs, with the wings and hang clear against a soft pine background. The samaras are small in the frame, so the shape is search; they are red and fully formed, and the leafless twigs point to late spring."
+          },
+          {
+            "key": "PLOC-fruit-08",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "clear",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "unripe",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Platanus occidentalis seed ball, round and bristly, hanging on a long stalk, at full shape but still yellow-green rather than brown, so unripe and usual_look false. Brown balls on the bare twigs behind point to late autumn."
+          },
+          {
+            "key": "PLOC-bark-08",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "clear",
+              "pattern": "clear",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": true,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Platanus occidentalis bark with mottled plates and flakes in grey, cream, olive and teal, filling the frame with no trunk edge, branch or scale, so too_close is true. Texture, pattern and colour all read clearly, and the colour is natural for sycamore, so no quality flag."
+          },
+          {
+            "key": "QURU-bark-02",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
+              "texture": "search",
+              "pattern": "search",
+              "colour": "search"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": false,
+            "side": null,
+            "causes": [
+              "angle",
+              "light"
+            ],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [
+              "bark_up_or_dark"
+            ],
+            "escalate": "none",
+            "note": "Quercus rubra trunk seen from below with the crown and fern-like leaves above, so the camera looks up into the crown. The trunk sits in deep shade under backlight, so angle and light are causes, and texture, pattern and colour are at search."
+          },
+          {
+            "key": "PLHI-leaf-02",
+            "description": "",
+            "part": "other",
+            "photo_features": {},
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": null,
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A tree-lined avenue of Platanus ×hispanica in full summer leaf. It is a street scene, not a leaf, bark, or fruit part, so part is other with no features. The depth feature two_heads does not apply because the part is not fruit, and the source name matches the tree."
+          },
+          {
+            "key": "ACRU-leaf-02",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "clear",
+              "margin": "clear",
+              "venation": "clear",
+              "arrangement": "no",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A single Acer rubrum leaf in autumn colour, with the lobes, margin and veins clear. Its left lobes run into the frame edge, so whole is false, and other leaves press close on every side, so alone is false. The autumn colour makes the usual look false, and it is not a cause."
+          },
+          {
+            "key": "PLOC-fruit-11",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "clear",
+              "shape": "search",
+              "hang": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "ripe",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Platanus occidentalis brown seed ball, intact and dry on its stalk with a green bract, so ripe. The bristly edges can be traced only in a soft, small photo, so shape is search, and the green lawn behind is plain."
+          },
+          {
+            "key": "ACRU-leaf-03",
+            "description": "",
+            "part": "leaf",
+            "photo_features": {
+              "shape": "search",
+              "margin": "search",
+              "venation": "search",
+              "arrangement": "clear",
+              "size": "no"
+            },
+            "whole": false,
+            "alone": false,
+            "too_close": null,
+            "side": "upper",
+            "causes": [
+              "angle",
+              "light"
+            ],
+            "scale": "none",
+            "season": "autumn",
+            "growth_stage": "autumn",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Several overlapping Acer rubrum leaves in autumn colour, in soft focus with warm low sun behind them. The petioles join the twig, so arrangement is clear, while the lobes and veins read only at search; the crowding makes alone false, the tilted leaves are angle, and the sun is light."
+          }
+        ]
+      }
+    }
+  ]
+}
