@@ -66,3 +66,10 @@ test('answers in calls of 20 go under their own set-up, apart from the calls of 
   assert.equal(v.answers['opus:high:V1'].A.part, 'leaf');
   assert.equal(v.answers['opus:high:V1:n20'].A.part, 'bark');
 });
+
+test('a ranking of the FR set goes under its own set-up, apart from the R ranking of the same cell', () => {
+  const job = (method, order) => ({ label: `rank:opus:high:${method}:T-leaf`, kind: 'rank', model: 'opus', effort: 'high', method, cell: 'T-leaf', keys: ['a', 'b'], groups: { 1: ['a', 'b'] }, result: { orders: { 1: order }, unread: [], note: '' } });
+  const v = buildViews([job('R', ['a', 'b']), job('FR', ['b', 'a'])], { 'rank:opus:high:R:T-leaf': { tokens: 1, usd: 1 }, 'rank:opus:high:FR:T-leaf': { tokens: 1, usd: 1 } });
+  assert.deepEqual(v.rank['opus:high']['T-leaf'].orders[1], ['a', 'b']);
+  assert.deepEqual(v.rank['opus:high:FR']['T-leaf'].orders[1], ['b', 'a']);
+});
