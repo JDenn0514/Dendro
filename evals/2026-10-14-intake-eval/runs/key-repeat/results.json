@@ -1,6 +1,7 @@
 {
   "runIds": [
-    "wf_4c5d3596-704"
+    "wf_4c5d3596-704",
+    "wf_1310c621-a69"
   ],
   "jobs": [
     {
@@ -9547,9 +9548,11 @@
         "PLOC-bark-06"
       ],
       "agentIds": [
-        "a7d742cebc480d4be"
+        "a7d742cebc480d4be",
+        "aa239e59d5c8221c1"
       ],
       "states": [
+        "done",
         "done"
       ],
       "result": {
@@ -9562,7 +9565,7 @@
               "shape": "clear",
               "margin": "search",
               "venation": "clear",
-              "arrangement": "no",
+              "arrangement": "search",
               "size": "no"
             },
             "whole": false,
@@ -9570,8 +9573,8 @@
             "too_close": null,
             "side": "under",
             "causes": [
-              "light",
-              "angle"
+              "angle",
+              "light"
             ],
             "scale": "none",
             "season": "summer",
@@ -9580,8 +9583,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Backlit underside of a lobed leaf in the foreground, cut by the bottom edge, with other leaves crowding behind it. Translucent light shifts the colour (light), the leaf is tilted (angle), and the toothed margin needs a close look (search).",
-            "growth_stage_dummy": null
+            "note": "Backlit underside of a large leaf seen from below, with other leaves behind it and the tip touching the bottom frame edge. The margin teeth are only readable with a close look, and the angle and backlight make it harder."
           },
           {
             "key": "PLOC-leaf-01",
@@ -9589,13 +9591,13 @@
             "part": "leaf",
             "photo_features": {
               "shape": "clear",
-              "margin": "search",
+              "margin": "clear",
               "venation": "clear",
               "arrangement": "clear",
               "size": "no"
             },
             "whole": true,
-            "alone": false,
+            "alone": true,
             "too_close": null,
             "side": "upper",
             "causes": [],
@@ -9606,7 +9608,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Several large lobed leaves on a leafy shoot, with the stalks joining the stem in view. The leaves overlap and a busy autumn background competes, and the margin teeth are small."
+            "note": "Green upper sides of several leaves on a twig against a dark soft background. The top leaves show full outline and margin, and the twig shows the alternate stalks."
           },
           {
             "key": "PLOC-leaf-02",
@@ -9615,12 +9617,12 @@
             "photo_features": {
               "shape": "clear",
               "margin": "search",
-              "venation": "search",
-              "arrangement": "clear",
+              "venation": "clear",
+              "arrangement": "search",
               "size": "no"
             },
             "whole": true,
-            "alone": true,
+            "alone": false,
             "too_close": null,
             "side": "upper",
             "causes": [],
@@ -9631,14 +9633,14 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Leaves in red, orange and green autumn colour on a twig against soft sky. Autumn colour is not a cause, but it makes usual_look false; the margin teeth are hard to read at this size."
+            "note": "A cluster of overlapping leaves in red, orange and green autumn colour. The top-left leaf is whole, but the crowd of leaves and the edges that are hard to read lower the clarity of the margin."
           },
           {
             "key": "PLOC-bark-04",
             "description": "",
             "part": "bark",
             "photo_features": {
-              "texture": "search",
+              "texture": "clear",
               "pattern": "clear",
               "colour": "clear"
             },
@@ -9656,7 +9658,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Winter view of a pale mottled trunk fork seen from below, with branches crossing the trunk. The patch pattern can be read, but the upward angle and crossing branches make it harder."
+            "note": "Mottled peeling white and olive bark on a trunk with crossing branches, seen from below against bare twigs and sky. The pattern reads clearly, so I did not call it a bark-up reject, but the upward angle and the branches make it harder."
           },
           {
             "key": "PLOC-leaf-07",
@@ -9681,7 +9683,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "One whole bright green lobed leaf with a toothed edge against a dark soft background. The twig is partly visible, so the leaf attachment needs a closer look."
+            "note": "One bright green leaf, sharp, against a soft lawn background, with its full outline and toothed margin readable. The twig joins are small at the top of the frame."
           },
           {
             "key": "PLOC-leaf-08",
@@ -9697,7 +9699,7 @@
             "whole": true,
             "alone": true,
             "too_close": null,
-            "side": "under",
+            "side": "upper",
             "causes": [],
             "scale": "none",
             "season": "summer",
@@ -9706,27 +9708,24 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "One whole large lobed leaf with its stalk on a grass background, showing the toothed margin and strong veins. The paler look suggests the underside."
+            "note": "A large green leaf with its full outline and teeth, over a plain grass background, with a second leaf cut at the left edge. The stalk goes off the bottom, so the twig is not shown."
           },
           {
             "key": "PLOC-leaf-03",
             "description": "",
             "part": "leaf",
             "photo_features": {
-              "shape": "search",
+              "shape": "clear",
               "margin": "search",
-              "venation": "search",
+              "venation": "clear",
               "arrangement": "no",
-              "size": "no"
+              "size": "clear"
             },
             "whole": false,
             "alone": false,
             "too_close": null,
             "side": "under",
-            "causes": [
-              "damaged",
-              "angle"
-            ],
+            "causes": [],
             "scale": "hand",
             "season": "summer",
             "growth_stage": "mature",
@@ -9734,7 +9733,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Two overlapping leaves held in a hand in front of a mottled trunk, with leaf litter around. The leaves overlap and a hand covers part, and the margin is faint and has small holes, so the outline needs close study."
+            "note": "Pale undersides of overlapping leaves held up in front of peeling bark, with a hand at the right edge that covers part of the leaf. The overlap and the busy bark behind make the margin hard to read and the leaf is not alone."
           },
           {
             "key": "PLOC-leaf-09",
@@ -9752,8 +9751,7 @@
             "too_close": null,
             "side": "upper",
             "causes": [
-              "light",
-              "damaged"
+              "light"
             ],
             "scale": "none",
             "season": "summer",
@@ -9762,7 +9760,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Flash-lit leaf on a black background with brown blotches and tears at the edges of upper leaves. The flash changes the colour (light) and the blotches slightly change the outline (damaged)."
+            "note": "A leaf lit by flash against a black background, with the outline and the teeth readable. Brown blotches sit on the leaves above but the outline of the main leaf is intact; the flash changes the colour."
           },
           {
             "key": "LITU-fruit-12",
@@ -9778,9 +9776,7 @@
             "alone": true,
             "too_close": null,
             "side": null,
-            "causes": [
-              "atypical"
-            ],
+            "causes": [],
             "scale": "none",
             "season": "winter",
             "growth_stage": "after_seed_fall",
@@ -9788,37 +9784,60 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Winter cone of samaras held upright on a twig in snow, with the seeds mostly shed. This is the after seed fall form, not the usual ripe look."
+            "note": "A dry, open cone of samaras sitting upright on the twig in snow. The seed wings still show but most of the seeds have fallen."
           },
           {
             "key": "PLOC-bark-03",
             "description": "",
             "part": "bark",
             "photo_features": {
+              "texture": "clear",
+              "pattern": "clear",
+              "colour": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": true,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "any",
+            "growth_stage": "mature",
+            "usual_look": true,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "A close frame of mottled olive, brown and white peeling bark, with the pattern repeat visible but no trunk edge, branch or scale object."
+          },
+          {
+            "key": "PLOC-bark-05",
+            "description": "",
+            "part": "bark",
+            "photo_features": {
               "texture": "search",
               "pattern": "search",
-              "colour": "search"
+              "colour": "clear"
             },
             "whole": true,
             "alone": false,
             "too_close": false,
             "side": null,
             "causes": [],
-            "scale": "other",
+            "scale": "none",
             "season": "any",
-            "growth_stage": "old",
+            "growth_stage": "mature",
             "usual_look": true,
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Street trunk base with root flare at a kerb, with parked cars around. The bark is seen from a distance, so the pattern needs a search."
+            "note": "A trunk base by a curb with parked cars and a street in the frame. The bark is seen from a distance, so the plate pattern is found only with close study."
           },
           {
-            "key": "PLOC-bark-05",
+            "key": "LITU-fruit-11",
             "description": "",
             "part": "other",
             "photo_features": {},
-            "whole": false,
+            "whole": true,
             "alone": true,
             "too_close": null,
             "side": null,
@@ -9830,10 +9849,10 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Bare twigs against blue sky with tiny dried seed pods. The main subject is a scene, and no feature can be read."
+            "note": "Bare branches against a blue sky with a few small dry fruit remnants. The main subject is a crown, so the part is other."
           },
           {
-            "key": "LITU-fruit-11",
+            "key": "PLOC-leaf-11",
             "description": "",
             "part": "leaf",
             "photo_features": {
@@ -9855,14 +9874,14 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Overlapping green leaves with toothed edges, a small stipule and a few holes. The photo is judged as shown and the source name is trusted."
+            "note": "One green leaf in the middle with its outline and teeth readable, but neighbouring leaves crowd it and one is cut at the left edge. A few small holes do not change the outline, and the twig joins are small."
           },
           {
-            "key": "PLOC-leaf-11",
+            "key": "PLOC-leaf-06",
             "description": "",
             "part": "leaf",
             "photo_features": {
-              "shape": "search",
+              "shape": "no",
               "margin": "no",
               "venation": "no",
               "arrangement": "no",
@@ -9872,28 +9891,26 @@
             "alone": false,
             "too_close": null,
             "side": "upper",
-            "causes": [
-              "angle"
-            ],
+            "causes": [],
             "scale": "none",
             "season": "summer",
-            "growth_stage": "young",
-            "usual_look": false,
+            "growth_stage": "mature",
+            "usual_look": true,
             "not_for": [],
             "reject": [
               "leaf_mass",
               "feature_unclear"
             ],
             "escalate": "none",
-            "note": "A leafy sapling whose leaves blend into a mass, so no single outline or margin can be read."
+            "note": "A leafy sapling or small tree crown in which the leaves blend into a mass. No single leaf outline or margin can be read."
           },
           {
-            "key": "PLOC-leaf-06",
+            "key": "PLOC-bark-02",
             "description": "",
             "part": "other",
             "photo_features": {},
-            "whole": false,
-            "alone": false,
+            "whole": true,
+            "alone": true,
             "too_close": null,
             "side": null,
             "causes": [],
@@ -9904,15 +9921,15 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Leafless winter crown with a pale mottled trunk against sky. The subject is a whole tree and crown."
+            "note": "A bare winter crown with a forked trunk and branches against the sky. The subject is the whole tree, so the part is other."
           },
           {
-            "key": "PLOC-bark-02",
+            "key": "PLOC-bark-06",
             "description": "",
             "part": "other",
             "photo_features": {},
-            "whole": false,
-            "alone": false,
+            "whole": true,
+            "alone": true,
             "too_close": null,
             "side": null,
             "causes": [],
@@ -9923,10 +9940,10 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A multi-trunk tree with a hollow base in a leafy woodland scene. The subject is a whole tree in a scene."
+            "note": "A multi-stemmed old tree with a hollow base in summer woodland. The subject is a whole tree in a scene, so the part is other."
           },
           {
-            "key": "PLOC-bark-06",
+            "key": "PLOC-leaf-10",
             "description": "",
             "part": "leaf",
             "photo_features": {
@@ -9936,7 +9953,7 @@
               "arrangement": "clear",
               "size": "no"
             },
-            "whole": true,
+            "whole": false,
             "alone": true,
             "too_close": null,
             "side": "upper",
@@ -9948,19 +9965,19 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A cut branch laid on a plain wooden deck, with several dark green toothed leaves and the stalks on the stem in view."
+            "note": "A leafy twig laid on a plain wooden deck, with the outline, teeth and alternate stalks readable. The lower leaves are cut by the frame edge, so the whole subject does not show."
           },
           {
-            "key": "PLOC-leaf-10",
+            "key": "PLOC-bark-01",
             "description": "",
             "part": "bark",
             "photo_features": {
-              "texture": "search",
+              "texture": "clear",
               "pattern": "clear",
-              "colour": "clear"
+              "colour": "search"
             },
             "whole": true,
-            "alone": false,
+            "alone": true,
             "too_close": false,
             "side": null,
             "causes": [
@@ -9973,10 +9990,10 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Mottled pale and brown trunk with branches crossing it and reeds behind. The warm colour cast changes the colour (light) and the branches compete with the trunk."
+            "note": "A trunk with plates and a pale patch pattern, with branches across the top. The warm, faded light shifts the colours, so the colour is harder to read, but the image is not toned enough to doubt it."
           },
           {
-            "key": "PLOC-bark-01",
+            "key": "PLOC-leaf-04",
             "description": "",
             "part": "leaf",
             "photo_features": {
@@ -9989,10 +10006,8 @@
             "whole": true,
             "alone": false,
             "too_close": null,
-            "side": "both",
-            "causes": [
-              "light"
-            ],
+            "side": "under",
+            "causes": [],
             "scale": "none",
             "season": "summer",
             "growth_stage": "mature",
@@ -10000,17 +10015,17 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A dim, speckled central leaf with pale undersides of other leaves at the lower left, among crowded leaves. The shade lowers the margin contrast."
+            "note": "The dull, speckled underside of a leaf with other leaves around it. The edge teeth are shallow and need close study, and the neighbouring leaves compete."
           },
           {
-            "key": "PLOC-leaf-04",
+            "key": "PLOC-leaf-12",
             "description": "",
             "part": "leaf",
             "photo_features": {
               "shape": "clear",
               "margin": "clear",
               "venation": "clear",
-              "arrangement": "no",
+              "arrangement": "search",
               "size": "no"
             },
             "whole": true,
@@ -10025,7 +10040,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "One whole pale green lobed leaf with mottled spots on a sandy soft background, with the toothed margin and veins readable."
+            "note": "A pale green, mottled leaf with its full outline and teeth, against soft gravel. Other leaves are cut at the top edge, and the stalk joins the twig only at the top."
           }
         ]
       }

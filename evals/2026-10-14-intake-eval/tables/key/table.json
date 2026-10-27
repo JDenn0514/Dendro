@@ -3,9 +3,10 @@
   "runs": [
     "key-judge",
     "key-batch20",
-    "key-effort"
+    "key-effort",
+    "key-n20"
   ],
-  "repeat_run": null,
+  "repeat_run": "key-repeat",
   "problems": [
     "judge:sonnet:medium:V1:b06: no answer for ACSA3-bark-12",
     "judge:sonnet:medium:V1:b13: no answer for LITU-bark-09"
@@ -713,6 +714,178 @@
             "1": 2,
             "2": 0,
             "3": 1
+          },
+          "cells_filled": 0
+        }
+      }
+    },
+    {
+      "id": "haiku:medium:V1:n20/P",
+      "setup": "haiku:medium:V1:n20",
+      "rule": "P",
+      "filter": null,
+      "photos": 211,
+      "no_answer": 0,
+      "part_errors": 37,
+      "n": 211,
+      "keep": 0.7630331753554502,
+      "drops": 47,
+      "drop_recall": 0.723404255319149,
+      "both": 127,
+      "exact": 0.47244094488188976,
+      "within1": 0.9133858267716536,
+      "part": null,
+      "usual_look": 0.889763779527559,
+      "usd_per_photo": 0.0010043997393364924,
+      "minutes_per_100": 9.99812006319115,
+      "thin_cell": [],
+      "source_yield": {
+        "iNaturalist": {
+          "photos": 48,
+          "kept": {
+            "1": 10,
+            "2": 8,
+            "3": 13
+          },
+          "cells_filled": 0
+        },
+        "Wikimedia Commons": {
+          "photos": 77,
+          "kept": {
+            "1": 21,
+            "2": 16,
+            "3": 16
+          },
+          "cells_filled": 0
+        },
+        "Lady Bird Johnson Wildflower Center": {
+          "photos": 16,
+          "kept": {
+            "1": 5,
+            "2": 2,
+            "3": 3
+          },
+          "cells_filled": 0
+        },
+        "VT Dendrology": {
+          "photos": 9,
+          "kept": {
+            "1": 7,
+            "2": 1,
+            "3": 0
+          },
+          "cells_filled": 0
+        },
+        "Bioimages": {
+          "photos": 35,
+          "kept": {
+            "1": 11,
+            "2": 1,
+            "3": 11
+          },
+          "cells_filled": 0
+        },
+        "Trees and Shrubs Online": {
+          "photos": 23,
+          "kept": {
+            "1": 7,
+            "2": 3,
+            "3": 4
+          },
+          "cells_filled": 0
+        },
+        "USDA PLANTS Database": {
+          "photos": 3,
+          "kept": {
+            "1": 1,
+            "2": 0,
+            "3": 0
+          },
+          "cells_filled": 0
+        }
+      }
+    },
+    {
+      "id": "haiku:medium:V1:n20/K3",
+      "setup": "haiku:medium:V1:n20",
+      "rule": "K3",
+      "filter": null,
+      "photos": 211,
+      "no_answer": 0,
+      "part_errors": 37,
+      "n": 211,
+      "keep": 0.7819905213270142,
+      "drops": 47,
+      "drop_recall": 0.6382978723404256,
+      "both": 135,
+      "exact": 0.4740740740740741,
+      "within1": 0.9111111111111111,
+      "part": null,
+      "usual_look": 0.8962962962962963,
+      "usd_per_photo": 0.0010043997393364924,
+      "minutes_per_100": 9.99812006319115,
+      "thin_cell": [],
+      "source_yield": {
+        "iNaturalist": {
+          "photos": 48,
+          "kept": {
+            "1": 10,
+            "2": 8,
+            "3": 15
+          },
+          "cells_filled": 0
+        },
+        "Wikimedia Commons": {
+          "photos": 77,
+          "kept": {
+            "1": 21,
+            "2": 16,
+            "3": 23
+          },
+          "cells_filled": 0
+        },
+        "Lady Bird Johnson Wildflower Center": {
+          "photos": 16,
+          "kept": {
+            "1": 5,
+            "2": 2,
+            "3": 3
+          },
+          "cells_filled": 0
+        },
+        "VT Dendrology": {
+          "photos": 9,
+          "kept": {
+            "1": 7,
+            "2": 1,
+            "3": 0
+          },
+          "cells_filled": 0
+        },
+        "Bioimages": {
+          "photos": 35,
+          "kept": {
+            "1": 11,
+            "2": 1,
+            "3": 13
+          },
+          "cells_filled": 0
+        },
+        "Trees and Shrubs Online": {
+          "photos": 23,
+          "kept": {
+            "1": 7,
+            "2": 3,
+            "3": 5
+          },
+          "cells_filled": 0
+        },
+        "USDA PLANTS Database": {
+          "photos": 3,
+          "kept": {
+            "1": 1,
+            "2": 0,
+            "3": 0
           },
           "cells_filled": 0
         }
@@ -3981,6 +4154,350 @@
             "1": 2,
             "2": 0,
             "3": 0
+          },
+          "cells_filled": 0
+        }
+      }
+    },
+    {
+      "id": "sonnet:medium:V1:n20/P",
+      "setup": "sonnet:medium:V1:n20",
+      "rule": "P",
+      "filter": null,
+      "photos": 211,
+      "no_answer": 0,
+      "part_errors": 26,
+      "n": 211,
+      "keep": 0.7962085308056872,
+      "drops": 47,
+      "drop_recall": 0.851063829787234,
+      "both": 128,
+      "exact": 0.421875,
+      "within1": 0.921875,
+      "part": null,
+      "usual_look": 0.96875,
+      "usd_per_photo": 0.009927934597156391,
+      "minutes_per_100": 5.352496050552921,
+      "thin_cell": [],
+      "source_yield": {
+        "iNaturalist": {
+          "photos": 48,
+          "kept": {
+            "1": 13,
+            "2": 4,
+            "3": 12
+          },
+          "cells_filled": 0
+        },
+        "Wikimedia Commons": {
+          "photos": 77,
+          "kept": {
+            "1": 19,
+            "2": 12,
+            "3": 17
+          },
+          "cells_filled": 0
+        },
+        "Lady Bird Johnson Wildflower Center": {
+          "photos": 16,
+          "kept": {
+            "1": 2,
+            "2": 2,
+            "3": 3
+          },
+          "cells_filled": 0
+        },
+        "VT Dendrology": {
+          "photos": 9,
+          "kept": {
+            "1": 6,
+            "2": 0,
+            "3": 1
+          },
+          "cells_filled": 0
+        },
+        "Bioimages": {
+          "photos": 35,
+          "kept": {
+            "1": 15,
+            "2": 0,
+            "3": 11
+          },
+          "cells_filled": 0
+        },
+        "Trees and Shrubs Online": {
+          "photos": 23,
+          "kept": {
+            "1": 10,
+            "2": 0,
+            "3": 5
+          },
+          "cells_filled": 0
+        },
+        "USDA PLANTS Database": {
+          "photos": 3,
+          "kept": {
+            "1": 2,
+            "2": 0,
+            "3": 1
+          },
+          "cells_filled": 0
+        }
+      }
+    },
+    {
+      "id": "sonnet:medium:V1:n20/P/F",
+      "setup": "sonnet:medium:V1:n20",
+      "rule": "P",
+      "filter": "haiku:high:V1",
+      "photos": 211,
+      "no_answer": 0,
+      "part_errors": 39,
+      "n": 211,
+      "keep": 0.7393364928909952,
+      "drops": 47,
+      "drop_recall": 0.8936170212765957,
+      "both": 114,
+      "exact": 0.42105263157894735,
+      "within1": 0.9210526315789473,
+      "part": null,
+      "usual_look": 0.9736842105263158,
+      "usd_per_photo": 0.009927934597156391,
+      "minutes_per_100": 5.352496050552921,
+      "thin_cell": [],
+      "source_yield": {
+        "iNaturalist": {
+          "photos": 48,
+          "kept": {
+            "1": 13,
+            "2": 4,
+            "3": 9
+          },
+          "cells_filled": 0
+        },
+        "Wikimedia Commons": {
+          "photos": 77,
+          "kept": {
+            "1": 17,
+            "2": 10,
+            "3": 15
+          },
+          "cells_filled": 0
+        },
+        "Lady Bird Johnson Wildflower Center": {
+          "photos": 16,
+          "kept": {
+            "1": 2,
+            "2": 2,
+            "3": 1
+          },
+          "cells_filled": 0
+        },
+        "VT Dendrology": {
+          "photos": 9,
+          "kept": {
+            "1": 6,
+            "2": 0,
+            "3": 1
+          },
+          "cells_filled": 0
+        },
+        "Bioimages": {
+          "photos": 35,
+          "kept": {
+            "1": 14,
+            "2": 0,
+            "3": 10
+          },
+          "cells_filled": 0
+        },
+        "Trees and Shrubs Online": {
+          "photos": 23,
+          "kept": {
+            "1": 9,
+            "2": 0,
+            "3": 4
+          },
+          "cells_filled": 0
+        },
+        "USDA PLANTS Database": {
+          "photos": 3,
+          "kept": {
+            "1": 1,
+            "2": 0,
+            "3": 1
+          },
+          "cells_filled": 0
+        }
+      }
+    },
+    {
+      "id": "sonnet:medium:V1:n20/K3",
+      "setup": "sonnet:medium:V1:n20",
+      "rule": "K3",
+      "filter": null,
+      "photos": 211,
+      "no_answer": 0,
+      "part_errors": 26,
+      "n": 211,
+      "keep": 0.8530805687203792,
+      "drops": 47,
+      "drop_recall": 0.6170212765957447,
+      "both": 151,
+      "exact": 0.423841059602649,
+      "within1": 0.9205298013245033,
+      "part": null,
+      "usual_look": 0.9470198675496688,
+      "usd_per_photo": 0.009927934597156391,
+      "minutes_per_100": 5.352496050552921,
+      "thin_cell": [],
+      "source_yield": {
+        "iNaturalist": {
+          "photos": 48,
+          "kept": {
+            "1": 13,
+            "2": 4,
+            "3": 20
+          },
+          "cells_filled": 0
+        },
+        "Wikimedia Commons": {
+          "photos": 77,
+          "kept": {
+            "1": 19,
+            "2": 12,
+            "3": 29
+          },
+          "cells_filled": 0
+        },
+        "Lady Bird Johnson Wildflower Center": {
+          "photos": 16,
+          "kept": {
+            "1": 2,
+            "2": 2,
+            "3": 10
+          },
+          "cells_filled": 0
+        },
+        "VT Dendrology": {
+          "photos": 9,
+          "kept": {
+            "1": 6,
+            "2": 0,
+            "3": 3
+          },
+          "cells_filled": 0
+        },
+        "Bioimages": {
+          "photos": 35,
+          "kept": {
+            "1": 15,
+            "2": 0,
+            "3": 13
+          },
+          "cells_filled": 0
+        },
+        "Trees and Shrubs Online": {
+          "photos": 23,
+          "kept": {
+            "1": 10,
+            "2": 0,
+            "3": 8
+          },
+          "cells_filled": 0
+        },
+        "USDA PLANTS Database": {
+          "photos": 3,
+          "kept": {
+            "1": 2,
+            "2": 0,
+            "3": 1
+          },
+          "cells_filled": 0
+        }
+      }
+    },
+    {
+      "id": "sonnet:medium:V1:n20/K3/F",
+      "setup": "sonnet:medium:V1:n20",
+      "rule": "K3",
+      "filter": "haiku:high:V1",
+      "photos": 211,
+      "no_answer": 0,
+      "part_errors": 42,
+      "n": 211,
+      "keep": 0.8009478672985783,
+      "drops": 47,
+      "drop_recall": 0.7021276595744681,
+      "both": 136,
+      "exact": 0.4117647058823529,
+      "within1": 0.9191176470588235,
+      "part": null,
+      "usual_look": 0.9632352941176471,
+      "usd_per_photo": 0.009927934597156391,
+      "minutes_per_100": 5.352496050552921,
+      "thin_cell": [],
+      "source_yield": {
+        "iNaturalist": {
+          "photos": 48,
+          "kept": {
+            "1": 13,
+            "2": 4,
+            "3": 15
+          },
+          "cells_filled": 0
+        },
+        "Wikimedia Commons": {
+          "photos": 77,
+          "kept": {
+            "1": 17,
+            "2": 11,
+            "3": 27
+          },
+          "cells_filled": 0
+        },
+        "Lady Bird Johnson Wildflower Center": {
+          "photos": 16,
+          "kept": {
+            "1": 2,
+            "2": 2,
+            "3": 6
+          },
+          "cells_filled": 0
+        },
+        "VT Dendrology": {
+          "photos": 9,
+          "kept": {
+            "1": 6,
+            "2": 0,
+            "3": 3
+          },
+          "cells_filled": 0
+        },
+        "Bioimages": {
+          "photos": 35,
+          "kept": {
+            "1": 14,
+            "2": 0,
+            "3": 13
+          },
+          "cells_filled": 0
+        },
+        "Trees and Shrubs Online": {
+          "photos": 23,
+          "kept": {
+            "1": 9,
+            "2": 0,
+            "3": 6
+          },
+          "cells_filled": 0
+        },
+        "USDA PLANTS Database": {
+          "photos": 3,
+          "kept": {
+            "1": 1,
+            "2": 0,
+            "3": 1
           },
           "cells_filled": 0
         }
@@ -173371,6 +173888,78 @@
       }
     },
     {
+      "setup": "haiku:medium:V1:n20",
+      "rule": "P",
+      "photos": 211,
+      "ten": {
+        "n": 211,
+        "keep": 0.7725118483412322,
+        "drops": 47,
+        "drop_recall": 0.7021276595744681,
+        "both": 130,
+        "exact": 0.4076923076923077,
+        "within1": 0.9153846153846154,
+        "part": null
+      },
+      "twenty": {
+        "n": 211,
+        "keep": 0.7630331753554502,
+        "drops": 47,
+        "drop_recall": 0.723404255319149,
+        "both": 127,
+        "exact": 0.47244094488188976,
+        "within1": 0.9133858267716536,
+        "part": null
+      },
+      "between": {
+        "n": 211,
+        "keep": 0.8199052132701422,
+        "both": 123,
+        "exact": 0.6260162601626016,
+        "within1": 0.7967479674796748
+      },
+      "usd_per_photo": {
+        "ten": 0.0018135218246445432,
+        "twenty": 0.0010043997393364924
+      }
+    },
+    {
+      "setup": "haiku:medium:V1:n20",
+      "rule": "K3",
+      "photos": 211,
+      "ten": {
+        "n": 211,
+        "keep": 0.8199052132701422,
+        "drops": 47,
+        "drop_recall": 0.5957446808510638,
+        "both": 145,
+        "exact": 0.4206896551724138,
+        "within1": 0.9103448275862069,
+        "part": null
+      },
+      "twenty": {
+        "n": 211,
+        "keep": 0.7819905213270142,
+        "drops": 47,
+        "drop_recall": 0.6382978723404256,
+        "both": 135,
+        "exact": 0.4740740740740741,
+        "within1": 0.9111111111111111,
+        "part": null
+      },
+      "between": {
+        "n": 211,
+        "keep": 0.8483412322274881,
+        "both": 142,
+        "exact": 0.647887323943662,
+        "within1": 0.8098591549295775
+      },
+      "usd_per_photo": {
+        "ten": 0.0018135218246445432,
+        "twenty": 0.0010043997393364924
+      }
+    },
+    {
       "setup": "opus:high:V1:n20",
       "rule": "P",
       "photos": 211,
@@ -173513,14 +174102,142 @@
         "ten": 0.016498944075829417,
         "twenty": 0.011890016113744066
       }
+    },
+    {
+      "setup": "sonnet:medium:V1:n20",
+      "rule": "P",
+      "photos": 211,
+      "ten": {
+        "n": 211,
+        "keep": 0.7772511848341233,
+        "drops": 47,
+        "drop_recall": 0.8297872340425532,
+        "both": 125,
+        "exact": 0.48,
+        "within1": 0.904,
+        "part": null
+      },
+      "twenty": {
+        "n": 211,
+        "keep": 0.7962085308056872,
+        "drops": 47,
+        "drop_recall": 0.851063829787234,
+        "both": 128,
+        "exact": 0.421875,
+        "within1": 0.921875,
+        "part": null
+      },
+      "between": {
+        "n": 211,
+        "keep": 0.8293838862559242,
+        "both": 116,
+        "exact": 0.7844827586206896,
+        "within1": 0.9051724137931034
+      },
+      "usd_per_photo": {
+        "ten": 0.01582334976303317,
+        "twenty": 0.009927934597156391
+      }
+    },
+    {
+      "setup": "sonnet:medium:V1:n20",
+      "rule": "K3",
+      "photos": 211,
+      "ten": {
+        "n": 211,
+        "keep": 0.8530805687203792,
+        "drops": 47,
+        "drop_recall": 0.6382978723404256,
+        "both": 150,
+        "exact": 0.44666666666666666,
+        "within1": 0.9133333333333333,
+        "part": null
+      },
+      "twenty": {
+        "n": 211,
+        "keep": 0.8530805687203792,
+        "drops": 47,
+        "drop_recall": 0.6170212765957447,
+        "both": 151,
+        "exact": 0.423841059602649,
+        "within1": 0.9205298013245033,
+        "part": null
+      },
+      "between": {
+        "n": 211,
+        "keep": 0.943127962085308,
+        "both": 162,
+        "exact": 0.8148148148148148,
+        "within1": 0.9074074074074074
+      },
+      "usd_per_photo": {
+        "ten": 0.01582334976303317,
+        "twenty": 0.009927934597156391
+      }
     }
   ],
-  "repeat": [],
+  "repeat": [
+    {
+      "setup": "opus:high:V1:n20",
+      "rule": "P",
+      "n": 211,
+      "keep": 0.9146919431279621,
+      "both": 137,
+      "exact": 0.9343065693430657,
+      "within1": 0.9781021897810219
+    },
+    {
+      "setup": "opus:high:V1:n20",
+      "rule": "K3",
+      "n": 211,
+      "keep": 0.9715639810426541,
+      "both": 172,
+      "exact": 0.9418604651162791,
+      "within1": 0.9767441860465116
+    },
+    {
+      "setup": "sonnet:medium:V1:n20",
+      "rule": "P",
+      "n": 211,
+      "keep": 0.8530805687203792,
+      "both": 121,
+      "exact": 0.7603305785123967,
+      "within1": 0.8760330578512396
+    },
+    {
+      "setup": "sonnet:medium:V1:n20",
+      "rule": "K3",
+      "n": 211,
+      "keep": 0.957345971563981,
+      "both": 165,
+      "exact": 0.8,
+      "within1": 0.8848484848484849
+    },
+    {
+      "setup": "haiku:medium:V1:n20",
+      "rule": "P",
+      "n": 211,
+      "keep": 0.8672985781990521,
+      "both": 128,
+      "exact": 0.7578125,
+      "within1": 0.8984375
+    },
+    {
+      "setup": "haiku:medium:V1:n20",
+      "rule": "K3",
+      "n": 211,
+      "keep": 0.8815165876777251,
+      "both": 142,
+      "exact": 0.7535211267605634,
+      "within1": 0.8943661971830986
+    }
+  ],
   "species_doubt": {
     "haiku:high:V1": [],
     "haiku:high:V1:n20": [],
     "haiku:high:V2": [],
     "haiku:medium:V1": [],
+    "haiku:medium:V1:n20": [],
     "haiku:xhigh:V1": [],
     "opus:high:V1": [],
     "opus:high:V1:n20": [],
@@ -173531,6 +174248,7 @@
     "sonnet:high:V1:n20": [],
     "sonnet:high:V2": [],
     "sonnet:medium:V1": [],
+    "sonnet:medium:V1:n20": [],
     "sonnet:xhigh:V1": []
   }
 }
