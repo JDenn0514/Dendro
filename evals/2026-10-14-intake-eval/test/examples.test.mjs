@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { gateExamples } from '../lib/examples.mjs';
+import { gateExamples, relabelSet } from '../lib/examples.mjs';
 
 const owner = {
   a: { keep: true, step: 2 }, b: { keep: true, step: 1 }, c: { keep: true, step: 2 },
@@ -26,4 +26,12 @@ test('the keep examples are the photos where every set-up disagrees with the own
 test('a photo with a species doubt or no owner call is no example', () => {
   const x = gateExamples(['g', 'zz'], owner, steps);
   assert.deepEqual([x.step, x.kept, x.dropped], [[], [], []]);
+});
+
+test('the relabel set is every photo where any set-up differs from the owner, less the photos already reviewed', () => {
+  const x = relabelSet(Object.keys(owner), owner, steps, new Set(['a']));
+  // b, c, e, f differ; a is reviewed; d agrees; g has a species doubt.
+  assert.deepEqual(x, ['b', 'c', 'e', 'f']);
+  const one = [new Map([['c', s(true, 2)], ['d', s(true, 2)]])];
+  assert.deepEqual(relabelSet(['c', 'd'], owner, one, new Set()), ['d']);
 });

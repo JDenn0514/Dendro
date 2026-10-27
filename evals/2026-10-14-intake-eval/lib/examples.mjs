@@ -16,3 +16,16 @@ export function gateExamples(keys, owner, steps) {
   }
   return out;
 }
+
+// The photos for the owner's blind relabel: every photo where any set-up differs from the owner on keep, or
+// on the difficulty step when both keep, less the photos in reviewed (a Set). Key order.
+export function relabelSet(keys, owner, steps, reviewed) {
+  return keys.filter(key => {
+    const o = owner[key];
+    if (!o || o.doubt || reviewed.has(key)) return false;
+    return steps.some(m => {
+      const j = m.get(key);
+      return j && (j.keep !== o.keep || (j.keep && o.keep && j.step !== o.step));
+    });
+  });
+}
