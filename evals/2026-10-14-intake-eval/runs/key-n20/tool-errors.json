@@ -1,0 +1,6 @@
+[
+  {
+    "label": "judge:haiku:medium:V1:n20:b04",
+    "text": "Output does not match required schema: /results/15: must have required property 'too_close'"
+  }
+]
