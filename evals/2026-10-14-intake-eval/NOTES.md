@@ -62,3 +62,4 @@ Every model costs more than 1.5 times its plan estimate at `high` (Opus 1.95, So
 | haiku xhigh | 42.9% | 44.1% | 78.7% | 0.0024 | 26.9 |
 
 - 2026-10-27, Task 5 (#54), the leading efforts (plan "Effort levels": the best exact difficulty step, or the cheaper one within 5 points), under rule `P`; rule `K3` gives the same: **Opus `high`** (52.7%; `xhigh` is within 5 points but costs more, `medium` is 8.1 points below). **Sonnet `medium`** (all 3 are within 5 points of `high`'s 48.9%; `medium` is the cheapest). **Haiku `medium`** (all 3 are within 5 points of `xhigh`'s 42.9%; `medium` is the cheapest). The batch-size test shows that one model can move 14 points between two runs, so these small differences can be noise. The repeat run of Task 6 measures that noise. Task 5 in all: agents 335, USD 47.09 (plan 56).
+- 2026-10-27, owner ruling on batch size: later judge runs use calls of 20. The plan records it in "Rulings of 2026-10-27".

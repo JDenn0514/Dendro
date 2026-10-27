@@ -519,6 +519,10 @@ The effort runs add 138 agents and about USD 18.5 to the spec's plan. The tracer
 1. **Batch size.** Test calls of 20 photos against calls of 10: V1 at `high`, all 3 models, on the key (Task 5, part 1b). The owner rules on the result before Task 6.
 2. **The yes for Tasks 5 and 6.** Given at the tracer numbers: Task 5 USD 56 with the batch-size test, Task 6 USD 36.
 
+## Rulings of 2026-10-27
+
+1. **Batch size.** Calls of 20 were as accurate as calls of 10 for all 3 models (Task 5, `NOTES.md`). Ruling: later judge runs use calls of 20.
+
 ## Later plans
 
 - **Phase 4, the pipeline and the skills.** The data model, the validator, the CLI audit commands, and the photo-check and content-run skills (spec Part 4). It moves `lib/step.mjs` into `app/logic/`. A separate plan.
