@@ -14,6 +14,7 @@ const config = {
   variants: ['V1', 'V2'],
   model_opt: { opus: 'claude-opus-5-5', sonnet: 'claude-sonnet-5-5', haiku: 'claude-haiku-5-5' },
   depth_features: { PLHI: { fruit: 'two_heads' } },
+  leading: { variant: 'V1', batch: 20, effort: { opus: 'high', sonnet: 'medium', haiku: 'medium' } },
 };
 let order = 0;
 const cell = (target, part, n, species = `${target} species`) => ({
@@ -96,6 +97,24 @@ test('key-effort plan: the named variant at medium and xhigh for each model', ()
   assert.ok(jobs.every(j => j.variant === 'V2'));
   assert.throws(() => buildJobs(POOL, 'key-effort', config), /needs --variant/);
   assert.throws(() => buildJobs(POOL, 'nope', config), /unknown plan nope/);
+});
+
+test('key-n20 plan: the leading variant in calls of 20, for each model whose leading effort is not high', () => {
+  const jobs = buildJobs(POOL, 'key-n20', config);
+  assert.deepEqual([...new Set(jobs.map(j => `${j.model}:${j.effort}`))], ['sonnet:medium', 'haiku:medium']);
+  assert.ok(jobs.every(j => j.batch === 20 && j.variant === 'V1'));
+  assert.equal(jobs[0].label, 'judge:sonnet:medium:V1:n20:b01');
+  assert.deepEqual(keysOf(jobs.filter(j => j.model === 'haiku')), POOL.cells.flatMap(c => c.photos.map(p => p.key)));
+  // Opus leads at high, and key-batch20 already holds that set-up.
+  const b20 = new Set(buildJobs(POOL, 'key-batch20', config).map(j => j.label));
+  assert.ok(jobs.every(j => !b20.has(j.label)));
+});
+
+test('key-repeat plan: the same jobs as the first calls-of-20 run of each leading set-up', () => {
+  const jobs = buildJobs(POOL, 'key-repeat', config);
+  assert.equal(jobs.length, 3 * 3);
+  const first = [...buildJobs(POOL, 'key-batch20', config).filter(j => j.model === 'opus'), ...buildJobs(POOL, 'key-n20', config)];
+  assert.deepEqual(jobs.map(j => [j.label, j.prompt, j.effort]), first.map(j => [j.label, j.prompt, j.effort]));
 });
 
 test('judge prompts list the 440 px copies, the tree, and the source name, and nothing of the owner', () => {

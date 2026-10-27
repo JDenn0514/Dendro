@@ -522,6 +522,7 @@ The effort runs add 138 agents and about USD 18.5 to the spec's plan. The tracer
 ## Rulings of 2026-10-27
 
 1. **Batch size.** Calls of 20 were as accurate as calls of 10 for all 3 models (Task 5, `NOTES.md`). Ruling: later judge runs use calls of 20.
+2. **The repeat run (Task 6).** Each leading set-up gets two runs in calls of 20, so the repeat compares two runs at the call size that later runs use. Opus `high` compares with part 1b (`key-batch20`) and one new run. Sonnet and Haiku `medium` get two new runs (`key-n20`, `key-repeat`). 55 agents, about USD 9 (7 to 13). The ranking jobs use the first calls-of-20 run of each leading set-up.
 
 ## Later plans
 

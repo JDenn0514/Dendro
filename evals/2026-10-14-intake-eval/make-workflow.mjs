@@ -1,4 +1,4 @@
-// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-batch20|key-effort [--variant V1|V2]
+// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-batch20|key-effort|key-n20|key-repeat [--variant V1|V2]
 // Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/<plan>.js, and wf/<plan>.jobs.json.
 // The workflow is named intake-eval-<plan>. collect.mjs --name <plan> then writes runs/<plan>/.
 // Prints the agent count per kind, model, and effort, and the USD estimate of estimate.mjs.
@@ -79,6 +79,12 @@ export function buildJobs(pool, plan, config, opts = {}) {
   } else if (plan === 'key-effort') {
     if (!config.variants.includes(opts.variant)) throw new Error('the key-effort plan needs --variant V1 or V2');
     for (const m of MODELS) for (const e of offHigh) judge(all, m, e, opts.variant);
+  } else if (plan === 'key-n20' || plan === 'key-repeat') {
+    // Owner ruling 2026-10-27: later runs use calls of 20. config.leading holds the leading variant and effort
+    // of Task 5. key-n20 runs each leading set-up that has no calls-of-20 run yet (key-batch20 ran high).
+    // key-repeat runs every leading set-up again, with the same labels and prompts: analyze.mjs --repeat.
+    const { variant, batch, effort } = config.leading;
+    for (const m of MODELS) if (plan === 'key-repeat' || effort[m] !== 'high') judge(all, m, effort[m], variant, batch);
   } else throw new Error(`unknown plan ${plan}`);
   return jobs;
 }

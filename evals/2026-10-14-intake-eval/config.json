@@ -23,5 +23,6 @@
     "Q442": { "1": 4, "2": 4, "3": 2, "usual_look_min": 2 }
   },
   "headline_quota": "Q332",
-  "depth_features": { "PLHI": { "fruit": "two_heads" } }
+  "depth_features": { "PLHI": { "fruit": "two_heads" } },
+  "leading": { "variant": "V1", "batch": 20, "effort": { "opus": "high", "sonnet": "medium", "haiku": "medium" } }
 }
