@@ -1,6 +1,6 @@
 // The review sheet: a private artifact page that shows photos side by side with captions, and saves one
 // answer per photo to the artifact's db (plan, Global constraints). Pure: returns the page HTML.
-// sheet: { title, intro: [paragraphs], collection, choices: [{ value, label }], groups: [{ id, heading, text, items }] }.
+// sheet: { title, intro: [paragraphs], legend?: [[term, text]], collection, choices: [{ value, label }], groups: [{ id, heading, text, items }] }.
 // item: { id, img, key, chips: [text], table: { cols, rows: [[label, ...cells]] }, lines: [text], notes: [[who, text]], source }.
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
@@ -25,6 +25,7 @@ ${it.notes.length ? `<details><summary>Judge notes</summary>${it.notes.map(([w, 
 
 export function reviewSheet(sheet) {
   const total = sheet.groups.reduce((s, g) => s + g.items.length, 0);
+  const legend = sheet.legend ? `<dl>${sheet.legend.map(([t, d]) => `<dt>${esc(t)}</dt><dd>${esc(d)}</dd>`).join('')}</dl>` : '';
   return `<title>${esc(sheet.title)}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
@@ -43,7 +44,11 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 h1, h2 { font-family: var(--display); font-weight: 600; text-wrap: balance; margin: 0; }
 h1 { font-size: 1.7rem; } h2 { font-size: 1.25rem; }
 .intro { display: grid; gap: 10px; max-width: 68ch; } .intro p, section > p { margin: 0; }
-.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 8px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); padding-block: 8px; font-variant-numeric: tabular-nums; color: var(--muted); display: grid; gap: 6px; }
+.legend summary { color: var(--accent); font-weight: 500; }
+.intro .legend dl { max-height: none; }
+.legend dl { margin: 6px 0 0; display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; color: var(--fg); max-width: 72ch; max-height: 50vh; overflow-y: auto; }
+.legend dt { font-weight: 600; } .legend dd { margin: 0; }
 section { display: grid; gap: 12px; } section > p { max-width: 68ch; color: var(--muted); }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 14px; }
 @media (max-width: 640px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; } body { font-size: 13px; } }
@@ -67,8 +72,8 @@ button:disabled { cursor: default; opacity: 0.6; }
 .state { margin: 0; font-size: 0.78rem; color: var(--muted); min-height: 1.2em; }
 </style>
 <div class="wrap">
-<header class="intro"><h1>${esc(sheet.title)}</h1>${sheet.intro.map(p => `<p>${esc(p)}</p>`).join('')}</header>
-<div class="bar" id="bar">${total} photos. Connecting to the saved answers…</div>
+<header class="intro"><h1>${esc(sheet.title)}</h1>${sheet.intro.map(p => `<p>${esc(p)}</p>`).join('')}${sheet.legend ? `<div class="legend">${legend}</div>` : ''}</header>
+<div class="bar"><span id="bar">${total} photos. Connecting to the saved answers…</span>${sheet.legend ? `<details class="legend"><summary>What the steps mean</summary>${legend}</details>` : ''}</div>
 ${sheet.groups.map(g => `<section id="${esc(g.id)}"><h2>${esc(g.heading)} (${g.items.length})</h2><p>${esc(g.text)}</p><div class="grid">${g.items.map(it => card(it, sheet.choices)).join('\n')}</div></section>`).join('\n')}
 </div>
 <script>
