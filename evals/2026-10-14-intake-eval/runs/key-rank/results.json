@@ -13,6 +13,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-leaf-05",
@@ -73,6 +74,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-bark-02",
@@ -145,6 +147,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-fruit-02",
@@ -213,6 +216,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-leaf-02",
@@ -270,6 +274,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-bark",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-bark-02",
@@ -342,6 +347,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-fruit-02",
@@ -395,6 +401,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-leaf",
+      "method": "R",
       "groups": {
         "2": [
           "QUAL-leaf-01",
@@ -451,6 +458,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-bark",
+      "method": "R",
       "groups": {
         "1": [
           "QUAL-bark-01",
@@ -501,6 +509,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "QUAL-fruit-01",
@@ -557,6 +566,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-leaf",
+      "method": "R",
       "groups": {
         "2": [
           "QURU-leaf-09"
@@ -619,6 +629,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "QURU-bark-01",
@@ -663,6 +674,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "QURU-fruit-01",
@@ -713,6 +725,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-leaf-04",
@@ -773,6 +786,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-bark-05",
@@ -845,6 +859,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-fruit-01",
@@ -913,6 +928,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "PLOC-leaf-08",
@@ -985,6 +1001,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-bark",
+      "method": "R",
       "groups": {
         "2": [
           "PLOC-bark-03",
@@ -1044,6 +1061,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "PLOC-fruit-02",
@@ -1115,6 +1133,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-leaf-08"
@@ -1172,6 +1191,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-bark",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-bark-01",
@@ -1238,6 +1258,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-fruit-04",
@@ -1307,6 +1328,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-leaf",
+      "method": "FR",
       "groups": {
         "1": [
           "ACRU-leaf-05",
@@ -1358,6 +1380,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-bark",
+      "method": "FR",
       "groups": {
         "1": [
           "ACRU-bark-02",
@@ -1424,6 +1447,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-fruit",
+      "method": "FR",
       "groups": {
         "1": [
           "ACRU-fruit-02",
@@ -1483,6 +1507,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-leaf",
+      "method": "FR",
       "groups": {
         "1": [
           "ACSA3-leaf-05",
@@ -1534,6 +1559,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-bark",
+      "method": "FR",
       "groups": {
         "1": [
           "ACSA3-bark-03",
@@ -1600,6 +1626,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-fruit",
+      "method": "FR",
       "groups": {
         "1": [
           "ACSA3-fruit-06"
@@ -1650,6 +1677,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-leaf",
+      "method": "FR",
       "groups": {
         "2": [
           "QUAL-leaf-01",
@@ -1703,6 +1731,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-bark",
+      "method": "FR",
       "groups": {
         "1": [
           "QURU-bark-01"
@@ -1744,6 +1773,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-fruit",
+      "method": "FR",
       "groups": {
         "1": [
           "QURU-fruit-01",
@@ -1791,6 +1821,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-leaf",
+      "method": "FR",
       "groups": {
         "2": [
           "LITU-leaf-10"
@@ -1832,6 +1863,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-bark",
+      "method": "FR",
       "groups": {
         "1": [
           "LITU-bark-05",
@@ -1895,6 +1927,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-fruit",
+      "method": "FR",
       "groups": {
         "1": [
           "LITU-fruit-01",
@@ -1960,6 +1993,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-leaf-02",
@@ -2026,6 +2060,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-bark-02",
@@ -2098,6 +2133,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-fruit-02",
@@ -2160,6 +2196,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-leaf-05",
@@ -2223,6 +2260,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-bark",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-bark-02",
@@ -2295,6 +2333,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-fruit-02",
@@ -2348,6 +2387,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "QUAL-leaf-01"
@@ -2408,6 +2448,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-bark",
+      "method": "R",
       "groups": {
         "1": [
           "QUAL-bark-01",
@@ -2458,6 +2499,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "QUAL-fruit-01",
@@ -2514,6 +2556,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "QURU-leaf-02"
@@ -2576,6 +2619,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "QURU-bark-01",
@@ -2620,6 +2664,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "QURU-fruit-01",
@@ -2670,6 +2715,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-leaf-04",
@@ -2723,6 +2769,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-bark-05",
@@ -2789,6 +2836,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-fruit-01",
@@ -2851,6 +2899,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "PLOC-leaf-07",
@@ -2923,6 +2972,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-bark",
+      "method": "R",
       "groups": {
         "1": [
           "PLOC-bark-10"
@@ -2983,6 +3033,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "PLOC-fruit-07",
@@ -3054,6 +3105,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-leaf-03",
@@ -3111,6 +3163,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-bark",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-bark-01",
@@ -3177,6 +3230,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-fruit-04",
@@ -3246,6 +3300,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-leaf",
+      "method": "FR",
       "groups": {
         "1": [
           "ACRU-leaf-02",
@@ -3293,6 +3348,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-bark",
+      "method": "FR",
       "groups": {
         "1": [
           "ACRU-bark-02",
@@ -3359,6 +3415,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-fruit",
+      "method": "FR",
       "groups": {
         "1": [
           "ACRU-fruit-02",
@@ -3418,6 +3475,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-leaf",
+      "method": "FR",
       "groups": {
         "1": [
           "ACSA3-leaf-05",
@@ -3465,6 +3523,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-bark",
+      "method": "FR",
       "groups": {
         "1": [
           "ACSA3-bark-06",
@@ -3531,6 +3590,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-fruit",
+      "method": "FR",
       "groups": {
         "1": [
           "ACSA3-fruit-06"
@@ -3581,6 +3641,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-leaf",
+      "method": "FR",
       "groups": {
         "1": [
           "QUAL-leaf-01"
@@ -3638,6 +3699,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-bark",
+      "method": "FR",
       "groups": {
         "1": [
           "QURU-bark-01"
@@ -3679,6 +3741,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-fruit",
+      "method": "FR",
       "groups": {
         "1": [
           "QURU-fruit-01",
@@ -3726,6 +3789,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-bark",
+      "method": "FR",
       "groups": {
         "1": [
           "LITU-bark-05",
@@ -3786,6 +3850,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-leaf-09"
@@ -3840,6 +3905,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-bark-02",
@@ -3906,6 +3972,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACRU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "ACRU-fruit-02",
@@ -3969,6 +4036,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-leaf-11"
@@ -4016,6 +4084,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-bark",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-bark-09",
@@ -4082,6 +4151,7 @@
       "variant": null,
       "batch": null,
       "cell": "ACSA3-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "ACSA3-fruit-01",
@@ -4128,6 +4198,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-leaf",
+      "method": "R",
       "groups": {
         "2": [
           "QUAL-leaf-01",
@@ -4181,6 +4252,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-bark",
+      "method": "R",
       "groups": {
         "1": [
           "QUAL-bark-01",
@@ -4231,6 +4303,7 @@
       "variant": null,
       "batch": null,
       "cell": "QUAL-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "QUAL-fruit-01",
@@ -4287,6 +4360,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "QURU-leaf-02",
@@ -4353,6 +4427,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "QURU-bark-01"
@@ -4394,6 +4469,7 @@
       "variant": null,
       "batch": null,
       "cell": "QURU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "QURU-fruit-03"
@@ -4445,6 +4521,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-leaf-01",
@@ -4485,6 +4562,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-bark",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-bark-05",
@@ -4544,6 +4622,7 @@
       "variant": null,
       "batch": null,
       "cell": "LITU-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "LITU-fruit-08"
@@ -4609,6 +4688,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "PLOC-leaf-07",
@@ -4681,6 +4761,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-bark",
+      "method": "R",
       "groups": {
         "1": [
           "PLOC-bark-04",
@@ -4747,6 +4828,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLOC-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "PLOC-fruit-02",
@@ -4822,6 +4904,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-leaf",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-leaf-08"
@@ -4879,6 +4962,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-bark",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-bark-01",
@@ -4945,6 +5029,7 @@
       "variant": null,
       "batch": null,
       "cell": "PLHI-fruit",
+      "method": "R",
       "groups": {
         "1": [
           "PLHI-fruit-02",
