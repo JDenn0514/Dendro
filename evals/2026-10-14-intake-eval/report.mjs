@@ -5,6 +5,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { EVAL } from './lib/paths.mjs';
 import { readJson } from './lib/data.mjs';
+import { leadingSetup } from './lib/setups.mjs';
 
 const v1 = readJson(path.join(EVAL, 'tables', 'key', 'table.json'));
 const v2 = readJson(path.join(EVAL, 'tables', 'key-v2', 'table.json'));
@@ -22,7 +23,7 @@ const CLEAN_USD = {
 
 const MODELS = ['opus', 'sonnet', 'haiku'];
 const name = m => m[0].toUpperCase() + m.slice(1);
-const lead = m => `${m}:${frozen.effort[m]}:${frozen.variant}:n${frozen.batch}`;
+const lead = m => leadingSetup({ leading: { variant: frozen.variant, batch: frozen.batch, effort: frozen.effort } }, m);
 const SETUPS = MODELS.flatMap(m => [...config.efforts.map(e => `${m}:${e}:V1`), lead(m)]);
 const rule = frozen.rule, Q = config.headline_quota;
 const row = (t, s) => t.setups.find(r => r.id === `${s}/${rule}`);
@@ -54,7 +55,7 @@ const haiku = pts.find(p => p.s === lead('haiku')), opus = pts.find(p => p.s ===
 const parts = [
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="'Roboto Condensed', 'Arial Narrow', 'Helvetica Neue', Arial, sans-serif" style="font-variant-numeric: tabular-nums">`,
   `<rect width="${W}" height="${H}" fill="${C.ground}"/>`,
-  t(24, 40, `On key v2, Haiku comes within ${Math.round((opus.exact - haiku.exact) * 100)} points of Opus at a tenth of the cost`, { fill: C.ink, size: 22, weight: 700 }),
+  t(24, 40, `On key v2, Haiku comes within ${Math.round((opus.exact - haiku.exact) * 100)} points of Opus at 1/${(opus.usdKept / haiku.usdKept).toFixed(0)} of the cost`, { fill: C.ink, size: 22, weight: 700 }),
   t(24, 66, 'Each dot is one judge set-up, V1, rule P. Height: the share of photos that both keep where the judge gives the', { fill: C.sub, size: 14 }),
   t(24, 84, "owner's exact difficulty step. Across: USD per kept photo at quota Q332, judging every key photo (log scale).", { fill: C.sub, size: 14 }),
   t(24, 102, 'Blue: the 3 frozen set-ups (high, calls of 20). The pale dot below each is the same set-up on the old key.', { fill: C.sub, size: 14 }),

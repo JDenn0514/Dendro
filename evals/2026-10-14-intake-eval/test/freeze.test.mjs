@@ -25,3 +25,7 @@ test('the check names each file whose hash differs', () => {
   assert.deepEqual(checkFrozen(r, { ...files, 'lib/step.mjs': 'changed' }), ['lib/step.mjs']);
   assert.deepEqual(checkFrozen(r, { 'lib/step.mjs': 'step' }), ['briefs/judge-V1.md', 'lib/schemas.mjs']);
 });
+
+test('the record refuses a variant other than the leading one, because the efforts belong to it', () => {
+  assert.throws(() => frozenRecord(config, { variant: 'V2', rule: 'P' }, { ...files, 'briefs/judge-V2.md': 'b2' }), /leading variant V1/);
+});

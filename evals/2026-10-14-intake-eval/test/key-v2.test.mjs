@@ -24,3 +24,7 @@ test('key v2 refuses a photo in both sheets or not in the key', () => {
   assert.throws(() => keyV2(owner, examples, { photos: [{ key: 'a', label: { keep: true, step: 1 } }] }), /a: on both sheets/);
   assert.throws(() => keyV2(owner, examples, { photos: [{ key: 'zz', label: { keep: true, step: 1 } }] }), /zz: not in the key/);
 });
+
+test('key v2 refuses a photo on both sheets whatever its answer on the examples sheet', () => {
+  assert.throws(() => keyV2(owner, examples, { photos: [{ key: 'd', label: { keep: true, step: 2 } }] }), /d: on both sheets/);
+});

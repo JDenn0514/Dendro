@@ -7,38 +7,14 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
 import { EVAL } from './lib/paths.mjs';
+import { loadKeySteps, MODELS } from './lib/key-steps.mjs';
 import { readJson, writeJson } from './lib/data.mjs';
-import { buildViews } from './lib/views.mjs';
-import { judgeSteps } from './lib/replay.mjs';
 import { KEY_FEATURES } from './lib/step.mjs';
-import { leadingSetup } from './lib/setups.mjs';
 import { gateExamples } from './lib/examples.mjs';
 import { reviewSheet } from './pages/review-sheet.mjs';
 
 const { values: args } = parseArgs({ options: { runs: { type: 'string', default: 'key-batch20' }, answers: { type: 'string' } } });
-const config = readJson(path.join(EVAL, 'config.json'));
-const pools = readJson(path.join(EVAL, 'key', 'pools.json'));
-const runs = args.runs.split(',').map(r => path.join(EVAL, 'runs', r));
-const v = buildViews(runs.flatMap(d => readJson(path.join(d, 'results.json')).jobs), Object.assign({}, ...runs.map(d => readJson(path.join(d, 'tokens.json')))));
-const MODELS = ['opus', 'sonnet', 'haiku'];
-const setups = MODELS.map(m => leadingSetup(config, m));
-for (const s of setups) if (!v.answers[s]) throw new Error(`no answers of ${s} in ${args.runs}`);
-
-// The species pools in key order, as analyze.mjs builds them.
-const byTarget = new Map(), photo = new Map();
-for (const c of pools.cells) for (const p of c.photos) {
-  const x = { ...p, part: p.part ?? c.part, cell: c.cell };
-  if (!byTarget.has(c.target)) byTarget.set(c.target, []);
-  byTarget.get(c.target).push(x);
-  photo.set(p.key, x);
-}
-const steps = setups.map(s => {
-  const out = new Map();
-  for (const [t, ps] of byTarget) for (const [k, r] of judgeSteps(t, [...ps].sort((a, b) => a.n - b.n), v.answers[s], 'P')) out.set(k, r);
-  return out;
-});
-const keys = pools.cells.flatMap(c => c.photos.map(p => p.key));
-const owner = Object.fromEntries(keys.map(k => [k, photo.get(k).owner]));
+const { v, setups, photo, keys, owner, steps } = loadKeySteps(args.runs.split(','));
 const ex = gateExamples(keys, owner, steps);
 
 // Why the code gave its result, from one set-up's answers (lib/step.mjs, rule P).

@@ -10,6 +10,7 @@ export const frozenFiles = variant => ['lib/step.mjs', `briefs/judge-${variant}.
 // files: { <path relative to EVAL>: text }. The efforts and the call size come from config.leading.
 export function frozenRecord(config, { variant, rule }, files) {
   if (!config.variants.includes(variant)) throw new Error(`variant ${variant} is not in config.variants`);
+  if (variant !== config.leading.variant) throw new Error(`variant ${variant} is not the leading variant ${config.leading.variant}, whose efforts config.leading holds`);
   if (!config.rules.includes(rule)) throw new Error(`rule ${rule} is not in config.rules`);
   const sha = {};
   for (const f of frozenFiles(variant)) {
