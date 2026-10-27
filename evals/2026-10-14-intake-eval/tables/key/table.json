@@ -1,5 +1,6 @@
 {
   "set": "key",
+  "labels": "v1",
   "runs": [
     "key-judge",
     "key-batch20",

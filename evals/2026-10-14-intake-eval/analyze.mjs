@@ -1,7 +1,8 @@
-// node analyze.mjs --set key [--runs <run>,<run>] [--repeat <run>]  ->  tables/<set>/table.json, table.md
+// node analyze.mjs --set key [--runs <run>,<run>] [--repeat <run>] [--labels v2]  ->  tables/<set>[-v2]/table.json, table.md
 // Replays methods S, F, R, FR, and CR from the stored answers of the runs and scores them. No tokens.
 // --runs: the runs to read (default: every run in runs/ with jobs of the set). A job label in two runs is a problem.
 // --repeat: second runs of the same set-ups (one or more, comma-separated), for the repeat agreement.
+// --labels v2: score against key v2 (lib/key-v2.mjs), the owner's labels with the later calls on top. Key only.
 import path from 'node:path';
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
@@ -10,9 +11,10 @@ import { readJson, writeJson } from './lib/data.mjs';
 import { buildViews } from './lib/views.mjs';
 import { judgeSteps, replayS, replayF, replayR, replayFR, replayCR } from './lib/replay.mjs';
 import { methodSetups, filterOf as filterFor } from './lib/setups.mjs';
+import { keyV2 } from './lib/key-v2.mjs';
 import { agreement, usualLook, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, gates, shortlist } from './lib/score.mjs';
 
-const { values: args } = parseArgs({ options: { set: { type: 'string', default: 'key' }, runs: { type: 'string' }, repeat: { type: 'string' } } });
+const { values: args } = parseArgs({ options: { set: { type: 'string', default: 'key' }, runs: { type: 'string' }, repeat: { type: 'string' }, labels: { type: 'string' } } });
 const config = readJson(path.join(EVAL, 'config.json'));
 const pools = readJson(path.join(EVAL, args.set, 'pools.json'));
 const problems = [];
@@ -49,7 +51,9 @@ for (const c of pools.cells) {
 }
 for (const s of species) s.photos.sort((a, b) => a.n - b.n || order.get(a.cell) - order.get(b.cell));
 const allPhotos = species.flatMap(s => s.photos);
-const owner = Object.fromEntries(pools.cells.flatMap(c => c.photos.map(p => [p.key, p.owner])));
+let owner = Object.fromEntries(pools.cells.flatMap(c => c.photos.map(p => [p.key, p.owner])));
+if (args.labels && (args.labels !== 'v2' || args.set !== 'key')) throw new Error('--labels takes v2, on the key only');
+if (args.labels) owner = keyV2(owner, readJson(path.join(EVAL, 'key', 'gate-examples.json')), readJson(path.join(EVAL, 'key', 'relabel.json'))).owner;
 const best = Object.fromEntries(pools.cells.filter(c => c.best).map(c => [c.cell, c.best]));
 
 // Usual look on the key: the owner kept the agent's value on every photo of the picks file.
@@ -204,15 +208,15 @@ if (args.repeat) {
 
 const doubt = Object.fromEntries(setups.map(s => [s, speciesDoubt(allPhotos.filter(p => p.key in v.answers[s]), v.answers[s])]));
 
-const outDir = path.join(EVAL, 'tables', args.set);
+const outDir = path.join(EVAL, 'tables', args.labels ? `${args.set}-${args.labels}` : args.set);
 fs.mkdirSync(outDir, { recursive: true });
 writeJson(path.join(outDir, 'table.json'), {
-  set: args.set, runs: runNames, repeat_run: args.repeat ?? null, problems, checks: v.checks, no_answer: v.noAnswer, unread: v.unread,
+  set: args.set, labels: args.labels ?? 'v1', runs: runNames, repeat_run: args.repeat ?? null, problems, checks: v.checks, no_answer: v.noAnswer, unread: v.unread,
   lines, setups: setupRows, methods: methodRows, shortlist: shortBy, batch, repeat, species_doubt: doubt,
 });
 
 const md = [
-  `# Intake eval: the ${args.set} table`,
+  `# Intake eval: the ${args.set} table${args.labels ? `, labels ${args.labels}` : ''}`,
   '',
   `Runs: ${runNames.join(', ')}.${args.repeat ? ` Repeat run: ${args.repeat}.` : ''} Written by \`analyze.mjs\`. The full numbers, the kept photos of each method, and the source yield are in \`table.json\`.`,
   '',

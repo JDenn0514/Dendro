@@ -1,0 +1,1284 @@
+{
+  "setups": [
+    "opus:high:V1:n20",
+    "sonnet:high:V1:n20",
+    "haiku:high:V1:n20"
+  ],
+  "rule": "P",
+  "photos": [
+    {
+      "key": "ACRU-leaf-01",
+      "code": "p021",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:19:42.459Z"
+    },
+    {
+      "key": "ACRU-leaf-02",
+      "code": "p136",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:35.855Z"
+    },
+    {
+      "key": "ACRU-leaf-05",
+      "code": "p205",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:32.509Z"
+    },
+    {
+      "key": "ACRU-leaf-07",
+      "code": "p112",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:19:44.592Z"
+    },
+    {
+      "key": "ACRU-leaf-08",
+      "code": "p162",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:27.993Z"
+    },
+    {
+      "key": "ACRU-leaf-10",
+      "code": "p182",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": false,
+        "step": null
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:34.217Z"
+    },
+    {
+      "key": "ACRU-leaf-11",
+      "code": "p141",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:30.492Z"
+    },
+    {
+      "key": "ACRU-bark-01",
+      "code": "p158",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:50.413Z"
+    },
+    {
+      "key": "ACRU-bark-02",
+      "code": "p116",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:00.488Z"
+    },
+    {
+      "key": "ACRU-bark-06",
+      "code": "p022",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:54.780Z"
+    },
+    {
+      "key": "ACRU-bark-07",
+      "code": "p174",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:02.246Z"
+    },
+    {
+      "key": "ACRU-bark-10",
+      "code": "p139",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:51.296Z"
+    },
+    {
+      "key": "ACRU-bark-11",
+      "code": "p084",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:29:53.855Z"
+    },
+    {
+      "key": "ACRU-fruit-01",
+      "code": "p123",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": false,
+        "step": null
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:06.409Z"
+    },
+    {
+      "key": "ACRU-fruit-05",
+      "code": "p044",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:04.467Z"
+    },
+    {
+      "key": "ACRU-fruit-06",
+      "code": "p003",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:17.584Z"
+    },
+    {
+      "key": "ACRU-fruit-07",
+      "code": "p058",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:20.842Z"
+    },
+    {
+      "key": "ACRU-fruit-08",
+      "code": "p188",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:09.634Z"
+    },
+    {
+      "key": "ACSA3-leaf-01",
+      "code": "p186",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:37.837Z"
+    },
+    {
+      "key": "ACSA3-leaf-02",
+      "code": "p134",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:23.500Z"
+    },
+    {
+      "key": "ACSA3-leaf-03",
+      "code": "p075",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:33.483Z"
+    },
+    {
+      "key": "ACSA3-leaf-04",
+      "code": "p062",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:35.629Z"
+    },
+    {
+      "key": "ACSA3-leaf-07",
+      "code": "p187",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:30.663Z"
+    },
+    {
+      "key": "ACSA3-leaf-08",
+      "code": "p163",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:28.458Z"
+    },
+    {
+      "key": "ACSA3-bark-04",
+      "code": "p153",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": false,
+        "step": null
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:44.171Z"
+    },
+    {
+      "key": "ACSA3-bark-07",
+      "code": "p108",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:41.746Z"
+    },
+    {
+      "key": "ACSA3-fruit-02",
+      "code": "p033",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:46.697Z"
+    },
+    {
+      "key": "ACSA3-fruit-05",
+      "code": "p071",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:30:53.204Z"
+    },
+    {
+      "key": "QUAL-leaf-04",
+      "code": "p093",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:11.865Z"
+    },
+    {
+      "key": "QUAL-leaf-06",
+      "code": "p078",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:31:57.949Z"
+    },
+    {
+      "key": "QUAL-leaf-07",
+      "code": "p035",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:00.507Z"
+    },
+    {
+      "key": "QUAL-bark-03",
+      "code": "p195",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:13.699Z"
+    },
+    {
+      "key": "QUAL-fruit-02",
+      "code": "p148",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:20.407Z"
+    },
+    {
+      "key": "QUAL-fruit-03",
+      "code": "p053",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:18.040Z"
+    },
+    {
+      "key": "QUAL-fruit-04",
+      "code": "p008",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:25.990Z"
+    },
+    {
+      "key": "QUAL-fruit-05",
+      "code": "p124",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:16.807Z"
+    },
+    {
+      "key": "QUAL-fruit-07",
+      "code": "p019",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:23.282Z"
+    },
+    {
+      "key": "QURU-leaf-02",
+      "code": "p045",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:27.982Z"
+    },
+    {
+      "key": "QURU-leaf-04",
+      "code": "p034",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:29.398Z"
+    },
+    {
+      "key": "QURU-leaf-05",
+      "code": "p121",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:49.731Z"
+    },
+    {
+      "key": "QURU-leaf-06",
+      "code": "p064",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:42.615Z"
+    },
+    {
+      "key": "QURU-leaf-08",
+      "code": "p145",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:47.456Z"
+    },
+    {
+      "key": "QURU-leaf-09",
+      "code": "p013",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:44.648Z"
+    },
+    {
+      "key": "QURU-leaf-10",
+      "code": "p099",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:33.557Z"
+    },
+    {
+      "key": "QURU-leaf-11",
+      "code": "p191",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:32.282Z"
+    },
+    {
+      "key": "QURU-leaf-12",
+      "code": "p007",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:37.340Z"
+    },
+    {
+      "key": "QURU-fruit-04",
+      "code": "p208",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:51.823Z"
+    },
+    {
+      "key": "QURU-fruit-05",
+      "code": "p210",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:52.590Z"
+    },
+    {
+      "key": "LITU-leaf-01",
+      "code": "p170",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:03.289Z"
+    },
+    {
+      "key": "LITU-leaf-03",
+      "code": "p066",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:55.715Z"
+    },
+    {
+      "key": "LITU-leaf-06",
+      "code": "p117",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": false,
+        "step": null
+      },
+      "note": null,
+      "at": "2026-10-27T22:32:57.690Z"
+    },
+    {
+      "key": "LITU-leaf-08",
+      "code": "p209",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:00.331Z"
+    },
+    {
+      "key": "LITU-leaf-10",
+      "code": "p107",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": false,
+        "step": null
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:09.831Z"
+    },
+    {
+      "key": "LITU-bark-11",
+      "code": "p041",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:12.689Z"
+    },
+    {
+      "key": "LITU-fruit-01",
+      "code": "p156",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:21.843Z"
+    },
+    {
+      "key": "LITU-fruit-02",
+      "code": "p031",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": "I'm not sure how I'd label this one tbh",
+      "at": "2026-10-27T22:33:44.311Z"
+    },
+    {
+      "key": "LITU-fruit-07",
+      "code": "p132",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:18.964Z"
+    },
+    {
+      "key": "LITU-fruit-09",
+      "code": "p201",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": false,
+        "step": null
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:17.356Z"
+    },
+    {
+      "key": "LITU-fruit-10",
+      "code": "p097",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:22.993Z"
+    },
+    {
+      "key": "LITU-fruit-12",
+      "code": "p100",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:24.993Z"
+    },
+    {
+      "key": "PLOC-leaf-01",
+      "code": "p039",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:56.618Z"
+    },
+    {
+      "key": "PLOC-leaf-02",
+      "code": "p190",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:50.126Z"
+    },
+    {
+      "key": "PLOC-leaf-03",
+      "code": "p073",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:55.018Z"
+    },
+    {
+      "key": "PLOC-leaf-04",
+      "code": "p146",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:48.351Z"
+    },
+    {
+      "key": "PLOC-leaf-05",
+      "code": "p061",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:02.914Z"
+    },
+    {
+      "key": "PLOC-leaf-07",
+      "code": "p138",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:46.302Z"
+    },
+    {
+      "key": "PLOC-leaf-10",
+      "code": "p086",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:33:44.401Z"
+    },
+    {
+      "key": "PLOC-bark-04",
+      "code": "p051",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": false,
+        "step": null
+      },
+      "note": "Too many branches in the way",
+      "at": "2026-10-27T22:34:15.689Z"
+    },
+    {
+      "key": "PLOC-bark-05",
+      "code": "p012",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": false,
+        "step": null
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:18.047Z"
+    },
+    {
+      "key": "PLOC-bark-06",
+      "code": "p180",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:15.872Z"
+    },
+    {
+      "key": "PLOC-bark-10",
+      "code": "p185",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:04.990Z"
+    },
+    {
+      "key": "PLOC-bark-11",
+      "code": "p085",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:23.255Z"
+    },
+    {
+      "key": "PLOC-fruit-01",
+      "code": "p004",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:38.505Z"
+    },
+    {
+      "key": "PLOC-fruit-02",
+      "code": "p197",
+      "before": {
+        "keep": true,
+        "step": 1
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:36.072Z"
+    },
+    {
+      "key": "PLOC-fruit-03",
+      "code": "p080",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:27.856Z"
+    },
+    {
+      "key": "PLOC-fruit-09",
+      "code": "p038",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:33.230Z"
+    },
+    {
+      "key": "PLOC-fruit-10",
+      "code": "p023",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:39.805Z"
+    },
+    {
+      "key": "PLOC-fruit-11",
+      "code": "p161",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:35.147Z"
+    },
+    {
+      "key": "PLHI-leaf-01",
+      "code": "p083",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:51.071Z"
+    },
+    {
+      "key": "PLHI-leaf-06",
+      "code": "p167",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:45.888Z"
+    },
+    {
+      "key": "PLHI-leaf-07",
+      "code": "p110",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:49.021Z"
+    },
+    {
+      "key": "PLHI-leaf-09",
+      "code": "p020",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:47.388Z"
+    },
+    {
+      "key": "PLHI-bark-05",
+      "code": "p128",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:57.888Z"
+    },
+    {
+      "key": "PLHI-bark-06",
+      "code": "p203",
+      "before": {
+        "keep": true,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:58.830Z"
+    },
+    {
+      "key": "PLHI-bark-10",
+      "code": "p101",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:53.321Z"
+    },
+    {
+      "key": "PLHI-bark-12",
+      "code": "p149",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:34:55.488Z"
+    },
+    {
+      "key": "PLHI-fruit-01",
+      "code": "p164",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 2
+      },
+      "note": null,
+      "at": "2026-10-27T22:35:04.179Z"
+    },
+    {
+      "key": "PLHI-fruit-02",
+      "code": "p152",
+      "before": {
+        "keep": false,
+        "step": 3
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:35:05.538Z"
+    },
+    {
+      "key": "PLHI-fruit-03",
+      "code": "p046",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 1
+      },
+      "note": null,
+      "at": "2026-10-27T22:35:12.446Z"
+    },
+    {
+      "key": "PLHI-fruit-07",
+      "code": "p005",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:35:08.238Z"
+    },
+    {
+      "key": "PLHI-fruit-08",
+      "code": "p176",
+      "before": {
+        "keep": true,
+        "step": 2
+      },
+      "label": {
+        "keep": true,
+        "step": 3
+      },
+      "note": null,
+      "at": "2026-10-27T22:35:09.996Z"
+    }
+  ]
+}
