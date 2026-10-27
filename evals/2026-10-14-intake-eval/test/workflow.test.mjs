@@ -117,6 +117,27 @@ test('key-repeat plan: the same jobs as the first calls-of-20 run of each leadin
   assert.deepEqual(jobs.map(j => [j.label, j.prompt, j.effort]), first.map(j => [j.label, j.prompt, j.effort]));
 });
 
+test('key-rank plan: R for each model and cell with 2 or more photos to rank; FR only where its set differs from R', () => {
+  // Every photo a plain step 1 answer for every model; Haiku rejects ACRU-leaf-01 only.
+  const ans = Object.fromEntries(POOL.cells.flatMap(c => c.photos.map(p => [p.key, { part: c.part, photo_features: { shape: 'clear', margin: 'clear', texture: 'clear', pattern: 'clear', kind: 'clear' }, whole: true, alone: true, too_close: false, causes: [], reject: [], side: 'upper' }])));
+  const filter = { ...ans, 'ACRU-leaf-01': { ...ans['ACRU-leaf-01'], reject: ['blur'] } };
+  const jobs = buildJobs(POOL, 'key-rank', config, { answers: { opus: ans, sonnet: ans, haiku: ans }, filter });
+  const r = jobs.filter(j => j.method === 'R'), fr = jobs.filter(j => j.method === 'FR');
+  assert.equal(r.length, 3 * 6);
+  assert.deepEqual(fr.map(j => j.label), ['rank:opus:high:FR:ACRU-leaf', 'rank:sonnet:high:FR:ACRU-leaf']);
+  assert.ok(!fr[0].keys.includes('ACRU-leaf-01'));
+  const one = r.find(j => j.label === 'rank:opus:high:ACRU-leaf');
+  assert.deepEqual(Object.keys(one.groups), ['1']);
+  assert.equal(one.keys.length, 13);
+  assert.ok(jobs.every(j => j.kind === 'rank' && j.effort === 'high' && j.schema === 'RANK' && j.model_opt === config.model_opt[j.model]));
+  // R and FR sheets of one cell do not share a file.
+  assert.ok(fr[0].sheets.every(s => !one.sheets.some(x => x.file === s.file)));
+  assert.match(one.prompt, /group "1": ACRU-leaf-01, /);
+  // ACRU and PLHI share no genus, so no prompt has a group line.
+  assert.ok(jobs.every(j => !j.prompt.includes('Group line')));
+  assert.throws(() => buildJobs(POOL, 'key-rank', config), /needs the judge answers/);
+});
+
 test('judge prompts list the 440 px copies, the tree, and the source name, and nothing of the owner', () => {
   const jobs = buildJobs(POOL, 'key-judge', config);
   const j = jobs.find(x => x.label === 'judge:opus:high:V1:b01');

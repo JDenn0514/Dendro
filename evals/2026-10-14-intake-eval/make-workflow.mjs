@@ -1,4 +1,5 @@
-// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-batch20|key-effort|key-n20|key-repeat [--variant V1|V2]
+// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-batch20|key-effort|key-n20|key-repeat|key-rank [--variant V1|V2]
+//   key-rank: [--runs key-batch20,key-n20] names the runs that hold the first calls-of-20 answers of each leading set-up.
 // Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/<plan>.js, and wf/<plan>.jobs.json.
 // The workflow is named intake-eval-<plan>. collect.mjs --name <plan> then writes runs/<plan>/.
 // Prints the agent count per kind, model, and effort, and the USD estimate of estimate.mjs.
@@ -12,7 +13,9 @@ import { SCHEMAS } from './lib/schemas.mjs';
 import { extractChecks, briefJudge, briefRank, promptJudge, promptCheck, promptRank } from './lib/prompts.mjs';
 import { mulberry32, shuffle } from './lib/seed.mjs';
 import { sheetsFor, PER_SHEET } from './lib/sheet.mjs';
+import { rankSets, groupLine } from './lib/rank-jobs.mjs';
 import { estimateJobs, printEstimate } from './estimate.mjs';
+import { buildViews } from './lib/views.mjs';
 
 export const MODELS = ['opus', 'sonnet', 'haiku'];
 const BATCH = 10;
@@ -50,11 +53,13 @@ export function buildJobs(pool, plan, config, opts = {}) {
       jobs.push({ label: `judge:${m}:${effort}:${variant}${tag}:b${n}`, ...base('judge', m, effort), variant, batch: size, keys: b.map(p => p.key), codes: codes(b), schema: 'JUDGE', prompt: promptJudge(shown.map(line), brief(`judge-${variant}`)) });
     }
   };
-  const rank = (m, c, groups, groupLine) => {
-    const prefix = g => (g === 'all' ? 'all' : `${m}-${g}`);
+  // method: 'R', or 'FR' for a ranking of the set left after Haiku's reject pass (views.mjs files it under :FR).
+  const rank = (m, c, groups, groupLine, method = 'R') => {
+    const tag = method === 'FR' ? 'FR' : '';
+    const prefix = g => (g === 'all' ? 'all' : `${m}${tag}-${g}`);
     const sheets = Object.entries(groups).flatMap(([g, keys]) => sheetsFor(EVAL, pool.set, c.cell, prefix(g), keys));
     jobs.push({
-      label: `rank:${m}:${config.rank_effort}:${c.cell}`, ...base('rank', m, config.rank_effort), cell: c.cell, groups,
+      label: `rank:${m}:${config.rank_effort}:${tag ? 'FR:' : ''}${c.cell}`, ...base('rank', m, config.rank_effort), method, cell: c.cell, groups,
       keys: Object.values(groups).flat(), sheets, schema: 'RANK',
       prompt: promptRank(c, groups, sheets.map(s => s.file), brief('rank'), groupLine),
     });
@@ -85,6 +90,20 @@ export function buildJobs(pool, plan, config, opts = {}) {
     // key-repeat runs every leading set-up again, with the same labels and prompts: analyze.mjs --repeat.
     const { variant, batch, effort } = config.leading;
     for (const m of MODELS) if (plan === 'key-repeat' || effort[m] !== 'high') judge(all, m, effort[m], variant, batch);
+  } else if (plan === 'key-rank') {
+    // opts.answers: { <model>: answers } of each model's leading set-up. opts.filter: Haiku's leading answers.
+    // FR runs for Opus and Sonnet only, and only where its set differs from R's (plan choice 10).
+    if (!opts.answers || !opts.filter) throw new Error('the key-rank plan needs the judge answers of each leading set-up');
+    const cellOf = name => pool.cells.find(c => c.cell === name);
+    for (const m of MODELS) {
+      const r = rankSets(pool, opts.answers[m]);
+      for (const [cell, groups] of Object.entries(r)) rank(m, cellOf(cell), groups, groupLine(pool, cell, opts.answers[m]));
+      if (m === 'haiku') continue;
+      const same = (a, b) => JSON.stringify(Object.values(a ?? {}).flat().sort()) === JSON.stringify(Object.values(b ?? {}).flat().sort());
+      for (const [cell, groups] of Object.entries(rankSets(pool, opts.answers[m], opts.filter))) {
+        if (!same(groups, r[cell])) rank(m, cellOf(cell), groups, groupLine(pool, cell, opts.answers[m]), 'FR');
+      }
+    }
   } else throw new Error(`unknown plan ${plan}`);
   return jobs;
 }
@@ -119,7 +138,21 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const config = readJson(path.join(EVAL, 'config.json'));
   const pool = readJson(path.join(EVAL, 'key', 'pools.json'));
   writeBriefs();
-  const jobs = buildJobs(pool, plan, config, { variant: opt('--variant') });
+  const opts = { variant: opt('--variant') };
+  if (plan === 'key-rank') {
+    const runs = (opt('--runs') ?? 'key-batch20,key-n20').split(',');
+    const all = runs.map(r => path.join(EVAL, 'runs', r));
+    const v = buildViews(all.flatMap(d => readJson(path.join(d, 'results.json')).jobs), Object.assign({}, ...all.map(d => readJson(path.join(d, 'tokens.json')))));
+    const { variant, batch, effort } = config.leading;
+    const setup = m => `${m}:${effort[m]}:${variant}:n${batch}`;
+    opts.answers = Object.fromEntries(MODELS.map(m => {
+      if (!v.answers[setup(m)]) throw new Error(`no answers of ${setup(m)} in runs ${runs.join(', ')}`);
+      return [m, v.answers[setup(m)]];
+    }));
+    opts.filter = opts.answers.haiku;
+    console.log(`answers: ${MODELS.map(setup).join(', ')} | problems in the runs: ${v.problems.length}`);
+  }
+  const jobs = buildJobs(pool, plan, config, opts);
   fs.mkdirSync(path.join(EVAL, 'wf'), { recursive: true });
   fs.writeFileSync(path.join(EVAL, 'wf', `${name}.js`), renderScript(name, jobs));
   writeJson(path.join(EVAL, 'wf', `${name}.jobs.json`), jobs);
