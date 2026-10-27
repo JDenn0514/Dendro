@@ -1,0 +1,4591 @@
+[
+  {
+    "label": "rank:opus:high:ACRU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-leaf",
+    "groups": {
+      "1": [
+        "ACRU-leaf-05",
+        "ACRU-leaf-09"
+      ],
+      "2": [
+        "ACRU-leaf-02"
+      ],
+      "3": [
+        "ACRU-leaf-01",
+        "ACRU-leaf-03",
+        "ACRU-leaf-06",
+        "ACRU-leaf-08"
+      ]
+    },
+    "keys": [
+      "ACRU-leaf-05",
+      "ACRU-leaf-09",
+      "ACRU-leaf-02",
+      "ACRU-leaf-01",
+      "ACRU-leaf-03",
+      "ACRU-leaf-06",
+      "ACRU-leaf-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/opus-1-1.jpg",
+        "keys": [
+          "ACRU-leaf-05",
+          "ACRU-leaf-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/opus-2-1.jpg",
+        "keys": [
+          "ACRU-leaf-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/opus-3-1.jpg",
+        "keys": [
+          "ACRU-leaf-01",
+          "ACRU-leaf-03",
+          "ACRU-leaf-06",
+          "ACRU-leaf-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/opus-3-1.jpg\nGroups:\n- group \"1\": ACRU-leaf-05, ACRU-leaf-09\n- group \"2\": ACRU-leaf-02\n- group \"3\": ACRU-leaf-01, ACRU-leaf-03, ACRU-leaf-06, ACRU-leaf-08"
+  },
+  {
+    "label": "rank:opus:high:ACRU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-bark",
+    "groups": {
+      "1": [
+        "ACRU-bark-02",
+        "ACRU-bark-06",
+        "ACRU-bark-07"
+      ],
+      "2": [
+        "ACRU-bark-05",
+        "ACRU-bark-09",
+        "ACRU-bark-10",
+        "ACRU-bark-11"
+      ],
+      "3": [
+        "ACRU-bark-01",
+        "ACRU-bark-04",
+        "ACRU-bark-08",
+        "ACRU-bark-12"
+      ]
+    },
+    "keys": [
+      "ACRU-bark-02",
+      "ACRU-bark-06",
+      "ACRU-bark-07",
+      "ACRU-bark-05",
+      "ACRU-bark-09",
+      "ACRU-bark-10",
+      "ACRU-bark-11",
+      "ACRU-bark-01",
+      "ACRU-bark-04",
+      "ACRU-bark-08",
+      "ACRU-bark-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/opus-1-1.jpg",
+        "keys": [
+          "ACRU-bark-02",
+          "ACRU-bark-06",
+          "ACRU-bark-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/opus-2-1.jpg",
+        "keys": [
+          "ACRU-bark-05",
+          "ACRU-bark-09",
+          "ACRU-bark-10",
+          "ACRU-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/opus-3-1.jpg",
+        "keys": [
+          "ACRU-bark-01",
+          "ACRU-bark-04",
+          "ACRU-bark-08",
+          "ACRU-bark-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/opus-3-1.jpg\nGroups:\n- group \"1\": ACRU-bark-02, ACRU-bark-06, ACRU-bark-07\n- group \"2\": ACRU-bark-05, ACRU-bark-09, ACRU-bark-10, ACRU-bark-11\n- group \"3\": ACRU-bark-01, ACRU-bark-04, ACRU-bark-08, ACRU-bark-12"
+  },
+  {
+    "label": "rank:opus:high:ACRU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-fruit",
+    "groups": {
+      "1": [
+        "ACRU-fruit-02",
+        "ACRU-fruit-03",
+        "ACRU-fruit-04",
+        "ACRU-fruit-09",
+        "ACRU-fruit-11"
+      ],
+      "3": [
+        "ACRU-fruit-01",
+        "ACRU-fruit-05",
+        "ACRU-fruit-06",
+        "ACRU-fruit-07",
+        "ACRU-fruit-08",
+        "ACRU-fruit-10"
+      ]
+    },
+    "keys": [
+      "ACRU-fruit-02",
+      "ACRU-fruit-03",
+      "ACRU-fruit-04",
+      "ACRU-fruit-09",
+      "ACRU-fruit-11",
+      "ACRU-fruit-01",
+      "ACRU-fruit-05",
+      "ACRU-fruit-06",
+      "ACRU-fruit-07",
+      "ACRU-fruit-08",
+      "ACRU-fruit-10"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/opus-1-1.jpg",
+        "keys": [
+          "ACRU-fruit-02",
+          "ACRU-fruit-03",
+          "ACRU-fruit-04",
+          "ACRU-fruit-09",
+          "ACRU-fruit-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/opus-3-1.jpg",
+        "keys": [
+          "ACRU-fruit-01",
+          "ACRU-fruit-05",
+          "ACRU-fruit-06",
+          "ACRU-fruit-07",
+          "ACRU-fruit-08",
+          "ACRU-fruit-10"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": ACRU-fruit-02, ACRU-fruit-03, ACRU-fruit-04, ACRU-fruit-09, ACRU-fruit-11\n- group \"3\": ACRU-fruit-01, ACRU-fruit-05, ACRU-fruit-06, ACRU-fruit-07, ACRU-fruit-08, ACRU-fruit-10"
+  },
+  {
+    "label": "rank:opus:high:ACSA3-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-leaf",
+    "groups": {
+      "1": [
+        "ACSA3-leaf-02",
+        "ACSA3-leaf-05",
+        "ACSA3-leaf-11"
+      ],
+      "2": [
+        "ACSA3-leaf-08"
+      ],
+      "3": [
+        "ACSA3-leaf-01",
+        "ACSA3-leaf-03"
+      ]
+    },
+    "keys": [
+      "ACSA3-leaf-02",
+      "ACSA3-leaf-05",
+      "ACSA3-leaf-11",
+      "ACSA3-leaf-08",
+      "ACSA3-leaf-01",
+      "ACSA3-leaf-03"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/opus-1-1.jpg",
+        "keys": [
+          "ACSA3-leaf-02",
+          "ACSA3-leaf-05",
+          "ACSA3-leaf-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/opus-2-1.jpg",
+        "keys": [
+          "ACSA3-leaf-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/opus-3-1.jpg",
+        "keys": [
+          "ACSA3-leaf-01",
+          "ACSA3-leaf-03"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/opus-3-1.jpg\nGroups:\n- group \"1\": ACSA3-leaf-02, ACSA3-leaf-05, ACSA3-leaf-11\n- group \"2\": ACSA3-leaf-08\n- group \"3\": ACSA3-leaf-01, ACSA3-leaf-03"
+  },
+  {
+    "label": "rank:opus:high:ACSA3-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-bark",
+    "groups": {
+      "1": [
+        "ACSA3-bark-02",
+        "ACSA3-bark-03",
+        "ACSA3-bark-06",
+        "ACSA3-bark-07",
+        "ACSA3-bark-09",
+        "ACSA3-bark-10"
+      ],
+      "2": [
+        "ACSA3-bark-08",
+        "ACSA3-bark-11"
+      ],
+      "3": [
+        "ACSA3-bark-01",
+        "ACSA3-bark-04",
+        "ACSA3-bark-12"
+      ]
+    },
+    "keys": [
+      "ACSA3-bark-02",
+      "ACSA3-bark-03",
+      "ACSA3-bark-06",
+      "ACSA3-bark-07",
+      "ACSA3-bark-09",
+      "ACSA3-bark-10",
+      "ACSA3-bark-08",
+      "ACSA3-bark-11",
+      "ACSA3-bark-01",
+      "ACSA3-bark-04",
+      "ACSA3-bark-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/opus-1-1.jpg",
+        "keys": [
+          "ACSA3-bark-02",
+          "ACSA3-bark-03",
+          "ACSA3-bark-06",
+          "ACSA3-bark-07",
+          "ACSA3-bark-09",
+          "ACSA3-bark-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/opus-2-1.jpg",
+        "keys": [
+          "ACSA3-bark-08",
+          "ACSA3-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/opus-3-1.jpg",
+        "keys": [
+          "ACSA3-bark-01",
+          "ACSA3-bark-04",
+          "ACSA3-bark-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/opus-3-1.jpg\nGroups:\n- group \"1\": ACSA3-bark-02, ACSA3-bark-03, ACSA3-bark-06, ACSA3-bark-07, ACSA3-bark-09, ACSA3-bark-10\n- group \"2\": ACSA3-bark-08, ACSA3-bark-11\n- group \"3\": ACSA3-bark-01, ACSA3-bark-04, ACSA3-bark-12"
+  },
+  {
+    "label": "rank:opus:high:ACSA3-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-fruit",
+    "groups": {
+      "1": [
+        "ACSA3-fruit-02",
+        "ACSA3-fruit-06"
+      ],
+      "3": [
+        "ACSA3-fruit-01",
+        "ACSA3-fruit-03",
+        "ACSA3-fruit-04",
+        "ACSA3-fruit-05"
+      ]
+    },
+    "keys": [
+      "ACSA3-fruit-02",
+      "ACSA3-fruit-06",
+      "ACSA3-fruit-01",
+      "ACSA3-fruit-03",
+      "ACSA3-fruit-04",
+      "ACSA3-fruit-05"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/opus-1-1.jpg",
+        "keys": [
+          "ACSA3-fruit-02",
+          "ACSA3-fruit-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/opus-3-1.jpg",
+        "keys": [
+          "ACSA3-fruit-01",
+          "ACSA3-fruit-03",
+          "ACSA3-fruit-04",
+          "ACSA3-fruit-05"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": ACSA3-fruit-02, ACSA3-fruit-06\n- group \"3\": ACSA3-fruit-01, ACSA3-fruit-03, ACSA3-fruit-04, ACSA3-fruit-05"
+  },
+  {
+    "label": "rank:opus:high:QUAL-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-leaf",
+    "groups": {
+      "2": [
+        "QUAL-leaf-01",
+        "QUAL-leaf-05"
+      ],
+      "3": [
+        "QUAL-leaf-02",
+        "QUAL-leaf-03",
+        "QUAL-leaf-04",
+        "QUAL-leaf-06",
+        "QUAL-leaf-07"
+      ]
+    },
+    "keys": [
+      "QUAL-leaf-01",
+      "QUAL-leaf-05",
+      "QUAL-leaf-02",
+      "QUAL-leaf-03",
+      "QUAL-leaf-04",
+      "QUAL-leaf-06",
+      "QUAL-leaf-07"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/opus-2-1.jpg",
+        "keys": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-05"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/opus-3-1.jpg",
+        "keys": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03",
+          "QUAL-leaf-04",
+          "QUAL-leaf-06",
+          "QUAL-leaf-07"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/opus-3-1.jpg\nGroups:\n- group \"2\": QUAL-leaf-01, QUAL-leaf-05\n- group \"3\": QUAL-leaf-02, QUAL-leaf-03, QUAL-leaf-04, QUAL-leaf-06, QUAL-leaf-07"
+  },
+  {
+    "label": "rank:opus:high:QUAL-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-bark",
+    "groups": {
+      "1": [
+        "QUAL-bark-01",
+        "QUAL-bark-02",
+        "QUAL-bark-04",
+        "QUAL-bark-06"
+      ],
+      "3": [
+        "QUAL-bark-03"
+      ]
+    },
+    "keys": [
+      "QUAL-bark-01",
+      "QUAL-bark-02",
+      "QUAL-bark-04",
+      "QUAL-bark-06",
+      "QUAL-bark-03"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/opus-1-1.jpg",
+        "keys": [
+          "QUAL-bark-01",
+          "QUAL-bark-02",
+          "QUAL-bark-04",
+          "QUAL-bark-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/opus-3-1.jpg",
+        "keys": [
+          "QUAL-bark-03"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/opus-3-1.jpg\nGroups:\n- group \"1\": QUAL-bark-01, QUAL-bark-02, QUAL-bark-04, QUAL-bark-06\n- group \"3\": QUAL-bark-03"
+  },
+  {
+    "label": "rank:opus:high:QUAL-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-fruit",
+    "groups": {
+      "1": [
+        "QUAL-fruit-01",
+        "QUAL-fruit-02",
+        "QUAL-fruit-03",
+        "QUAL-fruit-05",
+        "QUAL-fruit-06",
+        "QUAL-fruit-07"
+      ],
+      "3": [
+        "QUAL-fruit-04"
+      ]
+    },
+    "keys": [
+      "QUAL-fruit-01",
+      "QUAL-fruit-02",
+      "QUAL-fruit-03",
+      "QUAL-fruit-05",
+      "QUAL-fruit-06",
+      "QUAL-fruit-07",
+      "QUAL-fruit-04"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/opus-1-1.jpg",
+        "keys": [
+          "QUAL-fruit-01",
+          "QUAL-fruit-02",
+          "QUAL-fruit-03",
+          "QUAL-fruit-05",
+          "QUAL-fruit-06",
+          "QUAL-fruit-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/opus-3-1.jpg",
+        "keys": [
+          "QUAL-fruit-04"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": QUAL-fruit-01, QUAL-fruit-02, QUAL-fruit-03, QUAL-fruit-05, QUAL-fruit-06, QUAL-fruit-07\n- group \"3\": QUAL-fruit-04"
+  },
+  {
+    "label": "rank:opus:high:QURU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-leaf",
+    "groups": {
+      "2": [
+        "QURU-leaf-09"
+      ],
+      "3": [
+        "QURU-leaf-02",
+        "QURU-leaf-04",
+        "QURU-leaf-05",
+        "QURU-leaf-06",
+        "QURU-leaf-08",
+        "QURU-leaf-10",
+        "QURU-leaf-11",
+        "QURU-leaf-12"
+      ]
+    },
+    "keys": [
+      "QURU-leaf-09",
+      "QURU-leaf-02",
+      "QURU-leaf-04",
+      "QURU-leaf-05",
+      "QURU-leaf-06",
+      "QURU-leaf-08",
+      "QURU-leaf-10",
+      "QURU-leaf-11",
+      "QURU-leaf-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/opus-2-1.jpg",
+        "keys": [
+          "QURU-leaf-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/opus-3-1.jpg",
+        "keys": [
+          "QURU-leaf-02",
+          "QURU-leaf-04",
+          "QURU-leaf-05",
+          "QURU-leaf-06",
+          "QURU-leaf-08",
+          "QURU-leaf-10",
+          "QURU-leaf-11",
+          "QURU-leaf-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/opus-3-1.jpg\nGroups:\n- group \"2\": QURU-leaf-09\n- group \"3\": QURU-leaf-02, QURU-leaf-04, QURU-leaf-05, QURU-leaf-06, QURU-leaf-08, QURU-leaf-10, QURU-leaf-11, QURU-leaf-12"
+  },
+  {
+    "label": "rank:opus:high:QURU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-bark",
+    "groups": {
+      "1": [
+        "QURU-bark-01",
+        "QURU-bark-06"
+      ],
+      "3": [
+        "QURU-bark-05"
+      ]
+    },
+    "keys": [
+      "QURU-bark-01",
+      "QURU-bark-06",
+      "QURU-bark-05"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/opus-1-1.jpg",
+        "keys": [
+          "QURU-bark-01",
+          "QURU-bark-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/opus-3-1.jpg",
+        "keys": [
+          "QURU-bark-05"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/opus-3-1.jpg\nGroups:\n- group \"1\": QURU-bark-01, QURU-bark-06\n- group \"3\": QURU-bark-05"
+  },
+  {
+    "label": "rank:opus:high:QURU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-fruit",
+    "groups": {
+      "1": [
+        "QURU-fruit-01",
+        "QURU-fruit-03",
+        "QURU-fruit-04",
+        "QURU-fruit-05"
+      ],
+      "2": [
+        "QURU-fruit-02"
+      ]
+    },
+    "keys": [
+      "QURU-fruit-01",
+      "QURU-fruit-03",
+      "QURU-fruit-04",
+      "QURU-fruit-05",
+      "QURU-fruit-02"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/opus-1-1.jpg",
+        "keys": [
+          "QURU-fruit-01",
+          "QURU-fruit-03",
+          "QURU-fruit-04",
+          "QURU-fruit-05"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/opus-2-1.jpg",
+        "keys": [
+          "QURU-fruit-02"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/opus-2-1.jpg\nGroups:\n- group \"1\": QURU-fruit-01, QURU-fruit-03, QURU-fruit-04, QURU-fruit-05\n- group \"2\": QURU-fruit-02"
+  },
+  {
+    "label": "rank:opus:high:LITU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-leaf",
+    "groups": {
+      "1": [
+        "LITU-leaf-04",
+        "LITU-leaf-07"
+      ],
+      "2": [
+        "LITU-leaf-08",
+        "LITU-leaf-10"
+      ],
+      "3": [
+        "LITU-leaf-01",
+        "LITU-leaf-02",
+        "LITU-leaf-06"
+      ]
+    },
+    "keys": [
+      "LITU-leaf-04",
+      "LITU-leaf-07",
+      "LITU-leaf-08",
+      "LITU-leaf-10",
+      "LITU-leaf-01",
+      "LITU-leaf-02",
+      "LITU-leaf-06"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opus-1-1.jpg",
+        "keys": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opus-2-1.jpg",
+        "keys": [
+          "LITU-leaf-08",
+          "LITU-leaf-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opus-3-1.jpg",
+        "keys": [
+          "LITU-leaf-01",
+          "LITU-leaf-02",
+          "LITU-leaf-06"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opus-3-1.jpg\nGroups:\n- group \"1\": LITU-leaf-04, LITU-leaf-07\n- group \"2\": LITU-leaf-08, LITU-leaf-10\n- group \"3\": LITU-leaf-01, LITU-leaf-02, LITU-leaf-06"
+  },
+  {
+    "label": "rank:opus:high:LITU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-bark",
+    "groups": {
+      "1": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-11"
+      ],
+      "2": [
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10"
+      ],
+      "3": [
+        "LITU-bark-02",
+        "LITU-bark-04",
+        "LITU-bark-09",
+        "LITU-bark-12"
+      ]
+    },
+    "keys": [
+      "LITU-bark-05",
+      "LITU-bark-06",
+      "LITU-bark-08",
+      "LITU-bark-11",
+      "LITU-bark-01",
+      "LITU-bark-07",
+      "LITU-bark-10",
+      "LITU-bark-02",
+      "LITU-bark-04",
+      "LITU-bark-09",
+      "LITU-bark-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opus-1-1.jpg",
+        "keys": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08",
+          "LITU-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opus-2-1.jpg",
+        "keys": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opus-3-1.jpg",
+        "keys": [
+          "LITU-bark-02",
+          "LITU-bark-04",
+          "LITU-bark-09",
+          "LITU-bark-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opus-3-1.jpg\nGroups:\n- group \"1\": LITU-bark-05, LITU-bark-06, LITU-bark-08, LITU-bark-11\n- group \"2\": LITU-bark-01, LITU-bark-07, LITU-bark-10\n- group \"3\": LITU-bark-02, LITU-bark-04, LITU-bark-09, LITU-bark-12"
+  },
+  {
+    "label": "rank:opus:high:LITU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-fruit",
+    "groups": {
+      "1": [
+        "LITU-fruit-01",
+        "LITU-fruit-02",
+        "LITU-fruit-07",
+        "LITU-fruit-10",
+        "LITU-fruit-12"
+      ],
+      "3": [
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-08",
+        "LITU-fruit-09",
+        "LITU-fruit-11"
+      ]
+    },
+    "keys": [
+      "LITU-fruit-01",
+      "LITU-fruit-02",
+      "LITU-fruit-07",
+      "LITU-fruit-10",
+      "LITU-fruit-12",
+      "LITU-fruit-04",
+      "LITU-fruit-05",
+      "LITU-fruit-06",
+      "LITU-fruit-08",
+      "LITU-fruit-09",
+      "LITU-fruit-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/opus-1-1.jpg",
+        "keys": [
+          "LITU-fruit-01",
+          "LITU-fruit-02",
+          "LITU-fruit-07",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/opus-3-1.jpg",
+        "keys": [
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-08",
+          "LITU-fruit-09",
+          "LITU-fruit-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": LITU-fruit-01, LITU-fruit-02, LITU-fruit-07, LITU-fruit-10, LITU-fruit-12\n- group \"3\": LITU-fruit-04, LITU-fruit-05, LITU-fruit-06, LITU-fruit-08, LITU-fruit-09, LITU-fruit-11"
+  },
+  {
+    "label": "rank:opus:high:PLOC-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-leaf",
+    "groups": {
+      "1": [
+        "PLOC-leaf-08",
+        "PLOC-leaf-10",
+        "PLOC-leaf-12"
+      ],
+      "2": [
+        "PLOC-leaf-11"
+      ],
+      "3": [
+        "PLOC-leaf-01",
+        "PLOC-leaf-02",
+        "PLOC-leaf-03",
+        "PLOC-leaf-04",
+        "PLOC-leaf-05",
+        "PLOC-leaf-07",
+        "PLOC-leaf-09"
+      ]
+    },
+    "keys": [
+      "PLOC-leaf-08",
+      "PLOC-leaf-10",
+      "PLOC-leaf-12",
+      "PLOC-leaf-11",
+      "PLOC-leaf-01",
+      "PLOC-leaf-02",
+      "PLOC-leaf-03",
+      "PLOC-leaf-04",
+      "PLOC-leaf-05",
+      "PLOC-leaf-07",
+      "PLOC-leaf-09"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/opus-1-1.jpg",
+        "keys": [
+          "PLOC-leaf-08",
+          "PLOC-leaf-10",
+          "PLOC-leaf-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/opus-2-1.jpg",
+        "keys": [
+          "PLOC-leaf-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/opus-3-1.jpg",
+        "keys": [
+          "PLOC-leaf-01",
+          "PLOC-leaf-02",
+          "PLOC-leaf-03",
+          "PLOC-leaf-04",
+          "PLOC-leaf-05",
+          "PLOC-leaf-07",
+          "PLOC-leaf-09"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/opus-3-1.jpg\nGroups:\n- group \"1\": PLOC-leaf-08, PLOC-leaf-10, PLOC-leaf-12\n- group \"2\": PLOC-leaf-11\n- group \"3\": PLOC-leaf-01, PLOC-leaf-02, PLOC-leaf-03, PLOC-leaf-04, PLOC-leaf-05, PLOC-leaf-07, PLOC-leaf-09"
+  },
+  {
+    "label": "rank:opus:high:PLOC-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-bark",
+    "groups": {
+      "2": [
+        "PLOC-bark-03",
+        "PLOC-bark-08",
+        "PLOC-bark-10",
+        "PLOC-bark-11"
+      ],
+      "3": [
+        "PLOC-bark-01",
+        "PLOC-bark-05",
+        "PLOC-bark-06",
+        "PLOC-bark-07"
+      ]
+    },
+    "keys": [
+      "PLOC-bark-03",
+      "PLOC-bark-08",
+      "PLOC-bark-10",
+      "PLOC-bark-11",
+      "PLOC-bark-01",
+      "PLOC-bark-05",
+      "PLOC-bark-06",
+      "PLOC-bark-07"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/opus-2-1.jpg",
+        "keys": [
+          "PLOC-bark-03",
+          "PLOC-bark-08",
+          "PLOC-bark-10",
+          "PLOC-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/opus-3-1.jpg",
+        "keys": [
+          "PLOC-bark-01",
+          "PLOC-bark-05",
+          "PLOC-bark-06",
+          "PLOC-bark-07"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/opus-3-1.jpg\nGroups:\n- group \"2\": PLOC-bark-03, PLOC-bark-08, PLOC-bark-10, PLOC-bark-11\n- group \"3\": PLOC-bark-01, PLOC-bark-05, PLOC-bark-06, PLOC-bark-07"
+  },
+  {
+    "label": "rank:opus:high:PLOC-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-fruit",
+    "groups": {
+      "1": [
+        "PLOC-fruit-02",
+        "PLOC-fruit-03",
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-10",
+        "PLOC-fruit-12"
+      ],
+      "3": [
+        "PLOC-fruit-01",
+        "PLOC-fruit-06",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11"
+      ]
+    },
+    "keys": [
+      "PLOC-fruit-02",
+      "PLOC-fruit-03",
+      "PLOC-fruit-04",
+      "PLOC-fruit-05",
+      "PLOC-fruit-07",
+      "PLOC-fruit-08",
+      "PLOC-fruit-10",
+      "PLOC-fruit-12",
+      "PLOC-fruit-01",
+      "PLOC-fruit-06",
+      "PLOC-fruit-09",
+      "PLOC-fruit-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/opus-1-1.jpg",
+        "keys": [
+          "PLOC-fruit-02",
+          "PLOC-fruit-03",
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-10",
+          "PLOC-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/opus-3-1.jpg",
+        "keys": [
+          "PLOC-fruit-01",
+          "PLOC-fruit-06",
+          "PLOC-fruit-09",
+          "PLOC-fruit-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": PLOC-fruit-02, PLOC-fruit-03, PLOC-fruit-04, PLOC-fruit-05, PLOC-fruit-07, PLOC-fruit-08, PLOC-fruit-10, PLOC-fruit-12\n- group \"3\": PLOC-fruit-01, PLOC-fruit-06, PLOC-fruit-09, PLOC-fruit-11"
+  },
+  {
+    "label": "rank:opus:high:PLHI-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-leaf",
+    "groups": {
+      "1": [
+        "PLHI-leaf-08"
+      ],
+      "2": [
+        "PLHI-leaf-03",
+        "PLHI-leaf-09"
+      ],
+      "3": [
+        "PLHI-leaf-01",
+        "PLHI-leaf-06",
+        "PLHI-leaf-07"
+      ]
+    },
+    "keys": [
+      "PLHI-leaf-08",
+      "PLHI-leaf-03",
+      "PLHI-leaf-09",
+      "PLHI-leaf-01",
+      "PLHI-leaf-06",
+      "PLHI-leaf-07"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/opus-1-1.jpg",
+        "keys": [
+          "PLHI-leaf-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/opus-2-1.jpg",
+        "keys": [
+          "PLHI-leaf-03",
+          "PLHI-leaf-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/opus-3-1.jpg",
+        "keys": [
+          "PLHI-leaf-01",
+          "PLHI-leaf-06",
+          "PLHI-leaf-07"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/opus-3-1.jpg\nGroups:\n- group \"1\": PLHI-leaf-08\n- group \"2\": PLHI-leaf-03, PLHI-leaf-09\n- group \"3\": PLHI-leaf-01, PLHI-leaf-06, PLHI-leaf-07"
+  },
+  {
+    "label": "rank:opus:high:PLHI-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-bark",
+    "groups": {
+      "1": [
+        "PLHI-bark-01",
+        "PLHI-bark-03",
+        "PLHI-bark-04",
+        "PLHI-bark-08",
+        "PLHI-bark-12"
+      ],
+      "2": [
+        "PLHI-bark-09"
+      ],
+      "3": [
+        "PLHI-bark-05",
+        "PLHI-bark-06",
+        "PLHI-bark-10"
+      ]
+    },
+    "keys": [
+      "PLHI-bark-01",
+      "PLHI-bark-03",
+      "PLHI-bark-04",
+      "PLHI-bark-08",
+      "PLHI-bark-12",
+      "PLHI-bark-09",
+      "PLHI-bark-05",
+      "PLHI-bark-06",
+      "PLHI-bark-10"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/opus-1-1.jpg",
+        "keys": [
+          "PLHI-bark-01",
+          "PLHI-bark-03",
+          "PLHI-bark-04",
+          "PLHI-bark-08",
+          "PLHI-bark-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/opus-2-1.jpg",
+        "keys": [
+          "PLHI-bark-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/opus-3-1.jpg",
+        "keys": [
+          "PLHI-bark-05",
+          "PLHI-bark-06",
+          "PLHI-bark-10"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/opus-3-1.jpg\nGroups:\n- group \"1\": PLHI-bark-01, PLHI-bark-03, PLHI-bark-04, PLHI-bark-08, PLHI-bark-12\n- group \"2\": PLHI-bark-09\n- group \"3\": PLHI-bark-05, PLHI-bark-06, PLHI-bark-10"
+  },
+  {
+    "label": "rank:opus:high:PLHI-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-fruit",
+    "groups": {
+      "1": [
+        "PLHI-fruit-04",
+        "PLHI-fruit-05",
+        "PLHI-fruit-06",
+        "PLHI-fruit-09",
+        "PLHI-fruit-12"
+      ],
+      "2": [
+        "PLHI-fruit-03"
+      ],
+      "3": [
+        "PLHI-fruit-02",
+        "PLHI-fruit-07",
+        "PLHI-fruit-08",
+        "PLHI-fruit-11"
+      ]
+    },
+    "keys": [
+      "PLHI-fruit-04",
+      "PLHI-fruit-05",
+      "PLHI-fruit-06",
+      "PLHI-fruit-09",
+      "PLHI-fruit-12",
+      "PLHI-fruit-03",
+      "PLHI-fruit-02",
+      "PLHI-fruit-07",
+      "PLHI-fruit-08",
+      "PLHI-fruit-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/opus-1-1.jpg",
+        "keys": [
+          "PLHI-fruit-04",
+          "PLHI-fruit-05",
+          "PLHI-fruit-06",
+          "PLHI-fruit-09",
+          "PLHI-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/opus-2-1.jpg",
+        "keys": [
+          "PLHI-fruit-03"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/opus-3-1.jpg",
+        "keys": [
+          "PLHI-fruit-02",
+          "PLHI-fruit-07",
+          "PLHI-fruit-08",
+          "PLHI-fruit-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": PLHI-fruit-04, PLHI-fruit-05, PLHI-fruit-06, PLHI-fruit-09, PLHI-fruit-12\n- group \"2\": PLHI-fruit-03\n- group \"3\": PLHI-fruit-02, PLHI-fruit-07, PLHI-fruit-08, PLHI-fruit-11"
+  },
+  {
+    "label": "rank:opus:high:FR:ACRU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "ACRU-fruit",
+    "groups": {
+      "1": [
+        "ACRU-fruit-02",
+        "ACRU-fruit-03",
+        "ACRU-fruit-04",
+        "ACRU-fruit-09",
+        "ACRU-fruit-11"
+      ],
+      "3": [
+        "ACRU-fruit-01",
+        "ACRU-fruit-05",
+        "ACRU-fruit-06",
+        "ACRU-fruit-07",
+        "ACRU-fruit-08"
+      ]
+    },
+    "keys": [
+      "ACRU-fruit-02",
+      "ACRU-fruit-03",
+      "ACRU-fruit-04",
+      "ACRU-fruit-09",
+      "ACRU-fruit-11",
+      "ACRU-fruit-01",
+      "ACRU-fruit-05",
+      "ACRU-fruit-06",
+      "ACRU-fruit-07",
+      "ACRU-fruit-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/opusFR-1-1.jpg",
+        "keys": [
+          "ACRU-fruit-02",
+          "ACRU-fruit-03",
+          "ACRU-fruit-04",
+          "ACRU-fruit-09",
+          "ACRU-fruit-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/opusFR-3-1.jpg",
+        "keys": [
+          "ACRU-fruit-01",
+          "ACRU-fruit-05",
+          "ACRU-fruit-06",
+          "ACRU-fruit-07",
+          "ACRU-fruit-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/opusFR-3-1.jpg\nGroups:\n- group \"1\": ACRU-fruit-02, ACRU-fruit-03, ACRU-fruit-04, ACRU-fruit-09, ACRU-fruit-11\n- group \"3\": ACRU-fruit-01, ACRU-fruit-05, ACRU-fruit-06, ACRU-fruit-07, ACRU-fruit-08"
+  },
+  {
+    "label": "rank:opus:high:FR:QUAL-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QUAL-leaf",
+    "groups": {
+      "2": [
+        "QUAL-leaf-01",
+        "QUAL-leaf-05"
+      ],
+      "3": [
+        "QUAL-leaf-02",
+        "QUAL-leaf-03",
+        "QUAL-leaf-04"
+      ]
+    },
+    "keys": [
+      "QUAL-leaf-01",
+      "QUAL-leaf-05",
+      "QUAL-leaf-02",
+      "QUAL-leaf-03",
+      "QUAL-leaf-04"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/opusFR-2-1.jpg",
+        "keys": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-05"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/opusFR-3-1.jpg",
+        "keys": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03",
+          "QUAL-leaf-04"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/opusFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/opusFR-3-1.jpg\nGroups:\n- group \"2\": QUAL-leaf-01, QUAL-leaf-05\n- group \"3\": QUAL-leaf-02, QUAL-leaf-03, QUAL-leaf-04"
+  },
+  {
+    "label": "rank:opus:high:FR:LITU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "LITU-leaf",
+    "groups": {
+      "1": [
+        "LITU-leaf-04",
+        "LITU-leaf-07"
+      ],
+      "2": [
+        "LITU-leaf-08"
+      ],
+      "3": [
+        "LITU-leaf-02"
+      ]
+    },
+    "keys": [
+      "LITU-leaf-04",
+      "LITU-leaf-07",
+      "LITU-leaf-08",
+      "LITU-leaf-02"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opusFR-1-1.jpg",
+        "keys": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opusFR-2-1.jpg",
+        "keys": [
+          "LITU-leaf-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opusFR-3-1.jpg",
+        "keys": [
+          "LITU-leaf-02"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opusFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/opusFR-3-1.jpg\nGroups:\n- group \"1\": LITU-leaf-04, LITU-leaf-07\n- group \"2\": LITU-leaf-08\n- group \"3\": LITU-leaf-02"
+  },
+  {
+    "label": "rank:opus:high:FR:LITU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "LITU-bark",
+    "groups": {
+      "1": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-11"
+      ],
+      "2": [
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10"
+      ],
+      "3": [
+        "LITU-bark-02"
+      ]
+    },
+    "keys": [
+      "LITU-bark-05",
+      "LITU-bark-06",
+      "LITU-bark-08",
+      "LITU-bark-11",
+      "LITU-bark-01",
+      "LITU-bark-07",
+      "LITU-bark-10",
+      "LITU-bark-02"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opusFR-1-1.jpg",
+        "keys": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08",
+          "LITU-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opusFR-2-1.jpg",
+        "keys": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opusFR-3-1.jpg",
+        "keys": [
+          "LITU-bark-02"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opusFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/opusFR-3-1.jpg\nGroups:\n- group \"1\": LITU-bark-05, LITU-bark-06, LITU-bark-08, LITU-bark-11\n- group \"2\": LITU-bark-01, LITU-bark-07, LITU-bark-10\n- group \"3\": LITU-bark-02"
+  },
+  {
+    "label": "rank:opus:high:FR:LITU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "LITU-fruit",
+    "groups": {
+      "1": [
+        "LITU-fruit-01",
+        "LITU-fruit-07",
+        "LITU-fruit-10",
+        "LITU-fruit-12"
+      ],
+      "3": [
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-08",
+        "LITU-fruit-09"
+      ]
+    },
+    "keys": [
+      "LITU-fruit-01",
+      "LITU-fruit-07",
+      "LITU-fruit-10",
+      "LITU-fruit-12",
+      "LITU-fruit-04",
+      "LITU-fruit-05",
+      "LITU-fruit-06",
+      "LITU-fruit-08",
+      "LITU-fruit-09"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/opusFR-1-1.jpg",
+        "keys": [
+          "LITU-fruit-01",
+          "LITU-fruit-07",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/opusFR-3-1.jpg",
+        "keys": [
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-08",
+          "LITU-fruit-09"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/opusFR-3-1.jpg\nGroups:\n- group \"1\": LITU-fruit-01, LITU-fruit-07, LITU-fruit-10, LITU-fruit-12\n- group \"3\": LITU-fruit-04, LITU-fruit-05, LITU-fruit-06, LITU-fruit-08, LITU-fruit-09"
+  },
+  {
+    "label": "rank:opus:high:FR:PLOC-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "PLOC-fruit",
+    "groups": {
+      "1": [
+        "PLOC-fruit-02",
+        "PLOC-fruit-03",
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-10",
+        "PLOC-fruit-12"
+      ],
+      "3": [
+        "PLOC-fruit-09",
+        "PLOC-fruit-11"
+      ]
+    },
+    "keys": [
+      "PLOC-fruit-02",
+      "PLOC-fruit-03",
+      "PLOC-fruit-04",
+      "PLOC-fruit-05",
+      "PLOC-fruit-07",
+      "PLOC-fruit-08",
+      "PLOC-fruit-10",
+      "PLOC-fruit-12",
+      "PLOC-fruit-09",
+      "PLOC-fruit-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/opusFR-1-1.jpg",
+        "keys": [
+          "PLOC-fruit-02",
+          "PLOC-fruit-03",
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-10",
+          "PLOC-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/opusFR-3-1.jpg",
+        "keys": [
+          "PLOC-fruit-09",
+          "PLOC-fruit-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/opusFR-3-1.jpg\nGroups:\n- group \"1\": PLOC-fruit-02, PLOC-fruit-03, PLOC-fruit-04, PLOC-fruit-05, PLOC-fruit-07, PLOC-fruit-08, PLOC-fruit-10, PLOC-fruit-12\n- group \"3\": PLOC-fruit-09, PLOC-fruit-11"
+  },
+  {
+    "label": "rank:sonnet:high:ACRU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-leaf",
+    "groups": {
+      "1": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-09"
+      ],
+      "2": [
+        "ACRU-leaf-01",
+        "ACRU-leaf-05",
+        "ACRU-leaf-08"
+      ],
+      "3": [
+        "ACRU-leaf-03",
+        "ACRU-leaf-06",
+        "ACRU-leaf-07",
+        "ACRU-leaf-11"
+      ]
+    },
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-09",
+      "ACRU-leaf-01",
+      "ACRU-leaf-05",
+      "ACRU-leaf-08",
+      "ACRU-leaf-03",
+      "ACRU-leaf-06",
+      "ACRU-leaf-07",
+      "ACRU-leaf-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "ACRU-leaf-02",
+          "ACRU-leaf-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnet-2-1.jpg",
+        "keys": [
+          "ACRU-leaf-01",
+          "ACRU-leaf-05",
+          "ACRU-leaf-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "ACRU-leaf-03",
+          "ACRU-leaf-06",
+          "ACRU-leaf-07",
+          "ACRU-leaf-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnet-3-1.jpg\nGroups:\n- group \"1\": ACRU-leaf-02, ACRU-leaf-09\n- group \"2\": ACRU-leaf-01, ACRU-leaf-05, ACRU-leaf-08\n- group \"3\": ACRU-leaf-03, ACRU-leaf-06, ACRU-leaf-07, ACRU-leaf-11"
+  },
+  {
+    "label": "rank:sonnet:high:ACRU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-bark",
+    "groups": {
+      "1": [
+        "ACRU-bark-06",
+        "ACRU-bark-07"
+      ],
+      "2": [
+        "ACRU-bark-02",
+        "ACRU-bark-04",
+        "ACRU-bark-05",
+        "ACRU-bark-09"
+      ],
+      "3": [
+        "ACRU-bark-01",
+        "ACRU-bark-08",
+        "ACRU-bark-10",
+        "ACRU-bark-11",
+        "ACRU-bark-12"
+      ]
+    },
+    "keys": [
+      "ACRU-bark-06",
+      "ACRU-bark-07",
+      "ACRU-bark-02",
+      "ACRU-bark-04",
+      "ACRU-bark-05",
+      "ACRU-bark-09",
+      "ACRU-bark-01",
+      "ACRU-bark-08",
+      "ACRU-bark-10",
+      "ACRU-bark-11",
+      "ACRU-bark-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/sonnet-1-1.jpg",
+        "keys": [
+          "ACRU-bark-06",
+          "ACRU-bark-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/sonnet-2-1.jpg",
+        "keys": [
+          "ACRU-bark-02",
+          "ACRU-bark-04",
+          "ACRU-bark-05",
+          "ACRU-bark-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/sonnet-3-1.jpg",
+        "keys": [
+          "ACRU-bark-01",
+          "ACRU-bark-08",
+          "ACRU-bark-10",
+          "ACRU-bark-11",
+          "ACRU-bark-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/sonnet-3-1.jpg\nGroups:\n- group \"1\": ACRU-bark-06, ACRU-bark-07\n- group \"2\": ACRU-bark-02, ACRU-bark-04, ACRU-bark-05, ACRU-bark-09\n- group \"3\": ACRU-bark-01, ACRU-bark-08, ACRU-bark-10, ACRU-bark-11, ACRU-bark-12"
+  },
+  {
+    "label": "rank:sonnet:high:ACRU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-fruit",
+    "groups": {
+      "1": [
+        "ACRU-fruit-02",
+        "ACRU-fruit-03",
+        "ACRU-fruit-04",
+        "ACRU-fruit-05",
+        "ACRU-fruit-09",
+        "ACRU-fruit-11"
+      ],
+      "3": [
+        "ACRU-fruit-01",
+        "ACRU-fruit-06",
+        "ACRU-fruit-07",
+        "ACRU-fruit-08"
+      ]
+    },
+    "keys": [
+      "ACRU-fruit-02",
+      "ACRU-fruit-03",
+      "ACRU-fruit-04",
+      "ACRU-fruit-05",
+      "ACRU-fruit-09",
+      "ACRU-fruit-11",
+      "ACRU-fruit-01",
+      "ACRU-fruit-06",
+      "ACRU-fruit-07",
+      "ACRU-fruit-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "ACRU-fruit-02",
+          "ACRU-fruit-03",
+          "ACRU-fruit-04",
+          "ACRU-fruit-05",
+          "ACRU-fruit-09",
+          "ACRU-fruit-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "ACRU-fruit-01",
+          "ACRU-fruit-06",
+          "ACRU-fruit-07",
+          "ACRU-fruit-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": ACRU-fruit-02, ACRU-fruit-03, ACRU-fruit-04, ACRU-fruit-05, ACRU-fruit-09, ACRU-fruit-11\n- group \"3\": ACRU-fruit-01, ACRU-fruit-06, ACRU-fruit-07, ACRU-fruit-08"
+  },
+  {
+    "label": "rank:sonnet:high:ACSA3-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-leaf",
+    "groups": {
+      "1": [
+        "ACSA3-leaf-05",
+        "ACSA3-leaf-11"
+      ],
+      "2": [
+        "ACSA3-leaf-02"
+      ],
+      "3": [
+        "ACSA3-leaf-01",
+        "ACSA3-leaf-03",
+        "ACSA3-leaf-04",
+        "ACSA3-leaf-07",
+        "ACSA3-leaf-08"
+      ]
+    },
+    "keys": [
+      "ACSA3-leaf-05",
+      "ACSA3-leaf-11",
+      "ACSA3-leaf-02",
+      "ACSA3-leaf-01",
+      "ACSA3-leaf-03",
+      "ACSA3-leaf-04",
+      "ACSA3-leaf-07",
+      "ACSA3-leaf-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "ACSA3-leaf-05",
+          "ACSA3-leaf-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnet-2-1.jpg",
+        "keys": [
+          "ACSA3-leaf-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "ACSA3-leaf-01",
+          "ACSA3-leaf-03",
+          "ACSA3-leaf-04",
+          "ACSA3-leaf-07",
+          "ACSA3-leaf-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnet-3-1.jpg\nGroups:\n- group \"1\": ACSA3-leaf-05, ACSA3-leaf-11\n- group \"2\": ACSA3-leaf-02\n- group \"3\": ACSA3-leaf-01, ACSA3-leaf-03, ACSA3-leaf-04, ACSA3-leaf-07, ACSA3-leaf-08"
+  },
+  {
+    "label": "rank:sonnet:high:ACSA3-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-bark",
+    "groups": {
+      "1": [
+        "ACSA3-bark-02",
+        "ACSA3-bark-03",
+        "ACSA3-bark-06",
+        "ACSA3-bark-09",
+        "ACSA3-bark-10"
+      ],
+      "2": [
+        "ACSA3-bark-08",
+        "ACSA3-bark-11"
+      ],
+      "3": [
+        "ACSA3-bark-01",
+        "ACSA3-bark-04",
+        "ACSA3-bark-07",
+        "ACSA3-bark-12"
+      ]
+    },
+    "keys": [
+      "ACSA3-bark-02",
+      "ACSA3-bark-03",
+      "ACSA3-bark-06",
+      "ACSA3-bark-09",
+      "ACSA3-bark-10",
+      "ACSA3-bark-08",
+      "ACSA3-bark-11",
+      "ACSA3-bark-01",
+      "ACSA3-bark-04",
+      "ACSA3-bark-07",
+      "ACSA3-bark-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/sonnet-1-1.jpg",
+        "keys": [
+          "ACSA3-bark-02",
+          "ACSA3-bark-03",
+          "ACSA3-bark-06",
+          "ACSA3-bark-09",
+          "ACSA3-bark-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/sonnet-2-1.jpg",
+        "keys": [
+          "ACSA3-bark-08",
+          "ACSA3-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/sonnet-3-1.jpg",
+        "keys": [
+          "ACSA3-bark-01",
+          "ACSA3-bark-04",
+          "ACSA3-bark-07",
+          "ACSA3-bark-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/sonnet-3-1.jpg\nGroups:\n- group \"1\": ACSA3-bark-02, ACSA3-bark-03, ACSA3-bark-06, ACSA3-bark-09, ACSA3-bark-10\n- group \"2\": ACSA3-bark-08, ACSA3-bark-11\n- group \"3\": ACSA3-bark-01, ACSA3-bark-04, ACSA3-bark-07, ACSA3-bark-12"
+  },
+  {
+    "label": "rank:sonnet:high:ACSA3-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-fruit",
+    "groups": {
+      "1": [
+        "ACSA3-fruit-06"
+      ],
+      "3": [
+        "ACSA3-fruit-01",
+        "ACSA3-fruit-02",
+        "ACSA3-fruit-03",
+        "ACSA3-fruit-04",
+        "ACSA3-fruit-05"
+      ]
+    },
+    "keys": [
+      "ACSA3-fruit-06",
+      "ACSA3-fruit-01",
+      "ACSA3-fruit-02",
+      "ACSA3-fruit-03",
+      "ACSA3-fruit-04",
+      "ACSA3-fruit-05"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "ACSA3-fruit-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "ACSA3-fruit-01",
+          "ACSA3-fruit-02",
+          "ACSA3-fruit-03",
+          "ACSA3-fruit-04",
+          "ACSA3-fruit-05"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": ACSA3-fruit-06\n- group \"3\": ACSA3-fruit-01, ACSA3-fruit-02, ACSA3-fruit-03, ACSA3-fruit-04, ACSA3-fruit-05"
+  },
+  {
+    "label": "rank:sonnet:high:QUAL-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-leaf",
+    "groups": {
+      "1": [
+        "QUAL-leaf-04"
+      ],
+      "2": [
+        "QUAL-leaf-01",
+        "QUAL-leaf-05",
+        "QUAL-leaf-06"
+      ],
+      "3": [
+        "QUAL-leaf-02",
+        "QUAL-leaf-03",
+        "QUAL-leaf-07"
+      ]
+    },
+    "keys": [
+      "QUAL-leaf-04",
+      "QUAL-leaf-01",
+      "QUAL-leaf-05",
+      "QUAL-leaf-06",
+      "QUAL-leaf-02",
+      "QUAL-leaf-03",
+      "QUAL-leaf-07"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "QUAL-leaf-04"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnet-2-1.jpg",
+        "keys": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-05",
+          "QUAL-leaf-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03",
+          "QUAL-leaf-07"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnet-3-1.jpg\nGroups:\n- group \"1\": QUAL-leaf-04\n- group \"2\": QUAL-leaf-01, QUAL-leaf-05, QUAL-leaf-06\n- group \"3\": QUAL-leaf-02, QUAL-leaf-03, QUAL-leaf-07"
+  },
+  {
+    "label": "rank:sonnet:high:QUAL-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-bark",
+    "groups": {
+      "1": [
+        "QUAL-bark-01",
+        "QUAL-bark-02",
+        "QUAL-bark-03",
+        "QUAL-bark-04",
+        "QUAL-bark-06"
+      ]
+    },
+    "keys": [
+      "QUAL-bark-01",
+      "QUAL-bark-02",
+      "QUAL-bark-03",
+      "QUAL-bark-04",
+      "QUAL-bark-06"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/sonnet-1-1.jpg",
+        "keys": [
+          "QUAL-bark-01",
+          "QUAL-bark-02",
+          "QUAL-bark-03",
+          "QUAL-bark-04",
+          "QUAL-bark-06"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/sonnet-1-1.jpg\nGroups:\n- group \"1\": QUAL-bark-01, QUAL-bark-02, QUAL-bark-03, QUAL-bark-04, QUAL-bark-06"
+  },
+  {
+    "label": "rank:sonnet:high:QUAL-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-fruit",
+    "groups": {
+      "1": [
+        "QUAL-fruit-01",
+        "QUAL-fruit-05",
+        "QUAL-fruit-06",
+        "QUAL-fruit-07"
+      ],
+      "2": [
+        "QUAL-fruit-03"
+      ],
+      "3": [
+        "QUAL-fruit-02",
+        "QUAL-fruit-04"
+      ]
+    },
+    "keys": [
+      "QUAL-fruit-01",
+      "QUAL-fruit-05",
+      "QUAL-fruit-06",
+      "QUAL-fruit-07",
+      "QUAL-fruit-03",
+      "QUAL-fruit-02",
+      "QUAL-fruit-04"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "QUAL-fruit-01",
+          "QUAL-fruit-05",
+          "QUAL-fruit-06",
+          "QUAL-fruit-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/sonnet-2-1.jpg",
+        "keys": [
+          "QUAL-fruit-03"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "QUAL-fruit-02",
+          "QUAL-fruit-04"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": QUAL-fruit-01, QUAL-fruit-05, QUAL-fruit-06, QUAL-fruit-07\n- group \"2\": QUAL-fruit-03\n- group \"3\": QUAL-fruit-02, QUAL-fruit-04"
+  },
+  {
+    "label": "rank:sonnet:high:QURU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-leaf",
+    "groups": {
+      "3": [
+        "QURU-leaf-02",
+        "QURU-leaf-04",
+        "QURU-leaf-05",
+        "QURU-leaf-06",
+        "QURU-leaf-08",
+        "QURU-leaf-09",
+        "QURU-leaf-10",
+        "QURU-leaf-11",
+        "QURU-leaf-12"
+      ]
+    },
+    "keys": [
+      "QURU-leaf-02",
+      "QURU-leaf-04",
+      "QURU-leaf-05",
+      "QURU-leaf-06",
+      "QURU-leaf-08",
+      "QURU-leaf-09",
+      "QURU-leaf-10",
+      "QURU-leaf-11",
+      "QURU-leaf-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "QURU-leaf-02",
+          "QURU-leaf-04",
+          "QURU-leaf-05",
+          "QURU-leaf-06",
+          "QURU-leaf-08",
+          "QURU-leaf-09",
+          "QURU-leaf-10",
+          "QURU-leaf-11",
+          "QURU-leaf-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, leaf.\nGroup line: the other species of the genus mostly show one leaf, under side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/sonnet-3-1.jpg\nGroups:\n- group \"3\": QURU-leaf-02, QURU-leaf-04, QURU-leaf-05, QURU-leaf-06, QURU-leaf-08, QURU-leaf-09, QURU-leaf-10, QURU-leaf-11, QURU-leaf-12"
+  },
+  {
+    "label": "rank:sonnet:high:QURU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-bark",
+    "groups": {
+      "1": [
+        "QURU-bark-01",
+        "QURU-bark-06"
+      ],
+      "3": [
+        "QURU-bark-05"
+      ]
+    },
+    "keys": [
+      "QURU-bark-01",
+      "QURU-bark-06",
+      "QURU-bark-05"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/sonnet-1-1.jpg",
+        "keys": [
+          "QURU-bark-01",
+          "QURU-bark-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/sonnet-3-1.jpg",
+        "keys": [
+          "QURU-bark-05"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/sonnet-3-1.jpg\nGroups:\n- group \"1\": QURU-bark-01, QURU-bark-06\n- group \"3\": QURU-bark-05"
+  },
+  {
+    "label": "rank:sonnet:high:QURU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-fruit",
+    "groups": {
+      "1": [
+        "QURU-fruit-01",
+        "QURU-fruit-03",
+        "QURU-fruit-04",
+        "QURU-fruit-05"
+      ],
+      "2": [
+        "QURU-fruit-02"
+      ]
+    },
+    "keys": [
+      "QURU-fruit-01",
+      "QURU-fruit-03",
+      "QURU-fruit-04",
+      "QURU-fruit-05",
+      "QURU-fruit-02"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "QURU-fruit-01",
+          "QURU-fruit-03",
+          "QURU-fruit-04",
+          "QURU-fruit-05"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/sonnet-2-1.jpg",
+        "keys": [
+          "QURU-fruit-02"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/sonnet-2-1.jpg\nGroups:\n- group \"1\": QURU-fruit-01, QURU-fruit-03, QURU-fruit-04, QURU-fruit-05\n- group \"2\": QURU-fruit-02"
+  },
+  {
+    "label": "rank:sonnet:high:LITU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-leaf",
+    "groups": {
+      "1": [
+        "LITU-leaf-04",
+        "LITU-leaf-07"
+      ],
+      "3": [
+        "LITU-leaf-02",
+        "LITU-leaf-03",
+        "LITU-leaf-05",
+        "LITU-leaf-08"
+      ]
+    },
+    "keys": [
+      "LITU-leaf-04",
+      "LITU-leaf-07",
+      "LITU-leaf-02",
+      "LITU-leaf-03",
+      "LITU-leaf-05",
+      "LITU-leaf-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "LITU-leaf-02",
+          "LITU-leaf-03",
+          "LITU-leaf-05",
+          "LITU-leaf-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/sonnet-3-1.jpg\nGroups:\n- group \"1\": LITU-leaf-04, LITU-leaf-07\n- group \"3\": LITU-leaf-02, LITU-leaf-03, LITU-leaf-05, LITU-leaf-08"
+  },
+  {
+    "label": "rank:sonnet:high:LITU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-bark",
+    "groups": {
+      "1": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-11"
+      ],
+      "2": [
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10"
+      ],
+      "3": [
+        "LITU-bark-02",
+        "LITU-bark-09",
+        "LITU-bark-12"
+      ]
+    },
+    "keys": [
+      "LITU-bark-05",
+      "LITU-bark-06",
+      "LITU-bark-08",
+      "LITU-bark-11",
+      "LITU-bark-01",
+      "LITU-bark-07",
+      "LITU-bark-10",
+      "LITU-bark-02",
+      "LITU-bark-09",
+      "LITU-bark-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnet-1-1.jpg",
+        "keys": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08",
+          "LITU-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnet-2-1.jpg",
+        "keys": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnet-3-1.jpg",
+        "keys": [
+          "LITU-bark-02",
+          "LITU-bark-09",
+          "LITU-bark-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnet-3-1.jpg\nGroups:\n- group \"1\": LITU-bark-05, LITU-bark-06, LITU-bark-08, LITU-bark-11\n- group \"2\": LITU-bark-01, LITU-bark-07, LITU-bark-10\n- group \"3\": LITU-bark-02, LITU-bark-09, LITU-bark-12"
+  },
+  {
+    "label": "rank:sonnet:high:LITU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-fruit",
+    "groups": {
+      "1": [
+        "LITU-fruit-01",
+        "LITU-fruit-02",
+        "LITU-fruit-07",
+        "LITU-fruit-10",
+        "LITU-fruit-12"
+      ],
+      "3": [
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-08",
+        "LITU-fruit-09"
+      ]
+    },
+    "keys": [
+      "LITU-fruit-01",
+      "LITU-fruit-02",
+      "LITU-fruit-07",
+      "LITU-fruit-10",
+      "LITU-fruit-12",
+      "LITU-fruit-04",
+      "LITU-fruit-05",
+      "LITU-fruit-06",
+      "LITU-fruit-08",
+      "LITU-fruit-09"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "LITU-fruit-01",
+          "LITU-fruit-02",
+          "LITU-fruit-07",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-08",
+          "LITU-fruit-09"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": LITU-fruit-01, LITU-fruit-02, LITU-fruit-07, LITU-fruit-10, LITU-fruit-12\n- group \"3\": LITU-fruit-04, LITU-fruit-05, LITU-fruit-06, LITU-fruit-08, LITU-fruit-09"
+  },
+  {
+    "label": "rank:sonnet:high:PLOC-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-leaf",
+    "groups": {
+      "1": [
+        "PLOC-leaf-07",
+        "PLOC-leaf-08",
+        "PLOC-leaf-10",
+        "PLOC-leaf-12"
+      ],
+      "2": [
+        "PLOC-leaf-01",
+        "PLOC-leaf-11"
+      ],
+      "3": [
+        "PLOC-leaf-02",
+        "PLOC-leaf-03",
+        "PLOC-leaf-04",
+        "PLOC-leaf-05",
+        "PLOC-leaf-09"
+      ]
+    },
+    "keys": [
+      "PLOC-leaf-07",
+      "PLOC-leaf-08",
+      "PLOC-leaf-10",
+      "PLOC-leaf-12",
+      "PLOC-leaf-01",
+      "PLOC-leaf-11",
+      "PLOC-leaf-02",
+      "PLOC-leaf-03",
+      "PLOC-leaf-04",
+      "PLOC-leaf-05",
+      "PLOC-leaf-09"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "PLOC-leaf-07",
+          "PLOC-leaf-08",
+          "PLOC-leaf-10",
+          "PLOC-leaf-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/sonnet-2-1.jpg",
+        "keys": [
+          "PLOC-leaf-01",
+          "PLOC-leaf-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "PLOC-leaf-02",
+          "PLOC-leaf-03",
+          "PLOC-leaf-04",
+          "PLOC-leaf-05",
+          "PLOC-leaf-09"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/sonnet-3-1.jpg\nGroups:\n- group \"1\": PLOC-leaf-07, PLOC-leaf-08, PLOC-leaf-10, PLOC-leaf-12\n- group \"2\": PLOC-leaf-01, PLOC-leaf-11\n- group \"3\": PLOC-leaf-02, PLOC-leaf-03, PLOC-leaf-04, PLOC-leaf-05, PLOC-leaf-09"
+  },
+  {
+    "label": "rank:sonnet:high:PLOC-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-bark",
+    "groups": {
+      "1": [
+        "PLOC-bark-10"
+      ],
+      "2": [
+        "PLOC-bark-03",
+        "PLOC-bark-08",
+        "PLOC-bark-11"
+      ],
+      "3": [
+        "PLOC-bark-01",
+        "PLOC-bark-04",
+        "PLOC-bark-05",
+        "PLOC-bark-06",
+        "PLOC-bark-07"
+      ]
+    },
+    "keys": [
+      "PLOC-bark-10",
+      "PLOC-bark-03",
+      "PLOC-bark-08",
+      "PLOC-bark-11",
+      "PLOC-bark-01",
+      "PLOC-bark-04",
+      "PLOC-bark-05",
+      "PLOC-bark-06",
+      "PLOC-bark-07"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/sonnet-1-1.jpg",
+        "keys": [
+          "PLOC-bark-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/sonnet-2-1.jpg",
+        "keys": [
+          "PLOC-bark-03",
+          "PLOC-bark-08",
+          "PLOC-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/sonnet-3-1.jpg",
+        "keys": [
+          "PLOC-bark-01",
+          "PLOC-bark-04",
+          "PLOC-bark-05",
+          "PLOC-bark-06",
+          "PLOC-bark-07"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/sonnet-3-1.jpg\nGroups:\n- group \"1\": PLOC-bark-10\n- group \"2\": PLOC-bark-03, PLOC-bark-08, PLOC-bark-11\n- group \"3\": PLOC-bark-01, PLOC-bark-04, PLOC-bark-05, PLOC-bark-06, PLOC-bark-07"
+  },
+  {
+    "label": "rank:sonnet:high:PLOC-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-fruit",
+    "groups": {
+      "1": [
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-10",
+        "PLOC-fruit-12"
+      ],
+      "3": [
+        "PLOC-fruit-01",
+        "PLOC-fruit-02",
+        "PLOC-fruit-03",
+        "PLOC-fruit-06",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11"
+      ]
+    },
+    "keys": [
+      "PLOC-fruit-04",
+      "PLOC-fruit-05",
+      "PLOC-fruit-07",
+      "PLOC-fruit-08",
+      "PLOC-fruit-10",
+      "PLOC-fruit-12",
+      "PLOC-fruit-01",
+      "PLOC-fruit-02",
+      "PLOC-fruit-03",
+      "PLOC-fruit-06",
+      "PLOC-fruit-09",
+      "PLOC-fruit-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-10",
+          "PLOC-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "PLOC-fruit-01",
+          "PLOC-fruit-02",
+          "PLOC-fruit-03",
+          "PLOC-fruit-06",
+          "PLOC-fruit-09",
+          "PLOC-fruit-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": PLOC-fruit-04, PLOC-fruit-05, PLOC-fruit-07, PLOC-fruit-08, PLOC-fruit-10, PLOC-fruit-12\n- group \"3\": PLOC-fruit-01, PLOC-fruit-02, PLOC-fruit-03, PLOC-fruit-06, PLOC-fruit-09, PLOC-fruit-11"
+  },
+  {
+    "label": "rank:sonnet:high:PLHI-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-leaf",
+    "groups": {
+      "1": [
+        "PLHI-leaf-08"
+      ],
+      "2": [
+        "PLHI-leaf-03",
+        "PLHI-leaf-07"
+      ],
+      "3": [
+        "PLHI-leaf-01",
+        "PLHI-leaf-06",
+        "PLHI-leaf-09"
+      ]
+    },
+    "keys": [
+      "PLHI-leaf-08",
+      "PLHI-leaf-03",
+      "PLHI-leaf-07",
+      "PLHI-leaf-01",
+      "PLHI-leaf-06",
+      "PLHI-leaf-09"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "PLHI-leaf-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/sonnet-2-1.jpg",
+        "keys": [
+          "PLHI-leaf-03",
+          "PLHI-leaf-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "PLHI-leaf-01",
+          "PLHI-leaf-06",
+          "PLHI-leaf-09"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/sonnet-3-1.jpg\nGroups:\n- group \"1\": PLHI-leaf-08\n- group \"2\": PLHI-leaf-03, PLHI-leaf-07\n- group \"3\": PLHI-leaf-01, PLHI-leaf-06, PLHI-leaf-09"
+  },
+  {
+    "label": "rank:sonnet:high:PLHI-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-bark",
+    "groups": {
+      "1": [
+        "PLHI-bark-01",
+        "PLHI-bark-03",
+        "PLHI-bark-04",
+        "PLHI-bark-08",
+        "PLHI-bark-12"
+      ],
+      "2": [
+        "PLHI-bark-09"
+      ],
+      "3": [
+        "PLHI-bark-05",
+        "PLHI-bark-06",
+        "PLHI-bark-10"
+      ]
+    },
+    "keys": [
+      "PLHI-bark-01",
+      "PLHI-bark-03",
+      "PLHI-bark-04",
+      "PLHI-bark-08",
+      "PLHI-bark-12",
+      "PLHI-bark-09",
+      "PLHI-bark-05",
+      "PLHI-bark-06",
+      "PLHI-bark-10"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/sonnet-1-1.jpg",
+        "keys": [
+          "PLHI-bark-01",
+          "PLHI-bark-03",
+          "PLHI-bark-04",
+          "PLHI-bark-08",
+          "PLHI-bark-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/sonnet-2-1.jpg",
+        "keys": [
+          "PLHI-bark-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/sonnet-3-1.jpg",
+        "keys": [
+          "PLHI-bark-05",
+          "PLHI-bark-06",
+          "PLHI-bark-10"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/sonnet-3-1.jpg\nGroups:\n- group \"1\": PLHI-bark-01, PLHI-bark-03, PLHI-bark-04, PLHI-bark-08, PLHI-bark-12\n- group \"2\": PLHI-bark-09\n- group \"3\": PLHI-bark-05, PLHI-bark-06, PLHI-bark-10"
+  },
+  {
+    "label": "rank:sonnet:high:PLHI-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-fruit",
+    "groups": {
+      "1": [
+        "PLHI-fruit-04",
+        "PLHI-fruit-05",
+        "PLHI-fruit-06",
+        "PLHI-fruit-09",
+        "PLHI-fruit-12"
+      ],
+      "3": [
+        "PLHI-fruit-01",
+        "PLHI-fruit-02",
+        "PLHI-fruit-03",
+        "PLHI-fruit-07",
+        "PLHI-fruit-08",
+        "PLHI-fruit-11"
+      ]
+    },
+    "keys": [
+      "PLHI-fruit-04",
+      "PLHI-fruit-05",
+      "PLHI-fruit-06",
+      "PLHI-fruit-09",
+      "PLHI-fruit-12",
+      "PLHI-fruit-01",
+      "PLHI-fruit-02",
+      "PLHI-fruit-03",
+      "PLHI-fruit-07",
+      "PLHI-fruit-08",
+      "PLHI-fruit-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "PLHI-fruit-04",
+          "PLHI-fruit-05",
+          "PLHI-fruit-06",
+          "PLHI-fruit-09",
+          "PLHI-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "PLHI-fruit-01",
+          "PLHI-fruit-02",
+          "PLHI-fruit-03",
+          "PLHI-fruit-07",
+          "PLHI-fruit-08",
+          "PLHI-fruit-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": PLHI-fruit-04, PLHI-fruit-05, PLHI-fruit-06, PLHI-fruit-09, PLHI-fruit-12\n- group \"3\": PLHI-fruit-01, PLHI-fruit-02, PLHI-fruit-03, PLHI-fruit-07, PLHI-fruit-08, PLHI-fruit-11"
+  },
+  {
+    "label": "rank:sonnet:high:FR:ACRU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "ACRU-leaf",
+    "groups": {
+      "1": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-09"
+      ],
+      "2": [
+        "ACRU-leaf-01",
+        "ACRU-leaf-05",
+        "ACRU-leaf-08"
+      ],
+      "3": [
+        "ACRU-leaf-03",
+        "ACRU-leaf-06",
+        "ACRU-leaf-11"
+      ]
+    },
+    "keys": [
+      "ACRU-leaf-02",
+      "ACRU-leaf-09",
+      "ACRU-leaf-01",
+      "ACRU-leaf-05",
+      "ACRU-leaf-08",
+      "ACRU-leaf-03",
+      "ACRU-leaf-06",
+      "ACRU-leaf-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnetFR-1-1.jpg",
+        "keys": [
+          "ACRU-leaf-02",
+          "ACRU-leaf-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnetFR-2-1.jpg",
+        "keys": [
+          "ACRU-leaf-01",
+          "ACRU-leaf-05",
+          "ACRU-leaf-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnetFR-3-1.jpg",
+        "keys": [
+          "ACRU-leaf-03",
+          "ACRU-leaf-06",
+          "ACRU-leaf-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnetFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": ACRU-leaf-02, ACRU-leaf-09\n- group \"2\": ACRU-leaf-01, ACRU-leaf-05, ACRU-leaf-08\n- group \"3\": ACRU-leaf-03, ACRU-leaf-06, ACRU-leaf-11"
+  },
+  {
+    "label": "rank:sonnet:high:FR:ACSA3-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "ACSA3-leaf",
+    "groups": {
+      "1": [
+        "ACSA3-leaf-05",
+        "ACSA3-leaf-11"
+      ],
+      "2": [
+        "ACSA3-leaf-02"
+      ],
+      "3": [
+        "ACSA3-leaf-01",
+        "ACSA3-leaf-03",
+        "ACSA3-leaf-04",
+        "ACSA3-leaf-08"
+      ]
+    },
+    "keys": [
+      "ACSA3-leaf-05",
+      "ACSA3-leaf-11",
+      "ACSA3-leaf-02",
+      "ACSA3-leaf-01",
+      "ACSA3-leaf-03",
+      "ACSA3-leaf-04",
+      "ACSA3-leaf-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnetFR-1-1.jpg",
+        "keys": [
+          "ACSA3-leaf-05",
+          "ACSA3-leaf-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnetFR-2-1.jpg",
+        "keys": [
+          "ACSA3-leaf-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnetFR-3-1.jpg",
+        "keys": [
+          "ACSA3-leaf-01",
+          "ACSA3-leaf-03",
+          "ACSA3-leaf-04",
+          "ACSA3-leaf-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnetFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": ACSA3-leaf-05, ACSA3-leaf-11\n- group \"2\": ACSA3-leaf-02\n- group \"3\": ACSA3-leaf-01, ACSA3-leaf-03, ACSA3-leaf-04, ACSA3-leaf-08"
+  },
+  {
+    "label": "rank:sonnet:high:FR:QUAL-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QUAL-leaf",
+    "groups": {
+      "1": [
+        "QUAL-leaf-04"
+      ],
+      "2": [
+        "QUAL-leaf-01",
+        "QUAL-leaf-05"
+      ],
+      "3": [
+        "QUAL-leaf-02",
+        "QUAL-leaf-03"
+      ]
+    },
+    "keys": [
+      "QUAL-leaf-04",
+      "QUAL-leaf-01",
+      "QUAL-leaf-05",
+      "QUAL-leaf-02",
+      "QUAL-leaf-03"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnetFR-1-1.jpg",
+        "keys": [
+          "QUAL-leaf-04"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnetFR-2-1.jpg",
+        "keys": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-05"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnetFR-3-1.jpg",
+        "keys": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnetFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": QUAL-leaf-04\n- group \"2\": QUAL-leaf-01, QUAL-leaf-05\n- group \"3\": QUAL-leaf-02, QUAL-leaf-03"
+  },
+  {
+    "label": "rank:sonnet:high:FR:LITU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "LITU-leaf",
+    "groups": {
+      "1": [
+        "LITU-leaf-04",
+        "LITU-leaf-07"
+      ],
+      "3": [
+        "LITU-leaf-02",
+        "LITU-leaf-03",
+        "LITU-leaf-08"
+      ]
+    },
+    "keys": [
+      "LITU-leaf-04",
+      "LITU-leaf-07",
+      "LITU-leaf-02",
+      "LITU-leaf-03",
+      "LITU-leaf-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/sonnetFR-1-1.jpg",
+        "keys": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/sonnetFR-3-1.jpg",
+        "keys": [
+          "LITU-leaf-02",
+          "LITU-leaf-03",
+          "LITU-leaf-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": LITU-leaf-04, LITU-leaf-07\n- group \"3\": LITU-leaf-02, LITU-leaf-03, LITU-leaf-08"
+  },
+  {
+    "label": "rank:sonnet:high:FR:LITU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "LITU-bark",
+    "groups": {
+      "1": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-11"
+      ],
+      "2": [
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10"
+      ],
+      "3": [
+        "LITU-bark-02"
+      ]
+    },
+    "keys": [
+      "LITU-bark-05",
+      "LITU-bark-06",
+      "LITU-bark-08",
+      "LITU-bark-11",
+      "LITU-bark-01",
+      "LITU-bark-07",
+      "LITU-bark-10",
+      "LITU-bark-02"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnetFR-1-1.jpg",
+        "keys": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08",
+          "LITU-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnetFR-2-1.jpg",
+        "keys": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnetFR-3-1.jpg",
+        "keys": [
+          "LITU-bark-02"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnetFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": LITU-bark-05, LITU-bark-06, LITU-bark-08, LITU-bark-11\n- group \"2\": LITU-bark-01, LITU-bark-07, LITU-bark-10\n- group \"3\": LITU-bark-02"
+  },
+  {
+    "label": "rank:sonnet:high:FR:LITU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "LITU-fruit",
+    "groups": {
+      "1": [
+        "LITU-fruit-01",
+        "LITU-fruit-07",
+        "LITU-fruit-10",
+        "LITU-fruit-12"
+      ],
+      "3": [
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-08",
+        "LITU-fruit-09"
+      ]
+    },
+    "keys": [
+      "LITU-fruit-01",
+      "LITU-fruit-07",
+      "LITU-fruit-10",
+      "LITU-fruit-12",
+      "LITU-fruit-04",
+      "LITU-fruit-05",
+      "LITU-fruit-06",
+      "LITU-fruit-08",
+      "LITU-fruit-09"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/sonnetFR-1-1.jpg",
+        "keys": [
+          "LITU-fruit-01",
+          "LITU-fruit-07",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/sonnetFR-3-1.jpg",
+        "keys": [
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-08",
+          "LITU-fruit-09"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": LITU-fruit-01, LITU-fruit-07, LITU-fruit-10, LITU-fruit-12\n- group \"3\": LITU-fruit-04, LITU-fruit-05, LITU-fruit-06, LITU-fruit-08, LITU-fruit-09"
+  },
+  {
+    "label": "rank:sonnet:high:FR:PLOC-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "PLOC-fruit",
+    "groups": {
+      "1": [
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-10",
+        "PLOC-fruit-12"
+      ],
+      "3": [
+        "PLOC-fruit-02",
+        "PLOC-fruit-03",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11"
+      ]
+    },
+    "keys": [
+      "PLOC-fruit-04",
+      "PLOC-fruit-05",
+      "PLOC-fruit-07",
+      "PLOC-fruit-08",
+      "PLOC-fruit-10",
+      "PLOC-fruit-12",
+      "PLOC-fruit-02",
+      "PLOC-fruit-03",
+      "PLOC-fruit-09",
+      "PLOC-fruit-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/sonnetFR-1-1.jpg",
+        "keys": [
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-10",
+          "PLOC-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/sonnetFR-3-1.jpg",
+        "keys": [
+          "PLOC-fruit-02",
+          "PLOC-fruit-03",
+          "PLOC-fruit-09",
+          "PLOC-fruit-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": PLOC-fruit-04, PLOC-fruit-05, PLOC-fruit-07, PLOC-fruit-08, PLOC-fruit-10, PLOC-fruit-12\n- group \"3\": PLOC-fruit-02, PLOC-fruit-03, PLOC-fruit-09, PLOC-fruit-11"
+  },
+  {
+    "label": "rank:haiku:high:ACRU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-leaf",
+    "groups": {
+      "1": [
+        "ACRU-leaf-09"
+      ],
+      "2": [
+        "ACRU-leaf-02"
+      ],
+      "3": [
+        "ACRU-leaf-01",
+        "ACRU-leaf-03",
+        "ACRU-leaf-05",
+        "ACRU-leaf-06",
+        "ACRU-leaf-08",
+        "ACRU-leaf-10",
+        "ACRU-leaf-11"
+      ]
+    },
+    "keys": [
+      "ACRU-leaf-09",
+      "ACRU-leaf-02",
+      "ACRU-leaf-01",
+      "ACRU-leaf-03",
+      "ACRU-leaf-05",
+      "ACRU-leaf-06",
+      "ACRU-leaf-08",
+      "ACRU-leaf-10",
+      "ACRU-leaf-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/haiku-1-1.jpg",
+        "keys": [
+          "ACRU-leaf-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/haiku-2-1.jpg",
+        "keys": [
+          "ACRU-leaf-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/haiku-3-1.jpg",
+        "keys": [
+          "ACRU-leaf-01",
+          "ACRU-leaf-03",
+          "ACRU-leaf-05",
+          "ACRU-leaf-06",
+          "ACRU-leaf-08",
+          "ACRU-leaf-10",
+          "ACRU-leaf-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-leaf/haiku-3-1.jpg\nGroups:\n- group \"1\": ACRU-leaf-09\n- group \"2\": ACRU-leaf-02\n- group \"3\": ACRU-leaf-01, ACRU-leaf-03, ACRU-leaf-05, ACRU-leaf-06, ACRU-leaf-08, ACRU-leaf-10, ACRU-leaf-11"
+  },
+  {
+    "label": "rank:haiku:high:ACRU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-bark",
+    "groups": {
+      "1": [
+        "ACRU-bark-02"
+      ],
+      "2": [
+        "ACRU-bark-05",
+        "ACRU-bark-09",
+        "ACRU-bark-10",
+        "ACRU-bark-11"
+      ],
+      "3": [
+        "ACRU-bark-01",
+        "ACRU-bark-04",
+        "ACRU-bark-06",
+        "ACRU-bark-07",
+        "ACRU-bark-08",
+        "ACRU-bark-12"
+      ]
+    },
+    "keys": [
+      "ACRU-bark-02",
+      "ACRU-bark-05",
+      "ACRU-bark-09",
+      "ACRU-bark-10",
+      "ACRU-bark-11",
+      "ACRU-bark-01",
+      "ACRU-bark-04",
+      "ACRU-bark-06",
+      "ACRU-bark-07",
+      "ACRU-bark-08",
+      "ACRU-bark-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/haiku-1-1.jpg",
+        "keys": [
+          "ACRU-bark-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/haiku-2-1.jpg",
+        "keys": [
+          "ACRU-bark-05",
+          "ACRU-bark-09",
+          "ACRU-bark-10",
+          "ACRU-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/haiku-3-1.jpg",
+        "keys": [
+          "ACRU-bark-01",
+          "ACRU-bark-04",
+          "ACRU-bark-06",
+          "ACRU-bark-07",
+          "ACRU-bark-08",
+          "ACRU-bark-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-bark/haiku-3-1.jpg\nGroups:\n- group \"1\": ACRU-bark-02\n- group \"2\": ACRU-bark-05, ACRU-bark-09, ACRU-bark-10, ACRU-bark-11\n- group \"3\": ACRU-bark-01, ACRU-bark-04, ACRU-bark-06, ACRU-bark-07, ACRU-bark-08, ACRU-bark-12"
+  },
+  {
+    "label": "rank:haiku:high:ACRU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACRU-fruit",
+    "groups": {
+      "1": [
+        "ACRU-fruit-02",
+        "ACRU-fruit-03",
+        "ACRU-fruit-04",
+        "ACRU-fruit-05",
+        "ACRU-fruit-06",
+        "ACRU-fruit-09",
+        "ACRU-fruit-11"
+      ],
+      "3": [
+        "ACRU-fruit-01",
+        "ACRU-fruit-07",
+        "ACRU-fruit-08"
+      ]
+    },
+    "keys": [
+      "ACRU-fruit-02",
+      "ACRU-fruit-03",
+      "ACRU-fruit-04",
+      "ACRU-fruit-05",
+      "ACRU-fruit-06",
+      "ACRU-fruit-09",
+      "ACRU-fruit-11",
+      "ACRU-fruit-01",
+      "ACRU-fruit-07",
+      "ACRU-fruit-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/haiku-1-1.jpg",
+        "keys": [
+          "ACRU-fruit-02",
+          "ACRU-fruit-03",
+          "ACRU-fruit-04",
+          "ACRU-fruit-05",
+          "ACRU-fruit-06",
+          "ACRU-fruit-09",
+          "ACRU-fruit-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/haiku-3-1.jpg",
+        "keys": [
+          "ACRU-fruit-01",
+          "ACRU-fruit-07",
+          "ACRU-fruit-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer rubrum, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACRU-fruit/haiku-3-1.jpg\nGroups:\n- group \"1\": ACRU-fruit-02, ACRU-fruit-03, ACRU-fruit-04, ACRU-fruit-05, ACRU-fruit-06, ACRU-fruit-09, ACRU-fruit-11\n- group \"3\": ACRU-fruit-01, ACRU-fruit-07, ACRU-fruit-08"
+  },
+  {
+    "label": "rank:haiku:high:ACSA3-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-leaf",
+    "groups": {
+      "1": [
+        "ACSA3-leaf-02",
+        "ACSA3-leaf-03",
+        "ACSA3-leaf-05",
+        "ACSA3-leaf-11"
+      ],
+      "3": [
+        "ACSA3-leaf-01",
+        "ACSA3-leaf-04",
+        "ACSA3-leaf-08"
+      ]
+    },
+    "keys": [
+      "ACSA3-leaf-02",
+      "ACSA3-leaf-03",
+      "ACSA3-leaf-05",
+      "ACSA3-leaf-11",
+      "ACSA3-leaf-01",
+      "ACSA3-leaf-04",
+      "ACSA3-leaf-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/haiku-1-1.jpg",
+        "keys": [
+          "ACSA3-leaf-02",
+          "ACSA3-leaf-03",
+          "ACSA3-leaf-05",
+          "ACSA3-leaf-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/haiku-3-1.jpg",
+        "keys": [
+          "ACSA3-leaf-01",
+          "ACSA3-leaf-04",
+          "ACSA3-leaf-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-leaf/haiku-3-1.jpg\nGroups:\n- group \"1\": ACSA3-leaf-02, ACSA3-leaf-03, ACSA3-leaf-05, ACSA3-leaf-11\n- group \"3\": ACSA3-leaf-01, ACSA3-leaf-04, ACSA3-leaf-08"
+  },
+  {
+    "label": "rank:haiku:high:ACSA3-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-bark",
+    "groups": {
+      "1": [
+        "ACSA3-bark-02",
+        "ACSA3-bark-03",
+        "ACSA3-bark-06",
+        "ACSA3-bark-07",
+        "ACSA3-bark-09",
+        "ACSA3-bark-10"
+      ],
+      "2": [
+        "ACSA3-bark-08",
+        "ACSA3-bark-11"
+      ],
+      "3": [
+        "ACSA3-bark-01",
+        "ACSA3-bark-04",
+        "ACSA3-bark-12"
+      ]
+    },
+    "keys": [
+      "ACSA3-bark-02",
+      "ACSA3-bark-03",
+      "ACSA3-bark-06",
+      "ACSA3-bark-07",
+      "ACSA3-bark-09",
+      "ACSA3-bark-10",
+      "ACSA3-bark-08",
+      "ACSA3-bark-11",
+      "ACSA3-bark-01",
+      "ACSA3-bark-04",
+      "ACSA3-bark-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/haiku-1-1.jpg",
+        "keys": [
+          "ACSA3-bark-02",
+          "ACSA3-bark-03",
+          "ACSA3-bark-06",
+          "ACSA3-bark-07",
+          "ACSA3-bark-09",
+          "ACSA3-bark-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/haiku-2-1.jpg",
+        "keys": [
+          "ACSA3-bark-08",
+          "ACSA3-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/haiku-3-1.jpg",
+        "keys": [
+          "ACSA3-bark-01",
+          "ACSA3-bark-04",
+          "ACSA3-bark-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-bark/haiku-3-1.jpg\nGroups:\n- group \"1\": ACSA3-bark-02, ACSA3-bark-03, ACSA3-bark-06, ACSA3-bark-07, ACSA3-bark-09, ACSA3-bark-10\n- group \"2\": ACSA3-bark-08, ACSA3-bark-11\n- group \"3\": ACSA3-bark-01, ACSA3-bark-04, ACSA3-bark-12"
+  },
+  {
+    "label": "rank:haiku:high:ACSA3-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "ACSA3-fruit",
+    "groups": {
+      "1": [
+        "ACSA3-fruit-02",
+        "ACSA3-fruit-03",
+        "ACSA3-fruit-05",
+        "ACSA3-fruit-06"
+      ],
+      "3": [
+        "ACSA3-fruit-01",
+        "ACSA3-fruit-04"
+      ]
+    },
+    "keys": [
+      "ACSA3-fruit-02",
+      "ACSA3-fruit-03",
+      "ACSA3-fruit-05",
+      "ACSA3-fruit-06",
+      "ACSA3-fruit-01",
+      "ACSA3-fruit-04"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/haiku-1-1.jpg",
+        "keys": [
+          "ACSA3-fruit-02",
+          "ACSA3-fruit-03",
+          "ACSA3-fruit-05",
+          "ACSA3-fruit-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/haiku-3-1.jpg",
+        "keys": [
+          "ACSA3-fruit-01",
+          "ACSA3-fruit-04"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Acer saccharum, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/ACSA3-fruit/haiku-3-1.jpg\nGroups:\n- group \"1\": ACSA3-fruit-02, ACSA3-fruit-03, ACSA3-fruit-05, ACSA3-fruit-06\n- group \"3\": ACSA3-fruit-01, ACSA3-fruit-04"
+  },
+  {
+    "label": "rank:haiku:high:QUAL-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-leaf",
+    "groups": {
+      "2": [
+        "QUAL-leaf-01",
+        "QUAL-leaf-04",
+        "QUAL-leaf-05"
+      ],
+      "3": [
+        "QUAL-leaf-02",
+        "QUAL-leaf-03"
+      ]
+    },
+    "keys": [
+      "QUAL-leaf-01",
+      "QUAL-leaf-04",
+      "QUAL-leaf-05",
+      "QUAL-leaf-02",
+      "QUAL-leaf-03"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/haiku-2-1.jpg",
+        "keys": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-04",
+          "QUAL-leaf-05"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/haiku-3-1.jpg",
+        "keys": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-leaf/haiku-3-1.jpg\nGroups:\n- group \"2\": QUAL-leaf-01, QUAL-leaf-04, QUAL-leaf-05\n- group \"3\": QUAL-leaf-02, QUAL-leaf-03"
+  },
+  {
+    "label": "rank:haiku:high:QUAL-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-bark",
+    "groups": {
+      "1": [
+        "QUAL-bark-01",
+        "QUAL-bark-02",
+        "QUAL-bark-04",
+        "QUAL-bark-06"
+      ],
+      "3": [
+        "QUAL-bark-03"
+      ]
+    },
+    "keys": [
+      "QUAL-bark-01",
+      "QUAL-bark-02",
+      "QUAL-bark-04",
+      "QUAL-bark-06",
+      "QUAL-bark-03"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/haiku-1-1.jpg",
+        "keys": [
+          "QUAL-bark-01",
+          "QUAL-bark-02",
+          "QUAL-bark-04",
+          "QUAL-bark-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/haiku-3-1.jpg",
+        "keys": [
+          "QUAL-bark-03"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-bark/haiku-3-1.jpg\nGroups:\n- group \"1\": QUAL-bark-01, QUAL-bark-02, QUAL-bark-04, QUAL-bark-06\n- group \"3\": QUAL-bark-03"
+  },
+  {
+    "label": "rank:haiku:high:QUAL-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAL-fruit",
+    "groups": {
+      "1": [
+        "QUAL-fruit-01",
+        "QUAL-fruit-02",
+        "QUAL-fruit-04",
+        "QUAL-fruit-06"
+      ],
+      "2": [
+        "QUAL-fruit-03",
+        "QUAL-fruit-05",
+        "QUAL-fruit-07"
+      ]
+    },
+    "keys": [
+      "QUAL-fruit-01",
+      "QUAL-fruit-02",
+      "QUAL-fruit-04",
+      "QUAL-fruit-06",
+      "QUAL-fruit-03",
+      "QUAL-fruit-05",
+      "QUAL-fruit-07"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/haiku-1-1.jpg",
+        "keys": [
+          "QUAL-fruit-01",
+          "QUAL-fruit-02",
+          "QUAL-fruit-04",
+          "QUAL-fruit-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/haiku-2-1.jpg",
+        "keys": [
+          "QUAL-fruit-03",
+          "QUAL-fruit-05",
+          "QUAL-fruit-07"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus alba, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QUAL-fruit/haiku-2-1.jpg\nGroups:\n- group \"1\": QUAL-fruit-01, QUAL-fruit-02, QUAL-fruit-04, QUAL-fruit-06\n- group \"2\": QUAL-fruit-03, QUAL-fruit-05, QUAL-fruit-07"
+  },
+  {
+    "label": "rank:haiku:high:QURU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-leaf",
+    "groups": {
+      "1": [
+        "QURU-leaf-02",
+        "QURU-leaf-04",
+        "QURU-leaf-05"
+      ],
+      "2": [
+        "QURU-leaf-06",
+        "QURU-leaf-08",
+        "QURU-leaf-09",
+        "QURU-leaf-10"
+      ],
+      "3": [
+        "QURU-leaf-11",
+        "QURU-leaf-12"
+      ]
+    },
+    "keys": [
+      "QURU-leaf-02",
+      "QURU-leaf-04",
+      "QURU-leaf-05",
+      "QURU-leaf-06",
+      "QURU-leaf-08",
+      "QURU-leaf-09",
+      "QURU-leaf-10",
+      "QURU-leaf-11",
+      "QURU-leaf-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/haiku-1-1.jpg",
+        "keys": [
+          "QURU-leaf-02",
+          "QURU-leaf-04",
+          "QURU-leaf-05"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/haiku-2-1.jpg",
+        "keys": [
+          "QURU-leaf-06",
+          "QURU-leaf-08",
+          "QURU-leaf-09",
+          "QURU-leaf-10"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/haiku-3-1.jpg",
+        "keys": [
+          "QURU-leaf-11",
+          "QURU-leaf-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-leaf/haiku-3-1.jpg\nGroups:\n- group \"1\": QURU-leaf-02, QURU-leaf-04, QURU-leaf-05\n- group \"2\": QURU-leaf-06, QURU-leaf-08, QURU-leaf-09, QURU-leaf-10\n- group \"3\": QURU-leaf-11, QURU-leaf-12"
+  },
+  {
+    "label": "rank:haiku:high:QURU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-bark",
+    "groups": {
+      "1": [
+        "QURU-bark-01",
+        "QURU-bark-06"
+      ],
+      "3": [
+        "QURU-bark-05"
+      ]
+    },
+    "keys": [
+      "QURU-bark-01",
+      "QURU-bark-06",
+      "QURU-bark-05"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/haiku-1-1.jpg",
+        "keys": [
+          "QURU-bark-01",
+          "QURU-bark-06"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/haiku-3-1.jpg",
+        "keys": [
+          "QURU-bark-05"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-bark/haiku-3-1.jpg\nGroups:\n- group \"1\": QURU-bark-01, QURU-bark-06\n- group \"3\": QURU-bark-05"
+  },
+  {
+    "label": "rank:haiku:high:QURU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QURU-fruit",
+    "groups": {
+      "1": [
+        "QURU-fruit-01",
+        "QURU-fruit-03"
+      ],
+      "2": [
+        "QURU-fruit-02"
+      ],
+      "3": [
+        "QURU-fruit-04",
+        "QURU-fruit-05"
+      ]
+    },
+    "keys": [
+      "QURU-fruit-01",
+      "QURU-fruit-03",
+      "QURU-fruit-02",
+      "QURU-fruit-04",
+      "QURU-fruit-05"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/haiku-1-1.jpg",
+        "keys": [
+          "QURU-fruit-01",
+          "QURU-fruit-03"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/haiku-2-1.jpg",
+        "keys": [
+          "QURU-fruit-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/haiku-3-1.jpg",
+        "keys": [
+          "QURU-fruit-04",
+          "QURU-fruit-05"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus rubra, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/QURU-fruit/haiku-3-1.jpg\nGroups:\n- group \"1\": QURU-fruit-01, QURU-fruit-03\n- group \"2\": QURU-fruit-02\n- group \"3\": QURU-fruit-04, QURU-fruit-05"
+  },
+  {
+    "label": "rank:haiku:high:LITU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-leaf",
+    "groups": {
+      "1": [
+        "LITU-leaf-04",
+        "LITU-leaf-07"
+      ],
+      "3": [
+        "LITU-leaf-02",
+        "LITU-leaf-03",
+        "LITU-leaf-08"
+      ]
+    },
+    "keys": [
+      "LITU-leaf-04",
+      "LITU-leaf-07",
+      "LITU-leaf-02",
+      "LITU-leaf-03",
+      "LITU-leaf-08"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/haiku-1-1.jpg",
+        "keys": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/haiku-3-1.jpg",
+        "keys": [
+          "LITU-leaf-02",
+          "LITU-leaf-03",
+          "LITU-leaf-08"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-leaf/haiku-3-1.jpg\nGroups:\n- group \"1\": LITU-leaf-04, LITU-leaf-07\n- group \"3\": LITU-leaf-02, LITU-leaf-03, LITU-leaf-08"
+  },
+  {
+    "label": "rank:haiku:high:LITU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-bark",
+    "groups": {
+      "1": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08"
+      ],
+      "2": [
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10",
+        "LITU-bark-11"
+      ],
+      "3": [
+        "LITU-bark-02"
+      ]
+    },
+    "keys": [
+      "LITU-bark-05",
+      "LITU-bark-06",
+      "LITU-bark-08",
+      "LITU-bark-01",
+      "LITU-bark-07",
+      "LITU-bark-10",
+      "LITU-bark-11",
+      "LITU-bark-02"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/haiku-1-1.jpg",
+        "keys": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/haiku-2-1.jpg",
+        "keys": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10",
+          "LITU-bark-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/haiku-3-1.jpg",
+        "keys": [
+          "LITU-bark-02"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-bark/haiku-3-1.jpg\nGroups:\n- group \"1\": LITU-bark-05, LITU-bark-06, LITU-bark-08\n- group \"2\": LITU-bark-01, LITU-bark-07, LITU-bark-10, LITU-bark-11\n- group \"3\": LITU-bark-02"
+  },
+  {
+    "label": "rank:haiku:high:LITU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "LITU-fruit",
+    "groups": {
+      "3": [
+        "LITU-fruit-01",
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-07",
+        "LITU-fruit-08",
+        "LITU-fruit-09",
+        "LITU-fruit-10",
+        "LITU-fruit-12"
+      ]
+    },
+    "keys": [
+      "LITU-fruit-01",
+      "LITU-fruit-04",
+      "LITU-fruit-05",
+      "LITU-fruit-06",
+      "LITU-fruit-07",
+      "LITU-fruit-08",
+      "LITU-fruit-09",
+      "LITU-fruit-10",
+      "LITU-fruit-12"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/haiku-3-1.jpg",
+        "keys": [
+          "LITU-fruit-01",
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-07",
+          "LITU-fruit-08",
+          "LITU-fruit-09",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Liriodendron tulipifera, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/LITU-fruit/haiku-3-1.jpg\nGroups:\n- group \"3\": LITU-fruit-01, LITU-fruit-04, LITU-fruit-05, LITU-fruit-06, LITU-fruit-07, LITU-fruit-08, LITU-fruit-09, LITU-fruit-10, LITU-fruit-12"
+  },
+  {
+    "label": "rank:haiku:high:PLOC-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-leaf",
+    "groups": {
+      "1": [
+        "PLOC-leaf-07",
+        "PLOC-leaf-08",
+        "PLOC-leaf-12"
+      ],
+      "2": [
+        "PLOC-leaf-03",
+        "PLOC-leaf-04",
+        "PLOC-leaf-05",
+        "PLOC-leaf-10",
+        "PLOC-leaf-11"
+      ],
+      "3": [
+        "PLOC-leaf-01",
+        "PLOC-leaf-02",
+        "PLOC-leaf-09"
+      ]
+    },
+    "keys": [
+      "PLOC-leaf-07",
+      "PLOC-leaf-08",
+      "PLOC-leaf-12",
+      "PLOC-leaf-03",
+      "PLOC-leaf-04",
+      "PLOC-leaf-05",
+      "PLOC-leaf-10",
+      "PLOC-leaf-11",
+      "PLOC-leaf-01",
+      "PLOC-leaf-02",
+      "PLOC-leaf-09"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/haiku-1-1.jpg",
+        "keys": [
+          "PLOC-leaf-07",
+          "PLOC-leaf-08",
+          "PLOC-leaf-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/haiku-2-1.jpg",
+        "keys": [
+          "PLOC-leaf-03",
+          "PLOC-leaf-04",
+          "PLOC-leaf-05",
+          "PLOC-leaf-10",
+          "PLOC-leaf-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/haiku-3-1.jpg",
+        "keys": [
+          "PLOC-leaf-01",
+          "PLOC-leaf-02",
+          "PLOC-leaf-09"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-leaf/haiku-3-1.jpg\nGroups:\n- group \"1\": PLOC-leaf-07, PLOC-leaf-08, PLOC-leaf-12\n- group \"2\": PLOC-leaf-03, PLOC-leaf-04, PLOC-leaf-05, PLOC-leaf-10, PLOC-leaf-11\n- group \"3\": PLOC-leaf-01, PLOC-leaf-02, PLOC-leaf-09"
+  },
+  {
+    "label": "rank:haiku:high:PLOC-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-bark",
+    "groups": {
+      "2": [
+        "PLOC-bark-03",
+        "PLOC-bark-08"
+      ],
+      "3": [
+        "PLOC-bark-01",
+        "PLOC-bark-04",
+        "PLOC-bark-05",
+        "PLOC-bark-06",
+        "PLOC-bark-07",
+        "PLOC-bark-10",
+        "PLOC-bark-11"
+      ]
+    },
+    "keys": [
+      "PLOC-bark-03",
+      "PLOC-bark-08",
+      "PLOC-bark-01",
+      "PLOC-bark-04",
+      "PLOC-bark-05",
+      "PLOC-bark-06",
+      "PLOC-bark-07",
+      "PLOC-bark-10",
+      "PLOC-bark-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/haiku-2-1.jpg",
+        "keys": [
+          "PLOC-bark-03",
+          "PLOC-bark-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/haiku-3-1.jpg",
+        "keys": [
+          "PLOC-bark-01",
+          "PLOC-bark-04",
+          "PLOC-bark-05",
+          "PLOC-bark-06",
+          "PLOC-bark-07",
+          "PLOC-bark-10",
+          "PLOC-bark-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-bark/haiku-3-1.jpg\nGroups:\n- group \"2\": PLOC-bark-03, PLOC-bark-08\n- group \"3\": PLOC-bark-01, PLOC-bark-04, PLOC-bark-05, PLOC-bark-06, PLOC-bark-07, PLOC-bark-10, PLOC-bark-11"
+  },
+  {
+    "label": "rank:haiku:high:PLOC-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLOC-fruit",
+    "groups": {
+      "1": [
+        "PLOC-fruit-02",
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11",
+        "PLOC-fruit-12"
+      ],
+      "2": [
+        "PLOC-fruit-03"
+      ],
+      "3": [
+        "PLOC-fruit-10"
+      ]
+    },
+    "keys": [
+      "PLOC-fruit-02",
+      "PLOC-fruit-04",
+      "PLOC-fruit-05",
+      "PLOC-fruit-07",
+      "PLOC-fruit-08",
+      "PLOC-fruit-09",
+      "PLOC-fruit-11",
+      "PLOC-fruit-12",
+      "PLOC-fruit-03",
+      "PLOC-fruit-10"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/haiku-1-1.jpg",
+        "keys": [
+          "PLOC-fruit-02",
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-09",
+          "PLOC-fruit-11",
+          "PLOC-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/haiku-2-1.jpg",
+        "keys": [
+          "PLOC-fruit-03"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/haiku-3-1.jpg",
+        "keys": [
+          "PLOC-fruit-10"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus occidentalis, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLOC-fruit/haiku-3-1.jpg\nGroups:\n- group \"1\": PLOC-fruit-02, PLOC-fruit-04, PLOC-fruit-05, PLOC-fruit-07, PLOC-fruit-08, PLOC-fruit-09, PLOC-fruit-11, PLOC-fruit-12\n- group \"2\": PLOC-fruit-03\n- group \"3\": PLOC-fruit-10"
+  },
+  {
+    "label": "rank:haiku:high:PLHI-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-leaf",
+    "groups": {
+      "1": [
+        "PLHI-leaf-08"
+      ],
+      "2": [
+        "PLHI-leaf-01",
+        "PLHI-leaf-03",
+        "PLHI-leaf-09"
+      ],
+      "3": [
+        "PLHI-leaf-06",
+        "PLHI-leaf-07"
+      ]
+    },
+    "keys": [
+      "PLHI-leaf-08",
+      "PLHI-leaf-01",
+      "PLHI-leaf-03",
+      "PLHI-leaf-09",
+      "PLHI-leaf-06",
+      "PLHI-leaf-07"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/haiku-1-1.jpg",
+        "keys": [
+          "PLHI-leaf-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/haiku-2-1.jpg",
+        "keys": [
+          "PLHI-leaf-01",
+          "PLHI-leaf-03",
+          "PLHI-leaf-09"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/haiku-3-1.jpg",
+        "keys": [
+          "PLHI-leaf-06",
+          "PLHI-leaf-07"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-leaf/haiku-3-1.jpg\nGroups:\n- group \"1\": PLHI-leaf-08\n- group \"2\": PLHI-leaf-01, PLHI-leaf-03, PLHI-leaf-09\n- group \"3\": PLHI-leaf-06, PLHI-leaf-07"
+  },
+  {
+    "label": "rank:haiku:high:PLHI-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-bark",
+    "groups": {
+      "1": [
+        "PLHI-bark-01",
+        "PLHI-bark-03",
+        "PLHI-bark-04",
+        "PLHI-bark-05",
+        "PLHI-bark-08"
+      ],
+      "2": [
+        "PLHI-bark-09",
+        "PLHI-bark-12"
+      ],
+      "3": [
+        "PLHI-bark-06",
+        "PLHI-bark-10"
+      ]
+    },
+    "keys": [
+      "PLHI-bark-01",
+      "PLHI-bark-03",
+      "PLHI-bark-04",
+      "PLHI-bark-05",
+      "PLHI-bark-08",
+      "PLHI-bark-09",
+      "PLHI-bark-12",
+      "PLHI-bark-06",
+      "PLHI-bark-10"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/haiku-1-1.jpg",
+        "keys": [
+          "PLHI-bark-01",
+          "PLHI-bark-03",
+          "PLHI-bark-04",
+          "PLHI-bark-05",
+          "PLHI-bark-08"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/haiku-2-1.jpg",
+        "keys": [
+          "PLHI-bark-09",
+          "PLHI-bark-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/haiku-3-1.jpg",
+        "keys": [
+          "PLHI-bark-06",
+          "PLHI-bark-10"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-bark/haiku-3-1.jpg\nGroups:\n- group \"1\": PLHI-bark-01, PLHI-bark-03, PLHI-bark-04, PLHI-bark-05, PLHI-bark-08\n- group \"2\": PLHI-bark-09, PLHI-bark-12\n- group \"3\": PLHI-bark-06, PLHI-bark-10"
+  },
+  {
+    "label": "rank:haiku:high:PLHI-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "key",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLHI-fruit",
+    "groups": {
+      "1": [
+        "PLHI-fruit-03",
+        "PLHI-fruit-04",
+        "PLHI-fruit-05",
+        "PLHI-fruit-06",
+        "PLHI-fruit-09",
+        "PLHI-fruit-12"
+      ],
+      "2": [
+        "PLHI-fruit-07"
+      ],
+      "3": [
+        "PLHI-fruit-01",
+        "PLHI-fruit-02",
+        "PLHI-fruit-08",
+        "PLHI-fruit-11"
+      ]
+    },
+    "keys": [
+      "PLHI-fruit-03",
+      "PLHI-fruit-04",
+      "PLHI-fruit-05",
+      "PLHI-fruit-06",
+      "PLHI-fruit-09",
+      "PLHI-fruit-12",
+      "PLHI-fruit-07",
+      "PLHI-fruit-01",
+      "PLHI-fruit-02",
+      "PLHI-fruit-08",
+      "PLHI-fruit-11"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/haiku-1-1.jpg",
+        "keys": [
+          "PLHI-fruit-03",
+          "PLHI-fruit-04",
+          "PLHI-fruit-05",
+          "PLHI-fruit-06",
+          "PLHI-fruit-09",
+          "PLHI-fruit-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/haiku-2-1.jpg",
+        "keys": [
+          "PLHI-fruit-07"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/haiku-3-1.jpg",
+        "keys": [
+          "PLHI-fruit-01",
+          "PLHI-fruit-02",
+          "PLHI-fruit-08",
+          "PLHI-fruit-11"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus ×hispanica, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/key/PLHI-fruit/haiku-3-1.jpg\nGroups:\n- group \"1\": PLHI-fruit-03, PLHI-fruit-04, PLHI-fruit-05, PLHI-fruit-06, PLHI-fruit-09, PLHI-fruit-12\n- group \"2\": PLHI-fruit-07\n- group \"3\": PLHI-fruit-01, PLHI-fruit-02, PLHI-fruit-08, PLHI-fruit-11"
+  }
+]

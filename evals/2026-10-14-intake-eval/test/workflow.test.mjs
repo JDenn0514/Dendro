@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { buildJobs, renderScript, tracerPhotos, MODELS } from '../make-workflow.mjs';
+import { buildJobs, renderScript, tracerPhotos, changedJobs, MODELS } from '../make-workflow.mjs';
 import { SCHEMAS } from '../lib/schemas.mjs';
 import { EVAL } from '../lib/paths.mjs';
 
@@ -14,6 +14,7 @@ const config = {
   variants: ['V1', 'V2'],
   model_opt: { opus: 'claude-opus-5-5', sonnet: 'claude-sonnet-5-5', haiku: 'claude-haiku-5-5' },
   depth_features: { PLHI: { fruit: 'two_heads' } },
+  leading: { variant: 'V1', batch: 20, effort: { opus: 'high', sonnet: 'medium', haiku: 'medium' } },
 };
 let order = 0;
 const cell = (target, part, n, species = `${target} species`) => ({
@@ -96,6 +97,57 @@ test('key-effort plan: the named variant at medium and xhigh for each model', ()
   assert.ok(jobs.every(j => j.variant === 'V2'));
   assert.throws(() => buildJobs(POOL, 'key-effort', config), /needs --variant/);
   assert.throws(() => buildJobs(POOL, 'nope', config), /unknown plan nope/);
+});
+
+test('key-n20 plan: the leading variant in calls of 20, for each model whose leading effort is not high', () => {
+  const jobs = buildJobs(POOL, 'key-n20', config);
+  assert.deepEqual([...new Set(jobs.map(j => `${j.model}:${j.effort}`))], ['sonnet:medium', 'haiku:medium']);
+  assert.ok(jobs.every(j => j.batch === 20 && j.variant === 'V1'));
+  assert.equal(jobs[0].label, 'judge:sonnet:medium:V1:n20:b01');
+  assert.deepEqual(keysOf(jobs.filter(j => j.model === 'haiku')), POOL.cells.flatMap(c => c.photos.map(p => p.key)));
+  // Opus leads at high, and key-batch20 already holds that set-up.
+  const b20 = new Set(buildJobs(POOL, 'key-batch20', config).map(j => j.label));
+  assert.ok(jobs.every(j => !b20.has(j.label)));
+});
+
+test('key-repeat plan: the same jobs as the first calls-of-20 run of each leading set-up', () => {
+  const jobs = buildJobs(POOL, 'key-repeat', config);
+  assert.equal(jobs.length, 3 * 3);
+  const first = [...buildJobs(POOL, 'key-batch20', config).filter(j => j.model === 'opus'), ...buildJobs(POOL, 'key-n20', config)];
+  assert.deepEqual(jobs.map(j => [j.label, j.prompt, j.effort]), first.map(j => [j.label, j.prompt, j.effort]));
+});
+
+test('key-rank plan: R for each model and cell with 2 or more photos to rank; FR only where its set differs from R', () => {
+  // Every photo a plain step 1 answer for every model; Haiku rejects ACRU-leaf-01 only.
+  const ans = Object.fromEntries(POOL.cells.flatMap(c => c.photos.map(p => [p.key, { part: c.part, photo_features: { shape: 'clear', margin: 'clear', texture: 'clear', pattern: 'clear', kind: 'clear' }, whole: true, alone: true, too_close: false, causes: [], reject: [], side: 'upper' }])));
+  const filter = { ...ans, 'ACRU-leaf-01': { ...ans['ACRU-leaf-01'], reject: ['blur'] } };
+  const jobs = buildJobs(POOL, 'key-rank', config, { answers: { opus: ans, sonnet: ans, haiku: ans }, filter });
+  const r = jobs.filter(j => j.method === 'R'), fr = jobs.filter(j => j.method === 'FR');
+  assert.equal(r.length, 3 * 6);
+  assert.deepEqual(fr.map(j => j.label), ['rank:opus:high:FR:ACRU-leaf', 'rank:sonnet:high:FR:ACRU-leaf']);
+  assert.ok(!fr[0].keys.includes('ACRU-leaf-01'));
+  const one = r.find(j => j.label === 'rank:opus:high:ACRU-leaf');
+  assert.deepEqual(Object.keys(one.groups), ['1']);
+  assert.equal(one.keys.length, 13);
+  assert.ok(jobs.every(j => j.kind === 'rank' && j.effort === 'high' && j.schema === 'RANK' && j.model_opt === config.model_opt[j.model]));
+  // R and FR sheets of one cell do not share a file.
+  assert.ok(fr[0].sheets.every(s => !one.sheets.some(x => x.file === s.file)));
+  assert.match(one.prompt, /group "1": ACRU-leaf-01, /);
+  // ACRU and PLHI share no genus, so no prompt has a group line.
+  assert.ok(jobs.every(j => !j.prompt.includes('Group line')));
+  assert.throws(() => buildJobs(POOL, 'key-rank', config), /needs the judge answers/);
+});
+
+test('opts.models limits key-n20 and key-repeat to the models named', () => {
+  const jobs = buildJobs(POOL, 'key-repeat', config, { models: ['sonnet', 'haiku'] });
+  assert.deepEqual([...new Set(jobs.map(j => j.model))], ['sonnet', 'haiku']);
+  assert.throws(() => buildJobs(POOL, 'key-repeat', config, { models: ['gpt'] }), /unknown model gpt/);
+});
+
+test('changedJobs: the jobs whose label or prompt is not in the old job list', () => {
+  const old = [{ label: 'a', prompt: 'x' }, { label: 'b', prompt: 'y' }];
+  const now = [{ label: 'a', prompt: 'x' }, { label: 'b', prompt: 'z' }, { label: 'c', prompt: 'x' }];
+  assert.deepEqual(changedJobs(now, old).map(j => j.label), ['b', 'c']);
 });
 
 test('judge prompts list the 440 px copies, the tree, and the source name, and nothing of the owner', () => {

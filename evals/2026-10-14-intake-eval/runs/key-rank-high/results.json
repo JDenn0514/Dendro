@@ -1,0 +1,4720 @@
+{
+  "runIds": [
+    "wf_53c52590-4df",
+    "wf_cf0ac893-ea8"
+  ],
+  "jobs": [
+    {
+      "label": "rank:opus:high:ACRU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-leaf-05",
+          "ACRU-leaf-09"
+        ],
+        "2": [
+          "ACRU-leaf-02"
+        ],
+        "3": [
+          "ACRU-leaf-01",
+          "ACRU-leaf-03",
+          "ACRU-leaf-06",
+          "ACRU-leaf-08"
+        ]
+      },
+      "keys": [
+        "ACRU-leaf-05",
+        "ACRU-leaf-09",
+        "ACRU-leaf-02",
+        "ACRU-leaf-01",
+        "ACRU-leaf-03",
+        "ACRU-leaf-06",
+        "ACRU-leaf-08"
+      ],
+      "agentIds": [
+        "a4bb396b0faab595e"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-leaf-09",
+            "ACRU-leaf-05"
+          ],
+          "2": [
+            "ACRU-leaf-02"
+          ],
+          "3": [
+            "ACRU-leaf-06",
+            "ACRU-leaf-08",
+            "ACRU-leaf-01",
+            "ACRU-leaf-03"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: 09 shows one whole green mature leaf in full outline, ahead of 05 (autumn red and green colouring). Group 2: one photo only. Group 3: 06 is the only one with green mature leaves (a spray of several leaves). 08 and 01 show autumn red and orange leaves. 08 ranks ahead of 01 because its leaf outlines are whole and more distinct. 03 ranks last: backlit brown autumn leaves that overlap, with no clear whole outline."
+      }
+    },
+    {
+      "label": "rank:opus:high:ACRU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-bark-02",
+          "ACRU-bark-06",
+          "ACRU-bark-07"
+        ],
+        "2": [
+          "ACRU-bark-05",
+          "ACRU-bark-09",
+          "ACRU-bark-10",
+          "ACRU-bark-11"
+        ],
+        "3": [
+          "ACRU-bark-01",
+          "ACRU-bark-04",
+          "ACRU-bark-08",
+          "ACRU-bark-12"
+        ]
+      },
+      "keys": [
+        "ACRU-bark-02",
+        "ACRU-bark-06",
+        "ACRU-bark-07",
+        "ACRU-bark-05",
+        "ACRU-bark-09",
+        "ACRU-bark-10",
+        "ACRU-bark-11",
+        "ACRU-bark-01",
+        "ACRU-bark-04",
+        "ACRU-bark-08",
+        "ACRU-bark-12"
+      ],
+      "agentIds": [
+        "a4c00d621d600fd6e"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-bark-02",
+            "ACRU-bark-06",
+            "ACRU-bark-07"
+          ],
+          "2": [
+            "ACRU-bark-05",
+            "ACRU-bark-10",
+            "ACRU-bark-11",
+            "ACRU-bark-09"
+          ],
+          "3": [
+            "ACRU-bark-01",
+            "ACRU-bark-12",
+            "ACRU-bark-08",
+            "ACRU-bark-04"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: 02 is a close view of mature, shaggy, ridged bark that shows the pattern repeat. The hand in it does not count as scale. 06 shows mature furrowed bark on the whole trunk from farther back. 07 is younger and smoother, with pale patches, so it is the least typical. Group 2: all four are close views of mature bark. 05 shows the ridge and furrow pattern most clearly over a wide area. 10 and 11 are similar platy views. 09 comes last because it is a smaller landscape crop with blockier texture. Group 3: all four show the whole tree, which is not the close bark view named in the group line. 01 and 12 show mature ridged bark on the trunk well enough to read. In 08 the bark is mostly hidden under moss. In 04 the trunk is thin, lichen-covered, small in the frame and looks young."
+      }
+    },
+    {
+      "label": "rank:opus:high:ACRU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-fruit-02",
+          "ACRU-fruit-03",
+          "ACRU-fruit-04",
+          "ACRU-fruit-09",
+          "ACRU-fruit-11"
+        ],
+        "3": [
+          "ACRU-fruit-01",
+          "ACRU-fruit-05",
+          "ACRU-fruit-06",
+          "ACRU-fruit-07",
+          "ACRU-fruit-08",
+          "ACRU-fruit-10"
+        ]
+      },
+      "keys": [
+        "ACRU-fruit-02",
+        "ACRU-fruit-03",
+        "ACRU-fruit-04",
+        "ACRU-fruit-09",
+        "ACRU-fruit-11",
+        "ACRU-fruit-01",
+        "ACRU-fruit-05",
+        "ACRU-fruit-06",
+        "ACRU-fruit-07",
+        "ACRU-fruit-08",
+        "ACRU-fruit-10"
+      ],
+      "agentIds": [
+        "afcebc81a7e9a48de"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-fruit-02",
+            "ACRU-fruit-03",
+            "ACRU-fruit-11",
+            "ACRU-fruit-09",
+            "ACRU-fruit-04"
+          ],
+          "3": [
+            "ACRU-fruit-08",
+            "ACRU-fruit-05",
+            "ACRU-fruit-07",
+            "ACRU-fruit-01",
+            "ACRU-fruit-10",
+            "ACRU-fruit-06"
+          ]
+        },
+        "unread": [],
+        "note": "No photo in either sheet has a scale object, and none shows picked fruit. That left criterion 2 and the group line with little to separate the photos, so the order rests mostly on ripeness and on how much of the fruit is in frame. Group 1: 02 and 03 show whole clusters of mature samaras. 11 and 09 show whole red clusters, and 09's are smaller in the frame. 04 is the closest view of the fruit but crops the wings and looks less ripe. Group 3: 08 and 05 show whole clusters of ripe samaras. 07 shows pale mature samaras among leaves, seen from further away. 01 is a distant view of the tree. 10 and 06 show young, immature fruit, so they rank last."
+      }
+    },
+    {
+      "label": "rank:opus:high:ACSA3-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-leaf-02",
+          "ACSA3-leaf-05",
+          "ACSA3-leaf-11"
+        ],
+        "2": [
+          "ACSA3-leaf-08"
+        ],
+        "3": [
+          "ACSA3-leaf-01",
+          "ACSA3-leaf-03"
+        ]
+      },
+      "keys": [
+        "ACSA3-leaf-02",
+        "ACSA3-leaf-05",
+        "ACSA3-leaf-11",
+        "ACSA3-leaf-08",
+        "ACSA3-leaf-01",
+        "ACSA3-leaf-03"
+      ],
+      "agentIds": [
+        "a8f22988534554978"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-leaf-05",
+            "ACSA3-leaf-11",
+            "ACSA3-leaf-02"
+          ],
+          "2": [
+            "ACSA3-leaf-08"
+          ],
+          "3": [
+            "ACSA3-leaf-03",
+            "ACSA3-leaf-01"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: all three show one whole green mature leaf. 05 is a clean upper side on black with the full outline and petiole. 11 is a whole upper side on white but has a strong shadow. 02 is whole but paler and bluish on mulch, so it may be the underside. Group 3: 03 is one whole leaf, glossy upper side, isolated. 01 shows several leaves on a branch, some overlapping and with brown spots, and no single clean outline."
+      }
+    },
+    {
+      "label": "rank:opus:high:ACSA3-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-bark-02",
+          "ACSA3-bark-03",
+          "ACSA3-bark-06",
+          "ACSA3-bark-07",
+          "ACSA3-bark-09",
+          "ACSA3-bark-10"
+        ],
+        "2": [
+          "ACSA3-bark-08",
+          "ACSA3-bark-11"
+        ],
+        "3": [
+          "ACSA3-bark-01",
+          "ACSA3-bark-04",
+          "ACSA3-bark-12"
+        ]
+      },
+      "keys": [
+        "ACSA3-bark-02",
+        "ACSA3-bark-03",
+        "ACSA3-bark-06",
+        "ACSA3-bark-07",
+        "ACSA3-bark-09",
+        "ACSA3-bark-10",
+        "ACSA3-bark-08",
+        "ACSA3-bark-11",
+        "ACSA3-bark-01",
+        "ACSA3-bark-04",
+        "ACSA3-bark-12"
+      ],
+      "agentIds": [
+        "a6a9841541de3a7f3"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-bark-10",
+            "ACSA3-bark-02",
+            "ACSA3-bark-06",
+            "ACSA3-bark-03",
+            "ACSA3-bark-09",
+            "ACSA3-bark-07"
+          ],
+          "2": [
+            "ACSA3-bark-08",
+            "ACSA3-bark-11"
+          ],
+          "3": [
+            "ACSA3-bark-01",
+            "ACSA3-bark-04",
+            "ACSA3-bark-12"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1 shows mature trunks. 10, 02 and 06 come first because they show the typical long plates curling at the edges over a wide enough patch of trunk. 03 is close but covered in lichen. 09 is shot at an angle and shows less detail. 07 is a wide shot of a forked trunk, so the bark is small in the frame. Group 2: 08 shows clean gray plated bark with lifting edges, while 11 is darker with an algae tint. Group 3: 01 is the only close bark view (warm colour cast, but the pattern repeat is clear). 04 and 12 are whole-tree views. In 04 the trunk bark is more legible than in the mossy old trunk of 12."
+      }
+    },
+    {
+      "label": "rank:opus:high:ACSA3-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-fruit-02",
+          "ACSA3-fruit-06"
+        ],
+        "3": [
+          "ACSA3-fruit-01",
+          "ACSA3-fruit-03",
+          "ACSA3-fruit-04",
+          "ACSA3-fruit-05"
+        ]
+      },
+      "keys": [
+        "ACSA3-fruit-02",
+        "ACSA3-fruit-06",
+        "ACSA3-fruit-01",
+        "ACSA3-fruit-03",
+        "ACSA3-fruit-04",
+        "ACSA3-fruit-05"
+      ],
+      "agentIds": [
+        "a4a1d8c12b34f5811"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-fruit-02",
+            "ACSA3-fruit-06"
+          ],
+          "3": [
+            "ACSA3-fruit-04",
+            "ACSA3-fruit-01",
+            "ACSA3-fruit-05",
+            "ACSA3-fruit-03"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: 02 ranks first. It shows a whole ripe tan samara pair with a 1 cm scale bar. 06 shows green, still-developing fruit on the twig. Group 3: 04 ranks first. It shows ripe brown samaras hanging on the twig, which fits the group line. 01 and 05 show whole clusters on leafy twigs, but the seeds are still green. 01 is the cleaner, fully framed cluster, so it comes before 05. 03 ranks last. It is a single germinating half-samara on snow, which is not the usual look."
+      }
+    },
+    {
+      "label": "rank:opus:high:QUAL-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-leaf",
+      "method": "R",
+      "groups": {
+        "2": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-05"
+        ],
+        "3": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03",
+          "QUAL-leaf-04",
+          "QUAL-leaf-06",
+          "QUAL-leaf-07"
+        ]
+      },
+      "keys": [
+        "QUAL-leaf-01",
+        "QUAL-leaf-05",
+        "QUAL-leaf-02",
+        "QUAL-leaf-03",
+        "QUAL-leaf-04",
+        "QUAL-leaf-06",
+        "QUAL-leaf-07"
+      ],
+      "agentIds": [
+        "a84fce8f0373fac87"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "2": [
+            "QUAL-leaf-01",
+            "QUAL-leaf-05"
+          ],
+          "3": [
+            "QUAL-leaf-04",
+            "QUAL-leaf-02",
+            "QUAL-leaf-06",
+            "QUAL-leaf-03",
+            "QUAL-leaf-07"
+          ]
+        },
+        "unread": [],
+        "note": "Group 2: 01 is a close view of whole, green, mature leaves with clear lobe outlines. 05 is a wider branch view where the single-leaf outlines are smaller. Group 3: 04 shows one whole leaf outline filling the frame, though its grey tone may be the underside. 02 shows several whole green leaves against the sky. 06 is a leafy branch with green acorns and leaves that are mostly whole. 03 shows a near-whole leaf, but it has insect holes and galls, so it is not the usual look. 07 is a distant view of a whole branch with no clear single leaf."
+      }
+    },
+    {
+      "label": "rank:opus:high:QUAL-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAL-bark-01",
+          "QUAL-bark-02",
+          "QUAL-bark-04",
+          "QUAL-bark-06"
+        ],
+        "3": [
+          "QUAL-bark-03"
+        ]
+      },
+      "keys": [
+        "QUAL-bark-01",
+        "QUAL-bark-02",
+        "QUAL-bark-04",
+        "QUAL-bark-06",
+        "QUAL-bark-03"
+      ],
+      "agentIds": [
+        "a83902c14f2d6fe4c"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAL-bark-06",
+            "QUAL-bark-02",
+            "QUAL-bark-01",
+            "QUAL-bark-04"
+          ],
+          "3": [
+            "QUAL-bark-03"
+          ]
+        },
+        "unread": [],
+        "note": "All five tiles show mature bark, so I ranked mainly on how many repeats of the pattern show and on how close the view is (the group line asks for close bark). 06 is the closest and sharpest view, filling the frame with the scaly, blocky ridges. 02 shows the pale grey plates clearly across the whole trunk. 01 shows the blocky pattern well, but the trunk is narrow in the frame and there is a lot of forest background. 04 comes last because the trunk is farther away and the bark texture has low contrast. Group 3 has one photo, 03, a close view of dark furrowed bark partly in shade."
+      }
+    },
+    {
+      "label": "rank:opus:high:QUAL-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAL-fruit-01",
+          "QUAL-fruit-02",
+          "QUAL-fruit-03",
+          "QUAL-fruit-05",
+          "QUAL-fruit-06",
+          "QUAL-fruit-07"
+        ],
+        "3": [
+          "QUAL-fruit-04"
+        ]
+      },
+      "keys": [
+        "QUAL-fruit-01",
+        "QUAL-fruit-02",
+        "QUAL-fruit-03",
+        "QUAL-fruit-05",
+        "QUAL-fruit-06",
+        "QUAL-fruit-07",
+        "QUAL-fruit-04"
+      ],
+      "agentIds": [
+        "a49184ef0456137fc"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAL-fruit-01",
+            "QUAL-fruit-06",
+            "QUAL-fruit-02",
+            "QUAL-fruit-05",
+            "QUAL-fruit-07",
+            "QUAL-fruit-03"
+          ],
+          "3": [
+            "QUAL-fruit-04"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: QUAL-fruit-01 ranks first. It is the only photo with ripe brown acorns, it has a 1 cm scale bar, it shows the whole fruit with the cap off and on, and it is the picked view the group line names. The other five show green, unripe acorns on the branch, so I ranked them by how whole and clear the fruit is. 06 is one acorn, whole and sharp, in close-up. 02 is one whole acorn but smaller. 05 shows three whole acorns. 07 is a cluster with some overlap. 03 is a small, partly hidden cluster. Group 3: 04 is the only photo, with pinkish acorns that are nearly ripe in a cluster on the branch."
+      }
+    },
+    {
+      "label": "rank:opus:high:QURU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-leaf",
+      "method": "R",
+      "groups": {
+        "2": [
+          "QURU-leaf-09"
+        ],
+        "3": [
+          "QURU-leaf-02",
+          "QURU-leaf-04",
+          "QURU-leaf-05",
+          "QURU-leaf-06",
+          "QURU-leaf-08",
+          "QURU-leaf-10",
+          "QURU-leaf-11",
+          "QURU-leaf-12"
+        ]
+      },
+      "keys": [
+        "QURU-leaf-09",
+        "QURU-leaf-02",
+        "QURU-leaf-04",
+        "QURU-leaf-05",
+        "QURU-leaf-06",
+        "QURU-leaf-08",
+        "QURU-leaf-10",
+        "QURU-leaf-11",
+        "QURU-leaf-12"
+      ],
+      "agentIds": [
+        "adbcba208f451951c"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "2": [
+            "QURU-leaf-09"
+          ],
+          "3": [
+            "QURU-leaf-02",
+            "QURU-leaf-04",
+            "QURU-leaf-10",
+            "QURU-leaf-08",
+            "QURU-leaf-06",
+            "QURU-leaf-05",
+            "QURU-leaf-11",
+            "QURU-leaf-12"
+          ]
+        },
+        "unread": [],
+        "note": "Group 2 has a single photo (09, green mature leaves on a branch). Group 3 order: first the green mature leaves. 02 is best because one whole leaf outline is sharp and fills the frame. 04 and 10 show whole green leaves on saplings. 08 is green but crowded, and several leaves are cut off at the frame edge. After those come the off-season looks: 06 has leaves turning orange in autumn, 05 has red autumn foliage on a small branch, and 11 and 12 are young spring leaves with catkins. 12 is ranked last because it is the palest and most immature."
+      }
+    },
+    {
+      "label": "rank:opus:high:QURU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QURU-bark-01",
+          "QURU-bark-06"
+        ],
+        "3": [
+          "QURU-bark-05"
+        ]
+      },
+      "keys": [
+        "QURU-bark-01",
+        "QURU-bark-06",
+        "QURU-bark-05"
+      ],
+      "agentIds": [
+        "afc4cc2956669b3a1"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QURU-bark-06",
+            "QURU-bark-01"
+          ],
+          "3": [
+            "QURU-bark-05"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: both photos show mature bark, and both show enough area for the pattern to repeat. 06 is a close view across the whole frame of the trunk, with the flat-topped grey ridges and shallow furrows typical of red oak. 01 shows the whole trunk base of an old tree from a distance, with a flared, lichen-covered buttress, so the ridge detail is smaller in the frame. The two tie on preferences 1 to 3, so the group line (close bark) puts 06 first. Group 3: one photo only. 05 is a close, lichen-flecked view of mature, furrowed bark. Both sheets opened."
+      }
+    },
+    {
+      "label": "rank:opus:high:QURU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QURU-fruit-01",
+          "QURU-fruit-03",
+          "QURU-fruit-04",
+          "QURU-fruit-05"
+        ],
+        "2": [
+          "QURU-fruit-02"
+        ]
+      },
+      "keys": [
+        "QURU-fruit-01",
+        "QURU-fruit-03",
+        "QURU-fruit-04",
+        "QURU-fruit-05",
+        "QURU-fruit-02"
+      ],
+      "agentIds": [
+        "a724a5824ff0a2441"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QURU-fruit-04",
+            "QURU-fruit-03",
+            "QURU-fruit-01",
+            "QURU-fruit-05"
+          ],
+          "2": [
+            "QURU-fruit-02"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 1: all four show ripe, whole acorns. 04 ranks first because it is the only one with a scale object, a 1 cm scale bar. 03 is next: a single whole acorn hanging from its stalk outdoors, the closest match to the group line's on-the-twig view. 01 shows several typical brown ripe acorns with caps on a plain background, with no scale. 05 is last because its pale, bleached-looking acorns are the least usual look. Group 2: 02 is the only key; it shows green, unripe acorns on the twig among the leaves."
+      }
+    },
+    {
+      "label": "rank:opus:high:LITU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ],
+        "2": [
+          "LITU-leaf-08",
+          "LITU-leaf-10"
+        ],
+        "3": [
+          "LITU-leaf-01",
+          "LITU-leaf-02",
+          "LITU-leaf-06"
+        ]
+      },
+      "keys": [
+        "LITU-leaf-04",
+        "LITU-leaf-07",
+        "LITU-leaf-08",
+        "LITU-leaf-10",
+        "LITU-leaf-01",
+        "LITU-leaf-02",
+        "LITU-leaf-06"
+      ],
+      "agentIds": [
+        "affa2bc284e36d367"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-leaf-04",
+            "LITU-leaf-07"
+          ],
+          "2": [
+            "LITU-leaf-08",
+            "LITU-leaf-10"
+          ],
+          "3": [
+            "LITU-leaf-01",
+            "LITU-leaf-06",
+            "LITU-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: both are whole green mature leaves. 04 shows the classic four-lobed tulip outline with a notched tip, so it ranks first. 07 is a whole leaf too, but its lobing is shallower and more rounded. Group 2: 08 shows bright green mature leaves, several with near-whole outlines. 10 is darker, puts the flowers forward and crops most leaf outlines. Group 3: 01 shows many clear mature leaves, with flowers. 06 is a distant canopy view where single leaves are small. 02 shows emerging juvenile leaves, which is not the usual look, so it ranks last."
+      }
+    },
+    {
+      "label": "rank:opus:high:LITU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08",
+          "LITU-bark-11"
+        ],
+        "2": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10"
+        ],
+        "3": [
+          "LITU-bark-02",
+          "LITU-bark-04",
+          "LITU-bark-09",
+          "LITU-bark-12"
+        ]
+      },
+      "keys": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-11",
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10",
+        "LITU-bark-02",
+        "LITU-bark-04",
+        "LITU-bark-09",
+        "LITU-bark-12"
+      ],
+      "agentIds": [
+        "ad58e7b8a8b3ee3bf"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-bark-08",
+            "LITU-bark-06",
+            "LITU-bark-05",
+            "LITU-bark-11"
+          ],
+          "2": [
+            "LITU-bark-01",
+            "LITU-bark-10",
+            "LITU-bark-07"
+          ],
+          "3": [
+            "LITU-bark-02",
+            "LITU-bark-12",
+            "LITU-bark-04",
+            "LITU-bark-09"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: every photo shows mature trunk bark. 08 shows the interlacing furrows with pale grooves most clearly, and 06 is close behind. 05 has a burl that breaks up the pattern, and in 11 the pattern is washed out by pale patches. Group 2: 01 shows the classic mature furrowed bark across a wide area. In 10, lichen partly covers the ridges. 07 is an unusual twisted diagonal old-bark pattern, so it is the least typical. Group 3: 02 shows the bark pattern most clearly, though it has moss patches. 12 is an old trunk, but it is dark and distant. In 04, children cover much of the bark. 09 is a far view of several trunks, so the bark pattern is barely visible."
+      }
+    },
+    {
+      "label": "rank:opus:high:LITU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "LITU-fruit-01",
+          "LITU-fruit-02",
+          "LITU-fruit-07",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ],
+        "3": [
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-08",
+          "LITU-fruit-09",
+          "LITU-fruit-11"
+        ]
+      },
+      "keys": [
+        "LITU-fruit-01",
+        "LITU-fruit-02",
+        "LITU-fruit-07",
+        "LITU-fruit-10",
+        "LITU-fruit-12",
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-08",
+        "LITU-fruit-09",
+        "LITU-fruit-11"
+      ],
+      "agentIds": [
+        "a79b877b694f83a1e"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-fruit-10",
+            "LITU-fruit-01",
+            "LITU-fruit-02",
+            "LITU-fruit-07",
+            "LITU-fruit-12"
+          ],
+          "3": [
+            "LITU-fruit-08",
+            "LITU-fruit-09",
+            "LITU-fruit-06",
+            "LITU-fruit-05",
+            "LITU-fruit-04",
+            "LITU-fruit-11"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened, and no photo has a scale object. I ranked first the photos that show a whole, intact, ripe brown cone of samaras: 10 and 01 in group 1, and 08 and 09 in group 3. Next come photos where the cone is partly shed or weathered (02, 07). After those come the spent rosettes (12, 06) and the small, partly shed cones seen from a distance (05). 04 ranks low because the fruit is green and unripe. 11 is last because the fruits are tiny against a branch silhouette."
+      }
+    },
+    {
+      "label": "rank:opus:high:PLOC-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLOC-leaf-08",
+          "PLOC-leaf-10",
+          "PLOC-leaf-12"
+        ],
+        "2": [
+          "PLOC-leaf-11"
+        ],
+        "3": [
+          "PLOC-leaf-01",
+          "PLOC-leaf-02",
+          "PLOC-leaf-03",
+          "PLOC-leaf-04",
+          "PLOC-leaf-05",
+          "PLOC-leaf-07",
+          "PLOC-leaf-09"
+        ]
+      },
+      "keys": [
+        "PLOC-leaf-08",
+        "PLOC-leaf-10",
+        "PLOC-leaf-12",
+        "PLOC-leaf-11",
+        "PLOC-leaf-01",
+        "PLOC-leaf-02",
+        "PLOC-leaf-03",
+        "PLOC-leaf-04",
+        "PLOC-leaf-05",
+        "PLOC-leaf-07",
+        "PLOC-leaf-09"
+      ],
+      "agentIds": [
+        "a042bed5a0060dfde"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-leaf-08",
+            "PLOC-leaf-12",
+            "PLOC-leaf-10"
+          ],
+          "2": [
+            "PLOC-leaf-11"
+          ],
+          "3": [
+            "PLOC-leaf-07",
+            "PLOC-leaf-05",
+            "PLOC-leaf-03",
+            "PLOC-leaf-09",
+            "PLOC-leaf-01",
+            "PLOC-leaf-04",
+            "PLOC-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 08 is one whole green mature leaf seen from the upper side. 12 is one whole leaf but paler and possibly the lower side. 10 is a whole branch of leaves laid on a deck, not one leaf. Group 3: 07 and 05 each show one whole green leaf. 03 is one whole leaf held in a hand, dusty and with holes. 09 is mostly whole but has brown lesions and a damaged lobe. 01 is a cluster of small leaves. 04 is cropped, so its outline is incomplete. 02 shows red and yellow young or autumn leaves, not the usual look, so it is last."
+      }
+    },
+    {
+      "label": "rank:opus:high:PLOC-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-bark",
+      "method": "R",
+      "groups": {
+        "2": [
+          "PLOC-bark-03",
+          "PLOC-bark-08",
+          "PLOC-bark-10",
+          "PLOC-bark-11"
+        ],
+        "3": [
+          "PLOC-bark-01",
+          "PLOC-bark-05",
+          "PLOC-bark-06",
+          "PLOC-bark-07"
+        ]
+      },
+      "keys": [
+        "PLOC-bark-03",
+        "PLOC-bark-08",
+        "PLOC-bark-10",
+        "PLOC-bark-11",
+        "PLOC-bark-01",
+        "PLOC-bark-05",
+        "PLOC-bark-06",
+        "PLOC-bark-07"
+      ],
+      "agentIds": [
+        "a4987ca32b7ea9b93"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "2": [
+            "PLOC-bark-03",
+            "PLOC-bark-08",
+            "PLOC-bark-11",
+            "PLOC-bark-10"
+          ],
+          "3": [
+            "PLOC-bark-01",
+            "PLOC-bark-06",
+            "PLOC-bark-07",
+            "PLOC-bark-05"
+          ]
+        },
+        "unread": [],
+        "note": "Group 2: 03 is a close, wide view of the typical camouflage patchwork, with the pattern repeating across the frame. 08 is a close view of mottled bark, but a knot and lichen clutter it. 11 is a mid-distance view of a mottled trunk, partly hidden by leaves. 10 is a distant view of the whole tree, so the bark pattern is small. Group 3: 01 is a close view of mottled white and tan exfoliating bark. 06 shows the typical white mottled upper trunks, but from farther away. 07 is the base of an old trunk, with dark scaly bark and only a little mottling. 05 is a street scene with a small trunk base."
+      }
+    },
+    {
+      "label": "rank:opus:high:PLOC-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLOC-fruit-02",
+          "PLOC-fruit-03",
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-10",
+          "PLOC-fruit-12"
+        ],
+        "3": [
+          "PLOC-fruit-01",
+          "PLOC-fruit-06",
+          "PLOC-fruit-09",
+          "PLOC-fruit-11"
+        ]
+      },
+      "keys": [
+        "PLOC-fruit-02",
+        "PLOC-fruit-03",
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-10",
+        "PLOC-fruit-12",
+        "PLOC-fruit-01",
+        "PLOC-fruit-06",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11"
+      ],
+      "agentIds": [
+        "ab066befc71bbbb35"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-fruit-04",
+            "PLOC-fruit-12",
+            "PLOC-fruit-10",
+            "PLOC-fruit-03",
+            "PLOC-fruit-05",
+            "PLOC-fruit-08",
+            "PLOC-fruit-07",
+            "PLOC-fruit-02"
+          ],
+          "3": [
+            "PLOC-fruit-01",
+            "PLOC-fruit-11",
+            "PLOC-fruit-09",
+            "PLOC-fruit-06"
+          ]
+        },
+        "unread": [],
+        "note": "None of the photos has a scale object, so the order rests on ripeness, whether the whole fruit shows, and whether it hangs on the twig. Group 1: 04 is a ripe brown ball, whole and hanging on its stalk. 12 and 10 show several ripe balls on twigs, 10 at a smaller scale. 03 is ripe but lies on the ground and is starting to break up. 05 is dull and hangs on a winter twig, so it may be near ripe. 08, 07 and 02 are green and unripe, and 02 sits against a leaf. Group 3: 01 shows ripe balls on twigs but only from far away. 11 is unripe on the twig. 09 is breaking apart into its fluffy seeds, and 06 is a broken-up fruit on a log."
+      }
+    },
+    {
+      "label": "rank:opus:high:PLHI-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-leaf-08"
+        ],
+        "2": [
+          "PLHI-leaf-03",
+          "PLHI-leaf-09"
+        ],
+        "3": [
+          "PLHI-leaf-01",
+          "PLHI-leaf-06",
+          "PLHI-leaf-07"
+        ]
+      },
+      "keys": [
+        "PLHI-leaf-08",
+        "PLHI-leaf-03",
+        "PLHI-leaf-09",
+        "PLHI-leaf-01",
+        "PLHI-leaf-06",
+        "PLHI-leaf-07"
+      ],
+      "agentIds": [
+        "aa8c89d7a3e515f75"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-leaf-08"
+          ],
+          "2": [
+            "PLHI-leaf-03",
+            "PLHI-leaf-09"
+          ],
+          "3": [
+            "PLHI-leaf-07",
+            "PLHI-leaf-01",
+            "PLHI-leaf-06"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1 has one photo (08: green mature leaf, upper side, outline nearly whole). Group 2: 03 shows one mature leaf in a hand with its outline nearly whole, so it ranks first; the side looks pale, possibly the underside. 09 is a cluster of small leaves against the bark, with no whole single leaf. Group 3: 07 is one clean green leaf, upper side, with the outline mostly in the frame, though the base is partly covered. 01 is one leaf, upper side, but its lobe tips are cut off at the edges and it has brown blotches, so it is less typical. 06 is a canopy view with no single leaf outline."
+      }
+    },
+    {
+      "label": "rank:opus:high:PLHI-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-bark-01",
+          "PLHI-bark-03",
+          "PLHI-bark-04",
+          "PLHI-bark-08",
+          "PLHI-bark-12"
+        ],
+        "2": [
+          "PLHI-bark-09"
+        ],
+        "3": [
+          "PLHI-bark-05",
+          "PLHI-bark-06",
+          "PLHI-bark-10"
+        ]
+      },
+      "keys": [
+        "PLHI-bark-01",
+        "PLHI-bark-03",
+        "PLHI-bark-04",
+        "PLHI-bark-08",
+        "PLHI-bark-12",
+        "PLHI-bark-09",
+        "PLHI-bark-05",
+        "PLHI-bark-06",
+        "PLHI-bark-10"
+      ],
+      "agentIds": [
+        "ab6120d87fd4d08e8"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-bark-01",
+            "PLHI-bark-04",
+            "PLHI-bark-03",
+            "PLHI-bark-08",
+            "PLHI-bark-12"
+          ],
+          "2": [
+            "PLHI-bark-09"
+          ],
+          "3": [
+            "PLHI-bark-05",
+            "PLHI-bark-06",
+            "PLHI-bark-10"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: bark-01 and bark-04 show the classic mottled, peeling plane bark across the full trunk width, so the pattern repeat is visible. bark-03 is also typical but has more sky and background. bark-08 is a narrower, half-shaded trunk. bark-12 is pale, uniform old bark at the base and shows less of the usual camouflage pattern. Group 2 has one photo. Group 3: bark-05 shows mottled bark across the trunk width, with some lichen. bark-06 is rougher, deeply shaded old bark. bark-10 is a close-up of a few patches and too narrow to show the pattern repeat."
+      }
+    },
+    {
+      "label": "rank:opus:high:PLHI-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-fruit-04",
+          "PLHI-fruit-05",
+          "PLHI-fruit-06",
+          "PLHI-fruit-09",
+          "PLHI-fruit-12"
+        ],
+        "2": [
+          "PLHI-fruit-03"
+        ],
+        "3": [
+          "PLHI-fruit-02",
+          "PLHI-fruit-07",
+          "PLHI-fruit-08",
+          "PLHI-fruit-11"
+        ]
+      },
+      "keys": [
+        "PLHI-fruit-04",
+        "PLHI-fruit-05",
+        "PLHI-fruit-06",
+        "PLHI-fruit-09",
+        "PLHI-fruit-12",
+        "PLHI-fruit-03",
+        "PLHI-fruit-02",
+        "PLHI-fruit-07",
+        "PLHI-fruit-08",
+        "PLHI-fruit-11"
+      ],
+      "agentIds": [
+        "aa80b35bbe9e43d23"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-fruit-12",
+            "PLHI-fruit-09",
+            "PLHI-fruit-05",
+            "PLHI-fruit-04",
+            "PLHI-fruit-06"
+          ],
+          "2": [
+            "PLHI-fruit-03"
+          ],
+          "3": [
+            "PLHI-fruit-07",
+            "PLHI-fruit-08",
+            "PLHI-fruit-02",
+            "PLHI-fruit-11"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 12 ranks first because it shows a ripe brown head held in a hand, so it has a scale object and is picked fruit like the other species of the genus. 09 comes next with two whole ripe brown heads on the tree. 05, 04 and 06 show unripe green heads, and among them the larger, fully framed fruit ranks higher. Group 2 has one photo, 03: an unripe fruit with a hand. Group 3: 07 shows several whole ripe heads. 08 shows one ripe head, but it is small in the frame. 02 is a fallen head that is breaking apart, so it is not the usual look. 11 shows a tiny green fruit in a wide scene."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:ACRU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-fruit",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "ACRU-fruit-02",
+          "ACRU-fruit-03",
+          "ACRU-fruit-04",
+          "ACRU-fruit-09",
+          "ACRU-fruit-11"
+        ],
+        "3": [
+          "ACRU-fruit-01",
+          "ACRU-fruit-05",
+          "ACRU-fruit-06",
+          "ACRU-fruit-07",
+          "ACRU-fruit-08"
+        ]
+      },
+      "keys": [
+        "ACRU-fruit-02",
+        "ACRU-fruit-03",
+        "ACRU-fruit-04",
+        "ACRU-fruit-09",
+        "ACRU-fruit-11",
+        "ACRU-fruit-01",
+        "ACRU-fruit-05",
+        "ACRU-fruit-06",
+        "ACRU-fruit-07",
+        "ACRU-fruit-08"
+      ],
+      "agentIds": [
+        "ae1fbf8aca790b8de"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-fruit-02",
+            "ACRU-fruit-03",
+            "ACRU-fruit-11",
+            "ACRU-fruit-09",
+            "ACRU-fruit-04"
+          ],
+          "3": [
+            "ACRU-fruit-08",
+            "ACRU-fruit-05",
+            "ACRU-fruit-07",
+            "ACRU-fruit-01",
+            "ACRU-fruit-06"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. None of the photos has a scale object. None shows picked fruit, so the group-line view decided nothing. Group 1: 02 and 03 are near-duplicates. Both show whole clusters of mature samaras on the branch, and 02 is the closer shot. Next come 11 and 09, whole clusters of red samaras. 04 ranks last because it is a tight close-up that cuts off the wings at the edges. Group 3: 08 and 05 show whole clusters of ripe samaras clearly. 07 shows mature, pale samaras, but they are smaller in the frame among leaves. 01 is a distant view of the whole tree. 06 ranks last because it shows small developing fruit and is soft."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:QUAL-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-leaf",
+      "method": "FR",
+      "groups": {
+        "2": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-05"
+        ],
+        "3": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03",
+          "QUAL-leaf-04"
+        ]
+      },
+      "keys": [
+        "QUAL-leaf-01",
+        "QUAL-leaf-05",
+        "QUAL-leaf-02",
+        "QUAL-leaf-03",
+        "QUAL-leaf-04"
+      ],
+      "agentIds": [
+        "a4c4197c100f75dea"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "2": [
+            "QUAL-leaf-01",
+            "QUAL-leaf-05"
+          ],
+          "3": [
+            "QUAL-leaf-04",
+            "QUAL-leaf-02",
+            "QUAL-leaf-03"
+          ]
+        },
+        "unread": [],
+        "note": "Group 2: 01 shows a close cluster of green mature leaves with several whole lobed outlines; 05 is a wider branch view with many smaller leaves overlapping. Group 3: 04 is a single nearly whole leaf, lobing clear (base slightly cropped); 02 shows several mature leaves against sky, outlines readable but overlapping; 03 is a cropped leaf with holes and galls, not the usual look."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:LITU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ],
+        "2": [
+          "LITU-leaf-08"
+        ],
+        "3": [
+          "LITU-leaf-02"
+        ]
+      },
+      "keys": [
+        "LITU-leaf-04",
+        "LITU-leaf-07",
+        "LITU-leaf-08",
+        "LITU-leaf-02"
+      ],
+      "agentIds": [
+        "a628bd5695c2f3786"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-leaf-04",
+            "LITU-leaf-07"
+          ],
+          "2": [
+            "LITU-leaf-08"
+          ],
+          "3": [
+            "LITU-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: both are single, whole, green mature leaves. 04 ranks first because its four-lobed outline with pointed lobes and a notched apex is the most typical tulip-tree shape. It has only a few small spots. 07 is clean but its outline is rounder and less typical. Group 2: 08 is the only photo, a green foliage cluster with no single isolated leaf outline. Group 3: 02 is the only photo, young unfolding spring leaves, which is not the mature look."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:LITU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-bark",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08",
+          "LITU-bark-11"
+        ],
+        "2": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10"
+        ],
+        "3": [
+          "LITU-bark-02"
+        ]
+      },
+      "keys": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-11",
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10",
+        "LITU-bark-02"
+      ],
+      "agentIds": [
+        "a57af5482e88079df"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-bark-08",
+            "LITU-bark-06",
+            "LITU-bark-11",
+            "LITU-bark-05"
+          ],
+          "2": [
+            "LITU-bark-01",
+            "LITU-bark-10",
+            "LITU-bark-07"
+          ],
+          "3": [
+            "LITU-bark-02"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: 08 shows the classic interlacing ridges with pale furrows over a long trunk section; 06 is similar but less sharp; 11 shows the typical pattern but with lichen speckling; 05 has a knotted, irregular patch in the middle. Group 2: 01 is a wide view of typical mature furrowed bark; 10 is typical ridging but heavily lichen-covered; 07 is an atypical, twisted, braided old-bark pattern. Group 3: only one photo, a younger trunk with lichen patches."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:LITU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-fruit",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "LITU-fruit-01",
+          "LITU-fruit-07",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ],
+        "3": [
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-08",
+          "LITU-fruit-09"
+        ]
+      },
+      "keys": [
+        "LITU-fruit-01",
+        "LITU-fruit-07",
+        "LITU-fruit-10",
+        "LITU-fruit-12",
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-08",
+        "LITU-fruit-09"
+      ],
+      "agentIds": [
+        "ab0413f89246807cb"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-fruit-10",
+            "LITU-fruit-01",
+            "LITU-fruit-07",
+            "LITU-fruit-12"
+          ],
+          "3": [
+            "LITU-fruit-08",
+            "LITU-fruit-09",
+            "LITU-fruit-06",
+            "LITU-fruit-05",
+            "LITU-fruit-04"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened, and no photo has a scale object. Group 1: 10 shows a whole, intact ripe cone of samaras and is the clearest. 01 is also an intact ripe cone, shown with autumn leaves. 07 is small and partly shed. 12 is a winter remnant with most of its samaras gone. Group 3: 08 is a whole, intact ripe cone and is the sharpest. 09 is a fallen cone, fairly whole but bleached and in litter. 06 is a shed rosette seen from below. 05 shows two small cones that are partly shed. 04 is unripe green fruit, so it ranks last for the usual-look rule."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:PLOC-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-fruit",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "PLOC-fruit-02",
+          "PLOC-fruit-03",
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-10",
+          "PLOC-fruit-12"
+        ],
+        "3": [
+          "PLOC-fruit-09",
+          "PLOC-fruit-11"
+        ]
+      },
+      "keys": [
+        "PLOC-fruit-02",
+        "PLOC-fruit-03",
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-10",
+        "PLOC-fruit-12",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11"
+      ],
+      "agentIds": [
+        "a9d7a203f659f6c53"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-fruit-12",
+            "PLOC-fruit-04",
+            "PLOC-fruit-10",
+            "PLOC-fruit-03",
+            "PLOC-fruit-08",
+            "PLOC-fruit-05",
+            "PLOC-fruit-07",
+            "PLOC-fruit-02"
+          ],
+          "3": [
+            "PLOC-fruit-09",
+            "PLOC-fruit-11"
+          ]
+        },
+        "unread": [],
+        "note": "No photo in either group has a scale object. Group 1: the ripe brown balls come first: 12, 04, 10, then 03. Of those, 12 and 10 hang on the twig (the group line), and 04 is the closest whole ripe ball on its stalk. 03 is ripe, but it lies on the ground and is starting to break up. The green, immature balls come after them. 08 and 05 still show the twig. 07 shows only the stalk against leaves. 02 sits on a leaf. Group 3: 09 is a ripe brown ball that is shattering into fluffy seeds, and it ranks above 11, a young green head on a spring twig."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:ACRU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-leaf-02",
+          "ACRU-leaf-09"
+        ],
+        "2": [
+          "ACRU-leaf-01",
+          "ACRU-leaf-05",
+          "ACRU-leaf-08"
+        ],
+        "3": [
+          "ACRU-leaf-03",
+          "ACRU-leaf-06",
+          "ACRU-leaf-07",
+          "ACRU-leaf-11"
+        ]
+      },
+      "keys": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-09",
+        "ACRU-leaf-01",
+        "ACRU-leaf-05",
+        "ACRU-leaf-08",
+        "ACRU-leaf-03",
+        "ACRU-leaf-06",
+        "ACRU-leaf-07",
+        "ACRU-leaf-11"
+      ],
+      "agentIds": [
+        "ac82e6afaaf19ab87"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-leaf-09",
+            "ACRU-leaf-02"
+          ],
+          "2": [
+            "ACRU-leaf-05",
+            "ACRU-leaf-01",
+            "ACRU-leaf-08"
+          ],
+          "3": [
+            "ACRU-leaf-06",
+            "ACRU-leaf-07",
+            "ACRU-leaf-03",
+            "ACRU-leaf-11"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 09 is a green mature leaf, whole and upper side. 02 is autumn-coloured, and its leaf is partly overlapped. Group 2: every photo shows autumn colour. 05 has one clear whole leaf. 01 is greener but crowded. 08 is a dense cluster of red leaves. Group 3: 06 is green but a branch, not a single leaf. 07 has one whole red leaf among litter. 03 is blurred orange foliage. 11 is a distant yellow canopy."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:ACRU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-bark-06",
+          "ACRU-bark-07"
+        ],
+        "2": [
+          "ACRU-bark-02",
+          "ACRU-bark-04",
+          "ACRU-bark-05",
+          "ACRU-bark-09"
+        ],
+        "3": [
+          "ACRU-bark-01",
+          "ACRU-bark-08",
+          "ACRU-bark-10",
+          "ACRU-bark-11",
+          "ACRU-bark-12"
+        ]
+      },
+      "keys": [
+        "ACRU-bark-06",
+        "ACRU-bark-07",
+        "ACRU-bark-02",
+        "ACRU-bark-04",
+        "ACRU-bark-05",
+        "ACRU-bark-09",
+        "ACRU-bark-01",
+        "ACRU-bark-08",
+        "ACRU-bark-10",
+        "ACRU-bark-11",
+        "ACRU-bark-12"
+      ],
+      "agentIds": [
+        "a838a2cdbdb8ddca3"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-bark-06",
+            "ACRU-bark-07"
+          ],
+          "2": [
+            "ACRU-bark-05",
+            "ACRU-bark-09",
+            "ACRU-bark-02",
+            "ACRU-bark-04"
+          ],
+          "3": [
+            "ACRU-bark-11",
+            "ACRU-bark-10",
+            "ACRU-bark-01",
+            "ACRU-bark-12",
+            "ACRU-bark-08"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Ranked mature bark first, then bark area wide enough to show the pattern repeat, then close views per the group line. Whole-tree shots (04, 08, 12, 01) rank low because the bark is small in the frame. 04 is a thin young stem. 08 is mossy. The hand in 02 does not count as scale for bark."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:ACRU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-fruit-02",
+          "ACRU-fruit-03",
+          "ACRU-fruit-04",
+          "ACRU-fruit-05",
+          "ACRU-fruit-09",
+          "ACRU-fruit-11"
+        ],
+        "3": [
+          "ACRU-fruit-01",
+          "ACRU-fruit-06",
+          "ACRU-fruit-07",
+          "ACRU-fruit-08"
+        ]
+      },
+      "keys": [
+        "ACRU-fruit-02",
+        "ACRU-fruit-03",
+        "ACRU-fruit-04",
+        "ACRU-fruit-05",
+        "ACRU-fruit-09",
+        "ACRU-fruit-11",
+        "ACRU-fruit-01",
+        "ACRU-fruit-06",
+        "ACRU-fruit-07",
+        "ACRU-fruit-08"
+      ],
+      "agentIds": [
+        "a52a86b1f9b08fde8"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-fruit-03",
+            "ACRU-fruit-02",
+            "ACRU-fruit-11",
+            "ACRU-fruit-09",
+            "ACRU-fruit-05",
+            "ACRU-fruit-04"
+          ],
+          "3": [
+            "ACRU-fruit-08",
+            "ACRU-fruit-07",
+            "ACRU-fruit-01",
+            "ACRU-fruit-06"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. No photo shows a scale object, so that criterion did not separate any of them. Group 1: 03 and 02 show ripe red samara clusters whole on the twig with green leaves, and 03 shows the whole cluster. 11 and 09 are ripe and on the twig but have no green leaves. 05 is soft and less ripe. 04 is a tight crop with no twig. Group 3: 08 has ripe whole clusters on the twig. 07 shows the twig with fruit and green leaves, but the fruit is pale. 01 is ripe but small and distant. 06 is blurry and unripe."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:ACSA3-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-leaf-05",
+          "ACSA3-leaf-11"
+        ],
+        "2": [
+          "ACSA3-leaf-02"
+        ],
+        "3": [
+          "ACSA3-leaf-01",
+          "ACSA3-leaf-03",
+          "ACSA3-leaf-04",
+          "ACSA3-leaf-07",
+          "ACSA3-leaf-08"
+        ]
+      },
+      "keys": [
+        "ACSA3-leaf-05",
+        "ACSA3-leaf-11",
+        "ACSA3-leaf-02",
+        "ACSA3-leaf-01",
+        "ACSA3-leaf-03",
+        "ACSA3-leaf-04",
+        "ACSA3-leaf-07",
+        "ACSA3-leaf-08"
+      ],
+      "agentIds": [
+        "a0b39944b1b6014b9"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-leaf-05",
+            "ACSA3-leaf-11"
+          ],
+          "2": [
+            "ACSA3-leaf-02"
+          ],
+          "3": [
+            "ACSA3-leaf-08",
+            "ACSA3-leaf-03",
+            "ACSA3-leaf-01",
+            "ACSA3-leaf-04",
+            "ACSA3-leaf-07"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 05 is a clean, whole green leaf on black. 11 is also whole and green, but the veins are prominent and it casts shadows. Group 3: 08, 03 and 01 are green. 08 is the clearest upper side with one near-whole leaf. 03 is a single whole outline, but it is dark and glossy. 01 is cluttered, and its main leaf touches the frame edge. 04 and 07 are autumn-coloured and sit in leaf piles, so they rank last. 04 has one more distinct leaf than 07."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:ACSA3-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-bark-02",
+          "ACSA3-bark-03",
+          "ACSA3-bark-06",
+          "ACSA3-bark-09",
+          "ACSA3-bark-10"
+        ],
+        "2": [
+          "ACSA3-bark-08",
+          "ACSA3-bark-11"
+        ],
+        "3": [
+          "ACSA3-bark-01",
+          "ACSA3-bark-04",
+          "ACSA3-bark-07",
+          "ACSA3-bark-12"
+        ]
+      },
+      "keys": [
+        "ACSA3-bark-02",
+        "ACSA3-bark-03",
+        "ACSA3-bark-06",
+        "ACSA3-bark-09",
+        "ACSA3-bark-10",
+        "ACSA3-bark-08",
+        "ACSA3-bark-11",
+        "ACSA3-bark-01",
+        "ACSA3-bark-04",
+        "ACSA3-bark-07",
+        "ACSA3-bark-12"
+      ],
+      "agentIds": [
+        "ae51e8308657e0777"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-bark-02",
+            "ACSA3-bark-06",
+            "ACSA3-bark-10",
+            "ACSA3-bark-03",
+            "ACSA3-bark-09"
+          ],
+          "2": [
+            "ACSA3-bark-08",
+            "ACSA3-bark-11"
+          ],
+          "3": [
+            "ACSA3-bark-07",
+            "ACSA3-bark-01",
+            "ACSA3-bark-04",
+            "ACSA3-bark-12"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: all are mature trunk shots. 02, 06 and 10 show the furrow pattern clearly. 03 is covered in lichen and 09 is dark. Group 2: 08 shows clean gray ridges, and 11 is mossy. Group 3: 07 is mature gray bark over a wide area. 01 is a close view, which fits the group line, but its reddish color is unusual, so it ranks second. 04 and 12 are whole-tree views with little bark detail, and 12 is also mossy."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:ACSA3-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-fruit-06"
+        ],
+        "3": [
+          "ACSA3-fruit-01",
+          "ACSA3-fruit-02",
+          "ACSA3-fruit-03",
+          "ACSA3-fruit-04",
+          "ACSA3-fruit-05"
+        ]
+      },
+      "keys": [
+        "ACSA3-fruit-06",
+        "ACSA3-fruit-01",
+        "ACSA3-fruit-02",
+        "ACSA3-fruit-03",
+        "ACSA3-fruit-04",
+        "ACSA3-fruit-05"
+      ],
+      "agentIds": [
+        "a37053782f8b549f7"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-fruit-06"
+          ],
+          "3": [
+            "ACSA3-fruit-02",
+            "ACSA3-fruit-04",
+            "ACSA3-fruit-01",
+            "ACSA3-fruit-05",
+            "ACSA3-fruit-03"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 3: 02 is a ripe, whole samara pair with a 1 cm scale bar, so it ranks first even though it is off the twig. 04 is ripe fruit on the twig. 01 and 05 show the twig and green leaves, but the fruit is partly unripe, and 05 is dark and crowded. 03 is a single samara on snow, so it ranks last. Group 1 has one photo."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QUAL-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAL-leaf-04"
+        ],
+        "2": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-05",
+          "QUAL-leaf-06"
+        ],
+        "3": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03",
+          "QUAL-leaf-07"
+        ]
+      },
+      "keys": [
+        "QUAL-leaf-04",
+        "QUAL-leaf-01",
+        "QUAL-leaf-05",
+        "QUAL-leaf-06",
+        "QUAL-leaf-02",
+        "QUAL-leaf-03",
+        "QUAL-leaf-07"
+      ],
+      "agentIds": [
+        "a10c5a1931fa3233d"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAL-leaf-04"
+          ],
+          "2": [
+            "QUAL-leaf-05",
+            "QUAL-leaf-01",
+            "QUAL-leaf-06"
+          ],
+          "3": [
+            "QUAL-leaf-03",
+            "QUAL-leaf-02",
+            "QUAL-leaf-07"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 2: 05 is bright green with several whole leaf outlines. 01 shows a clear whole leaf but is greyer and bluer. 06 is dark and partly shadowed, with overlapping leaves. Group 3: 03 has one whole green leaf, with minor galls and holes. 02 has several leaves, partly cut off by the frame. 07 shows the whole tree, so no single leaf outline is visible."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QUAL-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAL-bark-01",
+          "QUAL-bark-02",
+          "QUAL-bark-03",
+          "QUAL-bark-04",
+          "QUAL-bark-06"
+        ]
+      },
+      "keys": [
+        "QUAL-bark-01",
+        "QUAL-bark-02",
+        "QUAL-bark-03",
+        "QUAL-bark-04",
+        "QUAL-bark-06"
+      ],
+      "agentIds": [
+        "ac2303cbd896655bb"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAL-bark-06",
+            "QUAL-bark-02",
+            "QUAL-bark-01",
+            "QUAL-bark-03",
+            "QUAL-bark-04"
+          ]
+        },
+        "unread": [],
+        "note": "All five show mature bark, so I ranked on how well each shows the pattern repeat and how close the view is. 06 is a wide, evenly lit area with a clear ridge pattern. 02 is clear but flatter and less ridged. 01 is narrower and has moss and busy background. 03 and 04 are dark and low in contrast, with 04 the weakest."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QUAL-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAL-fruit-01",
+          "QUAL-fruit-05",
+          "QUAL-fruit-06",
+          "QUAL-fruit-07"
+        ],
+        "2": [
+          "QUAL-fruit-03"
+        ],
+        "3": [
+          "QUAL-fruit-02",
+          "QUAL-fruit-04"
+        ]
+      },
+      "keys": [
+        "QUAL-fruit-01",
+        "QUAL-fruit-05",
+        "QUAL-fruit-06",
+        "QUAL-fruit-07",
+        "QUAL-fruit-03",
+        "QUAL-fruit-02",
+        "QUAL-fruit-04"
+      ],
+      "agentIds": [
+        "a0de0ac1599b65760"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAL-fruit-01",
+            "QUAL-fruit-06",
+            "QUAL-fruit-05",
+            "QUAL-fruit-07"
+          ],
+          "2": [
+            "QUAL-fruit-03"
+          ],
+          "3": [
+            "QUAL-fruit-04",
+            "QUAL-fruit-02"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 01 is the only ripe (golden-brown) fruit, it has a 1 cm scale bar, shows whole acorns, and is a picked-fruit view matching the group line. The other three show unripe green acorns on the branch. 06 shows one whole acorn clearly, 05 shows three whole acorns in a row, and 07 has a clustered, overlapping cup and nut, so it comes last. Group 3: 04 shows maturing reddish-brown acorns that are whole, while 02 is a single yellow-green acorn that is partly hidden by a leaf. Group 2 has one photo."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QURU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-leaf",
+      "method": "R",
+      "groups": {
+        "3": [
+          "QURU-leaf-02",
+          "QURU-leaf-04",
+          "QURU-leaf-05",
+          "QURU-leaf-06",
+          "QURU-leaf-08",
+          "QURU-leaf-09",
+          "QURU-leaf-10",
+          "QURU-leaf-11",
+          "QURU-leaf-12"
+        ]
+      },
+      "keys": [
+        "QURU-leaf-02",
+        "QURU-leaf-04",
+        "QURU-leaf-05",
+        "QURU-leaf-06",
+        "QURU-leaf-08",
+        "QURU-leaf-09",
+        "QURU-leaf-10",
+        "QURU-leaf-11",
+        "QURU-leaf-12"
+      ],
+      "agentIds": [
+        "add5d69c9bd0b7fed"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "3": [
+            "QURU-leaf-02",
+            "QURU-leaf-04",
+            "QURU-leaf-10",
+            "QURU-leaf-09",
+            "QURU-leaf-08",
+            "QURU-leaf-06",
+            "QURU-leaf-11",
+            "QURU-leaf-12",
+            "QURU-leaf-05"
+          ]
+        },
+        "unread": [],
+        "note": "Ranked from the contact sheet only. 02, 04 and 10 show green mature leaves with clear outlines (02 is one whole leaf). 09 and 08 are green but overlapping and cluttered. 06 is autumn orange, 11 and 12 are spring flush with catkins, and 05 is full red autumn colour, so those come last."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QURU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QURU-bark-01",
+          "QURU-bark-06"
+        ],
+        "3": [
+          "QURU-bark-05"
+        ]
+      },
+      "keys": [
+        "QURU-bark-01",
+        "QURU-bark-06",
+        "QURU-bark-05"
+      ],
+      "agentIds": [
+        "af844139e5cbee337"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QURU-bark-06",
+            "QURU-bark-01"
+          ],
+          "3": [
+            "QURU-bark-05"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 1: both photos show mature bark with a clear pattern repeat, so the group line (close bark) decided it. 06 is the close, frame-filling view and 01 is a full trunk view with the flared base and mulch. Group 3 has one photo."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QURU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QURU-fruit-01",
+          "QURU-fruit-03",
+          "QURU-fruit-04",
+          "QURU-fruit-05"
+        ],
+        "2": [
+          "QURU-fruit-02"
+        ]
+      },
+      "keys": [
+        "QURU-fruit-01",
+        "QURU-fruit-03",
+        "QURU-fruit-04",
+        "QURU-fruit-05",
+        "QURU-fruit-02"
+      ],
+      "agentIds": [
+        "a5e659708918f6517"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QURU-fruit-03",
+            "QURU-fruit-01",
+            "QURU-fruit-04",
+            "QURU-fruit-05"
+          ],
+          "2": [
+            "QURU-fruit-02"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 1: 03 and 01 show ripe brown acorns with the whole fruit in frame, and 03 ranks first because the cap and stalk are still attached, which is the closest to the on-twig view in the group line. 04 has a 1 cm scale bar, but its pale golden fruit looks less typical and one acorn is cut open. 05 ranks last because the acorns are pale and bleached on a black background. Group 2 has one key, QURU-fruit-02, which shows unripe green acorns on the twig."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:LITU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ],
+        "3": [
+          "LITU-leaf-02",
+          "LITU-leaf-03",
+          "LITU-leaf-05",
+          "LITU-leaf-08"
+        ]
+      },
+      "keys": [
+        "LITU-leaf-04",
+        "LITU-leaf-07",
+        "LITU-leaf-02",
+        "LITU-leaf-03",
+        "LITU-leaf-05",
+        "LITU-leaf-08"
+      ],
+      "agentIds": [
+        "afc98b3400791a1a0"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-leaf-07",
+            "LITU-leaf-04"
+          ],
+          "3": [
+            "LITU-leaf-08",
+            "LITU-leaf-03",
+            "LITU-leaf-05",
+            "LITU-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 1: both show one whole leaf. 07 is a richer mature green. 04 is paler and spotted, so it ranks second. Group 3: 08 shows mature green leaves with several near-whole outlines. 03 is mature green but crowded and overlapping, with a bud. 05 is pale, low-contrast and looks like small or juvenile growth. 02 is a young, unfurling, yellow-green spring flush, which is the least usual look."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:LITU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08",
+          "LITU-bark-11"
+        ],
+        "2": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10"
+        ],
+        "3": [
+          "LITU-bark-02",
+          "LITU-bark-09",
+          "LITU-bark-12"
+        ]
+      },
+      "keys": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-11",
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10",
+        "LITU-bark-02",
+        "LITU-bark-09",
+        "LITU-bark-12"
+      ],
+      "agentIds": [
+        "a3190d481cef260de"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-bark-08",
+            "LITU-bark-05",
+            "LITU-bark-06",
+            "LITU-bark-11"
+          ],
+          "2": [
+            "LITU-bark-01",
+            "LITU-bark-10",
+            "LITU-bark-07"
+          ],
+          "3": [
+            "LITU-bark-02",
+            "LITU-bark-09",
+            "LITU-bark-12"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 08 and 05 show mature furrowed bark wide enough for the pattern repeat. 08 is evenly lit and 05 is slightly cluttered, so 08 ranks first. 06 is dim and shadowed, and 11 is blotchy and lighter. Group 2: 01 is a clean, wide, evenly lit view of mature bark. 10 is heavily covered in yellow lichen. 07 is an unusual twisted, diagonal texture that is not the usual look. Group 3: 02 shows the bark pattern, though it is younger bark with lichen patches. 09 shows several pale trunks in winter, with little pattern detail. 12 shows a whole old tree and its base, with no visible bark pattern."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:LITU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "LITU-fruit-01",
+          "LITU-fruit-02",
+          "LITU-fruit-07",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ],
+        "3": [
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-08",
+          "LITU-fruit-09"
+        ]
+      },
+      "keys": [
+        "LITU-fruit-01",
+        "LITU-fruit-02",
+        "LITU-fruit-07",
+        "LITU-fruit-10",
+        "LITU-fruit-12",
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-08",
+        "LITU-fruit-09"
+      ],
+      "agentIds": [
+        "a847c2ad0045aa605"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-fruit-01",
+            "LITU-fruit-10",
+            "LITU-fruit-12",
+            "LITU-fruit-02",
+            "LITU-fruit-07"
+          ],
+          "3": [
+            "LITU-fruit-08",
+            "LITU-fruit-06",
+            "LITU-fruit-05",
+            "LITU-fruit-09",
+            "LITU-fruit-04"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. No photo shows a scale object, so rule 2 did not separate any of them. Ranked on ripe fruit first, then whole fruit in frame. In group 3, LITU-fruit-04 is green and unripe, so it goes last. In group 1, LITU-fruit-01 and LITU-fruit-10 are the clearest whole ripe fruits; LITU-fruit-02 and LITU-fruit-07 are small in the frame."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLOC-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLOC-leaf-07",
+          "PLOC-leaf-08",
+          "PLOC-leaf-10",
+          "PLOC-leaf-12"
+        ],
+        "2": [
+          "PLOC-leaf-01",
+          "PLOC-leaf-11"
+        ],
+        "3": [
+          "PLOC-leaf-02",
+          "PLOC-leaf-03",
+          "PLOC-leaf-04",
+          "PLOC-leaf-05",
+          "PLOC-leaf-09"
+        ]
+      },
+      "keys": [
+        "PLOC-leaf-07",
+        "PLOC-leaf-08",
+        "PLOC-leaf-10",
+        "PLOC-leaf-12",
+        "PLOC-leaf-01",
+        "PLOC-leaf-11",
+        "PLOC-leaf-02",
+        "PLOC-leaf-03",
+        "PLOC-leaf-04",
+        "PLOC-leaf-05",
+        "PLOC-leaf-09"
+      ],
+      "agentIds": [
+        "a67fed68eebef9cda"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-leaf-07",
+            "PLOC-leaf-08",
+            "PLOC-leaf-10",
+            "PLOC-leaf-12"
+          ],
+          "2": [
+            "PLOC-leaf-11",
+            "PLOC-leaf-01"
+          ],
+          "3": [
+            "PLOC-leaf-09",
+            "PLOC-leaf-04",
+            "PLOC-leaf-03",
+            "PLOC-leaf-05",
+            "PLOC-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 07 is one whole green upper-side leaf. 08 is a whole green leaf but shows the underside. 10 is several dark-green leaves, some cut off. 12 is pale and spotted. Group 2: 11 is a mostly whole green upper-side leaf, and 01 is a cluster of leaves on a busy dark background. Group 3: 09 is a whole upper-side leaf with some blemishes. 04 is mature green but overlapped and cropped. 03 is pale and held in a hand, with bark behind it. 05 is a shiny leaf with its tip cropped. 02 is young red and yellow leaves, not the usual look."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLOC-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLOC-bark-10"
+        ],
+        "2": [
+          "PLOC-bark-03",
+          "PLOC-bark-08",
+          "PLOC-bark-11"
+        ],
+        "3": [
+          "PLOC-bark-01",
+          "PLOC-bark-04",
+          "PLOC-bark-05",
+          "PLOC-bark-06",
+          "PLOC-bark-07"
+        ]
+      },
+      "keys": [
+        "PLOC-bark-10",
+        "PLOC-bark-03",
+        "PLOC-bark-08",
+        "PLOC-bark-11",
+        "PLOC-bark-01",
+        "PLOC-bark-04",
+        "PLOC-bark-05",
+        "PLOC-bark-06",
+        "PLOC-bark-07"
+      ],
+      "agentIds": [
+        "a351dacc709836b12"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-bark-10"
+          ],
+          "2": [
+            "PLOC-bark-08",
+            "PLOC-bark-03",
+            "PLOC-bark-11"
+          ],
+          "3": [
+            "PLOC-bark-01",
+            "PLOC-bark-04",
+            "PLOC-bark-07",
+            "PLOC-bark-05",
+            "PLOC-bark-06"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 2: 08 shows the widest mottled patch repeat, 03 is a tight close-up, 11 is partly hidden by leaves. Group 3: 01 and 04 show the mottled mature bark. 07 and 05 are dark old base bark with cars and curbs in frame. 06 is a distant multi-stem view."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLOC-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-10",
+          "PLOC-fruit-12"
+        ],
+        "3": [
+          "PLOC-fruit-01",
+          "PLOC-fruit-02",
+          "PLOC-fruit-03",
+          "PLOC-fruit-06",
+          "PLOC-fruit-09",
+          "PLOC-fruit-11"
+        ]
+      },
+      "keys": [
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-10",
+        "PLOC-fruit-12",
+        "PLOC-fruit-01",
+        "PLOC-fruit-02",
+        "PLOC-fruit-03",
+        "PLOC-fruit-06",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11"
+      ],
+      "agentIds": [
+        "a49b964c6e1a3674f"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-fruit-04",
+            "PLOC-fruit-12",
+            "PLOC-fruit-10",
+            "PLOC-fruit-08",
+            "PLOC-fruit-05",
+            "PLOC-fruit-07"
+          ],
+          "3": [
+            "PLOC-fruit-09",
+            "PLOC-fruit-11",
+            "PLOC-fruit-03",
+            "PLOC-fruit-01",
+            "PLOC-fruit-02",
+            "PLOC-fruit-06"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. No photo has a scale object. Group 1: the ripe brown fruit on the twig rank first (04 is the largest and whole, then 12 and 10), and the unripe green or yellow-green fruit follow (08, 05, 07). Group 3: 09 and 11 are whole ripe or old fruit, with 11 on the twig. Then come 03 (ripe, on a log), 01 (tiny fruit on twigs), 02 (green, unripe, lying on a leaf), and 06 (broken-up fruit, last)."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLHI-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-leaf-08"
+        ],
+        "2": [
+          "PLHI-leaf-03",
+          "PLHI-leaf-07"
+        ],
+        "3": [
+          "PLHI-leaf-01",
+          "PLHI-leaf-06",
+          "PLHI-leaf-09"
+        ]
+      },
+      "keys": [
+        "PLHI-leaf-08",
+        "PLHI-leaf-03",
+        "PLHI-leaf-07",
+        "PLHI-leaf-01",
+        "PLHI-leaf-06",
+        "PLHI-leaf-09"
+      ],
+      "agentIds": [
+        "aab2d847f4f159120"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-leaf-08"
+          ],
+          "2": [
+            "PLHI-leaf-03",
+            "PLHI-leaf-07"
+          ],
+          "3": [
+            "PLHI-leaf-09",
+            "PLHI-leaf-01",
+            "PLHI-leaf-06"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 2: 03 shows a whole green leaf outline with little clutter. 07 is darker and spotted, and its left lobe is cut by the frame edge. Group 3: 09 has a clear whole leaf, upper side, in the usual green. 01 is damaged and cropped at the right edge. 06 is a mass of leaves with no single leaf outline."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLHI-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-bark-01",
+          "PLHI-bark-03",
+          "PLHI-bark-04",
+          "PLHI-bark-08",
+          "PLHI-bark-12"
+        ],
+        "2": [
+          "PLHI-bark-09"
+        ],
+        "3": [
+          "PLHI-bark-05",
+          "PLHI-bark-06",
+          "PLHI-bark-10"
+        ]
+      },
+      "keys": [
+        "PLHI-bark-01",
+        "PLHI-bark-03",
+        "PLHI-bark-04",
+        "PLHI-bark-08",
+        "PLHI-bark-12",
+        "PLHI-bark-09",
+        "PLHI-bark-05",
+        "PLHI-bark-06",
+        "PLHI-bark-10"
+      ],
+      "agentIds": [
+        "a5da94d5ab2d84cb4"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-bark-03",
+            "PLHI-bark-01",
+            "PLHI-bark-04",
+            "PLHI-bark-08",
+            "PLHI-bark-12"
+          ],
+          "2": [
+            "PLHI-bark-09"
+          ],
+          "3": [
+            "PLHI-bark-10",
+            "PLHI-bark-05",
+            "PLHI-bark-06"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 03 and 01 show the mottled mature patchwork with enough area for the pattern repeat. 04 is wide but washed out. 08 is partly dark and cropped. 12 is pale and flat. Group 3: 10 shows the exfoliation pattern clearly, though the area is small. 05 is wider but lichen covers the pattern. 06 is dark and shadowed."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLHI-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-fruit-04",
+          "PLHI-fruit-05",
+          "PLHI-fruit-06",
+          "PLHI-fruit-09",
+          "PLHI-fruit-12"
+        ],
+        "3": [
+          "PLHI-fruit-01",
+          "PLHI-fruit-02",
+          "PLHI-fruit-03",
+          "PLHI-fruit-07",
+          "PLHI-fruit-08",
+          "PLHI-fruit-11"
+        ]
+      },
+      "keys": [
+        "PLHI-fruit-04",
+        "PLHI-fruit-05",
+        "PLHI-fruit-06",
+        "PLHI-fruit-09",
+        "PLHI-fruit-12",
+        "PLHI-fruit-01",
+        "PLHI-fruit-02",
+        "PLHI-fruit-03",
+        "PLHI-fruit-07",
+        "PLHI-fruit-08",
+        "PLHI-fruit-11"
+      ],
+      "agentIds": [
+        "ab68995e8386561a1"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-fruit-09",
+            "PLHI-fruit-12",
+            "PLHI-fruit-06",
+            "PLHI-fruit-04",
+            "PLHI-fruit-05"
+          ],
+          "3": [
+            "PLHI-fruit-08",
+            "PLHI-fruit-07",
+            "PLHI-fruit-03",
+            "PLHI-fruit-01",
+            "PLHI-fruit-02",
+            "PLHI-fruit-11"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 1: 09 is the ripe brown fruit on the twig. 12 has a hand for scale, but the fruit is old and dark. 06, 04 and 05 are green and unripe, and I put the two that show the fruit hanging on the twig ahead of 05. Group 3: 08 and 07 are ripe whole fruit on the twig, and 08 also shows green leaves. 03 has a hand for scale but the fruit is green. 01 has small fruit on the twig. 02 is a disintegrating fruit on the ground. 11 has a tiny fruit far from the camera."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:ACRU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "ACRU-leaf-02",
+          "ACRU-leaf-09"
+        ],
+        "2": [
+          "ACRU-leaf-01",
+          "ACRU-leaf-05",
+          "ACRU-leaf-08"
+        ],
+        "3": [
+          "ACRU-leaf-03",
+          "ACRU-leaf-06",
+          "ACRU-leaf-11"
+        ]
+      },
+      "keys": [
+        "ACRU-leaf-02",
+        "ACRU-leaf-09",
+        "ACRU-leaf-01",
+        "ACRU-leaf-05",
+        "ACRU-leaf-08",
+        "ACRU-leaf-03",
+        "ACRU-leaf-06",
+        "ACRU-leaf-11"
+      ],
+      "agentIds": [
+        "acff021635ac82a9f"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-leaf-09",
+            "ACRU-leaf-02"
+          ],
+          "2": [
+            "ACRU-leaf-05",
+            "ACRU-leaf-08",
+            "ACRU-leaf-01"
+          ],
+          "3": [
+            "ACRU-leaf-06",
+            "ACRU-leaf-03",
+            "ACRU-leaf-11"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 09 is a green mature leaf with a whole outline, upper side. 02 is a red and green fall leaf in a crowd of other leaves. Group 2: every photo is fall color. 05 is the clearest single whole leaf. 08 has several leaves with fairly clear outlines. 01 is a busy cluster with no single clear outline. Group 3: 06 is green mature foliage, but it is a cluster with no single whole leaf. 03 is blurry autumn foliage with partial leaves. 11 is a distant yellow canopy with no whole leaf outline, so it is last."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:ACSA3-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "ACSA3-leaf-05",
+          "ACSA3-leaf-11"
+        ],
+        "2": [
+          "ACSA3-leaf-02"
+        ],
+        "3": [
+          "ACSA3-leaf-01",
+          "ACSA3-leaf-03",
+          "ACSA3-leaf-04",
+          "ACSA3-leaf-08"
+        ]
+      },
+      "keys": [
+        "ACSA3-leaf-05",
+        "ACSA3-leaf-11",
+        "ACSA3-leaf-02",
+        "ACSA3-leaf-01",
+        "ACSA3-leaf-03",
+        "ACSA3-leaf-04",
+        "ACSA3-leaf-08"
+      ],
+      "agentIds": [
+        "a86f5d57b72b6bc85"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-leaf-05",
+            "ACSA3-leaf-11"
+          ],
+          "2": [
+            "ACSA3-leaf-02"
+          ],
+          "3": [
+            "ACSA3-leaf-03",
+            "ACSA3-leaf-01",
+            "ACSA3-leaf-08",
+            "ACSA3-leaf-04"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 05 is a clean green upper side of one whole leaf on black. 11 is also whole and green, but darker and more of an underside view, with a cast shadow. Group 3: 03 is one whole green leaf, upper side, on a dark ground. 01 is green and upper side, but the leaves overlap and the frame is cluttered. 08 is a paler underside view with overlapping leaves. 04 is red and yellow fall colour in a pile of leaves, so it is not the usual look and ranks last."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:QUAL-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "QUAL-leaf-04"
+        ],
+        "2": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-05"
+        ],
+        "3": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03"
+        ]
+      },
+      "keys": [
+        "QUAL-leaf-04",
+        "QUAL-leaf-01",
+        "QUAL-leaf-05",
+        "QUAL-leaf-02",
+        "QUAL-leaf-03"
+      ],
+      "agentIds": [
+        "af0f9068fee3dad71"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAL-leaf-04"
+          ],
+          "2": [
+            "QUAL-leaf-05",
+            "QUAL-leaf-01"
+          ],
+          "3": [
+            "QUAL-leaf-03",
+            "QUAL-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 2: 05 shows the brighter green mature foliage. 01 has clearer whole outlines but is darker and bluish. Group 3: 03 shows one clear whole leaf outline, though it has some galls and holes. 02 is a tangled canopy view with no single clean outline."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:LITU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ],
+        "3": [
+          "LITU-leaf-02",
+          "LITU-leaf-03",
+          "LITU-leaf-08"
+        ]
+      },
+      "keys": [
+        "LITU-leaf-04",
+        "LITU-leaf-07",
+        "LITU-leaf-02",
+        "LITU-leaf-03",
+        "LITU-leaf-08"
+      ],
+      "agentIds": [
+        "a059620b591cc6ad3"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-leaf-07",
+            "LITU-leaf-04"
+          ],
+          "3": [
+            "LITU-leaf-08",
+            "LITU-leaf-03",
+            "LITU-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 1: both are whole green mature leaves. 07 is ranked first because it has no blemishes and a clean outline. 04 has spots and a lichen background. Group 3: 08 shows several mature green leaves with lobes visible. 03 shows mature leaves, but they overlap and are partly cut off. 02 shows young, pale, unfurling leaves and a bud, which is not the usual look."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:LITU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-bark",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08",
+          "LITU-bark-11"
+        ],
+        "2": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10"
+        ],
+        "3": [
+          "LITU-bark-02"
+        ]
+      },
+      "keys": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-11",
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10",
+        "LITU-bark-02"
+      ],
+      "agentIds": [
+        "a2dba80c25aed2727"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-bark-08",
+            "LITU-bark-05",
+            "LITU-bark-06",
+            "LITU-bark-11"
+          ],
+          "2": [
+            "LITU-bark-01",
+            "LITU-bark-10",
+            "LITU-bark-07"
+          ],
+          "3": [
+            "LITU-bark-02"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Ranked from the sheets only. Group 1: 08 and 05 show mature furrowed bark over a wide area in good light, 06 is darker, 11 is paler and patchy. Group 2: 01 is clean mature bark with a wide pattern, 10 is heavily covered with yellow lichen, 07 is a tight close-up of twisted, atypical-looking bark with no sense of the pattern repeat. Group 3 has one photo: a trunk with lichen patches and a busy street background."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:LITU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-fruit",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "LITU-fruit-01",
+          "LITU-fruit-07",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ],
+        "3": [
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-08",
+          "LITU-fruit-09"
+        ]
+      },
+      "keys": [
+        "LITU-fruit-01",
+        "LITU-fruit-07",
+        "LITU-fruit-10",
+        "LITU-fruit-12",
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-08",
+        "LITU-fruit-09"
+      ],
+      "agentIds": [
+        "a29a4ea4d26aecb7f"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-fruit-10",
+            "LITU-fruit-01",
+            "LITU-fruit-12",
+            "LITU-fruit-07"
+          ],
+          "3": [
+            "LITU-fruit-08",
+            "LITU-fruit-05",
+            "LITU-fruit-06",
+            "LITU-fruit-09",
+            "LITU-fruit-04"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. No photo shows a scale object, so ranking rests on the usual look (ripe, dry fruit) and whole-subject framing. LITU-fruit-04 is a green, unripe fruit, so it is not the usual look and ranks last in group 3. LITU-fruit-06 is an opened, flattened fruit seen from above, and LITU-fruit-09 sits in ground clutter. LITU-fruit-07 is small and weathered in its frame."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:PLOC-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-fruit",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-10",
+          "PLOC-fruit-12"
+        ],
+        "3": [
+          "PLOC-fruit-02",
+          "PLOC-fruit-03",
+          "PLOC-fruit-09",
+          "PLOC-fruit-11"
+        ]
+      },
+      "keys": [
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-10",
+        "PLOC-fruit-12",
+        "PLOC-fruit-02",
+        "PLOC-fruit-03",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11"
+      ],
+      "agentIds": [
+        "ac293dbff2eaa93a7"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-fruit-04",
+            "PLOC-fruit-12",
+            "PLOC-fruit-10",
+            "PLOC-fruit-08",
+            "PLOC-fruit-05",
+            "PLOC-fruit-07"
+          ],
+          "3": [
+            "PLOC-fruit-09",
+            "PLOC-fruit-03",
+            "PLOC-fruit-11",
+            "PLOC-fruit-02"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. No photo shows a scale object. Group 1: ripe brown fruit on the twig ranks first (04, 12, 10). The unripe green or yellow-green fruit follows (08, 05, 07), with 07 last because it is small and in a busy frame. Group 3: 09 is ripe and whole on its stalk. 03 is ripe but lies on bark, not on a twig. 11 and 02 are both unripe green. 11 ranks above 02 because it hangs on the twig, which the group line names."
+      }
+    },
+    {
+      "label": "rank:haiku:high:ACRU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-leaf-09"
+        ],
+        "2": [
+          "ACRU-leaf-02"
+        ],
+        "3": [
+          "ACRU-leaf-01",
+          "ACRU-leaf-03",
+          "ACRU-leaf-05",
+          "ACRU-leaf-06",
+          "ACRU-leaf-08",
+          "ACRU-leaf-10",
+          "ACRU-leaf-11"
+        ]
+      },
+      "keys": [
+        "ACRU-leaf-09",
+        "ACRU-leaf-02",
+        "ACRU-leaf-01",
+        "ACRU-leaf-03",
+        "ACRU-leaf-05",
+        "ACRU-leaf-06",
+        "ACRU-leaf-08",
+        "ACRU-leaf-10",
+        "ACRU-leaf-11"
+      ],
+      "agentIds": [
+        "a7ad88fd4479ea784"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-leaf-09"
+          ],
+          "2": [
+            "ACRU-leaf-02"
+          ],
+          "3": [
+            "ACRU-leaf-06",
+            "ACRU-leaf-05",
+            "ACRU-leaf-08",
+            "ACRU-leaf-01",
+            "ACRU-leaf-03",
+            "ACRU-leaf-10",
+            "ACRU-leaf-11"
+          ]
+        },
+        "unread": [],
+        "note": "Read all three contact sheets (haiku-1-1, haiku-2-1, haiku-3-1); all opened. Group 1 and group 2 each hold one photo, so the order is trivial. Group 3: ACRU-leaf-06 is the clearest green mature foliage. ACRU-leaf-05 shows one whole leaf in frame, upper side, with some autumn colour. ACRU-leaf-08 and -01 are mixed green, yellow and red autumn foliage. ACRU-leaf-03 is bronze and brown. ACRU-leaf-10 is a distant shot of the whole tree, not a leaf view. ACRU-leaf-11 shows broad yellow leaves that do not look like the usual red maple leaf, so it ranks last."
+      }
+    },
+    {
+      "label": "rank:haiku:high:ACRU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-bark-02"
+        ],
+        "2": [
+          "ACRU-bark-05",
+          "ACRU-bark-09",
+          "ACRU-bark-10",
+          "ACRU-bark-11"
+        ],
+        "3": [
+          "ACRU-bark-01",
+          "ACRU-bark-04",
+          "ACRU-bark-06",
+          "ACRU-bark-07",
+          "ACRU-bark-08",
+          "ACRU-bark-12"
+        ]
+      },
+      "keys": [
+        "ACRU-bark-02",
+        "ACRU-bark-05",
+        "ACRU-bark-09",
+        "ACRU-bark-10",
+        "ACRU-bark-11",
+        "ACRU-bark-01",
+        "ACRU-bark-04",
+        "ACRU-bark-06",
+        "ACRU-bark-07",
+        "ACRU-bark-08",
+        "ACRU-bark-12"
+      ],
+      "agentIds": [
+        "a50513665f3307d1d"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-bark-02"
+          ],
+          "2": [
+            "ACRU-bark-05",
+            "ACRU-bark-09",
+            "ACRU-bark-11",
+            "ACRU-bark-10"
+          ],
+          "3": [
+            "ACRU-bark-06",
+            "ACRU-bark-07",
+            "ACRU-bark-01",
+            "ACRU-bark-12",
+            "ACRU-bark-08",
+            "ACRU-bark-04"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened and were read; no photo file was opened. Group 1 has one photo, so its order is trivial. In group 2 all four are close bark views that show the pattern; 05 is the grey, plated mature look, 09 is close and grey but smaller in its tile, 11 is brown-grey with plates, and 10 is tan and more ridged, so it ranks last. In group 3, 06 and 07 are the only close bark views and show mature furrowed or plated bark, so they lead. The wide trunk shots follow (01 and 12 show more trunk bark, 08 is dark and mossy, 04 has the bark small in a forest view). Scale objects were not counted for bark."
+      }
+    },
+    {
+      "label": "rank:haiku:high:ACRU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACRU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACRU-fruit-02",
+          "ACRU-fruit-03",
+          "ACRU-fruit-04",
+          "ACRU-fruit-05",
+          "ACRU-fruit-06",
+          "ACRU-fruit-09",
+          "ACRU-fruit-11"
+        ],
+        "3": [
+          "ACRU-fruit-01",
+          "ACRU-fruit-07",
+          "ACRU-fruit-08"
+        ]
+      },
+      "keys": [
+        "ACRU-fruit-02",
+        "ACRU-fruit-03",
+        "ACRU-fruit-04",
+        "ACRU-fruit-05",
+        "ACRU-fruit-06",
+        "ACRU-fruit-09",
+        "ACRU-fruit-11",
+        "ACRU-fruit-01",
+        "ACRU-fruit-07",
+        "ACRU-fruit-08"
+      ],
+      "agentIds": [
+        "af46eacf28d7c36b5"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACRU-fruit-02",
+            "ACRU-fruit-03",
+            "ACRU-fruit-11",
+            "ACRU-fruit-09",
+            "ACRU-fruit-05",
+            "ACRU-fruit-04",
+            "ACRU-fruit-06"
+          ],
+          "3": [
+            "ACRU-fruit-08",
+            "ACRU-fruit-07",
+            "ACRU-fruit-01"
+          ]
+        },
+        "unread": [],
+        "note": "Both contact sheets opened and all 10 keys ranked. No photo shows a scale object (hand, ruler, coin), so that tier does not separate any pair. The group line asks for picked fruit, but no photo shows picked fruit: every cluster is on a branch or tree, so the view tier does not separate them either. Group 1 ranks red or orange mature samaras first (02, 03 with green leaves in frame; 11 and 09 red, 05 orange-brown), then green-pink 04, then the young sprig 06. Group 3 ranks 08 first (clear orange-red whole clusters), 07 second (green leaves, but pale and small samaras), and 01 last (distant clusters against a pine background)."
+      }
+    },
+    {
+      "label": "rank:haiku:high:ACSA3-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-leaf-02",
+          "ACSA3-leaf-03",
+          "ACSA3-leaf-05",
+          "ACSA3-leaf-11"
+        ],
+        "3": [
+          "ACSA3-leaf-01",
+          "ACSA3-leaf-04",
+          "ACSA3-leaf-08"
+        ]
+      },
+      "keys": [
+        "ACSA3-leaf-02",
+        "ACSA3-leaf-03",
+        "ACSA3-leaf-05",
+        "ACSA3-leaf-11",
+        "ACSA3-leaf-01",
+        "ACSA3-leaf-04",
+        "ACSA3-leaf-08"
+      ],
+      "agentIds": [
+        "a999a84543b78e9aa"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-leaf-05",
+            "ACSA3-leaf-11",
+            "ACSA3-leaf-02",
+            "ACSA3-leaf-03"
+          ],
+          "3": [
+            "ACSA3-leaf-08",
+            "ACSA3-leaf-01",
+            "ACSA3-leaf-04"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened and every key is ranked. Group 1: 05 is a clean, whole, green upper-side leaf on black. 11 is a whole dark-green leaf on white, with the veins showing. 02 is whole and green but sits on bark mulch. 03 reads as the pale underside of a leaf, so it ranks last. Group 3: 08 is a single whole green leaf at the top of the frame. 01 is green but shows several leaves on a busy branch. 04 is a red and orange autumn pile of overlapping leaves, which is off the usual look, so it ranks last. Judged from the sheets only; no photo files were opened."
+      }
+    },
+    {
+      "label": "rank:haiku:high:ACSA3-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-bark-02",
+          "ACSA3-bark-03",
+          "ACSA3-bark-06",
+          "ACSA3-bark-07",
+          "ACSA3-bark-09",
+          "ACSA3-bark-10"
+        ],
+        "2": [
+          "ACSA3-bark-08",
+          "ACSA3-bark-11"
+        ],
+        "3": [
+          "ACSA3-bark-01",
+          "ACSA3-bark-04",
+          "ACSA3-bark-12"
+        ]
+      },
+      "keys": [
+        "ACSA3-bark-02",
+        "ACSA3-bark-03",
+        "ACSA3-bark-06",
+        "ACSA3-bark-07",
+        "ACSA3-bark-09",
+        "ACSA3-bark-10",
+        "ACSA3-bark-08",
+        "ACSA3-bark-11",
+        "ACSA3-bark-01",
+        "ACSA3-bark-04",
+        "ACSA3-bark-12"
+      ],
+      "agentIds": [
+        "a3ec1fe489b73f3e6"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-bark-06",
+            "ACSA3-bark-02",
+            "ACSA3-bark-09",
+            "ACSA3-bark-10",
+            "ACSA3-bark-07",
+            "ACSA3-bark-03"
+          ],
+          "2": [
+            "ACSA3-bark-08",
+            "ACSA3-bark-11"
+          ],
+          "3": [
+            "ACSA3-bark-01",
+            "ACSA3-bark-04",
+            "ACSA3-bark-12"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened and every key is ranked once, in its own group. Group 1: 06 and 02 show deep, mature plates with a clear pattern; 09 and 10 are close and typical; 07 has a branch crossing the frame; 03 is heavily lichened and pinkish, so it is last. Group 2: 08 has the grey, shaggy plated look with a clear pattern; 11 is greener and mossier. Group 3: 01 is a close bark view that shows the pattern repeat, but its reddish colour is less typical; 04 and 12 show whole trees, so the bark pattern is too small to judge. Ranked 01 first on the close-view and pattern criteria, then 04 and 12. Lower confidence on the group 3 order, since 01's colour and the two whole-tree views pull in different directions."
+      }
+    },
+    {
+      "label": "rank:haiku:high:ACSA3-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "ACSA3-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "ACSA3-fruit-02",
+          "ACSA3-fruit-03",
+          "ACSA3-fruit-05",
+          "ACSA3-fruit-06"
+        ],
+        "3": [
+          "ACSA3-fruit-01",
+          "ACSA3-fruit-04"
+        ]
+      },
+      "keys": [
+        "ACSA3-fruit-02",
+        "ACSA3-fruit-03",
+        "ACSA3-fruit-05",
+        "ACSA3-fruit-06",
+        "ACSA3-fruit-01",
+        "ACSA3-fruit-04"
+      ],
+      "agentIds": [
+        "a77862253ef4e0bdb"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "ACSA3-fruit-02",
+            "ACSA3-fruit-05",
+            "ACSA3-fruit-06",
+            "ACSA3-fruit-03"
+          ],
+          "3": [
+            "ACSA3-fruit-01",
+            "ACSA3-fruit-04"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened and all 6 keys were ranked from the sheets only. Group 1: 02 first (ripe golden samaras, whole fruit, 1 cm scale bar); 05 next (fruit on a twig with green leaves, matching the group line, but no scale and cropped at the edges); 06 (green fruit on a twig with a leaf, mostly whole); 03 last (single samara with no leaves or twig and a green stalk, so less usual). Group 3: 01 first (green mature leaves with fruit on a twig, matching the group line); 04 second (dried brown samaras with no leaves, cropped at the bottom)."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QUAL-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-leaf",
+      "method": "R",
+      "groups": {
+        "2": [
+          "QUAL-leaf-01",
+          "QUAL-leaf-04",
+          "QUAL-leaf-05"
+        ],
+        "3": [
+          "QUAL-leaf-02",
+          "QUAL-leaf-03"
+        ]
+      },
+      "keys": [
+        "QUAL-leaf-01",
+        "QUAL-leaf-04",
+        "QUAL-leaf-05",
+        "QUAL-leaf-02",
+        "QUAL-leaf-03"
+      ],
+      "agentIds": [
+        "ad52b037a7840e379"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "2": [
+            "QUAL-leaf-05",
+            "QUAL-leaf-04",
+            "QUAL-leaf-01"
+          ],
+          "3": [
+            "QUAL-leaf-02",
+            "QUAL-leaf-03"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened and all five keys were read from them; no photo files were opened. Group 2: 05 is the brightest green with mature lobed leaves, the usual look, so it ranks first. 04 is one whole leaf on the upper side, matching the group line, but is dusky and cropped at the bottom edge, so it ranks second. 01 is a blue-grey cluster of many leaves, not the usual look and not one leaf, so it ranks last. Group 3: 02 is clean green mature leaves in a natural setting, though cropped at the edges, so it ranks first. 03 shows one near-whole leaf on the upper side (matching the group line) but carries holes and galls, which weighs against the usual look; the 02 over 03 call is close."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QUAL-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAL-bark-01",
+          "QUAL-bark-02",
+          "QUAL-bark-04",
+          "QUAL-bark-06"
+        ],
+        "3": [
+          "QUAL-bark-03"
+        ]
+      },
+      "keys": [
+        "QUAL-bark-01",
+        "QUAL-bark-02",
+        "QUAL-bark-04",
+        "QUAL-bark-06",
+        "QUAL-bark-03"
+      ],
+      "agentIds": [
+        "abffaa8af9048bf3a"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAL-bark-06",
+            "QUAL-bark-02",
+            "QUAL-bark-01",
+            "QUAL-bark-04"
+          ],
+          "3": [
+            "QUAL-bark-03"
+          ]
+        },
+        "unread": [],
+        "note": "Both contact sheets opened. Group 1 ranked from the sheet only: 06 has deep, even, mature plates across the frame; 02 is close with clear furrows; 01 is a narrower trunk with forest background and less uniform pattern; 04 is smoother and more vertical-striped, with more background. Group 3 holds a single photo, 03. Ranking is by bark look and pattern repeat; the group line (close bark) was used only as a tiebreak."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QUAL-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAL-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAL-fruit-01",
+          "QUAL-fruit-02",
+          "QUAL-fruit-04",
+          "QUAL-fruit-06"
+        ],
+        "2": [
+          "QUAL-fruit-03",
+          "QUAL-fruit-05",
+          "QUAL-fruit-07"
+        ]
+      },
+      "keys": [
+        "QUAL-fruit-01",
+        "QUAL-fruit-02",
+        "QUAL-fruit-04",
+        "QUAL-fruit-06",
+        "QUAL-fruit-03",
+        "QUAL-fruit-05",
+        "QUAL-fruit-07"
+      ],
+      "agentIds": [
+        "aa04e38b4ced6eebc"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAL-fruit-01",
+            "QUAL-fruit-04",
+            "QUAL-fruit-02",
+            "QUAL-fruit-06"
+          ],
+          "2": [
+            "QUAL-fruit-07",
+            "QUAL-fruit-03",
+            "QUAL-fruit-05"
+          ]
+        },
+        "unread": [],
+        "note": "Both contact sheets opened and all 7 keys were read. Group 1: 01 ranks first (mature golden acorns, whole fruit, a printed 1 cm scale bar). 04 is second (several whole acorns, mature-looking cups, though still greenish-pink). 02 and 06 are single green immature acorns with the whole fruit in frame. 02 is placed above 06 only on a slight edge for the whole-leaf view, so the two are close. Group 2: 07 ranks first (acorns with brown cups, closest to the usual look). Its top-right corner shows a reddish blur that may be a hand, which is a possible scale object and is unconfirmed. 03 is second (whole green acorns with cups, one cropped at the base). 05 is third (a cluster of green acorns with leaves, several cropped). No group line was given in the prompt, so the view criterion was not applied."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QURU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QURU-leaf-02",
+          "QURU-leaf-04",
+          "QURU-leaf-05"
+        ],
+        "2": [
+          "QURU-leaf-06",
+          "QURU-leaf-08",
+          "QURU-leaf-09",
+          "QURU-leaf-10"
+        ],
+        "3": [
+          "QURU-leaf-11",
+          "QURU-leaf-12"
+        ]
+      },
+      "keys": [
+        "QURU-leaf-02",
+        "QURU-leaf-04",
+        "QURU-leaf-05",
+        "QURU-leaf-06",
+        "QURU-leaf-08",
+        "QURU-leaf-09",
+        "QURU-leaf-10",
+        "QURU-leaf-11",
+        "QURU-leaf-12"
+      ],
+      "agentIds": [
+        "afe2f3d3bd85c2921"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QURU-leaf-02",
+            "QURU-leaf-04",
+            "QURU-leaf-05"
+          ],
+          "2": [
+            "QURU-leaf-09",
+            "QURU-leaf-10",
+            "QURU-leaf-08",
+            "QURU-leaf-06"
+          ],
+          "3": [
+            "QURU-leaf-11",
+            "QURU-leaf-12"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened and every key was read. Ranked from the sheets only, per the brief's preference order. Group 1: 02 is a single whole green leaf; 04 shows several whole green leaves; 05 is red autumn foliage, so it is last. Group 2: 09 and 10 show clear green lobed leaves (09 with a bark trunk in view); 08 is darker with overlapping foliage; 06 is yellow and orange autumn foliage, so it is last. Group 3: 11 is brighter green with a clear whole leaf outline; 12 is pale yellow-green new growth with catkins. No scale objects apply to leaf. Ties were not present; the orders are judgements from the thumbnails."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QURU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QURU-bark-01",
+          "QURU-bark-06"
+        ],
+        "3": [
+          "QURU-bark-05"
+        ]
+      },
+      "keys": [
+        "QURU-bark-01",
+        "QURU-bark-06",
+        "QURU-bark-05"
+      ],
+      "agentIds": [
+        "a5c7f1f138d6f1272"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QURU-bark-06",
+            "QURU-bark-01"
+          ],
+          "3": [
+            "QURU-bark-05"
+          ]
+        },
+        "unread": [],
+        "note": "Both contact sheets opened. Group 1: QURU-bark-06 ranks above QURU-bark-01 because the group line favours close bark, and 06 is a close crop that shows the furrowed pattern clearly, while 01 is a whole-trunk view with much sky and background. Both look mature. Group 3 has a single key, so its order is trivial."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QURU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QURU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QURU-fruit-01",
+          "QURU-fruit-03"
+        ],
+        "2": [
+          "QURU-fruit-02"
+        ],
+        "3": [
+          "QURU-fruit-04",
+          "QURU-fruit-05"
+        ]
+      },
+      "keys": [
+        "QURU-fruit-01",
+        "QURU-fruit-03",
+        "QURU-fruit-02",
+        "QURU-fruit-04",
+        "QURU-fruit-05"
+      ],
+      "agentIds": [
+        "aeff9aa18e78c987b"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QURU-fruit-03",
+            "QURU-fruit-01"
+          ],
+          "2": [
+            "QURU-fruit-02"
+          ],
+          "3": [
+            "QURU-fruit-05",
+            "QURU-fruit-04"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 03 is one whole ripe acorn in frame on the twig, ahead of 01, a plate of five picked acorns, which are also whole and in frame. Group 2 has one key, 02, so there was nothing to rank; its acorns are green and unripe, on the twig. Group 3: 05 shows several mature, tan-brown acorns with caps, whole, on black; 04 is a yellow-fuzzed, cut-open cap view with a 1 cm scale bar, which is less of the usual look. The group line says the other species mostly show picked fruit. It does not name a view, so the view rule (4.4) was not used to break any tie."
+      }
+    },
+    {
+      "label": "rank:haiku:high:LITU-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "LITU-leaf-04",
+          "LITU-leaf-07"
+        ],
+        "3": [
+          "LITU-leaf-02",
+          "LITU-leaf-03",
+          "LITU-leaf-08"
+        ]
+      },
+      "keys": [
+        "LITU-leaf-04",
+        "LITU-leaf-07",
+        "LITU-leaf-02",
+        "LITU-leaf-03",
+        "LITU-leaf-08"
+      ],
+      "agentIds": [
+        "a51e76aeb62df3347"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-leaf-07",
+            "LITU-leaf-04"
+          ],
+          "3": [
+            "LITU-leaf-08",
+            "LITU-leaf-03",
+            "LITU-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "Both contact sheets opened. Group 1: both photos show a mature green whole leaf outline, so the order is a close call; 07 is ranked first for the cleaner leaf with the notched tip fully in frame, while 04 has small blemish spots. Group 3: 02 is a young unfolding shoot with pale new leaves, so it is last against the mature green leaves of 08 and 03. 08 and 03 are close; 08 is ranked first because it shows more lobed whole leaf outlines. No photo files were opened."
+      }
+    },
+    {
+      "label": "rank:haiku:high:LITU-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "LITU-bark-05",
+          "LITU-bark-06",
+          "LITU-bark-08"
+        ],
+        "2": [
+          "LITU-bark-01",
+          "LITU-bark-07",
+          "LITU-bark-10",
+          "LITU-bark-11"
+        ],
+        "3": [
+          "LITU-bark-02"
+        ]
+      },
+      "keys": [
+        "LITU-bark-05",
+        "LITU-bark-06",
+        "LITU-bark-08",
+        "LITU-bark-01",
+        "LITU-bark-07",
+        "LITU-bark-10",
+        "LITU-bark-11",
+        "LITU-bark-02"
+      ],
+      "agentIds": [
+        "a1de2be09ad712b5a"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "LITU-bark-08",
+            "LITU-bark-05",
+            "LITU-bark-06"
+          ],
+          "2": [
+            "LITU-bark-01",
+            "LITU-bark-11",
+            "LITU-bark-10",
+            "LITU-bark-07"
+          ],
+          "3": [
+            "LITU-bark-02"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened and every key was ranked from the sheets alone. Group 1: 08 shows deep, classic ridged furrows across the frame. 05 shows typical plated furrows, slightly less distinct. 06 has shallower, more uniform ridges. Group 2: 01 has typical vertical ridged bark that fills the frame. 11 is a whole trunk with a clear pattern but a tighter crop. 10 is dominated by yellow-green lichen that hides much of the pattern. 07 does not look like typical tulip poplar bark (it reads as a textured or carved surface), so it ranks last. Group 3 has one key, 02, a street trunk with lichen patches and a busy background."
+      }
+    },
+    {
+      "label": "rank:haiku:high:LITU-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "LITU-fruit",
+      "method": "R",
+      "groups": {
+        "3": [
+          "LITU-fruit-01",
+          "LITU-fruit-04",
+          "LITU-fruit-05",
+          "LITU-fruit-06",
+          "LITU-fruit-07",
+          "LITU-fruit-08",
+          "LITU-fruit-09",
+          "LITU-fruit-10",
+          "LITU-fruit-12"
+        ]
+      },
+      "keys": [
+        "LITU-fruit-01",
+        "LITU-fruit-04",
+        "LITU-fruit-05",
+        "LITU-fruit-06",
+        "LITU-fruit-07",
+        "LITU-fruit-08",
+        "LITU-fruit-09",
+        "LITU-fruit-10",
+        "LITU-fruit-12"
+      ],
+      "agentIds": [
+        "a54da0dea10761e90"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "3": [
+            "LITU-fruit-08",
+            "LITU-fruit-10",
+            "LITU-fruit-06",
+            "LITU-fruit-12",
+            "LITU-fruit-01",
+            "LITU-fruit-09",
+            "LITU-fruit-07",
+            "LITU-fruit-05",
+            "LITU-fruit-04"
+          ]
+        },
+        "unread": [],
+        "note": "Read the one contact sheet (haiku-3-1.jpg) and ranked the nine keys of group 3 from it, without opening any photo file. Mature brown fruit with the whole fruit in frame ranks highest (08, 10, 06, 12, 01, 09). Small, distant fruit or buds (07, 05) come next, and the green immature fruit (04) ranks last on the usual-look criterion. No scale object (hand, ruler, coin) is visible on any tile, so that criterion does not separate them. The sheet opened and no keys are unread."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLOC-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLOC-leaf-07",
+          "PLOC-leaf-08",
+          "PLOC-leaf-12"
+        ],
+        "2": [
+          "PLOC-leaf-03",
+          "PLOC-leaf-04",
+          "PLOC-leaf-05",
+          "PLOC-leaf-10",
+          "PLOC-leaf-11"
+        ],
+        "3": [
+          "PLOC-leaf-01",
+          "PLOC-leaf-02",
+          "PLOC-leaf-09"
+        ]
+      },
+      "keys": [
+        "PLOC-leaf-07",
+        "PLOC-leaf-08",
+        "PLOC-leaf-12",
+        "PLOC-leaf-03",
+        "PLOC-leaf-04",
+        "PLOC-leaf-05",
+        "PLOC-leaf-10",
+        "PLOC-leaf-11",
+        "PLOC-leaf-01",
+        "PLOC-leaf-02",
+        "PLOC-leaf-09"
+      ],
+      "agentIds": [
+        "a9571a5383352f738"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-leaf-08",
+            "PLOC-leaf-07",
+            "PLOC-leaf-12"
+          ],
+          "2": [
+            "PLOC-leaf-11",
+            "PLOC-leaf-04",
+            "PLOC-leaf-10",
+            "PLOC-leaf-05",
+            "PLOC-leaf-03"
+          ],
+          "3": [
+            "PLOC-leaf-09",
+            "PLOC-leaf-01",
+            "PLOC-leaf-02"
+          ]
+        },
+        "unread": [],
+        "note": "Ranked from the three contact sheets only (haiku-1-1, haiku-2-1, haiku-3-1); all 12 keys were visible, so nothing is unread. Group 1: 08 is one whole green leaf on the upper side; 07 has one whole leaf plus a second leaf and twig; 12 is a whole leaf but pale and mottled. Group 2: 11 has a central whole bright-green leaf; 04 is one mostly whole leaf with some spotting (edge cut at right); 10 shows several whole green leaves on a deck, not one leaf; 05 is glare-washed and overlapping; 03 shows overlapping leaves on the ground with a hand, which does not count for leaf. Group 3: 09 is one whole mature green leaf; 01 is a cluster of green leaves on a branch; 02 is mostly young reddish and yellow leaves, the least usual look."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLOC-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-bark",
+      "method": "R",
+      "groups": {
+        "2": [
+          "PLOC-bark-03",
+          "PLOC-bark-08"
+        ],
+        "3": [
+          "PLOC-bark-01",
+          "PLOC-bark-04",
+          "PLOC-bark-05",
+          "PLOC-bark-06",
+          "PLOC-bark-07",
+          "PLOC-bark-10",
+          "PLOC-bark-11"
+        ]
+      },
+      "keys": [
+        "PLOC-bark-03",
+        "PLOC-bark-08",
+        "PLOC-bark-01",
+        "PLOC-bark-04",
+        "PLOC-bark-05",
+        "PLOC-bark-06",
+        "PLOC-bark-07",
+        "PLOC-bark-10",
+        "PLOC-bark-11"
+      ],
+      "agentIds": [
+        "abef26db1e67e4151"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "2": [
+            "PLOC-bark-03",
+            "PLOC-bark-08"
+          ],
+          "3": [
+            "PLOC-bark-01",
+            "PLOC-bark-04",
+            "PLOC-bark-10",
+            "PLOC-bark-11",
+            "PLOC-bark-06",
+            "PLOC-bark-07",
+            "PLOC-bark-05"
+          ]
+        },
+        "unread": [],
+        "note": "Both contact sheets opened and every key was read from the sheets; no photo files were opened. Group 2: 03 shows the usual sycamore camouflage (mottled olive, white and orange flakes) across a bark area that shows the pattern repeat; 08 is grey-blue with crusty lichen and a knot, a less usual look. Group 3: 01 and 04 show the usual mottled white and tan bark at a close-to-medium view; 10 and 11 show mottled peeling bark at medium distance, with 11 partly covered by foliage. 06 is a whole-tree view with the mottled upper trunks small in the frame. 07 and 05 show mostly dark grey trunk bark, with 07 showing white-flared roots, and 05 is the farthest from the usual look. The group line asks for close bark, so close views were ranked above far views where the usual look was similar."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLOC-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLOC-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLOC-fruit-02",
+          "PLOC-fruit-04",
+          "PLOC-fruit-05",
+          "PLOC-fruit-07",
+          "PLOC-fruit-08",
+          "PLOC-fruit-09",
+          "PLOC-fruit-11",
+          "PLOC-fruit-12"
+        ],
+        "2": [
+          "PLOC-fruit-03"
+        ],
+        "3": [
+          "PLOC-fruit-10"
+        ]
+      },
+      "keys": [
+        "PLOC-fruit-02",
+        "PLOC-fruit-04",
+        "PLOC-fruit-05",
+        "PLOC-fruit-07",
+        "PLOC-fruit-08",
+        "PLOC-fruit-09",
+        "PLOC-fruit-11",
+        "PLOC-fruit-12",
+        "PLOC-fruit-03",
+        "PLOC-fruit-10"
+      ],
+      "agentIds": [
+        "a676633a6300534ab"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLOC-fruit-04",
+            "PLOC-fruit-09",
+            "PLOC-fruit-12",
+            "PLOC-fruit-11",
+            "PLOC-fruit-08",
+            "PLOC-fruit-05",
+            "PLOC-fruit-07",
+            "PLOC-fruit-02"
+          ],
+          "2": [
+            "PLOC-fruit-03"
+          ],
+          "3": [
+            "PLOC-fruit-10"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened and every key is ranked once. Group 1: 04 and 09 show ripe brown whole fruit on a twig or stem. 12 shows several ripe brown fruit on a twig, and 11 shows a whole brown-green fruit on a twig. 08, 05 and 07 are yellow-green or green fruit on a twig, still whole in frame. 02 is a green fruit on a leaf, not on a twig, so it ranks last. No photo in the sheets shows a scale object, so that criterion did not separate any keys. Groups 2 and 3 hold one key each, so their orders are trivial. 03 looks like a decay fungus or gall on a log rather than fruit on a twig, but it stays in group 2 as the brief requires."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLHI-leaf",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-leaf-08"
+        ],
+        "2": [
+          "PLHI-leaf-01",
+          "PLHI-leaf-03",
+          "PLHI-leaf-09"
+        ],
+        "3": [
+          "PLHI-leaf-06",
+          "PLHI-leaf-07"
+        ]
+      },
+      "keys": [
+        "PLHI-leaf-08",
+        "PLHI-leaf-01",
+        "PLHI-leaf-03",
+        "PLHI-leaf-09",
+        "PLHI-leaf-06",
+        "PLHI-leaf-07"
+      ],
+      "agentIds": [
+        "ac68e5c2e81f01a9d"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-leaf-08"
+          ],
+          "2": [
+            "PLHI-leaf-03",
+            "PLHI-leaf-01",
+            "PLHI-leaf-09"
+          ],
+          "3": [
+            "PLHI-leaf-07",
+            "PLHI-leaf-06"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened and every key was read. Group 2: 03 shows one whole mature leaf, upper side, held by a hand, so it ranks first. 01 is a whole leaf but its veins and pale surface look like the underside, which the group line marks as the minority view, so it ranks second. 09 is mostly bark with small leaves on a branch and no whole leaf outline, so it ranks last. Group 3: 07 shows one whole dark green leaf on upper side against the trunk, so it ranks first. 06 is a branch in a tree with many leaves and no single whole leaf in frame, so it ranks second. Group 1 holds a single key, so its order is trivial."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLHI-bark",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-bark-01",
+          "PLHI-bark-03",
+          "PLHI-bark-04",
+          "PLHI-bark-05",
+          "PLHI-bark-08"
+        ],
+        "2": [
+          "PLHI-bark-09",
+          "PLHI-bark-12"
+        ],
+        "3": [
+          "PLHI-bark-06",
+          "PLHI-bark-10"
+        ]
+      },
+      "keys": [
+        "PLHI-bark-01",
+        "PLHI-bark-03",
+        "PLHI-bark-04",
+        "PLHI-bark-05",
+        "PLHI-bark-08",
+        "PLHI-bark-09",
+        "PLHI-bark-12",
+        "PLHI-bark-06",
+        "PLHI-bark-10"
+      ],
+      "agentIds": [
+        "ac6a258a82d7b9ad8"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-bark-03",
+            "PLHI-bark-04",
+            "PLHI-bark-01",
+            "PLHI-bark-08",
+            "PLHI-bark-05"
+          ],
+          "2": [
+            "PLHI-bark-09",
+            "PLHI-bark-12"
+          ],
+          "3": [
+            "PLHI-bark-10",
+            "PLHI-bark-06"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened and were ranked from the sheets only. Group 1: 03 and 04 show the typical flaking, mottled patches over a wide area; 01 is mature, pinkish-brown flaking; 08 shows the pattern but is narrower and shows a building behind; 05 is mostly lichen-covered, the least typical look. Group 2: 09 is the classic patchwork pattern across a wide area; 12 is a whole trunk with a pale, smoother, cracked surface. Group 3: 10 shows clear exfoliating plates with orange-brown patches; 06 is dim and shadowed with less visible pattern."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLHI-fruit",
+      "kind": "rank",
+      "set": "key",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLHI-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLHI-fruit-03",
+          "PLHI-fruit-04",
+          "PLHI-fruit-05",
+          "PLHI-fruit-06",
+          "PLHI-fruit-09",
+          "PLHI-fruit-12"
+        ],
+        "2": [
+          "PLHI-fruit-07"
+        ],
+        "3": [
+          "PLHI-fruit-01",
+          "PLHI-fruit-02",
+          "PLHI-fruit-08",
+          "PLHI-fruit-11"
+        ]
+      },
+      "keys": [
+        "PLHI-fruit-03",
+        "PLHI-fruit-04",
+        "PLHI-fruit-05",
+        "PLHI-fruit-06",
+        "PLHI-fruit-09",
+        "PLHI-fruit-12",
+        "PLHI-fruit-07",
+        "PLHI-fruit-01",
+        "PLHI-fruit-02",
+        "PLHI-fruit-08",
+        "PLHI-fruit-11"
+      ],
+      "agentIds": [
+        "ab09df21ed0e23dd1"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLHI-fruit-12",
+            "PLHI-fruit-09",
+            "PLHI-fruit-03",
+            "PLHI-fruit-04",
+            "PLHI-fruit-06",
+            "PLHI-fruit-05"
+          ],
+          "2": [
+            "PLHI-fruit-07"
+          ],
+          "3": [
+            "PLHI-fruit-08",
+            "PLHI-fruit-01",
+            "PLHI-fruit-02",
+            "PLHI-fruit-11"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened, and all 11 keys were ranked. Group 1: 12 is ripe brown fruit with a hand as scale. 09 is ripe brown fruit on the twig, whole, with no scale. 03 has green mature leaves and a hand as scale, but green fruit. 04 and 06 show green leaves with fruit on the twig, and 05 has the fruit whole against blurred foliage. Group 2 has one key, so no ranking was needed. Group 3: 08 is a whole brown fruit on a twig among green mature leaves. 01 shows several small fruit on a twig among green leaves, and it is distant. 02 is ripe, dried fruit, but it sits on a wall and not on a twig. 11 has brown autumn leaves and green-yellow fruit, which is the least usual look. Ranks were made from the sheets only. No photo file was opened."
+      }
+    }
+  ]
+}

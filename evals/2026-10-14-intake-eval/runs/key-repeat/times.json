@@ -1,0 +1,167 @@
+{
+  "judge:opus:high:V1:n20:b01": {
+    "start": "2026-10-27T19:23:02.725Z",
+    "end": "2026-10-27T19:24:29.804Z",
+    "seconds": 87.079
+  },
+  "judge:opus:high:V1:n20:b02": {
+    "start": "2026-10-27T19:23:03.454Z",
+    "end": "2026-10-27T19:24:24.756Z",
+    "seconds": 81.302
+  },
+  "judge:opus:high:V1:n20:b03": {
+    "start": "2026-10-27T19:24:26.154Z",
+    "end": "2026-10-27T19:25:39.041Z",
+    "seconds": 72.887
+  },
+  "judge:opus:high:V1:n20:b04": {
+    "start": "2026-10-27T19:24:30.580Z",
+    "end": "2026-10-27T19:26:00.829Z",
+    "seconds": 90.249
+  },
+  "judge:opus:high:V1:n20:b05": {
+    "start": "2026-10-27T19:25:39.798Z",
+    "end": "2026-10-27T19:27:06.315Z",
+    "seconds": 86.517
+  },
+  "judge:opus:high:V1:n20:b06": {
+    "start": "2026-10-27T19:26:01.685Z",
+    "end": "2026-10-27T19:27:20.668Z",
+    "seconds": 78.983
+  },
+  "judge:opus:high:V1:n20:b07": {
+    "start": "2026-10-27T19:27:07.048Z",
+    "end": "2026-10-27T19:28:28.770Z",
+    "seconds": 81.722
+  },
+  "judge:opus:high:V1:n20:b08": {
+    "start": "2026-10-27T19:27:27.650Z",
+    "end": "2026-10-27T19:28:50.381Z",
+    "seconds": 82.731
+  },
+  "judge:opus:high:V1:n20:b09": {
+    "start": "2026-10-27T19:28:29.583Z",
+    "end": "2026-10-27T19:30:01.270Z",
+    "seconds": 91.687
+  },
+  "judge:opus:high:V1:n20:b10": {
+    "start": "2026-10-27T19:28:51.111Z",
+    "end": "2026-10-27T19:30:02.753Z",
+    "seconds": 71.642
+  },
+  "judge:opus:high:V1:n20:b11": {
+    "start": "2026-10-27T19:30:02.191Z",
+    "end": "2026-10-27T19:30:49.854Z",
+    "seconds": 47.663
+  },
+  "judge:sonnet:medium:V1:n20:b01": {
+    "start": "2026-10-27T19:30:03.719Z",
+    "end": "2026-10-27T19:31:05.324Z",
+    "seconds": 61.605
+  },
+  "judge:sonnet:medium:V1:n20:b02": {
+    "start": "2026-10-27T19:30:50.755Z",
+    "end": "2026-10-27T19:31:55.262Z",
+    "seconds": 64.507
+  },
+  "judge:sonnet:medium:V1:n20:b03": {
+    "start": "2026-10-27T19:31:06.160Z",
+    "end": "2026-10-27T19:31:50.685Z",
+    "seconds": 44.525
+  },
+  "judge:sonnet:medium:V1:n20:b04": {
+    "start": "2026-10-27T19:31:51.472Z",
+    "end": "2026-10-27T19:32:58.691Z",
+    "seconds": 67.219
+  },
+  "judge:sonnet:medium:V1:n20:b05": {
+    "start": "2026-10-27T19:31:56.792Z",
+    "end": "2026-10-27T19:32:56.593Z",
+    "seconds": 59.801
+  },
+  "judge:sonnet:medium:V1:n20:b06": {
+    "start": "2026-10-27T19:32:57.475Z",
+    "end": "2026-10-27T19:33:56.685Z",
+    "seconds": 59.21
+  },
+  "judge:sonnet:medium:V1:n20:b07": {
+    "start": "2026-10-27T19:32:59.832Z",
+    "end": "2026-10-27T19:33:59.439Z",
+    "seconds": 59.607
+  },
+  "judge:sonnet:medium:V1:n20:b08": {
+    "start": "2026-10-27T19:33:57.534Z",
+    "end": "2026-10-27T19:50:03.208Z",
+    "seconds": 965.674
+  },
+  "judge:sonnet:medium:V1:n20:b09": {
+    "start": "2026-10-27T19:34:00.382Z",
+    "end": "2026-10-27T19:35:31.445Z",
+    "seconds": 91.063
+  },
+  "judge:sonnet:medium:V1:n20:b10": {
+    "start": "2026-10-27T19:35:24.057Z",
+    "end": "2026-10-27T19:36:38.930Z",
+    "seconds": 74.873
+  },
+  "judge:sonnet:medium:V1:n20:b11": {
+    "start": "2026-10-27T19:35:32.227Z",
+    "end": "2026-10-27T19:36:29.230Z",
+    "seconds": 57.003
+  },
+  "judge:haiku:medium:V1:n20:b01": {
+    "start": "2026-10-27T19:36:30.007Z",
+    "end": "2026-10-27T19:38:51.658Z",
+    "seconds": 141.651
+  },
+  "judge:haiku:medium:V1:n20:b02": {
+    "start": "2026-10-27T19:36:39.693Z",
+    "end": "2026-10-27T19:38:45.594Z",
+    "seconds": 125.901
+  },
+  "judge:haiku:medium:V1:n20:b03": {
+    "start": "2026-10-27T19:38:46.393Z",
+    "end": "2026-10-27T19:40:23.059Z",
+    "seconds": 96.666
+  },
+  "judge:haiku:medium:V1:n20:b04": {
+    "start": "2026-10-27T19:38:53.282Z",
+    "end": "2026-10-27T19:41:02.989Z",
+    "seconds": 129.707
+  },
+  "judge:haiku:medium:V1:n20:b05": {
+    "start": "2026-10-27T19:40:23.854Z",
+    "end": "2026-10-27T19:43:00.350Z",
+    "seconds": 156.496
+  },
+  "judge:haiku:medium:V1:n20:b06": {
+    "start": "2026-10-27T19:41:04.055Z",
+    "end": "2026-10-27T19:43:58.508Z",
+    "seconds": 174.453
+  },
+  "judge:haiku:medium:V1:n20:b07": {
+    "start": "2026-10-27T19:43:01.247Z",
+    "end": "2026-10-27T19:44:30.438Z",
+    "seconds": 89.191
+  },
+  "judge:haiku:medium:V1:n20:b08": {
+    "start": "2026-10-27T19:43:59.556Z",
+    "end": "2026-10-27T19:45:52.773Z",
+    "seconds": 113.217
+  },
+  "judge:haiku:medium:V1:n20:b09": {
+    "start": "2026-10-27T19:44:31.144Z",
+    "end": "2026-10-27T19:46:53.588Z",
+    "seconds": 142.444
+  },
+  "judge:haiku:medium:V1:n20:b10": {
+    "start": "2026-10-27T19:45:53.525Z",
+    "end": "2026-10-27T19:47:28.244Z",
+    "seconds": 94.719
+  },
+  "judge:haiku:medium:V1:n20:b11": {
+    "start": "2026-10-27T19:46:54.658Z",
+    "end": "2026-10-27T19:48:16.558Z",
+    "seconds": 81.9
+  }
+}

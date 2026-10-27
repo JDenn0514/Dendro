@@ -1,0 +1,258 @@
+[
+  {
+    "label": "judge:sonnet:xhigh:V1:b06",
+    "text": "Output does not match required schema: /results/4/part: must be equal to one of the allowed values: [\"leaf\",\"bark\",\"fruit\",\"other\"]"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b05",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b05",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b05",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b05",
+    "text": "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Access Added As A Means]. If you have other tasks that don't depend on this action, continue working on those. I"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b06",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b06",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b06",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b07",
+    "text": "Output does not match required schema: /results/9: must have required property 'too_close'"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b08",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b08",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b08",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b13",
+    "text": "Exit code 1\n# Photo judge\n\nYou answer a fixed checklist on each photo for a tree-identification app. Each photo shows one part of one tree.\n\n- Never return a difficulty step, a keep, or a rank. The co"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b13",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b13",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b14",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b14",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b14",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b14",
+    "text": "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Access Added As A Means]. If you have other tasks that don't depend on this action, continue working on those. I"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b15",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b15",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b16",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b16",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b16",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b16",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b17",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b17",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b17",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b17",
+    "text": "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Access Added As A Means]. If you have other tasks that don't depend on this action, continue working on those. I"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b18",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b18",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b18",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b21",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:medium:V1:b21",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b21",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b21",
+    "text": "Permission for this action was denied by the Claude Code auto mode classifier. Reason: [Access Added As A Means]. If you have other tasks that don't depend on this action, continue working on those. I"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b21",
+    "text": "Exit code 1\nnon-200 OK status code: 403 Forbidden body: \"{\\\"message\\\":\\\"GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review thread"
+  },
+  {
+    "label": "judge:haiku:medium:V1:b22",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b06",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b06",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b06",
+    "text": "Exit code 1\ngh: Not Found (HTTP 404)\naccepts 1 arg(s), received 2"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b06",
+    "text": "Exit code 1\norigin\thttps://github.com/JDenn0514/Dendro (fetch)\norigin\thttps://github.com/JDenn0514/Dendro (push)\nfeat/intake-eval-5-key-runs\nHTTP 403: GitHub GraphQL is not available from Claude Code "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b07",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b07",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b09",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b09",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b09",
+    "text": "Exit code 1\norigin\thttps://github.com/JDenn0514/Dendro (fetch)\norigin\thttps://github.com/JDenn0514/Dendro (push)\n---\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pull"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b12",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b12",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b12",
+    "text": "Exit code 1\ngh: Not Found (HTTP 404)\naccepts 1 arg(s), received 2"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b13",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b13",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b13",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b15",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b15",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b15",
+    "text": "Exit code 1\ngh: Not Found (HTTP 404)\naccepts 1 arg(s), received 2"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b17",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b17",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b17",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b22",
+    "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b22",
+    "text": "Exit code 1\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/pulls/pulls#get-a-pull-request\",\"status\":\"404\"}gh: Not Found (HTTP 404)"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b22",
+    "text": "Exit code 1\ngh: Not Found (HTTP 404)\naccepts 1 arg(s), received 2"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b22",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  },
+  {
+    "label": "judge:haiku:xhigh:V1:b22",
+    "text": "failed to get pull request: GET https://api.github.com/repos/JDenn0514/Dendro/pulls/53: 404 Not Found []"
+  }
+]

@@ -1,0 +1,427 @@
+{
+  "rank:opus:high:ACRU-leaf": {
+    "start": "2026-10-27T19:48:37.287Z",
+    "end": "2026-10-27T19:48:46.568Z",
+    "seconds": 9.281
+  },
+  "rank:opus:high:ACRU-bark": {
+    "start": "2026-10-27T19:48:37.901Z",
+    "end": "2026-10-27T19:48:53.849Z",
+    "seconds": 15.948
+  },
+  "rank:opus:high:ACRU-fruit": {
+    "start": "2026-10-27T19:48:47.376Z",
+    "end": "2026-10-27T19:49:01.779Z",
+    "seconds": 14.403
+  },
+  "rank:opus:high:ACSA3-leaf": {
+    "start": "2026-10-27T19:48:54.640Z",
+    "end": "2026-10-27T19:49:05.456Z",
+    "seconds": 10.816
+  },
+  "rank:opus:high:ACSA3-bark": {
+    "start": "2026-10-27T19:49:02.559Z",
+    "end": "2026-10-27T19:49:15.236Z",
+    "seconds": 12.677
+  },
+  "rank:opus:high:ACSA3-fruit": {
+    "start": "2026-10-27T19:49:06.378Z",
+    "end": "2026-10-27T19:49:16.648Z",
+    "seconds": 10.27
+  },
+  "rank:opus:high:QUAL-leaf": {
+    "start": "2026-10-27T19:49:15.994Z",
+    "end": "2026-10-27T19:49:26.970Z",
+    "seconds": 10.976
+  },
+  "rank:opus:high:QUAL-bark": {
+    "start": "2026-10-27T19:49:17.383Z",
+    "end": "2026-10-27T19:49:25.024Z",
+    "seconds": 7.641
+  },
+  "rank:opus:high:QUAL-fruit": {
+    "start": "2026-10-27T19:49:25.850Z",
+    "end": "2026-10-27T19:49:34.615Z",
+    "seconds": 8.765
+  },
+  "rank:opus:high:QURU-leaf": {
+    "start": "2026-10-27T19:49:27.896Z",
+    "end": "2026-10-27T19:49:36.989Z",
+    "seconds": 9.093
+  },
+  "rank:opus:high:QURU-bark": {
+    "start": "2026-10-27T19:49:35.244Z",
+    "end": "2026-10-27T19:49:46.152Z",
+    "seconds": 10.908
+  },
+  "rank:opus:high:QURU-fruit": {
+    "start": "2026-10-27T19:49:37.737Z",
+    "end": "2026-10-27T19:49:48.285Z",
+    "seconds": 10.548
+  },
+  "rank:opus:high:LITU-leaf": {
+    "start": "2026-10-27T19:49:46.929Z",
+    "end": "2026-10-27T19:49:57.193Z",
+    "seconds": 10.264
+  },
+  "rank:opus:high:LITU-bark": {
+    "start": "2026-10-27T19:49:49.098Z",
+    "end": "2026-10-27T19:50:00.469Z",
+    "seconds": 11.371
+  },
+  "rank:opus:high:LITU-fruit": {
+    "start": "2026-10-27T19:49:58.027Z",
+    "end": "2026-10-27T19:50:09.733Z",
+    "seconds": 11.706
+  },
+  "rank:opus:high:PLOC-leaf": {
+    "start": "2026-10-27T19:50:01.193Z",
+    "end": "2026-10-27T19:50:15.253Z",
+    "seconds": 14.06
+  },
+  "rank:opus:high:PLOC-bark": {
+    "start": "2026-10-27T19:50:10.408Z",
+    "end": "2026-10-27T19:50:23.029Z",
+    "seconds": 12.621
+  },
+  "rank:opus:high:PLOC-fruit": {
+    "start": "2026-10-27T19:50:16.052Z",
+    "end": "2026-10-27T19:50:29.479Z",
+    "seconds": 13.427
+  },
+  "rank:opus:high:PLHI-leaf": {
+    "start": "2026-10-27T19:50:24.057Z",
+    "end": "2026-10-27T19:50:35.156Z",
+    "seconds": 11.099
+  },
+  "rank:opus:high:PLHI-bark": {
+    "start": "2026-10-27T19:50:30.207Z",
+    "end": "2026-10-27T19:50:40.672Z",
+    "seconds": 10.465
+  },
+  "rank:opus:high:PLHI-fruit": {
+    "start": "2026-10-27T19:50:35.816Z",
+    "end": "2026-10-27T19:50:46.990Z",
+    "seconds": 11.174
+  },
+  "rank:opus:high:FR:ACRU-leaf": {
+    "start": "2026-10-27T19:50:41.745Z",
+    "end": "2026-10-27T19:50:49.270Z",
+    "seconds": 7.525
+  },
+  "rank:opus:high:FR:ACRU-bark": {
+    "start": "2026-10-27T19:50:47.702Z",
+    "end": "2026-10-27T19:51:02.157Z",
+    "seconds": 14.455
+  },
+  "rank:opus:high:FR:ACRU-fruit": {
+    "start": "2026-10-27T19:50:50.072Z",
+    "end": "2026-10-27T19:51:03.324Z",
+    "seconds": 13.252
+  },
+  "rank:opus:high:FR:ACSA3-leaf": {
+    "start": "2026-10-27T19:51:02.988Z",
+    "end": "2026-10-27T19:51:10.835Z",
+    "seconds": 7.847
+  },
+  "rank:opus:high:FR:ACSA3-bark": {
+    "start": "2026-10-27T19:51:04.428Z",
+    "end": "2026-10-27T19:51:15.626Z",
+    "seconds": 11.198
+  },
+  "rank:opus:high:FR:ACSA3-fruit": {
+    "start": "2026-10-27T19:51:11.478Z",
+    "end": "2026-10-27T19:51:21.507Z",
+    "seconds": 10.029
+  },
+  "rank:opus:high:FR:QUAL-leaf": {
+    "start": "2026-10-27T19:51:16.835Z",
+    "end": "2026-10-27T19:51:25.817Z",
+    "seconds": 8.982
+  },
+  "rank:opus:high:FR:QURU-bark": {
+    "start": "2026-10-27T19:51:23.961Z",
+    "end": "2026-10-27T19:51:29.790Z",
+    "seconds": 5.829
+  },
+  "rank:opus:high:FR:QURU-fruit": {
+    "start": "2026-10-27T19:51:26.521Z",
+    "end": "2026-10-27T19:51:35.520Z",
+    "seconds": 8.999
+  },
+  "rank:opus:high:FR:LITU-leaf": {
+    "start": "2026-10-27T19:51:30.543Z",
+    "end": "2026-10-27T19:51:36.307Z",
+    "seconds": 5.764
+  },
+  "rank:opus:high:FR:LITU-bark": {
+    "start": "2026-10-27T19:51:39.556Z",
+    "end": "2026-10-27T19:51:49.289Z",
+    "seconds": 9.733
+  },
+  "rank:opus:high:FR:LITU-fruit": {
+    "start": "2026-10-27T19:51:39.623Z",
+    "end": "2026-10-27T19:51:52.056Z",
+    "seconds": 12.433
+  },
+  "rank:sonnet:high:ACRU-leaf": {
+    "start": "2026-10-27T19:51:50.128Z",
+    "end": "2026-10-27T19:52:18.484Z",
+    "seconds": 28.356
+  },
+  "rank:sonnet:high:ACRU-bark": {
+    "start": "2026-10-27T19:51:57.752Z",
+    "end": "2026-10-27T19:52:17.158Z",
+    "seconds": 19.406
+  },
+  "rank:sonnet:high:ACRU-fruit": {
+    "start": "2026-10-27T19:52:17.861Z",
+    "end": "2026-10-27T19:52:30.423Z",
+    "seconds": 12.562
+  },
+  "rank:sonnet:high:ACSA3-leaf": {
+    "start": "2026-10-27T19:52:19.245Z",
+    "end": "2026-10-27T19:52:30.461Z",
+    "seconds": 11.216
+  },
+  "rank:sonnet:high:ACSA3-bark": {
+    "start": "2026-10-27T19:52:31.111Z",
+    "end": "2026-10-27T19:52:41.319Z",
+    "seconds": 10.208
+  },
+  "rank:sonnet:high:ACSA3-fruit": {
+    "start": "2026-10-27T19:52:31.150Z",
+    "end": "2026-10-27T19:52:44.720Z",
+    "seconds": 13.57
+  },
+  "rank:sonnet:high:QUAL-leaf": {
+    "start": "2026-10-27T19:52:42.036Z",
+    "end": "2026-10-27T19:52:52.165Z",
+    "seconds": 10.129
+  },
+  "rank:sonnet:high:QUAL-bark": {
+    "start": "2026-10-27T19:52:54.425Z",
+    "end": "2026-10-27T19:53:02.800Z",
+    "seconds": 8.375
+  },
+  "rank:sonnet:high:QUAL-fruit": {
+    "start": "2026-10-27T19:53:03.513Z",
+    "end": "2026-10-27T19:53:16.110Z",
+    "seconds": 12.597
+  },
+  "rank:sonnet:high:QURU-leaf": {
+    "start": "2026-10-27T19:53:14.090Z",
+    "end": "2026-10-27T19:53:23.266Z",
+    "seconds": 9.176
+  },
+  "rank:sonnet:high:QURU-bark": {
+    "start": "2026-10-27T19:53:16.919Z",
+    "end": "2026-10-27T19:53:28.124Z",
+    "seconds": 11.205
+  },
+  "rank:sonnet:high:QURU-fruit": {
+    "start": "2026-10-27T19:53:23.972Z",
+    "end": "2026-10-27T19:53:34.627Z",
+    "seconds": 10.655
+  },
+  "rank:sonnet:high:LITU-leaf": {
+    "start": "2026-10-27T19:53:29.045Z",
+    "end": "2026-10-27T19:53:39.358Z",
+    "seconds": 10.313
+  },
+  "rank:sonnet:high:LITU-bark": {
+    "start": "2026-10-27T19:53:35.594Z",
+    "end": "2026-10-27T19:53:45.366Z",
+    "seconds": 9.772
+  },
+  "rank:sonnet:high:LITU-fruit": {
+    "start": "2026-10-27T19:53:40.273Z",
+    "end": "2026-10-27T19:53:48.197Z",
+    "seconds": 7.924
+  },
+  "rank:sonnet:high:PLOC-leaf": {
+    "start": "2026-10-27T19:53:46.056Z",
+    "end": "2026-10-27T19:53:57.260Z",
+    "seconds": 11.204
+  },
+  "rank:sonnet:high:PLOC-bark": {
+    "start": "2026-10-27T19:53:48.878Z",
+    "end": "2026-10-27T19:53:58.758Z",
+    "seconds": 9.88
+  },
+  "rank:sonnet:high:PLOC-fruit": {
+    "start": "2026-10-27T19:53:58.075Z",
+    "end": "2026-10-27T19:54:08.812Z",
+    "seconds": 10.737
+  },
+  "rank:sonnet:high:PLHI-leaf": {
+    "start": "2026-10-27T19:53:59.518Z",
+    "end": "2026-10-27T19:54:08.456Z",
+    "seconds": 8.938
+  },
+  "rank:sonnet:high:PLHI-bark": {
+    "start": "2026-10-27T19:54:09.297Z",
+    "end": "2026-10-27T19:54:19.493Z",
+    "seconds": 10.196
+  },
+  "rank:sonnet:high:PLHI-fruit": {
+    "start": "2026-10-27T19:54:09.594Z",
+    "end": "2026-10-27T19:54:22.497Z",
+    "seconds": 12.903
+  },
+  "rank:sonnet:high:FR:ACRU-leaf": {
+    "start": "2026-10-27T19:54:20.165Z",
+    "end": "2026-10-27T19:54:27.104Z",
+    "seconds": 6.939
+  },
+  "rank:sonnet:high:FR:ACRU-bark": {
+    "start": "2026-10-27T19:54:23.431Z",
+    "end": "2026-10-27T19:54:33.345Z",
+    "seconds": 9.914
+  },
+  "rank:sonnet:high:FR:ACRU-fruit": {
+    "start": "2026-10-27T19:54:27.787Z",
+    "end": "2026-10-27T19:54:39.159Z",
+    "seconds": 11.372
+  },
+  "rank:sonnet:high:FR:ACSA3-leaf": {
+    "start": "2026-10-27T19:54:34.163Z",
+    "end": "2026-10-27T19:54:45.145Z",
+    "seconds": 10.982
+  },
+  "rank:sonnet:high:FR:ACSA3-bark": {
+    "start": "2026-10-27T19:54:40.072Z",
+    "end": "2026-10-27T19:54:53.678Z",
+    "seconds": 13.606
+  },
+  "rank:sonnet:high:FR:ACSA3-fruit": {
+    "start": "2026-10-27T19:54:45.845Z",
+    "end": "2026-10-27T19:54:53.686Z",
+    "seconds": 7.841
+  },
+  "rank:sonnet:high:FR:QUAL-leaf": {
+    "start": "2026-10-27T19:54:57.205Z",
+    "end": "2026-10-27T19:55:05.613Z",
+    "seconds": 8.408
+  },
+  "rank:sonnet:high:FR:QURU-bark": {
+    "start": "2026-10-27T19:54:57.270Z",
+    "end": "2026-10-27T19:55:03.280Z",
+    "seconds": 6.01
+  },
+  "rank:sonnet:high:FR:QURU-fruit": {
+    "start": "2026-10-27T19:55:03.984Z",
+    "end": "2026-10-27T19:55:11.857Z",
+    "seconds": 7.873
+  },
+  "rank:sonnet:high:FR:LITU-bark": {
+    "start": "2026-10-27T19:55:06.249Z",
+    "end": "2026-10-27T19:55:14.369Z",
+    "seconds": 8.12
+  },
+  "rank:haiku:high:ACRU-leaf": {
+    "start": "2026-10-27T19:55:12.652Z",
+    "end": "2026-10-27T19:55:18.099Z",
+    "seconds": 5.447
+  },
+  "rank:haiku:high:ACRU-bark": {
+    "start": "2026-10-27T19:55:17.575Z",
+    "end": "2026-10-27T19:55:27.894Z",
+    "seconds": 10.319
+  },
+  "rank:haiku:high:ACRU-fruit": {
+    "start": "2026-10-27T19:55:18.731Z",
+    "end": "2026-10-27T19:55:29.623Z",
+    "seconds": 10.892
+  },
+  "rank:haiku:high:ACSA3-leaf": {
+    "start": "2026-10-27T19:55:28.582Z",
+    "end": "2026-10-27T19:55:36.025Z",
+    "seconds": 7.443
+  },
+  "rank:haiku:high:ACSA3-bark": {
+    "start": "2026-10-27T19:55:30.320Z",
+    "end": "2026-10-27T19:55:40.376Z",
+    "seconds": 10.056
+  },
+  "rank:haiku:high:ACSA3-fruit": {
+    "start": "2026-10-27T19:55:36.725Z",
+    "end": "2026-10-27T19:55:45.533Z",
+    "seconds": 8.808
+  },
+  "rank:haiku:high:QUAL-leaf": {
+    "start": "2026-10-27T19:55:41.075Z",
+    "end": "2026-10-27T19:55:53.728Z",
+    "seconds": 12.653
+  },
+  "rank:haiku:high:QUAL-bark": {
+    "start": "2026-10-27T19:55:46.183Z",
+    "end": "2026-10-27T19:55:52.875Z",
+    "seconds": 6.692
+  },
+  "rank:haiku:high:QUAL-fruit": {
+    "start": "2026-10-27T19:55:53.615Z",
+    "end": "2026-10-27T19:56:03.121Z",
+    "seconds": 9.506
+  },
+  "rank:haiku:high:QURU-leaf": {
+    "start": "2026-10-27T19:55:54.483Z",
+    "end": "2026-10-27T19:56:04.352Z",
+    "seconds": 9.869
+  },
+  "rank:haiku:high:QURU-bark": {
+    "start": "2026-10-27T19:56:04.089Z",
+    "end": "2026-10-27T19:56:13.914Z",
+    "seconds": 9.825
+  },
+  "rank:haiku:high:QURU-fruit": {
+    "start": "2026-10-27T19:56:05.037Z",
+    "end": "2026-10-27T19:56:13.409Z",
+    "seconds": 8.372
+  },
+  "rank:haiku:high:LITU-leaf": {
+    "start": "2026-10-27T19:56:14.230Z",
+    "end": "2026-10-27T19:56:19.334Z",
+    "seconds": 5.104
+  },
+  "rank:haiku:high:LITU-bark": {
+    "start": "2026-10-27T19:56:14.647Z",
+    "end": "2026-10-27T19:56:24.099Z",
+    "seconds": 9.452
+  },
+  "rank:haiku:high:LITU-fruit": {
+    "start": "2026-10-27T19:56:20.164Z",
+    "end": "2026-10-27T19:56:30.430Z",
+    "seconds": 10.266
+  },
+  "rank:haiku:high:PLOC-leaf": {
+    "start": "2026-10-27T19:56:25.142Z",
+    "end": "2026-10-27T19:56:38.035Z",
+    "seconds": 12.893
+  },
+  "rank:haiku:high:PLOC-bark": {
+    "start": "2026-10-27T19:56:31.144Z",
+    "end": "2026-10-27T19:56:40.221Z",
+    "seconds": 9.077
+  },
+  "rank:haiku:high:PLOC-fruit": {
+    "start": "2026-10-27T19:56:39.291Z",
+    "end": "2026-10-27T19:57:00.425Z",
+    "seconds": 21.134
+  },
+  "rank:haiku:high:PLHI-leaf": {
+    "start": "2026-10-27T19:56:41.012Z",
+    "end": "2026-10-27T19:56:50.058Z",
+    "seconds": 9.046
+  },
+  "rank:haiku:high:PLHI-bark": {
+    "start": "2026-10-27T19:56:50.792Z",
+    "end": "2026-10-27T19:56:58.077Z",
+    "seconds": 7.285
+  },
+  "rank:haiku:high:PLHI-fruit": {
+    "start": "2026-10-27T19:56:59.336Z",
+    "end": "2026-10-27T19:57:18.750Z",
+    "seconds": 19.414
+  }
+}
