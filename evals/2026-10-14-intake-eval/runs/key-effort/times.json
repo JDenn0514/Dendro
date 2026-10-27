@@ -1,0 +1,662 @@
+{
+  "judge:opus:medium:V1:b01": {
+    "start": "2026-10-27T14:43:32.187Z",
+    "end": "2026-10-27T14:44:12.003Z",
+    "seconds": 39.816
+  },
+  "judge:opus:medium:V1:b02": {
+    "start": "2026-10-27T14:43:32.802Z",
+    "end": "2026-10-27T14:44:06.546Z",
+    "seconds": 33.744
+  },
+  "judge:opus:medium:V1:b03": {
+    "start": "2026-10-27T14:44:07.816Z",
+    "end": "2026-10-27T14:44:33.336Z",
+    "seconds": 25.52
+  },
+  "judge:opus:medium:V1:b04": {
+    "start": "2026-10-27T14:44:13.422Z",
+    "end": "2026-10-27T14:44:56.116Z",
+    "seconds": 42.694
+  },
+  "judge:opus:medium:V1:b05": {
+    "start": "2026-10-27T14:44:35.313Z",
+    "end": "2026-10-27T14:45:14.612Z",
+    "seconds": 39.299
+  },
+  "judge:opus:medium:V1:b06": {
+    "start": "2026-10-27T14:44:57.093Z",
+    "end": "2026-10-27T14:45:25.985Z",
+    "seconds": 28.892
+  },
+  "judge:opus:medium:V1:b07": {
+    "start": "2026-10-27T14:45:15.509Z",
+    "end": "2026-10-27T14:45:54.776Z",
+    "seconds": 39.267
+  },
+  "judge:opus:medium:V1:b08": {
+    "start": "2026-10-27T14:45:26.798Z",
+    "end": "2026-10-27T14:45:59.840Z",
+    "seconds": 33.042
+  },
+  "judge:opus:medium:V1:b09": {
+    "start": "2026-10-27T14:45:55.731Z",
+    "end": "2026-10-27T14:46:40.490Z",
+    "seconds": 44.759
+  },
+  "judge:opus:medium:V1:b10": {
+    "start": "2026-10-27T14:46:00.868Z",
+    "end": "2026-10-27T14:46:39.412Z",
+    "seconds": 38.544
+  },
+  "judge:opus:medium:V1:b11": {
+    "start": "2026-10-27T14:46:41.079Z",
+    "end": "2026-10-27T14:47:19.875Z",
+    "seconds": 38.796
+  },
+  "judge:opus:medium:V1:b12": {
+    "start": "2026-10-27T14:46:42.068Z",
+    "end": "2026-10-27T14:47:25.908Z",
+    "seconds": 43.84
+  },
+  "judge:opus:medium:V1:b13": {
+    "start": "2026-10-27T14:47:20.906Z",
+    "end": "2026-10-27T14:47:52.603Z",
+    "seconds": 31.697
+  },
+  "judge:opus:medium:V1:b14": {
+    "start": "2026-10-27T14:47:26.757Z",
+    "end": "2026-10-27T14:48:10.516Z",
+    "seconds": 43.759
+  },
+  "judge:opus:medium:V1:b15": {
+    "start": "2026-10-27T14:47:53.484Z",
+    "end": "2026-10-27T14:48:38.032Z",
+    "seconds": 44.548
+  },
+  "judge:opus:medium:V1:b16": {
+    "start": "2026-10-27T14:48:12.254Z",
+    "end": "2026-10-27T14:48:54.380Z",
+    "seconds": 42.126
+  },
+  "judge:opus:medium:V1:b17": {
+    "start": "2026-10-27T14:48:40.105Z",
+    "end": "2026-10-27T14:49:04.810Z",
+    "seconds": 24.705
+  },
+  "judge:opus:medium:V1:b18": {
+    "start": "2026-10-27T14:48:55.483Z",
+    "end": "2026-10-27T14:49:33.939Z",
+    "seconds": 38.456
+  },
+  "judge:opus:medium:V1:b19": {
+    "start": "2026-10-27T14:49:05.816Z",
+    "end": "2026-10-27T14:49:37.668Z",
+    "seconds": 31.852
+  },
+  "judge:opus:medium:V1:b20": {
+    "start": "2026-10-27T14:49:35.382Z",
+    "end": "2026-10-27T14:50:09.411Z",
+    "seconds": 34.029
+  },
+  "judge:opus:medium:V1:b21": {
+    "start": "2026-10-27T14:49:38.539Z",
+    "end": "2026-10-27T14:50:16.578Z",
+    "seconds": 38.039
+  },
+  "judge:opus:medium:V1:b22": {
+    "start": "2026-10-27T14:50:10.239Z",
+    "end": "2026-10-27T14:50:20.106Z",
+    "seconds": 9.867
+  },
+  "judge:opus:xhigh:V1:b01": {
+    "start": "2026-10-27T14:50:17.385Z",
+    "end": "2026-10-27T14:51:33.663Z",
+    "seconds": 76.278
+  },
+  "judge:opus:xhigh:V1:b02": {
+    "start": "2026-10-27T14:50:20.915Z",
+    "end": "2026-10-27T14:51:39.149Z",
+    "seconds": 78.234
+  },
+  "judge:opus:xhigh:V1:b03": {
+    "start": "2026-10-27T14:51:34.637Z",
+    "end": "2026-10-27T14:52:45.551Z",
+    "seconds": 70.914
+  },
+  "judge:opus:xhigh:V1:b04": {
+    "start": "2026-10-27T14:51:40.210Z",
+    "end": "2026-10-27T14:53:32.912Z",
+    "seconds": 112.702
+  },
+  "judge:opus:xhigh:V1:b05": {
+    "start": "2026-10-27T14:52:47.352Z",
+    "end": "2026-10-27T14:54:22.455Z",
+    "seconds": 95.103
+  },
+  "judge:opus:xhigh:V1:b06": {
+    "start": "2026-10-27T14:53:34.029Z",
+    "end": "2026-10-27T14:54:21.969Z",
+    "seconds": 47.94
+  },
+  "judge:opus:xhigh:V1:b07": {
+    "start": "2026-10-27T14:54:22.866Z",
+    "end": "2026-10-27T14:56:08.894Z",
+    "seconds": 106.028
+  },
+  "judge:opus:xhigh:V1:b08": {
+    "start": "2026-10-27T14:54:23.298Z",
+    "end": "2026-10-27T14:55:27.911Z",
+    "seconds": 64.613
+  },
+  "judge:opus:xhigh:V1:b09": {
+    "start": "2026-10-27T14:55:28.862Z",
+    "end": "2026-10-27T14:56:39.958Z",
+    "seconds": 71.096
+  },
+  "judge:opus:xhigh:V1:b10": {
+    "start": "2026-10-27T14:56:10.001Z",
+    "end": "2026-10-27T14:57:49.583Z",
+    "seconds": 99.582
+  },
+  "judge:opus:xhigh:V1:b11": {
+    "start": "2026-10-27T14:56:40.700Z",
+    "end": "2026-10-27T14:58:03.510Z",
+    "seconds": 82.81
+  },
+  "judge:opus:xhigh:V1:b12": {
+    "start": "2026-10-27T14:57:50.358Z",
+    "end": "2026-10-27T14:59:19.976Z",
+    "seconds": 89.618
+  },
+  "judge:opus:xhigh:V1:b13": {
+    "start": "2026-10-27T14:58:04.748Z",
+    "end": "2026-10-27T14:59:12.566Z",
+    "seconds": 67.818
+  },
+  "judge:opus:xhigh:V1:b14": {
+    "start": "2026-10-27T14:59:13.398Z",
+    "end": "2026-10-27T15:00:37.889Z",
+    "seconds": 84.491
+  },
+  "judge:opus:xhigh:V1:b15": {
+    "start": "2026-10-27T14:59:20.714Z",
+    "end": "2026-10-27T15:01:23.893Z",
+    "seconds": 123.179
+  },
+  "judge:opus:xhigh:V1:b16": {
+    "start": "2026-10-27T15:00:38.926Z",
+    "end": "2026-10-27T15:02:09.331Z",
+    "seconds": 90.405
+  },
+  "judge:opus:xhigh:V1:b17": {
+    "start": "2026-10-27T15:01:24.871Z",
+    "end": "2026-10-27T15:02:33.575Z",
+    "seconds": 68.704
+  },
+  "judge:opus:xhigh:V1:b18": {
+    "start": "2026-10-27T15:02:10.150Z",
+    "end": "2026-10-27T15:03:45.549Z",
+    "seconds": 95.399
+  },
+  "judge:opus:xhigh:V1:b19": {
+    "start": "2026-10-27T15:02:34.354Z",
+    "end": "2026-10-27T15:03:57.186Z",
+    "seconds": 82.832
+  },
+  "judge:opus:xhigh:V1:b20": {
+    "start": "2026-10-27T15:03:46.782Z",
+    "end": "2026-10-27T15:04:50.232Z",
+    "seconds": 63.45
+  },
+  "judge:opus:xhigh:V1:b21": {
+    "start": "2026-10-27T15:03:59.334Z",
+    "end": "2026-10-27T15:05:02.509Z",
+    "seconds": 63.175
+  },
+  "judge:opus:xhigh:V1:b22": {
+    "start": "2026-10-27T15:04:51.404Z",
+    "end": "2026-10-27T15:05:05.189Z",
+    "seconds": 13.785
+  },
+  "judge:sonnet:medium:V1:b01": {
+    "start": "2026-10-27T15:05:03.453Z",
+    "end": "2026-10-27T15:05:31.165Z",
+    "seconds": 27.712
+  },
+  "judge:sonnet:medium:V1:b02": {
+    "start": "2026-10-27T15:05:06.113Z",
+    "end": "2026-10-27T15:05:33.415Z",
+    "seconds": 27.302
+  },
+  "judge:sonnet:medium:V1:b03": {
+    "start": "2026-10-27T15:05:31.935Z",
+    "end": "2026-10-27T15:06:01.052Z",
+    "seconds": 29.117
+  },
+  "judge:sonnet:medium:V1:b04": {
+    "start": "2026-10-27T15:05:34.405Z",
+    "end": "2026-10-27T15:06:13.475Z",
+    "seconds": 39.07
+  },
+  "judge:sonnet:medium:V1:b05": {
+    "start": "2026-10-27T15:06:01.888Z",
+    "end": "2026-10-27T15:06:32.885Z",
+    "seconds": 30.997
+  },
+  "judge:sonnet:medium:V1:b06": {
+    "start": "2026-10-27T15:06:14.444Z",
+    "end": "2026-10-27T15:06:37.232Z",
+    "seconds": 22.788
+  },
+  "judge:sonnet:medium:V1:b07": {
+    "start": "2026-10-27T15:06:33.854Z",
+    "end": "2026-10-27T15:07:06.778Z",
+    "seconds": 32.924
+  },
+  "judge:sonnet:medium:V1:b08": {
+    "start": "2026-10-27T15:06:38.120Z",
+    "end": "2026-10-27T15:07:03.583Z",
+    "seconds": 25.463
+  },
+  "judge:sonnet:medium:V1:b09": {
+    "start": "2026-10-27T15:07:04.712Z",
+    "end": "2026-10-27T15:07:36.447Z",
+    "seconds": 31.735
+  },
+  "judge:sonnet:medium:V1:b10": {
+    "start": "2026-10-27T15:07:07.852Z",
+    "end": "2026-10-27T15:07:39.041Z",
+    "seconds": 31.189
+  },
+  "judge:sonnet:medium:V1:b11": {
+    "start": "2026-10-27T15:07:37.783Z",
+    "end": "2026-10-27T15:08:06.647Z",
+    "seconds": 28.864
+  },
+  "judge:sonnet:medium:V1:b12": {
+    "start": "2026-10-27T15:07:40.242Z",
+    "end": "2026-10-27T15:08:14.548Z",
+    "seconds": 34.306
+  },
+  "judge:sonnet:medium:V1:b13": {
+    "start": "2026-10-27T15:08:07.621Z",
+    "end": "2026-10-27T15:08:29.984Z",
+    "seconds": 22.363
+  },
+  "judge:sonnet:medium:V1:b14": {
+    "start": "2026-10-27T15:08:15.483Z",
+    "end": "2026-10-27T15:08:42.487Z",
+    "seconds": 27.004
+  },
+  "judge:sonnet:medium:V1:b15": {
+    "start": "2026-10-27T15:08:30.772Z",
+    "end": "2026-10-27T15:09:10.375Z",
+    "seconds": 39.603
+  },
+  "judge:sonnet:medium:V1:b16": {
+    "start": "2026-10-27T15:08:43.328Z",
+    "end": "2026-10-27T15:09:19.421Z",
+    "seconds": 36.093
+  },
+  "judge:sonnet:medium:V1:b17": {
+    "start": "2026-10-27T15:09:12.879Z",
+    "end": "2026-10-27T15:09:48.510Z",
+    "seconds": 35.631
+  },
+  "judge:sonnet:medium:V1:b18": {
+    "start": "2026-10-27T15:09:20.243Z",
+    "end": "2026-10-27T15:09:54.583Z",
+    "seconds": 34.34
+  },
+  "judge:sonnet:medium:V1:b19": {
+    "start": "2026-10-27T15:09:49.324Z",
+    "end": "2026-10-27T15:10:17.411Z",
+    "seconds": 28.087
+  },
+  "judge:sonnet:medium:V1:b20": {
+    "start": "2026-10-27T15:09:56.006Z",
+    "end": "2026-10-27T15:10:24.841Z",
+    "seconds": 28.835
+  },
+  "judge:sonnet:medium:V1:b21": {
+    "start": "2026-10-27T15:10:18.195Z",
+    "end": "2026-10-27T15:10:49.884Z",
+    "seconds": 31.689
+  },
+  "judge:sonnet:medium:V1:b22": {
+    "start": "2026-10-27T15:10:25.576Z",
+    "end": "2026-10-27T15:10:32.795Z",
+    "seconds": 7.219
+  },
+  "judge:sonnet:xhigh:V1:b01": {
+    "start": "2026-10-27T15:10:34.072Z",
+    "end": "2026-10-27T15:12:19.936Z",
+    "seconds": 105.864
+  },
+  "judge:sonnet:xhigh:V1:b02": {
+    "start": "2026-10-27T15:10:50.826Z",
+    "end": "2026-10-27T15:12:10.465Z",
+    "seconds": 79.639
+  },
+  "judge:sonnet:xhigh:V1:b03": {
+    "start": "2026-10-27T15:12:11.906Z",
+    "end": "2026-10-27T15:13:50.838Z",
+    "seconds": 98.932
+  },
+  "judge:sonnet:xhigh:V1:b04": {
+    "start": "2026-10-27T15:12:21.181Z",
+    "end": "2026-10-27T15:14:33.895Z",
+    "seconds": 132.714
+  },
+  "judge:sonnet:xhigh:V1:b05": {
+    "start": "2026-10-27T15:13:51.626Z",
+    "end": "2026-10-27T15:15:58.562Z",
+    "seconds": 126.936
+  },
+  "judge:sonnet:xhigh:V1:b06": {
+    "start": "2026-10-27T15:14:34.959Z",
+    "end": "2026-10-27T15:15:54.876Z",
+    "seconds": 79.917
+  },
+  "judge:sonnet:xhigh:V1:b07": {
+    "start": "2026-10-27T15:15:55.777Z",
+    "end": "2026-10-27T15:18:25.525Z",
+    "seconds": 149.748
+  },
+  "judge:sonnet:xhigh:V1:b08": {
+    "start": "2026-10-27T15:15:59.458Z",
+    "end": "2026-10-27T15:17:31.365Z",
+    "seconds": 91.907
+  },
+  "judge:sonnet:xhigh:V1:b09": {
+    "start": "2026-10-27T15:17:32.603Z",
+    "end": "2026-10-27T15:19:29.420Z",
+    "seconds": 116.817
+  },
+  "judge:sonnet:xhigh:V1:b10": {
+    "start": "2026-10-27T15:18:26.337Z",
+    "end": "2026-10-27T15:20:14.027Z",
+    "seconds": 107.69
+  },
+  "judge:sonnet:xhigh:V1:b11": {
+    "start": "2026-10-27T15:19:30.486Z",
+    "end": "2026-10-27T15:21:16.652Z",
+    "seconds": 106.166
+  },
+  "judge:sonnet:xhigh:V1:b12": {
+    "start": "2026-10-27T15:20:15.181Z",
+    "end": "2026-10-27T15:22:13.015Z",
+    "seconds": 117.834
+  },
+  "judge:sonnet:xhigh:V1:b13": {
+    "start": "2026-10-27T15:21:17.960Z",
+    "end": "2026-10-27T15:22:52.710Z",
+    "seconds": 94.75
+  },
+  "judge:sonnet:xhigh:V1:b14": {
+    "start": "2026-10-27T15:22:14.038Z",
+    "end": "2026-10-27T15:24:08.920Z",
+    "seconds": 114.882
+  },
+  "judge:sonnet:xhigh:V1:b15": {
+    "start": "2026-10-27T15:22:53.544Z",
+    "end": "2026-10-27T15:25:25.768Z",
+    "seconds": 152.224
+  },
+  "judge:sonnet:xhigh:V1:b16": {
+    "start": "2026-10-27T15:24:10.354Z",
+    "end": "2026-10-27T15:26:07.336Z",
+    "seconds": 116.982
+  },
+  "judge:sonnet:xhigh:V1:b17": {
+    "start": "2026-10-27T15:25:26.579Z",
+    "end": "2026-10-27T15:27:12.526Z",
+    "seconds": 105.947
+  },
+  "judge:sonnet:xhigh:V1:b18": {
+    "start": "2026-10-27T15:26:08.129Z",
+    "end": "2026-10-27T15:28:36.289Z",
+    "seconds": 148.16
+  },
+  "judge:sonnet:xhigh:V1:b19": {
+    "start": "2026-10-27T15:27:13.784Z",
+    "end": "2026-10-27T15:29:30.974Z",
+    "seconds": 137.19
+  },
+  "judge:sonnet:xhigh:V1:b20": {
+    "start": "2026-10-27T15:28:37.225Z",
+    "end": "2026-10-27T15:30:04.816Z",
+    "seconds": 87.591
+  },
+  "judge:sonnet:xhigh:V1:b21": {
+    "start": "2026-10-27T15:29:32.124Z",
+    "end": "2026-10-27T15:31:24.526Z",
+    "seconds": 112.402
+  },
+  "judge:sonnet:xhigh:V1:b22": {
+    "start": "2026-10-27T15:30:05.653Z",
+    "end": "2026-10-27T15:30:19.100Z",
+    "seconds": 13.447
+  },
+  "judge:haiku:medium:V1:b01": {
+    "start": "2026-10-27T15:30:19.938Z",
+    "end": "2026-10-27T15:31:11.543Z",
+    "seconds": 51.605
+  },
+  "judge:haiku:medium:V1:b02": {
+    "start": "2026-10-27T15:31:12.329Z",
+    "end": "2026-10-27T15:32:17.553Z",
+    "seconds": 65.224
+  },
+  "judge:haiku:medium:V1:b03": {
+    "start": "2026-10-27T15:31:25.432Z",
+    "end": "2026-10-27T15:32:23.110Z",
+    "seconds": 57.678
+  },
+  "judge:haiku:medium:V1:b04": {
+    "start": "2026-10-27T15:32:18.359Z",
+    "end": "2026-10-27T15:33:25.345Z",
+    "seconds": 66.986
+  },
+  "judge:haiku:medium:V1:b05": {
+    "start": "2026-10-27T15:32:23.818Z",
+    "end": "2026-10-27T15:32:41.979Z",
+    "seconds": 18.161
+  },
+  "judge:haiku:medium:V1:b06": {
+    "start": "2026-10-27T15:32:43.235Z",
+    "end": "2026-10-27T15:33:27.188Z",
+    "seconds": 43.953
+  },
+  "judge:haiku:medium:V1:b07": {
+    "start": "2026-10-27T15:33:26.194Z",
+    "end": "2026-10-27T15:34:59.679Z",
+    "seconds": 93.485
+  },
+  "judge:haiku:medium:V1:b08": {
+    "start": "2026-10-27T15:33:27.922Z",
+    "end": "2026-10-27T15:34:24.960Z",
+    "seconds": 57.038
+  },
+  "judge:haiku:medium:V1:b09": {
+    "start": "2026-10-27T15:34:25.880Z",
+    "end": "2026-10-27T15:35:15.111Z",
+    "seconds": 49.231
+  },
+  "judge:haiku:medium:V1:b10": {
+    "start": "2026-10-27T15:35:00.523Z",
+    "end": "2026-10-27T15:35:56.171Z",
+    "seconds": 55.648
+  },
+  "judge:haiku:medium:V1:b11": {
+    "start": "2026-10-27T15:35:15.851Z",
+    "end": "2026-10-27T15:36:38.031Z",
+    "seconds": 82.18
+  },
+  "judge:haiku:medium:V1:b12": {
+    "start": "2026-10-27T15:35:57.511Z",
+    "end": "2026-10-27T15:36:56.136Z",
+    "seconds": 58.625
+  },
+  "judge:haiku:medium:V1:b13": {
+    "start": "2026-10-27T15:36:38.770Z",
+    "end": "2026-10-27T15:37:52.611Z",
+    "seconds": 73.841
+  },
+  "judge:haiku:medium:V1:b14": {
+    "start": "2026-10-27T15:36:56.840Z",
+    "end": "2026-10-27T15:37:14.019Z",
+    "seconds": 17.179
+  },
+  "judge:haiku:medium:V1:b15": {
+    "start": "2026-10-27T15:37:14.683Z",
+    "end": "2026-10-27T15:38:25.320Z",
+    "seconds": 70.637
+  },
+  "judge:haiku:medium:V1:b16": {
+    "start": "2026-10-27T15:37:53.397Z",
+    "end": "2026-10-27T15:39:25.223Z",
+    "seconds": 91.826
+  },
+  "judge:haiku:medium:V1:b17": {
+    "start": "2026-10-27T15:38:26.000Z",
+    "end": "2026-10-27T15:38:48.269Z",
+    "seconds": 22.269
+  },
+  "judge:haiku:medium:V1:b18": {
+    "start": "2026-10-27T15:38:49.134Z",
+    "end": "2026-10-27T15:39:04.856Z",
+    "seconds": 15.722
+  },
+  "judge:haiku:medium:V1:b19": {
+    "start": "2026-10-27T15:39:05.713Z",
+    "end": "2026-10-27T15:40:21.816Z",
+    "seconds": 76.103
+  },
+  "judge:haiku:medium:V1:b20": {
+    "start": "2026-10-27T15:39:26.037Z",
+    "end": "2026-10-27T15:40:33.278Z",
+    "seconds": 67.241
+  },
+  "judge:haiku:medium:V1:b21": {
+    "start": "2026-10-27T15:40:22.615Z",
+    "end": "2026-10-27T15:40:45.529Z",
+    "seconds": 22.914
+  },
+  "judge:haiku:medium:V1:b22": {
+    "start": "2026-10-27T15:40:34.007Z",
+    "end": "2026-10-27T15:40:56.771Z",
+    "seconds": 22.764
+  },
+  "judge:haiku:xhigh:V1:b01": {
+    "start": "2026-10-27T15:40:48.752Z",
+    "end": "2026-10-27T15:42:57.376Z",
+    "seconds": 128.624
+  },
+  "judge:haiku:xhigh:V1:b02": {
+    "start": "2026-10-27T15:40:57.485Z",
+    "end": "2026-10-27T15:42:40.359Z",
+    "seconds": 102.874
+  },
+  "judge:haiku:xhigh:V1:b03": {
+    "start": "2026-10-27T15:42:41.198Z",
+    "end": "2026-10-27T15:45:43.447Z",
+    "seconds": 182.249
+  },
+  "judge:haiku:xhigh:V1:b04": {
+    "start": "2026-10-27T15:42:58.166Z",
+    "end": "2026-10-27T15:45:33.917Z",
+    "seconds": 155.751
+  },
+  "judge:haiku:xhigh:V1:b05": {
+    "start": "2026-10-27T15:45:34.744Z",
+    "end": "2026-10-27T15:48:26.913Z",
+    "seconds": 172.169
+  },
+  "judge:haiku:xhigh:V1:b06": {
+    "start": "2026-10-27T15:45:44.301Z",
+    "end": "2026-10-27T15:48:03.626Z",
+    "seconds": 139.325
+  },
+  "judge:haiku:xhigh:V1:b07": {
+    "start": "2026-10-27T15:48:04.498Z",
+    "end": "2026-10-27T15:48:37.670Z",
+    "seconds": 33.172
+  },
+  "judge:haiku:xhigh:V1:b08": {
+    "start": "2026-10-27T15:48:27.755Z",
+    "end": "2026-10-27T15:51:03.681Z",
+    "seconds": 155.926
+  },
+  "judge:haiku:xhigh:V1:b09": {
+    "start": "2026-10-27T15:48:38.530Z",
+    "end": "2026-10-27T15:51:27.515Z",
+    "seconds": 168.985
+  },
+  "judge:haiku:xhigh:V1:b10": {
+    "start": "2026-10-27T15:51:04.423Z",
+    "end": "2026-10-27T15:53:53.959Z",
+    "seconds": 169.536
+  },
+  "judge:haiku:xhigh:V1:b11": {
+    "start": "2026-10-27T15:51:28.459Z",
+    "end": "2026-10-27T15:54:22.512Z",
+    "seconds": 174.053
+  },
+  "judge:haiku:xhigh:V1:b12": {
+    "start": "2026-10-27T15:53:54.778Z",
+    "end": "2026-10-27T15:57:17.841Z",
+    "seconds": 203.063
+  },
+  "judge:haiku:xhigh:V1:b13": {
+    "start": "2026-10-27T15:54:23.301Z",
+    "end": "2026-10-27T15:57:21.228Z",
+    "seconds": 177.927
+  },
+  "judge:haiku:xhigh:V1:b14": {
+    "start": "2026-10-27T15:57:18.553Z",
+    "end": "2026-10-27T15:59:44.344Z",
+    "seconds": 145.791
+  },
+  "judge:haiku:xhigh:V1:b15": {
+    "start": "2026-10-27T15:57:22.097Z",
+    "end": "2026-10-27T16:01:20.486Z",
+    "seconds": 238.389
+  },
+  "judge:haiku:xhigh:V1:b16": {
+    "start": "2026-10-27T15:59:45.187Z",
+    "end": "2026-10-27T16:02:48.162Z",
+    "seconds": 182.975
+  },
+  "judge:haiku:xhigh:V1:b17": {
+    "start": "2026-10-27T16:01:21.367Z",
+    "end": "2026-10-27T16:03:55.519Z",
+    "seconds": 154.152
+  },
+  "judge:haiku:xhigh:V1:b18": {
+    "start": "2026-10-27T16:02:48.971Z",
+    "end": "2026-10-27T16:06:22.211Z",
+    "seconds": 213.24
+  },
+  "judge:haiku:xhigh:V1:b19": {
+    "start": "2026-10-27T16:03:56.260Z",
+    "end": "2026-10-27T16:07:08.165Z",
+    "seconds": 191.905
+  },
+  "judge:haiku:xhigh:V1:b20": {
+    "start": "2026-10-27T16:06:23.068Z",
+    "end": "2026-10-27T16:08:43.204Z",
+    "seconds": 140.136
+  },
+  "judge:haiku:xhigh:V1:b21": {
+    "start": "2026-10-27T16:07:08.990Z",
+    "end": "2026-10-27T16:10:01.724Z",
+    "seconds": 172.734
+  },
+  "judge:haiku:xhigh:V1:b22": {
+    "start": "2026-10-27T16:08:44.136Z",
+    "end": "2026-10-27T16:09:43.337Z",
+    "seconds": 59.201
+  }
+}
