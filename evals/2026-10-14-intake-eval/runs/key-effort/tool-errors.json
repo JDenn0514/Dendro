@@ -1,5 +1,9 @@
 [
   {
+    "label": "judge:sonnet:xhigh:V1:b06",
+    "text": "Output does not match required schema: /results/4/part: must be equal to one of the allowed values: [\"leaf\",\"bark\",\"fruit\",\"other\"]"
+  },
+  {
     "label": "judge:haiku:medium:V1:b05",
     "text": "Exit code 1\nHTTP 403: GitHub GraphQL is not available from Claude Code sessions; use the REST API (gh api repos/{owner}/{repo}/...). For review threads, auto-merge, and draft/ready-for-review use the "
   },
