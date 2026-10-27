@@ -1,4 +1,5 @@
 // node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-batch20|key-effort|key-n20|key-repeat|key-rank [--variant V1|V2]
+//   [--name <name>] [--models sonnet,haiku] [--reuse <old job list name>]
 //   key-rank: [--runs key-batch20,key-n20] names the runs that hold the first calls-of-20 answers of each leading set-up.
 // Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/<plan>.js, and wf/<plan>.jobs.json.
 // The workflow is named intake-eval-<plan>. collect.mjs --name <plan> then writes runs/<plan>/.
@@ -88,8 +89,11 @@ export function buildJobs(pool, plan, config, opts = {}) {
     // Owner ruling 2026-10-27: later runs use calls of 20. config.leading holds the leading variant and effort
     // of Task 5. key-n20 runs each leading set-up that has no calls-of-20 run yet (key-batch20 ran high).
     // key-repeat runs every leading set-up again, with the same labels and prompts: analyze.mjs --repeat.
+    // opts.models: run only these models (a repeat after a change of leading effort).
     const { variant, batch, effort } = config.leading;
-    for (const m of MODELS) if (plan === 'key-repeat' || effort[m] !== 'high') judge(all, m, effort[m], variant, batch);
+    for (const m of opts.models ?? []) if (!MODELS.includes(m)) throw new Error(`unknown model ${m}`);
+    const models = MODELS.filter(m => !opts.models || opts.models.includes(m));
+    for (const m of models) if (plan === 'key-repeat' || effort[m] !== 'high') judge(all, m, effort[m], variant, batch);
   } else if (plan === 'key-rank') {
     // opts.answers: { <model>: answers } of each model's leading set-up. opts.filter: Haiku's leading answers.
     // FR runs for Opus and Sonnet only, and only where its set differs from R's (plan choice 10).
@@ -106,6 +110,13 @@ export function buildJobs(pool, plan, config, opts = {}) {
     }
   } else throw new Error(`unknown plan ${plan}`);
   return jobs;
+}
+
+// The jobs of a new job list that an old run does not hold already: a new label, or the same label with a new
+// prompt. With --reuse, the script runs only these, and collect.mjs takes the rest from the old run.
+export function changedJobs(jobs, old) {
+  const was = new Map(old.map(j => [j.label, j.prompt]));
+  return jobs.filter(j => was.get(j.label) !== j.prompt);
 }
 
 export function renderScript(name, jobs) {
@@ -134,11 +145,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const args = process.argv.slice(2);
   const opt = n => { const i = args.indexOf(n); return i >= 0 ? args[i + 1] : undefined; };
   const plan = opt('--plan');
-  const name = plan;
+  // --name: the name of the job list and script, when a plan runs a second time (default: the plan name).
+  const name = opt('--name') ?? plan;
   const config = readJson(path.join(EVAL, 'config.json'));
   const pool = readJson(path.join(EVAL, 'key', 'pools.json'));
   writeBriefs();
-  const opts = { variant: opt('--variant') };
+  const opts = { variant: opt('--variant'), models: opt('--models')?.split(',') };
   if (plan === 'key-rank') {
     const runs = (opt('--runs') ?? 'key-batch20,key-n20').split(',');
     const all = runs.map(r => path.join(EVAL, 'runs', r));
@@ -154,11 +166,15 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   }
   const jobs = buildJobs(pool, plan, config, opts);
   fs.mkdirSync(path.join(EVAL, 'wf'), { recursive: true });
-  fs.writeFileSync(path.join(EVAL, 'wf', `${name}.js`), renderScript(name, jobs));
+  // --reuse <name>: the script runs only the jobs that wf/<name>.jobs.json does not hold already.
+  const reuse = opt('--reuse');
+  const run = reuse ? changedJobs(jobs, readJson(path.join(EVAL, 'wf', `${reuse}.jobs.json`))) : jobs;
+  if (reuse) console.log(`reuse ${reuse}: ${jobs.length - run.length} jobs as they are, ${run.length} to run`);
+  fs.writeFileSync(path.join(EVAL, 'wf', `${name}.js`), renderScript(name, run));
   writeJson(path.join(EVAL, 'wf', `${name}.jobs.json`), jobs);
   const count = {};
-  for (const j of jobs) count[`${j.kind} ${j.model} ${j.effort}`] = (count[`${j.kind} ${j.model} ${j.effort}`] || 0) + 1;
+  for (const j of run) count[`${j.kind} ${j.model} ${j.effort}`] = (count[`${j.kind} ${j.model} ${j.effort}`] || 0) + 1;
   console.log(JSON.stringify(count, null, 1));
-  console.log(`agents: ${jobs.length} | script: ${path.join(EVAL, 'wf', `${name}.js`)}`);
-  printEstimate(estimateJobs(jobs));
+  console.log(`agents: ${run.length} | script: ${path.join(EVAL, 'wf', `${name}.js`)}`);
+  printEstimate(estimateJobs(run));
 }

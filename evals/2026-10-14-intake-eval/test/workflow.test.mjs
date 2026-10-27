@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import path from 'node:path';
-import { buildJobs, renderScript, tracerPhotos, MODELS } from '../make-workflow.mjs';
+import { buildJobs, renderScript, tracerPhotos, changedJobs, MODELS } from '../make-workflow.mjs';
 import { SCHEMAS } from '../lib/schemas.mjs';
 import { EVAL } from '../lib/paths.mjs';
 
@@ -136,6 +136,18 @@ test('key-rank plan: R for each model and cell with 2 or more photos to rank; FR
   // ACRU and PLHI share no genus, so no prompt has a group line.
   assert.ok(jobs.every(j => !j.prompt.includes('Group line')));
   assert.throws(() => buildJobs(POOL, 'key-rank', config), /needs the judge answers/);
+});
+
+test('opts.models limits key-n20 and key-repeat to the models named', () => {
+  const jobs = buildJobs(POOL, 'key-repeat', config, { models: ['sonnet', 'haiku'] });
+  assert.deepEqual([...new Set(jobs.map(j => j.model))], ['sonnet', 'haiku']);
+  assert.throws(() => buildJobs(POOL, 'key-repeat', config, { models: ['gpt'] }), /unknown model gpt/);
+});
+
+test('changedJobs: the jobs whose label or prompt is not in the old job list', () => {
+  const old = [{ label: 'a', prompt: 'x' }, { label: 'b', prompt: 'y' }];
+  const now = [{ label: 'a', prompt: 'x' }, { label: 'b', prompt: 'z' }, { label: 'c', prompt: 'x' }];
+  assert.deepEqual(changedJobs(now, old).map(j => j.label), ['b', 'c']);
 });
 
 test('judge prompts list the 440 px copies, the tree, and the source name, and nothing of the owner', () => {

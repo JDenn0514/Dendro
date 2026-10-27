@@ -1,7 +1,7 @@
 // node analyze.mjs --set key [--runs <run>,<run>] [--repeat <run>]  ->  tables/<set>/table.json, table.md
 // Replays methods S, F, R, FR, and CR from the stored answers of the runs and scores them. No tokens.
 // --runs: the runs to read (default: every run in runs/ with jobs of the set). A job label in two runs is a problem.
-// --repeat: a second run of the same set-ups, for the repeat agreement.
+// --repeat: second runs of the same set-ups (one or more, comma-separated), for the repeat agreement.
 import path from 'node:path';
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
@@ -32,7 +32,7 @@ function loadRuns(names) {
   return { jobs, tokens, times };
 }
 const allRuns = fs.readdirSync(path.join(EVAL, 'runs')).filter(n => fs.existsSync(path.join(EVAL, 'runs', n, 'results.json'))).sort();
-const runNames = args.runs ? args.runs.split(',') : allRuns.filter(n => n !== args.repeat && readJson(path.join(EVAL, 'runs', n, 'results.json')).jobs.some(j => j.set === args.set));
+const runNames = args.runs ? args.runs.split(',') : allRuns.filter(n => !(args.repeat ?? '').split(',').includes(n) && readJson(path.join(EVAL, 'runs', n, 'results.json')).jobs.some(j => j.set === args.set));
 const { jobs, tokens, times } = loadRuns(runNames);
 const v = buildViews(jobs, tokens);
 problems.push(...v.problems);
@@ -191,7 +191,7 @@ for (const setup of setups.filter(s => /:n\d+$/.test(s))) {
 // 5. The repeat agreement, from a second run.
 const repeat = [];
 if (args.repeat) {
-  const r2 = loadRuns([args.repeat]), v2 = buildViews(r2.jobs, r2.tokens);
+  const r2 = loadRuns(args.repeat.split(',')), v2 = buildViews(r2.jobs, r2.tokens);
   problems.push(...v2.problems.map(p => `repeat: ${p}`));
   for (const setup of Object.keys(v2.answers).filter(s => v.answers[s])) {
     const ps = species.map(s => ({ ...s, photos: s.photos.filter(p => p.key in v.answers[setup] && p.key in v2.answers[setup]) })).filter(s => s.photos.length);
