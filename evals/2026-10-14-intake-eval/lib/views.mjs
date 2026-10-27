@@ -5,7 +5,8 @@ const zero = { tokens: 0, usd: 0 };
 // jobs: results.json jobs. tokens: tokens.json.
 // answers[<model>:<effort>:<variant>[:n<call size>]][key]: the judge's answer object, or null when there is none
 // (a failed agent, a missing key, or an answer with no valid part). The replay counts null as a reject (plan choice 13).
-// rank[<model>:<effort>][cell]: { orders: { <group>: [keys] }, unread: [keys] }. A key left out of its group is unread.
+// rank[<model>:<effort>[:FR]][cell]: { orders: { <group>: [keys] }, unread: [keys] }. A key left out of its group is unread.
+// A ranking of the FR set (job method 'FR') goes under :FR, apart from the R ranking of the same cell.
 export function buildViews(jobs, tokens) {
   const v = { answers: {}, judgeCost: {}, noAnswer: {}, unread: {}, checks: {}, rank: {}, rankCost: {}, problems: [] };
   for (const j of jobs) {
@@ -34,7 +35,7 @@ export function buildViews(jobs, tokens) {
         v.judgeCost[setup][key] = { tokens: t.tokens / j.keys.length, usd: t.usd / j.keys.length };
       }
     } else if (j.kind === 'rank') {
-      const setup = `${j.model}:${j.effort}`;
+      const setup = `${j.model}:${j.effort}${j.method === 'FR' ? ':FR' : ''}`;
       v.rank[setup] ??= {}; v.rankCost[setup] ??= {};
       const unreadSaid = new Set((r?.unread ?? []).filter(k => j.keys.includes(k)));
       const orders = {}, placed = new Set();
