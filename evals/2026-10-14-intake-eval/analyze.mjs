@@ -9,6 +9,7 @@ import { ROOT, EVAL } from './lib/paths.mjs';
 import { readJson, writeJson } from './lib/data.mjs';
 import { buildViews } from './lib/views.mjs';
 import { judgeSteps, replayS, replayF, replayR, replayFR, replayCR } from './lib/replay.mjs';
+import { methodSetups, filterOf as filterFor } from './lib/setups.mjs';
 import { agreement, usualLook, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, gates, shortlist } from './lib/score.mjs';
 
 const { values: args } = parseArgs({ options: { set: { type: 'string', default: 'key' }, runs: { type: 'string' }, repeat: { type: 'string' } } });
@@ -78,12 +79,10 @@ function stepsOf(pools, setup, rule, filter) {
 }
 
 const setups = Object.keys(v.answers).sort();
-const mainSetups = setups.filter(s => !/:n\d+$/.test(s));
+// Method rows: the calls-of-10 set-ups and the leading set-ups, whose answers the rankings come from.
+const mainSetups = methodSetups(setups, config);
 const modelOf = setup => setup.split(':')[0];
-const filterOf = setup => {
-  const f = `haiku:${config.effort.haiku}:${setup.split(':')[2]}`;
-  return modelOf(setup) !== 'haiku' && v.answers[f] ? f : null;
-};
+const filterOf = setup => filterFor(setup, config, s => !!v.answers[s]);
 const pct = x => (x == null ? '-' : `${(x * 100).toFixed(1)}%`);
 const f4 = x => (x == null ? '-' : x.toFixed(4));
 
