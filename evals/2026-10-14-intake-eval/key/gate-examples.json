@@ -1,0 +1,800 @@
+{
+  "setups": [
+    "opus:high:V1:n20",
+    "sonnet:high:V1:n20",
+    "haiku:high:V1:n20"
+  ],
+  "rule": "P",
+  "sheet": "https://claude.ai/artifact/78n3HQjn99WZYoP7hW47Ke",
+  "count": {
+    "judges": 47,
+    "mine": 2,
+    "either": 0
+  },
+  "photos": [
+    {
+      "key": "ACRU-fruit-02",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:01:56.844Z"
+    },
+    {
+      "key": "ACRU-fruit-03",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:01:55.578Z"
+    },
+    {
+      "key": "ACRU-fruit-09",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": "The seeds are clear but they're a bit far away so they are harder to see.",
+      "at": "2026-10-27T22:02:24.394Z"
+    },
+    {
+      "key": "ACRU-fruit-11",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:25.269Z"
+    },
+    {
+      "key": "ACSA3-bark-02",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:29.969Z"
+    },
+    {
+      "key": "ACSA3-bark-03",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:29.112Z"
+    },
+    {
+      "key": "ACSA3-bark-06",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:33.761Z"
+    },
+    {
+      "key": "ACSA3-bark-09",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:34.710Z"
+    },
+    {
+      "key": "ACSA3-bark-10",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:41.410Z"
+    },
+    {
+      "key": "QUAL-bark-01",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:38.944Z"
+    },
+    {
+      "key": "QUAL-bark-02",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:45.719Z"
+    },
+    {
+      "key": "QUAL-bark-04",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:46.719Z"
+    },
+    {
+      "key": "LITU-bark-05",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:50.169Z"
+    },
+    {
+      "key": "LITU-bark-06",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:51.111Z"
+    },
+    {
+      "key": "PLHI-bark-08",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:56.777Z"
+    },
+    {
+      "key": "PLHI-fruit-06",
+      "group": "step-2-1",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 1",
+        "step 1",
+        "step 1"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:02:54.660Z"
+    },
+    {
+      "key": "ACRU-bark-05",
+      "group": "step-1-2",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:04.998Z"
+    },
+    {
+      "key": "ACRU-bark-09",
+      "group": "step-1-2",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:05.873Z"
+    },
+    {
+      "key": "ACSA3-bark-08",
+      "group": "step-1-2",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:10.156Z"
+    },
+    {
+      "key": "ACSA3-bark-11",
+      "group": "step-1-2",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:09.448Z"
+    },
+    {
+      "key": "LITU-bark-01",
+      "group": "step-1-2",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:13.156Z"
+    },
+    {
+      "key": "PLOC-bark-08",
+      "group": "step-1-2",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:14.039Z"
+    },
+    {
+      "key": "PLHI-leaf-03",
+      "group": "step-1-2",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:30.264Z"
+    },
+    {
+      "key": "PLHI-bark-09",
+      "group": "step-1-2",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:32.748Z"
+    },
+    {
+      "key": "ACRU-leaf-06",
+      "group": "step-2-3",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:40.672Z"
+    },
+    {
+      "key": "ACSA3-fruit-01",
+      "group": "step-2-3",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:38.898Z"
+    },
+    {
+      "key": "ACSA3-fruit-04",
+      "group": "step-2-3",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:03:43.474Z"
+    },
+    {
+      "key": "QUAL-leaf-02",
+      "group": "step-2-3",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:00.281Z"
+    },
+    {
+      "key": "LITU-fruit-05",
+      "group": "step-2-3",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:15.151Z"
+    },
+    {
+      "key": "PLOC-leaf-09",
+      "group": "step-2-3",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:13.356Z"
+    },
+    {
+      "key": "LITU-fruit-04",
+      "group": "step-1-3",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:24.568Z"
+    },
+    {
+      "key": "LITU-fruit-08",
+      "group": "step-1-3",
+      "owner": {
+        "keep": true,
+        "step": 1
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:25.360Z"
+    },
+    {
+      "key": "ACRU-leaf-03",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 3
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:31.356Z"
+    },
+    {
+      "key": "ACSA3-leaf-09",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 3
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:29.928Z"
+    },
+    {
+      "key": "QURU-bark-03",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:34.543Z"
+    },
+    {
+      "key": "LITU-leaf-02",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 3
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:44.130Z"
+    },
+    {
+      "key": "LITU-leaf-05",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 2
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:47.747Z"
+    },
+    {
+      "key": "LITU-leaf-11",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 3
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:46.389Z"
+    },
+    {
+      "key": "LITU-fruit-06",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 3
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:50.964Z"
+    },
+    {
+      "key": "PLOC-bark-09",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 3
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:52.197Z"
+    },
+    {
+      "key": "PLOC-bark-12",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 3
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:58.110Z"
+    },
+    {
+      "key": "PLHI-leaf-04",
+      "group": "keep-dropped",
+      "owner": {
+        "keep": true,
+        "step": 3
+      },
+      "judges": [
+        "reject",
+        "reject",
+        "reject"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:04:57.293Z"
+    },
+    {
+      "key": "ACRU-bark-04",
+      "group": "keep-kept",
+      "owner": {
+        "keep": false,
+        "step": 3
+      },
+      "judges": [
+        "step 3",
+        "step 2",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:05:11.910Z"
+    },
+    {
+      "key": "ACRU-bark-08",
+      "group": "keep-kept",
+      "owner": {
+        "keep": false,
+        "step": 3
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:05:14.743Z"
+    },
+    {
+      "key": "ACSA3-bark-01",
+      "group": "keep-kept",
+      "owner": {
+        "keep": false,
+        "step": 3
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:05:25.084Z"
+    },
+    {
+      "key": "ACSA3-fruit-03",
+      "group": "keep-kept",
+      "owner": {
+        "keep": false,
+        "step": 3
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 1"
+      ],
+      "verdict": "mine",
+      "note": null,
+      "at": "2026-10-27T22:05:36.567Z"
+    },
+    {
+      "key": "LITU-bark-02",
+      "group": "keep-kept",
+      "owner": {
+        "keep": false,
+        "step": 3
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:05:48.905Z"
+    },
+    {
+      "key": "LITU-bark-07",
+      "group": "keep-kept",
+      "owner": {
+        "keep": false,
+        "step": 3
+      },
+      "judges": [
+        "step 2",
+        "step 2",
+        "step 2"
+      ],
+      "verdict": "judges",
+      "note": null,
+      "at": "2026-10-27T22:05:47.131Z"
+    },
+    {
+      "key": "PLOC-bark-07",
+      "group": "keep-kept",
+      "owner": {
+        "keep": false,
+        "step": 3
+      },
+      "judges": [
+        "step 3",
+        "step 3",
+        "step 3"
+      ],
+      "verdict": "mine",
+      "note": null,
+      "at": "2026-10-27T22:05:54.538Z"
+    }
+  ]
+}

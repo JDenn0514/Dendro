@@ -1,4 +1,5 @@
 // node review-examples.mjs [--runs key-batch20]  ->  images/pages/examples/ (git-ignored)
+// node review-examples.mjs --answers <dir>  ->  key/gate-examples.json, from an ArtifactData export of `examples` (<dir>/<key>.json)
 // The review sheet of the failing gates (plan Task 7): the key photos where the 3 leading set-ups agree
 // with each other and not with the owner, rule P. The page and its photo copies go under images/, so that
 // git ignores the photos; the Artifact tool publishes the folder.
@@ -6,7 +7,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
 import { EVAL } from './lib/paths.mjs';
-import { readJson } from './lib/data.mjs';
+import { readJson, writeJson } from './lib/data.mjs';
 import { buildViews } from './lib/views.mjs';
 import { judgeSteps } from './lib/replay.mjs';
 import { KEY_FEATURES } from './lib/step.mjs';
@@ -14,7 +15,7 @@ import { leadingSetup } from './lib/setups.mjs';
 import { gateExamples } from './lib/examples.mjs';
 import { reviewSheet } from './pages/review-sheet.mjs';
 
-const { values: args } = parseArgs({ options: { runs: { type: 'string', default: 'key-batch20' } } });
+const { values: args } = parseArgs({ options: { runs: { type: 'string', default: 'key-batch20' }, answers: { type: 'string' } } });
 const config = readJson(path.join(EVAL, 'config.json'));
 const pools = readJson(path.join(EVAL, 'key', 'pools.json'));
 const runs = args.runs.split(',').map(r => path.join(EVAL, 'runs', r));
@@ -100,6 +101,22 @@ const sheet = {
   choices: [{ value: 'judges', label: 'Judges are right' }, { value: 'mine', label: 'My call stands' }, { value: 'either', label: 'Could be either' }],
   groups,
 };
+// The owner's answers: one per photo of the sheet, with its group. A missing, unknown, or bad answer stops the import.
+if (args.answers) {
+  const values = sheet.choices.map(c => c.value), rows = [], files = new Set(fs.readdirSync(args.answers).filter(f => f.endsWith('.json')).map(f => f.slice(0, -5)));
+  for (const g of groups) for (const it of g.items) {
+    if (!files.delete(it.key)) throw new Error(`no answer for ${it.key}`);
+    const a = readJson(path.join(args.answers, `${it.key}.json`));
+    if (!values.includes(a.verdict)) throw new Error(`${it.key}: answer ${JSON.stringify(a.verdict)} is not one of ${values.join(', ')}`);
+    rows.push({ key: it.key, group: g.id, owner: owner[it.key], judges: steps.map(m => label(m.get(it.key))), verdict: a.verdict, note: a.note || null, at: a.at });
+  }
+  if (files.size) throw new Error(`answers for photos not on the sheet: ${[...files].join(', ')}`);
+  const count = Object.fromEntries(values.map(x => [x, rows.filter(r => r.verdict === x).length]));
+  writeJson(path.join(EVAL, 'key', 'gate-examples.json'), { setups, rule: 'P', sheet: 'https://claude.ai/artifact/78n3HQjn99WZYoP7hW47Ke', count, photos: rows });
+  console.log(`gate examples: ${rows.length} answers | ${values.map(x => `${x} ${count[x]}`).join(', ')}`);
+  process.exit(0);
+}
+
 const out = path.join(EVAL, 'images', 'pages', 'examples');
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(path.join(out, 'img'), { recursive: true });
