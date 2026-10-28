@@ -12,6 +12,7 @@ import { readJson, writeJson } from './lib/data.mjs';
 import { pickOrder } from './lib/seed.mjs';
 import { relabelSet } from './lib/examples.mjs';
 import { reviewSheet } from './pages/review-sheet.mjs';
+import { STEP_LEGEND } from './pages/legend.mjs';
 
 const { values: args } = parseArgs({ options: { runs: { type: 'string', default: 'key-batch20' }, answers: { type: 'string' } } });
 const { config, pools, setups, photo, keys, owner, steps } = loadKeySteps(args.runs.split(','));
@@ -32,14 +33,7 @@ const sheet = {
     `${set.size} key photos, blind. Label each one as you would a new photo: keep it at difficulty step 1, 2, or 3, or drop it. The page shows no earlier label and no judge answer.`,
     'Your answers go into a key v2. The key keeps your labels of 2026-10-11, so both can be scored.',
   ],
-  // The legend says in plain words what lib/step.mjs computes (rule P), so the owner labels by the same definitions.
-  legend: [
-    ['Key features', 'Leaf: the outline (shape, blade, lobe tips) and the edge. Bark: the surface and the ridges, plates, grooves, or peeling. Fruit: the kind of fruit and its outline.'],
-    ['Step 1', 'The key features are clear, and the leaf, fruit, or bark is whole and the main thing in the frame. For bark, the photo also shows a trunk edge, a branch, or something for scale, not texture only.'],
-    ['Step 2', 'You can still read the key features, but the framing is not ideal: part of the subject is cut off, something competes with it, or the bark is a texture-only close-up.'],
-    ['Step 3', 'You must search or look closely to read a key feature, or the subject is not typical: young, damaged, an odd angle, or odd light.'],
-    ['Drop', 'A key feature does not show at all, or the photo has a reject problem, such as blur, a name label, dead leaves, or flowers or buds instead of the part.'],
-  ],
+  legend: STEP_LEGEND,
   choices: [{ value: '1', label: 'Step 1' }, { value: '2', label: 'Step 2' }, { value: '3', label: 'Step 3' }, { value: 'drop', label: 'Drop' }],
   groups,
 };
