@@ -1,0 +1,16 @@
+{
+  "variant": "V1",
+  "rule": "P",
+  "batch": 20,
+  "effort": {
+    "opus": "high",
+    "sonnet": "high",
+    "haiku": "high"
+  },
+  "sha256": {
+    "lib/step.mjs": "b29afe499f492c74d36c889acfebae92c8319cce2f9b447d49d05b6d7822c9ba",
+    "briefs/judge-V1.md": "aec7848d43fa993d513d738f7b7643d168e59eb19e31b1dbbe508dfb5792bb07",
+    "lib/schemas.mjs": "f48fe5b6e981caff91d0513885a330ce73cf641adc2b8e28033038b6d51b0cd1"
+  },
+  "frozen_at": "2026-10-27"
+}
