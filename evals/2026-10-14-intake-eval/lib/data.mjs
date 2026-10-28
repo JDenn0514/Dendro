@@ -127,3 +127,37 @@ function assignCodes(cells, seed) {
   const all = shuffle(cells.flatMap(c => c.photos), mulberry32(seed));
   all.forEach((p, i) => { p.code = `p${String(i + 1).padStart(3, '0')}`; });
 }
+
+// The held-out set (Task 8). rows: candidates.jsonl of the run, in file order (fetch order).
+// plantsNames: { <symbol>: PLANTS name }. opts.targets: the species, in pool order.
+// The last row of each id counts. A row with fetch_error, no file_hash, or a file_hash already in its species
+// pool drops out, with its reason. Manual rows stay in (the spec counts them). The judge sets the part, so a
+// photo has no part and no hint: no channel_hint, no tags_hint, no file name.
+// code: the judge's opaque name (h001, ...), in an order fixed by opts.seed. blind: the owner's opaque name on
+// the label page (o001, ...), in an order fixed by opts.pickSeed. blindKey maps each blind name to its key.
+export function buildHeldoutPool(rows, plantsNames, { targets, thumbPx, seed, pickSeed }) {
+  const last = new Map();
+  for (const r of rows) if (targets.includes(r.target)) last.set(r.id, r);
+  const dropped = [], cells = targets.map(t => ({ cell: t, target: t, part: null, species: plantsNames[t] ?? null, photos: [] }));
+  const seen = new Map(targets.map(t => [t, new Map()]));
+  for (const r of last.values()) {
+    const hashes = seen.get(r.target);
+    let reason = null;
+    if (r.fetch_error) reason = 'fetch_error';
+    else if (!r.file_hash) reason = 'no_hash';
+    else if (hashes.has(r.file_hash)) reason = 'duplicate_hash';
+    if (reason) { dropped.push(reason === 'duplicate_hash' ? { id: r.id, target: r.target, reason, kept_id: hashes.get(r.file_hash) } : { id: r.id, target: r.target, reason }); continue; }
+    hashes.set(r.file_hash, r.id);
+    const cell = cells.find(c => c.target === r.target), n = cell.photos.length + 1;
+    cell.photos.push({
+      key: keyOf(r.target, n), n, id: r.id, target: r.target, part: null, source_key: r.source_key,
+      url: r.file_url, fetch_url: fetchUrlOf(r.file_url, thumbPx), source: r.source,
+      credit: { author: r.author, license: r.license, origin: r.origin }, source_species: r.source_species,
+    });
+  }
+  const all = cells.flatMap(c => c.photos);
+  shuffle(all, mulberry32(seed)).forEach((p, i) => { p.code = `h${String(i + 1).padStart(3, '0')}`; });
+  const blindKey = {};
+  shuffle(all, mulberry32(pickSeed)).forEach((p, i) => { p.blind = `o${String(i + 1).padStart(3, '0')}`; blindKey[p.blind] = p.key; });
+  return { pool: { set: 'heldout', cells }, blindKey: Object.fromEntries(Object.entries(blindKey).sort()), dropped };
+}

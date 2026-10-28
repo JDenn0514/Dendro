@@ -1,0 +1,26 @@
+[
+  {
+    "id": "d249920b7dda4a2fc94d45ac76f5fbc3d20b7f39",
+    "target": "QUAU",
+    "reason": "duplicate_hash",
+    "kept_id": "9093e306831aa27c1706e3086fd37b11e58e7b30"
+  },
+  {
+    "id": "d19a4f500dbff8594ce8f63fbb9995bd64ed232d",
+    "target": "QUAU",
+    "reason": "duplicate_hash",
+    "kept_id": "b05ec29a9d0ebda06ff0bb14837a902526399687"
+  },
+  {
+    "id": "eeecaa6be734f8599e6a987b3597fd13392ea64d",
+    "target": "QUAU",
+    "reason": "duplicate_hash",
+    "kept_id": "995f49a140a1058995f9a8ddfa0076c918084905"
+  },
+  {
+    "id": "d16e96781340fc16c6540acb61bf133ba3c7dde0",
+    "target": "QUAU",
+    "reason": "duplicate_hash",
+    "kept_id": "c406acbec63a82a3d4d20d7dfe7e5f924fd58181"
+  }
+]
