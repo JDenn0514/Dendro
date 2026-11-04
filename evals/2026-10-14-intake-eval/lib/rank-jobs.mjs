@@ -14,6 +14,19 @@ function stepsBySpecies(pool, answers, rule, keep = () => true) {
   return out;
 }
 
+const CELL_PARTS = ['leaf', 'bark', 'fruit'];
+
+// The cells of a set as one judge sees them. On the key: the key's cells (plan choice 1). On the held-out set,
+// a cell has no part (Task 8), so the judge's part sets the cell: one cell per species and part, with the
+// photos in fetch order. A photo with no answer or the part other is in no cell.
+export function judgeCells(pool, answers) {
+  if (pool.cells.every(c => c.part)) return pool.cells;
+  return pool.cells.flatMap(c => CELL_PARTS.map(part => ({
+    cell: `${c.target}-${part}`, target: c.target, part, species: c.species,
+    photos: c.photos.filter(p => answers[p.key]?.part === part),
+  }))).filter(c => c.photos.length);
+}
+
 // The view of a photo (v1 spec section 3.7), from the judge's answers.
 export function viewOf(a) {
   if (!a) return null;
@@ -27,8 +40,10 @@ export function viewOf(a) {
 // Plan choice 9: the most common view among the kept difficulty step 1 photos (rule P) of the same part of
 // the other species of the same genus in the set. A tie goes to the view met first in key order. null: no line.
 export function groupLine(pool, cellName, answers) {
-  const cell = pool.cells.find(c => c.cell === cellName);
-  const mates = pool.cells.filter(c => c.part === cell.part && c.target !== cell.target && genus(c.species) === genus(cell.species));
+  const cells = judgeCells(pool, answers);
+  const cell = cells.find(c => c.cell === cellName);
+  if (!cell) return null;
+  const mates = cells.filter(c => c.part === cell.part && c.target !== cell.target && genus(c.species) === genus(cell.species));
   if (!mates.length) return null;
   const steps = stepsBySpecies(pool, answers, 'P');
   const count = new Map();
@@ -50,7 +65,7 @@ export function rankSets(pool, answers, filter = null) {
   const keep = p => !pass || pass.get(p.key)?.keep;
   const k3 = stepsBySpecies(pool, answers, 'K3', keep), p = stepsBySpecies(pool, answers, 'P', keep);
   const out = {};
-  for (const c of pool.cells) {
+  for (const c of judgeCells(pool, answers)) {
     const groups = {};
     let n = 0;
     for (const ph of c.photos) {

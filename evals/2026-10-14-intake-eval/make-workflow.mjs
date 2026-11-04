@@ -1,6 +1,8 @@
-// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-batch20|key-effort|key-n20|key-repeat|key-rank [--variant V1|V2]
+// node make-workflow.mjs --plan tracer|tracer-effort|key-judge|key-batch20|key-effort|key-n20|key-repeat|key-rank|heldout-judge|heldout-rank [--variant V1|V2]
 //   [--name <name>] [--models sonnet,haiku] [--reuse <old job list name>]
 //   key-rank: [--runs key-batch20,key-n20] names the runs that hold the first calls-of-20 answers of each leading set-up.
+//   heldout-judge, heldout-rank: the frozen set-up of frozen.json on heldout/pools.json. Both stop when a frozen
+//   file changed. heldout-rank: [--runs heldout-judge] names the runs that hold the frozen answers.
 // Writes briefs/judge-V1.md, judge-V2.md, rank.md, wf/<plan>.js, and wf/<plan>.jobs.json.
 // The workflow is named intake-eval-<plan>. collect.mjs --name <plan> then writes runs/<plan>/.
 // Prints the agent count per kind, model, and effort, and the USD estimate of estimate.mjs.
@@ -14,9 +16,10 @@ import { SCHEMAS } from './lib/schemas.mjs';
 import { extractChecks, briefJudge, briefRank, promptJudge, promptCheck, promptRank } from './lib/prompts.mjs';
 import { mulberry32, shuffle } from './lib/seed.mjs';
 import { sheetsFor, PER_SHEET } from './lib/sheet.mjs';
-import { rankSets, groupLine } from './lib/rank-jobs.mjs';
+import { rankSets, groupLine, judgeCells } from './lib/rank-jobs.mjs';
 import { estimateJobs, printEstimate } from './estimate.mjs';
 import { buildViews } from './lib/views.mjs';
+import { checkFrozen } from './lib/freeze.mjs';
 
 export const MODELS = ['opus', 'sonnet', 'haiku'];
 const BATCH = 10;
@@ -43,11 +46,12 @@ export function buildJobs(pool, plan, config, opts = {}) {
   const codes = list => Object.fromEntries(list.map(p => [p.code, p.key]));
   const base = (kind, m, effort) => ({ kind, phase: kind, set: pool.set, model: m, model_opt: config.model_opt[m], effort });
   const jobs = [];
-  const judge = (photos, m, effort, variant, size = BATCH) => {
+  // species: the species of a held-out call (choice 3: a call stays inside one species). It goes in the label.
+  const judge = (photos, m, effort, variant, size = BATCH, species = null) => {
     for (let i = 0; i < photos.length; i += size) {
       const b = photos.slice(i, i + size);
       const n = String(i / size + 1).padStart(2, '0');
-      const tag = size === BATCH ? '' : `:n${size}`;
+      const tag = (size === BATCH ? '' : `:n${size}`) + (species ? `:${species}` : '');
       // The photos of a call in an order fixed per call, the same for every model and variant.
       // The key order inside a cell follows the review prototype, so the prompt does not show it.
       const shown = shuffle(b, mulberry32(config.seed + i));
@@ -94,12 +98,20 @@ export function buildJobs(pool, plan, config, opts = {}) {
     for (const m of opts.models ?? []) if (!MODELS.includes(m)) throw new Error(`unknown model ${m}`);
     const models = MODELS.filter(m => !opts.models || opts.models.includes(m));
     for (const m of models) if (plan === 'key-repeat' || effort[m] !== 'high') judge(all, m, effort[m], variant, batch);
-  } else if (plan === 'key-rank') {
-    // opts.answers: { <model>: answers } of each model's leading set-up. opts.filter: Haiku's leading answers.
-    // FR runs for Opus and Sonnet only, and only where its set differs from R's (plan choice 10).
-    if (!opts.answers || !opts.filter) throw new Error('the key-rank plan needs the judge answers of each leading set-up');
-    const cellOf = name => pool.cells.find(c => c.cell === name);
+  } else if (plan === 'heldout-judge') {
+    // Task 9: the frozen variant, call size, and efforts (frozen.json). Plan choice 3: the calls stay inside
+    // one species, in fetch order, so each prompt names one tree: ceil(n / batch) calls per species and model.
+    const f = opts.frozen;
+    if (!f) throw new Error('the heldout-judge plan needs frozen.json');
+    for (const m of MODELS) for (const c of pool.cells) judge(c.photos, m, f.effort[m], f.variant, f.batch, c.target);
+  } else if (plan === 'key-rank' || plan === 'heldout-rank') {
+    // opts.answers: { <model>: answers } of each model's leading (key) or frozen (held-out) set-up.
+    // opts.filter: Haiku's answers of the same kind. FR runs for Opus and Sonnet only, and only where its set
+    // differs from R's (plan choice 10). On the held-out set each judge's own part sets its cells (judgeCells).
+    if (!opts.answers || !opts.filter) throw new Error(`the ${plan} plan needs the judge answers of each leading set-up`);
     for (const m of MODELS) {
+      const cells = judgeCells(pool, opts.answers[m]);
+      const cellOf = name => cells.find(c => c.cell === name);
       const r = rankSets(pool, opts.answers[m]);
       for (const [cell, groups] of Object.entries(r)) rank(m, cellOf(cell), groups, groupLine(pool, cell, opts.answers[m]));
       if (m === 'haiku') continue;
@@ -148,14 +160,21 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   // --name: the name of the job list and script, when a plan runs a second time (default: the plan name).
   const name = opt('--name') ?? plan;
   const config = readJson(path.join(EVAL, 'config.json'));
-  const pool = readJson(path.join(EVAL, 'key', 'pools.json'));
+  const heldout = plan?.startsWith('heldout-');
+  const pool = readJson(path.join(EVAL, heldout ? 'heldout' : 'key', 'pools.json'));
   writeBriefs();
   const opts = { variant: opt('--variant'), models: opt('--models')?.split(',') };
-  if (plan === 'key-rank') {
-    const runs = (opt('--runs') ?? 'key-batch20,key-n20').split(',');
+  if (heldout) {
+    // Task 9: the held-out plans use frozen.json, and stop when a frozen file changed (freeze.mjs --check).
+    opts.frozen = readJson(path.join(EVAL, 'frozen.json'));
+    const changed = checkFrozen(opts.frozen, Object.fromEntries(Object.keys(opts.frozen.sha256).map(f => [f, fs.existsSync(path.join(EVAL, f)) ? fs.readFileSync(path.join(EVAL, f), 'utf8') : null])));
+    if (changed.length) throw new Error(`changed since the freeze: ${changed.join(', ')}`);
+  }
+  if (plan === 'key-rank' || plan === 'heldout-rank') {
+    const runs = (opt('--runs') ?? (heldout ? 'heldout-judge' : 'key-batch20,key-n20')).split(',');
     const all = runs.map(r => path.join(EVAL, 'runs', r));
     const v = buildViews(all.flatMap(d => readJson(path.join(d, 'results.json')).jobs), Object.assign({}, ...all.map(d => readJson(path.join(d, 'tokens.json')))));
-    const { variant, batch, effort } = config.leading;
+    const { variant, batch, effort } = heldout ? opts.frozen : config.leading;
     const setup = m => `${m}:${effort[m]}:${variant}:n${batch}`;
     opts.answers = Object.fromEntries(MODELS.map(m => {
       if (!v.answers[setup(m)]) throw new Error(`no answers of ${setup(m)} in runs ${runs.join(', ')}`);
