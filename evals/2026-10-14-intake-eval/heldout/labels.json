@@ -1,0 +1,1250 @@
+{
+  "PLRA-01": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:46:18.203Z"
+  },
+  "PLRA-02": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:42:57.094Z"
+  },
+  "PLRA-03": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:47:51.458Z"
+  },
+  "PLRA-04": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:46:31.591Z"
+  },
+  "PLRA-05": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:46:38.462Z"
+  },
+  "PLRA-06": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T15:57:27.101Z"
+  },
+  "PLRA-07": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:47:49.291Z"
+  },
+  "PLRA-08": {
+    "part": "fruit",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-28T01:28:38.975Z"
+  },
+  "PLRA-09": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:00:13.785Z"
+  },
+  "PLRA-10": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-28T01:28:40.717Z"
+  },
+  "PLRA-11": {
+    "part": "fruit",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T15:26:50.698Z"
+  },
+  "PLRA-12": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:58:00.955Z"
+  },
+  "PLRA-13": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-28T01:38:42.844Z"
+  },
+  "PLRA-14": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:26:36.306Z"
+  },
+  "PLRA-15": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:25:52.114Z"
+  },
+  "PLRA-16": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:42:53.373Z"
+  },
+  "PLRA-17": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:47:34.491Z"
+  },
+  "PLRA-18": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:46:48.920Z"
+  },
+  "PLRA-19": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:47:28.333Z"
+  },
+  "PLRA-20": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:57:03.401Z"
+  },
+  "PLRA-21": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-28T01:28:33.542Z"
+  },
+  "PLRA-22": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T15:58:33.401Z"
+  },
+  "PLRA-23": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:06:15.053Z"
+  },
+  "PLRA-24": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-28T01:38:47.948Z"
+  },
+  "PLRA-25": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:00:03.577Z"
+  },
+  "PLRA-26": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:26:39.560Z"
+  },
+  "PLRA-27": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:47:47.150Z"
+  },
+  "PLRA-28": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:58:05.293Z"
+  },
+  "PLRA-29": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-28T01:28:42.850Z"
+  },
+  "PLRA-30": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-28T01:38:46.924Z"
+  },
+  "PLRA-31": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:25:51.276Z"
+  },
+  "PLRA-32": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:46:41.742Z"
+  },
+  "PLRA-33": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T15:58:08.785Z"
+  },
+  "PLRA-34": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:48:30.625Z"
+  },
+  "PLRA-35": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:46:13.582Z"
+  },
+  "PLRA-36": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:30:38.641Z"
+  },
+  "PLRA-37": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-28T01:38:32.307Z"
+  },
+  "PLRA-38": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T15:26:27.402Z"
+  },
+  "PLRA-39": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:57:24.509Z"
+  },
+  "PLRA-40": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:58:55.860Z"
+  },
+  "PLRA-41": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:06:29.366Z"
+  },
+  "PLRA-42": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:06:26.913Z"
+  },
+  "PLRA-43": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:47:32.266Z"
+  },
+  "PLRA-44": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-28T01:38:40.007Z"
+  },
+  "PLRA-45": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:46:34.816Z"
+  },
+  "PLRA-46": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:57:14.722Z"
+  },
+  "PLRA-47": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:58:42.897Z"
+  },
+  "PLRA-48": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:42:37.799Z"
+  },
+  "PLRA-49": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T15:57:08.368Z"
+  },
+  "PLRA-50": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:48:33.091Z"
+  },
+  "PLRA-51": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:30:25.166Z"
+  },
+  "PLRA-52": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T16:46:28.366Z"
+  },
+  "PLRA-53": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:48:02.245Z"
+  },
+  "PLRA-54": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T16:48:07.304Z"
+  },
+  "PLRA-55": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:58:16.380Z"
+  },
+  "PLRA-56": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:26:21.989Z"
+  },
+  "PLRA-57": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:26:08.268Z"
+  },
+  "PLRA-58": {
+    "part": "fruit",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:25:58.947Z"
+  },
+  "PLRA-59": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:47:22.304Z"
+  },
+  "PLRA-60": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:57:20.884Z"
+  },
+  "PLRA-61": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T15:57:19.172Z"
+  },
+  "PLRA-62": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-28T01:38:31.274Z"
+  },
+  "PLRA-63": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:46:45.982Z"
+  },
+  "PLRA-64": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:26:02.864Z"
+  },
+  "PLRA-65": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T15:59:56.018Z"
+  },
+  "PLRA-66": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-28T01:38:35.115Z"
+  },
+  "PLRA-67": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:47:40.438Z"
+  },
+  "PLRA-68": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:00:09.323Z"
+  },
+  "PLRA-69": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:47:59.520Z"
+  },
+  "PLRA-70": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T16:47:54.829Z"
+  },
+  "PLRA-71": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-28T01:28:35.133Z"
+  },
+  "PLRA-72": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:48:04.512Z"
+  },
+  "PLRA-73": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T15:58:50.281Z"
+  },
+  "PLRA-74": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T16:46:07.999Z"
+  },
+  "PLRA-75": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T16:06:22.191Z"
+  },
+  "PLRA-76": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:42:49.390Z"
+  },
+  "PLRA-77": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:30:28.746Z"
+  },
+  "PLRA-78": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:47:42.499Z"
+  },
+  "PLRA-79": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T15:58:37.526Z"
+  },
+  "PLRA-80": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T15:57:12.793Z"
+  },
+  "PLRA-81": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T15:57:34.222Z"
+  },
+  "PLRA-82": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:46:25.249Z"
+  },
+  "QUAU-01": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:17:51.994Z"
+  },
+  "QUAU-02": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-04T14:28:54.733Z"
+  },
+  "QUAU-03": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:07:34.718Z"
+  },
+  "QUAU-04": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:17:08.756Z"
+  },
+  "QUAU-05": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:18:23.123Z"
+  },
+  "QUAU-06": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:07:47.852Z"
+  },
+  "QUAU-07": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:17:32.811Z"
+  },
+  "QUAU-08": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:07:49.885Z"
+  },
+  "QUAU-09": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:07:16.006Z"
+  },
+  "QUAU-10": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-03T00:05:22.347Z"
+  },
+  "QUAU-11": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-04T14:28:47.153Z"
+  },
+  "QUAU-12": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-03T00:07:24.935Z"
+  },
+  "QUAU-13": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-03T00:07:52.035Z"
+  },
+  "QUAU-14": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:17:15.194Z"
+  },
+  "QUAU-15": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:18:44.319Z"
+  },
+  "QUAU-16": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:18:56.373Z"
+  },
+  "QUAU-17": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:17:41.277Z"
+  },
+  "QUAU-18": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:07:29.102Z"
+  },
+  "QUAU-19": {
+    "part": "fruit",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:05:11.652Z"
+  },
+  "QUAU-20": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:28:58.567Z"
+  },
+  "QUAU-21": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-03T00:07:57.427Z"
+  },
+  "QUAU-22": {
+    "part": "fruit",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:18:33.865Z"
+  },
+  "QUAU-23": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-03T00:07:02.602Z"
+  },
+  "QUAU-24": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:18:26.598Z"
+  },
+  "QUAU-25": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:07:43.564Z"
+  },
+  "QUAU-26": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:05:24.872Z"
+  },
+  "QUAU-27": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-03T00:07:32.285Z"
+  },
+  "QUAU-28": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-03T00:05:36.722Z"
+  },
+  "QUAU-29": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-03T00:05:31.572Z"
+  },
+  "QUAU-30": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-04T14:28:44.112Z"
+  },
+  "QUAU-31": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:28:37.145Z"
+  },
+  "QUAU-32": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:17:29.635Z"
+  },
+  "QUAU-33": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:18:53.548Z"
+  },
+  "QUAU-34": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:05:28.747Z"
+  },
+  "QUAU-35": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:05:14.777Z"
+  },
+  "QUAU-36": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:05:18.206Z"
+  },
+  "QUAU-37": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:28:26.958Z"
+  },
+  "QUAU-38": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-03T00:05:26.214Z"
+  },
+  "QUAU-39": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:17:24.806Z"
+  },
+  "QUAU-40": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:18:29.881Z"
+  },
+  "QUAU-41": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-03T00:05:40.789Z"
+  },
+  "QUAU-42": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:28:39.983Z"
+  },
+  "QUAU-43": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:17:38.773Z"
+  },
+  "QUAU-44": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:28:28.658Z"
+  },
+  "QUAU-45": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-03T00:08:01.294Z"
+  },
+  "QUAU-46": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:18:49.369Z"
+  },
+  "QUAU-47": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:18:37.070Z"
+  },
+  "QUAU-48": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-03T00:07:21.573Z"
+  },
+  "QUAU-49": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:17:21.123Z"
+  },
+  "QUAU-50": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-04T14:28:51.172Z"
+  },
+  "QUAU-51": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:18:39.261Z"
+  },
+  "QUAU-52": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-03T00:07:37.549Z"
+  },
+  "QUAU-53": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-04T14:28:33.070Z"
+  },
+  "QUAU-54": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:17:35.444Z"
+  },
+  "QUAU-55": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-03T00:06:53.697Z"
+  },
+  "QUAU-56": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-03T00:04:57.455Z"
+  },
+  "QULA-01": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:01:21.674Z"
+  },
+  "QULA-02": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:02:28.353Z"
+  },
+  "QULA-03": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:12:43.547Z"
+  },
+  "QULA-04": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:12:50.826Z"
+  },
+  "QULA-05": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:01:32.140Z"
+  },
+  "QULA-06": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:48:41.941Z"
+  },
+  "QULA-07": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:16:45.960Z"
+  },
+  "QULA-08": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:01:06.374Z"
+  },
+  "QULA-09": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:01:11.423Z"
+  },
+  "QULA-10": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:49:49.867Z"
+  },
+  "QULA-11": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:57:35.243Z"
+  },
+  "QULA-12": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:02:38.545Z"
+  },
+  "QULA-13": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:50:00.242Z"
+  },
+  "QULA-14": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:02:36.061Z"
+  },
+  "QULA-15": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:16:24.814Z"
+  },
+  "QULA-16": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:16:53.369Z"
+  },
+  "QULA-17": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:49:18.929Z"
+  },
+  "QULA-18": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:01:38.636Z"
+  },
+  "QULA-19": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:58:05.085Z"
+  },
+  "QULA-20": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:57:58.064Z"
+  },
+  "QULA-21": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:51:07.954Z"
+  },
+  "QULA-22": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:12:38.210Z"
+  },
+  "QULA-23": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:48:47.416Z"
+  },
+  "QULA-24": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:01:24.994Z"
+  },
+  "QULA-25": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:12:24.693Z"
+  },
+  "QULA-26": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:49:06.033Z"
+  },
+  "QULA-27": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:00:55.453Z"
+  },
+  "QULA-28": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:51:15.329Z"
+  },
+  "QULA-29": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:00:57.749Z"
+  },
+  "QULA-30": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:49:43.525Z"
+  },
+  "QULA-31": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:02:42.591Z"
+  },
+  "QULA-32": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:57:41.814Z"
+  },
+  "QULA-33": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:16:42.373Z"
+  },
+  "QULA-34": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:01:19.290Z"
+  },
+  "QULA-35": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:12:28.380Z"
+  },
+  "QULA-36": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:49:39.517Z"
+  },
+  "QULA-37": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:01:37.057Z"
+  },
+  "QULA-38": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:12:47.026Z"
+  },
+  "QULA-39": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:51:03.302Z"
+  },
+  "QULA-40": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:01:44.461Z"
+  },
+  "QULA-41": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:01:15.628Z"
+  },
+  "QULA-42": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:17:01.431Z"
+  },
+  "QULA-43": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:51:21.088Z"
+  },
+  "QULA-44": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:49:16.337Z"
+  },
+  "QULA-45": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:58:03.060Z"
+  },
+  "QULA-46": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:01:03.632Z"
+  },
+  "QULA-47": {
+    "part": "fruit",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:12:34.360Z"
+  },
+  "QULA-48": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:57:45.711Z"
+  },
+  "QULA-49": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:16:38.631Z"
+  },
+  "QULA-50": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:49:22.871Z"
+  },
+  "QULA-51": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:16:50.548Z"
+  },
+  "QULA-52": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:49:26.012Z"
+  },
+  "QULA-53": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:16:37.215Z"
+  },
+  "QULA-54": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:48:52.758Z"
+  },
+  "QULA-55": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:49:54.454Z"
+  },
+  "QULA-56": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T17:01:29.411Z"
+  },
+  "QULA-57": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:16:21.244Z"
+  },
+  "QULA-58": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:01:00.761Z"
+  },
+  "QULA-59": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:02:44.924Z"
+  },
+  "QULA-60": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-10-29T16:57:53.469Z"
+  },
+  "QULA-61": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:16:58.535Z"
+  },
+  "QULA-62": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T16:48:58.862Z"
+  },
+  "QULA-63": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:02:32.986Z"
+  },
+  "QULA-64": {
+    "part": "fruit",
+    "keep": true,
+    "step": 3,
+    "at": "2026-10-29T17:12:58.064Z"
+  },
+  "QULA-65": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T17:16:28.858Z"
+  },
+  "QULA-66": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:49:03.575Z"
+  },
+  "QULA-67": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:01:49.065Z"
+  },
+  "QULA-68": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T17:16:34.152Z"
+  },
+  "QULA-69": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-10-29T16:57:49.743Z"
+  },
+  "QULA-70": {
+    "part": "fruit",
+    "keep": true,
+    "step": 2,
+    "at": "2026-10-29T16:49:33.462Z"
+  }
+}
