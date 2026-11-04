@@ -209,7 +209,7 @@ const hcell = (target, n, species) => ({
   photos: Array.from({ length: n }, (_, i) => ({
     key: `${target}-${String(i + 1).padStart(2, '0')}`, n: i + 1, target, part: null,
     url: `https://x/${target}/${i + 1}.jpg`, fetch_url: `https://x/${target}/${i + 1}.jpg`,
-    code: `h${target.length}${String(++order).padStart(3, '0')}`, source_species: `${target} source`,
+    code: `h${String(++order).padStart(3, '0')}`, source_species: `${target} source`,
   })),
 });
 const HPOOL = { set: 'heldout', cells: [hcell('PLRA', 45, 'Platanus racemosa'), hcell('QULA', 20, 'Quercus laurifolia'), hcell('QUAU', 7, 'Quercus austrina')] };
@@ -225,11 +225,11 @@ test('heldout-judge plan: the frozen set-up, in calls of 20 inside one species, 
   assert.deepEqual(opus.map(j => j.keys.length), [20, 20, 5, 20, 7]);
   assert.deepEqual(keysOf(opus), HPOOL.cells.flatMap(c => c.photos.map(p => p.key)));
   assert.ok(jobs.every(j => j.set === 'heldout' && j.batch === 20 && j.variant === 'V1' && j.effort === 'high' && j.schema === 'JUDGE'));
-  assert.ok(jobs.every(j => j.keys.every(k => k.startsWith(j.label.split(':')[5]))), 'a call crosses species');
+  assert.ok(jobs.every(j => j.keys.every(k => k.startsWith(j.label.split(':')[5]))), 'each call holds the photos of one species');
   const j = opus[3];
   assert.match(j.prompt, /tree: Quercus laurifolia \| source name: QULA source/);
   assert.ok(j.prompt.includes(path.join(EVAL, 'images', 'app', 'heldout', `${HPOOL.cells[1].photos[0].code}.jpg`)));
-  assert.ok(!/PLRA-|QULA-|QUAU-/.test(j.prompt.split('\n').slice(1).join('\n')), 'the prompt shows a key');
+  assert.ok(!/PLRA-|QULA-|QUAU-/.test(j.prompt.split('\n').slice(1).join('\n')), 'the prompt shows only the codes');
   assert.ok(j.prompt.includes(path.join(EVAL, 'briefs', 'judge-V1.md')));
   assert.throws(() => buildJobs(HPOOL, 'heldout-judge', config), /needs frozen.json/);
 });
