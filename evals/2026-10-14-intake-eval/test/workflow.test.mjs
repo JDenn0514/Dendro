@@ -202,3 +202,56 @@ test('renderScript writes a pure-literal meta and the job list', () => {
   const schemas = JSON.parse(lines[2].slice('const SCHEMAS = '.length));
   assert.deepEqual(schemas, SCHEMAS);
 });
+
+// A held-out pool: one cell per species, with no part (Task 8). The judge sets the part.
+const hcell = (target, n, species) => ({
+  cell: target, target, part: null, species,
+  photos: Array.from({ length: n }, (_, i) => ({
+    key: `${target}-${String(i + 1).padStart(2, '0')}`, n: i + 1, target, part: null,
+    url: `https://x/${target}/${i + 1}.jpg`, fetch_url: `https://x/${target}/${i + 1}.jpg`,
+    code: `h${target.length}${String(++order).padStart(3, '0')}`, source_species: `${target} source`,
+  })),
+});
+const HPOOL = { set: 'heldout', cells: [hcell('PLRA', 45, 'Platanus racemosa'), hcell('QULA', 20, 'Quercus laurifolia'), hcell('QUAU', 7, 'Quercus austrina')] };
+const FROZEN = { variant: 'V1', rule: 'P', batch: 20, effort: { opus: 'high', sonnet: 'high', haiku: 'high' } };
+
+test('heldout-judge plan: the frozen set-up, in calls of 20 inside one species, in fetch order', () => {
+  const jobs = buildJobs(HPOOL, 'heldout-judge', config, { frozen: FROZEN });
+  // ceil(45/20) + ceil(20/20) + ceil(7/20) = 3 + 1 + 1 calls per model.
+  assert.equal(jobs.length, 3 * 5);
+  assert.equal(new Set(jobs.map(j => j.label)).size, jobs.length);
+  const opus = jobs.filter(j => j.model === 'opus');
+  assert.deepEqual(opus.map(j => j.label), ['judge:opus:high:V1:n20:PLRA:b01', 'judge:opus:high:V1:n20:PLRA:b02', 'judge:opus:high:V1:n20:PLRA:b03', 'judge:opus:high:V1:n20:QULA:b01', 'judge:opus:high:V1:n20:QUAU:b01']);
+  assert.deepEqual(opus.map(j => j.keys.length), [20, 20, 5, 20, 7]);
+  assert.deepEqual(keysOf(opus), HPOOL.cells.flatMap(c => c.photos.map(p => p.key)));
+  assert.ok(jobs.every(j => j.set === 'heldout' && j.batch === 20 && j.variant === 'V1' && j.effort === 'high' && j.schema === 'JUDGE'));
+  assert.ok(jobs.every(j => j.keys.every(k => k.startsWith(j.label.split(':')[5]))), 'a call crosses species');
+  const j = opus[3];
+  assert.match(j.prompt, /tree: Quercus laurifolia \| source name: QULA source/);
+  assert.ok(j.prompt.includes(path.join(EVAL, 'images', 'app', 'heldout', `${HPOOL.cells[1].photos[0].code}.jpg`)));
+  assert.ok(!/PLRA-|QULA-|QUAU-/.test(j.prompt.split('\n').slice(1).join('\n')), 'the prompt shows a key');
+  assert.ok(j.prompt.includes(path.join(EVAL, 'briefs', 'judge-V1.md')));
+  assert.throws(() => buildJobs(HPOOL, 'heldout-judge', config), /needs frozen.json/);
+});
+
+test('heldout-rank plan: the cells come from each judge part; R for 3 models, FR for Opus and Sonnet where the set differs', () => {
+  const step1 = part => ({ part, photo_features: { shape: 'clear', margin: 'clear', texture: 'clear', pattern: 'clear', kind: 'clear' }, whole: true, alone: true, too_close: false, causes: [], reject: [], side: 'upper' });
+  // Opus: every PLRA photo a leaf, every QULA photo bark. Sonnet: PLRA-01 and PLRA-02 fruit, the rest leaf.
+  const keys = c => HPOOL.cells.find(x => x.cell === c).photos.map(p => p.key);
+  const opus = Object.fromEntries([...keys('PLRA').map(k => [k, step1('leaf')]), ...keys('QULA').map(k => [k, step1('bark')])]);
+  const sonnet = { ...opus, 'PLRA-01': step1('fruit'), 'PLRA-02': step1('fruit') };
+  const haiku = { ...opus, 'PLRA-03': { ...step1('leaf'), reject: ['blur'] } };
+  const jobs = buildJobs(HPOOL, 'heldout-rank', config, { answers: { opus, sonnet, haiku }, filter: haiku });
+  assert.deepEqual(jobs.map(j => j.label), [
+    'rank:opus:high:PLRA-leaf', 'rank:opus:high:QULA-bark', 'rank:opus:high:FR:PLRA-leaf',
+    'rank:sonnet:high:PLRA-leaf', 'rank:sonnet:high:PLRA-fruit', 'rank:sonnet:high:QULA-bark', 'rank:sonnet:high:FR:PLRA-leaf',
+    'rank:haiku:high:PLRA-leaf', 'rank:haiku:high:QULA-bark',
+  ]);
+  const one = jobs.find(j => j.label === 'rank:sonnet:high:PLRA-fruit');
+  assert.deepEqual(one.keys, ['PLRA-01', 'PLRA-02']);
+  assert.match(one.prompt, /Cell: Platanus racemosa, fruit\./);
+  assert.deepEqual(one.sheets.map(s => s.file), [path.join(EVAL, 'images', 'sheets', 'heldout', 'PLRA-fruit', 'sonnet-1-1.jpg')]);
+  assert.ok(!jobs.find(j => j.label === 'rank:opus:high:FR:PLRA-leaf').keys.includes('PLRA-03'));
+  assert.ok(jobs.every(j => j.set === 'heldout' && j.effort === 'high' && j.schema === 'RANK'));
+  assert.throws(() => buildJobs(HPOOL, 'heldout-rank', config), /needs the judge answers/);
+});
