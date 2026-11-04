@@ -1,6 +1,7 @@
 {
   "runIds": [
-    "wf_b1d27fcc-42e"
+    "wf_b1d27fcc-42e",
+    "wf_0ebae8ff-58a"
   ],
   "jobs": [
     {
@@ -9086,9 +9087,11 @@
         "QULA-70"
       ],
       "agentIds": [
-        "a52df35ca6ee5f777"
+        "a52df35ca6ee5f777",
+        "af714e6e097ac61c3"
       ],
       "states": [
+        "done",
         "done"
       ],
       "result": {
@@ -9104,7 +9107,7 @@
               "cap": "clear"
             },
             "whole": true,
-            "alone": true,
+            "alone": false,
             "too_close": null,
             "side": null,
             "causes": [],
@@ -9115,14 +9118,14 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A green full-size acorn with a scaly cap sits on a twig in front of a hand and leaves. The acorn is whole and sharp; the hand does not cover it, but how it sits on the twig is only partly visible, so hang is search. It is green and unripe, so it is not the usual look."
+            "note": "A full-size green acorn with a scaly cap, held up behind a twig with a hand and leaves around it. The acorn is whole and unripe, so usual_look is false. The hand and leaves compete, so alone is false, and the hang is only found with study."
           },
           {
             "key": "QULA-64",
             "description": "",
             "part": "fruit",
             "photo_features": {
-              "kind": "search",
+              "kind": "clear",
               "shape": "search",
               "hang": "clear",
               "cap": "search"
@@ -9139,14 +9142,14 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A leafy branch with many green acorns among dense foliage. The acorns are small in the frame and compete with the leaves, so kind, shape and cap need a search, though the hang on the twigs shows. The acorns are green and unripe."
+            "note": "A branch crowded with leaves and many green acorns, mostly small in the frame. Several acorns at lower left show whole, but the shape and cap need a search among the leaves, so alone is false. The acorns are green and unripe."
           },
           {
             "key": "QULA-66",
             "description": "",
             "part": "leaf",
             "photo_features": {
-              "shape": "search",
+              "shape": "clear",
               "margin": "clear",
               "venation": "clear",
               "arrangement": "no",
@@ -9164,7 +9167,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "Many overlapping, shallowly lobed green leaves, upper sides, in flat light. One large leaf at right shows its whole outline, but the crowd makes the outline of the others a search. Small brown spots do not change the outline."
+            "note": "Several overlapping green lobed leaves, upper side. The large leaf at right shows its outline and lobed edge, but the other leaves crowd it, so alone is false. A few small brown spots do not change the outline."
           },
           {
             "key": "QULA-65",
@@ -9188,14 +9191,14 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A close shot of one green acorn with a scaly cap, with wet leaves around it. The acorn is whole and sharp; how it sits on the twig is only partly visible. It is green and unripe, so it is not the usual look."
+            "note": "A large, sharp, full-size green acorn with a scaly cap, in front of soft leaves. The acorn is the main subject and is whole. It is unripe, and the hang on the twig is only partly visible."
           },
           {
             "key": "QULA-67",
             "description": "",
             "part": "leaf",
             "photo_features": {
-              "shape": "search",
+              "shape": "clear",
               "margin": "clear",
               "venation": "clear",
               "arrangement": "search",
@@ -9213,7 +9216,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A branch tip with many overlapping grey-green leaves and a few small young acorn clusters. Several leaves show a whole outline and clear margin, but the crowding makes the outline and the leaf stalks a search. Brown patches on a few leaves do not change the outline."
+            "note": "Overlapping blue-green leaves on a sunlit branch with a small yellow-green cluster at the centre. The leaf at upper centre is mostly whole with a readable outline and edge. The other leaves crowd it, so alone is false."
           },
           {
             "key": "QULA-63",
@@ -9221,8 +9224,32 @@
             "part": "fruit",
             "photo_features": {
               "kind": "clear",
+              "shape": "clear",
+              "hang": "search",
+              "cap": "clear"
+            },
+            "whole": true,
+            "alone": true,
+            "too_close": null,
+            "side": null,
+            "causes": [],
+            "scale": "none",
+            "season": "summer",
+            "growth_stage": "unripe",
+            "usual_look": false,
+            "not_for": [],
+            "reject": [],
+            "escalate": "none",
+            "note": "Two large green acorns with scaly caps sit at the centre of the frame, with lobed leaves behind them. They are sharp and whole and are the main subject. They are unripe, and the twig attachment is partly hidden."
+          },
+          {
+            "key": "QULA-70",
+            "description": "",
+            "part": "fruit",
+            "photo_features": {
+              "kind": "search",
               "shape": "search",
-              "hang": "clear",
+              "hang": "search",
               "cap": "search"
             },
             "whole": true,
@@ -9237,10 +9264,10 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A sunlit branch with many green acorns among leaves. Acorns hang on the twigs and a pair at right shows the kind, but the fruit are small in the frame and crowded by leaves, so shape and cap are a search. The acorns are green and unripe."
+            "note": "A leafy branch with several small green acorns, seen from a distance with rocky ground behind. The acorns are small in the frame and mixed with leaves, so each fruit feature is at search and alone is false. The acorns are unripe."
           },
           {
-            "key": "QULA-70",
+            "key": "QULA-69",
             "description": "",
             "part": "fruit",
             "photo_features": {
@@ -9261,20 +9288,20 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A close shot of a cluster of green acorns with scaly caps on a twig, with a leaf behind. The kind, outline, cap and hang on the twig are all readable. The acorns are green and unripe."
+            "note": "A cluster of green acorns with scaly caps on a twig, sharp and close, with a large leaf behind. The acorns show their shape, caps and attachment, and they are the main subject. They are unripe."
           },
           {
-            "key": "QULA-69",
+            "key": "QULA-62",
             "description": "",
             "part": "leaf",
             "photo_features": {
               "shape": "search",
-              "margin": "clear",
+              "margin": "search",
               "venation": "search",
               "arrangement": "search",
               "size": "no"
             },
-            "whole": true,
+            "whole": false,
             "alone": false,
             "too_close": null,
             "side": "both",
@@ -9288,15 +9315,15 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A leafy branch against the sky, shot from a low angle with leaves tilted and overlapping, so both upper and under sides show. The lower leaf shows a whole lobed outline and margin; the others need a search. The tilted view is the angle cause."
+            "note": "A twig tip with leaves tilted at different angles against the sky, showing both the upper side and the grey-green underside. The leaves overlap and are foreshortened, and the frame edge cuts some of them, so the outline and edge need study. The tilt is the angle cause."
           },
           {
-            "key": "QULA-62",
+            "key": "QULA-68",
             "description": "",
             "part": "bark",
             "photo_features": {
               "texture": "clear",
-              "pattern": "clear",
+              "pattern": "search",
               "colour": "clear"
             },
             "whole": true,
@@ -9311,7 +9338,7 @@
             "not_for": [],
             "reject": [],
             "escalate": "none",
-            "note": "A full trunk in daylight with grey, finely scaly and blocky plates and ridges. The trunk edges and the ground are in frame, so it is not too close, and the pattern repeats across a wide area."
+            "note": "A grey trunk with scaly, blocky plates, taken from a few metres away so both trunk edges show. The surface is readable, but the plate pattern needs some study at this distance. The background is busy but the trunk dominates."
           }
         ]
       }
