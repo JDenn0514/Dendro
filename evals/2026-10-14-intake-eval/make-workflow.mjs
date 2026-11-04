@@ -46,12 +46,12 @@ export function buildJobs(pool, plan, config, opts = {}) {
   const codes = list => Object.fromEntries(list.map(p => [p.code, p.key]));
   const base = (kind, m, effort) => ({ kind, phase: kind, set: pool.set, model: m, model_opt: config.model_opt[m], effort });
   const jobs = [];
-  // species: the species of a held-out call (choice 3: a call stays inside one species). It goes in the label.
-  const judge = (photos, m, effort, variant, size = BATCH, species = null) => {
+  // target: the species symbol of a held-out call (choice 3: a call stays inside one species). It goes in the label.
+  const judge = (photos, m, effort, variant, size = BATCH, target = null) => {
     for (let i = 0; i < photos.length; i += size) {
       const b = photos.slice(i, i + size);
       const n = String(i / size + 1).padStart(2, '0');
-      const tag = (size === BATCH ? '' : `:n${size}`) + (species ? `:${species}` : '');
+      const tag = (size === BATCH ? '' : `:n${size}`) + (target ? `:${target}` : '');
       // The photos of a call in an order fixed per call, the same for every model and variant.
       // The key order inside a cell follows the review prototype, so the prompt does not show it.
       const shown = shuffle(b, mulberry32(config.seed + i));
@@ -108,7 +108,7 @@ export function buildJobs(pool, plan, config, opts = {}) {
     // opts.answers: { <model>: answers } of each model's leading (key) or frozen (held-out) set-up.
     // opts.filter: Haiku's answers of the same kind. FR runs for Opus and Sonnet only, and only where its set
     // differs from R's (plan choice 10). On the held-out set each judge's own part sets its cells (judgeCells).
-    if (!opts.answers || !opts.filter) throw new Error(`the ${plan} plan needs the judge answers of each leading set-up`);
+    if (!opts.answers || !opts.filter) throw new Error(`the ${plan} plan needs the judge answers of each set-up`);
     for (const m of MODELS) {
       const cells = judgeCells(pool, opts.answers[m]);
       const cellOf = name => cells.find(c => c.cell === name);
@@ -162,14 +162,16 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const config = readJson(path.join(EVAL, 'config.json'));
   const heldout = plan?.startsWith('heldout-');
   const pool = readJson(path.join(EVAL, heldout ? 'heldout' : 'key', 'pools.json'));
-  writeBriefs();
   const opts = { variant: opt('--variant'), models: opt('--models')?.split(',') };
   if (heldout) {
     // Task 9: the held-out plans use frozen.json, and stop when a frozen file changed (freeze.mjs --check).
+    // The check runs before writeBriefs, so that a change in prompts.mjs cannot overwrite the frozen brief.
     opts.frozen = readJson(path.join(EVAL, 'frozen.json'));
-    const changed = checkFrozen(opts.frozen, Object.fromEntries(Object.keys(opts.frozen.sha256).map(f => [f, fs.existsSync(path.join(EVAL, f)) ? fs.readFileSync(path.join(EVAL, f), 'utf8') : null])));
+    if (opts.frozen.rule !== 'P') throw new Error(`rank-jobs.mjs groups by rule P, but the frozen rule is ${opts.frozen.rule}`);
+    const text = f => (fs.existsSync(path.join(EVAL, f)) ? fs.readFileSync(path.join(EVAL, f), 'utf8') : null);
+    const changed = checkFrozen(opts.frozen, Object.fromEntries(Object.keys(opts.frozen.sha256).map(f => [f, text(f)])));
     if (changed.length) throw new Error(`changed since the freeze: ${changed.join(', ')}`);
-  }
+  } else writeBriefs();
   if (plan === 'key-rank' || plan === 'heldout-rank') {
     const runs = (opt('--runs') ?? (heldout ? 'heldout-judge' : 'key-batch20,key-n20')).split(',');
     const all = runs.map(r => path.join(EVAL, 'runs', r));
