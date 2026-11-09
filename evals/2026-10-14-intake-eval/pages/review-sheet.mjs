@@ -2,9 +2,8 @@
 // answer per photo to the artifact's db (plan, Global constraints). Pure: returns the page HTML.
 // sheet: { title, intro: [paragraphs], legend?: [[term, text]], collection, choices: [{ value, label }], groups: [{ id, heading, text, items }] }.
 // item: { id, img, key, chips: [text], table: { cols, rows: [[label, ...cells]] }, lines: [text], notes: [[who, text]], source }.
-import { SHEET_HEAD } from './style.mjs';
+import { SHEET_HEAD, esc } from './style.mjs';
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 function card(it, choices) {
   const t = it.table;

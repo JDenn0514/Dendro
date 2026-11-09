@@ -5,10 +5,9 @@
 // Each tap saves labels/<blind name> { part, keep, step, at }. The "Best photo" view saves
 // best/<target>-<part> { id, at }. Only Editors and up read or write (the publish declares the rules).
 import { pickOrder } from '../lib/seed.mjs';
-import { SHEET_HEAD } from './style.mjs';
+import { SHEET_HEAD, esc } from './style.mjs';
 import { STEP_LEGEND, PART_LEGEND } from './legend.mjs';
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const PARTS = [['leaf', 'Leaf'], ['bark', 'Bark'], ['fruit', 'Fruit'], ['other', 'Other']];
 
 function card(p) {

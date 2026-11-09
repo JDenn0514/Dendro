@@ -1,6 +1,9 @@
 // The head shared by the owner's pages: the fonts, the colour tokens of both themes, and the base layout
 // (a field sheet: a sticky bar, then sections with a grid of photo cards, 2 per row on a phone).
 // A page puts it after its <title> and adds its own rules before </style>.
+// HTML escape for text and attribute values on the owner's pages.
+export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+
 export const SHEET_HEAD = `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
 <style>
 /* Layout: a field sheet. A sticky count bar, then one section per group with a grid of photo cards, 2 per row on a phone. */
