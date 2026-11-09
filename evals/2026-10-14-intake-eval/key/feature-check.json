@@ -1,0 +1,2820 @@
+{
+  "seed": 20261014,
+  "runs": [
+    "key-batch20"
+  ],
+  "setups": [
+    "opus:high:V1:n20",
+    "sonnet:high:V1:n20",
+    "haiku:high:V1:n20"
+  ],
+  "photos": [
+    {
+      "id": "f01",
+      "key": "ACSA3-leaf-10",
+      "code": "p150",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": false,
+        "margin": false,
+        "venation": false,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T14:59:31.826Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "search",
+          "margin": "no",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "no",
+          "margin": "no",
+          "venation": null,
+          "arrangement": null,
+          "size": null
+        },
+        "haiku:high:V1:n20": {
+          "shape": "search",
+          "margin": "no",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f02",
+      "key": "PLHI-bark-09",
+      "code": "p014",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:49:23.142Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f03",
+      "key": "PLHI-fruit-11",
+      "code": "p082",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "two_heads"
+      ],
+      "owner": {
+        "kind": false,
+        "shape": false,
+        "hang": false,
+        "two_heads": false
+      },
+      "at": "2026-11-09T17:56:59.045Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "search",
+          "two_heads": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "search",
+          "two_heads": "no"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "search",
+          "two_heads": "no"
+        }
+      }
+    },
+    {
+      "id": "f04",
+      "key": "ACRU-bark-10",
+      "code": "p139",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:49:24.507Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f05",
+      "key": "QUAL-fruit-02",
+      "code": "p148",
+      "target": "QUAL",
+      "species": "Quercus alba",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "cap"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "cap": true
+      },
+      "at": "2026-11-09T17:57:19.997Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "cap": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "search",
+          "hang": "no",
+          "cap": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "search",
+          "cap": "clear"
+        }
+      }
+    },
+    {
+      "id": "f06",
+      "key": "ACRU-leaf-09",
+      "code": "p094",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": true,
+        "size": false
+      },
+      "at": "2026-11-04T14:57:54.938Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "search"
+        }
+      }
+    },
+    {
+      "id": "f07",
+      "key": "ACSA3-leaf-03",
+      "code": "p075",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T14:58:10.413Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "search",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f08",
+      "key": "QURU-leaf-05",
+      "code": "p121",
+      "target": "QURU",
+      "species": "Quercus rubra",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": false,
+        "margin": false,
+        "venation": false,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T14:59:36.976Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "no",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f09",
+      "key": "ACSA3-bark-02",
+      "code": "p111",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:49:28.759Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f10",
+      "key": "ACSA3-bark-06",
+      "code": "p049",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:49:31.384Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f11",
+      "key": "PLOC-fruit-01",
+      "code": "p004",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang"
+      ],
+      "owner": {
+        "kind": false,
+        "shape": false,
+        "hang": false
+      },
+      "at": "2026-11-09T17:57:35.931Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "search"
+        },
+        "haiku:high:V1:n20": {
+          "kind": null,
+          "shape": null,
+          "hang": null
+        }
+      }
+    },
+    {
+      "id": "f12",
+      "key": "PLOC-fruit-07",
+      "code": "p092",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false
+      },
+      "at": "2026-11-09T17:57:31.316Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "search"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear"
+        }
+      }
+    },
+    {
+      "id": "f13",
+      "key": "PLHI-leaf-01",
+      "code": "p083",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": false,
+        "size": true
+      },
+      "at": "2026-11-04T14:59:52.892Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "clear"
+        }
+      }
+    },
+    {
+      "id": "f14",
+      "key": "QURU-fruit-03",
+      "code": "p137",
+      "target": "QURU",
+      "species": "Quercus rubra",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "cap"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "cap": true
+      },
+      "at": "2026-11-09T17:57:57.453Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "cap": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "cap": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "cap": "clear"
+        }
+      }
+    },
+    {
+      "id": "f15",
+      "key": "PLOC-bark-12",
+      "code": "p017",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": false,
+        "pattern": false,
+        "colour": false
+      },
+      "at": "2026-11-09T14:49:41.105Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": null,
+          "pattern": null,
+          "colour": null
+        },
+        "haiku:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f16",
+      "key": "QURU-leaf-09",
+      "code": "p013",
+      "target": "QURU",
+      "species": "Quercus rubra",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T15:00:01.392Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "search",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f17",
+      "key": "PLHI-leaf-06",
+      "code": "p167",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": false,
+        "margin": false,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T15:00:28.097Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f18",
+      "key": "LITU-bark-05",
+      "code": "p037",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:49:43.083Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f19",
+      "key": "QUAL-leaf-05",
+      "code": "p159",
+      "target": "QUAL",
+      "species": "Quercus alba",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": false,
+        "arrangement": true,
+        "size": false
+      },
+      "at": "2026-11-04T15:00:31.738Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "search",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f20",
+      "key": "ACRU-fruit-01",
+      "code": "p123",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": false,
+        "shape": false,
+        "hang": true,
+        "wing": false
+      },
+      "at": "2026-11-09T17:57:54.033Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "search",
+          "wing": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "clear",
+          "wing": "search"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "search",
+          "hang": "clear",
+          "wing": "search"
+        }
+      }
+    },
+    {
+      "id": "f21",
+      "key": "QURU-leaf-02",
+      "code": "p045",
+      "target": "QURU",
+      "species": "Quercus rubra",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T15:10:13.416Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f22",
+      "key": "ACSA3-leaf-05",
+      "code": "p069",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T15:10:26.675Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f23",
+      "key": "ACSA3-bark-04",
+      "code": "p153",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": false,
+        "pattern": false,
+        "colour": false
+      },
+      "at": "2026-11-09T14:49:46.549Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f24",
+      "key": "QURU-bark-01",
+      "code": "p081",
+      "target": "QURU",
+      "species": "Quercus rubra",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:49:48.581Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f25",
+      "key": "ACRU-fruit-06",
+      "code": "p003",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "wing": true
+      },
+      "at": "2026-11-09T17:58:27.808Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "search",
+          "wing": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "no",
+          "wing": "search"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "wing": "clear"
+        }
+      }
+    },
+    {
+      "id": "f26",
+      "key": "PLHI-bark-08",
+      "code": "p042",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:49:53.028Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f27",
+      "key": "PLHI-bark-01",
+      "code": "p169",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:49:56.471Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f28",
+      "key": "LITU-bark-08",
+      "code": "p198",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T14:50:08.659Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f29",
+      "key": "LITU-bark-12",
+      "code": "p016",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": false,
+        "colour": false
+      },
+      "at": "2026-11-09T14:50:05.394Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "search"
+        },
+        "haiku:high:V1:n20": {
+          "texture": null,
+          "pattern": null,
+          "colour": null
+        }
+      }
+    },
+    {
+      "id": "f30",
+      "key": "LITU-bark-07",
+      "code": "p001",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": false,
+        "colour": false
+      },
+      "at": "2026-11-09T17:56:27.459Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f31",
+      "key": "LITU-fruit-08",
+      "code": "p027",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "wing": true
+      },
+      "at": "2026-11-09T17:58:04.804Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "wing": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "wing": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "search",
+          "shape": "clear",
+          "hang": "search",
+          "wing": null
+        }
+      }
+    },
+    {
+      "id": "f32",
+      "key": "ACRU-leaf-07",
+      "code": "p112",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T15:10:35.133Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "search",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "no",
+          "size": "search"
+        }
+      }
+    },
+    {
+      "id": "f33",
+      "key": "ACRU-leaf-05",
+      "code": "p205",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": false,
+        "margin": false,
+        "venation": false,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T15:10:42.070Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "search",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "search"
+        }
+      }
+    },
+    {
+      "id": "f34",
+      "key": "PLOC-bark-02",
+      "code": "p177",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": false,
+        "pattern": false,
+        "colour": false
+      },
+      "at": "2026-11-09T17:56:34.371Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": null,
+          "pattern": null,
+          "colour": null
+        },
+        "haiku:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f35",
+      "key": "ACRU-bark-02",
+      "code": "p116",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T17:56:39.824Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f36",
+      "key": "QURU-leaf-12",
+      "code": "p007",
+      "target": "QURU",
+      "species": "Quercus rubra",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": false,
+        "margin": false,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-05T14:30:26.807Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "no",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f37",
+      "key": "LITU-fruit-09",
+      "code": "p201",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "wing": false
+      },
+      "at": "2026-11-09T17:58:46.219Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "wing": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "search",
+          "shape": "clear",
+          "hang": "no",
+          "wing": "search"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "search",
+          "shape": "clear",
+          "hang": "no",
+          "wing": null
+        }
+      }
+    },
+    {
+      "id": "f38",
+      "key": "PLHI-fruit-03",
+      "code": "p046",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "two_heads"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": true,
+        "two_heads": true
+      },
+      "at": "2026-11-09T17:58:35.743Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "search",
+          "two_heads": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "search",
+          "hang": "no",
+          "two_heads": "no"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "two_heads": "no"
+        }
+      }
+    },
+    {
+      "id": "f39",
+      "key": "QURU-leaf-10",
+      "code": "p099",
+      "target": "QURU",
+      "species": "Quercus rubra",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": true,
+        "size": false
+      },
+      "at": "2026-11-05T14:30:57.836Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "search",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "search",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f40",
+      "key": "PLOC-leaf-04",
+      "code": "p146",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-05T14:31:35.494Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "search",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f41",
+      "key": "PLHI-fruit-02",
+      "code": "p152",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "two_heads"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": false,
+        "hang": false,
+        "two_heads": false
+      },
+      "at": "2026-11-09T18:13:23.373Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "two_heads": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "search",
+          "shape": "clear",
+          "hang": "no",
+          "two_heads": "no"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "no",
+          "two_heads": "no"
+        }
+      }
+    },
+    {
+      "id": "f42",
+      "key": "PLOC-fruit-02",
+      "code": "p197",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false
+      },
+      "at": "2026-11-09T18:13:16.756Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "search"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear"
+        }
+      }
+    },
+    {
+      "id": "f43",
+      "key": "QUAL-fruit-03",
+      "code": "p053",
+      "target": "QUAL",
+      "species": "Quercus alba",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "cap"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": true,
+        "cap": true
+      },
+      "at": "2026-11-09T18:14:03.071Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "cap": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "cap": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "search",
+          "cap": "clear"
+        }
+      }
+    },
+    {
+      "id": "f44",
+      "key": "PLHI-fruit-05",
+      "code": "p032",
+      "target": "PLHI",
+      "species": "Platanus ×hispanica",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "two_heads"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "two_heads": false
+      },
+      "at": "2026-11-09T18:13:35.467Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "two_heads": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "two_heads": "no"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "two_heads": "no"
+        }
+      }
+    },
+    {
+      "id": "f45",
+      "key": "ACRU-fruit-10",
+      "code": "p119",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": false,
+        "shape": false,
+        "hang": false,
+        "wing": false
+      },
+      "at": "2026-11-09T18:14:13.611Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "clear",
+          "wing": "search"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": null,
+          "shape": null,
+          "hang": null,
+          "wing": null
+        },
+        "haiku:high:V1:n20": {
+          "kind": null,
+          "shape": null,
+          "hang": null,
+          "wing": null
+        }
+      }
+    },
+    {
+      "id": "f46",
+      "key": "PLOC-leaf-06",
+      "code": "p135",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": false,
+        "margin": false,
+        "venation": false,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-05T14:31:59.058Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "search",
+          "margin": "no",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "search",
+          "margin": "no",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "no",
+          "margin": "no",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f47",
+      "key": "ACSA3-bark-07",
+      "code": "p108",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T17:56:42.953Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "search",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f48",
+      "key": "ACSA3-fruit-02",
+      "code": "p033",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "wing": true
+      },
+      "at": "2026-11-09T18:14:18.220Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "wing": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "wing": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "wing": "clear"
+        }
+      }
+    },
+    {
+      "id": "f49",
+      "key": "ACRU-bark-06",
+      "code": "p022",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T17:56:48.474Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f50",
+      "key": "PLOC-fruit-05",
+      "code": "p026",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": true
+      },
+      "at": "2026-11-09T18:14:29.435Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear"
+        }
+      }
+    },
+    {
+      "id": "f51",
+      "key": "LITU-bark-03",
+      "code": "p060",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": false,
+        "pattern": false,
+        "colour": false
+      },
+      "at": "2026-11-09T17:56:46.507Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": null,
+          "pattern": null,
+          "colour": null
+        },
+        "haiku:high:V1:n20": {
+          "texture": null,
+          "pattern": null,
+          "colour": null
+        }
+      }
+    },
+    {
+      "id": "f52",
+      "key": "PLOC-bark-05",
+      "code": "p012",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": false,
+        "pattern": false,
+        "colour": false
+      },
+      "at": "2026-11-09T17:56:51.773Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "search"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "search",
+          "pattern": "search",
+          "colour": "clear"
+        }
+      }
+    },
+    {
+      "id": "f53",
+      "key": "LITU-fruit-06",
+      "code": "p054",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "wing": true
+      },
+      "at": "2026-11-09T18:14:31.026Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "search",
+          "wing": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "search",
+          "shape": "search",
+          "hang": "no",
+          "wing": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "search",
+          "shape": "clear",
+          "hang": "no",
+          "wing": null
+        }
+      }
+    },
+    {
+      "id": "f54",
+      "key": "ACSA3-leaf-09",
+      "code": "p130",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": false,
+        "margin": false,
+        "venation": false,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-05T14:31:51.660Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "search",
+          "margin": "no",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "search",
+          "margin": "no",
+          "venation": null,
+          "arrangement": null,
+          "size": null
+        },
+        "haiku:high:V1:n20": {
+          "shape": "search",
+          "margin": "no",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f55",
+      "key": "ACRU-fruit-04",
+      "code": "p105",
+      "target": "ACRU",
+      "species": "Acer rubrum",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": false,
+        "wing": true
+      },
+      "at": "2026-11-09T18:14:41.128Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "search",
+          "wing": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "wing": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "no",
+          "wing": "clear"
+        }
+      }
+    },
+    {
+      "id": "f56",
+      "key": "PLOC-leaf-10",
+      "code": "p086",
+      "target": "PLOC",
+      "species": "Platanus occidentalis",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": true,
+        "size": false
+      },
+      "at": "2026-11-05T14:31:46.449Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "clear",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "clear",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "clear",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f57",
+      "key": "ACSA3-fruit-01",
+      "code": "p194",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "fruit",
+      "features": [
+        "kind",
+        "shape",
+        "hang",
+        "wing"
+      ],
+      "owner": {
+        "kind": true,
+        "shape": true,
+        "hang": true,
+        "wing": true
+      },
+      "at": "2026-11-09T18:14:37.327Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "kind": "clear",
+          "shape": "search",
+          "hang": "clear",
+          "wing": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "kind": "clear",
+          "shape": "clear",
+          "hang": "clear",
+          "wing": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "kind": "clear",
+          "shape": "search",
+          "hang": "clear",
+          "wing": "search"
+        }
+      }
+    },
+    {
+      "id": "f58",
+      "key": "QUAL-leaf-07",
+      "code": "p035",
+      "target": "QUAL",
+      "species": "Quercus alba",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": false,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-04T16:50:36.598Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "no",
+          "arrangement": "search",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "no",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f59",
+      "key": "ACSA3-leaf-04",
+      "code": "p062",
+      "target": "ACSA3",
+      "species": "Acer saccharum",
+      "part": "leaf",
+      "features": [
+        "shape",
+        "margin",
+        "venation",
+        "arrangement",
+        "size"
+      ],
+      "owner": {
+        "shape": true,
+        "margin": true,
+        "venation": true,
+        "arrangement": false,
+        "size": false
+      },
+      "at": "2026-11-05T14:32:11.594Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "shape": "search",
+          "margin": "clear",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "sonnet:high:V1:n20": {
+          "shape": "search",
+          "margin": "search",
+          "venation": "search",
+          "arrangement": "no",
+          "size": "no"
+        },
+        "haiku:high:V1:n20": {
+          "shape": "clear",
+          "margin": "search",
+          "venation": "clear",
+          "arrangement": "no",
+          "size": "no"
+        }
+      }
+    },
+    {
+      "id": "f60",
+      "key": "LITU-bark-06",
+      "code": "p183",
+      "target": "LITU",
+      "species": "Liriodendron tulipifera",
+      "part": "bark",
+      "features": [
+        "texture",
+        "pattern",
+        "colour"
+      ],
+      "owner": {
+        "texture": true,
+        "pattern": true,
+        "colour": true
+      },
+      "at": "2026-11-09T17:56:53.259Z",
+      "judges": {
+        "opus:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "sonnet:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        },
+        "haiku:high:V1:n20": {
+          "texture": "clear",
+          "pattern": "clear",
+          "colour": "clear"
+        }
+      }
+    }
+  ],
+  "compare": {
+    "setups": {
+      "opus:high:V1:n20": {
+        "all": {
+          "n": 236,
+          "agree": 199,
+          "owner_yes": 131,
+          "model_yes": 126
+        },
+        "by_part": {
+          "leaf": {
+            "n": 100,
+            "agree": 87,
+            "owner_yes": 44,
+            "model_yes": 37
+          },
+          "bark": {
+            "n": 60,
+            "agree": 50,
+            "owner_yes": 41,
+            "model_yes": 49
+          },
+          "fruit": {
+            "n": 76,
+            "agree": 62,
+            "owner_yes": 46,
+            "model_yes": 40
+          }
+        },
+        "by_feature": {
+          "leaf:shape": {
+            "n": 20,
+            "agree": 17,
+            "owner_yes": 13,
+            "model_yes": 12
+          },
+          "leaf:margin": {
+            "n": 20,
+            "agree": 17,
+            "owner_yes": 13,
+            "model_yes": 12
+          },
+          "leaf:venation": {
+            "n": 20,
+            "agree": 16,
+            "owner_yes": 13,
+            "model_yes": 11
+          },
+          "leaf:arrangement": {
+            "n": 20,
+            "agree": 17,
+            "owner_yes": 4,
+            "model_yes": 1
+          },
+          "leaf:size": {
+            "n": 20,
+            "agree": 20,
+            "owner_yes": 1,
+            "model_yes": 1
+          },
+          "bark:texture": {
+            "n": 20,
+            "agree": 18,
+            "owner_yes": 15,
+            "model_yes": 15
+          },
+          "bark:pattern": {
+            "n": 20,
+            "agree": 18,
+            "owner_yes": 13,
+            "model_yes": 15
+          },
+          "bark:colour": {
+            "n": 20,
+            "agree": 14,
+            "owner_yes": 13,
+            "model_yes": 19
+          },
+          "fruit:kind": {
+            "n": 20,
+            "agree": 18,
+            "owner_yes": 16,
+            "model_yes": 14
+          },
+          "fruit:shape": {
+            "n": 20,
+            "agree": 16,
+            "owner_yes": 15,
+            "model_yes": 13
+          },
+          "fruit:hang": {
+            "n": 20,
+            "agree": 15,
+            "owner_yes": 5,
+            "model_yes": 6
+          },
+          "fruit:two_heads": {
+            "n": 4,
+            "agree": 3,
+            "owner_yes": 1,
+            "model_yes": 0
+          },
+          "fruit:cap": {
+            "n": 3,
+            "agree": 3,
+            "owner_yes": 3,
+            "model_yes": 3
+          },
+          "fruit:wing": {
+            "n": 9,
+            "agree": 7,
+            "owner_yes": 6,
+            "model_yes": 4
+          }
+        },
+        "no_answer": 0
+      },
+      "sonnet:high:V1:n20": {
+        "all": {
+          "n": 236,
+          "agree": 196,
+          "owner_yes": 131,
+          "model_yes": 111
+        },
+        "by_part": {
+          "leaf": {
+            "n": 100,
+            "agree": 80,
+            "owner_yes": 44,
+            "model_yes": 30
+          },
+          "bark": {
+            "n": 60,
+            "agree": 55,
+            "owner_yes": 41,
+            "model_yes": 42
+          },
+          "fruit": {
+            "n": 76,
+            "agree": 61,
+            "owner_yes": 46,
+            "model_yes": 39
+          }
+        },
+        "by_feature": {
+          "leaf:shape": {
+            "n": 20,
+            "agree": 15,
+            "owner_yes": 13,
+            "model_yes": 12
+          },
+          "leaf:margin": {
+            "n": 20,
+            "agree": 12,
+            "owner_yes": 13,
+            "model_yes": 7
+          },
+          "leaf:venation": {
+            "n": 20,
+            "agree": 16,
+            "owner_yes": 13,
+            "model_yes": 9
+          },
+          "leaf:arrangement": {
+            "n": 20,
+            "agree": 17,
+            "owner_yes": 4,
+            "model_yes": 1
+          },
+          "leaf:size": {
+            "n": 20,
+            "agree": 20,
+            "owner_yes": 1,
+            "model_yes": 1
+          },
+          "bark:texture": {
+            "n": 20,
+            "agree": 19,
+            "owner_yes": 15,
+            "model_yes": 14
+          },
+          "bark:pattern": {
+            "n": 20,
+            "agree": 18,
+            "owner_yes": 13,
+            "model_yes": 13
+          },
+          "bark:colour": {
+            "n": 20,
+            "agree": 18,
+            "owner_yes": 13,
+            "model_yes": 15
+          },
+          "fruit:kind": {
+            "n": 20,
+            "agree": 16,
+            "owner_yes": 16,
+            "model_yes": 12
+          },
+          "fruit:shape": {
+            "n": 20,
+            "agree": 15,
+            "owner_yes": 15,
+            "model_yes": 12
+          },
+          "fruit:hang": {
+            "n": 20,
+            "agree": 16,
+            "owner_yes": 5,
+            "model_yes": 7
+          },
+          "fruit:two_heads": {
+            "n": 4,
+            "agree": 3,
+            "owner_yes": 1,
+            "model_yes": 0
+          },
+          "fruit:cap": {
+            "n": 3,
+            "agree": 3,
+            "owner_yes": 3,
+            "model_yes": 3
+          },
+          "fruit:wing": {
+            "n": 9,
+            "agree": 8,
+            "owner_yes": 6,
+            "model_yes": 5
+          }
+        },
+        "no_answer": 0
+      },
+      "haiku:high:V1:n20": {
+        "all": {
+          "n": 236,
+          "agree": 196,
+          "owner_yes": 131,
+          "model_yes": 123
+        },
+        "by_part": {
+          "leaf": {
+            "n": 100,
+            "agree": 86,
+            "owner_yes": 44,
+            "model_yes": 38
+          },
+          "bark": {
+            "n": 60,
+            "agree": 51,
+            "owner_yes": 41,
+            "model_yes": 44
+          },
+          "fruit": {
+            "n": 76,
+            "agree": 59,
+            "owner_yes": 46,
+            "model_yes": 41
+          }
+        },
+        "by_feature": {
+          "leaf:shape": {
+            "n": 20,
+            "agree": 17,
+            "owner_yes": 13,
+            "model_yes": 14
+          },
+          "leaf:margin": {
+            "n": 20,
+            "agree": 15,
+            "owner_yes": 13,
+            "model_yes": 12
+          },
+          "leaf:venation": {
+            "n": 20,
+            "agree": 17,
+            "owner_yes": 13,
+            "model_yes": 10
+          },
+          "leaf:arrangement": {
+            "n": 20,
+            "agree": 17,
+            "owner_yes": 4,
+            "model_yes": 1
+          },
+          "leaf:size": {
+            "n": 20,
+            "agree": 20,
+            "owner_yes": 1,
+            "model_yes": 1
+          },
+          "bark:texture": {
+            "n": 20,
+            "agree": 18,
+            "owner_yes": 15,
+            "model_yes": 13
+          },
+          "bark:pattern": {
+            "n": 20,
+            "agree": 18,
+            "owner_yes": 13,
+            "model_yes": 13
+          },
+          "bark:colour": {
+            "n": 20,
+            "agree": 15,
+            "owner_yes": 13,
+            "model_yes": 18
+          },
+          "fruit:kind": {
+            "n": 20,
+            "agree": 15,
+            "owner_yes": 16,
+            "model_yes": 13
+          },
+          "fruit:shape": {
+            "n": 20,
+            "agree": 19,
+            "owner_yes": 15,
+            "model_yes": 14
+          },
+          "fruit:hang": {
+            "n": 20,
+            "agree": 13,
+            "owner_yes": 5,
+            "model_yes": 8
+          },
+          "fruit:two_heads": {
+            "n": 4,
+            "agree": 3,
+            "owner_yes": 1,
+            "model_yes": 0
+          },
+          "fruit:cap": {
+            "n": 3,
+            "agree": 3,
+            "owner_yes": 3,
+            "model_yes": 3
+          },
+          "fruit:wing": {
+            "n": 9,
+            "agree": 6,
+            "owner_yes": 6,
+            "model_yes": 3
+          }
+        },
+        "no_answer": 0
+      }
+    },
+    "pairs": {
+      "opus:high:V1:n20 | sonnet:high:V1:n20": {
+        "n": 236,
+        "agree": 211
+      },
+      "opus:high:V1:n20 | haiku:high:V1:n20": {
+        "n": 236,
+        "agree": 203
+      },
+      "sonnet:high:V1:n20 | haiku:high:V1:n20": {
+        "n": 236,
+        "agree": 198
+      }
+    },
+    "all_models": {
+      "n": 236,
+      "agree": 188
+    }
+  }
+}
