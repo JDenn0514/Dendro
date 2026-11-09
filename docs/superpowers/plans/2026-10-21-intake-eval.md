@@ -526,6 +526,10 @@ The effort runs add 138 agents and about USD 18.5 to the spec's plan. The tracer
 3. **The leading efforts at calls of 20.** At calls of 20, `high` is more than 5 points better than `medium` on exact difficulty step for Sonnet and Haiku. Ruling: all 3 models use `high`. Sonnet and Haiku get a repeat run at `high` in calls of 20, and the rankings that depend on their answers run again.
 4. **No set-up passes the key gates (Task 7).** The owner answered a review sheet of 49 examples, then relabelled 91 more key photos blind. On those 91, the owner's old and new labels agree on the exact difficulty step only 48% of the time, and the judges agree with the owner about as well. Ruling: freeze V1, rule `P`, `high` for all 3 models, calls of 20, without a pass of the fixed gates. Record why they failed. Task 11 judges the held-out run by `heldoutCheck` (each score no more than 5 points below the owner's repeat agreement), not by the fixed gates. Key v2 (the old labels with the owner's later calls on top, `lib/key-v2.mjs`) is the key table of the report, with the old key next to it. No third prompt variant.
 
+## Rulings of 2026-10-28
+
+1. **The legend on the label pages (Task 8, Task 10).** The blind label page and the repeat page show what each difficulty step means, in the words of the Task 7 relabel sheet (`pages/legend.mjs`), with a line on the part `other`. The legend is the same on every photo, so it suggests no answer. The two pages use the same legend, so the repeat agreement compares like with like.
+
 ## Later plans
 
 - **Phase 4, the pipeline and the skills.** The data model, the validator, the CLI audit commands, and the photo-check and content-run skills (spec Part 4). It moves `lib/step.mjs` into `app/logic/`. A separate plan.
