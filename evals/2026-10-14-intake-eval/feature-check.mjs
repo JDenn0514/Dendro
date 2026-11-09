@@ -32,7 +32,7 @@ if (args.answers) {
   console.log(`feature check: ${rows.length} photos, ${compare.all_models.n} questions, owner yes ${compare.setups[setups[0]].all.owner_yes}`);
   for (const s of setups) {
     const t = compare.setups[s];
-    console.log(`${s}: ${pct(t.all)} | model yes ${t.all.model_yes} | ${Object.entries(t.by_part).map(([p, x]) => `${p} ${pct(x)}`).join(', ')} | no answer ${t.no_answer}`);
+    console.log(`${s}: ${pct(t.all)} | model yes ${t.all.model_yes} | ${Object.entries(t.by_part).map(([p, x]) => `${p} ${pct(x)}`).join(', ')} | no answer ${t.no_answer} photos, left out ${t.left_out} questions`);
   }
   for (const [pair, t] of Object.entries(compare.pairs)) console.log(`${pair}: ${pct(t)}`);
   console.log(`all 3 set-ups agree: ${pct(compare.all_models)}`);

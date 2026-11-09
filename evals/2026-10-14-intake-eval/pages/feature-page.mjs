@@ -3,10 +3,9 @@
 // The page knows each photo only by its opaque id (f01 to f60). It shows no key, no judge code, no species,
 // no URL, and no earlier answer of any kind. Each tap saves features/<id> { answers: { <feature>: true | false }, at }.
 // Only Editors and up read or write (the publish declares the rules).
-import { SHEET_HEAD } from './style.mjs';
+import { SHEET_HEAD, esc } from './style.mjs';
 import { QUESTIONS } from '../lib/features.mjs';
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const PARTS = [['leaf', 'Leaf'], ['bark', 'Bark'], ['fruit', 'Fruit']];
 
 function card(it, n) {

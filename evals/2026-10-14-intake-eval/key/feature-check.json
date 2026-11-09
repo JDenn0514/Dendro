@@ -2565,7 +2565,8 @@
             "model_yes": 4
           }
         },
-        "no_answer": 0
+        "no_answer": 0,
+        "left_out": 0
       },
       "sonnet:high:V1:n20": {
         "all": {
@@ -2680,7 +2681,8 @@
             "model_yes": 5
           }
         },
-        "no_answer": 0
+        "no_answer": 0,
+        "left_out": 19
       },
       "haiku:high:V1:n20": {
         "all": {
@@ -2795,7 +2797,8 @@
             "model_yes": 3
           }
         },
-        "no_answer": 0
+        "no_answer": 0,
+        "left_out": 16
       }
     },
     "pairs": {

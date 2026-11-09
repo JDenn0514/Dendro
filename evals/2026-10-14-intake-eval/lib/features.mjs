@@ -33,7 +33,8 @@ const FRUIT_EXTRA = { Acer: 'wing', Liriodendron: 'wing', Quercus: 'cap' };
 // The photo features to ask about on a photo of this species and part, in the brief's order.
 export function featuresOf(target, species, part, depthFeatures = {}) {
   const out = [...KEY_FEATURES[part], ...OTHER_FEATURES[part].filter(f => f !== 'wing' && f !== 'cap')];
-  if (part === 'fruit' && FRUIT_EXTRA[species.split(' ')[0]]) out.push(FRUIT_EXTRA[species.split(' ')[0]]);
+  const genus = species.split(' ')[0];
+  if (part === 'fruit' && FRUIT_EXTRA[genus]) out.push(FRUIT_EXTRA[genus]);
   const depth = depthFeatures[target]?.[part];
   if (depth) out.push(depth);
   return out;
@@ -73,16 +74,20 @@ export function importFeatures(docs, set) {
 }
 
 const yes = (answer, f) => answer?.photo_features?.[f] === 'clear';
-const tally = () => ({ n: 0, agree: 0, owner_yes: 0, model_yes: 0 });
-const add = (t, o, m) => { t.n++; if (o === m) t.agree++; if (o) t.owner_yes++; if (m) t.model_yes++; };
+const newCount = () => ({ n: 0, agree: 0, owner_yes: 0, model_yes: 0 });
+const countAnswer = (count, ownerYes, modelYes) => {
+  count.n++; if (ownerYes === modelYes) count.agree++; if (ownerYes) count.owner_yes++; if (modelYes) count.model_yes++;
+};
 
 // rows: importFeatures' result. answers: { <set-up>: { <key>: judge answer | null } }, the stored key answers.
 // A photo feature at `clear` is a yes. `search`, `no`, a feature left out, and no answer are a no.
+// no_answer counts the photos with no judge answer; left_out counts the questions that a judge who answered
+// the photo left with no value (such as a photo it gave another part). Both count as a no, and the report shows them.
 // Returns, per set-up, the agreement with the owner over all questions, per part, and per part and feature;
 // and the agreement of each pair of set-ups, and of all set-ups at once, on the same questions.
 export function compareFeatures(rows, answers) {
   const names = Object.keys(answers);
-  const setups = Object.fromEntries(names.map(s => [s, { all: tally(), by_part: {}, by_feature: {}, no_answer: 0 }]));
+  const setups = Object.fromEntries(names.map(s => [s, { all: newCount(), by_part: {}, by_feature: {}, no_answer: 0, left_out: 0 }]));
   const pairs = {};
   for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) pairs[`${names[i]} | ${names[j]}`] = { n: 0, agree: 0 };
   const allModels = { n: 0, agree: 0 };
@@ -91,10 +96,11 @@ export function compareFeatures(rows, answers) {
     for (const f of r.features) {
       const m = names.map(s => yes(answers[s][r.key], f));
       names.forEach((s, i) => {
-        const t = setups[s];
-        add(t.all, r.owner[f], m[i]);
-        add(t.by_part[r.part] ??= tally(), r.owner[f], m[i]);
-        add(t.by_feature[`${r.part}:${f}`] ??= tally(), r.owner[f], m[i]);
+        const t = setups[s], a = answers[s][r.key];
+        if (a != null && a.photo_features?.[f] == null) t.left_out++;
+        countAnswer(t.all, r.owner[f], m[i]);
+        countAnswer(t.by_part[r.part] ??= newCount(), r.owner[f], m[i]);
+        countAnswer(t.by_feature[`${r.part}:${f}`] ??= newCount(), r.owner[f], m[i]);
       });
       for (let i = 0; i < names.length; i++) for (let j = i + 1; j < names.length; j++) {
         const p = pairs[`${names[i]} | ${names[j]}`];

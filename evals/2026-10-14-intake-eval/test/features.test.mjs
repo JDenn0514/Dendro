@@ -89,6 +89,9 @@ test('a photo feature at clear is a yes; search, no, a missing feature, and a mi
   assert.deepEqual(c.setups['opus:high:V1:n20'].all, { n: 5, agree: 4, owner_yes: 3, model_yes: 2 });
   assert.deepEqual(c.setups['haiku:high:V1:n20'].all, { n: 5, agree: 4, owner_yes: 3, model_yes: 2 });
   assert.equal(c.setups['haiku:high:V1:n20'].no_answer, 1);
+  // A question with no value from a judge that did answer the photo is counted apart, so the report can show it.
+  assert.equal(c.setups['haiku:high:V1:n20'].left_out, 1);
+  assert.equal(c.setups['opus:high:V1:n20'].left_out, 0);
   assert.deepEqual(c.setups['opus:high:V1:n20'].by_feature['leaf:margin'], { n: 1, agree: 0, owner_yes: 1, model_yes: 0 });
   assert.deepEqual(c.setups['haiku:high:V1:n20'].by_part.bark, { n: 2, agree: 1, owner_yes: 1, model_yes: 0 });
 });
