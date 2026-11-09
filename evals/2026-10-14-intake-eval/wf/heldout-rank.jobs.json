@@ -1,0 +1,3105 @@
+[
+  {
+    "label": "rank:opus:high:PLRA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-leaf",
+    "groups": {
+      "1": [
+        "PLRA-37"
+      ],
+      "2": [
+        "PLRA-33",
+        "PLRA-44"
+      ],
+      "3": [
+        "PLRA-11",
+        "PLRA-35",
+        "PLRA-43",
+        "PLRA-49",
+        "PLRA-57",
+        "PLRA-59",
+        "PLRA-82"
+      ]
+    },
+    "keys": [
+      "PLRA-37",
+      "PLRA-33",
+      "PLRA-44",
+      "PLRA-11",
+      "PLRA-35",
+      "PLRA-43",
+      "PLRA-49",
+      "PLRA-57",
+      "PLRA-59",
+      "PLRA-82"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opus-1-1.jpg",
+        "keys": [
+          "PLRA-37"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opus-2-1.jpg",
+        "keys": [
+          "PLRA-33",
+          "PLRA-44"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opus-3-1.jpg",
+        "keys": [
+          "PLRA-11",
+          "PLRA-35",
+          "PLRA-43",
+          "PLRA-49",
+          "PLRA-57",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opus-3-1.jpg\nGroups:\n- group \"1\": PLRA-37\n- group \"2\": PLRA-33, PLRA-44\n- group \"3\": PLRA-11, PLRA-35, PLRA-43, PLRA-49, PLRA-57, PLRA-59, PLRA-82"
+  },
+  {
+    "label": "rank:opus:high:PLRA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-bark",
+    "groups": {
+      "1": [
+        "PLRA-05",
+        "PLRA-06",
+        "PLRA-61",
+        "PLRA-65",
+        "PLRA-70"
+      ],
+      "2": [
+        "PLRA-23",
+        "PLRA-67",
+        "PLRA-68"
+      ],
+      "3": [
+        "PLRA-01",
+        "PLRA-15",
+        "PLRA-19",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-66",
+        "PLRA-71",
+        "PLRA-72"
+      ]
+    },
+    "keys": [
+      "PLRA-05",
+      "PLRA-06",
+      "PLRA-61",
+      "PLRA-65",
+      "PLRA-70",
+      "PLRA-23",
+      "PLRA-67",
+      "PLRA-68",
+      "PLRA-01",
+      "PLRA-15",
+      "PLRA-19",
+      "PLRA-25",
+      "PLRA-27",
+      "PLRA-31",
+      "PLRA-63",
+      "PLRA-66",
+      "PLRA-71",
+      "PLRA-72"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opus-1-1.jpg",
+        "keys": [
+          "PLRA-05",
+          "PLRA-06",
+          "PLRA-61",
+          "PLRA-65",
+          "PLRA-70"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opus-2-1.jpg",
+        "keys": [
+          "PLRA-23",
+          "PLRA-67",
+          "PLRA-68"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opus-3-1.jpg",
+        "keys": [
+          "PLRA-01",
+          "PLRA-15",
+          "PLRA-19",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-66",
+          "PLRA-71"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opus-3-2.jpg",
+        "keys": [
+          "PLRA-72"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opus-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opus-3-2.jpg\nGroups:\n- group \"1\": PLRA-05, PLRA-06, PLRA-61, PLRA-65, PLRA-70\n- group \"2\": PLRA-23, PLRA-67, PLRA-68\n- group \"3\": PLRA-01, PLRA-15, PLRA-19, PLRA-25, PLRA-27, PLRA-31, PLRA-63, PLRA-66, PLRA-71, PLRA-72"
+  },
+  {
+    "label": "rank:opus:high:PLRA-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-fruit",
+    "groups": {
+      "1": [
+        "PLRA-52",
+        "PLRA-54",
+        "PLRA-58",
+        "PLRA-62"
+      ],
+      "2": [
+        "PLRA-74",
+        "PLRA-76",
+        "PLRA-79"
+      ],
+      "3": [
+        "PLRA-08",
+        "PLRA-75"
+      ]
+    },
+    "keys": [
+      "PLRA-52",
+      "PLRA-54",
+      "PLRA-58",
+      "PLRA-62",
+      "PLRA-74",
+      "PLRA-76",
+      "PLRA-79",
+      "PLRA-08",
+      "PLRA-75"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/opus-1-1.jpg",
+        "keys": [
+          "PLRA-52",
+          "PLRA-54",
+          "PLRA-58",
+          "PLRA-62"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/opus-2-1.jpg",
+        "keys": [
+          "PLRA-74",
+          "PLRA-76",
+          "PLRA-79"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/opus-3-1.jpg",
+        "keys": [
+          "PLRA-08",
+          "PLRA-75"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": PLRA-52, PLRA-54, PLRA-58, PLRA-62\n- group \"2\": PLRA-74, PLRA-76, PLRA-79\n- group \"3\": PLRA-08, PLRA-75"
+  },
+  {
+    "label": "rank:opus:high:QULA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-leaf",
+    "groups": {
+      "2": [
+        "QULA-02",
+        "QULA-26",
+        "QULA-45",
+        "QULA-50",
+        "QULA-51",
+        "QULA-57",
+        "QULA-58",
+        "QULA-59",
+        "QULA-66",
+        "QULA-67"
+      ],
+      "3": [
+        "QULA-03",
+        "QULA-04",
+        "QULA-05",
+        "QULA-13",
+        "QULA-14",
+        "QULA-15",
+        "QULA-16",
+        "QULA-21",
+        "QULA-23",
+        "QULA-25",
+        "QULA-27",
+        "QULA-28",
+        "QULA-30",
+        "QULA-32",
+        "QULA-34",
+        "QULA-36",
+        "QULA-38",
+        "QULA-39",
+        "QULA-41",
+        "QULA-42",
+        "QULA-43",
+        "QULA-52",
+        "QULA-53",
+        "QULA-54",
+        "QULA-62"
+      ]
+    },
+    "keys": [
+      "QULA-02",
+      "QULA-26",
+      "QULA-45",
+      "QULA-50",
+      "QULA-51",
+      "QULA-57",
+      "QULA-58",
+      "QULA-59",
+      "QULA-66",
+      "QULA-67",
+      "QULA-03",
+      "QULA-04",
+      "QULA-05",
+      "QULA-13",
+      "QULA-14",
+      "QULA-15",
+      "QULA-16",
+      "QULA-21",
+      "QULA-23",
+      "QULA-25",
+      "QULA-27",
+      "QULA-28",
+      "QULA-30",
+      "QULA-32",
+      "QULA-34",
+      "QULA-36",
+      "QULA-38",
+      "QULA-39",
+      "QULA-41",
+      "QULA-42",
+      "QULA-43",
+      "QULA-52",
+      "QULA-53",
+      "QULA-54",
+      "QULA-62"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-2-1.jpg",
+        "keys": [
+          "QULA-02",
+          "QULA-26",
+          "QULA-45",
+          "QULA-50",
+          "QULA-51",
+          "QULA-57",
+          "QULA-58",
+          "QULA-59",
+          "QULA-66"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-2-2.jpg",
+        "keys": [
+          "QULA-67"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-3-1.jpg",
+        "keys": [
+          "QULA-03",
+          "QULA-04",
+          "QULA-05",
+          "QULA-13",
+          "QULA-14",
+          "QULA-15",
+          "QULA-16",
+          "QULA-21",
+          "QULA-23"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-3-2.jpg",
+        "keys": [
+          "QULA-25",
+          "QULA-27",
+          "QULA-28",
+          "QULA-30",
+          "QULA-32",
+          "QULA-34",
+          "QULA-36",
+          "QULA-38",
+          "QULA-39"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-3-3.jpg",
+        "keys": [
+          "QULA-41",
+          "QULA-42",
+          "QULA-43",
+          "QULA-52",
+          "QULA-53",
+          "QULA-54",
+          "QULA-62"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, leaf.\nGroup line: the other species of the genus mostly show one leaf, both side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-2-2.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-3-2.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opus-3-3.jpg\nGroups:\n- group \"2\": QULA-02, QULA-26, QULA-45, QULA-50, QULA-51, QULA-57, QULA-58, QULA-59, QULA-66, QULA-67\n- group \"3\": QULA-03, QULA-04, QULA-05, QULA-13, QULA-14, QULA-15, QULA-16, QULA-21, QULA-23, QULA-25, QULA-27, QULA-28, QULA-30, QULA-32, QULA-34, QULA-36, QULA-38, QULA-39, QULA-41, QULA-42, QULA-43, QULA-52, QULA-53, QULA-54, QULA-62"
+  },
+  {
+    "label": "rank:opus:high:QULA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-bark",
+    "groups": {
+      "1": [
+        "QULA-22",
+        "QULA-55",
+        "QULA-68"
+      ],
+      "3": [
+        "QULA-24",
+        "QULA-33",
+        "QULA-48",
+        "QULA-60"
+      ]
+    },
+    "keys": [
+      "QULA-22",
+      "QULA-55",
+      "QULA-68",
+      "QULA-24",
+      "QULA-33",
+      "QULA-48",
+      "QULA-60"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/opus-1-1.jpg",
+        "keys": [
+          "QULA-22",
+          "QULA-55",
+          "QULA-68"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/opus-3-1.jpg",
+        "keys": [
+          "QULA-24",
+          "QULA-33",
+          "QULA-48",
+          "QULA-60"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/opus-3-1.jpg\nGroups:\n- group \"1\": QULA-22, QULA-55, QULA-68\n- group \"3\": QULA-24, QULA-33, QULA-48, QULA-60"
+  },
+  {
+    "label": "rank:opus:high:QULA-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-fruit",
+    "groups": {
+      "1": [
+        "QULA-37",
+        "QULA-61",
+        "QULA-65",
+        "QULA-69"
+      ],
+      "2": [
+        "QULA-35",
+        "QULA-47",
+        "QULA-63"
+      ],
+      "3": [
+        "QULA-44",
+        "QULA-64",
+        "QULA-70"
+      ]
+    },
+    "keys": [
+      "QULA-37",
+      "QULA-61",
+      "QULA-65",
+      "QULA-69",
+      "QULA-35",
+      "QULA-47",
+      "QULA-63",
+      "QULA-44",
+      "QULA-64",
+      "QULA-70"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/opus-1-1.jpg",
+        "keys": [
+          "QULA-37",
+          "QULA-61",
+          "QULA-65",
+          "QULA-69"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/opus-2-1.jpg",
+        "keys": [
+          "QULA-35",
+          "QULA-47",
+          "QULA-63"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/opus-3-1.jpg",
+        "keys": [
+          "QULA-44",
+          "QULA-64",
+          "QULA-70"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": QULA-37, QULA-61, QULA-65, QULA-69\n- group \"2\": QULA-35, QULA-47, QULA-63\n- group \"3\": QULA-44, QULA-64, QULA-70"
+  },
+  {
+    "label": "rank:opus:high:QUAU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-leaf",
+    "groups": {
+      "1": [
+        "QUAU-01",
+        "QUAU-12",
+        "QUAU-14"
+      ],
+      "2": [
+        "QUAU-04",
+        "QUAU-07",
+        "QUAU-15",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-47",
+        "QUAU-51"
+      ],
+      "3": [
+        "QUAU-17",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-49",
+        "QUAU-50",
+        "QUAU-53"
+      ]
+    },
+    "keys": [
+      "QUAU-01",
+      "QUAU-12",
+      "QUAU-14",
+      "QUAU-04",
+      "QUAU-07",
+      "QUAU-15",
+      "QUAU-28",
+      "QUAU-29",
+      "QUAU-47",
+      "QUAU-51",
+      "QUAU-17",
+      "QUAU-24",
+      "QUAU-27",
+      "QUAU-30",
+      "QUAU-41",
+      "QUAU-45",
+      "QUAU-48",
+      "QUAU-49",
+      "QUAU-50",
+      "QUAU-53"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opus-1-1.jpg",
+        "keys": [
+          "QUAU-01",
+          "QUAU-12",
+          "QUAU-14"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opus-2-1.jpg",
+        "keys": [
+          "QUAU-04",
+          "QUAU-07",
+          "QUAU-15",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-47",
+          "QUAU-51"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opus-3-1.jpg",
+        "keys": [
+          "QUAU-17",
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48",
+          "QUAU-49",
+          "QUAU-50"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opus-3-2.jpg",
+        "keys": [
+          "QUAU-53"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opus-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opus-3-2.jpg\nGroups:\n- group \"1\": QUAU-01, QUAU-12, QUAU-14\n- group \"2\": QUAU-04, QUAU-07, QUAU-15, QUAU-28, QUAU-29, QUAU-47, QUAU-51\n- group \"3\": QUAU-17, QUAU-24, QUAU-27, QUAU-30, QUAU-41, QUAU-45, QUAU-48, QUAU-49, QUAU-50, QUAU-53"
+  },
+  {
+    "label": "rank:opus:high:QUAU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-bark",
+    "groups": {
+      "1": [
+        "QUAU-10",
+        "QUAU-13",
+        "QUAU-32",
+        "QUAU-33",
+        "QUAU-39",
+        "QUAU-46",
+        "QUAU-52"
+      ],
+      "2": [
+        "QUAU-11"
+      ],
+      "3": [
+        "QUAU-55",
+        "QUAU-56"
+      ]
+    },
+    "keys": [
+      "QUAU-10",
+      "QUAU-13",
+      "QUAU-32",
+      "QUAU-33",
+      "QUAU-39",
+      "QUAU-46",
+      "QUAU-52",
+      "QUAU-11",
+      "QUAU-55",
+      "QUAU-56"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/opus-1-1.jpg",
+        "keys": [
+          "QUAU-10",
+          "QUAU-13",
+          "QUAU-32",
+          "QUAU-33",
+          "QUAU-39",
+          "QUAU-46",
+          "QUAU-52"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/opus-2-1.jpg",
+        "keys": [
+          "QUAU-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/opus-3-1.jpg",
+        "keys": [
+          "QUAU-55",
+          "QUAU-56"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/opus-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/opus-3-1.jpg\nGroups:\n- group \"1\": QUAU-10, QUAU-13, QUAU-32, QUAU-33, QUAU-39, QUAU-46, QUAU-52\n- group \"2\": QUAU-11\n- group \"3\": QUAU-55, QUAU-56"
+  },
+  {
+    "label": "rank:opus:high:QUAU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-fruit",
+    "groups": {
+      "1": [
+        "QUAU-02"
+      ],
+      "3": [
+        "QUAU-19",
+        "QUAU-21",
+        "QUAU-22",
+        "QUAU-23"
+      ]
+    },
+    "keys": [
+      "QUAU-02",
+      "QUAU-19",
+      "QUAU-21",
+      "QUAU-22",
+      "QUAU-23"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/opus-1-1.jpg",
+        "keys": [
+          "QUAU-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/opus-3-1.jpg",
+        "keys": [
+          "QUAU-19",
+          "QUAU-21",
+          "QUAU-22",
+          "QUAU-23"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/opus-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/opus-3-1.jpg\nGroups:\n- group \"1\": QUAU-02\n- group \"3\": QUAU-19, QUAU-21, QUAU-22, QUAU-23"
+  },
+  {
+    "label": "rank:opus:high:FR:PLRA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "PLRA-leaf",
+    "groups": {
+      "1": [
+        "PLRA-37"
+      ],
+      "2": [
+        "PLRA-33",
+        "PLRA-44"
+      ],
+      "3": [
+        "PLRA-11",
+        "PLRA-35",
+        "PLRA-43",
+        "PLRA-57",
+        "PLRA-59",
+        "PLRA-82"
+      ]
+    },
+    "keys": [
+      "PLRA-37",
+      "PLRA-33",
+      "PLRA-44",
+      "PLRA-11",
+      "PLRA-35",
+      "PLRA-43",
+      "PLRA-57",
+      "PLRA-59",
+      "PLRA-82"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opusFR-1-1.jpg",
+        "keys": [
+          "PLRA-37"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opusFR-2-1.jpg",
+        "keys": [
+          "PLRA-33",
+          "PLRA-44"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opusFR-3-1.jpg",
+        "keys": [
+          "PLRA-11",
+          "PLRA-35",
+          "PLRA-43",
+          "PLRA-57",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opusFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/opusFR-3-1.jpg\nGroups:\n- group \"1\": PLRA-37\n- group \"2\": PLRA-33, PLRA-44\n- group \"3\": PLRA-11, PLRA-35, PLRA-43, PLRA-57, PLRA-59, PLRA-82"
+  },
+  {
+    "label": "rank:opus:high:FR:PLRA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "PLRA-bark",
+    "groups": {
+      "1": [
+        "PLRA-05",
+        "PLRA-06",
+        "PLRA-61",
+        "PLRA-65",
+        "PLRA-70"
+      ],
+      "2": [
+        "PLRA-23",
+        "PLRA-67",
+        "PLRA-68"
+      ],
+      "3": [
+        "PLRA-01",
+        "PLRA-15",
+        "PLRA-19",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-66",
+        "PLRA-71"
+      ]
+    },
+    "keys": [
+      "PLRA-05",
+      "PLRA-06",
+      "PLRA-61",
+      "PLRA-65",
+      "PLRA-70",
+      "PLRA-23",
+      "PLRA-67",
+      "PLRA-68",
+      "PLRA-01",
+      "PLRA-15",
+      "PLRA-19",
+      "PLRA-25",
+      "PLRA-27",
+      "PLRA-31",
+      "PLRA-63",
+      "PLRA-66",
+      "PLRA-71"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opusFR-1-1.jpg",
+        "keys": [
+          "PLRA-05",
+          "PLRA-06",
+          "PLRA-61",
+          "PLRA-65",
+          "PLRA-70"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opusFR-2-1.jpg",
+        "keys": [
+          "PLRA-23",
+          "PLRA-67",
+          "PLRA-68"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opusFR-3-1.jpg",
+        "keys": [
+          "PLRA-01",
+          "PLRA-15",
+          "PLRA-19",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-66",
+          "PLRA-71"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opusFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/opusFR-3-1.jpg\nGroups:\n- group \"1\": PLRA-05, PLRA-06, PLRA-61, PLRA-65, PLRA-70\n- group \"2\": PLRA-23, PLRA-67, PLRA-68\n- group \"3\": PLRA-01, PLRA-15, PLRA-19, PLRA-25, PLRA-27, PLRA-31, PLRA-63, PLRA-66, PLRA-71"
+  },
+  {
+    "label": "rank:opus:high:FR:QULA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QULA-leaf",
+    "groups": {
+      "2": [
+        "QULA-02",
+        "QULA-26",
+        "QULA-45",
+        "QULA-50",
+        "QULA-57",
+        "QULA-58",
+        "QULA-59",
+        "QULA-66"
+      ],
+      "3": [
+        "QULA-03",
+        "QULA-14",
+        "QULA-16",
+        "QULA-23",
+        "QULA-25",
+        "QULA-27",
+        "QULA-28",
+        "QULA-30",
+        "QULA-32",
+        "QULA-34",
+        "QULA-36",
+        "QULA-38",
+        "QULA-39",
+        "QULA-43",
+        "QULA-52",
+        "QULA-53",
+        "QULA-54",
+        "QULA-62"
+      ]
+    },
+    "keys": [
+      "QULA-02",
+      "QULA-26",
+      "QULA-45",
+      "QULA-50",
+      "QULA-57",
+      "QULA-58",
+      "QULA-59",
+      "QULA-66",
+      "QULA-03",
+      "QULA-14",
+      "QULA-16",
+      "QULA-23",
+      "QULA-25",
+      "QULA-27",
+      "QULA-28",
+      "QULA-30",
+      "QULA-32",
+      "QULA-34",
+      "QULA-36",
+      "QULA-38",
+      "QULA-39",
+      "QULA-43",
+      "QULA-52",
+      "QULA-53",
+      "QULA-54",
+      "QULA-62"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opusFR-2-1.jpg",
+        "keys": [
+          "QULA-02",
+          "QULA-26",
+          "QULA-45",
+          "QULA-50",
+          "QULA-57",
+          "QULA-58",
+          "QULA-59",
+          "QULA-66"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opusFR-3-1.jpg",
+        "keys": [
+          "QULA-03",
+          "QULA-14",
+          "QULA-16",
+          "QULA-23",
+          "QULA-25",
+          "QULA-27",
+          "QULA-28",
+          "QULA-30",
+          "QULA-32"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opusFR-3-2.jpg",
+        "keys": [
+          "QULA-34",
+          "QULA-36",
+          "QULA-38",
+          "QULA-39",
+          "QULA-43",
+          "QULA-52",
+          "QULA-53",
+          "QULA-54",
+          "QULA-62"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, leaf.\nGroup line: the other species of the genus mostly show one leaf, both side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opusFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opusFR-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/opusFR-3-2.jpg\nGroups:\n- group \"2\": QULA-02, QULA-26, QULA-45, QULA-50, QULA-57, QULA-58, QULA-59, QULA-66\n- group \"3\": QULA-03, QULA-14, QULA-16, QULA-23, QULA-25, QULA-27, QULA-28, QULA-30, QULA-32, QULA-34, QULA-36, QULA-38, QULA-39, QULA-43, QULA-52, QULA-53, QULA-54, QULA-62"
+  },
+  {
+    "label": "rank:opus:high:FR:QULA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QULA-bark",
+    "groups": {
+      "1": [
+        "QULA-22",
+        "QULA-55",
+        "QULA-68"
+      ],
+      "3": [
+        "QULA-24",
+        "QULA-33"
+      ]
+    },
+    "keys": [
+      "QULA-22",
+      "QULA-55",
+      "QULA-68",
+      "QULA-24",
+      "QULA-33"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/opusFR-1-1.jpg",
+        "keys": [
+          "QULA-22",
+          "QULA-55",
+          "QULA-68"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/opusFR-3-1.jpg",
+        "keys": [
+          "QULA-24",
+          "QULA-33"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/opusFR-3-1.jpg\nGroups:\n- group \"1\": QULA-22, QULA-55, QULA-68\n- group \"3\": QULA-24, QULA-33"
+  },
+  {
+    "label": "rank:opus:high:FR:QUAU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QUAU-leaf",
+    "groups": {
+      "1": [
+        "QUAU-01",
+        "QUAU-12"
+      ],
+      "2": [
+        "QUAU-04",
+        "QUAU-07",
+        "QUAU-15",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-47",
+        "QUAU-51"
+      ],
+      "3": [
+        "QUAU-17",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-49",
+        "QUAU-50",
+        "QUAU-53"
+      ]
+    },
+    "keys": [
+      "QUAU-01",
+      "QUAU-12",
+      "QUAU-04",
+      "QUAU-07",
+      "QUAU-15",
+      "QUAU-28",
+      "QUAU-29",
+      "QUAU-47",
+      "QUAU-51",
+      "QUAU-17",
+      "QUAU-24",
+      "QUAU-27",
+      "QUAU-30",
+      "QUAU-41",
+      "QUAU-45",
+      "QUAU-48",
+      "QUAU-49",
+      "QUAU-50",
+      "QUAU-53"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opusFR-1-1.jpg",
+        "keys": [
+          "QUAU-01",
+          "QUAU-12"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opusFR-2-1.jpg",
+        "keys": [
+          "QUAU-04",
+          "QUAU-07",
+          "QUAU-15",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-47",
+          "QUAU-51"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opusFR-3-1.jpg",
+        "keys": [
+          "QUAU-17",
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48",
+          "QUAU-49",
+          "QUAU-50"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opusFR-3-2.jpg",
+        "keys": [
+          "QUAU-53"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opusFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opusFR-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/opusFR-3-2.jpg\nGroups:\n- group \"1\": QUAU-01, QUAU-12\n- group \"2\": QUAU-04, QUAU-07, QUAU-15, QUAU-28, QUAU-29, QUAU-47, QUAU-51\n- group \"3\": QUAU-17, QUAU-24, QUAU-27, QUAU-30, QUAU-41, QUAU-45, QUAU-48, QUAU-49, QUAU-50, QUAU-53"
+  },
+  {
+    "label": "rank:opus:high:FR:QUAU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "opus",
+    "model_opt": "claude-opus-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QUAU-fruit",
+    "groups": {
+      "1": [
+        "QUAU-02"
+      ],
+      "3": [
+        "QUAU-19",
+        "QUAU-23"
+      ]
+    },
+    "keys": [
+      "QUAU-02",
+      "QUAU-19",
+      "QUAU-23"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/opusFR-1-1.jpg",
+        "keys": [
+          "QUAU-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/opusFR-3-1.jpg",
+        "keys": [
+          "QUAU-19",
+          "QUAU-23"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/opusFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/opusFR-3-1.jpg\nGroups:\n- group \"1\": QUAU-02\n- group \"3\": QUAU-19, QUAU-23"
+  },
+  {
+    "label": "rank:sonnet:high:PLRA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-leaf",
+    "groups": {
+      "1": [
+        "PLRA-37"
+      ],
+      "2": [
+        "PLRA-33",
+        "PLRA-43",
+        "PLRA-44"
+      ],
+      "3": [
+        "PLRA-11",
+        "PLRA-35",
+        "PLRA-38",
+        "PLRA-49",
+        "PLRA-56",
+        "PLRA-59",
+        "PLRA-82"
+      ]
+    },
+    "keys": [
+      "PLRA-37",
+      "PLRA-33",
+      "PLRA-43",
+      "PLRA-44",
+      "PLRA-11",
+      "PLRA-35",
+      "PLRA-38",
+      "PLRA-49",
+      "PLRA-56",
+      "PLRA-59",
+      "PLRA-82"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "PLRA-37"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnet-2-1.jpg",
+        "keys": [
+          "PLRA-33",
+          "PLRA-43",
+          "PLRA-44"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "PLRA-11",
+          "PLRA-35",
+          "PLRA-38",
+          "PLRA-49",
+          "PLRA-56",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnet-3-1.jpg\nGroups:\n- group \"1\": PLRA-37\n- group \"2\": PLRA-33, PLRA-43, PLRA-44\n- group \"3\": PLRA-11, PLRA-35, PLRA-38, PLRA-49, PLRA-56, PLRA-59, PLRA-82"
+  },
+  {
+    "label": "rank:sonnet:high:PLRA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-bark",
+    "groups": {
+      "1": [
+        "PLRA-05",
+        "PLRA-06",
+        "PLRA-61",
+        "PLRA-65",
+        "PLRA-70"
+      ],
+      "2": [
+        "PLRA-67",
+        "PLRA-68"
+      ],
+      "3": [
+        "PLRA-01",
+        "PLRA-15",
+        "PLRA-23",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-64",
+        "PLRA-66",
+        "PLRA-71"
+      ]
+    },
+    "keys": [
+      "PLRA-05",
+      "PLRA-06",
+      "PLRA-61",
+      "PLRA-65",
+      "PLRA-70",
+      "PLRA-67",
+      "PLRA-68",
+      "PLRA-01",
+      "PLRA-15",
+      "PLRA-23",
+      "PLRA-25",
+      "PLRA-27",
+      "PLRA-31",
+      "PLRA-63",
+      "PLRA-64",
+      "PLRA-66",
+      "PLRA-71"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnet-1-1.jpg",
+        "keys": [
+          "PLRA-05",
+          "PLRA-06",
+          "PLRA-61",
+          "PLRA-65",
+          "PLRA-70"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnet-2-1.jpg",
+        "keys": [
+          "PLRA-67",
+          "PLRA-68"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnet-3-1.jpg",
+        "keys": [
+          "PLRA-01",
+          "PLRA-15",
+          "PLRA-23",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-64",
+          "PLRA-66"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnet-3-2.jpg",
+        "keys": [
+          "PLRA-71"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnet-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnet-3-2.jpg\nGroups:\n- group \"1\": PLRA-05, PLRA-06, PLRA-61, PLRA-65, PLRA-70\n- group \"2\": PLRA-67, PLRA-68\n- group \"3\": PLRA-01, PLRA-15, PLRA-23, PLRA-25, PLRA-27, PLRA-31, PLRA-63, PLRA-64, PLRA-66, PLRA-71"
+  },
+  {
+    "label": "rank:sonnet:high:PLRA-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-fruit",
+    "groups": {
+      "1": [
+        "PLRA-52",
+        "PLRA-54",
+        "PLRA-58",
+        "PLRA-62",
+        "PLRA-74"
+      ],
+      "2": [
+        "PLRA-76",
+        "PLRA-79"
+      ],
+      "3": [
+        "PLRA-08",
+        "PLRA-75"
+      ]
+    },
+    "keys": [
+      "PLRA-52",
+      "PLRA-54",
+      "PLRA-58",
+      "PLRA-62",
+      "PLRA-74",
+      "PLRA-76",
+      "PLRA-79",
+      "PLRA-08",
+      "PLRA-75"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "PLRA-52",
+          "PLRA-54",
+          "PLRA-58",
+          "PLRA-62",
+          "PLRA-74"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/sonnet-2-1.jpg",
+        "keys": [
+          "PLRA-76",
+          "PLRA-79"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "PLRA-08",
+          "PLRA-75"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": PLRA-52, PLRA-54, PLRA-58, PLRA-62, PLRA-74\n- group \"2\": PLRA-76, PLRA-79\n- group \"3\": PLRA-08, PLRA-75"
+  },
+  {
+    "label": "rank:sonnet:high:QULA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-leaf",
+    "groups": {
+      "1": [
+        "QULA-57",
+        "QULA-58"
+      ],
+      "2": [
+        "QULA-02",
+        "QULA-23",
+        "QULA-25",
+        "QULA-26",
+        "QULA-27",
+        "QULA-28",
+        "QULA-32",
+        "QULA-39",
+        "QULA-42",
+        "QULA-45",
+        "QULA-50",
+        "QULA-51",
+        "QULA-52",
+        "QULA-59",
+        "QULA-66",
+        "QULA-67"
+      ],
+      "3": [
+        "QULA-03",
+        "QULA-05",
+        "QULA-13",
+        "QULA-14",
+        "QULA-15",
+        "QULA-16",
+        "QULA-21",
+        "QULA-30",
+        "QULA-34",
+        "QULA-36",
+        "QULA-38",
+        "QULA-43",
+        "QULA-53",
+        "QULA-54",
+        "QULA-62"
+      ]
+    },
+    "keys": [
+      "QULA-57",
+      "QULA-58",
+      "QULA-02",
+      "QULA-23",
+      "QULA-25",
+      "QULA-26",
+      "QULA-27",
+      "QULA-28",
+      "QULA-32",
+      "QULA-39",
+      "QULA-42",
+      "QULA-45",
+      "QULA-50",
+      "QULA-51",
+      "QULA-52",
+      "QULA-59",
+      "QULA-66",
+      "QULA-67",
+      "QULA-03",
+      "QULA-05",
+      "QULA-13",
+      "QULA-14",
+      "QULA-15",
+      "QULA-16",
+      "QULA-21",
+      "QULA-30",
+      "QULA-34",
+      "QULA-36",
+      "QULA-38",
+      "QULA-43",
+      "QULA-53",
+      "QULA-54",
+      "QULA-62"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "QULA-57",
+          "QULA-58"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-2-1.jpg",
+        "keys": [
+          "QULA-02",
+          "QULA-23",
+          "QULA-25",
+          "QULA-26",
+          "QULA-27",
+          "QULA-28",
+          "QULA-32",
+          "QULA-39",
+          "QULA-42"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-2-2.jpg",
+        "keys": [
+          "QULA-45",
+          "QULA-50",
+          "QULA-51",
+          "QULA-52",
+          "QULA-59",
+          "QULA-66",
+          "QULA-67"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "QULA-03",
+          "QULA-05",
+          "QULA-13",
+          "QULA-14",
+          "QULA-15",
+          "QULA-16",
+          "QULA-21",
+          "QULA-30",
+          "QULA-34"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-3-2.jpg",
+        "keys": [
+          "QULA-36",
+          "QULA-38",
+          "QULA-43",
+          "QULA-53",
+          "QULA-54",
+          "QULA-62"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-2-2.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnet-3-2.jpg\nGroups:\n- group \"1\": QULA-57, QULA-58\n- group \"2\": QULA-02, QULA-23, QULA-25, QULA-26, QULA-27, QULA-28, QULA-32, QULA-39, QULA-42, QULA-45, QULA-50, QULA-51, QULA-52, QULA-59, QULA-66, QULA-67\n- group \"3\": QULA-03, QULA-05, QULA-13, QULA-14, QULA-15, QULA-16, QULA-21, QULA-30, QULA-34, QULA-36, QULA-38, QULA-43, QULA-53, QULA-54, QULA-62"
+  },
+  {
+    "label": "rank:sonnet:high:QULA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-bark",
+    "groups": {
+      "1": [
+        "QULA-22",
+        "QULA-33",
+        "QULA-55"
+      ],
+      "3": [
+        "QULA-24",
+        "QULA-48",
+        "QULA-68"
+      ]
+    },
+    "keys": [
+      "QULA-22",
+      "QULA-33",
+      "QULA-55",
+      "QULA-24",
+      "QULA-48",
+      "QULA-68"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/sonnet-1-1.jpg",
+        "keys": [
+          "QULA-22",
+          "QULA-33",
+          "QULA-55"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/sonnet-3-1.jpg",
+        "keys": [
+          "QULA-24",
+          "QULA-48",
+          "QULA-68"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/sonnet-3-1.jpg\nGroups:\n- group \"1\": QULA-22, QULA-33, QULA-55\n- group \"3\": QULA-24, QULA-48, QULA-68"
+  },
+  {
+    "label": "rank:sonnet:high:QULA-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-fruit",
+    "groups": {
+      "1": [
+        "QULA-37",
+        "QULA-63",
+        "QULA-65",
+        "QULA-69"
+      ],
+      "2": [
+        "QULA-35",
+        "QULA-47",
+        "QULA-61"
+      ],
+      "3": [
+        "QULA-44",
+        "QULA-64",
+        "QULA-70"
+      ]
+    },
+    "keys": [
+      "QULA-37",
+      "QULA-63",
+      "QULA-65",
+      "QULA-69",
+      "QULA-35",
+      "QULA-47",
+      "QULA-61",
+      "QULA-44",
+      "QULA-64",
+      "QULA-70"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "QULA-37",
+          "QULA-63",
+          "QULA-65",
+          "QULA-69"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/sonnet-2-1.jpg",
+        "keys": [
+          "QULA-35",
+          "QULA-47",
+          "QULA-61"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "QULA-44",
+          "QULA-64",
+          "QULA-70"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, fruit.\nGroup line: the other species of the genus mostly show fruit on the twig.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": QULA-37, QULA-63, QULA-65, QULA-69\n- group \"2\": QULA-35, QULA-47, QULA-61\n- group \"3\": QULA-44, QULA-64, QULA-70"
+  },
+  {
+    "label": "rank:sonnet:high:QUAU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-leaf",
+    "groups": {
+      "1": [
+        "QUAU-01",
+        "QUAU-04",
+        "QUAU-07",
+        "QUAU-12",
+        "QUAU-14",
+        "QUAU-15"
+      ],
+      "2": [
+        "QUAU-47"
+      ],
+      "3": [
+        "QUAU-17",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-49",
+        "QUAU-50",
+        "QUAU-51",
+        "QUAU-53"
+      ]
+    },
+    "keys": [
+      "QUAU-01",
+      "QUAU-04",
+      "QUAU-07",
+      "QUAU-12",
+      "QUAU-14",
+      "QUAU-15",
+      "QUAU-47",
+      "QUAU-17",
+      "QUAU-24",
+      "QUAU-27",
+      "QUAU-28",
+      "QUAU-29",
+      "QUAU-30",
+      "QUAU-41",
+      "QUAU-45",
+      "QUAU-48",
+      "QUAU-49",
+      "QUAU-50",
+      "QUAU-51",
+      "QUAU-53"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnet-1-1.jpg",
+        "keys": [
+          "QUAU-01",
+          "QUAU-04",
+          "QUAU-07",
+          "QUAU-12",
+          "QUAU-14",
+          "QUAU-15"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnet-2-1.jpg",
+        "keys": [
+          "QUAU-47"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnet-3-1.jpg",
+        "keys": [
+          "QUAU-17",
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnet-3-2.jpg",
+        "keys": [
+          "QUAU-49",
+          "QUAU-50",
+          "QUAU-51",
+          "QUAU-53"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, leaf.\nGroup line: the other species of the genus mostly show a leaf on a twig, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnet-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnet-3-2.jpg\nGroups:\n- group \"1\": QUAU-01, QUAU-04, QUAU-07, QUAU-12, QUAU-14, QUAU-15\n- group \"2\": QUAU-47\n- group \"3\": QUAU-17, QUAU-24, QUAU-27, QUAU-28, QUAU-29, QUAU-30, QUAU-41, QUAU-45, QUAU-48, QUAU-49, QUAU-50, QUAU-51, QUAU-53"
+  },
+  {
+    "label": "rank:sonnet:high:QUAU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-bark",
+    "groups": {
+      "1": [
+        "QUAU-10",
+        "QUAU-13",
+        "QUAU-32",
+        "QUAU-39",
+        "QUAU-46",
+        "QUAU-52"
+      ],
+      "2": [
+        "QUAU-11"
+      ],
+      "3": [
+        "QUAU-33",
+        "QUAU-55",
+        "QUAU-56"
+      ]
+    },
+    "keys": [
+      "QUAU-10",
+      "QUAU-13",
+      "QUAU-32",
+      "QUAU-39",
+      "QUAU-46",
+      "QUAU-52",
+      "QUAU-11",
+      "QUAU-33",
+      "QUAU-55",
+      "QUAU-56"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/sonnet-1-1.jpg",
+        "keys": [
+          "QUAU-10",
+          "QUAU-13",
+          "QUAU-32",
+          "QUAU-39",
+          "QUAU-46",
+          "QUAU-52"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/sonnet-2-1.jpg",
+        "keys": [
+          "QUAU-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/sonnet-3-1.jpg",
+        "keys": [
+          "QUAU-33",
+          "QUAU-55",
+          "QUAU-56"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/sonnet-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/sonnet-3-1.jpg\nGroups:\n- group \"1\": QUAU-10, QUAU-13, QUAU-32, QUAU-39, QUAU-46, QUAU-52\n- group \"2\": QUAU-11\n- group \"3\": QUAU-33, QUAU-55, QUAU-56"
+  },
+  {
+    "label": "rank:sonnet:high:QUAU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-fruit",
+    "groups": {
+      "1": [
+        "QUAU-02"
+      ],
+      "3": [
+        "QUAU-19",
+        "QUAU-21",
+        "QUAU-22",
+        "QUAU-23"
+      ]
+    },
+    "keys": [
+      "QUAU-02",
+      "QUAU-19",
+      "QUAU-21",
+      "QUAU-22",
+      "QUAU-23"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/sonnet-1-1.jpg",
+        "keys": [
+          "QUAU-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/sonnet-3-1.jpg",
+        "keys": [
+          "QUAU-19",
+          "QUAU-21",
+          "QUAU-22",
+          "QUAU-23"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/sonnet-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/sonnet-3-1.jpg\nGroups:\n- group \"1\": QUAU-02\n- group \"3\": QUAU-19, QUAU-21, QUAU-22, QUAU-23"
+  },
+  {
+    "label": "rank:sonnet:high:FR:PLRA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "PLRA-leaf",
+    "groups": {
+      "1": [
+        "PLRA-37"
+      ],
+      "2": [
+        "PLRA-33",
+        "PLRA-43",
+        "PLRA-44"
+      ],
+      "3": [
+        "PLRA-11",
+        "PLRA-35",
+        "PLRA-38",
+        "PLRA-56",
+        "PLRA-59",
+        "PLRA-82"
+      ]
+    },
+    "keys": [
+      "PLRA-37",
+      "PLRA-33",
+      "PLRA-43",
+      "PLRA-44",
+      "PLRA-11",
+      "PLRA-35",
+      "PLRA-38",
+      "PLRA-56",
+      "PLRA-59",
+      "PLRA-82"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnetFR-1-1.jpg",
+        "keys": [
+          "PLRA-37"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnetFR-2-1.jpg",
+        "keys": [
+          "PLRA-33",
+          "PLRA-43",
+          "PLRA-44"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnetFR-3-1.jpg",
+        "keys": [
+          "PLRA-11",
+          "PLRA-35",
+          "PLRA-38",
+          "PLRA-56",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnetFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": PLRA-37\n- group \"2\": PLRA-33, PLRA-43, PLRA-44\n- group \"3\": PLRA-11, PLRA-35, PLRA-38, PLRA-56, PLRA-59, PLRA-82"
+  },
+  {
+    "label": "rank:sonnet:high:FR:PLRA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "PLRA-bark",
+    "groups": {
+      "1": [
+        "PLRA-05",
+        "PLRA-06",
+        "PLRA-61",
+        "PLRA-65",
+        "PLRA-70"
+      ],
+      "2": [
+        "PLRA-67",
+        "PLRA-68"
+      ],
+      "3": [
+        "PLRA-01",
+        "PLRA-15",
+        "PLRA-23",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-66",
+        "PLRA-71"
+      ]
+    },
+    "keys": [
+      "PLRA-05",
+      "PLRA-06",
+      "PLRA-61",
+      "PLRA-65",
+      "PLRA-70",
+      "PLRA-67",
+      "PLRA-68",
+      "PLRA-01",
+      "PLRA-15",
+      "PLRA-23",
+      "PLRA-25",
+      "PLRA-27",
+      "PLRA-31",
+      "PLRA-63",
+      "PLRA-66",
+      "PLRA-71"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnetFR-1-1.jpg",
+        "keys": [
+          "PLRA-05",
+          "PLRA-06",
+          "PLRA-61",
+          "PLRA-65",
+          "PLRA-70"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnetFR-2-1.jpg",
+        "keys": [
+          "PLRA-67",
+          "PLRA-68"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnetFR-3-1.jpg",
+        "keys": [
+          "PLRA-01",
+          "PLRA-15",
+          "PLRA-23",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-66",
+          "PLRA-71"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnetFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": PLRA-05, PLRA-06, PLRA-61, PLRA-65, PLRA-70\n- group \"2\": PLRA-67, PLRA-68\n- group \"3\": PLRA-01, PLRA-15, PLRA-23, PLRA-25, PLRA-27, PLRA-31, PLRA-63, PLRA-66, PLRA-71"
+  },
+  {
+    "label": "rank:sonnet:high:FR:QULA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QULA-leaf",
+    "groups": {
+      "1": [
+        "QULA-57",
+        "QULA-58"
+      ],
+      "2": [
+        "QULA-02",
+        "QULA-23",
+        "QULA-25",
+        "QULA-26",
+        "QULA-27",
+        "QULA-28",
+        "QULA-32",
+        "QULA-39",
+        "QULA-45",
+        "QULA-50",
+        "QULA-52",
+        "QULA-59",
+        "QULA-66"
+      ],
+      "3": [
+        "QULA-03",
+        "QULA-14",
+        "QULA-16",
+        "QULA-30",
+        "QULA-34",
+        "QULA-36",
+        "QULA-38",
+        "QULA-43",
+        "QULA-53",
+        "QULA-54",
+        "QULA-62"
+      ]
+    },
+    "keys": [
+      "QULA-57",
+      "QULA-58",
+      "QULA-02",
+      "QULA-23",
+      "QULA-25",
+      "QULA-26",
+      "QULA-27",
+      "QULA-28",
+      "QULA-32",
+      "QULA-39",
+      "QULA-45",
+      "QULA-50",
+      "QULA-52",
+      "QULA-59",
+      "QULA-66",
+      "QULA-03",
+      "QULA-14",
+      "QULA-16",
+      "QULA-30",
+      "QULA-34",
+      "QULA-36",
+      "QULA-38",
+      "QULA-43",
+      "QULA-53",
+      "QULA-54",
+      "QULA-62"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-1-1.jpg",
+        "keys": [
+          "QULA-57",
+          "QULA-58"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-2-1.jpg",
+        "keys": [
+          "QULA-02",
+          "QULA-23",
+          "QULA-25",
+          "QULA-26",
+          "QULA-27",
+          "QULA-28",
+          "QULA-32",
+          "QULA-39",
+          "QULA-45"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-2-2.jpg",
+        "keys": [
+          "QULA-50",
+          "QULA-52",
+          "QULA-59",
+          "QULA-66"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-3-1.jpg",
+        "keys": [
+          "QULA-03",
+          "QULA-14",
+          "QULA-16",
+          "QULA-30",
+          "QULA-34",
+          "QULA-36",
+          "QULA-38",
+          "QULA-43",
+          "QULA-53"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-3-2.jpg",
+        "keys": [
+          "QULA-54",
+          "QULA-62"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-2-2.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/sonnetFR-3-2.jpg\nGroups:\n- group \"1\": QULA-57, QULA-58\n- group \"2\": QULA-02, QULA-23, QULA-25, QULA-26, QULA-27, QULA-28, QULA-32, QULA-39, QULA-45, QULA-50, QULA-52, QULA-59, QULA-66\n- group \"3\": QULA-03, QULA-14, QULA-16, QULA-30, QULA-34, QULA-36, QULA-38, QULA-43, QULA-53, QULA-54, QULA-62"
+  },
+  {
+    "label": "rank:sonnet:high:FR:QULA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QULA-bark",
+    "groups": {
+      "1": [
+        "QULA-22",
+        "QULA-33",
+        "QULA-55"
+      ],
+      "3": [
+        "QULA-24",
+        "QULA-68"
+      ]
+    },
+    "keys": [
+      "QULA-22",
+      "QULA-33",
+      "QULA-55",
+      "QULA-24",
+      "QULA-68"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/sonnetFR-1-1.jpg",
+        "keys": [
+          "QULA-22",
+          "QULA-33",
+          "QULA-55"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/sonnetFR-3-1.jpg",
+        "keys": [
+          "QULA-24",
+          "QULA-68"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": QULA-22, QULA-33, QULA-55\n- group \"3\": QULA-24, QULA-68"
+  },
+  {
+    "label": "rank:sonnet:high:FR:QUAU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QUAU-leaf",
+    "groups": {
+      "1": [
+        "QUAU-01",
+        "QUAU-04",
+        "QUAU-07",
+        "QUAU-12",
+        "QUAU-15"
+      ],
+      "2": [
+        "QUAU-47"
+      ],
+      "3": [
+        "QUAU-17",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-49",
+        "QUAU-50",
+        "QUAU-51",
+        "QUAU-53"
+      ]
+    },
+    "keys": [
+      "QUAU-01",
+      "QUAU-04",
+      "QUAU-07",
+      "QUAU-12",
+      "QUAU-15",
+      "QUAU-47",
+      "QUAU-17",
+      "QUAU-24",
+      "QUAU-27",
+      "QUAU-28",
+      "QUAU-29",
+      "QUAU-30",
+      "QUAU-41",
+      "QUAU-45",
+      "QUAU-48",
+      "QUAU-49",
+      "QUAU-50",
+      "QUAU-51",
+      "QUAU-53"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnetFR-1-1.jpg",
+        "keys": [
+          "QUAU-01",
+          "QUAU-04",
+          "QUAU-07",
+          "QUAU-12",
+          "QUAU-15"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnetFR-2-1.jpg",
+        "keys": [
+          "QUAU-47"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnetFR-3-1.jpg",
+        "keys": [
+          "QUAU-17",
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnetFR-3-2.jpg",
+        "keys": [
+          "QUAU-49",
+          "QUAU-50",
+          "QUAU-51",
+          "QUAU-53"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, leaf.\nGroup line: the other species of the genus mostly show a leaf on a twig, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnetFR-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnetFR-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/sonnetFR-3-2.jpg\nGroups:\n- group \"1\": QUAU-01, QUAU-04, QUAU-07, QUAU-12, QUAU-15\n- group \"2\": QUAU-47\n- group \"3\": QUAU-17, QUAU-24, QUAU-27, QUAU-28, QUAU-29, QUAU-30, QUAU-41, QUAU-45, QUAU-48, QUAU-49, QUAU-50, QUAU-51, QUAU-53"
+  },
+  {
+    "label": "rank:sonnet:high:FR:QUAU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "sonnet",
+    "model_opt": "claude-sonnet-5-5",
+    "effort": "high",
+    "method": "FR",
+    "cell": "QUAU-fruit",
+    "groups": {
+      "1": [
+        "QUAU-02"
+      ],
+      "3": [
+        "QUAU-19",
+        "QUAU-23"
+      ]
+    },
+    "keys": [
+      "QUAU-02",
+      "QUAU-19",
+      "QUAU-23"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/sonnetFR-1-1.jpg",
+        "keys": [
+          "QUAU-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/sonnetFR-3-1.jpg",
+        "keys": [
+          "QUAU-19",
+          "QUAU-23"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/sonnetFR-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/sonnetFR-3-1.jpg\nGroups:\n- group \"1\": QUAU-02\n- group \"3\": QUAU-19, QUAU-23"
+  },
+  {
+    "label": "rank:haiku:high:PLRA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-leaf",
+    "groups": {
+      "3": [
+        "PLRA-33",
+        "PLRA-35",
+        "PLRA-37",
+        "PLRA-38",
+        "PLRA-43",
+        "PLRA-44",
+        "PLRA-57",
+        "PLRA-59",
+        "PLRA-82"
+      ]
+    },
+    "keys": [
+      "PLRA-33",
+      "PLRA-35",
+      "PLRA-37",
+      "PLRA-38",
+      "PLRA-43",
+      "PLRA-44",
+      "PLRA-57",
+      "PLRA-59",
+      "PLRA-82"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/haiku-3-1.jpg",
+        "keys": [
+          "PLRA-33",
+          "PLRA-35",
+          "PLRA-37",
+          "PLRA-38",
+          "PLRA-43",
+          "PLRA-44",
+          "PLRA-57",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, leaf.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-leaf/haiku-3-1.jpg\nGroups:\n- group \"3\": PLRA-33, PLRA-35, PLRA-37, PLRA-38, PLRA-43, PLRA-44, PLRA-57, PLRA-59, PLRA-82"
+  },
+  {
+    "label": "rank:haiku:high:PLRA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-bark",
+    "groups": {
+      "1": [
+        "PLRA-61",
+        "PLRA-70"
+      ],
+      "2": [
+        "PLRA-05",
+        "PLRA-15",
+        "PLRA-66",
+        "PLRA-67"
+      ],
+      "3": [
+        "PLRA-01",
+        "PLRA-06",
+        "PLRA-19",
+        "PLRA-23",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-65",
+        "PLRA-68",
+        "PLRA-71"
+      ]
+    },
+    "keys": [
+      "PLRA-61",
+      "PLRA-70",
+      "PLRA-05",
+      "PLRA-15",
+      "PLRA-66",
+      "PLRA-67",
+      "PLRA-01",
+      "PLRA-06",
+      "PLRA-19",
+      "PLRA-23",
+      "PLRA-25",
+      "PLRA-27",
+      "PLRA-31",
+      "PLRA-63",
+      "PLRA-65",
+      "PLRA-68",
+      "PLRA-71"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/haiku-1-1.jpg",
+        "keys": [
+          "PLRA-61",
+          "PLRA-70"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/haiku-2-1.jpg",
+        "keys": [
+          "PLRA-05",
+          "PLRA-15",
+          "PLRA-66",
+          "PLRA-67"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/haiku-3-1.jpg",
+        "keys": [
+          "PLRA-01",
+          "PLRA-06",
+          "PLRA-19",
+          "PLRA-23",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-65"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/haiku-3-2.jpg",
+        "keys": [
+          "PLRA-68",
+          "PLRA-71"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/haiku-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-bark/haiku-3-2.jpg\nGroups:\n- group \"1\": PLRA-61, PLRA-70\n- group \"2\": PLRA-05, PLRA-15, PLRA-66, PLRA-67\n- group \"3\": PLRA-01, PLRA-06, PLRA-19, PLRA-23, PLRA-25, PLRA-27, PLRA-31, PLRA-63, PLRA-65, PLRA-68, PLRA-71"
+  },
+  {
+    "label": "rank:haiku:high:PLRA-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "PLRA-fruit",
+    "groups": {
+      "1": [
+        "PLRA-11",
+        "PLRA-13",
+        "PLRA-54",
+        "PLRA-62",
+        "PLRA-75"
+      ],
+      "2": [
+        "PLRA-52",
+        "PLRA-58",
+        "PLRA-74",
+        "PLRA-76",
+        "PLRA-79"
+      ],
+      "3": [
+        "PLRA-08",
+        "PLRA-56"
+      ]
+    },
+    "keys": [
+      "PLRA-11",
+      "PLRA-13",
+      "PLRA-54",
+      "PLRA-62",
+      "PLRA-75",
+      "PLRA-52",
+      "PLRA-58",
+      "PLRA-74",
+      "PLRA-76",
+      "PLRA-79",
+      "PLRA-08",
+      "PLRA-56"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/haiku-1-1.jpg",
+        "keys": [
+          "PLRA-11",
+          "PLRA-13",
+          "PLRA-54",
+          "PLRA-62",
+          "PLRA-75"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/haiku-2-1.jpg",
+        "keys": [
+          "PLRA-52",
+          "PLRA-58",
+          "PLRA-74",
+          "PLRA-76",
+          "PLRA-79"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/haiku-3-1.jpg",
+        "keys": [
+          "PLRA-08",
+          "PLRA-56"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Platanus racemosa, fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/PLRA-fruit/haiku-3-1.jpg\nGroups:\n- group \"1\": PLRA-11, PLRA-13, PLRA-54, PLRA-62, PLRA-75\n- group \"2\": PLRA-52, PLRA-58, PLRA-74, PLRA-76, PLRA-79\n- group \"3\": PLRA-08, PLRA-56"
+  },
+  {
+    "label": "rank:haiku:high:QULA-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-leaf",
+    "groups": {
+      "1": [
+        "QULA-58"
+      ],
+      "2": [
+        "QULA-26",
+        "QULA-45",
+        "QULA-52",
+        "QULA-59"
+      ],
+      "3": [
+        "QULA-02",
+        "QULA-03",
+        "QULA-14",
+        "QULA-16",
+        "QULA-18",
+        "QULA-20",
+        "QULA-23",
+        "QULA-25",
+        "QULA-27",
+        "QULA-28",
+        "QULA-30",
+        "QULA-32",
+        "QULA-34",
+        "QULA-38",
+        "QULA-39",
+        "QULA-43",
+        "QULA-50",
+        "QULA-53",
+        "QULA-54",
+        "QULA-57",
+        "QULA-62",
+        "QULA-66"
+      ]
+    },
+    "keys": [
+      "QULA-58",
+      "QULA-26",
+      "QULA-45",
+      "QULA-52",
+      "QULA-59",
+      "QULA-02",
+      "QULA-03",
+      "QULA-14",
+      "QULA-16",
+      "QULA-18",
+      "QULA-20",
+      "QULA-23",
+      "QULA-25",
+      "QULA-27",
+      "QULA-28",
+      "QULA-30",
+      "QULA-32",
+      "QULA-34",
+      "QULA-38",
+      "QULA-39",
+      "QULA-43",
+      "QULA-50",
+      "QULA-53",
+      "QULA-54",
+      "QULA-57",
+      "QULA-62",
+      "QULA-66"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-1-1.jpg",
+        "keys": [
+          "QULA-58"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-2-1.jpg",
+        "keys": [
+          "QULA-26",
+          "QULA-45",
+          "QULA-52",
+          "QULA-59"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-3-1.jpg",
+        "keys": [
+          "QULA-02",
+          "QULA-03",
+          "QULA-14",
+          "QULA-16",
+          "QULA-18",
+          "QULA-20",
+          "QULA-23",
+          "QULA-25",
+          "QULA-27"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-3-2.jpg",
+        "keys": [
+          "QULA-28",
+          "QULA-30",
+          "QULA-32",
+          "QULA-34",
+          "QULA-38",
+          "QULA-39",
+          "QULA-43",
+          "QULA-50",
+          "QULA-53"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-3-3.jpg",
+        "keys": [
+          "QULA-54",
+          "QULA-57",
+          "QULA-62",
+          "QULA-66"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-3-2.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-leaf/haiku-3-3.jpg\nGroups:\n- group \"1\": QULA-58\n- group \"2\": QULA-26, QULA-45, QULA-52, QULA-59\n- group \"3\": QULA-02, QULA-03, QULA-14, QULA-16, QULA-18, QULA-20, QULA-23, QULA-25, QULA-27, QULA-28, QULA-30, QULA-32, QULA-34, QULA-38, QULA-39, QULA-43, QULA-50, QULA-53, QULA-54, QULA-57, QULA-62, QULA-66"
+  },
+  {
+    "label": "rank:haiku:high:QULA-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-bark",
+    "groups": {
+      "1": [
+        "QULA-22",
+        "QULA-33",
+        "QULA-55",
+        "QULA-68"
+      ],
+      "3": [
+        "QULA-24"
+      ]
+    },
+    "keys": [
+      "QULA-22",
+      "QULA-33",
+      "QULA-55",
+      "QULA-68",
+      "QULA-24"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/haiku-1-1.jpg",
+        "keys": [
+          "QULA-22",
+          "QULA-33",
+          "QULA-55",
+          "QULA-68"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/haiku-3-1.jpg",
+        "keys": [
+          "QULA-24"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-bark/haiku-3-1.jpg\nGroups:\n- group \"1\": QULA-22, QULA-33, QULA-55, QULA-68\n- group \"3\": QULA-24"
+  },
+  {
+    "label": "rank:haiku:high:QULA-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QULA-fruit",
+    "groups": {
+      "1": [
+        "QULA-37",
+        "QULA-61",
+        "QULA-65",
+        "QULA-69"
+      ],
+      "2": [
+        "QULA-35",
+        "QULA-47",
+        "QULA-63"
+      ],
+      "3": [
+        "QULA-36",
+        "QULA-44",
+        "QULA-64",
+        "QULA-70"
+      ]
+    },
+    "keys": [
+      "QULA-37",
+      "QULA-61",
+      "QULA-65",
+      "QULA-69",
+      "QULA-35",
+      "QULA-47",
+      "QULA-63",
+      "QULA-36",
+      "QULA-44",
+      "QULA-64",
+      "QULA-70"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/haiku-1-1.jpg",
+        "keys": [
+          "QULA-37",
+          "QULA-61",
+          "QULA-65",
+          "QULA-69"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/haiku-2-1.jpg",
+        "keys": [
+          "QULA-35",
+          "QULA-47",
+          "QULA-63"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/haiku-3-1.jpg",
+        "keys": [
+          "QULA-36",
+          "QULA-44",
+          "QULA-64",
+          "QULA-70"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus laceyi, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QULA-fruit/haiku-3-1.jpg\nGroups:\n- group \"1\": QULA-37, QULA-61, QULA-65, QULA-69\n- group \"2\": QULA-35, QULA-47, QULA-63\n- group \"3\": QULA-36, QULA-44, QULA-64, QULA-70"
+  },
+  {
+    "label": "rank:haiku:high:QUAU-leaf",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-leaf",
+    "groups": {
+      "1": [
+        "QUAU-01"
+      ],
+      "2": [
+        "QUAU-04",
+        "QUAU-05",
+        "QUAU-07",
+        "QUAU-12",
+        "QUAU-15",
+        "QUAU-17",
+        "QUAU-47",
+        "QUAU-49",
+        "QUAU-53"
+      ],
+      "3": [
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-50",
+        "QUAU-51"
+      ]
+    },
+    "keys": [
+      "QUAU-01",
+      "QUAU-04",
+      "QUAU-05",
+      "QUAU-07",
+      "QUAU-12",
+      "QUAU-15",
+      "QUAU-17",
+      "QUAU-47",
+      "QUAU-49",
+      "QUAU-53",
+      "QUAU-24",
+      "QUAU-27",
+      "QUAU-28",
+      "QUAU-29",
+      "QUAU-30",
+      "QUAU-41",
+      "QUAU-45",
+      "QUAU-48",
+      "QUAU-50",
+      "QUAU-51"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/haiku-1-1.jpg",
+        "keys": [
+          "QUAU-01"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/haiku-2-1.jpg",
+        "keys": [
+          "QUAU-04",
+          "QUAU-05",
+          "QUAU-07",
+          "QUAU-12",
+          "QUAU-15",
+          "QUAU-17",
+          "QUAU-47",
+          "QUAU-49",
+          "QUAU-53"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/haiku-3-1.jpg",
+        "keys": [
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48",
+          "QUAU-50"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/haiku-3-2.jpg",
+        "keys": [
+          "QUAU-51"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, leaf.\nGroup line: the other species of the genus mostly show one leaf, upper side.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/haiku-3-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-leaf/haiku-3-2.jpg\nGroups:\n- group \"1\": QUAU-01\n- group \"2\": QUAU-04, QUAU-05, QUAU-07, QUAU-12, QUAU-15, QUAU-17, QUAU-47, QUAU-49, QUAU-53\n- group \"3\": QUAU-24, QUAU-27, QUAU-28, QUAU-29, QUAU-30, QUAU-41, QUAU-45, QUAU-48, QUAU-50, QUAU-51"
+  },
+  {
+    "label": "rank:haiku:high:QUAU-bark",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-bark",
+    "groups": {
+      "1": [
+        "QUAU-10",
+        "QUAU-13",
+        "QUAU-32",
+        "QUAU-39",
+        "QUAU-46",
+        "QUAU-52"
+      ],
+      "2": [
+        "QUAU-11"
+      ],
+      "3": [
+        "QUAU-33",
+        "QUAU-55",
+        "QUAU-56"
+      ]
+    },
+    "keys": [
+      "QUAU-10",
+      "QUAU-13",
+      "QUAU-32",
+      "QUAU-39",
+      "QUAU-46",
+      "QUAU-52",
+      "QUAU-11",
+      "QUAU-33",
+      "QUAU-55",
+      "QUAU-56"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/haiku-1-1.jpg",
+        "keys": [
+          "QUAU-10",
+          "QUAU-13",
+          "QUAU-32",
+          "QUAU-39",
+          "QUAU-46",
+          "QUAU-52"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/haiku-2-1.jpg",
+        "keys": [
+          "QUAU-11"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/haiku-3-1.jpg",
+        "keys": [
+          "QUAU-33",
+          "QUAU-55",
+          "QUAU-56"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, bark.\nGroup line: the other species of the genus mostly show close bark.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/haiku-2-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-bark/haiku-3-1.jpg\nGroups:\n- group \"1\": QUAU-10, QUAU-13, QUAU-32, QUAU-39, QUAU-46, QUAU-52\n- group \"2\": QUAU-11\n- group \"3\": QUAU-33, QUAU-55, QUAU-56"
+  },
+  {
+    "label": "rank:haiku:high:QUAU-fruit",
+    "kind": "rank",
+    "phase": "rank",
+    "set": "heldout",
+    "model": "haiku",
+    "model_opt": "claude-haiku-5-5",
+    "effort": "high",
+    "method": "R",
+    "cell": "QUAU-fruit",
+    "groups": {
+      "1": [
+        "QUAU-02"
+      ],
+      "3": [
+        "QUAU-19",
+        "QUAU-23"
+      ]
+    },
+    "keys": [
+      "QUAU-02",
+      "QUAU-19",
+      "QUAU-23"
+    ],
+    "sheets": [
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/haiku-1-1.jpg",
+        "keys": [
+          "QUAU-02"
+        ]
+      },
+      {
+        "file": "/home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/haiku-3-1.jpg",
+        "keys": [
+          "QUAU-19",
+          "QUAU-23"
+        ]
+      }
+    ],
+    "schema": "RANK",
+    "prompt": "Read the brief at /home/user/Dendro/evals/2026-10-14-intake-eval/briefs/rank.md and follow it.\nCell: Quercus austrina, fruit.\nGroup line: the other species of the genus mostly show picked fruit.\nContact sheets:\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/haiku-1-1.jpg\n- /home/user/Dendro/evals/2026-10-14-intake-eval/images/sheets/heldout/QUAU-fruit/haiku-3-1.jpg\nGroups:\n- group \"1\": QUAU-02\n- group \"3\": QUAU-19, QUAU-23"
+  }
+]

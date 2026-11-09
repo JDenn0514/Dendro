@@ -1,0 +1,182 @@
+{
+  "judge:opus:high:V1:n20:PLRA:b01": {
+    "start": "2026-11-04T14:57:12.838Z",
+    "end": "2026-11-04T14:58:21.219Z",
+    "seconds": 68.381
+  },
+  "judge:opus:high:V1:n20:PLRA:b02": {
+    "start": "2026-11-04T14:57:14.763Z",
+    "end": "2026-11-04T14:58:23.620Z",
+    "seconds": 68.857
+  },
+  "judge:opus:high:V1:n20:PLRA:b03": {
+    "start": "2026-11-04T14:58:22.107Z",
+    "end": "2026-11-04T14:59:37.108Z",
+    "seconds": 75.001
+  },
+  "judge:opus:high:V1:n20:PLRA:b04": {
+    "start": "2026-11-04T14:58:24.342Z",
+    "end": "2026-11-04T14:59:47.117Z",
+    "seconds": 82.775
+  },
+  "judge:opus:high:V1:n20:PLRA:b05": {
+    "start": "2026-11-04T14:59:37.928Z",
+    "end": "2026-11-04T14:59:55.168Z",
+    "seconds": 17.24
+  },
+  "judge:opus:high:V1:n20:QULA:b01": {
+    "start": "2026-11-04T14:59:47.855Z",
+    "end": "2026-11-04T15:01:07.789Z",
+    "seconds": 79.934
+  },
+  "judge:opus:high:V1:n20:QULA:b02": {
+    "start": "2026-11-04T14:59:55.865Z",
+    "end": "2026-11-04T15:01:37.992Z",
+    "seconds": 102.127
+  },
+  "judge:opus:high:V1:n20:QULA:b03": {
+    "start": "2026-11-04T15:01:08.570Z",
+    "end": "2026-11-04T15:02:42.411Z",
+    "seconds": 93.841
+  },
+  "judge:opus:high:V1:n20:QULA:b04": {
+    "start": "2026-11-04T15:01:39.011Z",
+    "end": "2026-11-04T15:02:23.847Z",
+    "seconds": 44.836
+  },
+  "judge:opus:high:V1:n20:QUAU:b01": {
+    "start": "2026-11-04T15:02:24.635Z",
+    "end": "2026-11-04T15:03:50.609Z",
+    "seconds": 85.974
+  },
+  "judge:opus:high:V1:n20:QUAU:b02": {
+    "start": "2026-11-04T15:02:43.647Z",
+    "end": "2026-11-04T15:04:11.954Z",
+    "seconds": 88.307
+  },
+  "judge:opus:high:V1:n20:QUAU:b03": {
+    "start": "2026-11-04T15:03:51.724Z",
+    "end": "2026-11-04T15:05:09.335Z",
+    "seconds": 77.611
+  },
+  "judge:sonnet:high:V1:n20:PLRA:b01": {
+    "start": "2026-11-04T15:04:12.651Z",
+    "end": "2026-11-04T15:05:19.732Z",
+    "seconds": 67.081
+  },
+  "judge:sonnet:high:V1:n20:PLRA:b02": {
+    "start": "2026-11-04T15:05:10.002Z",
+    "end": "2026-11-04T15:06:49.747Z",
+    "seconds": 99.745
+  },
+  "judge:sonnet:high:V1:n20:PLRA:b03": {
+    "start": "2026-11-04T15:05:20.477Z",
+    "end": "2026-11-04T15:07:30.401Z",
+    "seconds": 129.924
+  },
+  "judge:sonnet:high:V1:n20:PLRA:b04": {
+    "start": "2026-11-04T15:06:50.412Z",
+    "end": "2026-11-04T15:08:11.295Z",
+    "seconds": 80.883
+  },
+  "judge:sonnet:high:V1:n20:PLRA:b05": {
+    "start": "2026-11-04T15:07:32.143Z",
+    "end": "2026-11-04T15:07:49.188Z",
+    "seconds": 17.045
+  },
+  "judge:sonnet:high:V1:n20:QULA:b01": {
+    "start": "2026-11-04T15:07:50.753Z",
+    "end": "2026-11-04T15:09:09.732Z",
+    "seconds": 78.979
+  },
+  "judge:sonnet:high:V1:n20:QULA:b02": {
+    "start": "2026-11-04T15:08:12.120Z",
+    "end": "2026-11-04T15:09:48.551Z",
+    "seconds": 96.431
+  },
+  "judge:sonnet:high:V1:n20:QULA:b03": {
+    "start": "2026-11-04T15:09:10.488Z",
+    "end": "2026-11-04T15:10:54.640Z",
+    "seconds": 104.152
+  },
+  "judge:sonnet:high:V1:n20:QULA:b04": {
+    "start": "2026-11-04T15:09:49.270Z",
+    "end": "2026-11-04T15:28:42.087Z",
+    "seconds": 1132.817
+  },
+  "judge:sonnet:high:V1:n20:QUAU:b01": {
+    "start": "2026-11-04T15:10:31.225Z",
+    "end": "2026-11-04T15:11:55.253Z",
+    "seconds": 84.028
+  },
+  "judge:sonnet:high:V1:n20:QUAU:b02": {
+    "start": "2026-11-04T15:10:55.382Z",
+    "end": "2026-11-04T15:12:15.420Z",
+    "seconds": 80.038
+  },
+  "judge:sonnet:high:V1:n20:QUAU:b03": {
+    "start": "2026-11-04T15:11:56.040Z",
+    "end": "2026-11-04T15:13:20.094Z",
+    "seconds": 84.054
+  },
+  "judge:haiku:high:V1:n20:PLRA:b01": {
+    "start": "2026-11-04T15:12:16.146Z",
+    "end": "2026-11-04T15:14:55.892Z",
+    "seconds": 159.746
+  },
+  "judge:haiku:high:V1:n20:PLRA:b02": {
+    "start": "2026-11-04T15:13:20.910Z",
+    "end": "2026-11-04T15:15:36.048Z",
+    "seconds": 135.138
+  },
+  "judge:haiku:high:V1:n20:PLRA:b03": {
+    "start": "2026-11-04T15:14:56.670Z",
+    "end": "2026-11-04T15:16:55.885Z",
+    "seconds": 119.215
+  },
+  "judge:haiku:high:V1:n20:PLRA:b04": {
+    "start": "2026-11-04T15:15:36.860Z",
+    "end": "2026-11-04T15:18:05.967Z",
+    "seconds": 149.107
+  },
+  "judge:haiku:high:V1:n20:PLRA:b05": {
+    "start": "2026-11-04T15:16:56.607Z",
+    "end": "2026-11-04T15:17:33.826Z",
+    "seconds": 37.219
+  },
+  "judge:haiku:high:V1:n20:QULA:b01": {
+    "start": "2026-11-04T15:17:34.527Z",
+    "end": "2026-11-04T15:19:35.201Z",
+    "seconds": 120.674
+  },
+  "judge:haiku:high:V1:n20:QULA:b02": {
+    "start": "2026-11-04T15:18:06.751Z",
+    "end": "2026-11-04T15:20:51.436Z",
+    "seconds": 164.685
+  },
+  "judge:haiku:high:V1:n20:QULA:b03": {
+    "start": "2026-11-04T15:19:35.986Z",
+    "end": "2026-11-04T15:22:38.063Z",
+    "seconds": 182.077
+  },
+  "judge:haiku:high:V1:n20:QULA:b04": {
+    "start": "2026-11-04T15:20:52.694Z",
+    "end": "2026-11-04T15:22:21.070Z",
+    "seconds": 88.376
+  },
+  "judge:haiku:high:V1:n20:QUAU:b01": {
+    "start": "2026-11-04T15:22:22.016Z",
+    "end": "2026-11-04T15:25:12.590Z",
+    "seconds": 170.574
+  },
+  "judge:haiku:high:V1:n20:QUAU:b02": {
+    "start": "2026-11-04T15:22:39.051Z",
+    "end": "2026-11-04T15:24:37.912Z",
+    "seconds": 118.861
+  },
+  "judge:haiku:high:V1:n20:QUAU:b03": {
+    "start": "2026-11-04T15:24:38.690Z",
+    "end": "2026-11-04T15:27:22.769Z",
+    "seconds": 164.079
+  }
+}

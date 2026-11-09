@@ -1,0 +1,3062 @@
+{
+  "runIds": [
+    "wf_93b3951d-eb0"
+  ],
+  "jobs": [
+    {
+      "label": "rank:opus:high:PLRA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLRA-37"
+        ],
+        "2": [
+          "PLRA-33",
+          "PLRA-44"
+        ],
+        "3": [
+          "PLRA-11",
+          "PLRA-35",
+          "PLRA-43",
+          "PLRA-49",
+          "PLRA-57",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      },
+      "keys": [
+        "PLRA-37",
+        "PLRA-33",
+        "PLRA-44",
+        "PLRA-11",
+        "PLRA-35",
+        "PLRA-43",
+        "PLRA-49",
+        "PLRA-57",
+        "PLRA-59",
+        "PLRA-82"
+      ],
+      "agentIds": [
+        "a7ce5b1feebea219c"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-37"
+          ],
+          "2": [
+            "PLRA-33",
+            "PLRA-44"
+          ],
+          "3": [
+            "PLRA-35",
+            "PLRA-43",
+            "PLRA-49",
+            "PLRA-57",
+            "PLRA-82",
+            "PLRA-11",
+            "PLRA-59"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 2: PLRA-33 shows green mature leaves with clear whole outlines. PLRA-44 is green too, but the leaves are crowded and pale, and the central leaf may be showing its underside. Group 3: PLRA-35 and PLRA-43 show green mature leaves with a whole leaf outline in frame. PLRA-49 is green but is a distant crown view of young-looking leaves. PLRA-57 is mostly green but distant and partly browning. PLRA-82 is backlit and yellow-green, with one leaf mostly whole. PLRA-11 shows yellowish, spotted young leaves and is dominated by fruit heads. PLRA-59 shows spotted, browning autumn leaves."
+      }
+    },
+    {
+      "label": "rank:opus:high:PLRA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLRA-05",
+          "PLRA-06",
+          "PLRA-61",
+          "PLRA-65",
+          "PLRA-70"
+        ],
+        "2": [
+          "PLRA-23",
+          "PLRA-67",
+          "PLRA-68"
+        ],
+        "3": [
+          "PLRA-01",
+          "PLRA-15",
+          "PLRA-19",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-66",
+          "PLRA-71",
+          "PLRA-72"
+        ]
+      },
+      "keys": [
+        "PLRA-05",
+        "PLRA-06",
+        "PLRA-61",
+        "PLRA-65",
+        "PLRA-70",
+        "PLRA-23",
+        "PLRA-67",
+        "PLRA-68",
+        "PLRA-01",
+        "PLRA-15",
+        "PLRA-19",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-66",
+        "PLRA-71",
+        "PLRA-72"
+      ],
+      "agentIds": [
+        "a73354b7a3dbe75d0"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-70",
+            "PLRA-61",
+            "PLRA-65",
+            "PLRA-05",
+            "PLRA-06"
+          ],
+          "2": [
+            "PLRA-67",
+            "PLRA-68",
+            "PLRA-23"
+          ],
+          "3": [
+            "PLRA-66",
+            "PLRA-71",
+            "PLRA-63",
+            "PLRA-15",
+            "PLRA-01",
+            "PLRA-27",
+            "PLRA-25",
+            "PLRA-31",
+            "PLRA-19",
+            "PLRA-72"
+          ]
+        },
+        "unread": [],
+        "note": "All four sheets opened. Group 1: PLRA-70 shows the classic camouflage patchwork across a wide trunk area; 61 and 65 show mottled mature bark (65 has a burl); 05 is partly hidden by foliage; 06 is darker rough bark with weak patterning. Group 2: 67 and 68 are frame-filling close-ups of the exfoliating patchwork (67 shows more pattern repeat); 23 is a whole tree with the bark detail small and a road sign in front. Group 3: 66 fills the frame with mature mottled bark; 71 and 63 show trunk bark at moderate distance; 15, 01, 27, 25 are trunk/whole-tree views where the bark is smaller or partly obscured by burn scars; 31, 19, 72 are distant whole-tree or root views with little readable bark."
+      }
+    },
+    {
+      "label": "rank:opus:high:PLRA-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLRA-52",
+          "PLRA-54",
+          "PLRA-58",
+          "PLRA-62"
+        ],
+        "2": [
+          "PLRA-74",
+          "PLRA-76",
+          "PLRA-79"
+        ],
+        "3": [
+          "PLRA-08",
+          "PLRA-75"
+        ]
+      },
+      "keys": [
+        "PLRA-52",
+        "PLRA-54",
+        "PLRA-58",
+        "PLRA-62",
+        "PLRA-74",
+        "PLRA-76",
+        "PLRA-79",
+        "PLRA-08",
+        "PLRA-75"
+      ],
+      "agentIds": [
+        "a6f6dc72d69df8206"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-54",
+            "PLRA-62",
+            "PLRA-52",
+            "PLRA-58"
+          ],
+          "2": [
+            "PLRA-74",
+            "PLRA-76",
+            "PLRA-79"
+          ],
+          "3": [
+            "PLRA-75",
+            "PLRA-08"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. No scale object appears in any photo. Group 1: PLRA-54 shows a close, whole chain of ripe brown fruit heads. PLRA-62 shows large, dry, ripe heads that are close and whole, but they look like they hang from a string. PLRA-52 is a whole chain, but the heads are still greenish brown. PLRA-58 has many ripe chains, but the heads are small and far away. Group 2: PLRA-74 is a clear, whole chain of ripening golden heads. PLRA-76 has brown ripe heads, but the frame is cluttered and partly shaded. PLRA-79 shows green, unripe heads. Group 3: PLRA-75 is a close, whole chain, though still green yellow. PLRA-08 is a distant canopy shot in which the dark heads are tiny."
+      }
+    },
+    {
+      "label": "rank:opus:high:QULA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-leaf",
+      "method": "R",
+      "groups": {
+        "2": [
+          "QULA-02",
+          "QULA-26",
+          "QULA-45",
+          "QULA-50",
+          "QULA-51",
+          "QULA-57",
+          "QULA-58",
+          "QULA-59",
+          "QULA-66",
+          "QULA-67"
+        ],
+        "3": [
+          "QULA-03",
+          "QULA-04",
+          "QULA-05",
+          "QULA-13",
+          "QULA-14",
+          "QULA-15",
+          "QULA-16",
+          "QULA-21",
+          "QULA-23",
+          "QULA-25",
+          "QULA-27",
+          "QULA-28",
+          "QULA-30",
+          "QULA-32",
+          "QULA-34",
+          "QULA-36",
+          "QULA-38",
+          "QULA-39",
+          "QULA-41",
+          "QULA-42",
+          "QULA-43",
+          "QULA-52",
+          "QULA-53",
+          "QULA-54",
+          "QULA-62"
+        ]
+      },
+      "keys": [
+        "QULA-02",
+        "QULA-26",
+        "QULA-45",
+        "QULA-50",
+        "QULA-51",
+        "QULA-57",
+        "QULA-58",
+        "QULA-59",
+        "QULA-66",
+        "QULA-67",
+        "QULA-03",
+        "QULA-04",
+        "QULA-05",
+        "QULA-13",
+        "QULA-14",
+        "QULA-15",
+        "QULA-16",
+        "QULA-21",
+        "QULA-23",
+        "QULA-25",
+        "QULA-27",
+        "QULA-28",
+        "QULA-30",
+        "QULA-32",
+        "QULA-34",
+        "QULA-36",
+        "QULA-38",
+        "QULA-39",
+        "QULA-41",
+        "QULA-42",
+        "QULA-43",
+        "QULA-52",
+        "QULA-53",
+        "QULA-54",
+        "QULA-62"
+      ],
+      "agentIds": [
+        "a69e65784d895feba"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "2": [
+            "QULA-59",
+            "QULA-58",
+            "QULA-45",
+            "QULA-26",
+            "QULA-66",
+            "QULA-50",
+            "QULA-57",
+            "QULA-02",
+            "QULA-51",
+            "QULA-67"
+          ],
+          "3": [
+            "QULA-52",
+            "QULA-36",
+            "QULA-25",
+            "QULA-23",
+            "QULA-62",
+            "QULA-27",
+            "QULA-34",
+            "QULA-43",
+            "QULA-30",
+            "QULA-15",
+            "QULA-32",
+            "QULA-05",
+            "QULA-28",
+            "QULA-53",
+            "QULA-03",
+            "QULA-13",
+            "QULA-42",
+            "QULA-41",
+            "QULA-39",
+            "QULA-54",
+            "QULA-21",
+            "QULA-04",
+            "QULA-38",
+            "QULA-14",
+            "QULA-16"
+          ]
+        },
+        "unread": [],
+        "note": "All 5 sheets read. Group 2: QULA-59 and QULA-58 rank first because each shows one whole mature green leaf held up close, the single-leaf view the group line names. Next come the clear sprays with whole leaf outlines (45, 26, 66, 50). Last are the sprays where acorns or catkins take attention from the leaves (51, 67). Group 3: QULA-52 and QULA-36 rank first because they show whole lobed mature leaf outlines up close. Next come close branch views (25, 23, 62, 27, 34). Distant canopy shots (21, 04) rank low. The spring catkin shots (13, 15, 41, 42, 39) rank in the middle to low, since their leaves may not be fully mature. QULA-54 is backlit and yellowish. The autumn-coloured QULA-38 and the young red flushes QULA-14 and QULA-16 rank last because they do not show the usual look."
+      }
+    },
+    {
+      "label": "rank:opus:high:QULA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QULA-22",
+          "QULA-55",
+          "QULA-68"
+        ],
+        "3": [
+          "QULA-24",
+          "QULA-33",
+          "QULA-48",
+          "QULA-60"
+        ]
+      },
+      "keys": [
+        "QULA-22",
+        "QULA-55",
+        "QULA-68",
+        "QULA-24",
+        "QULA-33",
+        "QULA-48",
+        "QULA-60"
+      ],
+      "agentIds": [
+        "abb0b7ecef78ec8f8"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-55",
+            "QULA-22",
+            "QULA-68"
+          ],
+          "3": [
+            "QULA-24",
+            "QULA-33",
+            "QULA-48",
+            "QULA-60"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: QULA-55 is a close view of mature blocky plated bark with the pattern repeat clear. QULA-22 shows the same mature pattern on the whole trunk from farther back. QULA-68 is a more distant, leaning trunk where the texture is less legible. Group 3: QULA-24 is a close, wide area of mature furrowed bark. QULA-33 is close, but the area is dominated by an irregular wound or burl, so it is less typical. QULA-48 shows branch bark at a distance among limbs. QULA-60 is a small branch mostly hidden by foliage."
+      }
+    },
+    {
+      "label": "rank:opus:high:QULA-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QULA-37",
+          "QULA-61",
+          "QULA-65",
+          "QULA-69"
+        ],
+        "2": [
+          "QULA-35",
+          "QULA-47",
+          "QULA-63"
+        ],
+        "3": [
+          "QULA-44",
+          "QULA-64",
+          "QULA-70"
+        ]
+      },
+      "keys": [
+        "QULA-37",
+        "QULA-61",
+        "QULA-65",
+        "QULA-69",
+        "QULA-35",
+        "QULA-47",
+        "QULA-63",
+        "QULA-44",
+        "QULA-64",
+        "QULA-70"
+      ],
+      "agentIds": [
+        "a2005fb1299a5e92e"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-61",
+            "QULA-65",
+            "QULA-69",
+            "QULA-37"
+          ],
+          "2": [
+            "QULA-47",
+            "QULA-35",
+            "QULA-63"
+          ],
+          "3": [
+            "QULA-70",
+            "QULA-64",
+            "QULA-44"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: QULA-61 is first because a hand holds a whole acorn on the twig for scale. QULA-65 shows one whole acorn on the twig. QULA-69 shows several whole acorns along a twig. QULA-37 is a tight cluster close up, with some acorns cut off or covered. Group 2: QULA-47 is first because it is the only photo with a ripe brown acorn, and the acorn is on the twig. QULA-35 shows whole green acorns on a twig. QULA-63 shows green acorns among the leaves, and the twig is less clear. Group 3: QULA-70 shows whole green acorns on twigs at a usable distance. QULA-64 is a wide shot of the shrub, so the acorns are small. QULA-44 shows mostly the cup seen from the end, not the whole fruit."
+      }
+    },
+    {
+      "label": "rank:opus:high:QUAU-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-01",
+          "QUAU-12",
+          "QUAU-14"
+        ],
+        "2": [
+          "QUAU-04",
+          "QUAU-07",
+          "QUAU-15",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-47",
+          "QUAU-51"
+        ],
+        "3": [
+          "QUAU-17",
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48",
+          "QUAU-49",
+          "QUAU-50",
+          "QUAU-53"
+        ]
+      },
+      "keys": [
+        "QUAU-01",
+        "QUAU-12",
+        "QUAU-14",
+        "QUAU-04",
+        "QUAU-07",
+        "QUAU-15",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-47",
+        "QUAU-51",
+        "QUAU-17",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-49",
+        "QUAU-50",
+        "QUAU-53"
+      ],
+      "agentIds": [
+        "a95fb9f9e163ab072"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-12",
+            "QUAU-14",
+            "QUAU-01"
+          ],
+          "2": [
+            "QUAU-15",
+            "QUAU-04",
+            "QUAU-47",
+            "QUAU-07",
+            "QUAU-51",
+            "QUAU-28",
+            "QUAU-29"
+          ],
+          "3": [
+            "QUAU-41",
+            "QUAU-27",
+            "QUAU-48",
+            "QUAU-49",
+            "QUAU-45",
+            "QUAU-30",
+            "QUAU-17",
+            "QUAU-50",
+            "QUAU-24",
+            "QUAU-53"
+          ]
+        },
+        "unread": [],
+        "note": "All four sheets opened. Group 1: QUAU-12 and QUAU-14 show whole green leaves, both upper and lower surfaces, on a plain background. QUAU-12 comes first because its leaves are slightly cleaner. QUAU-01 shows one leaf, close to whole. Group 2: QUAU-15 and QUAU-04 show whole leaf outlines. QUAU-47 is a leaf in a hand and almost whole. QUAU-07 and QUAU-51 have their edges clipped. QUAU-28 and QUAU-29 are branch views where the leaves overlap. Group 3: QUAU-41 shows a whorl of whole leaves, and QUAU-27 shows whole leaves in dark light. QUAU-48, QUAU-49 and QUAU-45 are branch views where the leaves are small. QUAU-30 and QUAU-17 are partial close-ups. QUAU-17 shows the underside. QUAU-50 shows a straggly shoot, and QUAU-24 is a canopy silhouette. QUAU-53 shows only the leaf bases."
+      }
+    },
+    {
+      "label": "rank:opus:high:QUAU-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-10",
+          "QUAU-13",
+          "QUAU-32",
+          "QUAU-33",
+          "QUAU-39",
+          "QUAU-46",
+          "QUAU-52"
+        ],
+        "2": [
+          "QUAU-11"
+        ],
+        "3": [
+          "QUAU-55",
+          "QUAU-56"
+        ]
+      },
+      "keys": [
+        "QUAU-10",
+        "QUAU-13",
+        "QUAU-32",
+        "QUAU-33",
+        "QUAU-39",
+        "QUAU-46",
+        "QUAU-52",
+        "QUAU-11",
+        "QUAU-55",
+        "QUAU-56"
+      ],
+      "agentIds": [
+        "a517f2c5007c828d6"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-10",
+            "QUAU-13",
+            "QUAU-52",
+            "QUAU-33",
+            "QUAU-39",
+            "QUAU-46",
+            "QUAU-32"
+          ],
+          "2": [
+            "QUAU-11"
+          ],
+          "3": [
+            "QUAU-55",
+            "QUAU-56"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: QUAU-10 and QUAU-13 come first. They show mature, blocky, furrowed bark in a close view, wide enough to show the pattern repeat, which matches the close-bark group line. QUAU-52 and QUAU-33 come next: they are close views of mature bark, but moss on 52 and lichen on 33 partly hide the bark. QUAU-39 shows old, deeply furrowed bark, but it is a whole-trunk view of the base and not a close view. QUAU-46 is a thinner trunk photographed from farther away. QUAU-32 comes last: its bark is smoother and looks younger, with lichen spots. Group 2 has one photo, QUAU-11, a close view of mature bark. Group 3: QUAU-55 and QUAU-56 are near-duplicate distant trunk shots under heavy moss, so their order is nearly a tie, and 55 is placed first."
+      }
+    },
+    {
+      "label": "rank:opus:high:QUAU-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-02"
+        ],
+        "3": [
+          "QUAU-19",
+          "QUAU-21",
+          "QUAU-22",
+          "QUAU-23"
+        ]
+      },
+      "keys": [
+        "QUAU-02",
+        "QUAU-19",
+        "QUAU-21",
+        "QUAU-22",
+        "QUAU-23"
+      ],
+      "agentIds": [
+        "aa33dab470a4e219d"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-02"
+          ],
+          "3": [
+            "QUAU-23",
+            "QUAU-21",
+            "QUAU-22",
+            "QUAU-19"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1 has one photo, QUAU-02: a whole, nearly mature green acorn in its cup, seen from the side on a dark background, on the twig. Group 3: QUAU-23 comes first because it shows a larger, more developed green acorn, viewed end-on and whole in the frame. QUAU-21, QUAU-22 and QUAU-19 all show small, immature first-year acorns on the twig. QUAU-21 is the sharpest of the three, QUAU-22 is similar but its acorns are clustered, and QUAU-19 is the softest. No photo has a scale object, and none shows picked fruit."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:PLRA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "PLRA-37"
+        ],
+        "2": [
+          "PLRA-33",
+          "PLRA-44"
+        ],
+        "3": [
+          "PLRA-11",
+          "PLRA-35",
+          "PLRA-43",
+          "PLRA-57",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      },
+      "keys": [
+        "PLRA-37",
+        "PLRA-33",
+        "PLRA-44",
+        "PLRA-11",
+        "PLRA-35",
+        "PLRA-43",
+        "PLRA-57",
+        "PLRA-59",
+        "PLRA-82"
+      ],
+      "agentIds": [
+        "a8e14c009df765e9f"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-37"
+          ],
+          "2": [
+            "PLRA-33",
+            "PLRA-44"
+          ],
+          "3": [
+            "PLRA-35",
+            "PLRA-43",
+            "PLRA-82",
+            "PLRA-57",
+            "PLRA-59",
+            "PLRA-11"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 2: PLRA-33 shows green mature leaves with whole outlines; PLRA-44 has a whole central leaf, but it is pale and seen from below against darker foliage. Group 3: PLRA-35 has clear green mature leaves with near-whole outlines. PLRA-43 has a mostly whole green leaf, slightly yellowish. PLRA-82 has yellow-green leaves against the sky with fruit, and its outlines are partly cut off. PLRA-57 is mostly green but shot from a distance, with no single leaf clear. PLRA-59 has mottled, browning leaves. PLRA-11 shows young, immature yellowish leaves with flower heads, which is not the usual look."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:PLRA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-bark",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "PLRA-05",
+          "PLRA-06",
+          "PLRA-61",
+          "PLRA-65",
+          "PLRA-70"
+        ],
+        "2": [
+          "PLRA-23",
+          "PLRA-67",
+          "PLRA-68"
+        ],
+        "3": [
+          "PLRA-01",
+          "PLRA-15",
+          "PLRA-19",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-66",
+          "PLRA-71"
+        ]
+      },
+      "keys": [
+        "PLRA-05",
+        "PLRA-06",
+        "PLRA-61",
+        "PLRA-65",
+        "PLRA-70",
+        "PLRA-23",
+        "PLRA-67",
+        "PLRA-68",
+        "PLRA-01",
+        "PLRA-15",
+        "PLRA-19",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-66",
+        "PLRA-71"
+      ],
+      "agentIds": [
+        "a0edf41b6521ccf21"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-70",
+            "PLRA-61",
+            "PLRA-65",
+            "PLRA-05",
+            "PLRA-06"
+          ],
+          "2": [
+            "PLRA-67",
+            "PLRA-68",
+            "PLRA-23"
+          ],
+          "3": [
+            "PLRA-66",
+            "PLRA-71",
+            "PLRA-63",
+            "PLRA-01",
+            "PLRA-15",
+            "PLRA-27",
+            "PLRA-25",
+            "PLRA-19",
+            "PLRA-31"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 70 and 61 show the classic mottled exfoliating patchwork over a wide area; 65 is mottled but has burls; 05 is smooth and pale with little pattern; 06 is dark, rough and in shade. Group 2: 67 and 68 are wide close-ups of the plated patchwork (67 has the more typical grey-cream tones); 23 is a whole tree, mostly canopy and sign. Group 3: 66 is a wide close-up of plated mature bark; 71 and 63 show trunk bark texture (71 has dappled shade); 01 and 15 show pale trunks but are distant views; 25 and 27 have dark scars; 19 and 31 are mostly about roots or hollow trunk form."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:QULA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-leaf",
+      "method": "FR",
+      "groups": {
+        "2": [
+          "QULA-02",
+          "QULA-26",
+          "QULA-45",
+          "QULA-50",
+          "QULA-57",
+          "QULA-58",
+          "QULA-59",
+          "QULA-66"
+        ],
+        "3": [
+          "QULA-03",
+          "QULA-14",
+          "QULA-16",
+          "QULA-23",
+          "QULA-25",
+          "QULA-27",
+          "QULA-28",
+          "QULA-30",
+          "QULA-32",
+          "QULA-34",
+          "QULA-36",
+          "QULA-38",
+          "QULA-39",
+          "QULA-43",
+          "QULA-52",
+          "QULA-53",
+          "QULA-54",
+          "QULA-62"
+        ]
+      },
+      "keys": [
+        "QULA-02",
+        "QULA-26",
+        "QULA-45",
+        "QULA-50",
+        "QULA-57",
+        "QULA-58",
+        "QULA-59",
+        "QULA-66",
+        "QULA-03",
+        "QULA-14",
+        "QULA-16",
+        "QULA-23",
+        "QULA-25",
+        "QULA-27",
+        "QULA-28",
+        "QULA-30",
+        "QULA-32",
+        "QULA-34",
+        "QULA-36",
+        "QULA-38",
+        "QULA-39",
+        "QULA-43",
+        "QULA-52",
+        "QULA-53",
+        "QULA-54",
+        "QULA-62"
+      ],
+      "agentIds": [
+        "a4600c8e8cefd19a3"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "2": [
+            "QULA-58",
+            "QULA-59",
+            "QULA-45",
+            "QULA-26",
+            "QULA-66",
+            "QULA-50",
+            "QULA-02",
+            "QULA-57"
+          ],
+          "3": [
+            "QULA-52",
+            "QULA-36",
+            "QULA-23",
+            "QULA-25",
+            "QULA-62",
+            "QULA-34",
+            "QULA-27",
+            "QULA-43",
+            "QULA-28",
+            "QULA-30",
+            "QULA-39",
+            "QULA-32",
+            "QULA-03",
+            "QULA-54",
+            "QULA-53",
+            "QULA-14",
+            "QULA-16",
+            "QULA-38"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 2: every photo shows green mature leaves. 58 and 59 come first because each is a single whole leaf held in the hand, the view the group line names (58 the upper side, 59 apparently the paler underside). 45 is a hand-held cluster. 26, 66, 50 and 02 are clear clusters of leaves. 02 has an autumn background and a yellowing leaf. 57 is dark and small-scale. Group 3: 52 and 36 show the clearest single whole leaf outline. 23, 25, 62, 34 and 27 show clear mature leaves. 43, 28, 30, 39, 32 and 03 are busier views of foliage or branches. 54 is one backlit yellow-green young leaf and 53 a spring flush with catkins, so both rank low. 14 and 16 are young reddish emerging leaves and 38 is autumn color, so they rank last as atypical."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:QULA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-bark",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "QULA-22",
+          "QULA-55",
+          "QULA-68"
+        ],
+        "3": [
+          "QULA-24",
+          "QULA-33"
+        ]
+      },
+      "keys": [
+        "QULA-22",
+        "QULA-55",
+        "QULA-68",
+        "QULA-24",
+        "QULA-33"
+      ],
+      "agentIds": [
+        "a11ffad1eaa145c5a"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-55",
+            "QULA-22",
+            "QULA-68"
+          ],
+          "3": [
+            "QULA-24",
+            "QULA-33"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1: all three show mature, blocky-furrowed bark. QULA-55 is the closest view. Its pattern is the clearest and the area shown is wide enough to see it repeat, so it fits the close-bark view. QULA-22 shows the whole trunk with a clear pattern but from farther back. QULA-68 is a slimmer, more distant stem with the least bark detail. Group 3: QULA-24 is a close, evenly lit view of mature furrowed bark across a wide area. QULA-33 is a small urban tree whose bark is broken up by a wound or callus, so it is not the usual look."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:QUAU-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "QUAU-01",
+          "QUAU-12"
+        ],
+        "2": [
+          "QUAU-04",
+          "QUAU-07",
+          "QUAU-15",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-47",
+          "QUAU-51"
+        ],
+        "3": [
+          "QUAU-17",
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48",
+          "QUAU-49",
+          "QUAU-50",
+          "QUAU-53"
+        ]
+      },
+      "keys": [
+        "QUAU-01",
+        "QUAU-12",
+        "QUAU-04",
+        "QUAU-07",
+        "QUAU-15",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-47",
+        "QUAU-51",
+        "QUAU-17",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-49",
+        "QUAU-50",
+        "QUAU-53"
+      ],
+      "agentIds": [
+        "af3c72e7e3c7082ef"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-12",
+            "QUAU-01"
+          ],
+          "2": [
+            "QUAU-15",
+            "QUAU-04",
+            "QUAU-07",
+            "QUAU-47",
+            "QUAU-51",
+            "QUAU-28",
+            "QUAU-29"
+          ],
+          "3": [
+            "QUAU-41",
+            "QUAU-27",
+            "QUAU-48",
+            "QUAU-49",
+            "QUAU-45",
+            "QUAU-30",
+            "QUAU-17",
+            "QUAU-24",
+            "QUAU-50",
+            "QUAU-53"
+          ]
+        },
+        "unread": [],
+        "note": "All four sheets opened. Group 1: QUAU-12 shows two whole leaves (upper and lower surface) on a plain background, so it ranks above QUAU-01, whose base is cut off. Group 2: QUAU-15, -04 and -07 each show a clear, nearly whole green leaf outline. QUAU-47 and -51 are hand-held leaves cropped at one end. QUAU-28 and -29 are cluttered branch shots. Group 3: QUAU-41 and -27 show whole mature leaves clearly. QUAU-48, -49 and -45 are leaf clusters further away. QUAU-30 and -17 are partial close-ups (QUAU-17 is the underside). QUAU-24 is a canopy silhouette against the sky, QUAU-50 is cluttered, and QUAU-53 is a tight crop of the leaf bases only."
+      }
+    },
+    {
+      "label": "rank:opus:high:FR:QUAU-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "opus",
+      "model_opt": "claude-opus-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-fruit",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "QUAU-02"
+        ],
+        "3": [
+          "QUAU-19",
+          "QUAU-23"
+        ]
+      },
+      "keys": [
+        "QUAU-02",
+        "QUAU-19",
+        "QUAU-23"
+      ],
+      "agentIds": [
+        "a54c6143db57fa84c"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-02"
+          ],
+          "3": [
+            "QUAU-23",
+            "QUAU-19"
+          ]
+        },
+        "unread": [],
+        "note": "Group 1 has one photo: QUAU-02 is a whole, near-mature green acorn with its cap, seen from the side on the branch. Group 3: QUAU-23 comes first because it shows a whole, near-mature acorn, though seen from the tip end only. QUAU-19 shows small, immature first-year acorns on a twig, so it is not the usual look. Neither group-3 photo has a scale object, and neither shows picked fruit."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLRA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLRA-37"
+        ],
+        "2": [
+          "PLRA-33",
+          "PLRA-43",
+          "PLRA-44"
+        ],
+        "3": [
+          "PLRA-11",
+          "PLRA-35",
+          "PLRA-38",
+          "PLRA-49",
+          "PLRA-56",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      },
+      "keys": [
+        "PLRA-37",
+        "PLRA-33",
+        "PLRA-43",
+        "PLRA-44",
+        "PLRA-11",
+        "PLRA-35",
+        "PLRA-38",
+        "PLRA-49",
+        "PLRA-56",
+        "PLRA-59",
+        "PLRA-82"
+      ],
+      "agentIds": [
+        "ad1dc752e6bd0f35e"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-37"
+          ],
+          "2": [
+            "PLRA-33",
+            "PLRA-44",
+            "PLRA-43"
+          ],
+          "3": [
+            "PLRA-35",
+            "PLRA-59",
+            "PLRA-49",
+            "PLRA-38",
+            "PLRA-82",
+            "PLRA-11",
+            "PLRA-56"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Ranked from the sheets only. Group 2: 33 has green mature leaves, 44 is pale and crowded, 43 is yellowing. Group 3: 35 has green mature leaves with whole outlines, 59 is green but spotted and crowded, 49 is a canopy view with no single leaf outline. 38 and 82 are bright new-flush leaves, 11 is spotted young foliage with fruit, and 56 is distant autumn foliage."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLRA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLRA-05",
+          "PLRA-06",
+          "PLRA-61",
+          "PLRA-65",
+          "PLRA-70"
+        ],
+        "2": [
+          "PLRA-67",
+          "PLRA-68"
+        ],
+        "3": [
+          "PLRA-01",
+          "PLRA-15",
+          "PLRA-23",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-64",
+          "PLRA-66",
+          "PLRA-71"
+        ]
+      },
+      "keys": [
+        "PLRA-05",
+        "PLRA-06",
+        "PLRA-61",
+        "PLRA-65",
+        "PLRA-70",
+        "PLRA-67",
+        "PLRA-68",
+        "PLRA-01",
+        "PLRA-15",
+        "PLRA-23",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-64",
+        "PLRA-66",
+        "PLRA-71"
+      ],
+      "agentIds": [
+        "ae214c7d0be80c867"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-70",
+            "PLRA-61",
+            "PLRA-65",
+            "PLRA-05",
+            "PLRA-06"
+          ],
+          "2": [
+            "PLRA-67",
+            "PLRA-68"
+          ],
+          "3": [
+            "PLRA-66",
+            "PLRA-71",
+            "PLRA-63",
+            "PLRA-01",
+            "PLRA-15",
+            "PLRA-25",
+            "PLRA-27",
+            "PLRA-31",
+            "PLRA-23",
+            "PLRA-64"
+          ]
+        },
+        "unread": [],
+        "note": "All four sheets opened. Ranked from the sheets only. Group 1: PLRA-70 and PLRA-61 show a wide area of the mottled mature bark. PLRA-05 has leaves in front of the trunk. PLRA-06 is dark and cluttered. Group 2: PLRA-67 shows a wider area of the pattern repeat than the close-up PLRA-68. Group 3: PLRA-66, PLRA-71 and PLRA-63 show the bark pattern best. The later keys are whole-tree shots, burn or hollow views, or succulents covering the bark (PLRA-64)."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:PLRA-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLRA-52",
+          "PLRA-54",
+          "PLRA-58",
+          "PLRA-62",
+          "PLRA-74"
+        ],
+        "2": [
+          "PLRA-76",
+          "PLRA-79"
+        ],
+        "3": [
+          "PLRA-08",
+          "PLRA-75"
+        ]
+      },
+      "keys": [
+        "PLRA-52",
+        "PLRA-54",
+        "PLRA-58",
+        "PLRA-62",
+        "PLRA-74",
+        "PLRA-76",
+        "PLRA-79",
+        "PLRA-08",
+        "PLRA-75"
+      ],
+      "agentIds": [
+        "ae11356ecaba5c57d"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-54",
+            "PLRA-74",
+            "PLRA-62",
+            "PLRA-52",
+            "PLRA-58"
+          ],
+          "2": [
+            "PLRA-76",
+            "PLRA-79"
+          ],
+          "3": [
+            "PLRA-08",
+            "PLRA-75"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. No photo has a scale object. Group 1: PLRA-54 shows a whole ripe brown fruit chain with green leaves, and PLRA-74 is similar but less sharp. PLRA-62 shows dried, old fruit, and PLRA-52 and PLRA-58 have small or partly hidden fruit. Group 2: PLRA-76 has ripe brown fruit, and PLRA-79 has unripe green fruit. Group 3: PLRA-08 has ripe dark fruit, but they are tiny in the frame. PLRA-75 has clear, whole, unripe yellow-green fruit, so it ranks second on ripeness."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QULA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QULA-57",
+          "QULA-58"
+        ],
+        "2": [
+          "QULA-02",
+          "QULA-23",
+          "QULA-25",
+          "QULA-26",
+          "QULA-27",
+          "QULA-28",
+          "QULA-32",
+          "QULA-39",
+          "QULA-42",
+          "QULA-45",
+          "QULA-50",
+          "QULA-51",
+          "QULA-52",
+          "QULA-59",
+          "QULA-66",
+          "QULA-67"
+        ],
+        "3": [
+          "QULA-03",
+          "QULA-05",
+          "QULA-13",
+          "QULA-14",
+          "QULA-15",
+          "QULA-16",
+          "QULA-21",
+          "QULA-30",
+          "QULA-34",
+          "QULA-36",
+          "QULA-38",
+          "QULA-43",
+          "QULA-53",
+          "QULA-54",
+          "QULA-62"
+        ]
+      },
+      "keys": [
+        "QULA-57",
+        "QULA-58",
+        "QULA-02",
+        "QULA-23",
+        "QULA-25",
+        "QULA-26",
+        "QULA-27",
+        "QULA-28",
+        "QULA-32",
+        "QULA-39",
+        "QULA-42",
+        "QULA-45",
+        "QULA-50",
+        "QULA-51",
+        "QULA-52",
+        "QULA-59",
+        "QULA-66",
+        "QULA-67",
+        "QULA-03",
+        "QULA-05",
+        "QULA-13",
+        "QULA-14",
+        "QULA-15",
+        "QULA-16",
+        "QULA-21",
+        "QULA-30",
+        "QULA-34",
+        "QULA-36",
+        "QULA-38",
+        "QULA-43",
+        "QULA-53",
+        "QULA-54",
+        "QULA-62"
+      ],
+      "agentIds": [
+        "a1b2537f4105776a1"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-58",
+            "QULA-57"
+          ],
+          "2": [
+            "QULA-26",
+            "QULA-66",
+            "QULA-45",
+            "QULA-59",
+            "QULA-52",
+            "QULA-50",
+            "QULA-02",
+            "QULA-51",
+            "QULA-67",
+            "QULA-25",
+            "QULA-23",
+            "QULA-28",
+            "QULA-27",
+            "QULA-42",
+            "QULA-39",
+            "QULA-32"
+          ],
+          "3": [
+            "QULA-36",
+            "QULA-62",
+            "QULA-05",
+            "QULA-34",
+            "QULA-43",
+            "QULA-30",
+            "QULA-54",
+            "QULA-53",
+            "QULA-03",
+            "QULA-15",
+            "QULA-13",
+            "QULA-21",
+            "QULA-38",
+            "QULA-14",
+            "QULA-16"
+          ]
+        },
+        "unread": [],
+        "note": "All five sheets opened. Ranked on the contact sheets only, in the order the brief sets: usual look (green mature leaves), whole leaf outline, then the group line (one leaf, upper side). In group 1, QULA-58 shows a whole single leaf and QULA-57 is a branch with many leaves. In group 2, QULA-59 is a whole leaf but shows the underside, so it ranks below the best upper-side shots. In group 3, the autumn colour and red new-growth photos (QULA-38, 14, 16) rank last."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QULA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QULA-22",
+          "QULA-33",
+          "QULA-55"
+        ],
+        "3": [
+          "QULA-24",
+          "QULA-48",
+          "QULA-68"
+        ]
+      },
+      "keys": [
+        "QULA-22",
+        "QULA-33",
+        "QULA-55",
+        "QULA-24",
+        "QULA-48",
+        "QULA-68"
+      ],
+      "agentIds": [
+        "a7b841b6d9f0194e0"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-55",
+            "QULA-22",
+            "QULA-33"
+          ],
+          "3": [
+            "QULA-24",
+            "QULA-68",
+            "QULA-48"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 1: QULA-55 and QULA-22 show typical mature ridged bark over a wide area. QULA-55 has the clearer pattern repeat. QULA-33 is a close view, but it shows an atypical scarred patch, so it ranks last. Group 3: QULA-24 is a close view of mature bark with a clear pattern repeat, though it is shaded. QULA-68 shows the bark pattern on a trunk but from farther away. QULA-48 shows branches with a lot of clutter and little visible bark pattern."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QULA-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QULA-37",
+          "QULA-63",
+          "QULA-65",
+          "QULA-69"
+        ],
+        "2": [
+          "QULA-35",
+          "QULA-47",
+          "QULA-61"
+        ],
+        "3": [
+          "QULA-44",
+          "QULA-64",
+          "QULA-70"
+        ]
+      },
+      "keys": [
+        "QULA-37",
+        "QULA-63",
+        "QULA-65",
+        "QULA-69",
+        "QULA-35",
+        "QULA-47",
+        "QULA-61",
+        "QULA-44",
+        "QULA-64",
+        "QULA-70"
+      ],
+      "agentIds": [
+        "abb3f9c2390bb5d63"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-69",
+            "QULA-63",
+            "QULA-65",
+            "QULA-37"
+          ],
+          "2": [
+            "QULA-61",
+            "QULA-47",
+            "QULA-35"
+          ],
+          "3": [
+            "QULA-70",
+            "QULA-64",
+            "QULA-44"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. All fruit is unripe green except one brown acorn in QULA-47. Group 2: QULA-61 has a hand for scale, so it leads. Group 1: QULA-37 ranks last because its fruit is cropped and overlapping. Group 3: QULA-44 ranks last because it shows only a cup, and QULA-64 sits below QULA-70 because its acorns are small and distant."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QUAU-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-01",
+          "QUAU-04",
+          "QUAU-07",
+          "QUAU-12",
+          "QUAU-14",
+          "QUAU-15"
+        ],
+        "2": [
+          "QUAU-47"
+        ],
+        "3": [
+          "QUAU-17",
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48",
+          "QUAU-49",
+          "QUAU-50",
+          "QUAU-51",
+          "QUAU-53"
+        ]
+      },
+      "keys": [
+        "QUAU-01",
+        "QUAU-04",
+        "QUAU-07",
+        "QUAU-12",
+        "QUAU-14",
+        "QUAU-15",
+        "QUAU-47",
+        "QUAU-17",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-49",
+        "QUAU-50",
+        "QUAU-51",
+        "QUAU-53"
+      ],
+      "agentIds": [
+        "a7f2b74baeac48a71"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-04",
+            "QUAU-01",
+            "QUAU-15",
+            "QUAU-07",
+            "QUAU-12",
+            "QUAU-14"
+          ],
+          "2": [
+            "QUAU-47"
+          ],
+          "3": [
+            "QUAU-41",
+            "QUAU-29",
+            "QUAU-27",
+            "QUAU-51",
+            "QUAU-45",
+            "QUAU-48",
+            "QUAU-28",
+            "QUAU-49",
+            "QUAU-50",
+            "QUAU-30",
+            "QUAU-53",
+            "QUAU-24",
+            "QUAU-17"
+          ]
+        },
+        "unread": [],
+        "note": "All four sheets opened. Group 1 has the clearest twig and upper-side views. QUAU-12 and QUAU-14 are pressed on black, with brown spots and a mix of upper and lower sides, so they rank last. Group 3 is led by green mature leaves on a twig. QUAU-17 (underside, cropped) and QUAU-24 (small leaves against the sky) are last."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QUAU-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-10",
+          "QUAU-13",
+          "QUAU-32",
+          "QUAU-39",
+          "QUAU-46",
+          "QUAU-52"
+        ],
+        "2": [
+          "QUAU-11"
+        ],
+        "3": [
+          "QUAU-33",
+          "QUAU-55",
+          "QUAU-56"
+        ]
+      },
+      "keys": [
+        "QUAU-10",
+        "QUAU-13",
+        "QUAU-32",
+        "QUAU-39",
+        "QUAU-46",
+        "QUAU-52",
+        "QUAU-11",
+        "QUAU-33",
+        "QUAU-55",
+        "QUAU-56"
+      ],
+      "agentIds": [
+        "a60d604e0dbcd5107"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-10",
+            "QUAU-13",
+            "QUAU-39",
+            "QUAU-52",
+            "QUAU-46",
+            "QUAU-32"
+          ],
+          "2": [
+            "QUAU-11"
+          ],
+          "3": [
+            "QUAU-33",
+            "QUAU-55",
+            "QUAU-56"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 1: 10 and 13 are close, mature, fill the frame, and show the ridge pattern repeat. 39 is old mature bark but a wider, farther view. 52 and 46 are narrower and partly mossy or cluttered. 32 is smooth, young-looking bark with lichen spots and leaves in front. Group 3: 33 shows the clearest bark texture. 55 and 56 are near-duplicates, dark and mossy in dappled light, so their order is nearly arbitrary."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:QUAU-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-02"
+        ],
+        "3": [
+          "QUAU-19",
+          "QUAU-21",
+          "QUAU-22",
+          "QUAU-23"
+        ]
+      },
+      "keys": [
+        "QUAU-02",
+        "QUAU-19",
+        "QUAU-21",
+        "QUAU-22",
+        "QUAU-23"
+      ],
+      "agentIds": [
+        "a3476a624572c26e8"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-02"
+          ],
+          "3": [
+            "QUAU-23",
+            "QUAU-22",
+            "QUAU-21",
+            "QUAU-19"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 3 has no scale object in any photo. QUAU-23 is a large whole green acorn seen end-on and is the closest to the picked-fruit view. QUAU-22 and QUAU-21 show small immature acorns on the twig, with the cups mostly in frame and QUAU-22 sharper. QUAU-19 is last because its fruit are small and blurred."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:PLRA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "PLRA-37"
+        ],
+        "2": [
+          "PLRA-33",
+          "PLRA-43",
+          "PLRA-44"
+        ],
+        "3": [
+          "PLRA-11",
+          "PLRA-35",
+          "PLRA-38",
+          "PLRA-56",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      },
+      "keys": [
+        "PLRA-37",
+        "PLRA-33",
+        "PLRA-43",
+        "PLRA-44",
+        "PLRA-11",
+        "PLRA-35",
+        "PLRA-38",
+        "PLRA-56",
+        "PLRA-59",
+        "PLRA-82"
+      ],
+      "agentIds": [
+        "a73943aaf48b2896d"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-37"
+          ],
+          "2": [
+            "PLRA-33",
+            "PLRA-44",
+            "PLRA-43"
+          ],
+          "3": [
+            "PLRA-35",
+            "PLRA-38",
+            "PLRA-59",
+            "PLRA-82",
+            "PLRA-11",
+            "PLRA-56"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Group 2: 33 shows clear green leaves with whole outlines. 44 is green but crowded. 43 is yellowish and cluttered. Group 3: 35 has mature green leaves with whole outlines. 38 has bright whole leaves, but they are young and a bird sits in the frame. 59 is green with autumn tinge. 82 has yellowing leaves and fruit. 11 is spotted and yellow. 56 is distant autumn foliage with no clear single leaf."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:PLRA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-bark",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "PLRA-05",
+          "PLRA-06",
+          "PLRA-61",
+          "PLRA-65",
+          "PLRA-70"
+        ],
+        "2": [
+          "PLRA-67",
+          "PLRA-68"
+        ],
+        "3": [
+          "PLRA-01",
+          "PLRA-15",
+          "PLRA-23",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-66",
+          "PLRA-71"
+        ]
+      },
+      "keys": [
+        "PLRA-05",
+        "PLRA-06",
+        "PLRA-61",
+        "PLRA-65",
+        "PLRA-70",
+        "PLRA-67",
+        "PLRA-68",
+        "PLRA-01",
+        "PLRA-15",
+        "PLRA-23",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-66",
+        "PLRA-71"
+      ],
+      "agentIds": [
+        "af9f4a48a5104b89e"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-70",
+            "PLRA-61",
+            "PLRA-65",
+            "PLRA-05",
+            "PLRA-06"
+          ],
+          "2": [
+            "PLRA-67",
+            "PLRA-68"
+          ],
+          "3": [
+            "PLRA-66",
+            "PLRA-71",
+            "PLRA-63",
+            "PLRA-15",
+            "PLRA-01",
+            "PLRA-25",
+            "PLRA-27",
+            "PLRA-23",
+            "PLRA-31"
+          ]
+        },
+        "unread": [],
+        "note": "All three sheets opened. Ranked on how clearly each photo shows mature mottled bark over an area wide enough for the pattern to repeat. In group 1, PLRA-70 and PLRA-61 show the pattern best. PLRA-65 has burls, PLRA-05 is partly hidden by leaves, and PLRA-06 is dark and cluttered. In group 3, PLRA-66 is a wide bark close-up. PLRA-71 and PLRA-63 show the bark on the trunk. The photos that show whole trees, burn hollows or people come last."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:QULA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "QULA-57",
+          "QULA-58"
+        ],
+        "2": [
+          "QULA-02",
+          "QULA-23",
+          "QULA-25",
+          "QULA-26",
+          "QULA-27",
+          "QULA-28",
+          "QULA-32",
+          "QULA-39",
+          "QULA-45",
+          "QULA-50",
+          "QULA-52",
+          "QULA-59",
+          "QULA-66"
+        ],
+        "3": [
+          "QULA-03",
+          "QULA-14",
+          "QULA-16",
+          "QULA-30",
+          "QULA-34",
+          "QULA-36",
+          "QULA-38",
+          "QULA-43",
+          "QULA-53",
+          "QULA-54",
+          "QULA-62"
+        ]
+      },
+      "keys": [
+        "QULA-57",
+        "QULA-58",
+        "QULA-02",
+        "QULA-23",
+        "QULA-25",
+        "QULA-26",
+        "QULA-27",
+        "QULA-28",
+        "QULA-32",
+        "QULA-39",
+        "QULA-45",
+        "QULA-50",
+        "QULA-52",
+        "QULA-59",
+        "QULA-66",
+        "QULA-03",
+        "QULA-14",
+        "QULA-16",
+        "QULA-30",
+        "QULA-34",
+        "QULA-36",
+        "QULA-38",
+        "QULA-43",
+        "QULA-53",
+        "QULA-54",
+        "QULA-62"
+      ],
+      "agentIds": [
+        "a1fd6f14b308c1a36"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-58",
+            "QULA-57"
+          ],
+          "2": [
+            "QULA-45",
+            "QULA-59",
+            "QULA-26",
+            "QULA-02",
+            "QULA-52",
+            "QULA-66",
+            "QULA-50",
+            "QULA-25",
+            "QULA-23",
+            "QULA-27",
+            "QULA-39",
+            "QULA-32",
+            "QULA-28"
+          ],
+          "3": [
+            "QULA-36",
+            "QULA-34",
+            "QULA-62",
+            "QULA-53",
+            "QULA-03",
+            "QULA-54",
+            "QULA-43",
+            "QULA-30",
+            "QULA-38",
+            "QULA-14",
+            "QULA-16"
+          ]
+        },
+        "unread": [],
+        "note": "All five sheets opened. Ranked from the sheets only. Green mature leaves came first, then a whole leaf outline, then the upper-side view. Autumn-colour and new-growth photos (QULA-38, 14, 16) are last in group 3. Photos that mostly show buds, acorns, catkins or the underside (QULA-23, 25, 27, 28, 32, 39) are last in group 2."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:QULA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-bark",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "QULA-22",
+          "QULA-33",
+          "QULA-55"
+        ],
+        "3": [
+          "QULA-24",
+          "QULA-68"
+        ]
+      },
+      "keys": [
+        "QULA-22",
+        "QULA-33",
+        "QULA-55",
+        "QULA-24",
+        "QULA-68"
+      ],
+      "agentIds": [
+        "a88d163a6cee6f6e0"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-55",
+            "QULA-22",
+            "QULA-33"
+          ],
+          "3": [
+            "QULA-24",
+            "QULA-68"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 1: QULA-55 and QULA-22 show mature bark with a clear pattern repeat. 55 shows the pattern larger, so it ranks first. QULA-33 is a close view of a scarred, irregular patch, so it is least typical. Group 3: both photos show mature bark with the pattern repeat. QULA-24 is the closer view that the group line names, but it is partly in shade. QULA-68 is evenly lit but shows a whole trunk from farther away. I put 24 first on the group line."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:QUAU-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-leaf",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "QUAU-01",
+          "QUAU-04",
+          "QUAU-07",
+          "QUAU-12",
+          "QUAU-15"
+        ],
+        "2": [
+          "QUAU-47"
+        ],
+        "3": [
+          "QUAU-17",
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48",
+          "QUAU-49",
+          "QUAU-50",
+          "QUAU-51",
+          "QUAU-53"
+        ]
+      },
+      "keys": [
+        "QUAU-01",
+        "QUAU-04",
+        "QUAU-07",
+        "QUAU-12",
+        "QUAU-15",
+        "QUAU-47",
+        "QUAU-17",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-49",
+        "QUAU-50",
+        "QUAU-51",
+        "QUAU-53"
+      ],
+      "agentIds": [
+        "ab38c98f7702ed11b"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-04",
+            "QUAU-01",
+            "QUAU-15",
+            "QUAU-07",
+            "QUAU-12"
+          ],
+          "2": [
+            "QUAU-47"
+          ],
+          "3": [
+            "QUAU-41",
+            "QUAU-29",
+            "QUAU-27",
+            "QUAU-45",
+            "QUAU-48",
+            "QUAU-51",
+            "QUAU-28",
+            "QUAU-49",
+            "QUAU-50",
+            "QUAU-24",
+            "QUAU-30",
+            "QUAU-53",
+            "QUAU-17"
+          ]
+        },
+        "unread": [],
+        "note": "All four sheets opened. Group 1 ranks whole green upper-side leaves on a twig first, with the pressed leaves on black (QUAU-12) last. Group 3 puts clear twigs with whole green upper-side leaves first. Cropped leaves and the underside close-up (QUAU-17) are last."
+      }
+    },
+    {
+      "label": "rank:sonnet:high:FR:QUAU-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "sonnet",
+      "model_opt": "claude-sonnet-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-fruit",
+      "method": "FR",
+      "groups": {
+        "1": [
+          "QUAU-02"
+        ],
+        "3": [
+          "QUAU-19",
+          "QUAU-23"
+        ]
+      },
+      "keys": [
+        "QUAU-02",
+        "QUAU-19",
+        "QUAU-23"
+      ],
+      "agentIds": [
+        "a4bc1e2027b975add"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-02"
+          ],
+          "3": [
+            "QUAU-23",
+            "QUAU-19"
+          ]
+        },
+        "unread": [],
+        "note": "Both sheets opened. Group 3: QUAU-23 is one whole, fully sized acorn in close-up (an end-on view, with the cup rim around the nut), which fits the picked-fruit group line. QUAU-19 shows small, immature acorns on the twig, so it is not the usual ripe look. No photo in either group has a scale object."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLRA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-leaf",
+      "method": "R",
+      "groups": {
+        "3": [
+          "PLRA-33",
+          "PLRA-35",
+          "PLRA-37",
+          "PLRA-38",
+          "PLRA-43",
+          "PLRA-44",
+          "PLRA-57",
+          "PLRA-59",
+          "PLRA-82"
+        ]
+      },
+      "keys": [
+        "PLRA-33",
+        "PLRA-35",
+        "PLRA-37",
+        "PLRA-38",
+        "PLRA-43",
+        "PLRA-44",
+        "PLRA-57",
+        "PLRA-59",
+        "PLRA-82"
+      ],
+      "agentIds": [
+        "ab940757b3f4eccb1"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "3": [
+            "PLRA-37",
+            "PLRA-33",
+            "PLRA-35",
+            "PLRA-59",
+            "PLRA-44",
+            "PLRA-43",
+            "PLRA-57",
+            "PLRA-38",
+            "PLRA-82"
+          ]
+        },
+        "unread": [],
+        "note": "Cell Platanus racemosa, leaf, group 3 (9 keys), ranked from the single contact sheet haiku-3-1.jpg. Top: PLRA-37 (one large whole green mature leaf), PLRA-33 and PLRA-35 (several green mature lobed leaves, whole outlines visible). Middle: PLRA-59 and PLRA-44 (green to grey-green mature leaves, partly cropped or busy background), PLRA-43 (mature but crowded and cropped). Bottom: PLRA-57 (dense, small, busy leaves with no clear whole outline), PLRA-38 (pale young lime leaves, a bird in frame), PLRA-82 (young lime leaves partly in frame, fruit visible but not the subject). No scale-object rule applies to leaf."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLRA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLRA-61",
+          "PLRA-70"
+        ],
+        "2": [
+          "PLRA-05",
+          "PLRA-15",
+          "PLRA-66",
+          "PLRA-67"
+        ],
+        "3": [
+          "PLRA-01",
+          "PLRA-06",
+          "PLRA-19",
+          "PLRA-23",
+          "PLRA-25",
+          "PLRA-27",
+          "PLRA-31",
+          "PLRA-63",
+          "PLRA-65",
+          "PLRA-68",
+          "PLRA-71"
+        ]
+      },
+      "keys": [
+        "PLRA-61",
+        "PLRA-70",
+        "PLRA-05",
+        "PLRA-15",
+        "PLRA-66",
+        "PLRA-67",
+        "PLRA-01",
+        "PLRA-06",
+        "PLRA-19",
+        "PLRA-23",
+        "PLRA-25",
+        "PLRA-27",
+        "PLRA-31",
+        "PLRA-63",
+        "PLRA-65",
+        "PLRA-68",
+        "PLRA-71"
+      ],
+      "agentIds": [
+        "a9523fb35a26b1564"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-70",
+            "PLRA-61"
+          ],
+          "2": [
+            "PLRA-67",
+            "PLRA-66",
+            "PLRA-05",
+            "PLRA-15"
+          ],
+          "3": [
+            "PLRA-71",
+            "PLRA-65",
+            "PLRA-68",
+            "PLRA-63",
+            "PLRA-06",
+            "PLRA-27",
+            "PLRA-25",
+            "PLRA-23",
+            "PLRA-01",
+            "PLRA-31",
+            "PLRA-19"
+          ]
+        },
+        "unread": [],
+        "note": "Read all four sheets (haiku-1-1, haiku-2-1, haiku-3-1, haiku-3-2); every key was visible. Ranked from the sheets only, with no photo files opened. Group 1: PLRA-70 shows the classic mottled whole trunk, ahead of the dark close-up PLRA-61. Group 2: PLRA-67 has a clear plated pattern over a wide bark area; PLRA-66 is mature cracked bark; PLRA-05 shows the whole trunk with leaves; PLRA-15 is a large pale trunk where the pattern is hard to make out. Group 3: PLRA-71 and PLRA-65 show the whole pale mottled trunk; PLRA-68 and PLRA-63 are bark close-ups that show the pattern; PLRA-06 is mature rough bark in foliage; the split trunks (27, 25) and the dark corky base (23) come next; PLRA-01, PLRA-31 and PLRA-19 show the tree form or roots rather than the bark. No view line was named for these groups, so rule 4 was not applied."
+      }
+    },
+    {
+      "label": "rank:haiku:high:PLRA-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "PLRA-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "PLRA-11",
+          "PLRA-13",
+          "PLRA-54",
+          "PLRA-62",
+          "PLRA-75"
+        ],
+        "2": [
+          "PLRA-52",
+          "PLRA-58",
+          "PLRA-74",
+          "PLRA-76",
+          "PLRA-79"
+        ],
+        "3": [
+          "PLRA-08",
+          "PLRA-56"
+        ]
+      },
+      "keys": [
+        "PLRA-11",
+        "PLRA-13",
+        "PLRA-54",
+        "PLRA-62",
+        "PLRA-75",
+        "PLRA-52",
+        "PLRA-58",
+        "PLRA-74",
+        "PLRA-76",
+        "PLRA-79",
+        "PLRA-08",
+        "PLRA-56"
+      ],
+      "agentIds": [
+        "a8acc011266d3d7c0"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "PLRA-54",
+            "PLRA-62",
+            "PLRA-75",
+            "PLRA-11",
+            "PLRA-13"
+          ],
+          "2": [
+            "PLRA-74",
+            "PLRA-76",
+            "PLRA-58",
+            "PLRA-79",
+            "PLRA-52"
+          ],
+          "3": [
+            "PLRA-08",
+            "PLRA-56"
+          ]
+        },
+        "unread": [],
+        "note": "Ranked from the three contact sheets only (haiku-1-1, haiku-2-1, haiku-3-1); all sheets opened. No scale objects appear in any frame, so criterion 2 did not separate any photos. Group 1: PLRA-54 has a green mature leaf with brown fruit and whole fruit in frame; PLRA-62 has brown mature fruit, whole; PLRA-75 has green leaves but yellow-green, younger fruit; PLRA-11 has small red fruit with some green leaves; PLRA-13 is a sharp close-up of red immature fruit with no green leaves. Group 2: PLRA-74 has green mature leaves with brown whole fruit; PLRA-76 has green leaves and brown fruit but is cluttered and partly hidden; PLRA-58 has ripe brown fruit with darker olive leaves; PLRA-79 has green leaves and whole but green (younger) fruit; PLRA-52 has yellowish, young-looking leaves and small fruit. Group 3: PLRA-08 has mature green leaves with dark fruit clusters; PLRA-56 has more yellowing leaves and small scattered fruit. The group 1 order between PLRA-11 and PLRA-13 and the group 2 order between PLRA-76 and PLRA-58 were close calls."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QULA-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QULA-58"
+        ],
+        "2": [
+          "QULA-26",
+          "QULA-45",
+          "QULA-52",
+          "QULA-59"
+        ],
+        "3": [
+          "QULA-02",
+          "QULA-03",
+          "QULA-14",
+          "QULA-16",
+          "QULA-18",
+          "QULA-20",
+          "QULA-23",
+          "QULA-25",
+          "QULA-27",
+          "QULA-28",
+          "QULA-30",
+          "QULA-32",
+          "QULA-34",
+          "QULA-38",
+          "QULA-39",
+          "QULA-43",
+          "QULA-50",
+          "QULA-53",
+          "QULA-54",
+          "QULA-57",
+          "QULA-62",
+          "QULA-66"
+        ]
+      },
+      "keys": [
+        "QULA-58",
+        "QULA-26",
+        "QULA-45",
+        "QULA-52",
+        "QULA-59",
+        "QULA-02",
+        "QULA-03",
+        "QULA-14",
+        "QULA-16",
+        "QULA-18",
+        "QULA-20",
+        "QULA-23",
+        "QULA-25",
+        "QULA-27",
+        "QULA-28",
+        "QULA-30",
+        "QULA-32",
+        "QULA-34",
+        "QULA-38",
+        "QULA-39",
+        "QULA-43",
+        "QULA-50",
+        "QULA-53",
+        "QULA-54",
+        "QULA-57",
+        "QULA-62",
+        "QULA-66"
+      ],
+      "agentIds": [
+        "a64179955a95ab023"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-58"
+          ],
+          "2": [
+            "QULA-59",
+            "QULA-45",
+            "QULA-26",
+            "QULA-52"
+          ],
+          "3": [
+            "QULA-66",
+            "QULA-02",
+            "QULA-23",
+            "QULA-25",
+            "QULA-27",
+            "QULA-53",
+            "QULA-43",
+            "QULA-50",
+            "QULA-03",
+            "QULA-62",
+            "QULA-28",
+            "QULA-34",
+            "QULA-57",
+            "QULA-39",
+            "QULA-54",
+            "QULA-30",
+            "QULA-32",
+            "QULA-38",
+            "QULA-14",
+            "QULA-16",
+            "QULA-18",
+            "QULA-20"
+          ]
+        },
+        "unread": [],
+        "note": "All five contact sheets opened and were read. Group 1 has one photo, so it is ordered alone. Group 2 puts QULA-59 first (one whole green leaf held in view, upper side), then QULA-45 (green leaf with a whole leaf in the hand), QULA-26 (dense green cluster), and QULA-52 (cluster with a hand in frame). Group 3 favours green mature foliage with whole leaf outlines visible: QULA-66, QULA-02, and QULA-23 lead. Young pink or orange flushes (QULA-14, QULA-16, QULA-38), whole-tree shots (QULA-18, QULA-20) and the 2 dim or shaded ones fall to the bottom. Ranked from the contact sheets only; no photo files were opened."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QULA-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QULA-22",
+          "QULA-33",
+          "QULA-55",
+          "QULA-68"
+        ],
+        "3": [
+          "QULA-24"
+        ]
+      },
+      "keys": [
+        "QULA-22",
+        "QULA-33",
+        "QULA-55",
+        "QULA-68",
+        "QULA-24"
+      ],
+      "agentIds": [
+        "afd10656cf2ab1441"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-55",
+            "QULA-22",
+            "QULA-68",
+            "QULA-33"
+          ],
+          "3": [
+            "QULA-24"
+          ]
+        },
+        "unread": [],
+        "note": "Both contact sheets opened. QULA-55 shows mature, blocky bark filling the frame with a clear pattern repeat. QULA-22 is mature furrowed bark with the whole trunk in view. QULA-68 is mature bark on an angled trunk, fairly close. QULA-33 ranks last: its trunk shows a reddish, lichen-patched surface, a less typical look for the group, and the bark area is smaller against a lawn background. Group 3 has one photo, QULA-24, a close view of mature bark with the pattern clear."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QULA-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QULA-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QULA-37",
+          "QULA-61",
+          "QULA-65",
+          "QULA-69"
+        ],
+        "2": [
+          "QULA-35",
+          "QULA-47",
+          "QULA-63"
+        ],
+        "3": [
+          "QULA-36",
+          "QULA-44",
+          "QULA-64",
+          "QULA-70"
+        ]
+      },
+      "keys": [
+        "QULA-37",
+        "QULA-61",
+        "QULA-65",
+        "QULA-69",
+        "QULA-35",
+        "QULA-47",
+        "QULA-63",
+        "QULA-36",
+        "QULA-44",
+        "QULA-64",
+        "QULA-70"
+      ],
+      "agentIds": [
+        "ac33b84e1cc3078c6"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QULA-61",
+            "QULA-65",
+            "QULA-37",
+            "QULA-69"
+          ],
+          "2": [
+            "QULA-47",
+            "QULA-35",
+            "QULA-63"
+          ],
+          "3": [
+            "QULA-44",
+            "QULA-36",
+            "QULA-70",
+            "QULA-64"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened, and every key of the three groups is ranked once. Ranking came from the sheets only. No photo files were opened. Group 1: QULA-61 ranks first because a hand gives a scale object in the frame, and the whole fruit is shown. QULA-65 follows as a clear whole fruit with leaves. QULA-37 and QULA-69 are clusters on the tree and partly cut off at the frame edge. Group 2: QULA-47 ranks first because it shows a ripe brown acorn and whole fruit. QULA-35 has several whole acorns in a clear view. QULA-63 is cropped at the edges. Group 3: QULA-44 and QULA-36 each show one whole fruit clearly. QULA-70 shows several small fruit at a distance. QULA-64 is a wide tree view with tiny fruit. The group line (other species mostly show picked fruit) was used only as the last tiebreak, and no photo in the cell is a picked fruit. QULA-61 is the closest, held in a hand."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QUAU-leaf",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-leaf",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-01"
+        ],
+        "2": [
+          "QUAU-04",
+          "QUAU-05",
+          "QUAU-07",
+          "QUAU-12",
+          "QUAU-15",
+          "QUAU-17",
+          "QUAU-47",
+          "QUAU-49",
+          "QUAU-53"
+        ],
+        "3": [
+          "QUAU-24",
+          "QUAU-27",
+          "QUAU-28",
+          "QUAU-29",
+          "QUAU-30",
+          "QUAU-41",
+          "QUAU-45",
+          "QUAU-48",
+          "QUAU-50",
+          "QUAU-51"
+        ]
+      },
+      "keys": [
+        "QUAU-01",
+        "QUAU-04",
+        "QUAU-05",
+        "QUAU-07",
+        "QUAU-12",
+        "QUAU-15",
+        "QUAU-17",
+        "QUAU-47",
+        "QUAU-49",
+        "QUAU-53",
+        "QUAU-24",
+        "QUAU-27",
+        "QUAU-28",
+        "QUAU-29",
+        "QUAU-30",
+        "QUAU-41",
+        "QUAU-45",
+        "QUAU-48",
+        "QUAU-50",
+        "QUAU-51"
+      ],
+      "agentIds": [
+        "aa800831bd900568b"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-01"
+          ],
+          "2": [
+            "QUAU-07",
+            "QUAU-04",
+            "QUAU-12",
+            "QUAU-17",
+            "QUAU-15",
+            "QUAU-47",
+            "QUAU-49",
+            "QUAU-53",
+            "QUAU-05"
+          ],
+          "3": [
+            "QUAU-51",
+            "QUAU-30",
+            "QUAU-27",
+            "QUAU-41",
+            "QUAU-28",
+            "QUAU-29",
+            "QUAU-48",
+            "QUAU-50",
+            "QUAU-45",
+            "QUAU-24"
+          ]
+        },
+        "unread": [],
+        "note": "Ranked from the four contact sheets only (haiku-1-1, haiku-2-1, haiku-3-1, haiku-3-2); all four opened. Group 1 has one key. In group 2, QUAU-07 and QUAU-04 are single green leaves seen from the upper side, so they lead; QUAU-12 shows two whole leaves on a black ground; QUAU-17 looks like the pale underside of one leaf; QUAU-05 is a distant canopy and ranks last. In group 3, QUAU-51 is one whole green leaf held in the hand (the hand does not count for leaf), and QUAU-30 is a large single upper-side leaf cropped at the edges; sprigs and canopy shots rank lower, and QUAU-24 (canopy against sky) ranks last. Hands and scale objects were not credited, since this is a leaf cell."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QUAU-bark",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-bark",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-10",
+          "QUAU-13",
+          "QUAU-32",
+          "QUAU-39",
+          "QUAU-46",
+          "QUAU-52"
+        ],
+        "2": [
+          "QUAU-11"
+        ],
+        "3": [
+          "QUAU-33",
+          "QUAU-55",
+          "QUAU-56"
+        ]
+      },
+      "keys": [
+        "QUAU-10",
+        "QUAU-13",
+        "QUAU-32",
+        "QUAU-39",
+        "QUAU-46",
+        "QUAU-52",
+        "QUAU-11",
+        "QUAU-33",
+        "QUAU-55",
+        "QUAU-56"
+      ],
+      "agentIds": [
+        "ab3d4e267727cdbd8"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-10",
+            "QUAU-13",
+            "QUAU-52",
+            "QUAU-39",
+            "QUAU-46",
+            "QUAU-32"
+          ],
+          "2": [
+            "QUAU-11"
+          ],
+          "3": [
+            "QUAU-33",
+            "QUAU-55",
+            "QUAU-56"
+          ]
+        },
+        "unread": [],
+        "note": "All three contact sheets opened and were read; no keys were unread. Group 1: QUAU-10 and QUAU-13 are close bark views with clear ridge pattern, and QUAU-52 is a close flaky-bark view. QUAU-39 is a wider trunk-base view with ground and a stick in frame. QUAU-46 has a branch crossing the frame, and QUAU-32 is a wider scene with a leaf on the trunk, so both rank last. Group 2 has one photo. Group 3: QUAU-33 is a close lichen-patched bark view. QUAU-55 and QUAU-56 are near-identical wider trunk views with leaves and background, so their order is close to a tie. Ranking follows the brief's preference order, with the group line favouring close bark."
+      }
+    },
+    {
+      "label": "rank:haiku:high:QUAU-fruit",
+      "kind": "rank",
+      "set": "heldout",
+      "model": "haiku",
+      "model_opt": "claude-haiku-5-5",
+      "effort": "high",
+      "variant": null,
+      "batch": null,
+      "cell": "QUAU-fruit",
+      "method": "R",
+      "groups": {
+        "1": [
+          "QUAU-02"
+        ],
+        "3": [
+          "QUAU-19",
+          "QUAU-23"
+        ]
+      },
+      "keys": [
+        "QUAU-02",
+        "QUAU-19",
+        "QUAU-23"
+      ],
+      "agentIds": [
+        "a8afced18b3e7e1b0"
+      ],
+      "states": [
+        "done"
+      ],
+      "result": {
+        "orders": {
+          "1": [
+            "QUAU-02"
+          ],
+          "3": [
+            "QUAU-19",
+            "QUAU-23"
+          ]
+        },
+        "unread": [],
+        "note": "Cell QUAU fruit. Both contact sheets opened. Group 1 has one photo, so its order is just QUAU-02. Group 3: QUAU-19 ranks first because it shows a twig with green leaves and small fruits in place. QUAU-23 ranks second because it is a cut cross-section of a green cup, not the whole fruit, and it has no leaf context. Both show unripe fruit, so neither fits the usual look well. The group line says the rest of the genus mostly shows picked fruit, and neither photo matches that. This is a close call and could go either way."
+      }
+    }
+  ]
+}
