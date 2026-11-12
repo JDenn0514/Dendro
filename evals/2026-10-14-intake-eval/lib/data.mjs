@@ -9,6 +9,8 @@ export const RUNS = ['simple_lobed_us', 'simple_lobed_us_add'];
 
 export const readJsonl = file => fs.readFileSync(file, 'utf8').split('\n').filter(Boolean).map(l => JSON.parse(l));
 export const readJson = file => JSON.parse(fs.readFileSync(file, 'utf8'));
+// An ArtifactData export: <dir>/<doc id>.json for each document. Returns { <doc id>: body }.
+export const readExport = dir => Object.fromEntries(fs.readdirSync(dir).filter(f => f.endsWith('.json')).map(f => [f.slice(0, -5), readJson(path.join(dir, f))]));
 export function writeJson(file, obj) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(obj, null, 2) + '\n');

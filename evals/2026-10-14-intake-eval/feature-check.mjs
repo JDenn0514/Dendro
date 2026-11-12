@@ -8,9 +8,10 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
 import { EVAL } from './lib/paths.mjs';
-import { readJson, writeJson } from './lib/data.mjs';
+import { readJson, writeJson, readExport } from './lib/data.mjs';
 import { featureSet, importFeatures, compareFeatures } from './lib/features.mjs';
 import { featurePage } from './pages/feature-page.mjs';
+import { pageLeaks } from './pages/style.mjs';
 
 const { values: args } = parseArgs({ options: { answers: { type: 'string' }, runs: { type: 'string', default: 'key-batch20' } } });
 const config = readJson(path.join(EVAL, 'config.json'));
@@ -22,8 +23,7 @@ if (args.answers) {
   // The leading set-ups' answers: loaded only here, so the page build never touches a judge answer.
   const { loadKeySteps } = await import('./lib/key-steps.mjs');
   const { v, setups } = loadKeySteps(args.runs.split(','));
-  const docs = Object.fromEntries(fs.readdirSync(args.answers).filter(f => f.endsWith('.json')).map(f => [f.slice(0, -5), readJson(path.join(args.answers, f))]));
-  const rows = importFeatures(docs, set);
+  const rows = importFeatures(readExport(args.answers), set);
   const answers = Object.fromEntries(setups.map(s => [s, v.answers[s]]));
   const compare = compareFeatures(rows, answers);
   const photos = rows.map(r => ({ ...r, judges: Object.fromEntries(setups.map(s => [s, Object.fromEntries(r.features.map(f => [f, answers[s][r.key]?.photo_features?.[f] ?? null]))])) }));
@@ -50,7 +50,7 @@ const items = set.map(it => {
 const html = featurePage(items);
 // The same check as the tests, on the real set: no key, review key, URL, or species in the page. The judge
 // code is matched as a whole word, because a credit can hold it inside a name.
-const leaks = items.flatMap(it => [...it.secrets.filter(s => s && html.includes(s)), ...(new RegExp(`\\b${it.code}\\b`).test(html) ? [it.code] : [])]);
+const leaks = pageLeaks(html, { text: items.flatMap(it => it.secrets), words: items.map(it => it.code) });
 if (leaks.length) throw new Error(`the page shows ${leaks.length} things it must not, such as ${leaks[0]}`);
 fs.writeFileSync(path.join(out, 'index.html'), html);
 const by = part => set.filter(p => p.part === part).length;
