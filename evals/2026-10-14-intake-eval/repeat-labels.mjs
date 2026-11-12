@@ -8,10 +8,11 @@ import path from 'node:path';
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
 import { EVAL } from './lib/paths.mjs';
-import { readJson, writeJson } from './lib/data.mjs';
+import { readJson, writeJson, readExport } from './lib/data.mjs';
 import { repeatSet, repeatPool, ownerRepeat } from './lib/repeat.mjs';
 import { importLabels } from './lib/answers.mjs';
 import { labelPage } from './pages/label-page.mjs';
+import { pageLeaks } from './pages/style.mjs';
 
 const { values: args } = parseArgs({ options: { answers: { type: 'string' } } });
 const config = readJson(path.join(EVAL, 'config.json'));
@@ -23,8 +24,7 @@ const keyFile = path.join(EVAL, 'heldout', 'repeat-key.json');
 if (args.answers) {
   // The committed key must be the draw, so the answers map to the photos the page showed.
   if (JSON.stringify(readJson(keyFile)) !== JSON.stringify(repeatKey)) throw new Error('heldout/repeat-key.json is not the draw of config.seed');
-  const docs = Object.fromEntries(fs.readdirSync(args.answers).filter(f => f.endsWith('.json')).map(f => [f.slice(0, -5), readJson(path.join(args.answers, f))]));
-  const repeat = importLabels(docs, repeatKey);
+  const repeat = importLabels(readExport(args.answers), repeatKey);
   writeJson(path.join(EVAL, 'heldout', 'repeat.json'), repeat);
   const a = ownerRepeat(readJson(path.join(EVAL, 'heldout', 'labels.json')), repeat);
   const pct = x => (x == null ? 'n/a' : `${(100 * x).toFixed(1)}%`);
@@ -34,6 +34,8 @@ if (args.answers) {
   process.exit(0);
 }
 
+// The key is committed once. A build that would change it stops, so the answers keep their photos.
+if (fs.existsSync(keyFile) && JSON.stringify(readJson(keyFile)) !== JSON.stringify(repeatKey)) throw new Error('heldout/repeat-key.json is not the draw of config.seed; the build does not overwrite it');
 writeJson(keyFile, repeatKey);
 const out = path.join(EVAL, 'images', 'pages', 'repeat');
 fs.rmSync(out, { recursive: true, force: true });
@@ -41,10 +43,9 @@ fs.mkdirSync(path.join(out, 'img'), { recursive: true });
 for (const r of set) fs.copyFileSync(path.join(EVAL, 'images', 'app', 'heldout', `${r.code}.jpg`), path.join(out, 'img', `${r.id}.jpg`));
 const html = labelPage(repeatPool(pool, set), { seed: config.seed, best: false, collection: 'repeat' });
 // The same check as the tests, on the real pool and for all 208 photos: no key, candidate id, or URL, and
-// no judge code or blind name of the label page. A code or a name is matched as a whole word, because a
-// credit can hold it inside a name ("Awinch1001" holds h100).
-const word = s => new RegExp(`\\b${s}\\b`).test(html);
-const leaks = pool.cells.flatMap(c => c.photos).flatMap(p => [...[p.key, p.id, p.url, p.fetch_url, p.credit.origin].filter(s => s && html.includes(s)), ...[p.code, p.blind].filter(word)]);
+// no judge code or blind name of the label page (whole words).
+const all = pool.cells.flatMap(c => c.photos);
+const leaks = pageLeaks(html, { text: all.flatMap(p => [p.key, p.id, p.url, p.fetch_url, p.credit.origin]), words: all.flatMap(p => [p.code, p.blind]) });
 if (leaks.length) throw new Error(`the page shows ${leaks.length} things it must not, such as ${leaks[0]}`);
 fs.writeFileSync(path.join(out, 'index.html'), html);
 const by = t => set.filter(r => r.target === t).length;

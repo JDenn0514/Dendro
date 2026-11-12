@@ -3,7 +3,7 @@
 // A thin-cell photo comes back from judgeSteps kept at difficulty step 3, so it scores as one.
 
 const EPS = 1e-9;
-const share = (num, den) => (den ? num / den : null);
+export const share = (num, den) => (den ? num / den : null);
 const mean = xs => (xs.length ? xs.reduce((s, x) => s + x, 0) / xs.length : null);
 const keptBoth = (x, y) => x?.keep === true && y?.keep === true;
 

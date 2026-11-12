@@ -1,7 +1,7 @@
 // The owner's repeat labels (plan Task 10): 40 held-out photos, labelled again a week after the label page.
 // Pure: no file and no network.
 import { pickOrder } from './seed.mjs';
-import { repeatAgreement } from './score.mjs';
+import { repeatAgreement, share } from './score.mjs';
 
 export const REPEAT_N = 40;
 
@@ -37,7 +37,7 @@ export function repeatPool(pool, set) {
 export function ownerRepeat(first, second) {
   const keys = Object.keys(second);
   for (const k of keys) if (!first[k]) throw new Error(`${k}: no first label`);
-  const a = new Map(keys.map(k => [k, first[k]])), b = new Map(keys.map(k => [k, second[k]]));
-  const { n, keep, both, exact, within1 } = repeatAgreement(keys, a, b);
-  return { n, part: keys.length ? keys.filter(k => first[k].part === second[k].part).length / keys.length : null, keep, both, exact, within1 };
+  const firstByKey = new Map(keys.map(k => [k, first[k]])), secondByKey = new Map(keys.map(k => [k, second[k]]));
+  const { n, keep, both, exact, within1 } = repeatAgreement(keys, firstByKey, secondByKey);
+  return { n, part: share(keys.filter(k => first[k].part === second[k].part).length, keys.length), keep, both, exact, within1 };
 }

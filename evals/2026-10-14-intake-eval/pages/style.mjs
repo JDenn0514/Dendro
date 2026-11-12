@@ -2,6 +2,14 @@
 // (a field sheet: a sticky bar, then sections with a grid of photo cards, 2 per row on a phone).
 // A page puts it after its <title> and adds its own rules before </style>.
 // HTML escape for text and attribute values on the owner's pages.
+// The leak check of a page build: the values of `text` found anywhere in the html, and the values of
+// `words` found as whole words (a credit can hold a code inside a name: "Awinch1001" holds h100). Empty
+// values are skipped. The build throws when the list is not empty.
+export const pageLeaks = (html, { text = [], words = [] }) => [
+  ...text.filter(s => s && html.includes(s)),
+  ...words.filter(s => s && new RegExp(`\\b${s}\\b`).test(html)),
+];
+
 export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 export const SHEET_HEAD = `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
