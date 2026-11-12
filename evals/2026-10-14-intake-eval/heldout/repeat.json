@@ -1,0 +1,242 @@
+{
+  "PLRA-11": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:20:50.263Z"
+  },
+  "PLRA-27": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-11T02:01:03.738Z"
+  },
+  "PLRA-31": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:14:10.775Z"
+  },
+  "PLRA-35": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-12T14:19:04.966Z"
+  },
+  "PLRA-43": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-12T14:14:23.517Z"
+  },
+  "PLRA-46": {
+    "part": "bark",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:14:06.317Z"
+  },
+  "PLRA-53": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-11T02:01:10.754Z"
+  },
+  "PLRA-61": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:14:21.592Z"
+  },
+  "PLRA-63": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-12T14:14:19.442Z"
+  },
+  "QUAU-08": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:16:54.746Z"
+  },
+  "QUAU-09": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:17:15.962Z"
+  },
+  "QUAU-12": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:16:59.571Z"
+  },
+  "QUAU-14": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:16:05.962Z"
+  },
+  "QUAU-19": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:17:08.042Z"
+  },
+  "QUAU-22": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:17:10.112Z"
+  },
+  "QUAU-31": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:16:42.912Z"
+  },
+  "QUAU-32": {
+    "part": "bark",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-12T14:15:54.712Z"
+  },
+  "QUAU-37": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:16:52.062Z"
+  },
+  "QUAU-38": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:17:13.004Z"
+  },
+  "QUAU-53": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:17:03.450Z"
+  },
+  "QUAU-55": {
+    "part": "bark",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-12T14:15:57.454Z"
+  },
+  "QULA-04": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:15:09.604Z"
+  },
+  "QULA-06": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:15:25.471Z"
+  },
+  "QULA-14": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-12T14:16:34.321Z"
+  },
+  "QULA-20": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:15:12.704Z"
+  },
+  "QULA-21": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:15:44.438Z"
+  },
+  "QULA-23": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-12T14:14:51.104Z"
+  },
+  "QULA-25": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-12T14:14:39.900Z"
+  },
+  "QULA-29": {
+    "part": "other",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:15:07.529Z"
+  },
+  "QULA-32": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-12T14:15:35.529Z"
+  },
+  "QULA-35": {
+    "part": "fruit",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-12T14:14:29.258Z"
+  },
+  "QULA-37": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:15:40.154Z"
+  },
+  "QULA-53": {
+    "part": "leaf",
+    "keep": true,
+    "step": 3,
+    "at": "2026-11-12T14:15:23.696Z"
+  },
+  "QULA-54": {
+    "part": "leaf",
+    "keep": false,
+    "step": null,
+    "at": "2026-11-12T14:14:36.608Z"
+  },
+  "QULA-58": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:15:15.354Z"
+  },
+  "QULA-59": {
+    "part": "leaf",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:14:53.338Z"
+  },
+  "QULA-63": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:15:30.046Z"
+  },
+  "QULA-65": {
+    "part": "fruit",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:14:59.287Z"
+  },
+  "QULA-66": {
+    "part": "leaf",
+    "keep": true,
+    "step": 2,
+    "at": "2026-11-12T14:14:33.092Z"
+  },
+  "QULA-68": {
+    "part": "bark",
+    "keep": true,
+    "step": 1,
+    "at": "2026-11-12T14:15:48.587Z"
+  }
+}
