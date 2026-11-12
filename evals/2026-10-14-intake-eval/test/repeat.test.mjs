@@ -2,6 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { repeatSet, ownerRepeat, REPEAT_N } from '../lib/repeat.mjs';
 import { importLabels } from '../lib/answers.mjs';
+import { readExport } from '../lib/data.mjs';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 
 // A pool of 3 species, 30 photos each, with the label page's blind names and the judge codes.
 const photo = (t, n, i) => ({ key: `${t}-${String(n).padStart(2, '0')}`, code: `h${String(i).padStart(3, '0')}`, blind: `o${String(i).padStart(3, '0')}` });
@@ -71,4 +75,13 @@ test('the owner repeat agreement: part and keep on all photos, the difficulty st
 
 test('the owner repeat agreement stops when a repeat photo has no first label', () => {
   assert.throws(() => ownerRepeat({}, { A: { part: 'leaf', keep: false, step: null } }), /A: no first label/);
+});
+
+test('an ArtifactData export reads as { <doc id>: body }, from the .json files only', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'export-'));
+  fs.writeFileSync(path.join(dir, 'r01.json'), JSON.stringify({ part: 'leaf', keep: false, step: null }));
+  fs.writeFileSync(path.join(dir, 'r02.json'), JSON.stringify({ part: 'bark', keep: true, step: 2 }));
+  fs.writeFileSync(path.join(dir, 'notes.txt'), 'not a document');
+  assert.deepEqual(readExport(dir), { r01: { part: 'leaf', keep: false, step: null }, r02: { part: 'bark', keep: true, step: 2 } });
+  fs.rmSync(dir, { recursive: true });
 });

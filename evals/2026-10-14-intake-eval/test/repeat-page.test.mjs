@@ -2,7 +2,11 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { repeatSet, repeatPool } from '../lib/repeat.mjs';
 import { labelPage } from '../pages/label-page.mjs';
-import { STEP_LEGEND } from '../pages/legend.mjs';
+import { STEP_LEGEND, PART_LEGEND } from '../pages/legend.mjs';
+import { pageLeaks } from '../pages/style.mjs';
+import { readJson } from '../lib/data.mjs';
+import { createHash } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 
 // A pool with markers the page must never show: the key, the judge code, the blind name of the label page,
 // the candidate id, the URLs, the hints, and an earlier answer of the owner.
@@ -35,7 +39,8 @@ test('the repeat page has the 40 photos by their repeat names, their credits, th
   for (const p of SET) assert.ok(html.includes(all.find(x => x.key === p.key).credit.author));
   assert.equal((html.match(/<section /g) ?? []).length, new Set(SET.map(p => p.target)).size);
   assert.ok(html.includes('What the steps mean'));
-  for (const [t] of STEP_LEGEND) assert.ok(html.includes(t), t);
+  for (const [t] of [...STEP_LEGEND, PART_LEGEND]) assert.ok(html.includes(t), t);
+  assert.ok(html.includes(PART_LEGEND[1]));
 });
 
 test('the repeat page saves to repeat/ and has no best-photo view', () => {
@@ -48,4 +53,16 @@ test('the repeat page saves to repeat/ and has no best-photo view', () => {
 test('the label page keeps its best-photo view and its labels collection', () => {
   const page = labelPage(POOL, { seed: 9 });
   assert.ok(page.includes('Best photo') && page.includes(`db.doc('labels/'`) && page.includes(`collection('best')`));
+});
+
+test('with the default options, the label page builds byte for byte as before Task 10', () => {
+  const at = f => fileURLToPath(new URL(`../${f}`, import.meta.url));
+  const page = labelPage(readJson(at('heldout/pools.json')), { seed: readJson(at('config.json')).pick_seed });
+  assert.equal(createHash('sha256').update(page).digest('hex'), '0facda9bd1defe1332662bff8e9f8ad8e3516719465e6a237f95e3548057272d');
+});
+
+test('the leak check finds a text anywhere, a word only as a whole word, and skips an empty value', () => {
+  const page = '<p>(c) Awinch1001, see https://x.org/1 and o017.</p>';
+  assert.deepEqual(pageLeaks(page, { text: ['https://x.org/1', 'PLRA-01', null, ''], words: ['h100', 'o017', 'o018', undefined] }), ['https://x.org/1', 'o017']);
+  assert.deepEqual(pageLeaks(page, { text: [], words: [] }), []);
 });
