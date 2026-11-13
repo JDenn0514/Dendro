@@ -56,7 +56,7 @@ The pipeline today:
 - The `source` of a new manifest row comes from the candidate, as today. This plan adds no `source` value, so `app/logic/sources.js` does not change.
 - Judges and rankers are agents of a workflow that the session launches. The CLI does not call a model. Every agent gets the full model ID and the effort `high`.
 - Judges read the 440 px copy only, with the Read tool. Rankers read contact sheets only. Neither runs Bash, writes a file, or opens a web page.
-- Every workflow over 10 agents needs the owner's yes before launch. The yes states the agent count and the USD range.
+- The owner's approval of this plan is the standing yes for the intake workflows of a content run (ruling 3 of 2026-11-13). The session tells the owner the agent count and the USD range before each launch, and does not wait for an answer. It stops and asks only when the spend of a run would pass 1.5 times its estimate. Other workflows of more than 10 agents still need the owner's yes.
 - No new npm dependency. Load `sharp` and the S3 client lazily (CI does not run `npm install`). Give `spawnSync` a `maxBuffer` of 256 MB. Build file paths with `path.join`; rows store root-relative paths with `/`.
 - Tests: `npm test` (app) and `npm run test:pipeline`. No test uses the network or a model. HTTP goes through an injected `fetchImpl`, image work through an injected `resize`, and the workflow record through fixture files.
 - Prose, comments, skill text, and commit messages use Simplified Technical English.
@@ -115,10 +115,11 @@ Each choice is the plan's default. The owner can change any of them in the plan 
 13. **Calls.** A call of the reject pass and of the judge pass holds up to 20 photos of one species, in fetch order (`candidates.jsonl` order, the last row of each `id`, no `fetch_error`, a repeated `file_hash` dropped). The judge pass takes the photos that the Haiku pass keeps under rule `K3`. A photo whose `answers.jsonl` already has a row for that pass, with the same brief and schema hash, is not judged again.
 14. **The rank pass.** One Sonnet agent per cell with 2 or more photos to rank. It gets every kept photo of the cell, from earlier fetches too, minus the owner's drops, so a later fetch ranks the whole cell again. The group line is the eval's (choice 9, `groupLine`), from the other species of the genus in the same run.
 15. **Collect checks.** `intake collect` reads the run record of each `--run` and the transcripts. It voids the answers of an agent that used a tool other than `Read` and `StructuredOutput`, ran another model, or left a photo out, and it lists those jobs. `intake jobs --retry` writes a new script with only those jobs. A void attempt stays in `costs.jsonl` with `counted: false`. Collect commits at once: `content(<name>): intake <pass> answers`.
-16. **The cost.** Each `intake jobs` prints the agents per model and a USD estimate with a range of 0.75 to 1.5 times: Haiku USD 0.00125 per photo, Sonnet USD 0.0138 per photo judged (55% of the candidates before the Haiku pass is known), and ranking USD 0.0757 + 0.00086 × n per cell. It prints `needs the owner's yes` when the script has more than 10 agents. `report.md` gives the measured tokens and USD per pass from `costs.jsonl`, and the USD per pick.
+16. **The cost.** Each `intake jobs` prints the agents per model and a USD estimate with a range of 0.75 to 1.5 times: Haiku USD 0.00125 per photo, Sonnet USD 0.0138 per photo judged (55% of the candidates before the Haiku pass is known), and ranking USD 0.0757 + 0.00086 × n per cell. It prints the run's ceiling: 1.5 times the estimate of the run (ruling 3). `report.md` gives the measured tokens and USD per pass from `costs.jsonl`, and the USD per pick.
 17. **Thin cells.** `cellSteps` runs the thin-cell rule (spec ruling 11). A thin-cell photo shows on the review sheet at difficulty step 3, marked as one. The owner decides it like any pick.
-18. **The old flow stays for old runs.** `photos stage`, `photos apply`, and `photos verdict` stay as they are, for a run with no `intake` field and for hand fixes. `intake` commands refuse a run with no `intake` field. The photo-check skill describes the new flow only (see Open question 2).
+18. **The old flow stays for old runs.** `photos stage`, `photos apply`, and `photos verdict` stay as they are, for a run with no `intake` field and for hand fixes. `intake` commands refuse a run with no `intake` field. The photo-check skill describes the new flow only (ruling 2).
 19. **The pilot.** A run of 10 agents or fewer, on a new run of one species, ends at `intake check` and does not build, so no photo reaches the manifest. It checks the scripts, the collect step, the model check, the costs, and the sheet with real agents. The branch closes without a merge unless the owner asks for the build.
+20. **The agreement record.** `intake check` appends one row per run to `pipeline/runs/<name>/intake/agreement.json`: per part and per difficulty step, the picks the owner checked, kept, and dropped, and the owner's difficulty step against the judge's. `report.md` shows it, and a new `intake agreement` command sums it over every run. This record is the evidence for any later cut in the owner's check (Open question 1).
 
 ## Phase 4 tasks
 
@@ -231,7 +232,7 @@ intake pick <name> --out <dir>
 intake check <name> --from <file>
 ```
 
-- `intake jobs` needs HEAD on `content/<name>`. It writes `intake/codes.json` the first time, the images, `<dir>/<name>-<pass>.js` (a workflow script in the form of `renderScript` of `EVAL/make-workflow.mjs`), and `<dir>/<name>-<pass>.jobs.json`. It prints the agents per model, the estimate, and `needs the owner's yes` above 10 agents. The judge pass refuses to start while a candidate has no reject answer. The rank pass refuses to start while a photo that the Haiku pass keeps has no judge answer. `--retry` takes only the jobs that the last collect listed.
+- `intake jobs` needs HEAD on `content/<name>`. It writes `intake/codes.json` the first time, the images, `<dir>/<name>-<pass>.js` (a workflow script in the form of `renderScript` of `EVAL/make-workflow.mjs`), and `<dir>/<name>-<pass>.jobs.json`. It prints the agents per model, the estimate, the spend of the run so far, and the ceiling. It exits 1, and writes no script, when the spend so far plus this estimate passes the ceiling. The judge pass refuses to start while a candidate has no reject answer. The rank pass refuses to start while a photo that the Haiku pass keeps has no judge answer. `--retry` takes only the jobs that the last collect listed.
 - `intake collect` finds the record under `$HOME/.claude/projects/` (the port of `findRecord`, `failedAgents`, `timeSpan`, and the token prices of `EVAL/lib/tokens.mjs`). It checks the model, the tools, and the coverage of each job (choice 15), appends `answers.jsonl` or `ranks.jsonl` and `costs.jsonl`, prints the jobs to run again, and commits the run paths.
 - `intake pick` writes `intake/picks.json` and prints per cell the picks per difficulty step, the short slots, the reserves, and the USD so far.
 
@@ -256,7 +257,7 @@ The sheet (`intake pick --out <dir>` writes `<dir>/sheet/index.html` and the 440
 - Controls: keep or drop, the difficulty step (shown on a keep), `not_for` (a short list of the depths and a text field), and a flag on a caption that looks wrong. Each tap saves `checks/<code>` to `db`. Only Editors and up read or write. A reload shows the saved answers.
 - The session publishes the page with the Artifact tool, after loading the `artifact-design` and `artifact-capabilities` skills, as in the eval. A sheet with more than 200 photos splits into pages by species.
 
-`intake check <name> --from <file>`: reads the `ArtifactData` export, refuses a keep with no difficulty step, an unknown code, or a photo that is not on the sheet, fills the slots (choice 6), and appends the verdict rows of choice 8 in one write. It runs the stop rule and the verdict check (`validateVerdicts`) before it writes. It prints the cells and the photos kept per difficulty step, and the slots still short.
+`intake check <name> --from <file>`: reads the `ArtifactData` export, refuses a keep with no difficulty step, an unknown code, or a photo that is not on the sheet, fills the slots (choice 6), and appends the verdict rows of choice 8 in one write. It runs the stop rule and the verdict check (`validateVerdicts`) before it writes. It prints the cells and the photos kept per difficulty step, and the slots still short. It appends the run's row to `intake/agreement.json` (choice 20).
 
 Tests: the sheet HTML holds no owner label and every code of `picks.json`; the export reader refuses each bad case above; the verdict rows for a fixture (an owner drop fills from a reserve; an owner step change goes on the `photo` object; the code rejects get `checked_by: intake`; a kept photo that no slot needs gets no row); a second `intake check` of the same file appends nothing.
 
@@ -299,7 +300,7 @@ The skill text follows the `writing-for-agents` guidance: ordered steps that eac
 
 `.claude/skills/photo-check/SKILL.md`, rewritten. Its steps:
 
-1. **Reject pass.** Run `intake jobs <name> --pass reject --out <scratchpad>`. When the script has more than 10 agents, ask the owner for the yes with the printed agent count and USD range. Launch the workflow. Done when the workflow has ended.
+1. **Reject pass.** Run `intake jobs <name> --pass reject --out <scratchpad>`. Tell the owner the printed agent count and USD range, and launch the workflow (the standing yes, ruling 3). When `intake jobs` exits on the ceiling, stop and ask the owner. Done when the workflow has ended.
 2. **Collect.** Run `intake collect` with the run ID at once, in the same session. Run `intake jobs --retry` and collect again until no job is listed. Done when `intake collect` lists no job.
 3. **Judge pass.** As steps 1 and 2 with `--pass judge`.
 4. **Rank pass.** As steps 1 and 2 with `--pass rank`.
@@ -361,7 +362,7 @@ From the measured held-out numbers (Facts). These are the numbers each `intake j
 | A run of 10 species, 60 candidates each, 3 parts | 600 | 30, 20, up to 30 | about 8 (6 to 12) |
 | A run of 20 species, 60 candidates each, 3 parts | 1,200 | 60, 40, up to 60 | about 16 (12 to 24) |
 
-At the held-out fill of 51.9%, a cell gets about 4 picks of 8 slots, so a run spends about USD 0.05 to 0.07 per pick (the record, Consequences). Each run of more than 10 agents needs the owner's yes before its first launch (see Open question 3).
+At the held-out fill of 51.9%, a cell gets about 4 picks of 8 slots, so a run spends about USD 0.05 to 0.07 per pick (the record, Consequences). The plan's approval is the standing yes for these runs. A run stops and asks only at 1.5 times its estimate (ruling 3).
 
 ## Summary of agents and cost
 
@@ -378,24 +379,22 @@ Code-review agents, when the owner asks for them, are not in this table, as in t
 - Read this plan diff and answer the open questions.
 - Read the skill diff of Task 9.
 - In the pilot, check the picks of one species on the sheet (about 3 minutes).
-- In each later run: the yes for the workflows, and the photo check of the picks and reserves. At about 4 seconds per photo (spec Part 3), a run of 10 species with about 4 picks and 6 reserves per cell is about 300 photos, or about 20 minutes.
+- In each later run: the photo check of the picks and reserves. At about 4 seconds per photo (spec Part 3), a run of 10 species with about 4 picks and 6 reserves per cell is about 300 photos, or about 20 minutes.
 
 ## Open questions
 
-1. **Where the owner's photo check sits.** The record says no method spares it. About 1 pick in 17 is one the owner drops.
-   - (a) Before the build: the picks and reserves go to the sheet, and only the owner's keeps become approves. No dropped photo reaches the bucket or the manifest. **Recommended**, and the default of this plan (choices 6 and 8).
-   - (b) In the pull request, after the build: faster for the agent, but each drop becomes a retired row that stays in the manifest for good (IDs are append-only).
-   - (c) A sample only, such as the step 1 picks: less owner time, but about 1 bad photo in 17 reaches learners.
-2. **The old photo-check flow.** The new skill describes Sonnet FR only. Should the old flow (one agent per photo, five fields, the `hard` tag) stay in the skill for a hand fix or a run with no `intake` field?
-   - (a) Remove it from the skill. The commands stay in the CLI for hand fixes (choice 18). **Recommended**: one flow per skill, and the old flow breaks the best-of ruling.
-   - (b) Keep it as a second section.
-3. **The owner's yes for a run.** A run has three workflows, and the agent count of the judge and rank passes is known only after the pass before.
-   - (a) One yes per run, before the reject pass, at the full estimate of the run. A later pass that would take the total over 1.5 times that estimate stops and asks again. **Recommended**: one question per run, with a hard ceiling.
-   - (b) One yes per pass, each with its own count and range.
-4. **Runs already judged the old way.** The candidates of `simple_lobed_us` and the other runs already have verdicts.
-   - (a) Phase 4 applies to new runs only. The photos in the manifest get the new fields in phase 5, the audit. **Recommended**.
-   - (b) Also judge again the unjudged candidates of the old runs with Sonnet FR.
+1. **Less owner check over time.** Ruling 1 starts with a check of every pick and reserve. The owner asked how the method can improve and need less oversight, with hundreds of species to come. The models do not learn from the owner's answers on their own: the brief and the rule are frozen. Two things can change over time, each from the agreement record (choice 20):
+   - **A trust ladder (no new eval).** The check moves down one rung after 3 runs in a row that meet the bar, and back up one rung on a run that fails it:
+     - Rung 1: every pick and reserve (the start).
+     - Rung 2: every step 1 pick, every thin-cell photo, and a random 20% of the rest.
+     - Rung 3: a random 10% of the picks.
+     - The proposed bar: the owner keeps 97% or more of the checked picks, and drops no step 1 pick. On the held-out set Sonnet FR met the second part (0 of 22 step 1 picks dropped) but not the first (94.1%).
+   - **A better method (a new eval).** After about 500 checked picks, the owner's calls are a large blind key. A later plan can test a brief with example photos from them (the spec's third variant), or a rule change. A rule change replays from the stored answers at no token cost. A new brief needs an eval run and the owner's ruling, as V1 did.
+   - Options: (a) both: the ladder in this plan (a `--check full|step1|sample` mode on `intake pick`, chosen from the agreement record), and the better method as a later plan. **Recommended.** (b) The ladder only. (c) Neither for now: keep the full check and decide after a few runs.
 
-## Rulings
+## Rulings of 2026-11-13
 
-None yet.
+1. **The owner's photo check sits before the build** (option a). The owner checks every pick and reserve. No dropped photo reaches the bucket or the manifest. The owner wants less oversight over time (Open question 1).
+2. **The old photo-check flow** leaves the skill (option a). Its commands stay in the CLI for hand fixes (choice 18).
+3. **No yes per run.** The owner's approval of this plan is the standing yes for the intake workflows of each content run. The session tells the owner the agent count and the USD range before each launch and goes on. A guard stays: a run stops and asks when its spend would pass 1.5 times its estimate (for example, when judges go off task and run again).
+4. **The reclassification of the published photos stays in phase 5** (option i). Phase 4 applies to new runs only. The phase 5 audit re-judges every published photo with Sonnet FR and sets its difficulty step.
