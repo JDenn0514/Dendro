@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { KEY_FEATURES, OTHER_FEATURES } from '../lib/step.mjs';
-import { judgeSteps, joinedOrder, lineAt, replayS, replayF, replayR, replayFR, replayCR } from '../lib/replay.mjs';
+import { FILTER_RULE, judgeSteps, joinedOrder, lineAt, replayS, replayF, replayR, replayFR, replayCR } from '../lib/replay.mjs';
 
 // The answers of one photo. Kinds: s1 (difficulty step 1), u1 (step 1, usual look), s2, s3, rej (a reject),
 // last (rejected by the last reject line only: kept at difficulty step 3 under rule K3).
@@ -142,6 +142,18 @@ test('FR drops Haiku\'s rejects before the ranking', () => {
   assert.equal(r.judged, 9);
   assert.equal(r.ranked, 3);
   close(r.cost.usd, 10 * 0.001 + 9 * 0.01 + 3);
+});
+
+test('the Haiku reject pass of F and FR runs under rule K3, as the FR ranking jobs ran, whatever the replay\'s rule', () => {
+  const { pool: p, answers, cost } = pool(10, { 1: 's1', 2: 's1', 3: 's1', 4: 's2' });
+  const filter = haikuOf(p, [k(3)]);
+  filter.answers[k(2)] = ans('leaf', 'last');
+  assert.equal(FILTER_RULE, 'K3');
+  const fr = replayFR(p, { filter, answers, cost, rule: 'P', quota: Q, rank: {}, line: lineOf(0, 1) });
+  assert.equal(fr.judged, 9);
+  assert.deepEqual(fr.cells['T-leaf'][1], [k(1), k(2)]);
+  const f = replayF(p, { filter, answers, cost, rule: 'P', quota: Q });
+  assert.deepEqual(f.cells['T-leaf'][1], [k(1), k(2)]);
 });
 
 test('CR keeps code order: a fruit with a scale object ranks first; a leaf with one does not', () => {
