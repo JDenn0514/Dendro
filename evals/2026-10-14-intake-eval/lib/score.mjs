@@ -30,6 +30,45 @@ export function agreement(keys, owner, steps, parts = null) {
   return { n, keep: share(keep, n), drops, drop_recall: share(recalled, drops), both, exact: share(exact, both), within1: share(within1, both), part: share(part, pn) };
 }
 
+// On the photos a method picks for the quota (cells: { <target>-<part>: { 1, 2, 3: [keys] } }): the share the
+// owner kept in the cell's part, and the share the owner kept there at the same difficulty step. Where the owner
+// labels no part (the key), a keep is a keep. Owner request 2026-11-13.
+export function pickAgreement(cells, owner) {
+  let n = 0, kept = 0, step = 0;
+  const one = { n: 0, 1: 0, 2: 0, 3: 0, dropped: 0 };
+  for (const [cell, c] of Object.entries(cells)) {
+    const part = cell.slice(cell.lastIndexOf('-') + 1);
+    for (const s of [1, 2, 3]) for (const key of c[s]) {
+      const o = owner[key], ok = o?.keep && (o.part == null || o.part === part);
+      n++;
+      if (ok) { kept++; if (o.step === s) step++; }
+      // step_one: the picks at difficulty step 1 by the owner's call (owner request 2026-11-13).
+      if (s === 1) { one.n++; if (ok) one[o.step]++; else one.dropped++; }
+    }
+  }
+  return { n, kept: share(kept, n), step: share(step, n), step_one: one };
+}
+
+// Step 1 or not (owner request 2026-11-13): on the photos that the owner and the other label both keep in the
+// same part, the share where both call the photo step 1 or both do not. other: Map key -> { keep, step, cell }
+// from judgeSteps, or { keep, step, part } for a second label of the owner. Part counts only where both have one.
+export function stepOneAgreement(keys, owner, other) {
+  let n = 0, agree = 0, owner_one = 0, judge_one = 0, both_one = 0;
+  for (const key of keys) {
+    const o = owner[key], j = other.get(key);
+    if (!o?.keep || !j?.keep) continue;
+    const part = j.part ?? (j.cell ? j.cell.slice(j.cell.lastIndexOf('-') + 1) : null);
+    if (o.part != null && part != null && o.part !== part) continue;
+    const a = o.step === 1, b = j.step === 1;
+    n++;
+    if (a === b) agree++;
+    if (a) owner_one++;
+    if (b) judge_one++;
+    if (a && b) both_one++;
+  }
+  return { n, agree: share(agree, n), owner_one, judge_one, both_one };
+}
+
 // Usual look (key only, secondary): on the photos both keep, the share where the judge agrees with the owner.
 export function usualLook(keys, owner, steps, answers, usual) {
   const ks = keys.filter(key => keptBoth(owner[key], steps.get(key)) && usual[key] != null);
@@ -149,8 +188,9 @@ export const MARGIN = 0.05;
 export const gates = row => Object.entries(GATES).every(([f, min]) => row[f] != null && row[f] >= min - EPS);
 
 // The ranking methods that pass the gates, within 5 points of the best exact difficulty step and of the best keep agreement.
-export function shortlist(rows) {
-  const ok = rows.filter(r => r.ranking && gates(r));
+// gated: false leaves out the gates (owner ruling 2026-10-27, item 4: no set-up passed them on the key).
+export function shortlist(rows, { gated = true } = {}) {
+  const ok = rows.filter(r => r.ranking && r.exact != null && r.keep != null && (!gated || gates(r)));
   if (!ok.length) return [];
   const bestExact = Math.max(...ok.map(r => r.exact)), bestKeep = Math.max(...ok.map(r => r.keep));
   return ok.filter(r => r.exact >= bestExact - MARGIN - EPS && r.keep >= bestKeep - MARGIN - EPS);
@@ -170,4 +210,24 @@ export function candidate(rows, check = () => true) {
     if (check(r)) return { candidate: r.id, checked };
   }
   return { candidate: null, checked };
+}
+
+// The decision rule after the freeze (spec Part 2, plan choice 16, owner ruling 2026-10-27, item 4), step by step.
+// key: the key's method rows under the frozen variant and rule, at the headline quota. heldout: the held-out
+// method rows with the same ids. ownerRepeat: { keep, exact } from lib/repeat.mjs. The shortlist leaves out
+// the fixed gates. Returns { shortlist, best, bar, checked: [{ id, usd_per_kept, keep, exact, pass }], candidate }.
+export function decision({ key, heldout, ownerRepeat }) {
+  const short = shortlist(key, { gated: false });
+  const ranked = key.filter(r => r.ranking && r.exact != null && r.keep != null);
+  const best = ranked.length ? { exact: Math.max(...ranked.map(r => r.exact)), keep: Math.max(...ranked.map(r => r.keep)) } : null;
+  const ids = new Set(short.map(r => r.id));
+  const check = r => heldoutCheck(r, ownerRepeat);
+  const { candidate: chosen, checked } = candidate(heldout.filter(r => ids.has(r.id)), check);
+  const byId = new Map(heldout.map(r => [r.id, r]));
+  return {
+    shortlist: short.map(r => r.id), best,
+    bar: { keep: ownerRepeat.keep - MARGIN, exact: ownerRepeat.exact - MARGIN },
+    checked: checked.map(id => { const r = byId.get(id); return { id, usd_per_kept: r.usd_per_kept, keep: r.keep, exact: r.exact, pass: check(r) }; }),
+    candidate: chosen,
+  };
 }

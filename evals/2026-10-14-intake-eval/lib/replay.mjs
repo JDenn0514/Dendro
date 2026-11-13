@@ -6,6 +6,9 @@
 import { cellSteps, codeOrder } from './step.mjs';
 
 export const BATCH = 10;
+// The rule of the Haiku reject pass of F and FR. The FR ranking jobs dropped Haiku's rejects under rule K3
+// (plan choice 8, rankSets in lib/rank-jobs.mjs), so the replay does too, whatever its own rule.
+export const FILTER_RULE = 'K3';
 const STEPS = [1, 2, 3];
 const zero = () => ({ tokens: 0, usd: 0 });
 const add = (x, y) => ({ tokens: x.tokens + y.tokens, usd: x.usd + y.usd });
@@ -104,9 +107,9 @@ export function replayS(pool, { answers, cost, rule, quota }) {
   return { cells: w.cells, filled: w.filled, judged: keys.length, filtered: 0, ranked: 0, unranked: 0, cost: sumCost(keys, cost) };
 }
 
-// filter: Haiku's { answers, cost }. Haiku answers for every photo; its rejects drop out (rule-aware).
+// filter: Haiku's { answers, cost }. Haiku answers for every photo; its rejects under FILTER_RULE drop out.
 export function replayF(pool, { filter, answers, cost, rule, quota }) {
-  const rest = kept(pool.target, pool.photos, filter.answers, rule);
+  const rest = kept(pool.target, pool.photos, filter.answers, FILTER_RULE);
   const w = walk(pool, rest, answers, rule, quota);
   const keys = w.seen.map(p => p.key);
   const c = add(sumCost(pool.photos.map(p => p.key), filter.cost), sumCost(keys, cost));
@@ -143,7 +146,7 @@ export function replayR(pool, { K, answers, cost, rule, quota, rank, line }) {
 }
 
 export function replayFR(pool, { filter, answers, cost, rule, quota, rank, line }) {
-  const judged = kept(pool.target, pool.photos, filter.answers, rule);
+  const judged = kept(pool.target, pool.photos, filter.answers, FILTER_RULE);
   const r = ranked(pool, judged, { answers, rule, quota, rank, line });
   const c = r.rankCost && add(add(sumCost(pool.photos.map(p => p.key), filter.cost), sumCost(judged.map(p => p.key), cost)), r.rankCost);
   return { cells: r.cells, filled: r.filled, judged: judged.length, filtered: pool.photos.length, ranked: r.ranked, unranked: r.unranked, cost: c };

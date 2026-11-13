@@ -1,23 +1,31 @@
-// node analyze.mjs --set key [--runs <run>,<run>] [--repeat <run>] [--labels v2]  ->  tables/<set>[-v2]/table.json, table.md
+// node analyze.mjs --set key|heldout [--runs <run>,<run>] [--repeat <run>] [--labels v2]  ->  tables/<set>[-v2]/table.json, table.md
 // Replays methods S, F, R, FR, and CR from the stored answers of the runs and scores them. No tokens.
 // --runs: the runs to read (default: every run in runs/ with jobs of the set). A job label in two runs is a problem.
 // --repeat: second runs of the same set-ups (one or more, comma-separated), for the repeat agreement.
 // --labels v2: score against key v2 (lib/key-v2.mjs), the owner's labels with the later calls on top. Key only.
+// --set heldout: the owner's labels are heldout/labels.json, the best photos heldout/best.json, and the rule is the
+// frozen rule (frozen.json). The decision rule takes its shortlist from tables/key-v2/ (run the key first).
 import path from 'node:path';
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
 import { ROOT, EVAL } from './lib/paths.mjs';
 import { readJson, writeJson } from './lib/data.mjs';
 import { buildViews } from './lib/views.mjs';
-import { judgeSteps, replayS, replayF, replayR, replayFR, replayCR } from './lib/replay.mjs';
-import { methodSetups, filterOf as filterFor } from './lib/setups.mjs';
+import { FILTER_RULE, judgeSteps, replayS, replayF, replayR, replayFR, replayCR } from './lib/replay.mjs';
+import { methodSetups, filterOf as filterFor, leadingSetup } from './lib/setups.mjs';
+import { speciesPools, heldoutOwner } from './lib/heldout.mjs';
+import { ownerRepeat } from './lib/repeat.mjs';
 import { keyV2 } from './lib/key-v2.mjs';
-import { agreement, usualLook, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, gates, shortlist } from './lib/score.mjs';
+import { agreement, usualLook, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, gates, shortlist, decision, pickAgreement, stepOneAgreement } from './lib/score.mjs';
 
 const { values: args } = parseArgs({ options: { set: { type: 'string', default: 'key' }, runs: { type: 'string' }, repeat: { type: 'string' }, labels: { type: 'string' } } });
 const config = readJson(path.join(EVAL, 'config.json'));
 const pools = readJson(path.join(EVAL, args.set, 'pools.json'));
 const problems = [];
+const heldout = args.set === 'heldout';
+const frozen = readJson(path.join(EVAL, 'frozen.json'));
+// On the held-out set, only the frozen rule (plan Task 11).
+const rules = heldout ? [frozen.rule] : config.rules;
 
 // The runs: merge jobs, tokens, and times.
 function loadRuns(names) {
@@ -40,21 +48,15 @@ const { jobs, tokens, times } = loadRuns(runNames);
 const v = buildViews(jobs, tokens);
 problems.push(...v.problems);
 
-// The species pools in fetch order. On the key, the cells of a species interleave by the key number n.
-const order = new Map(pools.cells.map((c, i) => [c.cell, i]));
-const species = [];
-for (const c of pools.cells) {
-  let s = species.find(x => x.target === c.target);
-  if (!s) species.push(s = { target: c.target, parts: [], photos: [] });
-  s.parts.push(c.part);
-  for (const p of c.photos) s.photos.push({ key: p.key, n: p.n, part: p.part ?? null, cell: c.cell, source: p.source, source_species: p.source_species });
-}
-for (const s of species) s.photos.sort((a, b) => a.n - b.n || order.get(a.cell) - order.get(b.cell));
+// The species pools in fetch order. On the held-out set, the judge's part sets each photo's cell.
+const species = speciesPools(pools);
 const allPhotos = species.flatMap(s => s.photos);
-let owner = Object.fromEntries(pools.cells.flatMap(c => c.photos.map(p => [p.key, p.owner])));
+let owner = heldout ? heldoutOwner(readJson(path.join(EVAL, 'heldout', 'labels.json'))) : Object.fromEntries(pools.cells.flatMap(c => c.photos.map(p => [p.key, p.owner])));
 if (args.labels && (args.labels !== 'v2' || args.set !== 'key')) throw new Error('--labels takes v2, on the key only');
 if (args.labels) owner = keyV2(owner, readJson(path.join(EVAL, 'key', 'gate-examples.json')), readJson(path.join(EVAL, 'key', 'relabel.json'))).owner;
-const best = Object.fromEntries(pools.cells.filter(c => c.best).map(c => [c.cell, c.best]));
+const best = heldout
+  ? Object.fromEntries(Object.entries(readJson(path.join(EVAL, 'heldout', 'best.json'))).map(([cell, b]) => [cell, b.key]))
+  : Object.fromEntries(pools.cells.filter(c => c.best).map(c => [c.cell, c.best]));
 
 // Usual look on the key: the owner kept the agent's value on every photo of the picks file.
 const usual = {};
@@ -73,7 +75,7 @@ function stepsOf(pools, setup, rule, filter) {
   for (const s of pools) {
     let photos = s.photos;
     if (filter) {
-      const f = judgeSteps(s.target, photos, v.answers[filter], rule);
+      const f = judgeSteps(s.target, photos, v.answers[filter], FILTER_RULE);
       for (const p of photos) if (!f.get(p.key).keep) out.set(p.key, { ...f.get(p.key), line: `filter_${f.get(p.key).line}` });
       photos = photos.filter(p => f.get(p.key).keep);
     }
@@ -99,15 +101,20 @@ for (const j of jobs.filter(j => j.kind === 'judge' && times[j.label])) {
 
 // 1. Set-up rows: agreement belongs to the set-up, the rule, and the Haiku reject pass (plan choice 15).
 const setupRows = [];
-for (const setup of setups) for (const rule of config.rules) for (const filter of [null, filterOf(setup)].filter((x, i) => i === 0 || x)) {
+for (const setup of setups) for (const rule of rules) for (const filter of [null, filterOf(setup)].filter((x, i) => i === 0 || x)) {
   const ps = cut(filter ? [setup, filter] : [setup]);
   const keys = keysOf(ps), steps = stepsOf(ps, setup, rule, filter);
   const thin = keys.filter(k => steps.get(k).thin_cell);
+  // Part agreement (held-out set only): the judge's part against the owner's, on every photo with a label.
+  const parts = heldout ? Object.fromEntries(keys.map(k => [k, v.answers[setup][k]?.part ?? null])) : null;
   setupRows.push({
     id: `${setup}/${rule}${filter ? '/F' : ''}`, setup, rule, filter, photos: keys.length,
     no_answer: keys.filter(k => v.answers[setup][k] == null).length,
     part_errors: keys.filter(k => steps.get(k).line?.endsWith('part_error')).length,
-    ...agreement(keys, owner, steps),
+    ...agreement(keys, owner, steps, parts),
+    step_one: stepOneAgreement(keys, owner, steps),
+    // Photos that the owner and the judge both keep, in different parts (held-out set only).
+    kept_other_part: heldout ? keys.filter(k => owner[k]?.keep && steps.get(k).keep && owner[k].part !== parts[k]).length : null,
     usual_look: args.set === 'key' ? usualLook(keys, owner, steps, v.answers[setup], usual) : null,
     usd_per_photo: keys.length ? keys.reduce((s, k) => s + (v.judgeCost[setup][k]?.usd ?? 0), 0) / keys.length : null,
     minutes_per_100: minutesPer100(spans[setup] ?? []),
@@ -153,15 +160,15 @@ for (const setup of mainSetups) {
       { name: 'FR', ranking: true, pools: two, filter: true, run: (p, o) => replayFR(p, { ...o, filter: filt, rank: rankFR }) },
     ] : []),
   ];
-  for (const rule of config.rules) for (const [qName, quota] of Object.entries(config.quotas)) for (const meth of methods) {
+  for (const rule of rules) for (const [qName, quota] of Object.entries(config.quotas)) for (const meth of methods) {
     const results = meth.pools.map(p => meth.run(p, { ...opts, rule, quota }));
     const cells = Object.assign({}, ...results.map(r => r.cells));
     const a = setupRow(setup, rule, meth.filter ? filter : null);
     methodRows.push({
       id: `${meth.name}/${setup}/${rule}/${qName}`, method: meth.name, setup, rule, quota: qName, ranking: !!meth.ranking,
-      keep: a.keep, drop_recall: a.drop_recall, exact: a.exact, within1: a.within1,
+      keep: a.keep, drop_recall: a.drop_recall, exact: a.exact, within1: a.within1, part: a.part,
       ranked: results.reduce((s, r) => s + r.ranked, 0), unranked: results.reduce((s, r) => s + r.unranked, 0),
-      fill: quotaFill(results), ...costPer(results), top_pick: topPickScore(cells, best), cells,
+      fill: quotaFill(results), ...costPer(results), top_pick: topPickScore(cells, best), picks: pickAgreement(cells, owner), cells,
     });
   }
   // How often the top photo of "all" comes after photo K (spec, method R).
@@ -179,13 +186,13 @@ const groups = [...new Set(headline.map(r => `${r.setup.split(':')[2]}/${r.rule}
 const shortBy = Object.fromEntries(groups.map(g => [g, shortlist(headline.filter(r => `${r.setup.split(':')[2]}/${r.rule}` === g)).map(r => r.id)]));
 const short = Object.values(shortBy).flat();
 
-// 4. The batch-size test (owner ruling 2026-10-23).
+// 4. The batch-size test (owner ruling 2026-10-23). Key only: the held-out set ran in calls of 20 alone.
 const batch = [];
-for (const setup of setups.filter(s => /:n\d+$/.test(s))) {
+for (const setup of heldout ? [] : setups.filter(s => /:n\d+$/.test(s))) {
   const ten = setup.replace(/:n\d+$/, '');
   if (!v.answers[ten]) { problems.push(`${setup}: no set-up ${ten} to compare with`); continue; }
   const ps = cut([setup, ten]), keys = keysOf(ps);
-  for (const rule of config.rules) {
+  for (const rule of rules) {
     const b = batchScore(keys, owner, { steps: stepsOf(ps, ten, rule, null), cost: v.judgeCost[ten] }, { steps: stepsOf(ps, setup, rule, null), cost: v.judgeCost[setup] });
     batch.push({ setup, rule, photos: keys.length, ...b });
   }
@@ -198,12 +205,27 @@ if (args.repeat) {
   problems.push(...v2.problems.map(p => `repeat: ${p}`));
   for (const setup of Object.keys(v2.answers).filter(s => v.answers[s])) {
     const ps = species.map(s => ({ ...s, photos: s.photos.filter(p => p.key in v.answers[setup] && p.key in v2.answers[setup]) })).filter(s => s.photos.length);
-    for (const rule of config.rules) {
+    for (const rule of rules) {
       const second = new Map();
       for (const s of ps) for (const [k, x] of judgeSteps(s.target, s.photos, v2.answers[setup], rule)) second.set(k, x);
       repeat.push({ setup, rule, ...repeatAgreement(keysOf(ps), stepsOf(ps, setup, rule, null), second) });
     }
   }
+}
+
+// 6. The decision rule after the freeze (held-out set only): the shortlist from key v2 under the frozen
+// variant, rule, and set-ups, at the headline quota; then the candidate and the check on the held-out set.
+let owner_repeat = null, owner_repeat_step_one = null, decided = null;
+if (heldout) {
+  owner_repeat = ownerRepeat(readJson(path.join(EVAL, 'heldout', 'labels.json')), readJson(path.join(EVAL, 'heldout', 'repeat.json')));
+  // Step 1 or not, the owner against the owner, as for a judge (owner request 2026-11-13).
+  const second = heldoutOwner(readJson(path.join(EVAL, 'heldout', 'repeat.json')));
+  owner_repeat_step_one = stepOneAgreement(Object.keys(second), owner, new Map(Object.entries(second)));
+  const frozenSetups = Object.keys(config.model_opt).map(m => leadingSetup({ leading: frozen }, m));
+  const pick = rows => rows.filter(r => frozenSetups.includes(r.setup) && r.rule === frozen.rule && r.quota === config.headline_quota);
+  const keyRows = pick(readJson(path.join(EVAL, 'tables', 'key-v2', 'table.json')).methods);
+  if (!keyRows.length) problems.push('tables/key-v2/: no method row of the frozen set-ups');
+  decided = { frozen_setups: frozenSetups, ...decision({ key: keyRows, heldout: pick(methodRows), ownerRepeat: owner_repeat }) };
 }
 
 const doubt = Object.fromEntries(setups.map(s => [s, speciesDoubt(allPhotos.filter(p => p.key in v.answers[s]), v.answers[s])]));
@@ -212,7 +234,7 @@ const outDir = path.join(EVAL, 'tables', args.labels ? `${args.set}-${args.label
 fs.mkdirSync(outDir, { recursive: true });
 writeJson(path.join(outDir, 'table.json'), {
   set: args.set, labels: args.labels ?? 'v1', runs: runNames, repeat_run: args.repeat ?? null, problems, checks: v.checks, no_answer: v.noAnswer, unread: v.unread,
-  lines, setups: setupRows, methods: methodRows, shortlist: shortBy, batch, repeat, species_doubt: doubt,
+  lines, setups: setupRows, methods: methodRows, shortlist: shortBy, batch, repeat, species_doubt: doubt, owner_repeat, owner_repeat_step_one, decision: decided,
 });
 
 const md = [
@@ -227,9 +249,10 @@ const md = [
   '',
   'A set-up is one model, effort, and prompt variant (`:n20`: calls of 20). `/F`: Haiku\'s reject pass first. Agreement is against the owner, on the photos the set-up judged. Exact and within one are on the photos that both keep. A thin-cell photo counts as kept at difficulty step 3.',
   '',
-  '| set-up | photos | no answer | part errors | keep | drop recall | exact difficulty step | within one | usual look | USD per photo | minutes per 100 | thin cell |',
-  '|---|---|---|---|---|---|---|---|---|---|---|---|',
-  ...setupRows.map(r => `| ${r.id} | ${r.photos} | ${r.no_answer} | ${r.part_errors} | ${pct(r.keep)} | ${pct(r.drop_recall)} | ${pct(r.exact)} | ${pct(r.within1)} | ${pct(r.usual_look)} | ${f4(r.usd_per_photo)} | ${r.minutes_per_100 == null ? '-' : r.minutes_per_100.toFixed(1)} | ${r.thin_cell.join(' ') || '-'} |`),
+  ...(heldout ? ['On the held-out set, "part" is the judge\'s part against the owner\'s on every photo, and "kept, other part" counts the photos that both keep in different parts. A photo that the owner or the judge puts in the part other is a reject for keep.', ''] : []),
+  '| set-up | photos | no answer | part errors | part | kept, other part | keep | drop recall | exact difficulty step | within one | step 1 or not | usual look | USD per photo | minutes per 100 | thin cell |',
+  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
+  ...setupRows.map(r => `| ${r.id} | ${r.photos} | ${r.no_answer} | ${r.part_errors} | ${pct(r.part)} | ${r.kept_other_part ?? '-'} | ${pct(r.keep)} | ${pct(r.drop_recall)} | ${pct(r.exact)} | ${pct(r.within1)} | ${pct(r.step_one.agree)} | ${pct(r.usual_look)} | ${f4(r.usd_per_photo)} | ${r.minutes_per_100 == null ? '-' : r.minutes_per_100.toFixed(1)} | ${r.thin_cell.join(' ') || '-'} |`),
   '',
   '## Batch size',
   '',
@@ -237,7 +260,7 @@ const md = [
     '| set-up | rule | photos | keep (10, 20) | exact difficulty step (10, 20) | within one (10, 20) | 10 and 20 agree on keep | on exact difficulty step | on within one | USD per photo (10, 20) |',
     '|---|---|---|---|---|---|---|---|---|---|',
     ...batch.map(b => `| ${b.setup} | ${b.rule} | ${b.photos} | ${pct(b.ten.keep)}, ${pct(b.twenty.keep)} | ${pct(b.ten.exact)}, ${pct(b.twenty.exact)} | ${pct(b.ten.within1)}, ${pct(b.twenty.within1)} | ${pct(b.between.keep)} | ${pct(b.between.exact)} | ${pct(b.between.within1)} | ${f4(b.usd_per_photo.ten)}, ${f4(b.usd_per_photo.twenty)} |`),
-  ] : ['No set-up in calls of 20 yet.']),
+  ] : [heldout ? 'Key only: the held-out set ran in calls of 20 alone.' : 'No set-up in calls of 20 yet.']),
   '',
   '## Repeat',
   '',
@@ -251,11 +274,24 @@ const md = [
   '',
   `Quotas ${config.headline_quota} (the headline) and Q221. \`${config.headline_quota}\` rows that pass the gates: ${headline.filter(r => r.gates).length}. The shortlist is provisional until Task 7 freezes a variant and a rule, so it is made per variant and rule: ${groups.map(g => `${g} ${shortBy[g].length}`).join(', ')} rows (ids in \`table.json\`). S and F keep photos in fetch order and run as cost baselines only. Keep and the difficulty step come from the set-up row. "No ranking": cells with 2 or more photos to rank and no ranking, which keep fetch order. Q442 is in \`table.json\`.`,
   '',
-  '| method | set-up | rule | quota | gates | judged | ranked | no ranking | quota fill | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |',
-  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
+  '| method | set-up | rule | quota | gates | judged | ranked | no ranking | quota fill | top pick | top of all after K | picks the owner kept | picks at the owner\'s step | USD | USD per photo | USD per kept photo | tokens per kept photo |',
+  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
   ...methodRows.filter(r => r.quota === config.headline_quota || r.quota === 'Q221')
-    .map(r => `| ${r.method} | ${r.setup} | ${r.rule} | ${r.quota} | ${r.gates ? 'pass' : 'fail'}${short.includes(r.id) ? ', shortlist' : ''} | ${r.fill.judged} | ${r.ranked} | ${r.unranked} | ${pct(r.fill.share)} | ${pct(r.top_pick)} | ${pct(r.best_after_k)} | ${f4(r.usd)} | ${f4(r.usd_per_photo)} | ${f4(r.usd_per_kept)} | ${r.tokens_per_kept == null ? '-' : Math.round(r.tokens_per_kept)} |`),
+    .map(r => `| ${r.method} | ${r.setup} | ${r.rule} | ${r.quota} | ${r.gates ? 'pass' : 'fail'}${short.includes(r.id) ? ', shortlist' : ''} | ${r.fill.judged} | ${r.ranked} | ${r.unranked} | ${pct(r.fill.share)} | ${pct(r.top_pick)} | ${pct(r.best_after_k)} | ${pct(r.picks.kept)} | ${pct(r.picks.step)} | ${f4(r.usd)} | ${f4(r.usd_per_photo)} | ${f4(r.usd_per_kept)} | ${r.tokens_per_kept == null ? '-' : Math.round(r.tokens_per_kept)} |`),
   '',
+  ...(decided ? [
+    '## The decision rule',
+    '',
+    `The owner's repeat agreement (${owner_repeat.n} photos): keep ${pct(owner_repeat.keep)}, exact difficulty step ${pct(owner_repeat.exact)} (${owner_repeat.both} photos kept both times). The bar of \`heldoutCheck\`: keep ${pct(decided.bar.keep)}, exact ${pct(decided.bar.exact)}.`,
+    `Shortlist from \`tables/key-v2/\` (the frozen set-ups, rule ${frozen.rule}, ${config.headline_quota}, no fixed gates): best exact ${pct(decided.best?.exact)}, best keep ${pct(decided.best?.keep)}; ${decided.shortlist.length} rows: ${decided.shortlist.join(', ')}.`,
+    '',
+    '| checked, cheapest first | USD per kept photo | keep | exact difficulty step | check |',
+    '|---|---|---|---|---|',
+    ...decided.checked.map(c => `| ${c.id} | ${f4(c.usd_per_kept)} | ${pct(c.keep)} | ${pct(c.exact)} | ${c.pass ? 'pass' : 'fail'} |`),
+    '',
+    `Candidate: ${decided.candidate ?? 'none'}.`,
+    '',
+  ] : []),
   '## Species doubt',
   '',
   ...Object.entries(doubt).flatMap(([s, d]) => d.map(x => `- ${s}: ${x.key}, ${x.kind}, source name ${x.source_species}`)),
