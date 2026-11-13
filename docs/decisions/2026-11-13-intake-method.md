@@ -20,6 +20,8 @@ Date: 2026-11-13. Status: decided by the owner, not yet in the pipeline.
   | **Sonnet FR** | 51 | 94.1% | 64.7% | **0.0525** | 51.9% |
   | Haiku Rall | 48 | 89.6% | 54.2% | 0.0064 | 55.6% |
 
+- Step 1 or not (asked on 2026-11-13), on the photos that the owner and the judge both keep: Sonnet agrees with the owner on 82.9%, Haiku on 80.0%, and Opus on 74.0%. The owner agrees with the owner on 72.2% (18 photos). Of the 22 photos Sonnet FR puts at step 1, the owner called 18 step 1, 2 step 2, and 2 step 3, and dropped none.
+
 ## Decision
 
 1. **The intake method is Sonnet FR**, in place of the rule's Opus CR20.
