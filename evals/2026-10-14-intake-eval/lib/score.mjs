@@ -149,8 +149,9 @@ export const MARGIN = 0.05;
 export const gates = row => Object.entries(GATES).every(([f, min]) => row[f] != null && row[f] >= min - EPS);
 
 // The ranking methods that pass the gates, within 5 points of the best exact difficulty step and of the best keep agreement.
-export function shortlist(rows) {
-  const ok = rows.filter(r => r.ranking && gates(r));
+// gated: false leaves out the gates (owner ruling 2026-10-27, item 4: no set-up passed them on the key).
+export function shortlist(rows, { gated = true } = {}) {
+  const ok = rows.filter(r => r.ranking && r.exact != null && r.keep != null && (!gated || gates(r)));
   if (!ok.length) return [];
   const bestExact = Math.max(...ok.map(r => r.exact)), bestKeep = Math.max(...ok.map(r => r.keep));
   return ok.filter(r => r.exact >= bestExact - MARGIN - EPS && r.keep >= bestKeep - MARGIN - EPS);
@@ -170,4 +171,24 @@ export function candidate(rows, check = () => true) {
     if (check(r)) return { candidate: r.id, checked };
   }
   return { candidate: null, checked };
+}
+
+// The decision rule after the freeze (spec Part 2, plan choice 16, owner ruling 2026-10-27, item 4), step by step.
+// key: the key's method rows under the frozen variant and rule, at the headline quota. heldout: the held-out
+// method rows with the same ids. ownerRepeat: { keep, exact } from lib/repeat.mjs. The shortlist leaves out
+// the fixed gates. Returns { shortlist, best, bar, checked: [{ id, usd_per_kept, keep, exact, pass }], candidate }.
+export function decision({ key, heldout, ownerRepeat }) {
+  const short = shortlist(key, { gated: false });
+  const ranked = key.filter(r => r.ranking && r.exact != null && r.keep != null);
+  const best = ranked.length ? { exact: Math.max(...ranked.map(r => r.exact)), keep: Math.max(...ranked.map(r => r.keep)) } : null;
+  const ids = new Set(short.map(r => r.id));
+  const check = r => heldoutCheck(r, ownerRepeat);
+  const { candidate: chosen, checked } = candidate(heldout.filter(r => ids.has(r.id)), check);
+  const byId = new Map(heldout.map(r => [r.id, r]));
+  return {
+    shortlist: short.map(r => r.id), best,
+    bar: { keep: ownerRepeat.keep - MARGIN, exact: ownerRepeat.exact - MARGIN },
+    checked: checked.map(id => { const r = byId.get(id); return { id, usd_per_kept: r.usd_per_kept, keep: r.keep, exact: r.exact, pass: check(r) }; }),
+    candidate: chosen,
+  };
 }
