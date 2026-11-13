@@ -119,7 +119,8 @@ Each choice is the plan's default. The owner can change any of them in the plan 
 17. **Thin cells.** `cellSteps` runs the thin-cell rule (spec ruling 11). A thin-cell photo shows on the review sheet at difficulty step 3, marked as one. The owner decides it like any pick.
 18. **The old flow stays for old runs.** `photos stage`, `photos apply`, and `photos verdict` stay as they are, for a run with no `intake` field and for hand fixes. `intake` commands refuse a run with no `intake` field. The photo-check skill describes the new flow only (ruling 2).
 19. **The pilot.** A run of 10 agents or fewer, on a new run of one species, ends at `intake check` and does not build, so no photo reaches the manifest. It checks the scripts, the collect step, the model check, the costs, and the sheet with real agents. The branch closes without a merge unless the owner asks for the build.
-20. **The agreement record.** `intake check` appends one row per run to `pipeline/runs/<name>/intake/agreement.json`: per part and per difficulty step, the picks the owner checked, kept, and dropped, and the owner's difficulty step against the judge's. `report.md` shows it, and a new `intake agreement` command sums it over every run. This record is the evidence for any later cut in the owner's check (Open question 1).
+20. **The agreement record.** `intake check` appends one row per run to `pipeline/runs/<name>/intake/agreement.json`: per part and per difficulty step, the picks the owner checked, kept, and dropped, and the owner's difficulty step against the judge's. `report.md` shows it, and a new `intake agreement` command sums it over every run. This record sets the rung of the trust ladder (choice 21).
+21. **The trust ladder** (ruling 5). `intake pick` takes `--check full|step1|sample`. `full` (rung 1) puts every pick and reserve on the sheet. `step1` (rung 2) puts every step 1 pick, every thin-cell photo, and a random 20% of the other picks, with their reserves. `sample` (rung 3) puts a random 10% of the picks. The random draw uses a seed from the run name, so a second `intake pick` draws the same photos. A pick that the sheet leaves out becomes an approve with `checked_by: intake` and the judge's difficulty step. `intake agreement` prints the rung that the record allows: the check moves down one rung after 3 runs in a row that meet the bar, and up one rung after any run that fails it. The bar: the owner keeps 97% or more of the checked picks, and drops no step 1 pick. A run starts on rung 1 when the record has fewer than 3 runs. The skill uses the rung that `intake agreement` prints. Only the owner can choose a lower rung than that.
 
 ## Phase 4 tasks
 
@@ -228,7 +229,8 @@ Usage lines:
 ```
 intake jobs <name> --pass reject|judge|rank --out <dir> [--retry]
 intake collect <name> --pass reject|judge|rank --run <id> [--run <id> ...]
-intake pick <name> --out <dir>
+intake pick <name> --out <dir> --check full|step1|sample
+intake agreement
 intake check <name> --from <file>
 ```
 
@@ -257,9 +259,9 @@ The sheet (`intake pick --out <dir>` writes `<dir>/sheet/index.html` and the 440
 - Controls: keep or drop, the difficulty step (shown on a keep), `not_for` (a short list of the depths and a text field), and a flag on a caption that looks wrong. Each tap saves `checks/<code>` to `db`. Only Editors and up read or write. A reload shows the saved answers.
 - The session publishes the page with the Artifact tool, after loading the `artifact-design` and `artifact-capabilities` skills, as in the eval. A sheet with more than 200 photos splits into pages by species.
 
-`intake check <name> --from <file>`: reads the `ArtifactData` export, refuses a keep with no difficulty step, an unknown code, or a photo that is not on the sheet, fills the slots (choice 6), and appends the verdict rows of choice 8 in one write. It runs the stop rule and the verdict check (`validateVerdicts`) before it writes. It prints the cells and the photos kept per difficulty step, and the slots still short. It appends the run's row to `intake/agreement.json` (choice 20).
+`intake check <name> --from <file>`: reads the `ArtifactData` export, refuses a keep with no difficulty step, an unknown code, or a photo that is not on the sheet, fills the slots (choice 6), and appends the verdict rows of choice 8 in one write. It runs the stop rule and the verdict check (`validateVerdicts`) before it writes. It prints the cells and the photos kept per difficulty step, and the slots still short. It appends the run's row to `intake/agreement.json` (choice 20). With `--check step1` or `sample`, it also writes the approves of the picks that the sheet left out (choice 21).
 
-Tests: the sheet HTML holds no owner label and every code of `picks.json`; the export reader refuses each bad case above; the verdict rows for a fixture (an owner drop fills from a reserve; an owner step change goes on the `photo` object; the code rejects get `checked_by: intake`; a kept photo that no slot needs gets no row); a second `intake check` of the same file appends nothing.
+Tests: the sheet HTML holds no owner label and every code of `picks.json`; the export reader refuses each bad case above; the verdict rows for a fixture (an owner drop fills from a reserve; an owner step change goes on the `photo` object; the code rejects get `checked_by: intake`; a kept photo that no slot needs gets no row); a second `intake check` of the same file appends nothing; `--check step1` puts every step 1 pick on the sheet and the same random 20% each time; `intake agreement` moves down a rung after 3 runs that meet the bar and up after one that fails, and gives rung 1 with fewer than 3 runs.
 
 Done when: the tests pass, and a build of the fixture run writes the owner's approves with the photo fields.
 
@@ -304,7 +306,7 @@ The skill text follows the `writing-for-agents` guidance: ordered steps that eac
 2. **Collect.** Run `intake collect` with the run ID at once, in the same session. Run `intake jobs --retry` and collect again until no job is listed. Done when `intake collect` lists no job.
 3. **Judge pass.** As steps 1 and 2 with `--pass judge`.
 4. **Rank pass.** As steps 1 and 2 with `--pass rank`.
-5. **Pick and sheet.** Run `intake pick`. Publish the sheet. Send the owner the link, the short cells, and the USD so far. Done when the owner says the check is done.
+5. **Pick and sheet.** Run `intake agreement`, then `intake pick` with the `--check` rung that it prints. Publish the sheet. Send the owner the link, the short cells, and the USD so far. Done when the owner says the check is done.
 6. **Check.** Export the `checks` collection with `ArtifactData`. Run `intake check <name> --from <file>`. Done when it exits 0.
 
 Rules that the skill holds, each in one place:
@@ -379,22 +381,16 @@ Code-review agents, when the owner asks for them, are not in this table, as in t
 - Read this plan diff and answer the open questions.
 - Read the skill diff of Task 9.
 - In the pilot, check the picks of one species on the sheet (about 3 minutes).
-- In each later run: the photo check of the picks and reserves. At about 4 seconds per photo (spec Part 3), a run of 10 species with about 4 picks and 6 reserves per cell is about 300 photos, or about 20 minutes.
+- In each later run: the photo check of the picks and reserves, on the rung of the trust ladder (ruling 5). At about 4 seconds per photo (spec Part 3), a run of 10 species with about 4 picks and 6 reserves per cell is about 300 photos, or about 20 minutes.
 
 ## Open questions
 
-1. **Less owner check over time.** Ruling 1 starts with a check of every pick and reserve. The owner asked how the method can improve and need less oversight, with hundreds of species to come. The models do not learn from the owner's answers on their own: the brief and the rule are frozen. Two things can change over time, each from the agreement record (choice 20):
-   - **A trust ladder (no new eval).** The check moves down one rung after 3 runs in a row that meet the bar, and back up one rung on a run that fails it:
-     - Rung 1: every pick and reserve (the start).
-     - Rung 2: every step 1 pick, every thin-cell photo, and a random 20% of the rest.
-     - Rung 3: a random 10% of the picks.
-     - The proposed bar: the owner keeps 97% or more of the checked picks, and drops no step 1 pick. On the held-out set Sonnet FR met the second part (0 of 22 step 1 picks dropped) but not the first (94.1%).
-   - **A better method (a new eval).** After about 500 checked picks, the owner's calls are a large blind key. A later plan can test a brief with example photos from them (the spec's third variant), or a rule change. A rule change replays from the stored answers at no token cost. A new brief needs an eval run and the owner's ruling, as V1 did.
-   - Options: (a) both: the ladder in this plan (a `--check full|step1|sample` mode on `intake pick`, chosen from the agreement record), and the better method as a later plan. **Recommended.** (b) The ladder only. (c) Neither for now: keep the full check and decide after a few runs.
+None. The owner answered all four on 2026-11-13.
 
 ## Rulings of 2026-11-13
 
-1. **The owner's photo check sits before the build** (option a). The owner checks every pick and reserve. No dropped photo reaches the bucket or the manifest. The owner wants less oversight over time (Open question 1).
+1. **The owner's photo check sits before the build** (option a). The owner checks every pick and reserve. No dropped photo reaches the bucket or the manifest. The trust ladder (ruling 5) can lower it over time.
 2. **The old photo-check flow** leaves the skill (option a). Its commands stay in the CLI for hand fixes (choice 18).
 3. **No yes per run.** The owner's approval of this plan is the standing yes for the intake workflows of each content run. The session tells the owner the agent count and the USD range before each launch and goes on. A guard stays: a run stops and asks when its spend would pass 1.5 times its estimate (for example, when judges go off task and run again).
 4. **The reclassification of the published photos stays in phase 5** (option i). Phase 4 applies to new runs only. The phase 5 audit re-judges every published photo with Sonnet FR and sets its difficulty step.
+5. **The trust ladder** (Open question 1 of the second draft, option a). The owner's check starts on rung 1 (every pick and reserve) and moves down one rung after 3 runs in a row that meet the bar (97% or more of the checked picks kept, no step 1 pick dropped), and back up one rung after a run that fails it (choice 21). A better method from the owner's answers (a brief with example photos, or a rule change) is a later plan with its own eval.
