@@ -16,7 +16,7 @@ import { methodSetups, filterOf as filterFor, leadingSetup } from './lib/setups.
 import { speciesPools, heldoutOwner } from './lib/heldout.mjs';
 import { ownerRepeat } from './lib/repeat.mjs';
 import { keyV2 } from './lib/key-v2.mjs';
-import { agreement, usualLook, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, gates, shortlist, decision } from './lib/score.mjs';
+import { agreement, usualLook, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, gates, shortlist, decision, pickAgreement } from './lib/score.mjs';
 
 const { values: args } = parseArgs({ options: { set: { type: 'string', default: 'key' }, runs: { type: 'string' }, repeat: { type: 'string' }, labels: { type: 'string' } } });
 const config = readJson(path.join(EVAL, 'config.json'));
@@ -167,7 +167,7 @@ for (const setup of mainSetups) {
       id: `${meth.name}/${setup}/${rule}/${qName}`, method: meth.name, setup, rule, quota: qName, ranking: !!meth.ranking,
       keep: a.keep, drop_recall: a.drop_recall, exact: a.exact, within1: a.within1, part: a.part,
       ranked: results.reduce((s, r) => s + r.ranked, 0), unranked: results.reduce((s, r) => s + r.unranked, 0),
-      fill: quotaFill(results), ...costPer(results), top_pick: topPickScore(cells, best), cells,
+      fill: quotaFill(results), ...costPer(results), top_pick: topPickScore(cells, best), picks: pickAgreement(cells, owner), cells,
     });
   }
   // How often the top photo of "all" comes after photo K (spec, method R).
@@ -270,10 +270,10 @@ const md = [
   '',
   `Quotas ${config.headline_quota} (the headline) and Q221. \`${config.headline_quota}\` rows that pass the gates: ${headline.filter(r => r.gates).length}. The shortlist is provisional until Task 7 freezes a variant and a rule, so it is made per variant and rule: ${groups.map(g => `${g} ${shortBy[g].length}`).join(', ')} rows (ids in \`table.json\`). S and F keep photos in fetch order and run as cost baselines only. Keep and the difficulty step come from the set-up row. "No ranking": cells with 2 or more photos to rank and no ranking, which keep fetch order. Q442 is in \`table.json\`.`,
   '',
-  '| method | set-up | rule | quota | gates | judged | ranked | no ranking | quota fill | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |',
-  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
+  '| method | set-up | rule | quota | gates | judged | ranked | no ranking | quota fill | top pick | top of all after K | picks the owner kept | picks at the owner\'s step | USD | USD per photo | USD per kept photo | tokens per kept photo |',
+  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
   ...methodRows.filter(r => r.quota === config.headline_quota || r.quota === 'Q221')
-    .map(r => `| ${r.method} | ${r.setup} | ${r.rule} | ${r.quota} | ${r.gates ? 'pass' : 'fail'}${short.includes(r.id) ? ', shortlist' : ''} | ${r.fill.judged} | ${r.ranked} | ${r.unranked} | ${pct(r.fill.share)} | ${pct(r.top_pick)} | ${pct(r.best_after_k)} | ${f4(r.usd)} | ${f4(r.usd_per_photo)} | ${f4(r.usd_per_kept)} | ${r.tokens_per_kept == null ? '-' : Math.round(r.tokens_per_kept)} |`),
+    .map(r => `| ${r.method} | ${r.setup} | ${r.rule} | ${r.quota} | ${r.gates ? 'pass' : 'fail'}${short.includes(r.id) ? ', shortlist' : ''} | ${r.fill.judged} | ${r.ranked} | ${r.unranked} | ${pct(r.fill.share)} | ${pct(r.top_pick)} | ${pct(r.best_after_k)} | ${pct(r.picks.kept)} | ${pct(r.picks.step)} | ${f4(r.usd)} | ${f4(r.usd_per_photo)} | ${f4(r.usd_per_kept)} | ${r.tokens_per_kept == null ? '-' : Math.round(r.tokens_per_kept)} |`),
   '',
   ...(decided ? [
     '## The decision rule',

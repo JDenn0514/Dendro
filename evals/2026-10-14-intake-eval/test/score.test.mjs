@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { agreement, usualLook, topPick, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100 } from '../lib/score.mjs';
+import { agreement, usualLook, topPick, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, pickAgreement } from '../lib/score.mjs';
 
 const close = (x, y) => assert.ok(Math.abs(x - y) < 1e-9, `${x} is not ${y}`);
 const J = (keep, step = null, extra = {}) => ({ keep, step: keep ? step : null, ...extra });
@@ -149,4 +149,16 @@ test('best after K: the share of cells whose top photo under "all" is not in the
   const all = { A: { 1: ['p'], 2: [], 3: [] }, B: { 1: [], 2: ['q'], 3: [] }, C: { 1: [], 2: [], 3: [] } };
   close(bestAfterK(all, new Set(['p'])), 1 / 2);
   assert.equal(bestAfterK({ C: all.C }, new Set()), null);
+});
+
+test('pickAgreement: on the photos a method picks, the share the owner kept, in the same part, and at the same difficulty step', () => {
+  const cells = { 'T-leaf': { 1: ['a', 'b'], 2: ['c'], 3: [] }, 'T-bark': { 1: [], 2: [], 3: ['d'] } };
+  const owner = {
+    a: { part: 'leaf', keep: true, step: 1 },
+    b: { part: 'leaf', keep: true, step: 2 },
+    c: { part: 'bark', keep: true, step: 2 },
+    d: { part: 'bark', keep: false, step: null },
+  };
+  assert.deepEqual(pickAgreement(cells, owner), { n: 4, kept: 0.75, part: 0.5, step: 0.5 });
+  assert.deepEqual(pickAgreement({}, owner), { n: 0, kept: null, part: null, step: null });
 });

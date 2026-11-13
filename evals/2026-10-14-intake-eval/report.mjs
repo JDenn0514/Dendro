@@ -189,7 +189,7 @@ const nLabels = Object.keys(labels).length, nKept = Object.values(labels).filter
 const partCount = p => Object.values(labels).filter(l => l.part === p).length;
 const hoThin = ho.setups.filter(r => r.thin_cell.length).length, hoDoubts = Object.values(ho.species_doubt).flat().length;
 const fc = featureCheck.compare.setups;
-const methodLine = r => `| ${r.method} | ${name(modelOf(r.setup))} | ${r.fill.judged} | ${r.ranked} | ${pct(r.fill.share)} | ${pct(r.top_pick)} | ${pct(r.best_after_k)} | ${r.usd == null ? '-' : usd2(r.usd)} | ${r.usd_per_photo == null ? '-' : usd(r.usd_per_photo)} | ${r.usd_per_kept == null ? '-' : usd(r.usd_per_kept)} | ${r.tokens_per_kept == null ? '-' : Math.round(r.tokens_per_kept).toLocaleString('en-US')} |`;
+const methodLine = r => `| ${r.method} | ${name(modelOf(r.setup))} | ${r.fill.judged} | ${r.ranked} | ${pct(r.fill.share)} | ${r.picks.n} | ${pct(r.picks.kept)} | ${pct(r.picks.step)} | ${pct(r.top_pick)} | ${pct(r.best_after_k)} | ${r.usd == null ? '-' : usd2(r.usd)} | ${r.usd_per_photo == null ? '-' : usd(r.usd_per_photo)} | ${r.usd_per_kept == null ? '-' : usd(r.usd_per_kept)} | ${r.tokens_per_kept == null ? '-' : Math.round(r.tokens_per_kept).toLocaleString('en-US')} |`;
 const METHOD_ORDER = ['S', 'F', ...config.ks.map(K => `R${K}`), 'FR', ...config.ks.map(K => `CR${K}`)];
 const methodRowsOf = q => MODELS.flatMap(m => METHOD_ORDER.map(meth => hoMethod(`${meth}/${lead(m)}/${rule}/${q}`)).filter(Boolean));
 const sourceRows = Object.entries(hoRow(`${lead('opus')}/${rule}`).source_yield).sort((a, b) => b[1].photos - a[1].photos);
@@ -197,6 +197,9 @@ const ownerYield = Object.fromEntries(sourceRows.map(([s]) => [s, { photos: 0, k
 for (const c of pools0.cells) for (const p of c.photos) { const o = ownerYield[p.source] ?? (ownerYield[p.source] = { photos: 0, kept: 0 }); o.photos++; if (labels[p.key].keep) o.kept++; }
 
 // From NOTES.md (Task 5, part 2) and the plan ("Summary of agents and cost"): not in any table.
+// The owner's ruling of 2026-11-13 on the method (docs/decisions/2026-11-13-intake-method.md).
+const RULING = { method: 'FR', model: 'sonnet', date: '2026-11-13' };
+const ruled = hoMethod(`${RULING.method}/${lead(RULING.model)}/${rule}/${Q}`);
 const FIRST_ATTEMPTS_USD = 3.07, PLAN_TOTAL = { usd: 119, lo: 89, hi: 179, agents: 595 };
 const cellPts = 1 / Object.keys(bestPhotos).length;
 const dropV2 = MODELS.map(m => keyV2Row(`${lead(m)}/${rule}`).exact - hoRow(`${lead(m)}/${rule}`).exact);
@@ -212,6 +215,7 @@ const md = [
   '',
   '## The result',
   '',
+  `- **Owner ruling ${RULING.date}: ${name(RULING.model)} ${RULING.method}** (\`docs/decisions/2026-11-13-intake-method.md\`). Haiku drops its rejects, ${name(RULING.model)} at \`${frozen.effort[RULING.model]}\` judges the rest, and a ${name(RULING.model)} agent ranks each cell. Of the ${ruled.picks.n} photos it picks for the ${Q} quota on the held-out set, the owner kept ${pct(ruled.picks.kept)}, and ${pct(ruled.picks.step)} are at the owner's difficulty step, at ${usd(ruled.usd_per_kept)} per kept photo. It fills ${pct(ruled.fill.share)} of the quota slots. The owner prefers too few photos to bad ones. This overrules the result of the decision rule below: ${name(RULING.model)} missed the shortlist on key v2, but passes \`heldoutCheck\` on the held-out set.`,
   `- **The decision rule gives ${dec.candidate ? `${shortId(dec.candidate)}` : 'no candidate'}**${dec.candidate ? `: Opus at \`${frozen.effort.opus}\` judges the first ${dec.candidate.match(/\d+/)?.[0] ?? 'all'} photos of each species pool, and the code order picks the photos. On the held-out set it costs ${usd(cand.usd_per_kept)} per kept photo, with keep ${pct(cand.keep)} and exact difficulty step ${pct(cand.exact)}, against a bar of ${pct(dec.bar.keep)} and ${pct(dec.bar.exact)}` : ''}.`,
   ...(dec.candidate ? [`- **But it fills only ${pct(cand.fill.share)} of the quota slots** (${cand.fill.filled} of ${cand.fill.slots}), because it judges ${cand.fill.judged} of the ${ho.setups[0].photos} photos. The same set-up over all photos (${shortId(all('opus').id)}) fills ${pct(all('opus').fill.share)} at ${usd(all('opus').usd_per_kept)} per kept photo. The rule ranks by USD per kept photo, and a small K keeps fewer photos for less. The owner rules on this.`] : []),
   `- **Haiku fails the check** on the exact difficulty step: ${pct(hoRow(`${lead('haiku')}/${rule}`).exact)} against the bar of ${pct(dec.bar.exact)}, ${pts1(dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact)} points short. Its keep agreement passes (${pct(hoRow(`${lead('haiku')}/${rule}`).keep)}). Haiku costs ${usd(all('haiku').usd_per_kept)} per kept photo over all photos, ${(all('opus').usd_per_kept / all('haiku').usd_per_kept).toFixed(0)} times less than Opus.`,
@@ -295,18 +299,20 @@ const md = [
   '',
   `Quota ${Q} (3, 3, and 2 photos per difficulty step, 2 or more of the usual look at step 1) on every cell: ${ho.methods.find(r => r.quota === Q).fill.slots} slots, 9 cells × 3 difficulty steps. Keep and the difficulty step belong to the set-up (plan choice 15), so the methods differ in cost, quota fill, and top pick. R and CR at K judge the first K photos of each species pool. "Top of all after K": the share of cells where the top photo of R or CR over all photos comes after photo K. The ranking cost is the line a + b × n from the held-out ranking jobs (plan choice 11). F and FR have no Haiku row (plan choice 10).`,
   '',
-  '| method | judge | judged | ranked | quota fill | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |',
-  '|---|---|---|---|---|---|---|---|---|---|---|',
+  '| method | judge | judged | ranked | quota fill | photos picked | picks the owner kept | picks at the owner\'s step | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |',
+  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
   ...methodRowsOf(Q).map(methodLine),
   '',
   `Quota Q221 (2, 2, and 1), the same columns: the quota fill and the USD per kept photo change; the agreement does not.`,
   '',
-  '| method | judge | judged | ranked | quota fill | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |',
-  '|---|---|---|---|---|---|---|---|---|---|---|',
+  '| method | judge | judged | ranked | quota fill | photos picked | picks the owner kept | picks at the owner\'s step | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |',
+  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
   ...methodRowsOf('Q221').map(methodLine),
   '',
   `- Over all photos, no method fills more than ${pct(Math.max(...methodRowsOf(Q).map(r => r.fill.share)))} of the ${Q} slots: the pools do not hold 3 photos at every difficulty step of every cell. The owner kept ${nKept} of ${nLabels} photos.`,
   `- Top pick (the method's first photo at its lowest difficulty step is the owner's best photo), over ${Object.keys(bestPhotos).length} cells: best ${pct(Math.max(...methodRowsOf(Q).map(r => r.top_pick)))} (${methodRowsOf(Q).filter(r => r.top_pick === Math.max(...methodRowsOf(Q).map(x => x.top_pick))).map(r => `${name(modelOf(r.setup))} ${r.method}`).join(', ')}). One cell is ${pts1(cellPts)} points.`,
+  '',
+  `- Photos picked: the photos the method puts in the quota. "Picks the owner kept": the share of them that the owner kept. "Picks at the owner's step": the share that the owner kept at the same difficulty step (owner request 2026-11-13).`,
   '',
   '### How often the best photo of "all" comes after photo K',
   '',
@@ -342,7 +348,7 @@ const md = [
   ...dec.checked.map(c => `   | ${shortId(c.id)} | ${usd(c.usd_per_kept)} | ${pct(c.keep)} | ${pct(c.exact)} | ${c.pass ? 'pass' : 'fail'} |`),
   '',
   `   Result: **${dec.candidate ? shortId(dec.candidate) : 'no candidate'}**.${sameSetup.length ? ` The other shortlisted rows of ${name(modelOf(cand.setup))}, at a higher USD per kept photo: ${sameSetup.filter(r => r.id !== dec.candidate).sort((a, b) => a.usd_per_kept - b.usd_per_kept).map(r => `${r.method} ${usd(r.usd_per_kept)}, fill ${pct(r.fill.share)}, ${heldoutCheck(r, rep) ? 'pass' : `fail (exact ${pct(r.exact)}, ${((dec.bar.exact - r.exact) * 100).toFixed(2)} points under the bar${r.method === 'FR' ? ', with the Haiku reject pass' : ''})`}`).join('; ')}.` : ''}`,
-  '5. **The ruling**: the owner reads this report and rules. The decision record goes in `docs/decisions/`.',
+  `5. **The ruling** (${RULING.date}): **${name(RULING.model)} ${RULING.method}**, not the rule's ${dec.candidate ? shortId(dec.candidate) : 'result'}. The owner leans to accuracy and prefers too few photos to bad ones, so the owner judged the methods by the photos each one picks for the quota (the columns "picks the owner kept" and "picks at the owner's step" in the methods table), not by USD per kept photo alone.`,
   '',
   '## The costs per phase',
   '',
