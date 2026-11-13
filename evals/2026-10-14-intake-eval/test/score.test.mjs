@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { agreement, usualLook, topPick, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, pickAgreement } from '../lib/score.mjs';
+import { agreement, usualLook, topPick, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, pickAgreement, stepOneAgreement } from '../lib/score.mjs';
 
 const close = (x, y) => assert.ok(Math.abs(x - y) < 1e-9, `${x} is not ${y}`);
 const J = (keep, step = null, extra = {}) => ({ keep, step: keep ? step : null, ...extra });
@@ -160,9 +160,45 @@ test('pickAgreement: on the photos a method picks, the share the owner kept in t
     d: { part: 'bark', keep: false, step: null },
   };
   // c: the owner kept it, but as bark, so it is not a keep of the cell T-leaf.
-  assert.deepEqual(pickAgreement(cells, owner), { n: 4, kept: 0.5, step: 0.25 });
+  assert.deepEqual(pickAgreement(cells, owner), { n: 4, kept: 0.5, step: 0.25, step_one: { n: 2, 1: 1, 2: 1, 3: 0, dropped: 0 } });
   // On the key, the owner labels no part: a keep is a keep.
   const key = { a: { keep: true, step: 1 }, b: { keep: true, step: 2 }, c: { keep: true, step: 2 }, d: { keep: false, step: null } };
-  assert.deepEqual(pickAgreement(cells, key), { n: 4, kept: 0.75, step: 0.5 });
-  assert.deepEqual(pickAgreement({}, owner), { n: 0, kept: null, step: null });
+  assert.deepEqual(pickAgreement(cells, key), { n: 4, kept: 0.75, step: 0.5, step_one: { n: 2, 1: 1, 2: 1, 3: 0, dropped: 0 } });
+  assert.deepEqual(pickAgreement({}, owner), { n: 0, kept: null, step: null, step_one: { n: 0, 1: 0, 2: 0, 3: 0, dropped: 0 } });
+});
+
+test('stepOneAgreement: step 1 or not, on the photos both keep in the same part', () => {
+  const owner = {
+    a: { part: 'leaf', keep: true, step: 1 },
+    b: { part: 'leaf', keep: true, step: 1 },
+    c: { part: 'leaf', keep: true, step: 3 },
+    d: { part: 'leaf', keep: true, step: 2 },
+    e: { part: 'bark', keep: true, step: 1 },
+    f: { part: 'leaf', keep: false, step: null },
+  };
+  const steps = new Map([
+    ['a', { cell: 'T-leaf', keep: true, step: 1 }],
+    ['b', { cell: 'T-leaf', keep: true, step: 2 }],
+    ['c', { cell: 'T-leaf', keep: true, step: 1 }],
+    ['d', { cell: 'T-leaf', keep: true, step: 3 }],
+    ['e', { cell: 'T-leaf', keep: true, step: 1 }],
+    ['f', { cell: 'T-leaf', keep: true, step: 1 }],
+  ]);
+  // e is in another part and f is a drop of the owner, so only a to d count.
+  assert.deepEqual(stepOneAgreement(Object.keys(owner), owner, steps), { n: 4, agree: 0.5, owner_one: 2, judge_one: 2, both_one: 1 });
+  // A second label of the owner gives its part, not a cell. The key has no owner part.
+  const second = new Map([['a', { part: 'leaf', keep: true, step: 1 }], ['b', { part: 'bark', keep: true, step: 1 }]]);
+  assert.deepEqual(stepOneAgreement(['a', 'b'], owner, second), { n: 1, agree: 1, owner_one: 1, judge_one: 1, both_one: 1 });
+  assert.deepEqual(stepOneAgreement([], owner, steps), { n: 0, agree: null, owner_one: 0, judge_one: 0, both_one: 0 });
+});
+
+test('pickAgreement: the step 1 picks by the owner\'s call', () => {
+  const cells = { 'T-leaf': { 1: ['a', 'b', 'c', 'd'], 2: [], 3: [] } };
+  const owner = {
+    a: { part: 'leaf', keep: true, step: 1 },
+    b: { part: 'leaf', keep: true, step: 3 },
+    c: { part: 'bark', keep: true, step: 1 },
+    d: { part: 'leaf', keep: false, step: null },
+  };
+  assert.deepEqual(pickAgreement(cells, owner).step_one, { n: 4, 1: 1, 2: 0, 3: 1, dropped: 2 });
 });
