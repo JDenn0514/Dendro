@@ -151,7 +151,7 @@ test('best after K: the share of cells whose top photo under "all" is not in the
   assert.equal(bestAfterK({ C: all.C }, new Set()), null);
 });
 
-test('pickAgreement: on the photos a method picks, the share the owner kept, in the same part, and at the same difficulty step', () => {
+test('pickAgreement: on the photos a method picks, the share the owner kept in the same part, and at the same difficulty step', () => {
   const cells = { 'T-leaf': { 1: ['a', 'b'], 2: ['c'], 3: [] }, 'T-bark': { 1: [], 2: [], 3: ['d'] } };
   const owner = {
     a: { part: 'leaf', keep: true, step: 1 },
@@ -159,6 +159,10 @@ test('pickAgreement: on the photos a method picks, the share the owner kept, in 
     c: { part: 'bark', keep: true, step: 2 },
     d: { part: 'bark', keep: false, step: null },
   };
-  assert.deepEqual(pickAgreement(cells, owner), { n: 4, kept: 0.75, part: 0.5, step: 0.5 });
-  assert.deepEqual(pickAgreement({}, owner), { n: 0, kept: null, part: null, step: null });
+  // c: the owner kept it, but as bark, so it is not a keep of the cell T-leaf.
+  assert.deepEqual(pickAgreement(cells, owner), { n: 4, kept: 0.5, step: 0.25 });
+  // On the key, the owner labels no part: a keep is a keep.
+  const key = { a: { keep: true, step: 1 }, b: { keep: true, step: 2 }, c: { keep: true, step: 2 }, d: { keep: false, step: null } };
+  assert.deepEqual(pickAgreement(cells, key), { n: 4, kept: 0.75, step: 0.5 });
+  assert.deepEqual(pickAgreement({}, owner), { n: 0, kept: null, step: null });
 });
