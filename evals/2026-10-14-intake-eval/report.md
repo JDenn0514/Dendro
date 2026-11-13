@@ -9,6 +9,7 @@ The report of the intake eval, phases 1 to 3 (plan `docs/superpowers/plans/2026-
 - **But it fills only 14.8% of the quota slots** (4 of 27), because it judges 60 of the 208 photos. The same set-up over all photos (Opus CRall) fills 59.3% at USD 0.0804 per kept photo. The rule ranks by USD per kept photo, and a small K keeps fewer photos for less. The owner rules on this.
 - **Haiku fails the check** on the exact difficulty step: 54.9% against the bar of 58.2%, 3.3 points short. Its keep agreement passes (81.7%). Haiku costs USD 0.0055 per kept photo over all photos, 15 times less than Opus.
 - **Sonnet is not on the shortlist**: on key v2 its exact difficulty step is 74.3%, below the line of 75.1% (5 points under the best, 80.1%). On the held-out set it passes the check (keep 81.3%, exact 62.3%) at USD 0.0562 per kept photo over all photos.
+- **Step 1 or not**, the call that sets the first photos a learner sees: Sonnet agrees with the owner on 82.9% of the photos both keep, and the owner agrees with the owner on 72.2%. Of the 22 photos Sonnet FR puts at step 1, the owner called 18 step 1 and dropped 0.
 - **The owner's own bar is soft.** The owner agrees with the owner on keep for 82.5% of 40 photos and on the exact difficulty step for 63.2% of the 19 photos kept both times. One photo moves exact by 5.3 points, so the bar has an error of several points.
 - **No set-up passes the fixed gates**, on the key or on key v2 (owner ruling 2026-10-27, item 4, below).
 
@@ -97,6 +98,35 @@ What the chart shows:
 - All 5 set-up rows pass the keep bar (77.5%): keep runs from 80.8% to 81.7%.
 - The exact difficulty step decides the check. Haiku is 3.3 points under the bar, about 2.7 of its 82 photos kept by both.
 - Every frozen set-up is 12 to 20 points lower on exact difficulty step than on key v2 (Opus 79.9% on key v2, 59.5% here). Key v2 holds the owner's later calls, some made with the judges' answers on the page; the held-out labels are blind.
+
+### Step 1 or not
+
+The owner asked on 2026-11-13 how well each judge tells step 1 from steps 2 and 3. In the owner's repeat labels, a photo first called step 1 mostly stayed at step 1, and most changes moved a photo to an easier step. On the photos that the owner and the judge both keep in the same part: the share where both call the photo step 1 or both do not, then the owner's step 1 photos that the judge also calls step 1, then the judge's step 1 photos that the owner also calls step 1.
+
+| set-up | step 1 or not | the owner's step 1, the judge says 1 | the judge's step 1, the owner says 1 |
+|---|---|---|---|
+| Opus | 74.0% (57 of 77) | 63.0% (17 of 27) | 63.0% (17 of 27) |
+| Opus, Haiku reject pass first | 73.6% (53 of 72) | 63.0% (17 of 27) | 65.4% (17 of 26) |
+| Sonnet | 82.9% (63 of 76) | 85.2% (23 of 27) | 71.9% (23 of 32) |
+| Sonnet, Haiku reject pass first | 83.3% (60 of 72) | 85.2% (23 of 27) | 74.2% (23 of 31) |
+| Haiku | 80.0% (64 of 80) | 64.3% (18 of 28) | 75.0% (18 of 24) |
+| The owner, repeat | 72.2% (13 of 18) | 85.7% (6 of 7) | 60.0% (6 of 10) |
+
+- In the owner's row, "the judge" is the owner's second label. It has 18 photos, not 19, because one photo changed part between the two labels.
+- On key v2, step 1 or not: Opus 87.8%, Sonnet 88.9%, Haiku 84.1%.
+
+The photos each method puts at difficulty step 1 for the Q332 quota, by the owner's call (in the same part):
+
+| method | judge | step 1 picks | the owner: step 1 | step 2 | step 3 | dropped or other part |
+|---|---|---|---|---|---|---|
+| FR | Opus | 19 | 15 | 2 | 2 | 0 |
+| Rall | Opus | 20 | 15 | 2 | 3 | 0 |
+| CRall | Opus | 20 | 12 | 4 | 3 | 1 |
+| FR | Sonnet | 22 | 18 | 2 | 2 | 0 |
+| Rall | Sonnet | 22 | 18 | 2 | 2 | 0 |
+| CRall | Sonnet | 22 | 16 | 3 | 2 | 1 |
+| Rall | Haiku | 17 | 14 | 1 | 2 | 0 |
+| CRall | Haiku | 17 | 14 | 1 | 2 | 0 |
 
 ### The methods
 

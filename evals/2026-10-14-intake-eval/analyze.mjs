@@ -16,7 +16,7 @@ import { methodSetups, filterOf as filterFor, leadingSetup } from './lib/setups.
 import { speciesPools, heldoutOwner } from './lib/heldout.mjs';
 import { ownerRepeat } from './lib/repeat.mjs';
 import { keyV2 } from './lib/key-v2.mjs';
-import { agreement, usualLook, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, gates, shortlist, decision, pickAgreement } from './lib/score.mjs';
+import { agreement, usualLook, topPickScore, bestAfterK, speciesDoubt, repeatAgreement, batchScore, quotaFill, costPer, sourceYield, fitLine, minutesPer100, gates, shortlist, decision, pickAgreement, stepOneAgreement } from './lib/score.mjs';
 
 const { values: args } = parseArgs({ options: { set: { type: 'string', default: 'key' }, runs: { type: 'string' }, repeat: { type: 'string' }, labels: { type: 'string' } } });
 const config = readJson(path.join(EVAL, 'config.json'));
@@ -112,6 +112,7 @@ for (const setup of setups) for (const rule of rules) for (const filter of [null
     no_answer: keys.filter(k => v.answers[setup][k] == null).length,
     part_errors: keys.filter(k => steps.get(k).line?.endsWith('part_error')).length,
     ...agreement(keys, owner, steps, parts),
+    step_one: stepOneAgreement(keys, owner, steps),
     // Photos that the owner and the judge both keep, in different parts (held-out set only).
     kept_other_part: heldout ? keys.filter(k => owner[k]?.keep && steps.get(k).keep && owner[k].part !== parts[k]).length : null,
     usual_look: args.set === 'key' ? usualLook(keys, owner, steps, v.answers[setup], usual) : null,
@@ -214,9 +215,12 @@ if (args.repeat) {
 
 // 6. The decision rule after the freeze (held-out set only): the shortlist from key v2 under the frozen
 // variant, rule, and set-ups, at the headline quota; then the candidate and the check on the held-out set.
-let owner_repeat = null, decided = null;
+let owner_repeat = null, owner_repeat_step_one = null, decided = null;
 if (heldout) {
   owner_repeat = ownerRepeat(readJson(path.join(EVAL, 'heldout', 'labels.json')), readJson(path.join(EVAL, 'heldout', 'repeat.json')));
+  // Step 1 or not, the owner against the owner, as for a judge (owner request 2026-11-13).
+  const second = heldoutOwner(readJson(path.join(EVAL, 'heldout', 'repeat.json')));
+  owner_repeat_step_one = stepOneAgreement(Object.keys(second), owner, new Map(Object.entries(second)));
   const frozenSetups = Object.keys(config.model_opt).map(m => leadingSetup({ leading: frozen }, m));
   const pick = rows => rows.filter(r => frozenSetups.includes(r.setup) && r.rule === frozen.rule && r.quota === config.headline_quota);
   const keyRows = pick(readJson(path.join(EVAL, 'tables', 'key-v2', 'table.json')).methods);
@@ -230,7 +234,7 @@ const outDir = path.join(EVAL, 'tables', args.labels ? `${args.set}-${args.label
 fs.mkdirSync(outDir, { recursive: true });
 writeJson(path.join(outDir, 'table.json'), {
   set: args.set, labels: args.labels ?? 'v1', runs: runNames, repeat_run: args.repeat ?? null, problems, checks: v.checks, no_answer: v.noAnswer, unread: v.unread,
-  lines, setups: setupRows, methods: methodRows, shortlist: shortBy, batch, repeat, species_doubt: doubt, owner_repeat, decision: decided,
+  lines, setups: setupRows, methods: methodRows, shortlist: shortBy, batch, repeat, species_doubt: doubt, owner_repeat, owner_repeat_step_one, decision: decided,
 });
 
 const md = [
@@ -246,9 +250,9 @@ const md = [
   'A set-up is one model, effort, and prompt variant (`:n20`: calls of 20). `/F`: Haiku\'s reject pass first. Agreement is against the owner, on the photos the set-up judged. Exact and within one are on the photos that both keep. A thin-cell photo counts as kept at difficulty step 3.',
   '',
   ...(heldout ? ['On the held-out set, "part" is the judge\'s part against the owner\'s on every photo, and "kept, other part" counts the photos that both keep in different parts. A photo that the owner or the judge puts in the part other is a reject for keep.', ''] : []),
-  '| set-up | photos | no answer | part errors | part | kept, other part | keep | drop recall | exact difficulty step | within one | usual look | USD per photo | minutes per 100 | thin cell |',
-  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
-  ...setupRows.map(r => `| ${r.id} | ${r.photos} | ${r.no_answer} | ${r.part_errors} | ${pct(r.part)} | ${r.kept_other_part ?? '-'} | ${pct(r.keep)} | ${pct(r.drop_recall)} | ${pct(r.exact)} | ${pct(r.within1)} | ${pct(r.usual_look)} | ${f4(r.usd_per_photo)} | ${r.minutes_per_100 == null ? '-' : r.minutes_per_100.toFixed(1)} | ${r.thin_cell.join(' ') || '-'} |`),
+  '| set-up | photos | no answer | part errors | part | kept, other part | keep | drop recall | exact difficulty step | within one | step 1 or not | usual look | USD per photo | minutes per 100 | thin cell |',
+  '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
+  ...setupRows.map(r => `| ${r.id} | ${r.photos} | ${r.no_answer} | ${r.part_errors} | ${pct(r.part)} | ${r.kept_other_part ?? '-'} | ${pct(r.keep)} | ${pct(r.drop_recall)} | ${pct(r.exact)} | ${pct(r.within1)} | ${pct(r.step_one.agree)} | ${pct(r.usual_look)} | ${f4(r.usd_per_photo)} | ${r.minutes_per_100 == null ? '-' : r.minutes_per_100.toFixed(1)} | ${r.thin_cell.join(' ') || '-'} |`),
   '',
   '## Batch size',
   '',

@@ -35,15 +35,38 @@ export function agreement(keys, owner, steps, parts = null) {
 // labels no part (the key), a keep is a keep. Owner request 2026-11-13.
 export function pickAgreement(cells, owner) {
   let n = 0, kept = 0, step = 0;
+  const one = { n: 0, 1: 0, 2: 0, 3: 0, dropped: 0 };
   for (const [cell, c] of Object.entries(cells)) {
     const part = cell.slice(cell.lastIndexOf('-') + 1);
     for (const s of [1, 2, 3]) for (const key of c[s]) {
-      const o = owner[key];
+      const o = owner[key], ok = o?.keep && (o.part == null || o.part === part);
       n++;
-      if (o?.keep && (o.part == null || o.part === part)) { kept++; if (o.step === s) step++; }
+      if (ok) { kept++; if (o.step === s) step++; }
+      // step_one: the picks at difficulty step 1 by the owner's call (owner request 2026-11-13).
+      if (s === 1) { one.n++; if (ok) one[o.step]++; else one.dropped++; }
     }
   }
-  return { n, kept: share(kept, n), step: share(step, n) };
+  return { n, kept: share(kept, n), step: share(step, n), step_one: one };
+}
+
+// Step 1 or not (owner request 2026-11-13): on the photos that the owner and the other label both keep in the
+// same part, the share where both call the photo step 1 or both do not. other: Map key -> { keep, step, cell }
+// from judgeSteps, or { keep, step, part } for a second label of the owner. Part counts only where both have one.
+export function stepOneAgreement(keys, owner, other) {
+  let n = 0, agree = 0, owner_one = 0, judge_one = 0, both_one = 0;
+  for (const key of keys) {
+    const o = owner[key], j = other.get(key);
+    if (!o?.keep || !j?.keep) continue;
+    const part = j.part ?? (j.cell ? j.cell.slice(j.cell.lastIndexOf('-') + 1) : null);
+    if (o.part != null && part != null && o.part !== part) continue;
+    const a = o.step === 1, b = j.step === 1;
+    n++;
+    if (a === b) agree++;
+    if (a) owner_one++;
+    if (b) judge_one++;
+    if (a && b) both_one++;
+  }
+  return { n, agree: share(agree, n), owner_one, judge_one, both_one };
 }
 
 // Usual look (key only, secondary): on the photos both keep, the share where the judge agrees with the owner.

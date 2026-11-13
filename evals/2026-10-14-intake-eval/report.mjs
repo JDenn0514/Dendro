@@ -205,6 +205,10 @@ for (const c of pools0.cells) for (const p of c.photos) { const o = ownerYield[p
 
 // From NOTES.md (Task 5, part 2) and the plan ("Summary of agents and cost"): not in any table.
 // The owner's ruling of 2026-11-13 on the method (docs/decisions/2026-11-13-intake-method.md).
+// Step 1 or not (owner request 2026-11-13).
+const so = r => r.step_one, ownerOne = ho.owner_repeat_step_one;
+const frac = (a, b) => `${pct(b ? a / b : null)} (${a} of ${b})`;
+const ONE_METHODS = MODELS.flatMap(m => ['FR', 'Rall', 'CRall'].map(meth => hoMethod(`${meth}/${lead(m)}/${rule}/${Q}`)).filter(Boolean));
 const RULING = { method: 'FR', model: 'sonnet', date: '2026-11-13' };
 const ruled = hoMethod(`${RULING.method}/${lead(RULING.model)}/${rule}/${Q}`);
 const FIRST_ATTEMPTS_USD = 3.07, PLAN_TOTAL = { usd: 119, lo: 89, hi: 179, agents: 595 };
@@ -227,6 +231,7 @@ const md = [
   ...(dec.candidate ? [`- **But it fills only ${pct(cand.fill.share)} of the quota slots** (${cand.fill.filled} of ${cand.fill.slots}), because it judges ${cand.fill.judged} of the ${ho.setups[0].photos} photos. The same set-up over all photos (${shortId(all('opus').id)}) fills ${pct(all('opus').fill.share)} at ${usd(all('opus').usd_per_kept)} per kept photo. The rule ranks by USD per kept photo, and a small K keeps fewer photos for less. The owner rules on this.`] : []),
   `- **Haiku fails the check** on the exact difficulty step: ${pct(hoRow(`${lead('haiku')}/${rule}`).exact)} against the bar of ${pct(dec.bar.exact)}, ${pts1(dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact)} points short. Its keep agreement passes (${pct(hoRow(`${lead('haiku')}/${rule}`).keep)}). Haiku costs ${usd(all('haiku').usd_per_kept)} per kept photo over all photos, ${(all('opus').usd_per_kept / all('haiku').usd_per_kept).toFixed(0)} times less than Opus.`,
   ...outModels.map(m => `- **${name(m)} is not on the shortlist**: on key v2 its exact difficulty step is ${pct(keyV2Row(`${lead(m)}/${rule}`).exact)}, below the line of ${pct(exactLine)} (${+(MARGIN * 100).toFixed(1)} points under the best, ${pct(dec.best.exact)}). On the held-out set it ${passSet.has(`${lead(m)}/${rule}`) ? 'passes' : 'fails'} the check (keep ${pct(hoRow(`${lead(m)}/${rule}`).keep)}, exact ${pct(hoRow(`${lead(m)}/${rule}`).exact)}) at ${usd(all(m).usd_per_kept)} per kept photo over all photos.`),
+  `- **Step 1 or not**, the call that sets the first photos a learner sees: ${name(RULING.model)} agrees with the owner on ${pct(so(hoRow(`${lead(RULING.model)}/${rule}`)).agree)} of the photos both keep, and the owner agrees with the owner on ${pct(ownerOne.agree)}. Of the ${ruled.picks.step_one.n} photos ${name(RULING.model)} ${RULING.method} puts at step 1, the owner called ${ruled.picks.step_one[1]} step 1 and dropped ${ruled.picks.step_one.dropped}.`,
   `- **The owner's own bar is soft.** The owner agrees with the owner on keep for ${pct(rep.keep)} of ${rep.n} photos and on the exact difficulty step for ${pct(rep.exact)} of the ${rep.both} photos kept both times. One photo moves exact by ${pts1(1 / rep.both)} points, so the bar has an error of several points.`,
   `- **No set-up passes the fixed gates**, on the key or on key v2 (owner ruling 2026-10-27, item 4, below).`,
   '',
@@ -301,6 +306,24 @@ const md = [
   `- All ${HO_SETUPS.length} set-up rows pass the keep bar (${pct(dec.bar.keep)}): keep runs from ${pct(Math.min(...HO_SETUPS.map(id => hoRow(id).keep)))} to ${pct(Math.max(...HO_SETUPS.map(id => hoRow(id).keep)))}.`,
   `- The exact difficulty step decides the check. Haiku is ${pts1(dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact)} points under the bar, about ${((dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact) * hoRow(`${lead('haiku')}/${rule}`).both).toFixed(1)} of its ${hoRow(`${lead('haiku')}/${rule}`).both} photos kept by both.`,
   `- Every frozen set-up is ${Math.round(Math.min(...dropV2) * 100)} to ${Math.round(Math.max(...dropV2) * 100)} points lower on exact difficulty step than on key v2 (Opus ${pct(keyV2Row(`${lead('opus')}/${rule}`).exact)} on key v2, ${pct(hoRow(`${lead('opus')}/${rule}`).exact)} here). Key v2 holds the owner's later calls, some made with the judges' answers on the page; the held-out labels are blind.`,
+  '',
+  '### Step 1 or not',
+  '',
+  `The owner asked on 2026-11-13 how well each judge tells step 1 from steps 2 and 3. In the owner's repeat labels, a photo first called step 1 mostly stayed at step 1, and most changes moved a photo to an easier step. On the photos that the owner and the judge both keep in the same part: the share where both call the photo step 1 or both do not, then the owner's step 1 photos that the judge also calls step 1, then the judge's step 1 photos that the owner also calls step 1.`,
+  '',
+  '| set-up | step 1 or not | the owner\'s step 1, the judge says 1 | the judge\'s step 1, the owner says 1 |',
+  '|---|---|---|---|',
+  ...HO_SETUPS.map(id => { const x = so(hoRow(id)); return `| ${hoLabel(id)} | ${frac(Math.round(x.agree * x.n), x.n)} | ${frac(x.both_one, x.owner_one)} | ${frac(x.both_one, x.judge_one)} |`; }),
+  `| The owner, repeat | ${frac(Math.round(ownerOne.agree * ownerOne.n), ownerOne.n)} | ${frac(ownerOne.both_one, ownerOne.owner_one)} | ${frac(ownerOne.both_one, ownerOne.judge_one)} |`,
+  '',
+  `- In the owner's row, "the judge" is the owner's second label. It has ${ownerOne.n} photos, not ${rep.both}, because one photo changed part between the two labels.`,
+  `- On key v2, step 1 or not: ${MODELS.map(m => `${name(m)} ${pct(so(keyV2Row(`${lead(m)}/${rule}`)).agree)}`).join(', ')}.`,
+  '',
+  `The photos each method puts at difficulty step 1 for the ${Q} quota, by the owner's call (in the same part):`,
+  '',
+  '| method | judge | step 1 picks | the owner: step 1 | step 2 | step 3 | dropped or other part |',
+  '|---|---|---|---|---|---|---|',
+  ...ONE_METHODS.map(r => { const x = r.picks.step_one; return `| ${r.method} | ${name(modelOf(r.setup))} | ${x.n} | ${x[1]} | ${x[2]} | ${x[3]} | ${x.dropped} |`; }),
   '',
   '### The methods',
   '',

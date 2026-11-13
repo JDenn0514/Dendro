@@ -10,13 +10,13 @@ A set-up is one model, effort, and prompt variant (`:n20`: calls of 20). `/F`: H
 
 On the held-out set, "part" is the judge's part against the owner's on every photo, and "kept, other part" counts the photos that both keep in different parts. A photo that the owner or the judge puts in the part other is a reject for keep.
 
-| set-up | photos | no answer | part errors | part | kept, other part | keep | drop recall | exact difficulty step | within one | usual look | USD per photo | minutes per 100 | thin cell |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| haiku:high:V1:n20/P | 208 | 0 | 0 | 81.7% | 2 | 81.7% | 83.0% | 54.9% | 95.1% | - | 0.0013 | 12.9 | - |
-| opus:high:V1:n20/P | 208 | 0 | 0 | 85.1% | 2 | 80.8% | 84.0% | 59.5% | 93.7% | - | 0.0197 | 7.1 | - |
-| opus:high:V1:n20/P/F | 208 | 0 | 0 | 85.1% | 2 | 81.3% | 89.6% | 58.1% | 94.6% | - | 0.0197 | 7.1 | - |
-| sonnet:high:V1:n20/P | 208 | 0 | 0 | 84.6% | 1 | 81.3% | 86.8% | 62.3% | 94.8% | - | 0.0138 | 16.5 | - |
-| sonnet:high:V1:n20/P/F | 208 | 0 | 0 | 84.6% | 1 | 80.8% | 89.6% | 61.6% | 95.9% | - | 0.0138 | 16.5 | - |
+| set-up | photos | no answer | part errors | part | kept, other part | keep | drop recall | exact difficulty step | within one | step 1 or not | usual look | USD per photo | minutes per 100 | thin cell |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| haiku:high:V1:n20/P | 208 | 0 | 0 | 81.7% | 2 | 81.7% | 83.0% | 54.9% | 95.1% | 80.0% | - | 0.0013 | 12.9 | - |
+| opus:high:V1:n20/P | 208 | 0 | 0 | 85.1% | 2 | 80.8% | 84.0% | 59.5% | 93.7% | 74.0% | - | 0.0197 | 7.1 | - |
+| opus:high:V1:n20/P/F | 208 | 0 | 0 | 85.1% | 2 | 81.3% | 89.6% | 58.1% | 94.6% | 73.6% | - | 0.0197 | 7.1 | - |
+| sonnet:high:V1:n20/P | 208 | 0 | 0 | 84.6% | 1 | 81.3% | 86.8% | 62.3% | 94.8% | 82.9% | - | 0.0138 | 16.5 | - |
+| sonnet:high:V1:n20/P/F | 208 | 0 | 0 | 84.6% | 1 | 80.8% | 89.6% | 61.6% | 95.9% | 83.3% | - | 0.0138 | 16.5 | - |
 
 ## Batch size
 
