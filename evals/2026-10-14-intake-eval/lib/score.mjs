@@ -31,20 +31,19 @@ export function agreement(keys, owner, steps, parts = null) {
 }
 
 // On the photos a method picks for the quota (cells: { <target>-<part>: { 1, 2, 3: [keys] } }): the share the
-// owner kept, the share the owner put in the cell's part, and the share the owner kept at the same difficulty
-// step. Part counts only photos where the owner labels the part (the held-out set). Owner ruling 2026-11-13.
+// owner kept in the cell's part, and the share the owner kept there at the same difficulty step. Where the owner
+// labels no part (the key), a keep is a keep. Owner request 2026-11-13.
 export function pickAgreement(cells, owner) {
-  let n = 0, kept = 0, pn = 0, part = 0, step = 0;
+  let n = 0, kept = 0, step = 0;
   for (const [cell, c] of Object.entries(cells)) {
-    const cellPart = cell.slice(cell.lastIndexOf('-') + 1);
+    const part = cell.slice(cell.lastIndexOf('-') + 1);
     for (const s of [1, 2, 3]) for (const key of c[s]) {
       const o = owner[key];
       n++;
-      if (o?.keep) { kept++; if (o.step === s) step++; }
-      if (o?.part != null) { pn++; if (o.keep && o.part === cellPart) part++; }
+      if (o?.keep && (o.part == null || o.part === part)) { kept++; if (o.step === s) step++; }
     }
   }
-  return { n, kept: share(kept, n), part: share(part, pn), step: share(step, n) };
+  return { n, kept: share(kept, n), step: share(step, n) };
 }
 
 // Usual look (key only, secondary): on the photos both keep, the share where the judge agrees with the owner.

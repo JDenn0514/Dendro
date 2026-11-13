@@ -7,7 +7,8 @@ import fs from 'node:fs';
 import { EVAL } from './lib/paths.mjs';
 import { readJson } from './lib/data.mjs';
 import { leadingSetup } from './lib/setups.mjs';
-import { heldoutCheck } from './lib/score.mjs';
+import { heldoutCheck, GATES, MARGIN } from './lib/score.mjs';
+import { CELL_PARTS } from './lib/heldout.mjs';
 
 const v1 = readJson(path.join(EVAL, 'tables', 'key', 'table.json'));
 const v2 = readJson(path.join(EVAL, 'tables', 'key-v2', 'table.json'));
@@ -101,11 +102,17 @@ const pts1 = x => `${(x * 100).toFixed(1)}`;
 const HO_SETUPS = MODELS.flatMap(m => [`${lead(m)}/${rule}`, ...(hoRow(`${lead(m)}/${rule}/F`) ? [`${lead(m)}/${rule}/F`] : [])]);
 const hoLabel = id => `${name(modelOf(id))}${id.endsWith('/F') ? ', Haiku reject pass first' : ''}`;
 const cand = dec.candidate && hoMethod(dec.candidate);
-const passSet = new Set(HO_SETUPS.filter(id => hoRow(id).keep >= dec.bar.keep - 1e-9 && hoRow(id).exact >= dec.bar.exact - 1e-9));
+const passSet = new Set(HO_SETUPS.filter(id => heldoutCheck(hoRow(id), rep)));
+// A set-up row is on the shortlist when one of its ranking methods is: FR for the /F rows, R or CR for the others.
+const onShortlist = id => dec.shortlist.some(x => x.split('/')[1] === lead(modelOf(id)) && (id.endsWith('/F') ? x.startsWith('FR/') : !x.startsWith('FR/')));
+const pctN = x => `${+(x * 100).toFixed(1)}%`;
+const gatesText = `drop recall ${pctN(GATES.drop_recall)}, keep agreement ${pctN(GATES.keep)}, exact difficulty step ${pctN(GATES.exact)}, and within one ${pctN(GATES.within1)}`;
+const quotaText = q => { const c = config.quotas[q]; return `${c[1]}, ${c[2]}, and ${c[3]} photos at difficulty steps 1, 2, and 3, with ${c.usual_look_min} or more of the usual look at step 1`; };
+const HOW = { CR: 'the code order picks the photos', R: 'a ranking agent picks the photos', FR: 'Haiku drops its rejects first, and a ranking agent picks the photos', S: 'the photos are kept in fetch order', F: 'Haiku drops its rejects first, and the photos are kept in fetch order' };
 const keyV2Row = id => v2.setups.find(r => r.id === id);
 const shortModels = MODELS.filter(m => dec.shortlist.some(id => id.includes(`/${lead(m)}/`)));
 const outModels = MODELS.filter(m => !shortModels.includes(m));
-const exactLine = dec.best.exact - 0.05, keepLine = dec.best.keep - 0.05;
+const exactLine = dec.best.exact - MARGIN, keepLine = dec.best.keep - MARGIN;
 const all = (m, q = Q) => hoMethod(`CRall/${lead(m)}/${rule}/${q}`);
 const sameSetup = dec.candidate ? ho.methods.filter(r => r.setup === cand.setup && r.quota === Q && dec.shortlist.includes(r.id)) : [];
 
@@ -123,7 +130,7 @@ const sameSetup = dec.candidate ? ho.methods.filter(r => r.setup === cand.setup 
     t(24, 40, dec.candidate ? `Of the shortlist, only ${name(modelOf(cand.setup))} clears the owner's bar on the held-out set` : 'No shortlisted set-up clears the owner\'s bar on the held-out set', { fill: C.ink, size: 22, weight: 700 }),
     t(24, 66, `Each dot is one frozen judge set-up on the ${ho.setups[0].photos} held-out photos (V1, rule ${rule}). Left: the share of photos where keep or drop`, { fill: C.sub, size: 14 }),
     t(24, 84, "agrees with the owner. Right: the owner's exact difficulty step, on the photos that both keep. The dashed line is the bar", { fill: C.sub, size: 14 }),
-    t(24, 102, `of heldoutCheck: 5 points below the owner's own repeat agreement (the thin line), from ${rep.n} photos labelled twice.`, { fill: C.sub, size: 14 }),
+    t(24, 102, `of heldoutCheck: ${+(MARGIN * 100).toFixed(1)} points below the owner's own repeat agreement (the thin line), from ${rep.n} photos labelled twice.`, { fill: C.sub, size: 14 }),
   ];
   for (const [panel, f, label] of [[0, 'keep', 'Keep agreement'], [1, 'exact', 'Exact difficulty step']]) {
     s.push(t(xp(panel, X0h), T - 8, label, { fill: C.ink, size: 14, weight: 700 }));
@@ -140,7 +147,7 @@ const sameSetup = dec.candidate ? ho.methods.filter(r => r.setup === cand.setup 
     });
   }
   rows.forEach((id, i) => {
-    const onShort = shortModels.includes(modelOf(id)) && (!id.endsWith('/F') || dec.shortlist.some(x => x.startsWith('FR/') && x.includes(`/${lead(modelOf(id))}/`)));
+    const onShort = onShortlist(id);
     s.push(t(24, yr(i) + 4, hoLabel(id), { fill: accent(id) ? C.accent : C.ink, size: 13, weight: accent(id) ? 700 : null }));
     s.push(t(24, yr(i) + 18, onShort ? 'on the shortlist' : 'not on the shortlist (key v2)', { fill: C.axis, size: 11 }));
   });
@@ -216,10 +223,10 @@ const md = [
   '## The result',
   '',
   `- **Owner ruling ${RULING.date}: ${name(RULING.model)} ${RULING.method}** (\`docs/decisions/2026-11-13-intake-method.md\`). Haiku drops its rejects, ${name(RULING.model)} at \`${frozen.effort[RULING.model]}\` judges the rest, and a ${name(RULING.model)} agent ranks each cell. Of the ${ruled.picks.n} photos it picks for the ${Q} quota on the held-out set, the owner kept ${pct(ruled.picks.kept)}, and ${pct(ruled.picks.step)} are at the owner's difficulty step, at ${usd(ruled.usd_per_kept)} per kept photo. It fills ${pct(ruled.fill.share)} of the quota slots. The owner prefers too few photos to bad ones. This overrules the result of the decision rule below: ${name(RULING.model)} missed the shortlist on key v2, but passes \`heldoutCheck\` on the held-out set.`,
-  `- **The decision rule gives ${dec.candidate ? `${shortId(dec.candidate)}` : 'no candidate'}**${dec.candidate ? `: Opus at \`${frozen.effort.opus}\` judges the first ${dec.candidate.match(/\d+/)?.[0] ?? 'all'} photos of each species pool, and the code order picks the photos. On the held-out set it costs ${usd(cand.usd_per_kept)} per kept photo, with keep ${pct(cand.keep)} and exact difficulty step ${pct(cand.exact)}, against a bar of ${pct(dec.bar.keep)} and ${pct(dec.bar.exact)}` : ''}.`,
+  `- **The decision rule gives ${dec.candidate ? `${shortId(dec.candidate)}` : 'no candidate'}**${dec.candidate ? `: ${name(modelOf(cand.setup))} at \`${frozen.effort[modelOf(cand.setup)]}\` judges ${/\d+$/.test(cand.method) ? `the first ${cand.method.match(/\d+$/)[0]}` : 'all the'} photos of each species pool, and ${HOW[cand.method.replace(/(\d+|all)$/, '')]}. On the held-out set it costs ${usd(cand.usd_per_kept)} per kept photo, with keep ${pct(cand.keep)} and exact difficulty step ${pct(cand.exact)}, against a bar of ${pct(dec.bar.keep)} and ${pct(dec.bar.exact)}` : ''}.`,
   ...(dec.candidate ? [`- **But it fills only ${pct(cand.fill.share)} of the quota slots** (${cand.fill.filled} of ${cand.fill.slots}), because it judges ${cand.fill.judged} of the ${ho.setups[0].photos} photos. The same set-up over all photos (${shortId(all('opus').id)}) fills ${pct(all('opus').fill.share)} at ${usd(all('opus').usd_per_kept)} per kept photo. The rule ranks by USD per kept photo, and a small K keeps fewer photos for less. The owner rules on this.`] : []),
   `- **Haiku fails the check** on the exact difficulty step: ${pct(hoRow(`${lead('haiku')}/${rule}`).exact)} against the bar of ${pct(dec.bar.exact)}, ${pts1(dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact)} points short. Its keep agreement passes (${pct(hoRow(`${lead('haiku')}/${rule}`).keep)}). Haiku costs ${usd(all('haiku').usd_per_kept)} per kept photo over all photos, ${(all('opus').usd_per_kept / all('haiku').usd_per_kept).toFixed(0)} times less than Opus.`,
-  ...outModels.map(m => `- **${name(m)} is not on the shortlist**: on key v2 its exact difficulty step is ${pct(keyV2Row(`${lead(m)}/${rule}`).exact)}, below the line of ${pct(exactLine)} (5 points under the best, ${pct(dec.best.exact)}). On the held-out set it ${passSet.has(`${lead(m)}/${rule}`) ? 'passes' : 'fails'} the check (keep ${pct(hoRow(`${lead(m)}/${rule}`).keep)}, exact ${pct(hoRow(`${lead(m)}/${rule}`).exact)}) at ${usd(all(m).usd_per_kept)} per kept photo over all photos.`),
+  ...outModels.map(m => `- **${name(m)} is not on the shortlist**: on key v2 its exact difficulty step is ${pct(keyV2Row(`${lead(m)}/${rule}`).exact)}, below the line of ${pct(exactLine)} (${+(MARGIN * 100).toFixed(1)} points under the best, ${pct(dec.best.exact)}). On the held-out set it ${passSet.has(`${lead(m)}/${rule}`) ? 'passes' : 'fails'} the check (keep ${pct(hoRow(`${lead(m)}/${rule}`).keep)}, exact ${pct(hoRow(`${lead(m)}/${rule}`).exact)}) at ${usd(all(m).usd_per_kept)} per kept photo over all photos.`),
   `- **The owner's own bar is soft.** The owner agrees with the owner on keep for ${pct(rep.keep)} of ${rep.n} photos and on the exact difficulty step for ${pct(rep.exact)} of the ${rep.both} photos kept both times. One photo moves exact by ${pts1(1 / rep.both)} points, so the bar has an error of several points.`,
   `- **No set-up passes the fixed gates**, on the key or on key v2 (owner ruling 2026-10-27, item 4, below).`,
   '',
@@ -227,7 +234,7 @@ const md = [
   '',
   '### The result',
   '',
-  `- No judge set-up passes the fixed gates on the key, on the old labels (${passing(v1.methods)} method rows) or on key v2 (${passing(v2.methods)}). The gates are drop recall 80%, keep agreement 85%, exact difficulty step 80%, and within one 97%.`,
+  `- No judge set-up passes the fixed gates on the key, on the old labels (${passing(v1.methods)} method rows) or on key v2 (${passing(v2.methods)}). The gates are ${gatesText}.`,
   `- The owner's own labels move. On the ${relabel.photos.length} key photos that the owner relabelled blind, the old and the new label agree on keep for ${pct(selfKeep / relabel.photos.length)} of the photos and on the exact difficulty step for ${pct(selfExact / bothKept.length)} of the ${bothKept.length} photos kept both times. On those photos the judges agree with the owner about as well as the owner agrees with the owner (NOTES.md, Task 7).`,
   `- Owner ruling 2026-10-27 (plan, "Rulings of 2026-10-27", item 4): freeze without a pass of the fixed gates. Task 11 judges the held-out run against the owner's own repeat agreement (\`heldoutCheck\`). No third prompt variant.`,
   `- **The freeze** (\`frozen.json\`): variant ${frozen.variant}, rule ${frozen.rule}, calls of ${frozen.batch}, ${MODELS.map(m => `${name(m)} \`${frozen.effort[m]}\``).join(', ')}. The sha256 of ${Object.keys(frozen.sha256).map(f => `\`${f}\``).join(', ')} are in the file, and \`freeze.mjs --check\` tests them before the held-out run.`,
@@ -274,7 +281,7 @@ const md = [
   '',
   '## The held-out set',
   '',
-  `${ho.setups[0].photos} photos of 3 species, in fetch order: ${pools0.cells.map(c => `${c.target} ${c.photos.length}`).join(', ')}. The owner labelled every photo blind (part, keep, difficulty step) and picked the best photo of each of the ${Object.keys(bestPhotos).length} cells. The frozen set-ups judged them in calls of 20 (Task 9). Each photo goes in the cell of the judge's part, and a photo that the owner or the judge puts in the part \`other\` is a reject for keep. The tables: \`tables/heldout/\`.`,
+  `${ho.setups[0].photos} photos of ${pools0.cells.length} species, in fetch order: ${pools0.cells.map(c => `${c.target} ${c.photos.length}`).join(', ')}. The owner labelled every photo blind (part, keep, difficulty step) and picked the best photo of each of the ${Object.keys(bestPhotos).length} cells. The frozen set-ups judged them in calls of 20 (Task 9). Each photo goes in the cell of the judge's part, and a photo that the owner or the judge puts in the part \`other\` is a reject for keep. The tables: \`tables/heldout/\`.`,
   '',
   `The Haiku reject pass of F and FR drops Haiku's rejects under rule K3, because the FR ranking jobs ran on that set (plan choice 8). Before Task 11 the replay used its own rule there. The key tables use K3 for the reject pass too, so the /F, F, and FR rows of \`tables/key/\` and \`tables/key-v2/\` changed in Task 11, and no other row.`,
   '',
@@ -292,18 +299,18 @@ const md = [
   'What the chart shows:',
   '',
   `- All ${HO_SETUPS.length} set-up rows pass the keep bar (${pct(dec.bar.keep)}): keep runs from ${pct(Math.min(...HO_SETUPS.map(id => hoRow(id).keep)))} to ${pct(Math.max(...HO_SETUPS.map(id => hoRow(id).keep)))}.`,
-  `- The exact difficulty step decides the check. Haiku is ${pts1(dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact)} points under the bar, about ${Math.round((dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact) * hoRow(`${lead('haiku')}/${rule}`).both)} of its ${hoRow(`${lead('haiku')}/${rule}`).both} photos kept by both.`,
+  `- The exact difficulty step decides the check. Haiku is ${pts1(dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact)} points under the bar, about ${((dec.bar.exact - hoRow(`${lead('haiku')}/${rule}`).exact) * hoRow(`${lead('haiku')}/${rule}`).both).toFixed(1)} of its ${hoRow(`${lead('haiku')}/${rule}`).both} photos kept by both.`,
   `- Every frozen set-up is ${Math.round(Math.min(...dropV2) * 100)} to ${Math.round(Math.max(...dropV2) * 100)} points lower on exact difficulty step than on key v2 (Opus ${pct(keyV2Row(`${lead('opus')}/${rule}`).exact)} on key v2, ${pct(hoRow(`${lead('opus')}/${rule}`).exact)} here). Key v2 holds the owner's later calls, some made with the judges' answers on the page; the held-out labels are blind.`,
   '',
   '### The methods',
   '',
-  `Quota ${Q} (3, 3, and 2 photos per difficulty step, 2 or more of the usual look at step 1) on every cell: ${ho.methods.find(r => r.quota === Q).fill.slots} slots, 9 cells × 3 difficulty steps. Keep and the difficulty step belong to the set-up (plan choice 15), so the methods differ in cost, quota fill, and top pick. R and CR at K judge the first K photos of each species pool. "Top of all after K": the share of cells where the top photo of R or CR over all photos comes after photo K. The ranking cost is the line a + b × n from the held-out ranking jobs (plan choice 11). F and FR have no Haiku row (plan choice 10).`,
+  `Quota ${Q} (${quotaText(Q)}) on every cell: ${ho.methods.find(r => r.quota === Q).fill.slots} slots, ${ho.methods.find(r => r.quota === Q).fill.slots / 3} cells × 3 difficulty steps. Keep and the difficulty step belong to the set-up (plan choice 15), so the methods differ in cost, quota fill, and top pick. R and CR at K judge the first K photos of each species pool. "Top of all after K": the share of cells where the top photo of R or CR over all photos comes after photo K. The ranking cost is the line a + b × n from the held-out ranking jobs (plan choice 11). F and FR have no Haiku row (plan choice 10).`,
   '',
   '| method | judge | judged | ranked | quota fill | photos picked | picks the owner kept | picks at the owner\'s step | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |',
   '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
   ...methodRowsOf(Q).map(methodLine),
   '',
-  `Quota Q221 (2, 2, and 1), the same columns: the quota fill and the USD per kept photo change; the agreement does not.`,
+  `Quota Q221 (${quotaText('Q221')}), the same columns: the quota fill and the USD per kept photo change; the agreement does not.`,
   '',
   '| method | judge | judged | ranked | quota fill | photos picked | picks the owner kept | picks at the owner\'s step | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |',
   '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|',
@@ -312,7 +319,7 @@ const md = [
   `- Over all photos, no method fills more than ${pct(Math.max(...methodRowsOf(Q).map(r => r.fill.share)))} of the ${Q} slots: the pools do not hold 3 photos at every difficulty step of every cell. The owner kept ${nKept} of ${nLabels} photos.`,
   `- Top pick (the method's first photo at its lowest difficulty step is the owner's best photo), over ${Object.keys(bestPhotos).length} cells: best ${pct(Math.max(...methodRowsOf(Q).map(r => r.top_pick)))} (${methodRowsOf(Q).filter(r => r.top_pick === Math.max(...methodRowsOf(Q).map(x => x.top_pick))).map(r => `${name(modelOf(r.setup))} ${r.method}`).join(', ')}). One cell is ${pts1(cellPts)} points.`,
   '',
-  `- Photos picked: the photos the method puts in the quota. "Picks the owner kept": the share of them that the owner kept. "Picks at the owner's step": the share that the owner kept at the same difficulty step (owner request 2026-11-13).`,
+  `- Photos picked: the photos the method puts in the quota. "Picks the owner kept": the share of them that the owner kept in the same part. "Picks at the owner's step": the share that the owner kept in that part at the same difficulty step (owner request 2026-11-13).`,
   '',
   '### How often the best photo of "all" comes after photo K',
   '',
@@ -334,12 +341,12 @@ const md = [
   '',
   '## The decision rule, step by step',
   '',
-  `1. **The fixed gates on the key** (drop recall 80%, keep 85%, exact difficulty step 80%, within one 97%): no row passes, on the old key (${passing(v1.methods)} method rows) or on key v2 (${passing(v2.methods)}). Owner ruling 2026-10-27, item 4: the shortlist leaves out the gates, and the held-out check uses the owner's repeat agreement.`,
-  `2. **The shortlist, from key v2**: the ranking methods (R at each K, FR, CR at each K) of the 3 frozen set-ups, rule ${rule}, quota ${Q}, within 5 points of the best exact difficulty step (${pct(dec.best.exact)}, so ${pct(exactLine)} or more) and of the best keep (${pct(dec.best.keep)}, so ${pct(keepLine)} or more). ${dec.shortlist.length} rows: ${shortModels.map(m => `${name(m)} ${dec.shortlist.filter(id => id.includes(`/${lead(m)}/`)).map(id => id.split('/')[0]).join(', ')}`).join('; ')}.`,
+  `1. **The fixed gates on the key** (${gatesText}): no row passes, on the old key (${passing(v1.methods)} method rows) or on key v2 (${passing(v2.methods)}). Owner ruling 2026-10-27, item 4: the shortlist leaves out the gates, and the held-out check uses the owner's repeat agreement.`,
+  `2. **The shortlist, from key v2**: the ranking methods (R at each K, FR, CR at each K) of the 3 frozen set-ups, rule ${rule}, quota ${Q}, within ${+(MARGIN * 100).toFixed(1)} points of the best exact difficulty step (${pct(dec.best.exact)}, so ${pct(exactLine)} or more) and of the best keep (${pct(dec.best.keep)}, so ${pct(keepLine)} or more). ${dec.shortlist.length} rows: ${shortModels.map(m => `${name(m)} ${dec.shortlist.filter(id => id.includes(`/${lead(m)}/`)).map(id => id.split('/')[0]).join(', ')}`).join('; ')}.`,
   '',
   '   | set-up on key v2 | exact difficulty step | keep | on the shortlist |',
   '   |---|---|---|---|',
-  ...HO_SETUPS.map(id => { const r = keyV2Row(id); return `   | ${hoLabel(id)} | ${pct(r.exact)} | ${pct(r.keep)} | ${r.exact >= exactLine - 1e-9 && r.keep >= keepLine - 1e-9 ? 'yes' : 'no'} |`; }),
+  ...HO_SETUPS.map(id => { const r = keyV2Row(id); return `   | ${hoLabel(id)} | ${pct(r.exact)} | ${pct(r.keep)} | ${onShortlist(id) ? 'yes' : 'no'} |`; }),
   '',
   `3. **The candidate**: the shortlisted row with the lowest USD per kept photo on the held-out set. 4. **The check** (\`heldoutCheck\`): keep ${pct(dec.bar.keep)} or more and exact difficulty step ${pct(dec.bar.exact)} or more, each 5 points under the owner's repeat agreement (${pct(rep.keep)}, ${pct(rep.exact)}). When a row fails, the next-cheapest gets the check:`,
   '',
@@ -359,13 +366,13 @@ const md = [
   ...PHASES.map(p => `| ${p.task} | ${p.work} | ${p.agents} | ${mtok(p.tokens)} | ${mtok(p.output)} | ${usd2(p.usd)} | ${p.est ? `${usd2(p.est.usd)}${p.est.lo != null ? ` (${p.est.lo.toFixed(2)} to ${p.est.hi.toFixed(2)})` : ''}, ${p.est.src}` : 'none: the owner asked for it'} | ${p.est ? `up to ${p.est.agents}` : '-'} |`),
   `| | All | ${sum('agents')} | ${mtok(sum('tokens'))} | ${mtok(sum('output'))} | ${usd2(sum('usd'))} | ${usd2(PHASES.filter(p => p.est).reduce((s, p) => s + p.est.usd, 0))}, the sum of the estimates | |`,
   '',
-  `- Tasks 1, 2, 4, 7, 8, 10, and 11 ran no judge or ranking agent: USD 0 of tokens. Code-review agents are not in this table.`,
+  `- No other task ran a judge or ranking agent, so no other task spent tokens on the eval. Code-review agents are not in this table.`,
   `- The plan's total was USD ${PLAN_TOTAL.usd} (${PLAN_TOTAL.lo} to ${PLAN_TOTAL.hi}) for up to ${PLAN_TOTAL.agents} agents. The eval spent ${usd2(sum('usd'))} on ${sum('agents')} agents. Most of each agent's cost is its fixed context, so calls of 20 cost less per photo than calls of 10 for Opus and Sonnet.`,
   `- Task 5 includes ${usd2(FIRST_ATTEMPTS_USD)} of first attempts that do not count, from the judges that went off task (NOTES.md, Task 5, part 2).`,
   '',
   "## The owner's photo calls",
   '',
-  `- **Held-out labels** (\`heldout/labels.json\`, \`heldout/best.json\`): ${nLabels} of ${nLabels} labelled blind. Parts: ${['leaf', 'bark', 'fruit', 'other'].map(p => `${p} ${partCount(p)}`).join(', ')}. Kept ${nKept}. A best photo for each of the ${Object.keys(bestPhotos).length} cells.`,
+  `- **Held-out labels** (\`heldout/labels.json\`, \`heldout/best.json\`): ${nLabels} of ${nLabels} labelled blind. Parts: ${[...CELL_PARTS, 'other'].map(p => `${p} ${partCount(p)}`).join(', ')}. Kept ${nKept}. A best photo for each of the ${Object.keys(bestPhotos).length} cells.`,
   `- **Repeat labels** (\`heldout/repeat.json\`): ${rep.n} photos a week later. Part ${pct(rep.part)}, keep ${pct(rep.keep)}, exact difficulty step ${pct(rep.exact)}, within one ${pct(rep.within1)}.`,
   `- **Thin-cell photos and species doubts on the held-out set**: ${hoThin ? `${hoThin} set-up rows have a thin-cell photo` : 'no thin-cell photo'}; ${hoDoubts ? `${hoDoubts} species doubts` : 'no `mismatch` escalation and no `hybrid` reject'}. So no review sheet was needed.`,
   `- **The feature check** (\`key/feature-check.json\`): ${featureCheck.photos.length} key photos, ${fc[lead('opus')].all.n} yes-or-no questions on the photo features. The frozen set-ups agree with the owner on ${MODELS.map(m => `${name(m)} ${pct(fc[lead(m)].all.agree / fc[lead(m)].all.n)}`).join(', ')}.`,

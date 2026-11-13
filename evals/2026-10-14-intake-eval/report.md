@@ -95,64 +95,64 @@ Agreement is against the owner's blind labels. Part: the judge's part against th
 What the chart shows:
 
 - All 5 set-up rows pass the keep bar (77.5%): keep runs from 80.8% to 81.7%.
-- The exact difficulty step decides the check. Haiku is 3.3 points under the bar, about 3 of its 82 photos kept by both.
+- The exact difficulty step decides the check. Haiku is 3.3 points under the bar, about 2.7 of its 82 photos kept by both.
 - Every frozen set-up is 12 to 20 points lower on exact difficulty step than on key v2 (Opus 79.9% on key v2, 59.5% here). Key v2 holds the owner's later calls, some made with the judges' answers on the page; the held-out labels are blind.
 
 ### The methods
 
-Quota Q332 (3, 3, and 2 photos per difficulty step, 2 or more of the usual look at step 1) on every cell: 27 slots, 9 cells × 3 difficulty steps. Keep and the difficulty step belong to the set-up (plan choice 15), so the methods differ in cost, quota fill, and top pick. R and CR at K judge the first K photos of each species pool. "Top of all after K": the share of cells where the top photo of R or CR over all photos comes after photo K. The ranking cost is the line a + b × n from the held-out ranking jobs (plan choice 11). F and FR have no Haiku row (plan choice 10).
+Quota Q332 (3, 3, and 2 photos at difficulty steps 1, 2, and 3, with 2 or more of the usual look at step 1) on every cell: 27 slots, 9 cells × 3 difficulty steps. Keep and the difficulty step belong to the set-up (plan choice 15), so the methods differ in cost, quota fill, and top pick. R and CR at K judge the first K photos of each species pool. "Top of all after K": the share of cells where the top photo of R or CR over all photos comes after photo K. The ranking cost is the line a + b × n from the held-out ranking jobs (plan choice 11). F and FR have no Haiku row (plan choice 10).
 
 | method | judge | judged | ranked | quota fill | photos picked | picks the owner kept | picks at the owner's step | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| S | Opus | 208 | 0 | 59.3% | 51 | 92.2% | 51.0% | 33.3% | - | USD 4.10 | USD 0.0197 | USD 0.0804 | 83,042 |
-| F | Opus | 114 | 0 | 55.6% | 50 | 90.0% | 50.0% | 33.3% | - | USD 2.52 | USD 0.0121 | USD 0.0504 | 120,535 |
-| R20 | Opus | 60 | 25 | 14.8% | 20 | 80.0% | 35.0% | 11.1% | 66.7% | USD 1.92 | USD 0.0320 | USD 0.0960 | 100,531 |
-| R30 | Opus | 90 | 45 | 18.5% | 25 | 84.0% | 44.0% | 22.2% | 66.7% | USD 2.62 | USD 0.0291 | USD 0.1047 | 110,707 |
+| S | Opus | 208 | 0 | 59.3% | 51 | 90.2% | 51.0% | 33.3% | - | USD 4.10 | USD 0.0197 | USD 0.0804 | 83,042 |
+| F | Opus | 114 | 0 | 55.6% | 50 | 88.0% | 50.0% | 33.3% | - | USD 2.52 | USD 0.0121 | USD 0.0504 | 120,535 |
+| R20 | Opus | 60 | 25 | 14.8% | 20 | 75.0% | 35.0% | 11.1% | 66.7% | USD 1.92 | USD 0.0320 | USD 0.0960 | 100,531 |
+| R30 | Opus | 90 | 45 | 18.5% | 25 | 80.0% | 44.0% | 22.2% | 66.7% | USD 2.62 | USD 0.0291 | USD 0.1047 | 110,707 |
 | Rall | Opus | 208 | 124 | 59.3% | 51 | 94.1% | 51.0% | 33.3% | - | USD 5.41 | USD 0.0260 | USD 0.1060 | 113,496 |
 | FR | Opus | 114 | 108 | 55.6% | 50 | 96.0% | 52.0% | 44.4% | - | USD 3.80 | USD 0.0183 | USD 0.0760 | 151,490 |
-| CR20 | Opus | 60 | 0 | 14.8% | 20 | 80.0% | 35.0% | 11.1% | 55.6% | USD 1.25 | USD 0.0209 | USD 0.0627 | 58,126 |
-| CR30 | Opus | 90 | 0 | 18.5% | 25 | 84.0% | 52.0% | 22.2% | 44.4% | USD 1.80 | USD 0.0200 | USD 0.0720 | 69,796 |
+| CR20 | Opus | 60 | 0 | 14.8% | 20 | 75.0% | 35.0% | 11.1% | 55.6% | USD 1.25 | USD 0.0209 | USD 0.0627 | 58,126 |
+| CR30 | Opus | 90 | 0 | 18.5% | 25 | 80.0% | 52.0% | 22.2% | 44.4% | USD 1.80 | USD 0.0200 | USD 0.0720 | 69,796 |
 | CRall | Opus | 208 | 0 | 59.3% | 51 | 90.2% | 49.0% | 33.3% | - | USD 4.10 | USD 0.0197 | USD 0.0804 | 83,042 |
 | S | Sonnet | 208 | 0 | 51.9% | 51 | 90.2% | 62.7% | 33.3% | - | USD 2.87 | USD 0.0138 | USD 0.0562 | 67,146 |
 | F | Sonnet | 114 | 0 | 51.9% | 51 | 88.2% | 60.8% | 33.3% | - | USD 1.90 | USD 0.0092 | USD 0.0373 | 109,500 |
-| R20 | Sonnet | 60 | 23 | 7.4% | 16 | 87.5% | 62.5% | 11.1% | 66.7% | USD 1.10 | USD 0.0183 | USD 0.0686 | 93,557 |
-| R30 | Sonnet | 90 | 43 | 18.5% | 22 | 90.9% | 63.6% | 22.2% | 66.7% | USD 1.53 | USD 0.0170 | USD 0.0695 | 93,853 |
+| R20 | Sonnet | 60 | 23 | 7.4% | 16 | 81.3% | 62.5% | 11.1% | 66.7% | USD 1.10 | USD 0.0183 | USD 0.0686 | 93,557 |
+| R30 | Sonnet | 90 | 43 | 18.5% | 22 | 86.4% | 63.6% | 22.2% | 66.7% | USD 1.53 | USD 0.0170 | USD 0.0695 | 93,853 |
 | Rall | Sonnet | 208 | 121 | 51.9% | 51 | 94.1% | 66.7% | 55.6% | - | USD 3.65 | USD 0.0176 | USD 0.0716 | 97,581 |
 | FR | Sonnet | 114 | 108 | 51.9% | 51 | 94.1% | 64.7% | 55.6% | - | USD 2.68 | USD 0.0129 | USD 0.0525 | 139,842 |
-| CR20 | Sonnet | 60 | 0 | 7.4% | 16 | 87.5% | 62.5% | 11.1% | 55.6% | USD 0.70 | USD 0.0117 | USD 0.0438 | 40,668 |
-| CR30 | Sonnet | 90 | 0 | 18.5% | 22 | 86.4% | 59.1% | 22.2% | 44.4% | USD 1.04 | USD 0.0115 | USD 0.0472 | 47,441 |
+| CR20 | Sonnet | 60 | 0 | 7.4% | 16 | 81.3% | 62.5% | 11.1% | 55.6% | USD 0.70 | USD 0.0117 | USD 0.0438 | 40,668 |
+| CR30 | Sonnet | 90 | 0 | 18.5% | 22 | 81.8% | 59.1% | 22.2% | 44.4% | USD 1.04 | USD 0.0115 | USD 0.0472 | 47,441 |
 | CRall | Sonnet | 208 | 0 | 51.9% | 51 | 90.2% | 58.8% | 55.6% | - | USD 2.87 | USD 0.0138 | USD 0.0562 | 67,146 |
-| S | Haiku | 208 | 0 | 55.6% | 48 | 87.5% | 56.3% | 33.3% | - | USD 0.26 | USD 0.0013 | USD 0.0055 | 77,088 |
+| S | Haiku | 208 | 0 | 55.6% | 48 | 85.4% | 54.2% | 33.3% | - | USD 0.26 | USD 0.0013 | USD 0.0055 | 77,088 |
 | R20 | Haiku | 60 | 26 | 7.4% | 16 | 81.3% | 50.0% | 11.1% | 66.7% | USD 0.10 | USD 0.0017 | USD 0.0065 | 119,774 |
 | R30 | Haiku | 90 | 43 | 14.8% | 22 | 90.9% | 63.6% | 22.2% | 66.7% | USD 0.14 | USD 0.0016 | USD 0.0065 | 113,390 |
-| Rall | Haiku | 208 | 114 | 55.6% | 48 | 91.7% | 56.3% | 44.4% | - | USD 0.31 | USD 0.0015 | USD 0.0064 | 109,655 |
+| Rall | Haiku | 208 | 114 | 55.6% | 48 | 89.6% | 54.2% | 44.4% | - | USD 0.31 | USD 0.0015 | USD 0.0064 | 109,655 |
 | CR20 | Haiku | 60 | 0 | 7.4% | 16 | 75.0% | 43.8% | 11.1% | 66.7% | USD 0.08 | USD 0.0013 | USD 0.0047 | 56,041 |
 | CR30 | Haiku | 90 | 0 | 14.8% | 22 | 81.8% | 59.1% | 22.2% | 55.6% | USD 0.11 | USD 0.0012 | USD 0.0049 | 59,056 |
 | CRall | Haiku | 208 | 0 | 55.6% | 48 | 83.3% | 56.3% | 44.4% | - | USD 0.26 | USD 0.0013 | USD 0.0055 | 77,088 |
 
-Quota Q221 (2, 2, and 1), the same columns: the quota fill and the USD per kept photo change; the agreement does not.
+Quota Q221 (2, 2, and 1 photos at difficulty steps 1, 2, and 3, with 2 or more of the usual look at step 1), the same columns: the quota fill and the USD per kept photo change; the agreement does not.
 
 | method | judge | judged | ranked | quota fill | photos picked | picks the owner kept | picks at the owner's step | top pick | top of all after K | USD | USD per photo | USD per kept photo | tokens per kept photo |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| S | Opus | 208 | 0 | 66.7% | 34 | 94.1% | 58.8% | 33.3% | - | USD 4.10 | USD 0.0197 | USD 0.1206 | 124,564 |
-| F | Opus | 114 | 0 | 66.7% | 34 | 94.1% | 58.8% | 33.3% | - | USD 2.52 | USD 0.0121 | USD 0.0741 | 177,258 |
-| R20 | Opus | 60 | 25 | 33.3% | 16 | 75.0% | 31.3% | 11.1% | 66.7% | USD 1.92 | USD 0.0320 | USD 0.1200 | 125,664 |
-| R30 | Opus | 90 | 45 | 40.7% | 20 | 80.0% | 40.0% | 22.2% | 66.7% | USD 2.62 | USD 0.0291 | USD 0.1309 | 138,383 |
+| S | Opus | 208 | 0 | 66.7% | 34 | 91.2% | 58.8% | 33.3% | - | USD 4.10 | USD 0.0197 | USD 0.1206 | 124,564 |
+| F | Opus | 114 | 0 | 66.7% | 34 | 91.2% | 58.8% | 33.3% | - | USD 2.52 | USD 0.0121 | USD 0.0741 | 177,258 |
+| R20 | Opus | 60 | 25 | 33.3% | 16 | 68.8% | 31.3% | 11.1% | 66.7% | USD 1.92 | USD 0.0320 | USD 0.1200 | 125,664 |
+| R30 | Opus | 90 | 45 | 40.7% | 20 | 75.0% | 40.0% | 22.2% | 66.7% | USD 2.62 | USD 0.0291 | USD 0.1309 | 138,383 |
 | Rall | Opus | 208 | 124 | 66.7% | 34 | 100.0% | 55.9% | 33.3% | - | USD 5.41 | USD 0.0260 | USD 0.1591 | 170,244 |
 | FR | Opus | 114 | 108 | 66.7% | 34 | 100.0% | 55.9% | 44.4% | - | USD 3.80 | USD 0.0183 | USD 0.1118 | 222,780 |
-| CR20 | Opus | 60 | 0 | 33.3% | 16 | 81.3% | 37.5% | 11.1% | 55.6% | USD 1.25 | USD 0.0209 | USD 0.0784 | 72,658 |
-| CR30 | Opus | 90 | 0 | 40.7% | 20 | 85.0% | 50.0% | 22.2% | 44.4% | USD 1.80 | USD 0.0200 | USD 0.0900 | 87,245 |
+| CR20 | Opus | 60 | 0 | 33.3% | 16 | 75.0% | 37.5% | 11.1% | 55.6% | USD 1.25 | USD 0.0209 | USD 0.0784 | 72,658 |
+| CR30 | Opus | 90 | 0 | 40.7% | 20 | 80.0% | 50.0% | 22.2% | 44.4% | USD 1.80 | USD 0.0200 | USD 0.0900 | 87,245 |
 | CRall | Opus | 208 | 0 | 66.7% | 34 | 94.1% | 55.9% | 33.3% | - | USD 4.10 | USD 0.0197 | USD 0.1206 | 124,564 |
 | S | Sonnet | 208 | 0 | 70.4% | 36 | 91.7% | 66.7% | 33.3% | - | USD 2.87 | USD 0.0138 | USD 0.0797 | 95,124 |
 | F | Sonnet | 114 | 0 | 70.4% | 36 | 91.7% | 66.7% | 33.3% | - | USD 1.90 | USD 0.0092 | USD 0.0529 | 155,125 |
-| R20 | Sonnet | 60 | 23 | 29.6% | 14 | 85.7% | 57.1% | 11.1% | 66.7% | USD 1.10 | USD 0.0183 | USD 0.0784 | 106,922 |
-| R30 | Sonnet | 90 | 43 | 37.0% | 17 | 94.1% | 64.7% | 22.2% | 66.7% | USD 1.53 | USD 0.0170 | USD 0.0900 | 121,457 |
+| R20 | Sonnet | 60 | 23 | 29.6% | 14 | 78.6% | 57.1% | 11.1% | 66.7% | USD 1.10 | USD 0.0183 | USD 0.0784 | 106,922 |
+| R30 | Sonnet | 90 | 43 | 37.0% | 17 | 88.2% | 64.7% | 22.2% | 66.7% | USD 1.53 | USD 0.0170 | USD 0.0900 | 121,457 |
 | Rall | Sonnet | 208 | 121 | 70.4% | 36 | 94.4% | 69.4% | 55.6% | - | USD 3.65 | USD 0.0176 | USD 0.1015 | 138,240 |
 | FR | Sonnet | 114 | 108 | 70.4% | 36 | 94.4% | 66.7% | 55.6% | - | USD 2.68 | USD 0.0129 | USD 0.0744 | 198,110 |
-| CR20 | Sonnet | 60 | 0 | 29.6% | 14 | 85.7% | 57.1% | 11.1% | 55.6% | USD 0.70 | USD 0.0117 | USD 0.0500 | 46,478 |
-| CR30 | Sonnet | 90 | 0 | 37.0% | 17 | 88.2% | 58.8% | 22.2% | 44.4% | USD 1.04 | USD 0.0115 | USD 0.0611 | 61,394 |
+| CR20 | Sonnet | 60 | 0 | 29.6% | 14 | 78.6% | 57.1% | 11.1% | 55.6% | USD 0.70 | USD 0.0117 | USD 0.0500 | 46,478 |
+| CR30 | Sonnet | 90 | 0 | 37.0% | 17 | 82.4% | 58.8% | 22.2% | 44.4% | USD 1.04 | USD 0.0115 | USD 0.0611 | 61,394 |
 | CRall | Sonnet | 208 | 0 | 70.4% | 36 | 94.4% | 63.9% | 55.6% | - | USD 2.87 | USD 0.0138 | USD 0.0797 | 95,124 |
-| S | Haiku | 208 | 0 | 63.0% | 32 | 87.5% | 65.6% | 33.3% | - | USD 0.26 | USD 0.0013 | USD 0.0082 | 115,632 |
+| S | Haiku | 208 | 0 | 63.0% | 32 | 84.4% | 62.5% | 33.3% | - | USD 0.26 | USD 0.0013 | USD 0.0082 | 115,632 |
 | R20 | Haiku | 60 | 26 | 22.2% | 14 | 85.7% | 50.0% | 11.1% | 66.7% | USD 0.10 | USD 0.0017 | USD 0.0075 | 136,884 |
 | R30 | Haiku | 90 | 43 | 29.6% | 18 | 88.9% | 61.1% | 22.2% | 66.7% | USD 0.14 | USD 0.0016 | USD 0.0079 | 138,588 |
 | Rall | Haiku | 208 | 114 | 63.0% | 32 | 93.8% | 56.3% | 44.4% | - | USD 0.31 | USD 0.0015 | USD 0.0096 | 164,482 |
@@ -163,7 +163,7 @@ Quota Q221 (2, 2, and 1), the same columns: the quota fill and the USD per kept 
 - Over all photos, no method fills more than 59.3% of the Q332 slots: the pools do not hold 3 photos at every difficulty step of every cell. The owner kept 102 of 208 photos.
 - Top pick (the method's first photo at its lowest difficulty step is the owner's best photo), over 9 cells: best 55.6% (Sonnet Rall, Sonnet FR, Sonnet CRall). One cell is 11.1 points.
 
-- Photos picked: the photos the method puts in the quota. "Picks the owner kept": the share of them that the owner kept. "Picks at the owner's step": the share that the owner kept at the same difficulty step (owner request 2026-11-13).
+- Photos picked: the photos the method puts in the quota. "Picks the owner kept": the share of them that the owner kept in the same part. "Picks at the owner's step": the share that the owner kept in that part at the same difficulty step (owner request 2026-11-13).
 
 ### How often the best photo of "all" comes after photo K
 
@@ -191,7 +191,7 @@ Per source, the photos and the kept photos (Opus, frozen, by difficulty step 1, 
 
 ## The decision rule, step by step
 
-1. **The fixed gates on the key** (drop recall 80%, keep 85%, exact difficulty step 80%, within one 97%): no row passes, on the old key (0 method rows) or on key v2 (0). Owner ruling 2026-10-27, item 4: the shortlist leaves out the gates, and the held-out check uses the owner's repeat agreement.
+1. **The fixed gates on the key** (drop recall 80%, keep agreement 85%, exact difficulty step 80%, and within one 97%): no row passes, on the old key (0 method rows) or on key v2 (0). Owner ruling 2026-10-27, item 4: the shortlist leaves out the gates, and the held-out check uses the owner's repeat agreement.
 2. **The shortlist, from key v2**: the ranking methods (R at each K, FR, CR at each K) of the 3 frozen set-ups, rule P, quota Q332, within 5 points of the best exact difficulty step (80.1%, so 75.1% or more) and of the best keep (90.5%, so 85.5% or more). 13 rows: Opus R20, R30, Rall, CR20, CR30, CRall, FR; Haiku R20, R30, Rall, CR20, CR30, CRall.
 
    | set-up on key v2 | exact difficulty step | keep | on the shortlist |
@@ -230,7 +230,7 @@ Tokens include cache reads and writes. USD is price-weighted (plan, "Global cons
 | Task 9 | Held-out judge and rankings | 76 | 18.1M | 0.7M | USD 10.76 | USD 11.80, the owner's yes of 2026-11-04 (cap 17.7) | up to 81 |
 | | All | 639 | 141.5M | 6.9M | USD 81.02 | USD 104.61, the sum of the estimates | |
 
-- Tasks 1, 2, 4, 7, 8, 10, and 11 ran no judge or ranking agent: USD 0 of tokens. Code-review agents are not in this table.
+- No other task ran a judge or ranking agent, so no other task spent tokens on the eval. Code-review agents are not in this table.
 - The plan's total was USD 119 (89 to 179) for up to 595 agents. The eval spent USD 81.02 on 639 agents. Most of each agent's cost is its fixed context, so calls of 20 cost less per photo than calls of 10 for Opus and Sonnet.
 - Task 5 includes USD 3.07 of first attempts that do not count, from the judges that went off task (NOTES.md, Task 5, part 2).
 
