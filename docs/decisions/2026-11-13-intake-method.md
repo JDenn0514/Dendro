@@ -8,17 +8,17 @@ Date: 2026-11-13. Status: decided by the owner, not yet in the pipeline.
 - No set-up passed the fixed gates on the key. On 2026-10-27 the owner froze V1, rule `P`, calls of 20, and effort `high` for Opus, Sonnet, and Haiku (`frozen.json`). The held-out run is judged against the owner's own repeat agreement (`heldoutCheck`), not against the gates.
 - The owner's repeat agreement on 40 held-out photos: keep 82.5%, exact difficulty step 63.2% (19 photos kept both times). So the bar of `heldoutCheck` is keep 77.5% and exact difficulty step 58.2%.
 - The decision rule of the spec, with the gates left out, gives **Opus CR20**. The shortlist from key v2 holds the ranking methods of Opus and Haiku. Haiku fails the check on exact difficulty step (54.9%, 3.3 points short). Opus CR20 is then the cheapest row that passes, at USD 0.0627 per kept photo.
-- Opus CR20 judges only the first 20 photos of each species pool. It fills 14.8% of the quota slots, and the owner kept 80.0% of the photos it picks, 35.0% at the owner's difficulty step. The rule ranks by USD per kept photo and does not weigh quota fill or the quality of the picks.
+- Opus CR20 judges only the first 20 photos of each species pool. It fills 14.8% of the quota slots, and the owner kept 75.0% of the photos it picks in the same part, 35.0% at the owner's difficulty step. The rule ranks by USD per kept photo and does not weigh quota fill or the quality of the picks.
 - The owner leans to accuracy: "I'd rather have too few photos that get repeated if necessary than meet the quota with bad photos." So the owner judged the methods by the photos each one picks for the quota, on the held-out set at quota `Q332`:
 
-  | Method | Photos picked | The owner kept | At the owner's difficulty step | USD per kept photo | Quota fill |
+  | Method | Photos picked | The owner kept, same part | At the owner's difficulty step | USD per kept photo | Quota fill |
   |---|---|---|---|---|---|
-  | Opus CR20 (the rule's result) | 20 | 80.0% | 35.0% | 0.0627 | 14.8% |
+  | Opus CR20 (the rule's result) | 20 | 75.0% | 35.0% | 0.0627 | 14.8% |
   | Opus CRall | 51 | 90.2% | 49.0% | 0.0804 | 59.3% |
   | Opus FR | 50 | 96.0% | 52.0% | 0.0760 | 55.6% |
   | Sonnet Rall | 51 | 94.1% | 66.7% | 0.0716 | 51.9% |
   | **Sonnet FR** | 51 | 94.1% | 64.7% | **0.0525** | 51.9% |
-  | Haiku Rall | 48 | 91.7% | 56.3% | 0.0064 | 55.6% |
+  | Haiku Rall | 48 | 89.6% | 54.2% | 0.0064 | 55.6% |
 
 ## Decision
 
