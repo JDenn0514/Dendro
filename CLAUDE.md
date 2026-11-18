@@ -50,7 +50,7 @@ Read the `content-run` skill before you start a run or a step of one.
 
 ## Verification
 
-- Before you report a change as done, show the commands you ran and their output. Do not say "it works" or "verified" without it.
+- Before you report a change as done, show the commands you ran and their output. Do not say "it works" or "verified" without it. For a change to code or content, run the `verify-change` skill, and put its report in your answer and in the pull request.
 - A check that still fails after three rounds of fixes: stop, and tell the owner what fails and what you tried.
 - A flaky test: do not skip it, add a sleep, or run it again until it passes. Find the cause. If you cannot, tell the owner.
 - Do not change an existing assertion in the same change as the code it tests unless the pull request says why.
