@@ -56,7 +56,7 @@ Read the `content-run` skill before you start a run or a step of one.
 - Do not change an existing assertion in the same change as the code it tests unless the pull request says why.
 - A rule that code can check is a test, a CLI check, or a CI step, not text.
 - Before you open a pull request, run the `reviewer` subagent (`.claude/agents/reviewer.md`) with the goal of the change. Fix its Important findings, then run it again on the new diff. Three rounds at most.
-- `REVIEW.md` says what a reviewer looks for. Fill in each section of `.github/pull_request_template.md`, including the `Verified:` line. Put the reviewer's rounds in that line.
+- `REVIEW.md` says what a reviewer looks for. Fill in each section of `.github/pull_request_template.md`, including the `Verified:` line. Put the reviewer in that line as `reviewer: <n> rounds, <n> Important open`.
 - An agent's review never counts as the owner's approval.
 
 ## Environment
