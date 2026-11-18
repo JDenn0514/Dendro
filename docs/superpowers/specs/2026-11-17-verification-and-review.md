@@ -26,7 +26,7 @@ An agent shows that its change works before it says that the change is done, and
 
 - **Tests:** `npm test` runs in about 1.7 s, and `npm run test:pipeline` runs in about 2.5 s. Both are fast enough to run at the end of every agent turn that changes code.
 - **CI** (`.github/workflows/check.yml`) runs the app tests, the two validator runs, and `ids check --base origin/main`. It does not run the pipeline tests. The intake plan records the same gap (Facts, "The pipeline today").
-- **The pipeline tests fail on `main` without `node_modules`.** `pipeline/lib/chroma.ts` line 1 is `import sharp from 'sharp'`. That is an eager import, which `CLAUDE.md` forbids ("Keep `sharp` and the S3 client loaded lazily"). It came in with `e8e8f9e` ("feat: add the chroma measure and MONO_THRESHOLD"). Without `node_modules`, three files fail to load: `chroma.test.ts`, `cli_audit.test.ts`, and `cli_fetch.test.ts` (502 of 505 tests pass). With `sharp` installed, they pass, so the break did not show on the author's machine. CI would have caught it on the first push if it ran the pipeline tests. This is the case V and R describe: a cheap check that is not in the gate.
+- **The pipeline tests need the dev dependencies.** `chroma.test.ts`, `cli_audit.test.ts`, and `cli_fetch.test.ts` make and read real JPEGs with `sharp` (`pipeline/tests/fixtures/images.ts`). Without `node_modules`, those three files fail to load. With `npm ci`, all 567 pipeline tests pass. The CLI keeps the `CLAUDE.md` rule: `pipeline/cli.ts` loads `chroma.ts`, `sharp_resizer.ts`, and `s3_storage.ts` with `await import(...)`. (Corrected on 2026-11-17. The first draft called the import in `chroma.ts` a bug. It is not.)
 - **No branch protection** on `main` (`gh api .../branches/main/protection` gives 404). The owner merges every pull request by hand.
 - **No pull request template, no `REVIEW.md`, no hooks, no `.claude/rules/`, and no project subagents.** `.claude/` holds `settings.json` and five content skills.
 - **Review today:** the owner asks for code-review agents on a pull request when the owner wants them (for example, "fix the findings of the code review" in #72). `code-review`, `simplify`, and `security-review` are `user-invocable-only` in `.claude/settings.json`, so an agent does not start them by itself.
@@ -52,10 +52,10 @@ Each proposal names its source, where it goes, and its draft wording where it ad
 
 ### 4.1 The cheap checks run on every pull request (V, R)
 
-1. **Make the `sharp` import in `pipeline/lib/chroma.ts` lazy** (`await import('sharp')`, as `pipeline/lib/sharp_resizer.ts` does). A `fix/` branch of its own.
-2. **CI runs the pipeline tests.** Add a step `node --test "pipeline/tests/**/*.test.ts"` after the app tests. CI does not run `npm install`, so this step also proves that every pipeline module loads without `sharp` and the S3 client. That turns the `CLAUDE.md` line about the lazy loads into a check (ruling 10, made general). The intake plan's hash check (Task 1, choice 22) then runs in CI too.
+1. **CI runs the pipeline tests in a second job, `pipeline`.** It runs `npm ci`, then `node --test "pipeline/tests/**/*.test.ts"`. The intake plan's hash check (Task 1, choice 22) then runs in CI too.
+2. **The `check` job stays install-free.** It still proves that the app tests, the validator, and `ids check` load without `sharp` and the S3 client. The deploy needs both jobs, and branch protection requires both.
 
-Items 1 and 2 go in one pull request, because item 2 fails until item 1 is in.
+Owner ruling of 2026-11-17: a second job, not `npm ci` in `check`.
 
 ### 4.2 The tests run before an agent ends a turn (V)
 
@@ -128,7 +128,7 @@ Each of these is Important, never a Nit:
 | `app/logic/content.js` | `content/` and `content_dev/` still validate. A new rule has a test that the old content passes or fails on purpose. | |
 | A new `source` value in the manifest | `app/logic/sources.js` has the entry. | `CLAUDE.md` |
 | `pipeline/lib/licenses.ts` or `app/logic/licenses.js` | The owner's permissions in `docs/decisions/` cover each new value. | |
-| An `import` in `pipeline/` of `sharp` or `@aws-sdk` | It is `await import(...)`, not a top-level import. | `e8e8f9e` |
+| A new `import` of `sharp` or `@aws-sdk`, or of a module that imports them | `pipeline/cli.ts` loads that module with `await import(...)`. The `check` job of CI proves this for the paths it runs. | `CLAUDE.md` |
 | An `import` in `app/` | It does not reach `pipeline/` or `evals/`. | `CLAUDE.md` |
 | A pipeline call that reaches the network | It goes through the injected `fetchImpl`, and its test does not use the network. | `CLAUDE.md` |
 | `.github/workflows/` | The owner reviews it. Deploy keeps `include-hidden-files`. CI keeps working without `npm install`. | |
@@ -238,7 +238,7 @@ Written with the seeded generator in `tests/helpers/rng.js`, not `fast-check`, b
 1. **D1.** The skill is `verify-change`.
 2. **D2.** The `Stop` hook enforces from the start.
 3. **D3.** `.claude/rules/` gets new lines only. No line moves out of `CLAUDE.md`.
-4. **D4.** Branch protection on `main` requires the `check` job. Set on 2026-11-17, with no required review, because the owner is the only reviewer. The rule does not bind admins (`enforce_admins: false`), so the owner can still merge past a red check on purpose. Force pushes and deletion of `main` are blocked.
+4. **D4.** Branch protection on `main` requires the `check` job. Set on 2026-11-17, with no required review, because the owner is the only reviewer. The rule does not bind admins (`enforce_admins: false`), so the owner can still merge past a red check on purpose. Force pushes and deletion of `main` are blocked. The `pipeline` job of 4.1 is required too, from the pull request that adds it.
 5. **D5.** Python Playwright and its Chromium are installed on the owner's machine, so `verify-change` runs `scripts/audit.py`.
 6. **D6.** The draft of 4.4 is set from the owner's answers of 2026-11-17:
    - The four failures (content lies, lost progress, a published ID gone, the site breaks) are always Important.
@@ -253,7 +253,7 @@ Written with the seeded generator in `tests/helpers/rng.js`, not `fast-check`, b
 
 Each item is one pull request. The owner merges each one.
 
-1. `fix/chroma-lazy-sharp`: the lazy import and the CI step (4.1).
+1. `fix/ci-pipeline-tests`: the `pipeline` job of CI (4.1).
 2. `skills/review-md`: `REVIEW.md`, the pull request template, and the `CLAUDE.md` section (4.4, 4.6, 4.7).
 3. `skills/reviewer-agent`: the reviewer subagent (4.5).
 4. `skills/verify-change`: the skill (4.3). Done when the skill runs on one app change and one pipeline change, and its report shows each check.
@@ -261,4 +261,4 @@ Each item is one pull request. The owner merges each one.
 6. `skills/area-rules`: the two rules files (4.8).
 7. `feat/property-tests`: the property and differential tests (4.9).
 
-Item 1 does not wait for the rest. It fixes a test that fails on `main` today.
+Item 1 does not wait for the rest.
