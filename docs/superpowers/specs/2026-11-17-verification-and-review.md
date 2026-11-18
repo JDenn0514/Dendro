@@ -226,6 +226,15 @@ Written with the seeded generator in `tests/helpers/rng.js`, not `fast-check`, b
 - **D5.** Install Python Playwright, so `verify-change` can run `scripts/audit.py`. Without it, the skill uses the built-in browser only, and says that `audit.py` did not run.
 - **D6.** `REVIEW.md`: the owner edits the draft of 4.4 before it lands, because V and R both say the owner of the code writes it.
 
+## Rulings of 2026-11-17
+
+1. **D1.** The skill is `verify-change`.
+2. **D2.** The `Stop` hook enforces from the start.
+3. **D3.** `.claude/rules/` gets new lines only. No line moves out of `CLAUDE.md`.
+4. **D4.** Branch protection on `main` requires the `check` job. Set on 2026-11-17, with no required review, because the owner is the only reviewer. The rule does not bind admins (`enforce_admins: false`), so the owner can still merge past a red check on purpose. Force pushes and deletion of `main` are blocked.
+5. **D5.** Python Playwright and its Chromium are installed on the owner's machine, so `verify-change` runs `scripts/audit.py`.
+6. **D6.** Open. The owner reads the draft of 4.4 as good, and wants to know more about what `REVIEW.md` does before editing it.
+
 ## 6. Order of work
 
 Each item is one pull request. The owner merges each one.
