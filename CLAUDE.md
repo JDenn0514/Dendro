@@ -48,6 +48,15 @@ Read the `content-run` skill before you start a run or a step of one.
 - Run `gh pr merge <number> --merge` and `gh run rerun <id> --failed` as Bash calls of their own. The allow rules in `~/.claude/settings.json` do not match a command chained with `&&`, `;`, or `|`, so the auto mode classifier blocks it. Check the result in a separate call.
 - If the classifier blocks a command, do not run it again in another form. Tell the user what was blocked.
 
+## Verification
+
+- Before you report a change as done, show the commands you ran and their output. Do not say "it works" or "verified" without it.
+- A check that still fails after three rounds of fixes: stop, and tell the owner what fails and what you tried.
+- A flaky test: do not skip it, add a sleep, or run it again until it passes. Find the cause. If you cannot, tell the owner.
+- Do not change an existing assertion in the same change as the code it tests unless the pull request says why.
+- A rule that code can check is a test, a CLI check, or a CI step, not text.
+- `REVIEW.md` says what a reviewer looks for. Fill in each section of `.github/pull_request_template.md`, including the `Verified:` line.
+
 ## Environment
 
 - `.env` (gitignored) holds the `DENDRO_S3_*` settings for R2. `process.loadEnvFile` loads it.
