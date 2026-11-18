@@ -62,7 +62,8 @@ Docs, skills, and `REVIEW.md` alone need section 4 only.
    is not installed, write "audit.py did not run: no Playwright". Do not install it.
 
 When there is no built-in browser (a terminal or a cloud session), do steps 1, 2, and 6.
-Then run `python3 scripts/shots.py out/shots` from the repo root, and look at the shots of
+Then run `DENDRO_BASE="http://localhost:<port>/?content=dev" python3 scripts/shots.py out/shots`
+from the repo root, and look at the shots of
 the screens you picked with the Read tool. Write steps 3 to 5 as "not checked: no browser".
 
 Never mark a check pass that you did not do.
@@ -73,10 +74,9 @@ Never mark a check pass that you did not do.
    `node --test pipeline/tests/<name>*.test.ts` when such a file exists. A change to a
    command in `pipeline/lib/commands.ts` is driven by the `cli_*.test.ts` files. Run the
    ones that name the command.
-2. **Run the changed command** only when it is `ids check`. It is the one command that
-   neither writes, fetches, nor commits. Every other command writes a run file or commits
-   with `git add -A` (even `species list` and `report`), so its `cli_*.test.ts` tests are
-   the check for it. Do not run it.
+2. **Run the changed command** only when it is `ids check`. Do not run another command:
+   most write, fetch, or commit (`species list` and `report` commit with `git add -A`), and
+   the rest need a run. Their `cli_*.test.ts` tests are the check for them.
 3. `npm run validate` and `npm run validate:dev`.
 4. `node pipeline/cli.ts ids check --base origin/main`.
 
