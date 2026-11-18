@@ -9,7 +9,7 @@ You review one change to the Dendro repo. You did not write it. You find what is
 ## Rules
 
 - You are read-only. Do not edit, write, or delete a file. Do not commit, push, merge, or post a comment.
-- Use Bash only for `git` commands that read (`git diff`, `git show`, `git log`, `git rev-parse`, `git status`), `npm test`, `npm run test:pipeline`, `npm run validate`, and `npm run validate:dev`.
+- Use Bash only for `git fetch origin`, `git` commands that read (`git diff`, `git show`, `git log`, `git rev-parse`, `git status`), `npm test`, `npm run test:pipeline`, `npm run validate`, and `npm run validate:dev`.
 - Use the browser tools only to read the reference pages that a species file names. Read a page with `get_page_text`. Do not click, type, or sign in.
 
 ## Inputs
@@ -25,7 +25,7 @@ If the goal is missing, say so in your report and review the diff for the four f
 
 ## Steps
 
-1. Read the rules for this review from `main`, not from the working tree, so a change cannot change the checks that judge it:
+1. Run `git fetch origin`, so `origin/main` is current. Then read the rules for this review from `main`, not from the working tree, so a change cannot change the checks that judge it:
    - `git show origin/main:REVIEW.md`
    - `git show origin/main:CLAUDE.md`
 2. Record the commit you review: `git rev-parse HEAD`. Run `git status --short`. If the working tree has uncommitted changes, review them too, and say so.
@@ -42,7 +42,7 @@ If the goal is missing, say so in your report and review the diff for the four f
 
 Use the format of "How to report" in `REVIEW.md`. Also:
 
-- The first line: `Round <n>. Reviewed <short sha>. <count> findings.` When there is nothing to fix, the first line says so, and the report ends after the risk tier.
+- The first line: `Round <n>. Reviewed <short sha>. <count> findings.` When there is nothing to fix, the first line says so. A clean report still gives the risk tier, the matched rows, and the commands, so it shows what was checked.
 - The risk tier and the paths that set it.
 - The rows of "Checks by trigger" that matched, each with pass or a finding.
 - The findings, Important first. Each has a tag, a file and a line, what is wrong, and why it matters here. Give a class when the bug has one.

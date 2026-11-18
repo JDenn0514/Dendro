@@ -8,4 +8,4 @@
 
 ## How to revert
 
-Verified: <!-- the checks that ran, for example: npm test, npm run test:pipeline, CI. Or: none -->
+Verified: <!-- the checks that ran, for example: npm test, npm run test:pipeline, reviewer rounds 2, CI. Or: none -->
