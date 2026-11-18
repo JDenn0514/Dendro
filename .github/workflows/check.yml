@@ -9,6 +9,8 @@ permissions:
   contents: read
 
 jobs:
+  # This job installs no package. That is the check that the app tests, the
+  # validator, and `ids check` load without sharp or the S3 client.
   check:
     runs-on: ubuntu-latest
     steps:
@@ -39,8 +41,24 @@ jobs:
         # shipped it never leaves the content, retired or not.
         run: node pipeline/cli.ts ids check --base origin/main
 
+  # The pipeline tests need the dev dependencies: some tests make and read real
+  # JPEGs with sharp. So this job installs them, apart from the check job.
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          check-latest: true
+          cache: npm
+      - name: Install the dev dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run the pipeline tests
+        run: node --test "pipeline/tests/**/*.test.ts"
+
   deploy:
-    needs: check
+    needs: [check, pipeline]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     # Only one Pages deploy runs at a time. The check job is free to run in parallel.

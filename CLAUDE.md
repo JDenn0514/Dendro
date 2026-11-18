@@ -42,7 +42,7 @@ Read the `content-run` skill before you start a run or a step of one.
 ## Tests and CI
 
 - The pipeline tests never use the network. Every HTTP call goes through an injected `fetchImpl`. The rate limits and cache lifetimes per host are in `pipeline/lib/http.ts`.
-- CI (`.github/workflows/check.yml`) does not run `npm install`. Keep `sharp` and the S3 client loaded lazily.
+- CI (`.github/workflows/check.yml`) has two jobs. `check` does not run `npm install`, so keep `sharp` and the S3 client loaded lazily. `pipeline` runs `npm ci` and the pipeline tests. Run `npm ci` before the pipeline tests on a new machine.
 - On `main`, CI deploys the repo root to GitHub Pages. Keep `.nojekyll`.
 - `.gitattributes` forces LF. The fixtures must stay LF.
 - Run `gh pr merge <number> --merge` and `gh run rerun <id> --failed` as Bash calls of their own. The allow rules in `~/.claude/settings.json` do not match a command chained with `&&`, `;`, or `|`, so the auto mode classifier blocks it. Check the result in a separate call.
