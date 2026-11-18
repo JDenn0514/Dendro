@@ -36,8 +36,9 @@ Docs, skills, and `REVIEW.md` alone need section 4 only.
    `http://localhost:<port>/index.html?content=dev`.
 2. **Pick the screens.** A change to `app/logic/`, `app/ui/`, `app/main.js`,
    `app/style.css`, or `index.html` touches every screen. A change to
-   `app/screens/<name>.js` touches that screen. `concept.js` is the page a Lessons unit
-   opens. The screens and their routes are in `ROUTES` in `scripts/shots.py`.
+   `app/screens/<name>.js` touches that screen. `concept.js` draws "Progress, one shape"
+   (`#/progress/<part>/<key>`, `progress-shape` in `ROUTES`). `session.js` also draws
+   `#/placement`. The other screens and their routes are in `ROUTES` in `scripts/shots.py`.
 3. **Open each screen** in the built-in browser at 390 px wide (`resize_window`). Do what
    the lines of `scripts/CHECKLIST.md` for that screen ask, and answer each line yes or no.
    Read a line's answer from the page (`get_page_text`, `find`, or `read_page`, or
@@ -51,15 +52,17 @@ Docs, skills, and `REVIEW.md` alone need section 4 only.
      does not show): write "line does not apply", and say why.
 4. **Read the console** of each screen (`read_console_messages`). An error is a fail.
 5. **Play a session** on `?content=dev`. Answer up to three cards, at least one wrong and one
-   right (a dev unit can have fewer cards). Read the reveal. Reload, and check that the
-   progress shows on the Progress screen. Then remove the progress you made:
-   `localStorage.removeItem('dendro_cards')` and `localStorage.removeItem('dendro_log')`.
-6. **Run the audit:** `DENDRO_BASE="http://localhost:<port>/?content=dev" python3 scripts/audit.py`
-   from the `scripts/` folder. A line other than `ok` is a fail. When Python Playwright is
-   not installed, write "audit.py did not run: no Playwright". Do not install it.
+   right (a session of `content_dev/` can have fewer cards). Read the reveal. Reload, and
+   check that the progress shows on the Progress screen. Then remove the progress you made:
+   `localStorage.removeItem` of `dendro_cards`, `dendro_log`, and `dendro_missing_edges`.
+6. **Run the audit** from the repo root:
+   `DENDRO_BASE="http://localhost:<port>/?content=dev" python3 scripts/audit.py`.
+   It passes when it exits 0 and its last line is `0 screen states with findings.` Each
+   `FAIL` line is a fail. The `base`, `===`, and `ok` lines are not. When Python Playwright
+   is not installed, write "audit.py did not run: no Playwright". Do not install it.
 
 When there is no built-in browser (a terminal or a cloud session), do steps 1, 2, and 6.
-Then run `python3 scripts/shots.py ../out/shots` from `scripts/`, and look at the shots of
+Then run `python3 scripts/shots.py out/shots` from the repo root, and look at the shots of
 the screens you picked with the Read tool. Write steps 3 to 5 as "not checked: no browser".
 
 Never mark a check pass that you did not do.
@@ -70,10 +73,10 @@ Never mark a check pass that you did not do.
    `node --test pipeline/tests/<name>*.test.ts` when such a file exists. A change to a
    command in `pipeline/lib/commands.ts` is driven by the `cli_*.test.ts` files. Run the
    ones that name the command.
-2. **Run the changed command** only when it neither writes nor uses the network:
-   `ids check --base origin/main`, `species list <name>`, or `report <name>`, for a run that
-   exists. Show the output. Do not run a command that fetches, writes a run file,
-   uploads, or commits. Its `cli_*.test.ts` tests are the check for it.
+2. **Run the changed command** only when it is `ids check`. It is the one command that
+   neither writes, fetches, nor commits. Every other command writes a run file or commits
+   with `git add -A` (even `species list` and `report`), so its `cli_*.test.ts` tests are
+   the check for it. Do not run it.
 3. `npm run validate` and `npm run validate:dev`.
 4. `node pipeline/cli.ts ids check --base origin/main`.
 
