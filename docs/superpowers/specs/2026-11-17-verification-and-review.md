@@ -98,9 +98,12 @@ The owner writes this file. A reviewer reads it from `main`, not from the pull r
 
 ## What failure looks like here
 
-- The content lies: a wrong species, a wrong credit, or a licence that the allowlist does not cover.
-- A learner loses progress: saved progress in localStorage no longer loads.
+Each of these is Important, never a Nit:
+
+- The content lies: a wrong species, a wrong credit, a licence that the allowlist does not cover, or a species field or look-for line that its reference does not support.
+- A learner loses progress: saved progress in localStorage no longer loads, or resets.
 - A published ID leaves the content.
+- The site breaks: a screen does not open, the console shows an error, or the deploy fails.
 
 ## How to report
 
@@ -109,6 +112,8 @@ The owner writes this file. A reviewer reads it from `main`, not from the pull r
 - Tag each finding Important, Nit, or Pre-existing. Do not blame the author for a Pre-existing finding.
 - Five Nits at most.
 - When one bug has a class, name the class, so the author fixes each instance.
+- A pull request that says a change works, but does not show the commands and their output or the `verify-change` report, is an Important finding.
+- Wording: in specs, plans, decisions, and skills, prose that breaks Simplified Technical English or the words of `GLOSSARY.md` is Important, because that text steers agents. In code comments it is a Nit.
 
 ## Skip
 
@@ -130,6 +135,8 @@ The owner writes this file. A reviewer reads it from `main`, not from the pull r
 | A test file and the code it tests change together | An assertion that changed (not one that was added) has its reason in the pull request. | V: a change cannot change its own check |
 | `.claude/skills/photo-check/SKILL.md` | The intake plan's frozen files do not change because of it. | Intake plan, Facts |
 | `CDN_BASE` | The trailing `/` stays. | `CLAUDE.md` |
+| `content_src/species/*.json` or `look_for.json` of a run | Each field and look-for line is supported by a reference in its `ref`. Read `pipeline/sources/<SYMBOL>.json` when it exists, else the named page. An unsupported claim is Important. | The content-lies failure; the owner checks this by hand today (`species-draft`) |
+| A spec, plan, or decision under `docs/` | Each file, function, and line number it cites exists on the branch. Numbers from evals are not checked. | Owner ruling of 2026-11-17 |
 ```
 
 The rule that a reviewer reads `REVIEW.md` from `main` (V: "changes can't modify their own checks") goes into the reviewer subagent of 4.5: it reads `git show origin/main:REVIEW.md`. A pull request that changes `REVIEW.md` gets its change reviewed by the owner, and the new text applies only after it merges.
@@ -138,7 +145,7 @@ The owner adds an item when a bug reaches `main` or the owner corrects the same 
 
 ### 4.5 A reviewer subagent with a fresh context (R, V)
 
-`.claude/agents/reviewer.md`. Read-only tools: Read, Grep, Glob, and Bash for `git` and the test commands only. It reads `CLAUDE.md`, `REVIEW.md` from `origin/main`, the pull request's goal (the issue or the plan task), and the diff. It reports in the format of `REVIEW.md`.
+`.claude/agents/reviewer.md`. Read-only tools: Read, Grep, Glob, Bash for `git` and the test commands only, and the built-in browser's page-reading tools for the references of a species file. It reads `CLAUDE.md`, `REVIEW.md` from `origin/main`, the pull request's goal (the issue or the plan task), and the diff. It reports in the format of `REVIEW.md`.
 
 Its rules for rounds, from R:
 
@@ -233,7 +240,14 @@ Written with the seeded generator in `tests/helpers/rng.js`, not `fast-check`, b
 3. **D3.** `.claude/rules/` gets new lines only. No line moves out of `CLAUDE.md`.
 4. **D4.** Branch protection on `main` requires the `check` job. Set on 2026-11-17, with no required review, because the owner is the only reviewer. The rule does not bind admins (`enforce_admins: false`), so the owner can still merge past a red check on purpose. Force pushes and deletion of `main` are blocked.
 5. **D5.** Python Playwright and its Chromium are installed on the owner's machine, so `verify-change` runs `scripts/audit.py`.
-6. **D6.** Open. The owner reads the draft of 4.4 as good, and wants to know more about what `REVIEW.md` does before editing it.
+6. **D6.** The draft of 4.4 is set from the owner's answers of 2026-11-17:
+   - The four failures (content lies, lost progress, a published ID gone, the site breaks) are always Important.
+   - Wording that breaks Simplified Technical English or `GLOSSARY.md` is Important in specs, plans, decisions, and skills, and a Nit in code comments.
+   - In a spec, plan, or decision, the reviewer checks that each cited file, function, and line exists. It does not check eval numbers.
+   - The reviewer checks each authored species field and look-for line against its reference.
+   - A claim that a change works, without the output that shows it, is Important.
+   - No new rules for tests. The draft's row on a changed assertion stays.
+   The owner adds rows over time, from bugs that reach `main` and from review comments the owner gives twice.
 
 ## 6. Order of work
 
