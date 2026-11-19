@@ -255,7 +255,7 @@ test('a listed variety matches a source name only with the same infraspecific ep
 // With an author first ("Quercus alba L. ssp rubra") the parse is right.
 // normalizeName skips these markers. The test runs and reports as todo until
 // the owner rules on a fix.
-test('a listed variety matches a source name with a dotless rank marker', { todo: 'parseName reads a dotless rank marker as the epithet' }, () => {
+test('a listed variety matches a source name with a dotless rank marker', { todo: 'issue #92: parseName reads a dotless rank marker as the epithet' }, () => {
   forEachSeed(CASES, (rng: Rng) => varietyRule(rng, DOTLESS_RANKS));
 });
 
