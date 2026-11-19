@@ -20,7 +20,7 @@ Each of these is Important, never a Nit:
 - Tag each finding Important, Nit, or Pre-existing. Do not blame the author for a Pre-existing finding.
 - Five Nits at most.
 - When one bug has a class, name the class, so the author fixes each instance.
-- A pull request that says a change works, but does not show the commands and their output, is an Important finding.
+- A pull request that says a change works, but does not show the commands and their output or the `verify-change` report, is an Important finding.
 - Wording: in specs, plans, decisions, and skills, prose that breaks Simplified Technical English or the words of `GLOSSARY.md` is Important, because that text steers agents. In code comments it is a Nit.
 - Give the risk tier of the change (below), and the paths that set it.
 
