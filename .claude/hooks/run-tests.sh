@@ -3,9 +3,11 @@
 #
 # It runs only when code changed and is not pushed yet: an uncommitted change,
 # or a commit that is not on the branch's upstream (origin/main when the branch
-# has none), under app/, pipeline/, tests/, or scripts/. pipeline/runs/ is left
-# out: a content run's CLI writes and commits its data there, so a content run
-# does not start the hook. When the base ref is missing, the hook runs the tests.
+# has none), under app/, pipeline/, tests/, or scripts/. pipeline/runs/ and
+# pipeline/data/ are left out: a content run's CLI writes and commits its data
+# there (runPaths in pipeline/lib/run.ts; its other two paths, content/ and
+# content_src/, are not under the hook's paths). So a content run does not start
+# the hook. When the base ref is missing, the hook runs the tests.
 #
 # When a suite fails, the hook blocks the stop once and gives the failure to the
 # agent. When it already blocked in this turn (stop_hook_active), it lets the
@@ -27,7 +29,7 @@ dir="${CLAUDE_PROJECT_DIR:-$(field cwd)}"
 cd "${dir:-.}" || exit 0
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 
-paths=(app pipeline tests scripts ':(exclude)pipeline/runs')
+paths=(app pipeline tests scripts ':(exclude)pipeline/runs' ':(exclude)pipeline/data')
 base=$(git rev-parse --abbrev-ref '@{upstream}' 2>/dev/null || echo origin/main)
 
 if git rev-parse --verify -q "$base" >/dev/null; then
