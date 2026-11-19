@@ -59,7 +59,7 @@ Owner ruling of 2026-11-17: a second job, not `npm ci` in `check`.
 
 ### 4.2 The tests run before an agent ends a turn (V)
 
-A `Stop` hook in `.claude/settings.json` runs `npm test` and `npm run test:pipeline` when the working tree has a change under `app/`, `pipeline/`, `tests/`, or `scripts/`. When a suite fails, the hook gives the failure to the agent, and the agent fixes it before it ends the turn. When the hook already blocked once in the turn (`stop_hook_active`), it lets the turn end, so an agent cannot loop on it. A content run changes only data files, so the hook does not run in a content run.
+A `Stop` hook in `.claude/settings.json` runs `npm test` and `npm run test:pipeline` when code under `app/`, `pipeline/`, `tests/`, or `scripts/` changed and is not pushed: an uncommitted change, or a commit that is not on the branch's upstream (`origin/main` when the branch has none). An agent that commits in its turn is still checked. `pipeline/runs/` and `pipeline/data/` are left out, because a content run's CLI commits its data there (`runPaths` in `pipeline/lib/run.ts`). When the base ref is missing, the hook runs the tests. When a suite fails, the hook gives the failure to the agent, and the agent fixes it before it ends the turn. When the hook already blocked once in the turn (`stop_hook_active`), it lets the turn end, so an agent cannot loop on it.
 
 - The script goes in `.claude/hooks/run-tests.sh`, so the owner can read it apart from the settings.
 - V says to start a new gate in observe mode. These suites are fast, need no network, and have no flaky test today. The proposal is to **enforce from the start**. The other choice is one week in observe mode, where the hook logs what it would block and blocks nothing (Owner decision D2).
