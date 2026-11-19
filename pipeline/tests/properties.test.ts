@@ -247,15 +247,13 @@ test('a listed variety matches a source name only with the same infraspecific ep
   forEachSeed(CASES, (rng: Rng) => varietyRule(rng, DOTTED_RANKS));
 });
 
-// A known bug, left for the owner: when a rank marker with no dot ("var",
-// "ssp", "subsp") comes right after the epithet, parseName
-// (pipeline/lib/verdicts.ts) reads it as a bare infraspecific epithet, because
-// it is all letters. So "Quercus alba var alba" does not match "Quercus alba
-// var. alba", and "Platanus saccharum ssp alba" matches "... ssp leucoderme".
-// With an author first ("Quercus alba L. ssp rubra") the parse is right.
-// normalizeName skips these markers. The test runs and reports as todo until
-// the owner rules on a fix.
-test('a listed variety matches a source name with a dotless rank marker', { todo: 'issue #92: parseName reads a dotless rank marker as the epithet' }, () => {
+// Issue #92: a rank marker with no dot ("var", "ssp", "subsp") is never the
+// infraspecific epithet, so "Quercus alba var alba" matches "Quercus alba var.
+// alba" and "... ssp alba" does not match "... ssp leucoderme". That holds right
+// after the epithet and after the author suffix "f." ("Michx. f. subsp
+// gambelii"). parseName (pipeline/lib/verdicts.ts) keeps the rank markers out of
+// the epithet in both rules, as normalizeName does.
+test('a listed variety matches a source name with a dotless rank marker', () => {
   forEachSeed(CASES, (rng: Rng) => varietyRule(rng, DOTLESS_RANKS));
 });
 
