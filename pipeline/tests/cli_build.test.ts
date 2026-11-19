@@ -1843,16 +1843,42 @@ test('build.json counts a retried candidate once, by its last row', async (t) =>
 
 // A differential test: the second build of a run with no new rows must not
 // change the published content. A byte that moves (an order, a date, a field)
-// would show in every content diff and could hide a real change.
+// would show in every content diff and could hide a real change. The first
+// build is then published (main holds it), and the second build runs a day
+// later, so a date that a rebuild stamps again shows here.
+async function buildTwice(t: TestContext, options: SeedOptions = {}): Promise<{ first: string[]; second: string[] }> {
+  const { root, deps, exec, err } = setup(t);
+  seed(root, options);
+  const files = ['content/species.json', 'content/images/manifest.json'];
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+  const first = files.map((file) => readText(root, file));
+
+  fakeGitShow(exec, 'main', { species: speciesOf(root), manifest: manifestOf(root) });
+  deps.now = () => new Date(Date.parse(NOW) + 86400000);
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+  return { first, second: files.map((file) => readText(root, file)) };
+}
+
 test('a second build with no new rows writes species.json and the manifest byte for byte the same', async (t) => {
-  const { root, deps, err } = setup(t);
-  seed(root);
+  const { first, second } = await buildTwice(t);
+  assert.deepEqual(second, first);
+});
 
-  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
-  const species = readText(root, 'content/species.json');
-  const manifest = readText(root, 'content/images/manifest.json');
-
-  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
-  assert.equal(readText(root, 'content/species.json'), species);
-  assert.equal(readText(root, 'content/images/manifest.json'), manifest);
+test('a rebuild a day after publishing keeps the date a species was retired on', async (t) => {
+  const { first, second } = await buildTwice(t, {
+    manifest: [
+      row({
+        hash: HASH_B,
+        target: 'QUGA',
+        channel: 'leaf',
+        retired: true,
+        retired_reason: 'takedown request',
+        retired_at: '2026-09-01',
+      }),
+    ],
+    verdicts: [verdict(MYSTERY.id, 'escalate', { case: 'quality', note: 'Blurred.' })],
+  });
+  assert.match(first[0], /"retired_at": "2026-09-22"/);
+  assert.deepEqual(second, first);
 });

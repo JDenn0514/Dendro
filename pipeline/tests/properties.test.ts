@@ -145,42 +145,69 @@ test('content that loses any published id fails the append-only check and names 
   });
 });
 
-// Names in the order sources write them: a genus, an optional hybrid sign, an
-// epithet, optional authors (with or without brackets), and an optional rank
-// marker with an infraspecific epithet and its author. Case and spacing vary.
+// Names in the order sources write them: a genus, an optional hybrid sign (a
+// token of its own, or on the epithet as USDA PLANTS writes it), an epithet,
+// and then one of three tails:
+//   none:     authors only, "Quercus alba L."
+//   rank:     authors, a rank marker, an infraspecific epithet, and an author,
+//             "Acer saccharum Marshall ssp. leucoderme (Small) Desmarais"
+//   trinomial: a bare lowercase infraspecific epithet right after the epithet,
+//             "Acer saccharum leucoderme"
+// Case and spacing vary.
 const GENERA = ['Quercus', 'QUERCUS', 'quercus', 'Acer', 'Platanus', 'Liquidambar'];
 const EPITHETS = ['alba', 'rubra', 'gambelii', 'x-bebbiana', 'saccharum', 'leucoderme'];
 const AUTHORS = ['L.', 'Michx.', 'Michx. f.', '(Torr.)', '(L.) Moench', 'Nutt.', 'Sarg.', 'Nuttall'];
-const RANKS = ['var.', 'var', 'subsp.', 'ssp', 'ssp.', 'f.'];
+const RANKS = ['var.', 'var', 'subsp.', 'subsp', 'ssp', 'ssp.', 'f.'];
+const DOTTED_RANKS = RANKS.filter((rank) => rank.endsWith('.'));
+const DOTLESS_RANKS = RANKS.filter((rank) => !rank.endsWith('.'));
 
-// A name, and the "genus epithet" it must normalize to: the rank marker, the
-// infraspecific epithet, the hybrid sign, and every author drop out.
-function randomNamed(rng: Rng): { name: string; species: string } {
+interface Named {
+  name: string;
+  /** The "genus epithet", lowercase. */
+  species: string;
+  /** The infraspecific epithet, or null. */
+  infra: string | null;
+  /** What normalizeName must give: a rank marker and its epithet drop out, a bare one stays. */
+  normal: string;
+}
+
+function randomNamed(rng: Rng, ranks: string[] = RANKS): Named {
   const genus = pick(rng, GENERA);
   const epithet = pick(rng, EPITHETS);
+  const species = `${genus.toLowerCase()} ${epithet}`;
   const parts = [genus];
-  if (rng() < 0.15) parts.push('×');
-  parts.push(rng() < 0.15 ? epithet.toUpperCase() : epithet);
-  for (let i = intIn(rng, 0, 2); i > 0; i -= 1) parts.push(pick(rng, AUTHORS));
-  if (rng() < 0.5) {
-    parts.push(pick(rng, RANKS), pick(rng, EPITHETS));
+  const hybrid = rng();
+  const shown = rng() < 0.15 ? epithet.toUpperCase() : epithet;
+  if (hybrid < 0.1) parts.push('×', shown);
+  else if (hybrid < 0.2) parts.push(`×${shown}`);
+  else parts.push(shown);
+
+  const tail = pick(rng, ['none', 'rank', 'trinomial']);
+  let infra: string | null = null;
+  if (tail === 'trinomial') {
+    infra = pick(rng, EPITHETS);
+    parts.push(infra);
     if (rng() < 0.5) parts.push(pick(rng, AUTHORS));
+  } else {
+    for (let i = intIn(rng, 0, 2); i > 0; i -= 1) parts.push(pick(rng, AUTHORS));
+    if (tail === 'rank') {
+      infra = pick(rng, EPITHETS);
+      parts.push(pick(rng, ranks), infra);
+      if (rng() < 0.5) parts.push(pick(rng, AUTHORS));
+    }
   }
-  return { name: parts.join(pick(rng, [' ', '  ', '\t'])), species: `${genus.toLowerCase()} ${epithet}` };
+  const normal = tail === 'trinomial' ? `${species} ${infra}` : species;
+  return { name: parts.join(pick(rng, [' ', '  ', '\t'])), species, infra, normal };
 }
 
 function randomName(rng: Rng): string {
   return randomNamed(rng).name;
 }
 
-function speciesOf(normal: string): string {
-  return normal.split(' ').slice(0, 2).join(' ');
-}
-
-test('normalizeName gives the genus and the epithet, and nothing else', () => {
+test('normalizeName drops authors, the hybrid sign, and a rank with its epithet', () => {
   forEachSeed(CASES, (rng: Rng) => {
-    const { name, species } = randomNamed(rng);
-    assert.equal(normalizeName(name), species, JSON.stringify(name));
+    const { name, normal } = randomNamed(rng);
+    assert.equal(normalizeName(name), normal, JSON.stringify(name));
   });
 });
 
@@ -199,18 +226,41 @@ test('normalizeName gives a lowercase name of plain tokens', () => {
   });
 });
 
-test('a source name matches its own species, at any rank', () => {
+// Owner ruling 2026-09-26 (identityMatches in pipeline/lib/verdicts.ts): a listed
+// name with no infraspecific epithet matches its species at any rank. A listed
+// name with one matches only a source with the same one.
+test('a plain species name matches every source name of that species', () => {
   forEachSeed(CASES, (rng: Rng) => {
-    const name = randomName(rng);
-    const species = speciesOf(normalizeName(name));
+    const { name, species } = randomNamed(rng);
     assert.equal(identityMatches(name, [species]), true, `${JSON.stringify(name)} against ${species}`);
   });
 });
 
+function varietyRule(rng: Rng, ranks: string[]): void {
+  const { name, species, infra } = randomNamed(rng, ranks);
+  const listedInfra = pick(rng, EPITHETS);
+  const listed = `${species} ${pick(rng, ranks)} ${listedInfra}`;
+  assert.equal(identityMatches(name, [listed]), infra === listedInfra, `${JSON.stringify(name)} against ${listed}`);
+}
+
+test('a listed variety matches a source name only with the same infraspecific epithet', () => {
+  forEachSeed(CASES, (rng: Rng) => varietyRule(rng, DOTTED_RANKS));
+});
+
+// A known bug, left for the owner: parseName (pipeline/lib/verdicts.ts) reads a
+// rank marker with no dot ("var", "ssp", "subsp") as a bare infraspecific
+// epithet, because it is all letters. So "Quercus alba var alba" does not match
+// "Quercus alba var. alba", and two names with "ssp" match each other whatever
+// their epithets. normalizeName skips these markers. The test runs and reports
+// as todo until the owner rules on a fix.
+test('a listed variety matches a source name with a dotless rank marker', { todo: 'parseName reads a dotless rank marker as the epithet' }, () => {
+  forEachSeed(CASES, (rng: Rng) => varietyRule(rng, DOTLESS_RANKS));
+});
+
 test('a source name never matches another species', () => {
   forEachSeed(CASES, (rng: Rng) => {
-    const name = randomName(rng);
-    const [genus, epithet] = speciesOf(normalizeName(name)).split(' ');
+    const { name, species } = randomNamed(rng);
+    const [genus, epithet] = species.split(' ');
     const other = pick(rng, EPITHETS.filter((e) => e !== epithet));
     assert.equal(identityMatches(name, [`${genus} ${other}`]), false, `${JSON.stringify(name)} against ${genus} ${other}`);
   });
