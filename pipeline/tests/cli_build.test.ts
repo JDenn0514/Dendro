@@ -1840,3 +1840,19 @@ test('build.json counts a retried candidate once, by its last row', async (t) =>
 
   assert.deepEqual(buildOf(root).counts.candidates_by_source, { commons: 1, inat: 2, plants: 1 });
 });
+
+// A differential test: the second build of a run with no new rows must not
+// change the published content. A byte that moves (an order, a date, a field)
+// would show in every content diff and could hide a real change.
+test('a second build with no new rows writes species.json and the manifest byte for byte the same', async (t) => {
+  const { root, deps, err } = setup(t);
+  seed(root);
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+  const species = readText(root, 'content/species.json');
+  const manifest = readText(root, 'content/images/manifest.json');
+
+  assert.equal(await runCommand(['build', 'demo'], deps), 0, err.join(' | '));
+  assert.equal(readText(root, 'content/species.json'), species);
+  assert.equal(readText(root, 'content/images/manifest.json'), manifest);
+});
