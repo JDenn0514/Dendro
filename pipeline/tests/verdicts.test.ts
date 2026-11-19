@@ -7,6 +7,7 @@ import {
   VERDICT_KINDS,
   ESCALATION_CASES,
   normalizeName,
+  infraEpithet,
   identityMatches,
   pendingCandidates,
   stopRule,
@@ -255,6 +256,25 @@ test('a variety of the accepted species matches the target', () => {
   assert.equal(identityMatches('Quercus sinuata breviloba', names), true);
   assert.equal(identityMatches('Acer tataricum ginnala', ['Acer tataricum ssp. ginnala']), true);
   assert.equal(identityMatches('Acer tataricum tataricum', ['Acer tataricum ssp. ginnala']), false);
+});
+
+// Issue #92: a rank marker with no dot right after the epithet is a marker, not the
+// infraspecific epithet.
+test('infraEpithet skips a dotless rank marker after the epithet', () => {
+  assert.equal(infraEpithet('Quercus alba var alba'), 'alba');
+});
+
+test('a dotless rank marker matches the same variety with a dotted marker', () => {
+  assert.equal(identityMatches('Quercus alba var alba', ['Quercus alba var. alba']), true);
+});
+
+test('a dotless rank marker does not match a different subspecies', () => {
+  assert.equal(identityMatches('Acer saccharum ssp leucoderme', ['Acer saccharum ssp floridanum']), false);
+});
+
+test('a dotless rank marker after the author suffix f. is not the epithet', () => {
+  // Property test seed 32. "f." counts as a rank marker, so "subsp" after it was read as the epithet.
+  assert.equal(infraEpithet('Quercus leucoderme Nuttall Michx. f. subsp gambelii'), 'gambelii');
 });
 
 test('a species-level synonym still matches its varieties', () => {

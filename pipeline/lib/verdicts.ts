@@ -36,6 +36,11 @@ function isEpithet(token: string): boolean {
   return EPITHET.test(token);
 }
 
+/** An epithet that is not a rank marker. "var", "ssp", and "subsp" pass isEpithet. */
+function isInfraEpithet(token: string): boolean {
+  return !RANK_MARKERS.has(token.toLowerCase()) && isEpithet(token);
+}
+
 /**
  * The genus and the first epithet, lower cased. After them a token survives only when it
  * is already lowercase and holds letters and hyphens alone, so an author drops out. A rank
@@ -74,7 +79,9 @@ interface ParsedName {
 /**
  * The species and the infraspecific epithet of a name. The epithet is the token after the
  * first rank marker that an epithet follows, so the author suffix "f." in "Michx. f. var.
- * leucoderme" does not count. A bare lowercase third token counts too.
+ * leucoderme" does not count. A bare lowercase third token counts too. A rank marker with no
+ * dot is never the epithet: "var" in "Quercus alba var alba" and "subsp" in "Michx. f. subsp
+ * gambelii" are markers, as in normalizeName.
  */
 function parseName(name: string): ParsedName {
   const tokens = name
@@ -84,9 +91,9 @@ function parseName(name: string): ParsedName {
     .filter((token) => token.length > 0);
   const species = tokens.length === 0 ? '' : normalizeName(tokens.slice(0, 2).join(' '));
   let infra: string | null = null;
-  if (tokens.length > 2 && isEpithet(tokens[2])) infra = tokens[2];
+  if (tokens.length > 2 && isInfraEpithet(tokens[2])) infra = tokens[2];
   for (let i = 2; infra === null && i < tokens.length - 1; i += 1) {
-    if (RANK_MARKERS.has(tokens[i].toLowerCase()) && isEpithet(tokens[i + 1])) {
+    if (RANK_MARKERS.has(tokens[i].toLowerCase()) && isInfraEpithet(tokens[i + 1])) {
       infra = tokens[i + 1];
     }
   }
