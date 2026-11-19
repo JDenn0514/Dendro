@@ -56,6 +56,10 @@ Check only the rows whose trigger is in the diff.
 | `CDN_BASE` (`app/logic/content.js`) | The trailing `/` stays. | `CLAUDE.md` |
 | `content_src/species/*.json`, or `look_for.json` of a run | Each field and look-for line is supported by a reference in its `ref`. Read `pipeline/sources/<SYMBOL>.json` when it exists, else the named page. An unsupported claim is Important. | The content-lies failure. The owner checks this by hand today (`species-draft`). |
 | A spec, plan, or decision under `docs/` | Each file, function, and line number it cites exists on the branch. Numbers from evals are not checked. | Owner ruling of 2026-11-17 |
+| `.claude/skills/**`, `.claude/agents/*.md`, or `.claude/rules/*.md` that gives a shell command | The command runs as written from the folder that the text names, with the port and the environment variables that the text's own server uses. Each file, path, key, and tool that the text names exists. | Reviews of `verify-change` (#88): wrong script paths, and `shots.py` with no `DENDRO_BASE` |
+| Text that calls a command read-only or safe to run, or says only one item does a thing | The command does not write, fetch, or commit (check its handler in `pipeline/lib/commands.ts`). A claim of "the one" or "only" is checked against the full list, for example `COMMANDS`. | Reviews of `verify-change` (#88) and the area rules (#90): `species list` and `report` commit |
+| A path filter on the repo tree (a hook, a CI `paths:` filter, a script) that leaves out a content run | It leaves out each path of `runPaths` in `pipeline/lib/run.ts` that falls under the filter's paths. | Reviews of the Stop hook (#89): `pipeline/runs/` and `pipeline/data/` |
+| A test with a `todo` or `skip` option | The pull request links an issue for the known bug or gap that the test covers. | Review of the property tests (#91), issue #92 |
 
 ## Adding a row
 
