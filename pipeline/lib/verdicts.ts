@@ -28,7 +28,12 @@ export type Decision =
 export const STOP_MIN_JUDGED = 20;
 export const STOP_RATIO = 0.25;
 
-const RANK_MARKERS = new Set(['subsp.', 'subsp', 'ssp.', 'ssp', 'var.', 'var', 'f.']);
+/**
+ * The rank markers, with and without a dot. "f." is also the author suffix "filius" ("Michx.
+ * f."). An author stops normalizeName before it, and parseName takes a marker only when an
+ * epithet follows it.
+ */
+const RANK_MARKERS = new Set(['subsp.', 'subsp', 'ssp.', 'ssp', 'var.', 'var', 'f.', 'f', 'fo.', 'fo', 'forma']);
 const EPITHET = /^[a-z][a-z-]*$/;
 
 /** Letters and hyphens only, and already lowercase. An author fails both halves. */
@@ -36,7 +41,7 @@ function isEpithet(token: string): boolean {
   return EPITHET.test(token);
 }
 
-/** An epithet that is not a rank marker. "var", "ssp", and "subsp" pass isEpithet. */
+/** An epithet that is not a rank marker. "var", "f", "forma", and the like pass isEpithet. */
 function isInfraEpithet(token: string): boolean {
   return !RANK_MARKERS.has(token.toLowerCase()) && isEpithet(token);
 }

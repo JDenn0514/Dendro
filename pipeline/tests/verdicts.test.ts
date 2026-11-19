@@ -277,6 +277,34 @@ test('a dotless rank marker after the author suffix f. is not the epithet', () =
   assert.equal(infraEpithet('Quercus leucoderme Nuttall Michx. f. subsp gambelii'), 'gambelii');
 });
 
+// Issue #95: the forma markers "f", "fo.", "fo", and "forma" are rank markers too.
+test('infraEpithet reads the epithet after each forma marker', () => {
+  assert.equal(infraEpithet('Quercus alba f alba'), 'alba');
+  assert.equal(infraEpithet('Quercus alba forma alba'), 'alba');
+  assert.equal(infraEpithet('Quercus alba fo. alba'), 'alba');
+  assert.equal(infraEpithet('Quercus alba fo alba'), 'alba');
+  assert.equal(infraEpithet('Quercus alba L. forma rubra'), 'rubra');
+});
+
+test('normalizeName drops each forma marker and its epithet', () => {
+  assert.equal(normalizeName('Quercus alba f alba'), 'quercus alba');
+  assert.equal(normalizeName('Quercus alba forma alba'), 'quercus alba');
+  assert.equal(normalizeName('Quercus alba fo. alba'), 'quercus alba');
+});
+
+test('a forma matches the same forma under any marker, and not another forma', () => {
+  assert.equal(identityMatches('Quercus alba f alba', ['Quercus alba f. alba']), true);
+  assert.equal(identityMatches('Quercus alba L. forma rubra', ['Quercus alba f. rubra']), true);
+  assert.equal(identityMatches('Quercus alba forma alba', ['Quercus alba f. rubra']), false);
+});
+
+test('the author suffix f. or f before a rank marker is not the epithet', () => {
+  assert.equal(infraEpithet('Acer nigrum Michx. f. var. leucoderme'), 'leucoderme');
+  assert.equal(infraEpithet('Acer nigrum Michx. f var leucoderme'), 'leucoderme');
+  assert.equal(infraEpithet('Acer nigrum Michx. f.'), null);
+  assert.equal(normalizeName('Acer nigrum Michx. f.'), 'acer nigrum');
+});
+
 test('a species-level synonym still matches its varieties', () => {
   const names = ['Quercus texana Buckley', 'Quercus nuttallii Palmer', 'Quercus shumardii Buckley var. texana (Buckley) Ashe'];
   assert.equal(identityMatches('Quercus nuttallii', names), true);

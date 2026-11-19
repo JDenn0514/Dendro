@@ -157,7 +157,7 @@ test('content that loses any published id fails the append-only check and names 
 const GENERA = ['Quercus', 'QUERCUS', 'quercus', 'Acer', 'Platanus', 'Liquidambar'];
 const EPITHETS = ['alba', 'rubra', 'gambelii', 'x-bebbiana', 'saccharum', 'leucoderme'];
 const AUTHORS = ['L.', 'Michx.', 'Michx. f.', '(Torr.)', '(L.) Moench', 'Nutt.', 'Sarg.', 'Nuttall'];
-const RANKS = ['var.', 'var', 'subsp.', 'subsp', 'ssp', 'ssp.', 'f.'];
+const RANKS = ['var.', 'var', 'subsp.', 'subsp', 'ssp', 'ssp.', 'f.', 'f', 'fo.', 'fo', 'forma'];
 const DOTTED_RANKS = RANKS.filter((rank) => rank.endsWith('.'));
 const DOTLESS_RANKS = RANKS.filter((rank) => !rank.endsWith('.'));
 
