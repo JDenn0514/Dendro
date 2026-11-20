@@ -26,7 +26,8 @@ export interface FetchedSpecies {
   scientific: string;
   common: string[];
   family: string | null;
-  genus: string;
+  // PLANTS can omit the genus. validateFetched drops a species with no genus.
+  genus: string | null;
   native_status: string | null;
   section: string | null;
   varieties: { key: string; name: string }[];

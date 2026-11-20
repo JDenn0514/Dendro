@@ -54,6 +54,11 @@ jobs:
           cache: npm
       - name: Install the dev dependencies
         run: npm ci --no-audit --no-fund
+      # Node strips the types and checks none of them. tsc checks them, and
+      # refuses the syntax Node cannot strip (enums, parameter properties,
+      # namespaces).
+      - name: Type check the pipeline
+        run: npm run typecheck
       - name: Run the pipeline tests
         run: node --test "pipeline/tests/**/*.test.ts"
 

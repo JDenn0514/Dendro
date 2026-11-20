@@ -118,7 +118,7 @@ function fakeRoot(t: TestContext, saved: boolean): string {
   return root;
 }
 
-function fakeFetch(routes: Map<string, Uint8Array>, calls: string[]): typeof fetch {
+function fakeFetch(routes: Map<string, Uint8Array<ArrayBuffer>>, calls: string[]): typeof fetch {
   return (async (input: string | URL | Request) => {
     const url = String(input);
     calls.push(url);
@@ -188,7 +188,7 @@ test('vt-rows.ts gives each species its own file when the image names are the sa
     { symbol: 'JUSC2', sci: 'Juniperus scopulorum', id: 165, bytes: new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 1]) },
     { symbol: 'THOC2', sci: 'Thuja occidentalis', id: 118, bytes: new Uint8Array([0xff, 0xd8, 0xff, 0xe0, 2]) },
   ];
-  const routes = new Map<string, Uint8Array>();
+  const routes = new Map<string, Uint8Array<ArrayBuffer>>();
   for (const { symbol, sci, id, bytes } of species) {
     const pageUrl = `https://dendro.cnre.vt.edu/dendrology/syllabus/factsheet.cfm?ID=${id}`;
     fs.writeFileSync(path.join(root, 'pipeline', 'sources', `${symbol}.json`), JSON.stringify({

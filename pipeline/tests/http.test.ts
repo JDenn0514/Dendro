@@ -30,7 +30,7 @@ const COMMONS_GAP = MS_PER_SECOND / RATE_PER_SECOND['commons.wikimedia.org'];
 
 interface Queued {
   status?: number;
-  body?: string | Uint8Array;
+  body?: string | Uint8Array<ArrayBuffer>;
   headers?: Record<string, string>;
   throws?: string;
 }
