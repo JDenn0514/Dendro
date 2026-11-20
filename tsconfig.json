@@ -1,0 +1,24 @@
+{
+  // Type checks the pipeline. Node runs the .ts files through type stripping,
+  // so tsc only checks and never writes output.
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": true,
+    "strict": true,
+    // Node strips types but compiles nothing: no enums, no parameter
+    // properties, no namespaces.
+    "erasableSyntaxOnly": true,
+    // Node needs `import type` for an import that is only a type.
+    "verbatimModuleSyntax": true,
+    // Relative imports inside pipeline/ carry the .ts extension.
+    "allowImportingTsExtensions": true,
+    // The pipeline imports app/logic/*.js. Read their types, do not check them.
+    "allowJs": true,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": ["pipeline/**/*.ts"]
+}

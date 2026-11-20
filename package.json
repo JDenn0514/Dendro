@@ -7,6 +7,7 @@
   "scripts": {
     "test": "node --test \"tests/**/*.test.js\"",
     "test:pipeline": "node --test \"pipeline/tests/**/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json",
     "test:live": "node --test \"pipeline/tests_live/**/*.test.ts\"",
     "test:all": "npm test && npm run test:pipeline && npm run test:live",
     "validate": "node scripts/validate_content.js content",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1138.0",
     "@types/node": "^26.6.2",
-    "sharp": "^0.35.4"
+    "sharp": "^0.35.4",
+    "typescript": "^5.9.3"
   }
 }

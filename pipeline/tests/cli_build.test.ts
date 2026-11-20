@@ -470,7 +470,7 @@ function seed(root: string, options: SeedOptions = {}): void {
   writeJson(root, 'content_src/species/QUGA.json', options.authored ?? AUTHORED);
 
   // A bucket run names its channels. A concept run derives them from the key prefixes.
-  const flags =
+  const flags: Record<string, string> =
     options.conceptRun === undefined
       ? { bucket: 'simple_lobed', channels: options.channels ?? 'leaf,bark' }
       : { concepts: options.conceptRun.join(',') };
@@ -929,6 +929,8 @@ test('every unit gets a row, and the card count is the one the app derives', asy
   };
   const loaded = loadContent(raw);
   assert.equal(loaded.ok, true);
+  assert.ok(loaded.content !== null);
+  const unitCards = loaded.content.unit_cards as Record<string, unknown[]>;
 
   const rows = buildOf(root).units;
   assert.deepEqual(
@@ -936,7 +938,7 @@ test('every unit gets a row, and the card count is the one the app derives', asy
     UNITS.map((unit) => unit.key),
   );
   for (const one of rows) {
-    assert.equal(one.cards, loaded.content.unit_cards[one.key].length);
+    assert.equal(one.cards, unitCards[one.key].length);
     assert.ok(one.warning !== null && one.warning.startsWith(`${one.key} holds `));
   }
   assert.equal(rows.find((one) => one.key === 'fruit_types')?.cards, 0);
@@ -1820,7 +1822,7 @@ test('deferredStorage queues, answers head, drops a removed put, and flushes in 
   await deferred.flush();
 
   assert.deepEqual(
-    inner.puts.map((put) => put.key),
+    inner.puts.map((put: { key: string }) => put.key),
     ['img/one.jpg', 'img/two.jpg'],
   );
   assert.deepEqual([...inner.objects.get('img/two.jpg')!], [2]);

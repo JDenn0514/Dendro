@@ -4,8 +4,8 @@ Dendro is a tree-identification app (`app/`: plain HTML, CSS, and ES modules, no
 
 ## Commands
 
-- Node 24 or later. It runs the pipeline TypeScript through type stripping, and the test globs need it. There is no build, lint, or typecheck step.
-- Keep the TypeScript erasable: no enums, no parameter properties, no namespaces.
+- Node 24 or later. It runs the pipeline TypeScript through type stripping, and the test globs need it. There is no build or lint step. `npm run typecheck` runs `tsc` in strict mode on `pipeline/` (it writes nothing), and CI runs it in the `pipeline` job.
+- Keep the TypeScript erasable: no enums, no parameter properties, no namespaces. `tsconfig.json` sets `erasableSyntaxOnly`, so the typecheck refuses them.
 - `npm test`: app tests. `npm run test:pipeline`: pipeline tests. `npm run test:all`: both, plus the live tests.
 - One file: `node --test tests/grader.test.js`. One test: add `--test-name-pattern="<regex>"`.
 - `npm run validate` checks `content/`. `npm run validate:dev` checks `content_dev/`.
@@ -42,7 +42,7 @@ Read the `content-run` skill before you start a run or a step of one.
 ## Tests and CI
 
 - The pipeline tests never use the network. Every HTTP call goes through an injected `fetchImpl`. The rate limits and cache lifetimes per host are in `pipeline/lib/http.ts`.
-- CI (`.github/workflows/check.yml`) has two jobs. `check` does not run `npm install`, so keep `sharp` and the S3 client loaded lazily. `pipeline` runs `npm ci` and the pipeline tests. Run `npm ci` before the pipeline tests on a new machine.
+- CI (`.github/workflows/check.yml`) has two jobs. `check` does not run `npm install`, so keep `sharp` and the S3 client loaded lazily. `pipeline` runs `npm ci`, the typecheck, and the pipeline tests. Run `npm ci` before the pipeline tests on a new machine.
 - On `main`, CI deploys the repo root to GitHub Pages. Keep `.nojekyll`.
 - `.gitattributes` forces LF. The fixtures must stay LF.
 - Run `gh pr merge <number> --merge` and `gh run rerun <id> --failed` as Bash calls of their own. The allow rules in `~/.claude/settings.json` do not match a command chained with `&&`, `;`, or `|`, so the auto mode classifier blocks it. Check the result in a separate call.
